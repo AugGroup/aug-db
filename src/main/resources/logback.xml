@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- configuration file for LogBack (slf4J implementation)
+See here for more details: http://gordondickens.com/wordpress/2013/03/27/sawing-through-the-java-loggers/ -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <property name="pattern" value="[%d{HH:mm:ss.SSS}] - %-5level: [%logger{0}.%method] - %msg%n"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${pattern}</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.aug" level="info" />
+    <logger name="org.hibernate" level="warn" />
+    <logger name="org.hibernate.jpa" level="warn" />
+    <logger name="org.springframework.batch" level="warn" />
+    <logger name="org.springframework.scheduling" level="warn" />
+    <logger name="org.springframework.batch.item.jms" level="error" />
+
+    <root level="debug">
+        <appender-ref ref="console"/>
+    </root>
+</configuration>
