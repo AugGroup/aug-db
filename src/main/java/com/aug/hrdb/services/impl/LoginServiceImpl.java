@@ -6,10 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hr.dao.LoginDao;
-import com.aug.hr.entity.Login;
-import com.aug.hr.entity.Official;
-import com.aug.hr.services.LoginService;
+import com.aug.hrdb.entities.Login;
+import com.aug.hrdb.repositories.LoginRepositories;
+import com.aug.hrdb.services.LoginService;
+
+
+
+//import com.aug.hr.entity.Official;
+
 
 @Service("loginService")
 @Transactional
@@ -57,5 +61,6 @@ public class LoginServiceImpl implements LoginService{
 	public Login searhEmpIdtoLogin() {		
 		return loginRepositories.searhEmpIdtoLogin();
 	}
+
 
 }

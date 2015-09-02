@@ -7,12 +7,14 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.aug.hr.dao.LoginDao;
-import com.aug.hr.entity.Login;
-import com.aug.hr.entity.Official;
+import com.aug.hrdb.entities.Login;
+import com.aug.hrdb.repositories.LoginRepositories;
+
+
+//import com.aug.hr.entity.Official;
 
 @Repository
-public class LoginRepositoriesImpl extends GenericDaoImpl<Login, Integer> implements LoginRepositories {
+public class LoginRepositoriesImpl extends GenericRepositoryImpl<Login, Integer> implements LoginRepositories {
 
 	public LoginRepositoriesImpl() {
 		super(Login.class);
