@@ -2,8 +2,9 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-import com.aug.hr.entity.SkillLanguage;
-import com.aug.hr.entity.dto.SkillLanguageDto;
+import com.aug.hrdb.entities.SkillLanguage;
+
+
 
 public interface SkillLanguageService {
 
@@ -13,10 +14,7 @@ public interface SkillLanguageService {
 	public SkillLanguage find(Integer Id);
 	public List<SkillLanguage> findAll();
 	
-	public List<SkillLanguage> findAllByEmployee(Integer IdEmployee);	
-	public void saveByFindEmployee(Integer employeeId,SkillLanguageDto skillLanguage);
-	public SkillLanguageDto findSkillLanguageById(Integer id);
-    public SkillLanguage findJoinMasSkillLanguage(Integer id);
-	public void updateSetSkillLanguage(SkillLanguageDto skillLanguage);
+	public SkillLanguage deleteById(Integer id);
+	//public List<Employee> findByCriteria(Employee employee);
 	
 }
