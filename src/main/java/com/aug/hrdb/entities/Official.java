@@ -28,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "insertOfficial",
-            query = "insert into EMP_OFFICIAL("
+            query = "insert into OFFICIAL("
             		+ "OFFICIAL_DATE,"
             		+ "START_WORK_DATE,"
             		+ "END_WORK_DATE,"
@@ -57,12 +57,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
             		
            @NamedNativeQuery(
 		           name = "searchIdEmptoOfficial",
-		           query = "select * from EMP_OFFICIAL ORDER BY ID desc LIMIT 1;", 
+		           query = "select * from OFFICIAL ORDER BY ID desc LIMIT 1;", 
 		           resultClass = Official.class),
             
             @NamedNativeQuery(
                     name = "updateOfficial",
-                    query = "update EMP_OFFICIAL set OFFICIAL_DATE =:OFFICIAL_DATE,"
+                    query = "update OFFICIAL set OFFICIAL_DATE =:OFFICIAL_DATE,"
                        		+ "START_WORK_DATE =:START_WORK_DATE, "
                        		+ "END_WORK_DATE =:END_WORK_DATE, "
                        		+ "POSITION_APPLIED_FOR =:POSITION_APPLIED_FOR, "
@@ -80,7 +80,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
   })
 
 @Entity
-@Table(name = "EMP_OFFICIAL",uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+@Table(name = "OFFICIAL",uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class Official extends BaseEntity{
 		@Id
 	    @GeneratedValue
