@@ -8,7 +8,7 @@ import com.aug.hrdb.entities.SkillLanguage;
 
 
 
-public interface SkillLanguageRepositories extends GenericRepository<SkillLanguage,Integer>{
+public interface SkillLanguageRepository extends GenericRepository<SkillLanguage,Integer>{
 	
 	
 	//public List<Employee> findByCriteria(Employee employee);

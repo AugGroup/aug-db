@@ -13,16 +13,16 @@ import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.SkillLanguageDto;
 import com.aug.hrdb.entities.SkillLanguage;
-import com.aug.hrdb.repositories.SkillLanguageRepositories;
+import com.aug.hrdb.repositories.SkillLanguageRepository;
 
 
 
 @Repository
-public class SkillLanguageRepositoriesImpl extends GenericRepositoryImpl<SkillLanguage,Integer> implements SkillLanguageRepositories{
+public class SkillLanguageRepositoryImpl extends GenericRepositoryImpl<SkillLanguage,Integer> implements SkillLanguageRepository{
 
 	
 
-	public SkillLanguageRepositoriesImpl() {
+	public SkillLanguageRepositoryImpl() {
 		super(SkillLanguage.class);
 		// TODO Auto-generated constructor stub
 	}

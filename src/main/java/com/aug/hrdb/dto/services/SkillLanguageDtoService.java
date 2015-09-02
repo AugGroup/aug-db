@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.SkillLanguageDto;
-import com.aug.hrdb.repositories.SkillLanguageRepositories;
+import com.aug.hrdb.repositories.SkillLanguageRepository;
 
 
 @Service(value="skillLanguageDtoService")
@@ -15,11 +15,11 @@ import com.aug.hrdb.repositories.SkillLanguageRepositories;
 public class SkillLanguageDtoService {
 
 	@Autowired
-	private SkillLanguageRepositories skillLanguageRepositories;
+	private SkillLanguageRepository skillLanguageRepository;
 	
 	
 	public List<SkillLanguageDto> listSkillLanguage(Integer id){
-		return  skillLanguageRepositories.listSkillLanguageByEmployee(id);
+		return  skillLanguageRepository.listSkillLanguageByEmployee(id);
 	}
 	
 }

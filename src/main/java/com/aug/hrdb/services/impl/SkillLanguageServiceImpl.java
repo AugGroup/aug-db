@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.SkillLanguage;
-import com.aug.hrdb.repositories.SkillLanguageRepositories;
+import com.aug.hrdb.repositories.SkillLanguageRepository;
 import com.aug.hrdb.services.SkillLanguageService;
 
 
@@ -20,38 +20,38 @@ import com.aug.hrdb.services.SkillLanguageService;
 public class SkillLanguageServiceImpl implements SkillLanguageService{
 
 	@Autowired
-	private SkillLanguageRepositories skillLanguageRepositories;
+	private SkillLanguageRepository skillLanguageRepository;
 	/*@Autowired
 	private EmployeeService employeeService;*/
 
 	@Override
 	public void create(SkillLanguage skillLanguage) {
-		skillLanguageRepositories.create(skillLanguage);
+		skillLanguageRepository.create(skillLanguage);
 		
 	}
 
 	@Override
 	public void update(SkillLanguage skillLanguage) {
-		skillLanguageRepositories.update(skillLanguage);
+		skillLanguageRepository.update(skillLanguage);
 		
 	}
 
 	@Override
 	public void delete(SkillLanguage skillLanguage) {
-		skillLanguageRepositories.delete(skillLanguage);
+		skillLanguageRepository.delete(skillLanguage);
 		
 	}
 
 	@Override
 	public SkillLanguage find(Integer Id) {
 		
-		return skillLanguageRepositories.find(Id);
+		return skillLanguageRepository.find(Id);
 	}
 
 	@Override
 	public List<SkillLanguage> findAll() {
 		// TODO Auto-generated method stub
-		return skillLanguageRepositories.findAll();
+		return skillLanguageRepository.findAll();
 	}
 
 	
@@ -59,7 +59,7 @@ public class SkillLanguageServiceImpl implements SkillLanguageService{
 	@Override
 	public SkillLanguage deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		return skillLanguageRepositories.deleteById(id);
+		return skillLanguageRepository.deleteById(id);
 	}
 
 	
