@@ -29,7 +29,14 @@
 		<mapping class="com.aug.hrdb.entities.MasRole" />
 		<mapping class="com.aug.hrdb.entities.Allowances" />
 		<mapping class="com.aug.hrdb.entities.MasAllowances" />
-
-
+		<mapping class="com.aug.hrdb.entities.Ability"/>
+		<mapping class="com.aug.hrdb.entities.Leave"/>
+		<mapping class="com.aug.hrdb.entities.SkillLanguage"/>
+		<mapping class="com.aug.hrdb.entities.MasDegreetype"/>
+		<mapping class="com.aug.hrdb.entities.Address"/>
+		<mapping class="com.aug.hrdb.entities.MasAddressType"/>
+		<mapping class="com.aug.hrdb.entities.MasProvince"/>
+		<mapping class="com.aug.hrdb.entities.Official"/>
+		
 	</session-factory>
 </hibernate-configuration>
