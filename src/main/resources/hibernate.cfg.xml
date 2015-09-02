@@ -22,6 +22,13 @@
         <!--<mapping class="com.aug.db.entities"/>-->
         <!-- <mapping class="com.aug.hrdb.entities.Family"/>
         <mapping class="com.aug.hrdb.entities.MasRelationType"/> -->
+        <mapping class="com.aug.hrdb.entities.History"/>
+        <mapping class="com.aug.hrdb.entities.MasDivision" />
+		<mapping class="com.aug.hrdb.entities.MasJoblevel" />
+		<mapping class="com.aug.hrdb.entities.MasTechnology" />
+		<mapping class="com.aug.hrdb.entities.MasRole" />
+		<mapping class="com.aug.hrdb.entities.Allowances" />
+		<mapping class="com.aug.hrdb.entities.MasAllowances" />
 
 
 	</session-factory>
