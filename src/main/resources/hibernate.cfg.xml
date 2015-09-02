@@ -28,6 +28,7 @@
 		<mapping class="com.aug.hrdb.entities.MasTechnology" />
 		<mapping class="com.aug.hrdb.entities.MasRole" />
 		<mapping class="com.aug.hrdb.entities.Allowances" />
+
 		<mapping class="com.aug.hrdb.entities.MasAllowances" />
 		<mapping class="com.aug.hrdb.entities.Ability"/>
 		<mapping class="com.aug.hrdb.entities.Leave"/>
@@ -38,5 +39,12 @@
 		<mapping class="com.aug.hrdb.entities.MasProvince"/>
 		<mapping class="com.aug.hrdb.entities.Official"/>
 		
+		<mapping class="com.aug.hrdb.entities.Login" />
+		<mapping class="com.aug.hrdb.entities.MasSpecialty" />
+		<mapping class="com.aug.hrdb.entities.Reward" />
+		<mapping class="com.aug.hrdb.entities.Punish" />
+		<mapping class="com.aug.hrdb.entities.Card" />
+		
+
 	</session-factory>
 </hibernate-configuration>
