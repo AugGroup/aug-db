@@ -1,3 +1,4 @@
+
 /**
  *
  * @author Ekkachai.K
@@ -17,6 +18,7 @@ import com.aug.hrdb.repositories.GenericRepository;
 
 
 public class GenericRepositoryImpl<E, I extends Serializable> implements GenericRepository<E, I> {
+
     private Class<E> entityClass;
 
     @Autowired
@@ -55,4 +57,5 @@ public class GenericRepositoryImpl<E, I extends Serializable> implements Generic
     public void flush() {
         getCurrentSession().flush();
     }
+
 }
