@@ -8,30 +8,25 @@ package com.aug.hrdb.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 
 
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "insertAddress",
-            query = "insert into EMP_ADDRESS("
-            		+ "ADDRESS1,"
-            		+ "ADDRESS2,"
+            query = "insert into ADDRESS("
+            		+ "HOUSE_NO,"
+            		+ "ROAD,"
+            		+ "DISTRICT,"
+            		+ "SUB_DISTRICT,"
             		+ "ZIPCODE,"
             		+ "EMPLOYEE_ID,"
             		+ "ADDRESSTYPE_ID,"
@@ -41,8 +36,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
             	    + "auditFlag "
             		+ ") "
             		+ " values("
-            		+ ":ADDRESS1,"
-            		+ ":ADDRESS2,"
+            		+ ":HOUSE_NO,"
+            		+ ":ROAD,"
+            		+ ":DISTRICT,"
+            		+ ":SUB_DISTRICT,"
             		+ ":ZIPCODE,"
             		+ ":EMPLOYEE_ID,"
             		+ ":ADDRESSTYPE_ID,"
@@ -56,8 +53,10 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
             		
         @NamedNativeQuery(
             name = "updateAddress",
-            query = "update EMP_ADDRESS set ADDRESS1 =:ADDRESS1,"
-            	     + "ADDRESS2 =:ADDRESS2,"
+            query = "update ADDRESS set HOUSE_NO =:HOUSE_NO,"
+            	     + "ROAD =:ROAD,"
+            		 + "DISTRICT =:DISTRICT,"
+            	     + "SUB_DISTRICT =:SUB_DISTRICT,"
             	     + "ZIPCODE =:ZIPCODE,"
             	     + "EMPLOYEE_ID =:EMPLOYEE_ID,"
             	     + "ADDRESSTYPE_ID =:ADDRESSTYPE_ID,"
@@ -70,12 +69,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
             	     
          @NamedNativeQuery(
              name = "deleteAddress",
-            	 query = "delete from EMP_ADDRESS where ID=:id",
+            	 query = "delete from ADDRESS where ID=:id",
             	 resultClass = Address.class),    	     
   })
 
 @Entity
-@Table(name = "ADDRESS",uniqueConstraints = {@UniqueConstraint(columnNames = {"address1","address2"})})
+@Table(name = "ADDRESS",uniqueConstraints = {@UniqueConstraint(columnNames = {"houseNo","district"})})
 public class Address extends BaseEntity{
 	
 	@Id
@@ -98,11 +97,11 @@ public class Address extends BaseEntity{
 	@Column(name="ZIPCODE")
 	private Integer zipcode;
 	
-	@Transient
+	/*@Transient
     private Integer addressTypeId;
 	@Transient
 	private Integer provinceId;
-   
+   */
 	
 /*	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "EMPLOYEE_ID")
@@ -110,7 +109,7 @@ public class Address extends BaseEntity{
 //	@JsonIgnore
     private Employee employee;*/
 	
-	
+/*	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "ADDRESSTYPE_ID")
 
@@ -122,7 +121,7 @@ public class Address extends BaseEntity{
 
 //	@JsonIgnore
     private MasProvince province;
-	
+	*/
 	
 
 	public Integer getId() {
@@ -142,32 +141,6 @@ public class Address extends BaseEntity{
 		this.zipcode = zipcode;
 	}
 	
-	
-
-	/*public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}*/
-
-
-	public MasAddressType getAddressType() {
-		return addressType;
-	}
-
-	public void setAddressType(MasAddressType addressType) {
-		this.addressType = addressType;
-	}
-
-	public MasProvince getProvince() {
-		return province;
-	}
-
-	public void setProvince(MasProvince province) {
-		this.province = province;
-	}
 
 	public String getHouseNo() {
 		return houseNo;
@@ -201,7 +174,7 @@ public class Address extends BaseEntity{
 		this.subDistrict = subDistrict;
 	}
 
-	public Integer getAddressTypeId() {
+	/*public Integer getAddressTypeId() {
 		return addressTypeId;
 	}
 
@@ -215,8 +188,34 @@ public class Address extends BaseEntity{
 
 	public void setProvinceId(Integer provinceId) {
 		this.provinceId = provinceId;
+	}*/
+
+
+	/*public Employee getEmployee() {
+		return employee;
 	}
 
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}*/
+
+
+	/*public MasAddressType getAddressType() {
+		return addressType;
+	}
+
+	public void setAddressType(MasAddressType addressType) {
+		this.addressType = addressType;
+	}
+
+	public MasProvince getProvince() {
+		return province;
+	}
+
+	public void setProvince(MasProvince province) {
+		this.province = province;
+	}
+*/
 	
 	
 }

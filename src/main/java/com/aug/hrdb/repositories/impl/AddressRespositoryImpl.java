@@ -8,22 +8,24 @@ package com.aug.hrdb.repositories.impl;
 
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import com.mysql.jdbc.StringUtils;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Address;
-import com.aug.hrdb.repositories.AddressRespositories;
+import com.aug.hrdb.repositories.AddressRespository;
 
 
 
 @Repository
-public class AddressRespositoriesImpl extends GenericDaoImpl<Address, Integer> implements AddressRespositories{
+public class AddressRespositoryImpl extends GenericRepositoryImpl<Address, Integer> implements AddressRespository{
 
-	public AddressRespositoriesImpl() {
+	public AddressRespositoryImpl() {
 		super(Address.class);
 	
 	}
@@ -47,24 +49,24 @@ public class AddressRespositoriesImpl extends GenericDaoImpl<Address, Integer> i
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<AddressRespositories> searchAddress(Integer id) {
+	public List<AddressDto> searchAddress(Integer id) {
 		Query namedQuery = getCurrentSession().getNamedQuery("searchAddress").setInteger("empId" ,id);
 	    return  namedQuery.list();
 	}
 	
 
 	@Override
-	public void saveAddressByNameQuery(AddressRespositories addressResp) {
+	public void saveAddressByNameQuery(AddressDto addressDto) {
 		
 		Query query = getCurrentSession().getNamedQuery("insertAddress");
-		query.setString("HOUSE_NO", addressResp.getAddress1());
-		query.setString("ROAD", addressResp.getAddress2());
-		query.setInteger("DISTRICT", addressResp.getZipcode());
-		query.setString("SUB_DISTRICT", addressResp.getAddress2());
-		query.setInteger("ZIPCODE", addressResp.getZipcode());
-		query.setInteger("EMPLOYEE_ID", addressResp.getEmployeeId());
-		query.setInteger("ADDRESSTYPE_ID", addressResp.getAddressTypeId());
-		query.setInteger("PROVINCE_ID", addressResp.getMasprovinceId());
+		query.setString("HOUSE_NO", addressDto.getHouseNo());
+		query.setString("ROAD", addressDto.getRoad());
+		query.setString("DISTRICT", addressDto.getDistrict());
+		query.setString("SUB_DISTRICT", addressDto.getSubDistrict());
+		query.setInteger("ZIPCODE", addressDto.getZipcode());
+		/*query.setInteger("EMPLOYEE_ID", addressDto.getEmployeeId());
+		query.setInteger("ADDRESSTYPE_ID", addressDto.getAddressTypeId());
+		query.setInteger("PROVINCE_ID", addressDto.getMasprovinceId());*/
 		
 		query.executeUpdate();
 		
@@ -88,14 +90,14 @@ public class AddressRespositoriesImpl extends GenericDaoImpl<Address, Integer> i
 		Query query = getCurrentSession().getNamedQuery("updateAddress");
 		
 		
-		query.setString("HOUSE_NO", addressResp.getAddress1());
-		query.setString("ROAD", addressResp.getAddress2());
-		query.setString("DISTRICT", addressResp.getZipcode());
-		query.setString("SUB_DISTRICT", addressResp.getAddress2());
-		query.setInteger("ZIPCODE", addressResp.getZipcode());
-		query.setInteger("EMPLOYEE_ID", addressResp.getEmployeeId());
+		query.setString("HOUSE_NO", addressDto.getHouseNo());
+		query.setString("ROAD", addressDto.getRoad());
+		query.setString("DISTRICT", addressDto.getDistrict());
+		query.setString("SUB_DISTRICT", addressDto.getSubDistrict());
+		query.setInteger("ZIPCODE", addressDto.getZipcode());
+		/*query.setInteger("EMPLOYEE_ID", addressResp.getEmployeeId());
 		query.setInteger("ADDRESSTYPE_ID", addressResp.getAddressTypeId());
-		query.setInteger("PROVINCE_ID", addressResp.getMasprovinceId());
+		query.setInteger("PROVINCE_ID", addressResp.getMasprovinceId());*/
 		
 		
 		query.executeUpdate();
