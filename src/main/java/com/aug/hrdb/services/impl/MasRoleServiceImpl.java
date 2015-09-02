@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasRole;
+import com.aug.hrdb.repositories.MasRoleRepository;
 import com.aug.hrdb.services.MasRoleService;
 
 @Service("masRoleService")
@@ -14,39 +15,39 @@ import com.aug.hrdb.services.MasRoleService;
 public class MasRoleServiceImpl implements MasRoleService{
 
 	@Autowired
-	private MasRoleRepositories masRoleRepositories;
+	private MasRoleRepository masRoleRepository;
 
 	@Override
 	public void create(MasRole masRole) {
-		masRoleRepositories.create(masRole);
+		masRoleRepository.create(masRole);
 		
 	}
 
 	@Override
 	public void update(MasRole masRole) {
-		masRoleRepositories.update(masRole);
+		masRoleRepository.update(masRole);
 		
 	}
 
 	@Override
 	public void delete(MasRole masRole) {
-		masRoleRepositories.delete(masRole);
+		masRoleRepository.delete(masRole);
 		
 	}
 
 	@Override
 	public MasRole find(Integer id) {
-		return masRoleRepositories.find(id);
+		return masRoleRepository.find(id);
 	}
 
 	@Override
 	public List<MasRole> findAll() {
-		return masRoleRepositories.findAll();
+		return masRoleRepository.findAll();
 	}
 
 	@Override
 	public MasRole deleteById(Integer id) {
-		return masRoleRepositories.deleteById(id);
+		return masRoleRepository.deleteById(id);
 	}
 	
 }

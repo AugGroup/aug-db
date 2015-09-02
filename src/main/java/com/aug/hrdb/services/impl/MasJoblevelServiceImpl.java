@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.services.MasJoblevelService;
 
 @Service("masJoblevelService")
@@ -14,48 +15,48 @@ import com.aug.hrdb.services.MasJoblevelService;
 public class MasJoblevelServiceImpl implements MasJoblevelService {
 
 	
-	@Autowired private MasJoblevelRepositories masJoblevelRepositories;
+	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	
 	@Override
 	public void create(MasJoblevel masJoblevel) {
-		masJoblevelRepositories.create(masJoblevel);
+		masJoblevelRepository.create(masJoblevel);
 		
 	}
 
 	@Override
 	public void update(MasJoblevel masJoblevel) {
-		masJoblevelRepositories.update(masJoblevel);
+		masJoblevelRepository.update(masJoblevel);
 		
 	}
 
 	@Override
 	public void delete(MasJoblevel masJoblevel) {
-		masJoblevelRepositories.delete(masJoblevel);
+		masJoblevelRepository.delete(masJoblevel);
 		
 	}
 
 	@Override
 	public MasJoblevel find(Integer id) {
 		
-		return masJoblevelRepositories.find(id);
+		return masJoblevelRepository.find(id);
 	}
 
 	@Override
 	public List<MasJoblevel> findAll() {
 		// TODO Auto-generated method stub
-		return masJoblevelRepositories.findAll();
+		return masJoblevelRepository.findAll();
 	}
 
 	@Override
 	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel) {
 		// TODO Auto-generated method stub
-		return masJoblevelRepositories.findByCriteria(masJoblevel);
+		return masJoblevelRepository.findByCriteria(masJoblevel);
 	}
 
 	@Override
 	public MasJoblevel deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		return masJoblevelRepositories.deleteById(id);
+		return masJoblevelRepository.deleteById(id);
 	}
 
 }

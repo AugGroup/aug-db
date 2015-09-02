@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasTechnology;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.masTechnologyService;
 
 @Service("masTechnologyService")
@@ -14,7 +15,7 @@ import com.aug.hrdb.services.masTechnologyService;
 public class MasTechnologyServiceImpl implements masTechnologyService{
 
 	@Autowired
-	private MasTechnologyRepositories masTechDao;
+	private MasTechnologyRepository masTechDao;
 	
 	
 	
