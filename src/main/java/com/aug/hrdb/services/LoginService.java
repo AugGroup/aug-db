@@ -5,7 +5,6 @@ import java.util.List;
 import com.aug.hrdb.entities.Login;
 
 
-
 public interface LoginService {
 	
 	public void create(Login login);

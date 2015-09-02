@@ -8,15 +8,15 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.entities.Login;
-import com.aug.hrdb.repositories.LoginRepositories;
+import com.aug.hrdb.repositories.LoginRepository;
 
 
 //import com.aug.hr.entity.Official;
 
 @Repository
-public class LoginRepositoriesImpl extends GenericRepositoryImpl<Login, Integer> implements LoginRepositories {
+public class LoginRepositoryImpl extends GenericRepositoryImpl<Login, Integer> implements LoginRepository {
 
-	public LoginRepositoriesImpl() {
+	public LoginRepositoryImpl() {
 		super(Login.class);
 	}
 	

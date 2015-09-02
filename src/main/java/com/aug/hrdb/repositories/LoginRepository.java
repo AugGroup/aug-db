@@ -5,7 +5,7 @@ import java.util.List;
 import com.aug.hrdb.entities.Login;
 
 
-public interface LoginRepositories extends GenericRepository<Login, Integer>{
+public interface LoginRepository extends GenericRepository<Login, Integer>{
 
 	public Login findByUserName(String name);
 	
