@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasProvince;
-import com.aug.hrdb.repositories.MasProvinceRespository;
+import com.aug.hrdb.repositories.MasProvinceRepository;
 import com.aug.hrdb.services.MasProvinceService;
 
 @Service("masProvinceService")
@@ -20,7 +20,7 @@ import com.aug.hrdb.services.MasProvinceService;
 public class MasProvinceImpl implements MasProvinceService {
 
 	@Autowired
-	private MasProvinceRespository masProvinceResp;
+	private MasProvinceRepository masProvinceResp;
 	
 	@Override
 	public void create(MasProvince masProvince) {

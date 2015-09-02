@@ -12,7 +12,7 @@ import com.aug.hrdb.entities.MasEmployment;
 
 
 
-public interface MasEmploymentRespository extends GenericRepository<MasEmployment,Integer>{
+public interface MasEmploymentRepository extends GenericRepository<MasEmployment,Integer>{
 	
 List<MasEmployment> findByCriteria(MasEmployment masEmployment);
 	

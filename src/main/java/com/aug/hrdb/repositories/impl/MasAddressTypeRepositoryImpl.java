@@ -13,13 +13,13 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.entities.MasAddressType;
-import com.aug.hrdb.repositories.MasAddressTypeRespository;
+import com.aug.hrdb.repositories.MasAddressTypeRepository;
 import com.mysql.jdbc.StringUtils;
 
 @Repository
-public class MasAddressTypeRespositoryImpl extends GenericRepositoryImpl<MasAddressType, Integer> implements MasAddressTypeRespository{
+public class MasAddressTypeRepositoryImpl extends GenericRepositoryImpl<MasAddressType, Integer> implements MasAddressTypeRepository{
 
-	public MasAddressTypeRespositoryImpl() {
+	public MasAddressTypeRepositoryImpl() {
 		super(MasAddressType.class);
 		
 	}

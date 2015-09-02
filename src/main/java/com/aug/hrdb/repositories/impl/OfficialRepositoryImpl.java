@@ -16,12 +16,12 @@ import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Official;
-import com.aug.hrdb.repositories.OfficialRespository;
+import com.aug.hrdb.repositories.OfficialRepository;
 import com.mysql.jdbc.StringUtils;
 @Repository
-public class OfficialRespositoryImpl extends GenericRepositoryImpl<Official, Integer> implements OfficialRespository{
+public class OfficialRepositoryImpl extends GenericRepositoryImpl<Official, Integer> implements OfficialRepository{
 
-	public OfficialRespositoryImpl() {
+	public OfficialRepositoryImpl() {
 		super(Official.class);
 		// TODO Auto-generated constructor stub
 	}

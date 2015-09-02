@@ -13,14 +13,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.OfficialDto;
-import com.aug.hrdb.repositories.OfficialRespository;
+import com.aug.hrdb.repositories.OfficialRepository;
 
 
 @Service("officialDtoService")
 @Transactional
 public class OfficialDtoService {
 	
-	@Autowired private OfficialRespository officialResp;
+	@Autowired private OfficialRepository officialResp;
 	
 	public List<OfficialDto> searchOfficial(){
 		return officialResp.searchOfficial();

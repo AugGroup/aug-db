@@ -11,7 +11,7 @@ import java.util.List;
 import com.aug.hrdb.entities.MasAddressType;
 
 
-public interface MasAddressTypeRespository extends GenericRepository<MasAddressType, Integer>{
+public interface MasAddressTypeRepository extends GenericRepository<MasAddressType, Integer>{
 	
 	public List<MasAddressType> findByCriteria(MasAddressType masAddressType);
 

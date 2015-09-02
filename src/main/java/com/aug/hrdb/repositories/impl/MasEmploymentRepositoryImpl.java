@@ -13,13 +13,13 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.entities.MasEmployment;
-import com.aug.hrdb.repositories.MasEmploymentRespository;
+import com.aug.hrdb.repositories.MasEmploymentRepository;
 import com.mysql.jdbc.StringUtils;
 
 @Repository
-public class MasEmploymentDaoImpl extends GenericRepositoryImpl<MasEmployment, Integer> implements MasEmploymentRespository{
+public class MasEmploymentRepositoryImpl extends GenericRepositoryImpl<MasEmployment, Integer> implements MasEmploymentRepository{
 
-	public MasEmploymentDaoImpl() {
+	public MasEmploymentRepositoryImpl() {
 		super(MasEmployment.class);
 		
 	}

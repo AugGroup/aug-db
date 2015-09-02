@@ -18,14 +18,14 @@ import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Address;
-import com.aug.hrdb.repositories.AddressRespository;
+import com.aug.hrdb.repositories.AddressRepository;
 
 
 
 @Repository
-public class AddressRespositoryImpl extends GenericRepositoryImpl<Address, Integer> implements AddressRespository{
+public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Integer> implements AddressRepository{
 
-	public AddressRespositoryImpl() {
+	public AddressRepositoryImpl() {
 		super(Address.class);
 	
 	}

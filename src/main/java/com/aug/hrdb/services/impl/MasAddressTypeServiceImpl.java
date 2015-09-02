@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasAddressType;
-import com.aug.hrdb.repositories.MasAddressTypeRespository;
+import com.aug.hrdb.repositories.MasAddressTypeRepository;
 import com.aug.hrdb.services.MasAddressTypeService;
 
 
@@ -22,7 +22,7 @@ import com.aug.hrdb.services.MasAddressTypeService;
 public class MasAddressTypeServiceImpl implements MasAddressTypeService{
 	
 	@Autowired
-	private MasAddressTypeRespository masAddressTypeResp;
+	private MasAddressTypeRepository masAddressTypeResp;
 
 	@Override
 	public void create(MasAddressType masAddressType) {

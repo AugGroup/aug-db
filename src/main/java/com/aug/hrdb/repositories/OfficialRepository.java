@@ -12,7 +12,7 @@ import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Official;
 
 
-public interface OfficialRespository extends GenericRepository<Official,Integer>{
+public interface OfficialRepository extends GenericRepository<Official,Integer>{
 
 	List<Official> findByCriteria(Official official);
 	

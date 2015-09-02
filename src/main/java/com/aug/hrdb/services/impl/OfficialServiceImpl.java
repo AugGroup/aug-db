@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Official;
-import com.aug.hrdb.repositories.OfficialRespository;
+import com.aug.hrdb.repositories.OfficialRepository;
 import com.aug.hrdb.services.OfficialService;
 
 @Service("officialService")
@@ -22,7 +22,7 @@ import com.aug.hrdb.services.OfficialService;
 public class OfficialServiceImpl implements OfficialService{
 
 	@Autowired
-	private OfficialRespository officialResp;
+	private OfficialRepository officialResp;
 	
 	
 	@Override

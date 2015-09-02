@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Address;
-import com.aug.hrdb.repositories.AddressRespository;
+import com.aug.hrdb.repositories.AddressRepository;
 import com.aug.hrdb.services.AddressService;
 
 
@@ -25,7 +25,7 @@ import com.aug.hrdb.services.AddressService;
 public class AddressServiceImpl implements AddressService{
 
 	@Autowired
-	private AddressRespository addressResp;
+	private AddressRepository addressResp;
 	
 	@Override
 	public void create(Address address) {

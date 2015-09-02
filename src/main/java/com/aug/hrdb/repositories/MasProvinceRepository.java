@@ -9,6 +9,6 @@ import com.aug.hrdb.entities.MasProvince;
 
 
 
-public interface MasProvinceRespository extends GenericRepository<MasProvince, Integer>{
+public interface MasProvinceRepository extends GenericRepository<MasProvince, Integer>{
 
 }

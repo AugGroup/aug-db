@@ -8,13 +8,13 @@ package com.aug.hrdb.repositories.impl;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.entities.MasProvince;
-import com.aug.hrdb.repositories.MasProvinceRespository;
+import com.aug.hrdb.repositories.MasProvinceRepository;
 
 
 @Repository
-public class MasProvinceRespositoryImpl extends GenericRepositoryImpl<MasProvince, Integer> implements MasProvinceRespository{
+public class MasProvinceRepositoryImpl extends GenericRepositoryImpl<MasProvince, Integer> implements MasProvinceRepository{
 
-	public MasProvinceRespositoryImpl() {
+	public MasProvinceRepositoryImpl() {
 		super(MasProvince.class);
 		// TODO Auto-generated constructor stub
 	}

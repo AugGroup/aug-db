@@ -15,7 +15,7 @@ import com.aug.hrdb.entities.Address;
 
 
 
-public interface AddressRespository extends GenericRepository<Address, Integer>{
+public interface AddressRepository extends GenericRepository<Address, Integer>{
 	
 	public List<Address> findByCriteria(Address address);
 

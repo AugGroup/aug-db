@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasEmployment;
-import com.aug.hrdb.repositories.MasEmploymentRespository;
+import com.aug.hrdb.repositories.MasEmploymentRepository;
 import com.aug.hrdb.services.MasEmploymentService;
 
 
@@ -22,7 +22,7 @@ import com.aug.hrdb.services.MasEmploymentService;
 public class MasEmploymentServiceImpl implements MasEmploymentService{
 
 	@Autowired
-	private MasEmploymentRespository masEmploymentResp;
+	private MasEmploymentRepository masEmploymentResp;
 	
 	@Override
 	public void create(MasEmployment masEmployment) {
