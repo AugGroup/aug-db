@@ -22,7 +22,7 @@ public class Family extends BaseEntity implements Serializable {
 	
 	private static final long serialVersionUID = -5187864989377656419L;
 	private Integer id; 
-	private String name;
+	private String familyName;
 	private String gender;
 	private Integer age;
 	private String mobile;
@@ -46,17 +46,16 @@ public class Family extends BaseEntity implements Serializable {
 	}
 
 	
-	
 	@Column(name="NAME")	
 	@NotNull
 	@NotEmpty
-	public String getName() {
-		return name;
+	public String getFamilyName() {
+		return familyName;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFamilyName(String familyName) {
+		this.familyName = familyName;
 	}
 
 
@@ -132,19 +131,21 @@ public class Family extends BaseEntity implements Serializable {
 	public void setPosition(String position) {
 		this.position = position;
 	}
+
+
 	
-	
-   
-    @ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MASRELATION_ID",nullable=false)
-	public MasRelationType getMasRelation() {
+	public MasRelationType getMasRelationType() {
 		return masRelationType;
 	}
 
 
-	public void setMasRelation(MasRelationType masRelation) {
-		this.masRelationType = masRelation;
+	public void setMasRelationType(MasRelationType masRelationType) {
+		this.masRelationType = masRelationType;
 	}
+	
+	
 	
 	
     /*@ManyToOne(fetch=FetchType.EAGER)
