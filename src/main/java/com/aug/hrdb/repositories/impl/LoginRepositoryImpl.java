@@ -30,12 +30,12 @@ public class LoginRepositoryImpl extends GenericRepositoryImpl<Login, Integer> i
 		 else return null;
 	}
 
-	@Override
+/*	@Override
 	public Login deleteById(Integer id) {
 		Login login = (Login) getCurrentSession().load(Login.class, id);
 		getCurrentSession().delete(login);
 		return login;
-	}
+	}*/
 	
 	@SuppressWarnings("unchecked")
 	@Override

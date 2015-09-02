@@ -52,11 +52,11 @@ public class LoginServiceImpl implements LoginService{
 		return loginRepository.findByUserName(name);
 	}
 
-	@Override
+/*	@Override
 	public Login deleteById(Integer id) {
 		return loginRepository.deleteById(id);
-	}
-	
+	}*/
+
 	@Override
 	public Login searhEmpIdtoLogin() {		
 		return loginRepository.searhEmpIdtoLogin();
