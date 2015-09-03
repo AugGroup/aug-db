@@ -52,7 +52,7 @@
 
 		<mapping class="com.aug.hrdb.entities.Experience"/>
 		<mapping class="com.aug.hrdb.entities.Education" />
-		
+		<mapping class="com.aug.hrdb.entities.Certification" />
 
 	</session-factory>
 </hibernate-configuration>
