@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
-@Table(name = "EMP_CARD")
+@Table(name = "CARD")
 public class Card {
 	
 		
