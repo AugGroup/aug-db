@@ -1,9 +1,13 @@
 package com.aug.hrdb.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,8 +25,8 @@ public class MasRole extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
 	
-//	@OneToMany(mappedBy = "masRole")
-//	private Set<Login> logins = new HashSet<Login>();
+	@OneToMany(mappedBy = "masRole")
+	private Set<Login> logins = new HashSet<Login>();
 
 	public Integer getId() {
 		return id;

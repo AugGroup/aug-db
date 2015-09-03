@@ -35,15 +35,18 @@ public class Login extends BaseEntity{
 	private String username;
 	@Column(name="PASSWORD",length=13,nullable=false)
 	private String password;
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
+//	@OneToOne(fetch=FetchType.LAZY)
+//	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
 //	private Employee employee;
-//    @ManyToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name= "ROLE_ID")
-//    private MasRole masRole;  
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name= "MAS_LOCATION_ID")
-//    private MasLocation masLocation;
+	
+    @ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name= "ROLE_ID")
+    private MasRole masRole;  
+    
+    
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name= "MAS_LOCATION_ID")
+    private MasLocation masLocation;
     
 	public Integer getId() {
 		return id;
@@ -74,24 +77,24 @@ public class Login extends BaseEntity{
 	}
 
 
-//	public MasRole getMasRole() {
-//		return masRole;
-//	}
-//
-//
-//	public void setMasRole(MasRole masRole) {
-//		this.masRole = masRole;
-//	}
-//
-//
-//	public MasLocation getMasLocation() {
-//		return masLocation;
-//	}
-//
-//
-//	public void setMasLocation(MasLocation masLocation) {
-//		this.masLocation = masLocation;
-//	}
+	public MasRole getMasRole() {
+		return masRole;
+	}
+
+
+	public void setMasRole(MasRole masRole) {
+		this.masRole = masRole;
+	}
+
+
+	public MasLocation getMasLocation() {
+	   return masLocation;
+	}
+
+
+    public void setMasLocation(MasLocation masLocation) {
+		this.masLocation = masLocation;
+    }
 //
 //
 //	public Employee getEmployee() {
