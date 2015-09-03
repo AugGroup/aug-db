@@ -38,9 +38,9 @@ public class Punish {
 	@NotEmpty 
 	private String description;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="EMPLOYEE_ID" , referencedColumnName="id", nullable=true)
-//	private Employee employee;
+//	@ManyToOne(fetch=FetchType.EAGER)
+//	@JoinColumn(name="EMPLOYEE_ID" , referencedColumnName="id", nullable=true)
+////	private Employee employee;
 
 	@Column(name = "PENALTY" ,nullable = false)
 	@NotEmpty 
