@@ -52,4 +52,12 @@ public class MasRole extends BaseEntity {
 		this.isActive = isActive;
 	}
 
+	public Set<Login> getLogins() {
+		return logins;
+	}
+
+	public void setLogins(Set<Login> logins) {
+		this.logins = logins;
+	}
+
 }
