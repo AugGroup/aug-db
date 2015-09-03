@@ -5,12 +5,12 @@ import javax.persistence.NamedNativeQuery;
 
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATE c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDTO.class),
+		+ " FROM CERTIFICATE c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATE c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDTO.class)
+		+ " FROM CERTIFICATE c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDto.class)
 	})
-public class CertificationDTO {
+public class CertificationDto {
 	
 	private Integer id;
 	

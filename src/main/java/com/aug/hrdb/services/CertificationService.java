@@ -2,7 +2,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-import com.aug.hrdb.dto.CertificationDTO;
+import com.aug.hrdb.dto.CertificationDto;
 import com.aug.hrdb.entities.Certification;
 
 public interface CertificationService {
@@ -12,14 +12,14 @@ public interface CertificationService {
 
 	public void update(Certification certification);
 
-	public void deleteById(Integer id);
+	public void deleteByApplicantId(Integer id);
 	
 	public void delete(Certification certification);
 
 	public List<Certification> findAll();
 	
-	public List<CertificationDTO> findCertificateById(Integer id);
+	public List<CertificationDto> findCertificateById(Integer id);
 
-	public CertificationDTO findCertificate(Integer id);
+	public CertificationDto findCertificate(Integer id);
 	
 }
