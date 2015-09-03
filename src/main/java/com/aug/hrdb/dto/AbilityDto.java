@@ -23,7 +23,7 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAbility",
-			query="select ability.id,ability.rank,mas_specialty.name,ability.employee_id,emp.employee_code,mas_specialty.spec_id from emp_ability as ability ,emp_employee as emp, mas_specialty where ability.employee_id=:empId and ability.employee_id = emp.id and  ability.specialty_id = mas_specialty.SPEC_ID ",
+			query="select ability.id,ability.rank,mas_specialty.name,ability.employee_id,emp.employee_code,mas_specialty.spec_id from ability as ability ,emp_employee as emp, mas_specialty where ability.employee_id=:empId and ability.employee_id = emp.id and  ability.specialty_id = mas_specialty.SPEC_ID ",
 			resultClass = AbilityDto.class)
 			
 	
