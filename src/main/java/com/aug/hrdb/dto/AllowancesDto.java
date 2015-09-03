@@ -14,20 +14,20 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAllowances",
-			query="select emp_allowances.id,"
-					+ "emp_allowances.amount,"
-					+ "emp_allowances.EMPLOYEE_ID,"
+			query="select allowances.id,"
+					+ "allowances.amount,"
+					+ "allowances.EMPLOYEE_ID,"
 					+ "mas_allowances.ALLOWANCES_TYPE,"
-					+ "emp_allowances.EMPLOYEE_ID,"
+					+ "allowances.EMPLOYEE_ID,"
 					+ "mas_allowances.ALLO_ID, "
 					+ "mas_allowances.AMOUNT_ALLOWANCES "
-					+ "from emp_allowances,"
-					+ "emp_employee as emp ,"
+					+ "from allowances,"
+					+ "employee as emp ,"
 					+ "mas_allowances "
 					+ "where "
-					+ "emp_allowances.employee_id=:empId "
-					+ "and emp_allowances.employee_id = emp.id "
-					+ "and emp_allowances.MAS_ALLOWANCES_ID = mas_allowances.ALLO_ID",																																																																					
+					+ "allowances.employee_id=:empId "
+					+ "and allowances.employee_id = emp.id "
+					+ "and allowances.MAS_ALLOWANCES_ID = mas_allowances.ALLO_ID",																																																																					
 			resultClass = AllowancesDto.class)
 			
 })
