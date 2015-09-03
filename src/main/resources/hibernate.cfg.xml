@@ -45,6 +45,7 @@
 		<mapping class="com.aug.hrdb.entities.Reward" />
 		<mapping class="com.aug.hrdb.entities.Punish" />
 		<mapping class="com.aug.hrdb.entities.Card" />
+		<mapping class="com.aug.hrdb.entities.MasLocation" />
 		
 
 	</session-factory>
