@@ -9,7 +9,7 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchReward",
-            query = "select reward.id,reward.type_reward,reward.year,reward.reason,reward.isActive,reward.employee_id from emp_reward as reward ,emp_employee as emp where reward.employee_id =:empId and reward.employee_id=emp.id", 
+            query = "select reward.id,reward.type_reward,reward.year,reward.reason,reward.isActive,reward.employee_id from reward as reward ,emp_employee as emp where reward.employee_id =:empId and reward.employee_id=emp.id", 
             resultClass = RewardDto.class)
   })
 

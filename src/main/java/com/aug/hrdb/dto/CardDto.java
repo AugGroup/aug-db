@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
     @NamedNativeQuery(
             name = "searchCard",
-            query = "select card.id,card.cardno,card.start_date,card.end_date,card.status,card.remark,card.employee_id from emp_card as card,emp_employee as emp where card.employee_id =:empId and card.employee_id=emp.id",
+            query = "select card.id,card.cardno,card.start_date,card.end_date,card.status,card.remark,card.employee_id from card,emp_employee as emp where card.employee_id =:empId and card.employee_id=emp.id",
             resultClass = CardDto.class),
 })
 
