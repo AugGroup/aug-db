@@ -45,8 +45,8 @@ public class MasLocation extends BaseEntity {
 	/*@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Employee> employees = new HashSet<Employee>();*/
 	
-	@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
-	private Set<Login> logins = new HashSet<Login>();
+	/*@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
+	private Set<Login> logins = new HashSet<Login>();*/
 	
 
 
