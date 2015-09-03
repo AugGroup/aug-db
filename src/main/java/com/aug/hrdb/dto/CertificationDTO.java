@@ -1,42 +1,27 @@
-package com.aug.hrdb.entities;
+package com.aug.hrdb.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 
-//import com.aug.db.entities.Applicant;
-@Entity
-@Table(name = "CERTIFICATION")
-public class Certification extends BaseEntity {
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
+@NamedNativeQueries({
+	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
+		+ " FROM CERTIFICATE c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDTO.class),
+		
+	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
+		+ " FROM CERTIFICATE c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDTO.class)
+	})
+public class CertificationDTO {
+	
 	private Integer id;
 	
-	@Column(name = "CERTIFICATION_FORM")
 	private String certificationForm;
 	
-	@Column(name = "DESCRICPION")
 	private String descricption;
 	
-	@Column(name = "NAME")
 	private String name;
 	
-	@Column(name = "YEAR")
 	private String year;
 
-	/*@ManyToOne
-	@JoinColumn(name = "APPLICANT_ID")
-	private Applicant applicant;
-	*/
-	
-	/*@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_ID")
-	private Applicant employee;
-	*/
-	
 	public Integer getId() {
 		return id;
 	}
@@ -76,7 +61,5 @@ public class Certification extends BaseEntity {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
-
 
 }
