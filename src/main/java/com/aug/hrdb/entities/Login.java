@@ -39,14 +39,14 @@ public class Login extends BaseEntity{
 //	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
 //	private Employee employee;
 	
-    /*@ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "ROLE_ID")
     private MasRole masRole;  
     
     
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name= "MAS_LOCATION_ID")
-    private MasLocation masLocation;*/
+    private MasLocation masLocation;
     
 	public Integer getId() {
 		return id;
@@ -77,7 +77,7 @@ public class Login extends BaseEntity{
 	}
 
 
-	/*public MasRole getMasRole() {
+	public MasRole getMasRole() {
 		return masRole;
 	}
 
@@ -94,7 +94,7 @@ public class Login extends BaseEntity{
 
     public void setMasLocation(MasLocation masLocation) {
 		this.masLocation = masLocation;
-    }*/
+    }
 	
 	
 

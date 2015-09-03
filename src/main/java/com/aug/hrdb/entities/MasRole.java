@@ -25,8 +25,8 @@ public class MasRole extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
 	
-	/*@OneToMany(mappedBy = "masRole")
-	private Set<Login> logins = new HashSet<Login>();*/
+	@OneToMany(mappedBy = "masRole")
+	private Set<Login> logins = new HashSet<Login>();
 
 	public Integer getId() {
 		return id;
