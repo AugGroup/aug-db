@@ -74,7 +74,7 @@ import org.hibernate.annotations.NamedNativeQuery;
   })
 
 @Entity
-@Table(name = "ADDRESS",uniqueConstraints = {@UniqueConstraint(columnNames = {"houseNo","district"})})
+@Table(name = "ADDRESS",uniqueConstraints = {@UniqueConstraint(columnNames = {"HOUSE_NO","DISTRICT"})})
 public class Address extends BaseEntity{
 	
 	@Id

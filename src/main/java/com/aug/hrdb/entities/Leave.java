@@ -21,7 +21,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name="LEAVE")
+@Table(name="LEAVES")
 public class Leave extends BaseEntity {
 	
 	@Id
