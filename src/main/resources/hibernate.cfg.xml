@@ -50,6 +50,7 @@
 		<mapping class="com.aug.hrdb.entities.Site" />
 		<mapping class="com.aug.hrdb.entities.Health" />
 		
+		<mapping class="com.aug.hrdb.entities.Experience"/>
 		
 
 	</session-factory>
