@@ -54,7 +54,7 @@ public class GenericRepositoryImpl<E, I extends Serializable> implements Generic
         getCurrentSession().delete(e);
     }
 
-    public void deleteById(I id){
+    public void deleteByApplicantId(I id){
     	delete(find(id));
     }
     

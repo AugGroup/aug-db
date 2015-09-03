@@ -13,7 +13,7 @@ public interface ExperienceService {
 	
 	public void update(Experience experience);
 	
-	public void deleteById(Integer id);
+	public void deleteByApplicantId(Integer id);
 	
 	public void delete(Experience experience);
 	
