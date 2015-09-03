@@ -54,6 +54,10 @@ public class GenericRepositoryImpl<E, I extends Serializable> implements Generic
         getCurrentSession().delete(e);
     }
 
+    public void deleteByApplicantId(I id){
+    	delete(find(id));
+    }
+    
     public void flush() {
         getCurrentSession().flush();
     }

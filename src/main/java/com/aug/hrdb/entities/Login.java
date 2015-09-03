@@ -24,7 +24,7 @@ import org.hibernate.annotations.NamedNativeQuery;
 
 
 @Entity
-@Table(name="EMP_LOGIN" ,uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+@Table(name="LOGIN" ,uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
 public class Login extends BaseEntity{
 
 	@Id

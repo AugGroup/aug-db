@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Login;
-import com.aug.hrdb.repositories.LoginRepositories;
+import com.aug.hrdb.repositories.LoginRepository;
 import com.aug.hrdb.services.LoginService;
 
 
@@ -19,47 +19,47 @@ import com.aug.hrdb.services.LoginService;
 @Transactional
 public class LoginServiceImpl implements LoginService{
 
-	@Autowired private LoginRepositories loginRepositories;
+	@Autowired private LoginRepository loginRepository;
 	
 	@Override
 	public void create(Login login) {
-		loginRepositories.create(login);
+		loginRepository.create(login);
 		
 	}
 
 	@Override
 	public void update(Login login) {
-		loginRepositories.update(login);
+		loginRepository.update(login);
 	}
 
 	@Override
 	public void delete(Login login) {
-		loginRepositories.delete(login);
+		loginRepository.delete(login);
 	}
 
 	@Override
 	public Login find(Integer id) {
-		return loginRepositories.find(id);
+		return loginRepository.find(id);
 	}
 
 	@Override
 	public List<Login> findAll() {
-		return loginRepositories.findAll();
+		return loginRepository.findAll();
 	}
 
 	@Override
 	public Login findByUserName(String name) {
-		return loginRepositories.findByUserName(name);
+		return loginRepository.findByUserName(name);
 	}
 
-	@Override
+/*	@Override
 	public Login deleteById(Integer id) {
-		return loginRepositories.deleteById(id);
-	}
-	
+		return loginRepository.deleteById(id);
+	}*/
+
 	@Override
 	public Login searhEmpIdtoLogin() {		
-		return loginRepositories.searhEmpIdtoLogin();
+		return loginRepository.searhEmpIdtoLogin();
 	}
 
 

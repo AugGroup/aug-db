@@ -22,7 +22,31 @@
         <!--<mapping class="com.aug.db.entities"/>-->
         <!-- <mapping class="com.aug.hrdb.entities.Family"/>
         <mapping class="com.aug.hrdb.entities.MasRelationType"/> -->
+        <mapping class="com.aug.hrdb.entities.History"/>
+        <mapping class="com.aug.hrdb.entities.MasDivision" />
+		<mapping class="com.aug.hrdb.entities.MasJoblevel" />
+		<mapping class="com.aug.hrdb.entities.MasTechnology" />
+		<mapping class="com.aug.hrdb.entities.MasRole" />
+		<mapping class="com.aug.hrdb.entities.Allowances" />
+		<mapping class="com.aug.hrdb.entities.MasEmployment" />
 
+		<mapping class="com.aug.hrdb.entities.MasAllowances" />
+		<mapping class="com.aug.hrdb.entities.Ability"/>
+		<mapping class="com.aug.hrdb.entities.Leave"/>
+		<mapping class="com.aug.hrdb.entities.SkillLanguage"/>
+		<mapping class="com.aug.hrdb.entities.MasDegreetype"/>
+		<mapping class="com.aug.hrdb.entities.Address"/>
+		<mapping class="com.aug.hrdb.entities.MasAddressType"/>
+		<mapping class="com.aug.hrdb.entities.MasProvince"/>
+		<mapping class="com.aug.hrdb.entities.Official"/>
+		
+		<mapping class="com.aug.hrdb.entities.Login" />
+		<mapping class="com.aug.hrdb.entities.MasSpecialty" />
+		<mapping class="com.aug.hrdb.entities.Reward" />
+		<mapping class="com.aug.hrdb.entities.Punish" />
+		<mapping class="com.aug.hrdb.entities.Card" />
+		<mapping class="com.aug.hrdb.entities.MasLocation" />
+		
 
 	</session-factory>
 </hibernate-configuration>
