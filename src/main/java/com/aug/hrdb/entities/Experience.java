@@ -31,6 +31,9 @@ public class Experience extends BaseEntity {
 
 	@Column(name = "TYPE_OF_BUSINESS")
 	private String typeOfBusiness;
+	
+	@Column(name ="COMPANY_NAME")
+	private String companyName;
 
 	@Column(name = "DATE_FROM")
 	private Date dateFrom;
