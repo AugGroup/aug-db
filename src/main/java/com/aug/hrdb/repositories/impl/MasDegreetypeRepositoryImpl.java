@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 import com.aug.hrdb.entities.MasDegreetype;
 import com.aug.hrdb.repositories.MasDegreetypeRepository;
 import com.mysql.jdbc.StringUtils;
@@ -27,6 +28,7 @@ public class MasDegreetypeRepositoryImpl extends GenericRepositoryImpl<MasDegree
 		// TODO Auto-generated constructor stub
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MasDegreetype> findByCriteria(MasDegreetype masDegreetype) {
 		Criteria c = getCurrentSession().createCriteria(MasDegreetype.class);

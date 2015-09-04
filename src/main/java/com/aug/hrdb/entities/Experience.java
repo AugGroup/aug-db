@@ -31,6 +31,9 @@ public class Experience extends BaseEntity {
 
 	@Column(name = "TYPE_OF_BUSINESS")
 	private String typeOfBusiness;
+	
+	@Column(name ="COMPANY_NAME")
+	private String companyName;
 
 	@Column(name = "DATE_FROM")
 	private Date dateFrom;
@@ -76,6 +79,14 @@ public class Experience extends BaseEntity {
 
 	public void setTypeOfBusiness(String typeOfBusiness) {
 		this.typeOfBusiness = typeOfBusiness;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 	public Date getDateFrom() {

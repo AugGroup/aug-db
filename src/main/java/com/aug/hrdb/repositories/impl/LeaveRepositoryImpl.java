@@ -8,7 +8,7 @@ package com.aug.hrdb.repositories.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
+
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -57,7 +57,7 @@ public class LeaveRepositoryImpl extends GenericRepositoryImpl<Leave, Integer> i
 
 	}
 
-	@Override
+	/*@Override
 	public List<Leave> findLeaveType(Integer idLeave,Integer idEmp) {
 		Criteria c = getCurrentSession().createCriteria(Leave.class,"leave");
 		c.setFetchMode("employee",FetchMode.JOIN);
@@ -66,7 +66,7 @@ public class LeaveRepositoryImpl extends GenericRepositoryImpl<Leave, Integer> i
 		c.add(Restrictions.eq("leave.masleavetype.id",idLeave));
 		return c.list();
 		
-	}
+	}*/
 
 	/*@Override
 	public List<ReportLeaveDto> reportLeave(String nameEng) {

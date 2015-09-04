@@ -4,7 +4,7 @@
  * @date May 24, 2015
  */
 
-package com.aug.hrdb.dto.services;
+package com.aug.hrdb.services;
 
 import java.util.List;
 

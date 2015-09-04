@@ -3,7 +3,7 @@
  * @author Pranrajit
  * @date 19 พ.ค. 2558
  */
-package com.aug.hrdb.dto.services;
+package com.aug.hrdb.services;
 
 import java.util.List;
 

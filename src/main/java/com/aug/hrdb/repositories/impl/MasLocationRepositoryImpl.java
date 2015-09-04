@@ -35,14 +35,14 @@ public class MasLocationRepositoryImpl  extends GenericRepositoryImpl<MasLocatio
 		return c.list();
 	}
 
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	public MasLocation findByLocationCode(String locationCode) {
 		Criteria c = getCurrentSession().createCriteria(MasLocation.class);
 	    c.add(Restrictions.eq("code", locationCode));
 	    MasLocation location = (MasLocation) c.uniqueResult();
 		return location;
 	}
-
+*/
 	
 	public MasLocation deleteById(Integer id) {
 		MasLocation masLocation =(MasLocation)getCurrentSession().load(MasLocation.class, id);

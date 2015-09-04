@@ -65,6 +65,11 @@ public class Ability extends BaseEntity  {
 	public Integer getRank() {
 		return rank;
 	}
+	
+	public void setRank(Integer rank) {
+		this.rank = rank;
+	}
+
 
 
 /*	public Employee getEmployee() {
@@ -75,10 +80,7 @@ public class Ability extends BaseEntity  {
 		this.employee = employee;
 	}
 
-	public void setRank(Integer rank) {
-		this.rank = rank;
-	}
-
+	
 	public MasSpecialty getMasspecialty() {
 		return masspecialty;
 	}

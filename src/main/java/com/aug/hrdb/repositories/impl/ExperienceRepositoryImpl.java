@@ -14,8 +14,8 @@ import com.aug.hrdb.repositories.ExperienceRepository;
 public class ExperienceRepositoryImpl extends GenericRepositoryImpl<Experience, Serializable> implements ExperienceRepository {
 
 
-	public ExperienceRepositoryImpl(Class<Experience> entityClass) {
-		super(entityClass);
+	public ExperienceRepositoryImpl() {
+		super(Experience.class);
 		// TODO Auto-generated constructor stub
 	}
 

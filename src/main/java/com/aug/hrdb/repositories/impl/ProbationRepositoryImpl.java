@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
+
+import com.aug.hrdb.dto.ProbationDto;
 import com.aug.hrdb.entities.Probation;
 import com.aug.hrdb.repositories.ProbationRepository;
 
@@ -29,17 +31,17 @@ public class ProbationRepositoryImpl extends GenericRepositoryImpl<Probation, In
 		return null;
 	}
 	
-//	@SuppressWarnings("unchecked")
-//	public List<ProbationDto> searchProbation(Integer id){
-//		Query namedQuery = getCurrentSession().getNamedQuery("searchProbation").setInteger("empId" ,id);
-//		//namedQuery.executeUpdate();
-//		List<ProbationDto> expDto = namedQuery.list();
-//	     return expDto;
-//	}
-//	
-//	@SuppressWarnings("unchecked")
-//	public void createProbation(ProbationDto probationDto){
-//		Query namedQuery = getCurrentSession().getNamedQuery("createProbation");
-//	}
+	@SuppressWarnings("unchecked")
+	public List<ProbationDto> searchProbation(Integer id){
+		Query namedQuery = getCurrentSession().getNamedQuery("searchProbation").setInteger("empId" ,id);
+		//namedQuery.executeUpdate();
+		List<ProbationDto> expDto = namedQuery.list();
+	     return expDto;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void createProbation(ProbationDto probationDto){
+		Query namedQuery = getCurrentSession().getNamedQuery("createProbation");
+	}
 
 }
