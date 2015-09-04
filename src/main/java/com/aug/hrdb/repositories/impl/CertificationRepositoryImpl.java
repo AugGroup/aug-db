@@ -13,9 +13,8 @@ import com.aug.hrdb.repositories.CertificationRepository;
 @Repository(value = "certificationRepository")
 public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certification, Serializable> implements CertificationRepository {
 
-	public CertificationRepositoryImpl(Class<Certification> entityClass) {
-		super(entityClass);
-		// TODO Auto-generated constructor stub
+	public CertificationRepositoryImpl() {
+		super(Certification.class);
 	}
 
 	@Override
