@@ -1,11 +1,18 @@
 package services;
 
+import static org.junit.Assert.assertNotNull;
+
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.services.CertificationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -14,6 +21,48 @@ public class CertificationServiceTest {
 	
 	@Autowired
 	private CertificationService certificationService;
+	
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	public void testInsertCertificationService() throws Exception {
+		Certification certification = new Certification();
+		certification.setName("Java");
+		certificationService.create(certification);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	public void testUpdateCertificationService() throws Exception {
+		Certification certification = certificationService.findById(5);
+		certification.setName(".Net");
+		certificationService.update(certification);
+	}
+	
+	@Test
+	@Transactional
+	@Rollback(value = false)
+	public void testDeleteByIdCertificationService() throws Exception {
+		certificationService.deleteByApplicantId(5);
+	}
+
+	@Test
+	@Transactional
+	public void testFindByIdCertificateService() throws Exception {
+		Certification certification = certificationService.findById(5);
+		assertNotNull(certification.getName());
+		
+	}
+
+	@Test
+	@Transactional
+	public void testFindAllCertificateService() throws Exception {
+		List<Certification> certifications = certificationService.findAll();
+		for (Certification certification : certifications)
+			System.out.println("certification : "
+					+ certification.getName());
+	}
 	
 	
 	
