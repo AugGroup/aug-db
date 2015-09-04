@@ -15,6 +15,7 @@ public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certifica
 
 	public CertificationRepositoryImpl() {
 		super(Certification.class);
+
 	}
 
 	@Override

@@ -53,23 +53,23 @@ public class LeaveServiceImpl implements LeaveService {
 		return leaveRepository.find(id);
 	}
 
-	@Override
+	/*@Override
 	public List<Leave> findByCriteria(Leave leave) {
 		
 		return leaveRepository.findByCriteria(leave);
 	}
-
+*/
 	@Override
 	public Leave deleteById(Integer id) {
 		
 		return leaveRepository.deleteById(id);
 	}
 
-	@Override
+	/*@Override
 	public List<Leave> findLeaveType(Integer idLeave,Integer idEmp) {
 		// TODO Auto-generated method stub
 		return leaveRepository.findLeaveType(idLeave,idEmp);
-	}
+	}*/
 
 	
 }
