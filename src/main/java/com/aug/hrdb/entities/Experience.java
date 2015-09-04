@@ -81,6 +81,14 @@ public class Experience extends BaseEntity {
 		this.typeOfBusiness = typeOfBusiness;
 	}
 
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
 	public Date getDateFrom() {
 		return dateFrom;
 	}

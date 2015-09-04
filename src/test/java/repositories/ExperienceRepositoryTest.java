@@ -1,6 +1,8 @@
 package repositories;
 
-import static org.junit.Assert.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,20 +16,28 @@ import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.repositories.ExperienceRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:spring-bean-db-test.xml")
+@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @Transactional
 public class ExperienceRepositoryTest {
 
 	@Autowired
 	private ExperienceRepository experienceRepository;
-	
+
 	@Test
-	@Rollback(value="false")
-	public void insertExperience(){
+	@Rollback(false)
+	public void insertExperience() {
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Experience experience = new Experience();
-		experience.setId("1");
+
+		experience.setId(1);
 		experience.setAddress("ExperienceAddressTest");
 		experience.setTypeOfBusiness("TypeTest");
-		experience.setc
+		experience.setCompanyName("companyName");
+		// experience.setDateFrom(dateFmt.parse("04/01/2015"));
+		// experience.setDateTo(dateFmt.parse("04/09/2015"));
+		experience.setPosition("positionTest");
+
+		experienceRepository.getCurrentSession().save(experience);
+		
 	}
 }
