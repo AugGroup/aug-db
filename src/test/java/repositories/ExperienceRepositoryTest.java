@@ -25,19 +25,31 @@ public class ExperienceRepositoryTest {
 
 	@Test
 	@Rollback(false)
-	public void insertExperience() {
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
+	public void insertExperience() throws ParseException {
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.ENGLISH);
 		Experience experience = new Experience();
 
 		experience.setId(1);
 		experience.setAddress("ExperienceAddressTest");
 		experience.setTypeOfBusiness("TypeTest");
-		experience.setCompanyName("companyName");
-		// experience.setDateFrom(dateFmt.parse("04/01/2015"));
-		// experience.setDateTo(dateFmt.parse("04/09/2015"));
+		experience.setCompanyName("companyNameTest");
+		experience.setDateFrom(dateFmt.parse("04/01/2015"));
+		experience.setDateTo(dateFmt.parse("04/09/2015"));
 		experience.setPosition("positionTest");
+		experience.setReason("reasonTest");
+		experience.setReference("referenceTest");
+		experience.setResponsibility("responsibilityTest");
+		experience.setSalary(20000);
 
 		experienceRepository.getCurrentSession().save(experience);
-		
+		System.out.println(experience.getDateTo());
 	}
+	
+	/*@Test
+	@Rollback(false)
+	public void updateExperience()*/
+	
+	
+	
 }
