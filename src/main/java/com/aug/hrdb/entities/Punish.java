@@ -16,7 +16,6 @@ import javax.persistence.TemporalType;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.aug.hrdb.dto.PunsihDto;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -31,7 +30,7 @@ public class Punish {
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name = "DATEPUNISH" ,nullable = false)
-	//@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date datepunish;
 		
 	@Column(name = "DESCRIPTION" ,nullable = false)
