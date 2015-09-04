@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.aug.hrdb.dto.ReferenceDto;
+
+
 @Entity
 @Table(name = "REFERENCE")
 public class Reference extends BaseEntity{
@@ -22,7 +25,7 @@ public class Reference extends BaseEntity{
 	private String address;
 	
 	@Column(name = "TELEPHONE", nullable = false)
-	private String telephone;
+	private String tel;
 	
 	@Column(name = "OCCUPATION", nullable = false)
 	private String occupation;
@@ -51,12 +54,12 @@ public class Reference extends BaseEntity{
 		this.address = address;
 	}
 
-	public String getTelephone() {
-		return telephone;
+	public String getTel() {
+		return tel;
 	}
 
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 
 	public String getOccupation() {
@@ -65,6 +68,29 @@ public class Reference extends BaseEntity{
 
 	public void setOccupation(String occupation) {
 		this.occupation = occupation;
+	}
+	
+	public ReferenceDto toReferenceDto(){
+		ReferenceDto referenceDto = new ReferenceDto();
+		referenceDto.setId(this.id);
+		referenceDto.setName(this.name);
+		referenceDto.setAddress(this.address);
+		referenceDto.setTel(this.tel);
+		referenceDto.setOccupation(this.occupation);
+//		referenceDto.setEmployeeId(this.employee.getId());
+		return referenceDto;
+	}
+
+	public Reference fromReferenceDto(Reference reference,ReferenceDto referenceDto){
+		//Reference reference = new Reference();
+		reference.setId(referenceDto.getId());
+		reference.setName(referenceDto.getName());
+		reference.setAddress(referenceDto.getAddress());
+		reference.setTel(referenceDto.getTel());		reference.setOccupation(referenceDto.getOccupation());				
+//		Employee employee = new Employee();
+//		employee.setId(referenceDto.getEmployeeId());
+//		reference.setEmployee(employee);
+		return reference;
 	}
 	
 }
