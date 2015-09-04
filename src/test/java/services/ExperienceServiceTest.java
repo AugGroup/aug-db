@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Experience;
-import com.aug.hrdb.repositories.ExperienceRepository;
 import com.aug.hrdb.services.ExperienceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)

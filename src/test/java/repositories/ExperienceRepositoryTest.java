@@ -4,8 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import javax.validation.constraints.NotNull;
-
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
