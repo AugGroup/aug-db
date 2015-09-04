@@ -1,12 +1,9 @@
-package repositories;
+package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import javax.validation.constraints.NotNull;
-
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.repositories.ExperienceRepository;
+import com.aug.hrdb.services.ExperienceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
-@Transactional
-public class ExperienceRepositoryTest {
+public class ExperienceServiceTest {
 
 	@Autowired
-	private ExperienceRepository experienceRepository;
+	private ExperienceService experienceService;
 
 	@Test
-	@Ignore
 	@Rollback(false)
-	public void insertExperienceRepositoryTest() throws ParseException {
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
+	public void insertExperienceServiceTest() throws ParseException {
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",
+				Locale.ENGLISH);
 		Experience experience = new Experience();
 
 		experience.setId(1);
@@ -43,36 +40,37 @@ public class ExperienceRepositoryTest {
 		experience.setReason("reasonTest");
 		experience.setReference("referenceTest");
 		experience.setResponsibility("responsibilityTest");
-		experience.setSalary(20000);
+		experience.setSalary(40000);
 
-		experienceRepository.getCurrentSession().save(experience);
-		System.out.println("ExperienceRepositoryTest : " + experience.getDateTo());
+		experienceService.create(experience);
+		System.out.println("ExperienceServiceTest " + experience.getDateTo());
 	}
-
+	
 	@Test
 	@Rollback(false)
-	public void findByIdExperienceRepositoryTest() {
-		Experience experience = experienceRepository.find(1);
+	public void findByIdExperienceServiceTest() {
+		Experience experience = experienceService.findById(1);
 		System.out.println("Experience Address : "+experience.getAddress());
 
 	}
 	
 	@Test
 	@Rollback(false)
-	public void updateExperienceRepositoryTest() {
-		Experience experience = experienceRepository.find(1);
-		experience.setCompanyName("companyNameUpdateTest ");
-		experienceRepository.update(experience);
+	public void updateExperienceServiceTest() {
+		Experience experience = experienceService.findById(1);
+		experience.setCompanyName("companyNameUpdateServiceTest ");
+		experienceService.update(experience);
 		System.out.println("Experience Name : " + experience.getCompanyName());
 
 	}
 	
 	@Test
 	@Rollback(false)
-	public void deleteByIdExperienceRepositoryTest() {
-		Experience experience = experienceRepository.find(5);
-		experienceRepository.delete(experience);
-		System.out.println("Delete Experience : " + experienceRepository.find(5));
+	public void deleteByIdExperienceServiceTest() {
+		Experience experience =  experienceService.findById(5);
+		experienceService.delete(experience);
+		System.out.println("Delete Experience : " + experienceService.findById(5));
 	}
+
 
 }
