@@ -53,8 +53,8 @@ public class AllowancesServiceImpl implements AllowancesService {
 //	}
 
 	@Override
-	public Allowances deleteById(Integer id) {
-		return allowancesRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		allowancesRepository.deleteById(id);
 	}
 
 }

@@ -17,5 +17,5 @@ public interface HistoryService {
 	public void delete(History history);
 	public History findById(Integer id);
 	public List<History> findByCriteria(History history);
-	public History deleteById(Integer id);
+	public void deleteById(Integer id);
 }

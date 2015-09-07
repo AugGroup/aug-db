@@ -32,11 +32,5 @@ public class MasJoblevelRepositoryImpl extends GenericRepositoryImpl<MasJoblevel
 		return c.list();
 	}
 
-	@Override
-	public MasJoblevel deleteById(Integer id) {
-		MasJoblevel masJoblevel =(MasJoblevel)getCurrentSession().load(MasJoblevel.class, id);
-		getCurrentSession().delete(masJoblevel);
-		return masJoblevel;
-	}
 
 }

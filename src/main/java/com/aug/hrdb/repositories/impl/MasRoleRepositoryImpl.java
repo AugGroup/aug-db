@@ -12,9 +12,4 @@ public class MasRoleRepositoryImpl extends GenericRepositoryImpl<MasRole, Intege
 			super(MasRole.class);
 		}
 		
-		public MasRole deleteById(Integer id) {
-			MasRole masRole =(MasRole)getCurrentSession().load(MasRole.class, id);
-			getCurrentSession().delete(masRole);
-			return masRole;
-		}
 }

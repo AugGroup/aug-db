@@ -53,10 +53,5 @@ public class MasJoblevelServiceImpl implements MasJoblevelService {
 		return masJoblevelRepository.findByCriteria(masJoblevel);
 	}
 
-	@Override
-	public MasJoblevel deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		return masJoblevelRepository.deleteById(id);
-	}
 
 }

@@ -53,8 +53,8 @@ public class HistoryServiceImpl implements HistoryService{
 	}
 
 	@Override
-	public History deleteById(Integer id) {
-		return historyRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		historyRepository.deleteById(id);
 	}
 
 }

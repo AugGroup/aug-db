@@ -11,5 +11,5 @@ public interface MasRoleService {
 	public void delete(MasRole masRole);
 	public MasRole find(Integer id);
 	public List<MasRole> findAll();
-	public MasRole deleteById(Integer id);
+	public void deleteById(Integer id);
 }

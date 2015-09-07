@@ -34,12 +34,6 @@ public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowances, 
 //		return c.list();
 //	}
 
-	@Override
-	public Allowances deleteById(Integer id) {
-		Allowances allowances =(Allowances)getCurrentSession().load(Allowances.class, id);
-		getCurrentSession().delete(allowances);
-		return allowances;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

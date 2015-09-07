@@ -32,11 +32,5 @@ public class MasAllowancesRepositoryImpl extends GenericRepositoryImpl<MasAllowa
 		return c.list();
 	}
 
-	@Override
-	public MasAllowances deleteById(Integer id) {
-		MasAllowances masAllowances =(MasAllowances)getCurrentSession().load(MasAllowances.class, id);
-		getCurrentSession().delete(masAllowances);
-		return masAllowances;
-	}
 
 }

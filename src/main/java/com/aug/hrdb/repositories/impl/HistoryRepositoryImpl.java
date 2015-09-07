@@ -34,12 +34,6 @@ public class HistoryRepositoryImpl extends GenericRepositoryImpl<History, Intege
 		return c.list();
 	}
 
-	@Override
-	public History deleteById(Integer id) {
-		History history =(History)getCurrentSession().load(History.class, id);
-		getCurrentSession().delete(history);
-		return history;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

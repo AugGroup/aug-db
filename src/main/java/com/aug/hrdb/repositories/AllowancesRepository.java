@@ -14,7 +14,7 @@ public interface AllowancesRepository extends GenericRepository<Allowances, Inte
 
 //	public List<Allowances> findByCriteria(Allowances allowances);
 
-	public Allowances deleteById(Integer id);
+//	public Allowances deleteById(Integer id);
 
 	public List<AllowancesDto> searchAllowances(Integer id);
 

@@ -8,6 +8,5 @@ public interface MasJoblevelRepository extends GenericRepository<MasJoblevel,Int
 
 	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel);
 
-	public MasJoblevel deleteById(Integer id);
 
 }

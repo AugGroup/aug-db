@@ -13,5 +13,4 @@ public interface MasAllowancesRepository extends GenericRepository<MasAllowances
 
 	public List<MasAllowances> findByCriteria(MasAllowances masAllowances);
 
-	public MasAllowances deleteById(Integer id);
 }

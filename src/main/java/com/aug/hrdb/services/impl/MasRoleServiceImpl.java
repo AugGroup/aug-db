@@ -46,8 +46,8 @@ public class MasRoleServiceImpl implements MasRoleService{
 	}
 
 	@Override
-	public MasRole deleteById(Integer id) {
-		return masRoleRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		masRoleRepository.deleteById(id);
 	}
 	
 }

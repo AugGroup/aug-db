@@ -12,6 +12,5 @@ public interface MasJoblevelService {
 	public MasJoblevel find(Integer id);
 	public List<MasJoblevel> findAll();
 	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel);
-	public MasJoblevel deleteById(Integer id);
 
 }
