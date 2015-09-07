@@ -7,6 +7,14 @@ import com.aug.hrdb.entities.Family;
 
 
 public interface FamilyRepository extends GenericRepository<Family, Integer> {
+	
+	
+	 public void create(Family family);
+	 public void update(Family family);
+	 public void delete(Family family);
+	 public Family find(Integer Id);
+	 public List<Family> findAll();
+	
 
 	 public List<Family> findFamilyByEmployeeId(Integer Id);
 	 //public Employee findEmployeeById(Integer Id);

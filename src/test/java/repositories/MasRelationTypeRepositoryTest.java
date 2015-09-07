@@ -32,7 +32,7 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	public void create() {
 	
 		MasRelationType masRelationType = new MasRelationType();
-		masRelationType.setRelationType("Farther");
+		masRelationType.setRelationType("Father");
 		masRelationType.setAuditFlag("C");
 		masRelationType.setCode("REL-03");
 		masRelationType.setCreatedBy(1);
@@ -40,6 +40,33 @@ private MasRelationTypeRepository masRelationTypeRepository;
 		masRelationType.setIsActive(true);
 	
 		masRelationTypeRepository.create(masRelationType);
+		
+		
+		
+		MasRelationType masRelationType2 = new MasRelationType();
+		masRelationType2.setRelationType("Mother");
+		masRelationType2.setAuditFlag("C");
+		masRelationType2.setCode("REL-04");
+		masRelationType2.setCreatedBy(1);
+		masRelationType2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masRelationType2.setIsActive(true);
+	
+		masRelationTypeRepository.create(masRelationType2);
+		
+		
+		
+		
+		MasRelationType masRelationType3 = new MasRelationType();
+		masRelationType3.setRelationType("Son");
+		masRelationType3.setAuditFlag("C");
+		masRelationType3.setCode("REL-05");
+		masRelationType3.setCreatedBy(1);
+		masRelationType3.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masRelationType3.setIsActive(true);
+	
+		masRelationTypeRepository.create(masRelationType3);
+	
+	
 	
 	}
 	
@@ -91,7 +118,7 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	public void findAll() {
 	
 		List<MasRelationType> masRelationTypeList = masRelationTypeRepository.findAll();
-		Assert.assertEquals(1, masRelationTypeList.size());
+		Assert.assertEquals(2, masRelationTypeList.size());
 		
 		for(int i=0;i<masRelationTypeList.size();i++){		
 			System.out.println("id: "+masRelationTypeList.get(i).getId());
@@ -107,8 +134,8 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	@Rollback(false)
 	public void findByName() {
 	
-		MasRelationType masRelationType = masRelationTypeRepository.findByName("Farther");
-		Assert.assertEquals("Farther", masRelationType.getRelationType());
+		MasRelationType masRelationType = masRelationTypeRepository.findByName("Father");
+		Assert.assertEquals("Father", masRelationType.getRelationType());
 	
 	}
 
