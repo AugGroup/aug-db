@@ -110,4 +110,10 @@ public class SiteServiceImpl implements SiteService{
 		siteRepository.update(site);
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		siteRepository.deleteById(id);
+	}
+
 }

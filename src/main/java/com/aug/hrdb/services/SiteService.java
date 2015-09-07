@@ -13,6 +13,7 @@ public interface SiteService {
 	public void delete(Site site);
 	public Site find(Integer Id);
 	public List<Site> findAll();
+	 public void deleteById(Integer id);
 	public void createSetDtoToEnity(SiteDto siteDto);
 	public SiteDto findByIdReturnToDto(Integer id);
 	public void updateSetDtoToEntity(SiteDto siteDto);
