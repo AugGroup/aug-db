@@ -9,6 +9,11 @@ import com.aug.hrdb.entities.Health;
 
 public interface HealthRepository extends GenericRepository<Health,Integer>{
 	
-	public  List<HealthDto> listHealth(Integer id);
-	public Health findByEmployeeId(Integer id);
+	 public void create(Health health);
+	 public void update(Health health);
+	 public void delete(Health health);
+	 public Health find(Integer Id);
+	 public List<Health> findAll();	
+	 public  List<HealthDto> listHealth(Integer id);
+	 public Health findByEmployeeId(Integer id);
 }
