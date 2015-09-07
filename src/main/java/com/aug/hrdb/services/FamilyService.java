@@ -14,6 +14,8 @@ public interface FamilyService {
 	public void delete(Family empFamily);
 	public Family find(Integer Id);
 	public List<Family> findAll();
+	public void deleteById(Integer id);
+
 	
 	public List<Family> findFamilyByEmployeeId(Integer Id);
 	

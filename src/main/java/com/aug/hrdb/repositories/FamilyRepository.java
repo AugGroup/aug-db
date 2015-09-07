@@ -14,6 +14,7 @@ public interface FamilyRepository extends GenericRepository<Family, Integer> {
 	 public void delete(Family family);
 	 public Family find(Integer Id);
 	 public List<Family> findAll();
+	 public void deleteById(Integer id);
 	
 
 	 public List<Family> findFamilyByEmployeeId(Integer Id);

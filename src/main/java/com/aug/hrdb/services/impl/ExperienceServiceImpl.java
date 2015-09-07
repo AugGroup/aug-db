@@ -42,8 +42,8 @@ public class ExperienceServiceImpl implements ExperienceService {
 	}
 
 	@Override
-	public void deleteByApplicantId(Integer id) {
-		experienceRepository.deleteByApplicantId(id);
+	public void deleteById(Integer id) {
+		experienceRepository.deleteById(id);
 
 	}
 
