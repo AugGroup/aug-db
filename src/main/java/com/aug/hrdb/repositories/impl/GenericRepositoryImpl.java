@@ -41,7 +41,7 @@ public class GenericRepositoryImpl<E, I extends Serializable> implements Generic
     public E find(I id) {
         return (E) getCurrentSession().get(entityClass, id);
     }
-
+    
     public void create(E e) {
         getCurrentSession().save(e);
     }
@@ -53,13 +53,14 @@ public class GenericRepositoryImpl<E, I extends Serializable> implements Generic
     public void delete(E e) {
         getCurrentSession().delete(e);
     }
-
-    public void deleteByApplicantId(I id){
+    
+    public void deleteById(I id) {
     	delete(find(id));
     }
     
     public void flush() {
         getCurrentSession().flush();
     }
+
 
 }

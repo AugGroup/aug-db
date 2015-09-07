@@ -18,7 +18,7 @@ public interface GenericRepository<E, I extends Serializable> {
 
 	public void delete(E e);
 
-	public void deleteByApplicantId(I id);
+	public void deleteById(I id);
 
 	public void flush();
 }
