@@ -30,9 +30,9 @@ public class MasRelationTypeServiceTest {
 	public void create() {
 
 		MasRelationType masRelationType = new MasRelationType();
-		masRelationType.setRelationType("Mather");
+		masRelationType.setRelationType("Son");
 		masRelationType.setAuditFlag("C");
-		masRelationType.setCode("REL-03");
+		masRelationType.setCode("REL-06");
 		masRelationType.setCreatedBy(1);
 		masRelationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masRelationType.setIsActive(true);
@@ -47,8 +47,8 @@ public class MasRelationTypeServiceTest {
 	@Rollback(false)
 	public void update() {
 
-		MasRelationType masRelationType = masRelationTypeService.find(1);
-		masRelationType.setRelationType("Son");
+		MasRelationType masRelationType = masRelationTypeService.find(4);
+		masRelationType.setRelationType("Daughter");
 		masRelationType.setAuditFlag("U");
 		masRelationType.setUpdatedBy(1);
 		masRelationType.setUpdatedTimeStamp(Calendar.getInstance().getTime());
@@ -63,7 +63,7 @@ public class MasRelationTypeServiceTest {
 	@Rollback(false)
 	public void delete() {
 
-		MasRelationType masRelationType = masRelationTypeService.find(2);
+		MasRelationType masRelationType = masRelationTypeService.find(4);
 		masRelationTypeService.delete(masRelationType);
 
 	}
@@ -85,7 +85,7 @@ public class MasRelationTypeServiceTest {
 	public void findAll() {
 
 		List<MasRelationType> masRelationTypeList = masRelationTypeService.findAll();
-		Assert.assertEquals(1, masRelationTypeList.size());
+		Assert.assertEquals(2, masRelationTypeList.size());
 		
 		for(int i=0;i<masRelationTypeList.size();i++){		
 			System.out.println("id: "+masRelationTypeList.get(i).getId());
@@ -101,8 +101,8 @@ public class MasRelationTypeServiceTest {
 	@Rollback(false)
 	public void findByName() {
 	
-		MasRelationType masRelationType = masRelationTypeService.findByName("Son");
-		Assert.assertEquals("Son", masRelationType.getRelationType());
+		MasRelationType masRelationType = masRelationTypeService.findByName("Mother");
+		Assert.assertEquals("Mother", masRelationType.getRelationType());
 	
 	}
 	
