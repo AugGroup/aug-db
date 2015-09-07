@@ -58,8 +58,8 @@ public class MasEmploymentServiceImpl implements MasEmploymentService{
 	}
 
 	@Override
-	public MasEmployment deleteById(Integer id) {
-		return masEmploymentResp.deleteById(id);
+	public void deleteById(Integer id) {
+		 masEmploymentResp.deleteById(id);
 	}
 	
 	

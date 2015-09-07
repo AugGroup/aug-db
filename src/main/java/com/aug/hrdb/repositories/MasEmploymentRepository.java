@@ -16,6 +16,5 @@ public interface MasEmploymentRepository extends GenericRepository<MasEmployment
 	
 List<MasEmployment> findByCriteria(MasEmployment masEmployment);
 	
-	public MasEmployment deleteById(Integer id);
 
 }

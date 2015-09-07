@@ -55,8 +55,8 @@ public class OfficialServiceImpl implements OfficialService{
 	}
 
 	@Override
-	public Official deleteById(Integer id) {
-		return officialResp.deleteById(id);
+	public void deleteById(Integer id) {
+		 officialResp.deleteById(id);
 	}
 
 	@Override

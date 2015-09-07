@@ -39,12 +39,6 @@ public class OfficialRepositoryImpl extends GenericRepositoryImpl<Official, Inte
 		
 	}
 	
-	public Official deleteById(Integer id){
-		
-		Official official =(Official)getCurrentSession().load(Official.class, id);
-		getCurrentSession().delete(official);
-		return official;
-	}
 
 
 	@Override

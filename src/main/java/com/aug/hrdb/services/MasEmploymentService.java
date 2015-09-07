@@ -19,6 +19,6 @@ public interface MasEmploymentService {
 	public MasEmployment findById(Integer Id);
 	public List<MasEmployment> findAll();
 	public List<MasEmployment> findByCriteria(MasEmployment masEmployment);
-	public MasEmployment deleteById(Integer id);
+	public void deleteById(Integer id);
 
 }

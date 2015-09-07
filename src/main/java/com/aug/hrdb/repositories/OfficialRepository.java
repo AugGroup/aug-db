@@ -16,7 +16,6 @@ public interface OfficialRepository extends GenericRepository<Official,Integer>{
 
 	List<Official> findByCriteria(Official official);
 	
-	public Official deleteById(Integer id);
 	public List<OfficialDto> searchOfficial();
 	public void saveOfficialByNameQuery(OfficialDto officialDto);
 	public Official searhEmpIdtoOfficial();

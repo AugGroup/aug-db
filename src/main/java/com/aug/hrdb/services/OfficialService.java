@@ -19,7 +19,7 @@ public interface OfficialService {
 	public Official findById(Integer id);
 	public List<Official> findAll();
 	public List<Official> findByCriteria(Official official);
-	public Official deleteById(Integer id);
+	public void deleteById(Integer id);
 	public void saveOfficialByNameQuery(OfficialDto officialDto);
 	public Official searhEmpIdtoOfficial();
 	public void deleteOfficialByNameQuery(Official official); 

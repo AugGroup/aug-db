@@ -19,7 +19,6 @@ public interface AddressRepository extends GenericRepository<Address, Integer>{
 	
 	public List<Address> findByCriteria(Address address);
 
-	public Address deleteById(Integer id);
 	
 	public List<AddressDto> searchAddress(Integer id);
 	public void saveAddressByNameQuery(AddressDto addressDto);

@@ -36,11 +36,5 @@ public class MasAddressTypeRepositoryImpl extends GenericRepositoryImpl<MasAddre
 	}
 
 	
-	public MasAddressType deleteById(Integer id) {
-		
-		MasAddressType masAddressType =(MasAddressType)getCurrentSession().load(MasAddressType.class, id);
-		getCurrentSession().delete(masAddressType);
-		return masAddressType;
-	}
 
 }

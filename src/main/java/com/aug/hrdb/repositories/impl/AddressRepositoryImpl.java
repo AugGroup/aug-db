@@ -41,12 +41,6 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 	}
 
 	
-	public Address deleteById(Integer id) {
-		
-		Address address =(Address)getCurrentSession().load(Address.class, id);
-		getCurrentSession().delete(address);
-		return address;
-	}
 	
 	@SuppressWarnings("unchecked")
 	public List<AddressDto> searchAddress(Integer id) {

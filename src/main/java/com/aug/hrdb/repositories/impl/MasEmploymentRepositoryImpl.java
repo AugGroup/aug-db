@@ -35,12 +35,6 @@ public class MasEmploymentRepositoryImpl extends GenericRepositoryImpl<MasEmploy
 	}
 
 	
-	public MasEmployment deleteById(Integer id) {
-		
-		MasEmployment masEmployment =(MasEmployment)getCurrentSession().load(MasEmployment.class, id);
-		getCurrentSession().delete(masEmployment);
-		return masEmployment;
-	}
 
 	
 }

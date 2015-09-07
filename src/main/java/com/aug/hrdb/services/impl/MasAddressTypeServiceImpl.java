@@ -58,8 +58,8 @@ public class MasAddressTypeServiceImpl implements MasAddressTypeService{
 	}
 
 	@Override
-	public MasAddressType deleteById(Integer id) {
-		return masAddressTypeResp.deleteById(id);
+	public void deleteById(Integer id) {
+		 masAddressTypeResp.deleteById(id);
 	}
 	
 

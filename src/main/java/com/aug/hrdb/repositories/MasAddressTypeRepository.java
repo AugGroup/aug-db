@@ -15,6 +15,5 @@ public interface MasAddressTypeRepository extends GenericRepository<MasAddressTy
 	
 	public List<MasAddressType> findByCriteria(MasAddressType masAddressType);
 
-	public MasAddressType deleteById(Integer id);
 
 }

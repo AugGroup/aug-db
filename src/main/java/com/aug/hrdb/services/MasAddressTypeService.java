@@ -20,5 +20,5 @@ public interface MasAddressTypeService {
 	public MasAddressType findById(Integer Id);
 	public List<MasAddressType> findAll();
 	public List<MasAddressType> findByCriteria(MasAddressType masAddressType);
-	public MasAddressType deleteById(Integer id);
+	public void deleteById(Integer id);
 }
