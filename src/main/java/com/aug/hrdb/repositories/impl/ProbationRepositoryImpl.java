@@ -16,14 +16,6 @@ public class ProbationRepositoryImpl extends GenericRepositoryImpl<Probation, In
 		super(Probation.class);
 	}
 	
-	@Override
-	public void deleteById(Integer id){
-		
-		Probation probation =(Probation)getCurrentSession().load(Probation.class, id);
-		if(probation != null){
-			getCurrentSession().delete(probation);
-		}
-	}
 
 	@Override
 	public List<Probation> findByCriteria(Probation probation) {

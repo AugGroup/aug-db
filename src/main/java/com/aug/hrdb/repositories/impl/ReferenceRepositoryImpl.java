@@ -27,13 +27,6 @@ public class ReferenceRepositoryImpl extends GenericRepositoryImpl<Reference, In
 		return c.list();
 	}
 	
-
-	@Override
-	public Reference deleteById(Integer id) {
-		Reference reference =(Reference)getCurrentSession().load(Reference.class, id);
-		getCurrentSession().delete(reference);
-		return reference;
-	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

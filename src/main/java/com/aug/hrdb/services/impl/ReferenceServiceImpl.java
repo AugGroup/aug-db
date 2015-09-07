@@ -50,8 +50,8 @@ public class ReferenceServiceImpl implements ReferenceService{
 	}
 
 	@Override
-	public Reference deleteById(Integer id) {
-		return referenceRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		referenceRepository.deleteById(id);
 
 	}
 }

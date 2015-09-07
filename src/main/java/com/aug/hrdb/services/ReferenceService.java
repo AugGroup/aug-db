@@ -13,5 +13,5 @@ public interface ReferenceService {
 	public Reference findById(Integer id);
 	public List<Reference> findAll();
 	public List<Reference> findByCriteria(Reference reference);
-	public Reference deleteById(Integer id);
+	public void deleteById(Integer id);
 }
