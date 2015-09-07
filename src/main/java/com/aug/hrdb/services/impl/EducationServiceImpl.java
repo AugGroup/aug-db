@@ -42,7 +42,7 @@ public class EducationServiceImpl implements EducationService{
 	
 	@Override
 	public void deleteByApplicantId(Integer id) {
-		educationRepository.deleteByApplicantId(id);
+		educationRepository.deleteById(id);
 		
 	}
 
