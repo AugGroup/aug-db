@@ -17,7 +17,7 @@ public interface MasDegreetypeRepository extends GenericRepository<MasDegreetype
 	
 	public List<MasDegreetype> findByCriteria(MasDegreetype masDegreetype);
 
-	public MasDegreetype deleteById(Integer id);
+	
 
 	
 }

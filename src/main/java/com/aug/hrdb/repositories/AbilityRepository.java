@@ -14,7 +14,7 @@ public interface AbilityRepository extends GenericRepository<Ability, Integer> {
 
 //	public List<Employee> findByCriteria(Employee employee);
 	
-	public Ability deleteById(Integer id);
+	
 
 	public List<AbilityDto> searchAbility(Integer id);
 

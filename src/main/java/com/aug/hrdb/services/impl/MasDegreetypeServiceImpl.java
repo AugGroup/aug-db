@@ -61,8 +61,8 @@ public class MasDegreetypeServiceImpl implements MasDegreetypeService{
 
 	@Override
 
-	public MasDegreetype deleteById(Integer id) {
-	return	 masDegreetypeRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		 masDegreetypeRepository.deleteById(id);
 		
 
 	}

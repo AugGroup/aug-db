@@ -33,12 +33,7 @@ public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability,Integer
 		return c.list();
 	}*/
 
-	@Override
-	public Ability deleteById(Integer id) {
-		Ability ability =(Ability)getCurrentSession().load(Ability.class, id);
-		getCurrentSession().delete(ability);
-		return ability;
-	}
+
 
 	@SuppressWarnings("unchecked")
 	public List<AbilityDto> searchAbility(Integer id) {

@@ -20,7 +20,7 @@ public interface AbilityService {
 	public Ability find(Integer Id);
 	public List<Ability> findAll();
 	public List<Ability> findByCriteria(Ability ability);
-	public Ability deleteById(Integer id);
+	public void deleteById(Integer id);
 	//public List<Employee> findByCriteria(Employee employee);
 	
 	

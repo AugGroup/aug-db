@@ -57,9 +57,9 @@ public class SkillLanguageServiceImpl implements SkillLanguageService{
 	
 
 	@Override
-	public SkillLanguage deleteById(Integer id) {
+	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		return skillLanguageRepository.deleteById(id);
+		 skillLanguageRepository.deleteById(id);
 	}
 
 	

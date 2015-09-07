@@ -28,12 +28,7 @@ public class SkillLanguageRepositoryImpl extends GenericRepositoryImpl<SkillLang
 	}
 
 
-	@Override
-	public SkillLanguage deleteById(Integer id) {
-		SkillLanguage SkillLanguage =(SkillLanguage)getCurrentSession().load(SkillLanguage.class, id);
-		getCurrentSession().delete(SkillLanguage);
-		return SkillLanguage;
-	}
+	
 
 
 	@SuppressWarnings("unchecked")

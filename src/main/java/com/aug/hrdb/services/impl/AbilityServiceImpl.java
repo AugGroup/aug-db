@@ -59,8 +59,8 @@ public class AbilityServiceImpl implements AbilityService{
 	}*/
 
 	@Override
-	public Ability deleteById(Integer id) {
-	return	 abilityRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		 abilityRepository.deleteById(id);
 		
 	}
 

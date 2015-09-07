@@ -15,7 +15,7 @@ public interface MasLocationRepository extends GenericRepository<MasLocation,Int
 
 	
 	public List<MasLocation> findByCriteria(MasLocation masLocation);
-	public MasLocation deleteById(Integer id);	
+
 	//public MasLocation findByLocationCode(String locationCode);
 	
 }

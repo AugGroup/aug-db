@@ -61,9 +61,9 @@ public class MasLocationServiceImpl implements MasLocationService{
 	}
 
 	@Override
-	public MasLocation deleteById(Integer id) {
+	public void deleteById(Integer id) {
 		
-		return masLocationRepository.deleteById(id);
+		 masLocationRepository.deleteById(id);
 	}
 
 	/*@Override

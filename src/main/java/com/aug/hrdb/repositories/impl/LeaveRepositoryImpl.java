@@ -40,12 +40,7 @@ public class LeaveRepositoryImpl extends GenericRepositoryImpl<Leave, Integer> i
 		return c.list();
 	}
 
-	@Override
-	public Leave deleteById(Integer id) {
-		Leave leave =(Leave)getCurrentSession().load(Leave.class, id);
-		getCurrentSession().delete(leave);
-		return leave;
-	}
+	
 
 	@SuppressWarnings("unchecked")
 	@Override

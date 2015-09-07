@@ -44,10 +44,6 @@ public class MasLocationRepositoryImpl  extends GenericRepositoryImpl<MasLocatio
 	}
 */
 	
-	public MasLocation deleteById(Integer id) {
-		MasLocation masLocation =(MasLocation)getCurrentSession().load(MasLocation.class, id);
-		getCurrentSession().delete(masLocation);
-		return masLocation;
-	}
+	
 
 }

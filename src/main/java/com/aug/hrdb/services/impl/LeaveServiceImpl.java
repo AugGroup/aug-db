@@ -60,9 +60,8 @@ public class LeaveServiceImpl implements LeaveService {
 	}
 */
 	@Override
-	public Leave deleteById(Integer id) {
-		
-		return leaveRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		 leaveRepository.deleteById(id);
 	}
 
 	/*@Override

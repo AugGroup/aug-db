@@ -21,6 +21,6 @@ public interface LeaveService {
 	public void delete(Leave leave);
 	public Leave  findById(Integer id);
 	//public List<Leave> findByCriteria(Leave leave);
-	public Leave deleteById(Integer id);
+	public void deleteById(Integer id);
 	//public List<Leave> findLeaveType(Integer idLeave,Integer idEmp);
 }

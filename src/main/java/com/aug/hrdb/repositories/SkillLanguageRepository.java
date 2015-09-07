@@ -12,7 +12,7 @@ public interface SkillLanguageRepository extends GenericRepository<SkillLanguage
 	
 	
 	//public List<Employee> findByCriteria(Employee employee);
-	public SkillLanguage deleteById(Integer id);
+	
 
 	public List<SkillLanguageDto> listSkillLanguageByEmployee(Integer id);
 

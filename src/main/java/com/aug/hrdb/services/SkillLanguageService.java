@@ -14,7 +14,7 @@ public interface SkillLanguageService {
 	public SkillLanguage find(Integer Id);
 	public List<SkillLanguage> findAll();
 	
-	public SkillLanguage deleteById(Integer id);
+	public void deleteById(Integer id);
 	//public List<Employee> findByCriteria(Employee employee);
 	
 }

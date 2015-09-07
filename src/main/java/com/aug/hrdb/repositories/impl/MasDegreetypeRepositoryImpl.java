@@ -38,11 +38,6 @@ public class MasDegreetypeRepositoryImpl extends GenericRepositoryImpl<MasDegree
 		return c.list();
 	}
 
-	@Override
-	public MasDegreetype deleteById(Integer id) {
-		MasDegreetype masDegreetype =(MasDegreetype)getCurrentSession().load(MasDegreetype.class, id);
-		getCurrentSession().delete(masDegreetype);
-		return masDegreetype;
-	}
+	
 
 }
