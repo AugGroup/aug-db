@@ -177,5 +177,25 @@ public class FamilyServiceTest {
 	
 	}
 	
+	
+	
+	@Test
+	@Rollback(false)
+	public void createFindMasRelationAndEmployee(){
+		
+		FamilyDto familyDto = new FamilyDto();
+		familyDto.setFamilyName("test create data");
+		familyDto.setAge(25);
+		familyDto.setAddress("HOME");
+		familyDto.setMasRelationTypeId(1);
+		familyDto.setMobile("089-085-1022");
+		familyDto.setPosition("PROGRAMER");
+		familyDto.setOccupation("ITS");
+		familyDto.setGender("Female");
+		familyService.createFindMasRelationAndEmployee(familyDto);
+
+		
+	}
+	
 
 }
