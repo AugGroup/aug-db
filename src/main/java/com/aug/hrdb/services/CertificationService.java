@@ -12,7 +12,7 @@ public interface CertificationService {
 
 	public void update(Certification certification);
 
-	public void deleteByApplicantId(Integer id);
+	public void deleteById(Integer id);
 	
 	public void delete(Certification certification);
 

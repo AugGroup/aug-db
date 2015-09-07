@@ -32,8 +32,8 @@ public class CertificationServiceImpl implements CertificationService {
 	}
 
 	@Override
-	public void deleteByApplicantId(Integer id) {
-		certificationRepository.deleteByApplicantId(id);
+	public void deleteById(Integer id) {
+		certificationRepository.deleteById(id);
 		
 	}
 

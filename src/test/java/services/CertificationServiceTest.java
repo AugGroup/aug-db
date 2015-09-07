@@ -44,7 +44,7 @@ public class CertificationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdCertificationService() throws Exception {
-		certificationService.deleteByApplicantId(5);
+		certificationService.deleteById(4);
 	}
 
 	@Test

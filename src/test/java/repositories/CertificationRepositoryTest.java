@@ -44,7 +44,7 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = false)
 		public void testDeleteByIdCertificationRepository() throws Exception {
-			certificationRepository.deleteByApplicantId(7);
+			certificationRepository.deleteById(6);
 		}
 
 		@Test
