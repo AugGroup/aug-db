@@ -9,10 +9,10 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import com.aug.hrdb.repositories.RewardRepository;
 import junit.framework.Assert;
 
 import com.aug.hrdb.entities.Reward;
+import com.aug.hrdb.repositories.RewardRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

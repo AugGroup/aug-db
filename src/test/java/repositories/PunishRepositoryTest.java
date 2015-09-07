@@ -1,6 +1,5 @@
 package repositories;
 
-
 import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Criteria;
@@ -15,7 +14,6 @@ import junit.framework.Assert;
 
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.repositories.PunishRepository;
-import com.aug.hrdb.repositories.RewardRepository;
 
 
 

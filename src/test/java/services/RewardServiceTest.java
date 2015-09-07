@@ -1,7 +1,6 @@
 package services;
 
 import java.util.List;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,9 +10,9 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-
 import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.services.RewardService;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })

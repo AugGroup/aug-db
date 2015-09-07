@@ -12,12 +12,11 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import com.aug.hrdb.repositories.RewardRepository;
 import junit.framework.Assert;
 
 import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.repositories.CardRepository;
-import com.aug.hrdb.services.CardService;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
