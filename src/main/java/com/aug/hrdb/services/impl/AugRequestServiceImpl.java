@@ -43,7 +43,7 @@ public class AugRequestServiceImpl implements AugRequestService {
 
 	@Override
 	public void deleteById(Integer id) {
-		augRequestRepository.deleteByApplicantId(id);
+		augRequestRepository.deleteById(id);
 
 	}
 
