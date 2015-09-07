@@ -1,4 +1,4 @@
-package com.aug.hrdb.dto.services;
+package com.aug.hrdb.services;
 
 import java.util.List;
 
