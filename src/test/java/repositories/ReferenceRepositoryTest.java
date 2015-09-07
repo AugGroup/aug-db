@@ -31,31 +31,32 @@ public class ReferenceRepositoryTest {
 		reference.setName("Jutamas");
 		reference.setOccupation("Programmer");
 		reference.setTel("0817334542");
+		referenceRepository.getCurrentSession().save(reference);
 	}
 
-	@Test
-	public void update(){
-		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
-		reference.setOccupation("HR");
-		referenceRepository.getCurrentSession().update(reference);
-	}
-	
-	@Test
-	public void delete(){
-		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
-		referenceRepository.getCurrentSession().delete(reference);
-	}
-	
-	@Test
-	public void findById(){
-		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
-		int id = reference.getId();
-		Assert.assertEquals(1, id);
-	}
-	
-	@Test
-	public void findAll(){	
-		List<Reference> references = referenceRepository.findAll();
-		Assert.assertEquals(1, references.size());
-	}
+//	@Test
+//	public void update(){
+//		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
+//		reference.setOccupation("HR");
+//		referenceRepository.getCurrentSession().update(reference);
+//	}
+//	
+//	@Test
+//	public void delete(){
+//		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
+//		referenceRepository.getCurrentSession().delete(reference);
+//	}
+//	
+//	@Test
+//	public void findById(){
+//		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
+//		int id = reference.getId();
+//		Assert.assertEquals(1, id);
+//	}
+//	
+//	@Test
+//	public void findAll(){	
+//		List<Reference> references = referenceRepository.findAll();
+//		Assert.assertEquals(1, references.size());
+//	}
 }
