@@ -25,7 +25,7 @@ import com.aug.hrdb.services.MasRelationTypeService;
 public class FamilyServiceImpl implements FamilyService{
 	
 	@Autowired
-	private FamilyRepository empFamilyDao;
+	private FamilyRepository familyRepository;
 	
 	//@Autowired
 	//private EmployeeService employeeService;
@@ -36,32 +36,32 @@ public class FamilyServiceImpl implements FamilyService{
 	@Override
 	public void create(Family empFamily) {
 		// TODO Auto-generated method stub
-		empFamilyDao.create(empFamily);
+		familyRepository.create(empFamily);
 	}
 
 	@Override
 	public void update(Family empFamily) {
 		// TODO Auto-generated method stub
-		empFamilyDao.update(empFamily);
+		familyRepository.update(empFamily);
 	}
 
 	@Override
 	public void delete(Family empFamily) {
 		// TODO Auto-generated method stub
-		empFamilyDao.delete(empFamily);
+		familyRepository.delete(empFamily);
 	}
 
 	@Override
 	public Family find(Integer Id) {
 		// TODO Auto-generated method stub
-		Family empFamily = empFamilyDao.find(Id);
+		Family empFamily = familyRepository.find(Id);
 		return empFamily;
 	}
 
 	@Override
 	public List<Family> findAll() {
 		// TODO Auto-generated method stub
-		List<Family> empFamilyList = empFamilyDao.findAll();
+		List<Family> empFamilyList = familyRepository.findAll();
 		return empFamilyList;
 	}
 
@@ -69,7 +69,7 @@ public class FamilyServiceImpl implements FamilyService{
 	@Override
 	public List<Family> findFamilyByEmployeeId(Integer Id) {
 		// TODO Auto-generated method stub
-		List<Family> empFamilyList = empFamilyDao.findFamilyByEmployeeId(Id);
+		List<Family> empFamilyList = familyRepository.findFamilyByEmployeeId(Id);
 		return empFamilyList;
 	}
 
@@ -86,26 +86,26 @@ public class FamilyServiceImpl implements FamilyService{
 	@Override
 	public Family findLastFamily(Integer Id) {
 		// TODO Auto-generated method stub
-		Family empfamily = empFamilyDao.findLastFamily(Id);
+		Family empfamily = familyRepository.findLastFamily(Id);
 		return empfamily;
 	}
 
 	@Override
 	public void saveByNameQuery(FamilyDto family) {
 		// TODO Auto-generated method stub
-		empFamilyDao.saveByNameQuery(family);
+		familyRepository.saveByNameQuery(family);
 	}
 
 	@Override
 	public void updateByNameQuery(FamilyDto family) {
 		// TODO Auto-generated method stub
-		empFamilyDao.updateByNameQuery(family);
+		familyRepository.updateByNameQuery(family);
 	}
 
 	@Override
 	public void deleteByNameQuery(FamilyDto family) {
 		// TODO Auto-generated method stub
-		empFamilyDao.deleteByNameQuery(family);
+		familyRepository.deleteByNameQuery(family);
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class FamilyServiceImpl implements FamilyService{
 		family.setPosition(familyDto.getPosition());
 		family.setGender(familyDto.getGender());
 		
-	    empFamilyDao.create(family);
+	    familyRepository.create(family);
 	    
 	}
 
@@ -149,7 +149,7 @@ public class FamilyServiceImpl implements FamilyService{
 	public FamilyDto findForInitEdit(FamilyDto family) {
 		// TODO Auto-generated method stub
 
-        Family familyEdit = empFamilyDao.findLastFamily(new Integer(family.getId()));
+        Family familyEdit = familyRepository.findLastFamily(new Integer(family.getId()));
         Hibernate.initialize(familyEdit);
        
         FamilyDto familyDto = new FamilyDto();
@@ -177,7 +177,7 @@ public class FamilyServiceImpl implements FamilyService{
 		
 		
 		Family familyObj = new Family();
-		familyObj = empFamilyDao.findLastFamily(familyDto.getId());	
+		familyObj = familyRepository.findLastFamily(familyDto.getId());	
 		/*familyObj.setFirstName(familyDto.getFirstName());
 		familyObj.setLastName(familyDto.getLastName());*/
 		familyObj.setFamilyName(familyDto.getFamilyName());
@@ -193,7 +193,15 @@ public class FamilyServiceImpl implements FamilyService{
 		familyObj.setAuditFlag("U");
 		familyObj.setUpdatedBy(familyDto.getEmployeeId());
 		
-		empFamilyDao.update(familyObj);
+		familyRepository.update(familyObj);
+		
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		Family family = familyRepository.find(id);
+		familyRepository.deleteById(family.getId());
 		
 	}
 
