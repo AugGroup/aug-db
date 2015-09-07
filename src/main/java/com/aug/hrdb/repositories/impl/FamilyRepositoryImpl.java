@@ -102,8 +102,6 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 	public void updateByNameQuery(FamilyDto family) {
 		// TODO Auto-generated method stub
 		Query query =  getCurrentSession().getNamedQuery("updateFamily");
-		/*query.setString("FIRSTNAME" ,family.getFirstName());
-		query.setString("LASTNAME", family.getLastName());*/
 		query.setString("NAME", family.getFamilyName());
 		query.setInteger("AGE", family.getAge());
 		query.setString("ADDRESS", family.getAddress());
@@ -113,7 +111,7 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 		query.setInteger("MASRELATION_ID", family.getMasRelationTypeId());
 		//query.setInteger("EMPLOYEE_ID", family.getEmployeeId());
 		query.setString("GENDER", family.getGender());
-		query.setInteger("UPDATEDBY", family.getEmployeeId());
+		//query.setInteger("UPDATEDBY", family.getEmployeeId()); //set update
 		query.setInteger("familyId", family.getId());
 		query.executeUpdate();
 	}

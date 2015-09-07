@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.FamilyDto;
 import com.aug.hrdb.entities.Family;
 import com.aug.hrdb.entities.MasRelationType;
 import com.aug.hrdb.repositories.FamilyRepository;
@@ -137,8 +138,42 @@ public class FamilyServiceTest {
 		
 		for(int i=0;i<family.size();i++){		
 			System.out.println("id: "+family.get(i).getId());
-		}
+		}		
+	}
 	
+	
+	
+	
+	@Test
+	@Rollback(false)
+	public void deleteByNameQuery(){
+		
+		Family family = familyService.find(3);
+		FamilyDto familyDto = new FamilyDto();
+		familyDto.setId(family.getId());
+		familyService.deleteByNameQuery(familyDto);
+		
+	}
+	
+	
+	
+	
+	@Test
+	@Rollback(false)
+	public void updateByNameQuery(){
+		
+		Family family = familyService.find(6);
+		FamilyDto familyDto = new FamilyDto();
+		familyDto.setId(family.getId());
+		familyDto.setFamilyName("test family data");
+		familyDto.setAge(family.getAge());
+		familyDto.setAddress(family.getAddress());
+		familyDto.setMasRelationTypeId(family.getMasRelationType().getId());
+		familyDto.setMobile(family.getMobile());
+		familyDto.setPosition(family.getPosition());
+		familyDto.setOccupation(family.getOccupation());
+		familyDto.setGender(family.getGender());
+		familyService.updateByNameQuery(familyDto);
 	
 	}
 	

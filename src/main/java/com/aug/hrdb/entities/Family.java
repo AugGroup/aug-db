@@ -9,10 +9,41 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+
+@NamedNativeQueries({
+
+	@NamedNativeQuery(
+	        name = "deleteFamily",
+	        query = "delete from FAMILY where ID=:familyId",
+	        resultClass=Family.class),
+	
+	@NamedNativeQuery(
+            name = "updateFamily",
+            query = "update FAMILY "
+            		+ "SET NAME=:NAME,"
+            		+ "AGE=:AGE,"
+            		+ "ADDRESS=:ADDRESS,"
+            		+ "OCCUPATION=:OCCUPATION,"
+            		+ "POSITION=:POSITION,"
+            		+ "TELEPHONE=:TEL,"
+            		+ "MASRELATION_ID=:MASRELATION_ID, "
+             	   // + "EMPLOYEE_ID=:EMPLOYEE_ID,"
+             	    + "GENDER=:GENDER,"
+             	    + "AUDITFLAG='U',"
+             	   // + "UPDATEDBY=:UPDATEDBY,"
+             	    + "UPDATEDTIMESTAMP=NOW() "
+             	    + "where ID=:familyId",
+             	    resultClass=Family.class)
+    
+})
+
 
 
 @Entity
