@@ -14,6 +14,7 @@ public interface HealthRepository extends GenericRepository<Health,Integer>{
 	 public void delete(Health health);
 	 public Health find(Integer Id);
 	 public List<Health> findAll();	
+	 public void deleteById(Integer id);
 	 public  List<HealthDto> listHealth(Integer id);
 	 public Health findByEmployeeId(Integer id);
 }

@@ -13,5 +13,6 @@ public interface MasRelationTypeRepository extends GenericRepository<MasRelation
 	public MasRelationType find(Integer Id);
 	public List<MasRelationType> findAll();
 	public MasRelationType findByName(String name);
+	public void deleteById(Integer id);
 
 }

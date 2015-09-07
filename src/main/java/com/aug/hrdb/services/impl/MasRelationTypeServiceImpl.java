@@ -57,4 +57,10 @@ public class MasRelationTypeServiceImpl implements MasRelationTypeService{
 		return masRelation;
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		masRelationTypeRepository.deleteById(id);
+	}
+
 }

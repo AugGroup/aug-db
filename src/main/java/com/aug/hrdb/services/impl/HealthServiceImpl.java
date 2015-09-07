@@ -171,4 +171,10 @@ public class HealthServiceImpl implements HealthService{
 		return healthDto;
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		healthRepository.deleteById(id);
+	}
+
 }

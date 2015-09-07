@@ -15,6 +15,7 @@ public interface HealthService {
 	public void delete(Health health);
 	public Health find(Integer Id);
 	public List<Health> findAll();
+	public void deleteById(Integer id);
 	public Health createSetDtoToEnity(HealthDto healthDto);
 	public HealthDto findByIdReturnToDto(Integer id);
 	public void updateSetDtoToEntity(HealthDto healthDto);

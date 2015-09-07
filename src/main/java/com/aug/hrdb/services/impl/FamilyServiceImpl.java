@@ -200,8 +200,7 @@ public class FamilyServiceImpl implements FamilyService{
 	@Override
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
-		Family family = familyRepository.find(id);
-		familyRepository.deleteById(family.getId());
+		familyRepository.deleteById(id);
 		
 	}
 
