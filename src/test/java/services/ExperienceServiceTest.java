@@ -65,8 +65,8 @@ public class ExperienceServiceTest {
 	@Test
 	@Rollback(false)
 	public void deleteByIdExperienceServiceTest() {
-		Experience experience =  experienceService.findById(5);
-		experienceService.delete(experience);
+		//Experience experience =  experienceService.findById(5);
+		experienceService.deleteById(5);
 		System.out.println("Delete Experience : " + experienceService.findById(5));
 	}
 

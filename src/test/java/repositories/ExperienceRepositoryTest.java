@@ -68,8 +68,8 @@ public class ExperienceRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void deleteByIdExperienceRepositoryTest() {
-		Experience experience = experienceRepository.find(5);
-		experienceRepository.delete(experience);
+		//Experience experience = experienceRepository.find(5);
+		experienceRepository.deleteById(5);
 		System.out.println("Delete Experience : " + experienceRepository.find(5));
 	}
 
