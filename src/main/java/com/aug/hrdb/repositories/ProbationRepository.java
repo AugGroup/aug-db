@@ -7,7 +7,6 @@ import com.aug.hrdb.entities.Probation;
 
 public interface ProbationRepository extends GenericRepository<Probation, Integer>{
 
-	public void deleteById(Integer id);
 
 	public List<Probation> findByCriteria(Probation probation);
 	
