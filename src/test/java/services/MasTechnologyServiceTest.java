@@ -15,7 +15,7 @@ import com.aug.hrdb.services.masTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
-public class MasTechnologyServicesTest {
+public class MasTechnologyServiceTest {
 	
 	@Autowired
 	private masTechnologyService masTechService;

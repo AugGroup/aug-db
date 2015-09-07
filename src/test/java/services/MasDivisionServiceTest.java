@@ -19,7 +19,7 @@ import com.aug.hrdb.services.MasDivisionService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
-public class MasDivisionServicesTest {
+public class MasDivisionServiceTest {
 
 	@Autowired
 	private MasDivisionService masDivisionServices;
@@ -51,17 +51,8 @@ public class MasDivisionServicesTest {
 //		
 //	}
 //	
-//	
 //	@Test
-//	public void findAllDatamasDivision(){
-//
-//		List<MasDivision> masDivision = masDivisionServices.findAll();
-//		Assert.assertEquals(3, masDivision.size());
-//	}
-//	
-//	
-//	@Test
-//	public void findDatabyIdmasDivision(){
+//	public void findbyIdmasDivision(){
 //
 //		MasDivision  masDivision = masDivisionServices.findById(2);
 //		Assert.assertEquals("JAVA",masDivision.getName());
