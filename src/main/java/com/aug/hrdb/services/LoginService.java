@@ -18,7 +18,7 @@ public interface LoginService {
 
 	public Login findByUserName(String name);
 
-	//public Login deleteById(Integer id);
+//	public void deleteById(Integer id);
 
 	public Login searhEmpIdtoLogin();
 

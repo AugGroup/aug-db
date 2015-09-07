@@ -13,6 +13,6 @@ public interface PunishService {
 	public Punish findById(Integer id);
 	public List<Punish> findAll();
 	public List<Punish> findByCriteria(Punish punish);
-	public Punish deleteById(Integer id);
+	public void deleteById(Integer id);
 	
 }

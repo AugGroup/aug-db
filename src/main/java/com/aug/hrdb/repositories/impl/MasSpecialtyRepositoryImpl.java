@@ -29,10 +29,10 @@ public class MasSpecialtyRepositoryImpl extends GenericRepositoryImpl<MasSpecial
 				return c.list();
 			}
 
-			@Override
-			public MasSpecialty deleteById(Integer id) {
-				MasSpecialty specialty =(MasSpecialty)getCurrentSession().load(MasSpecialty.class, id);
-				getCurrentSession().delete(specialty);
-				return specialty;
-			}
+//			@Override
+//			public MasSpecialty deleteById(Integer id) {
+//				MasSpecialty specialty =(MasSpecialty)getCurrentSession().load(MasSpecialty.class, id);
+//				getCurrentSession().delete(specialty);
+//				return specialty;
+//			}
 }

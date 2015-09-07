@@ -31,12 +31,6 @@ public class RewardRepositoryImpl extends GenericRepositoryImpl<Reward, Integer>
 		return c.list();
 	}
 
-	@Override
-	public Reward deleteById(Integer id) {
-		Reward reward =(Reward)getCurrentSession().load(Reward.class, id);
-		getCurrentSession().delete(reward);
-		return reward;
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override

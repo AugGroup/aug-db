@@ -32,12 +32,12 @@ public class CardRepositoryImpl extends GenericRepositoryImpl<Card, Integer> imp
 	
 	
 
-	@Override
-	public Card deleteById(Integer id) {
-		Card card = (Card)getCurrentSession().load(Card.class, id);
-		getCurrentSession().delete(card);
-		return card;
-	}
+//	@Override
+//	public Card deleteById(Integer id) {
+//		Card card = (Card)getCurrentSession().load(Card.class, id);
+//		getCurrentSession().delete(card);
+//		return card;
+//	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

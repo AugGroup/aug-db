@@ -10,7 +10,6 @@ import com.aug.hrdb.entities.Reward;
 public interface RewardRepository extends GenericRepository<Reward, Integer>{
 
 	public List<Reward> findByCriteria(Reward reward);
-	public Reward deleteById(Integer id);
 	public List<RewardDto> searchReward(Integer id);
 
 	

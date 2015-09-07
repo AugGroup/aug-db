@@ -11,7 +11,7 @@ public interface MasSpecialtyRepository extends GenericRepository<MasSpecialty, 
 	
 	public List<MasSpecialty> findByCriteria(MasSpecialty specialty);
 	
-	public MasSpecialty deleteById(Integer id);
+
 	
 
 }

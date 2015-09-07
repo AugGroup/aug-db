@@ -55,8 +55,8 @@ public class PunishServiceImpl implements PunishService {
 	}
 
 	@Override
-	public Punish deleteById(Integer id) {
-		return punishRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		 punishRepository.deleteById(id);
 	}
 
 

@@ -33,11 +33,11 @@ public class PunishRepositoryImpl extends GenericRepositoryImpl<Punish, Integer>
 	}
 
 	
-	public Punish deleteById(Integer id) {
-		Punish punish =(Punish)getCurrentSession().load(Punish.class, id);
-		getCurrentSession().delete(punish);
-		return punish;
-	}
+//	public Punish deleteById(Integer id) {
+//		Punish punish =(Punish)getCurrentSession().load(Punish.class, id);
+//		getCurrentSession().delete(punish);
+//		return punish;
+//	}
 
 
 	@SuppressWarnings("unchecked")

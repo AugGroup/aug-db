@@ -56,8 +56,8 @@ public class RewardServiceImpl implements RewardService {
 	}
 
 	@Override
-	public Reward deleteById(Integer id) {
-		return rewardRepository.deleteById(id);
+	public  void deleteById(Integer id) {
+		 rewardRepository.deleteById(id);
 	}
 
 }

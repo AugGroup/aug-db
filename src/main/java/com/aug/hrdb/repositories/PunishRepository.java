@@ -10,7 +10,6 @@ import com.aug.hrdb.entities.Punish;
 public interface PunishRepository extends GenericRepository<Punish, Integer> {
 	
 	public List<Punish> findByCriteria(Punish punish);
-	public Punish deleteById(Integer id);
 	public List<PunsihDto> searchPunish(Integer id);
 	
 }

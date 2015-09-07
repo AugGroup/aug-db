@@ -13,6 +13,6 @@ public interface MasSpecialtyService {
 	public void delete(MasSpecialty specialty);
 	public MasSpecialty findById(Integer id);
 	public List<MasSpecialty> findByCriteria(MasSpecialty specialty);
-	public MasSpecialty deleteById(Integer id);
+	public void deleteById(Integer id);
 
 }

@@ -13,6 +13,6 @@ public interface CardService {
 	public Card findById(Integer id);
 	public List<Card> findAll();
 	public List<Card> findByCriteria(Card card);
-	public Card deleteById(Integer id);
+	public void deleteById(Integer id);
 
 }

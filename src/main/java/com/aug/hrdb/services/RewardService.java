@@ -13,7 +13,7 @@ public interface RewardService {
 	public void delete(Reward  reward);
 	public Reward  findById(Integer id);
 	public List<Reward> findByCriteria(Reward  reward);
-	public Reward deleteById(Integer id);
-	
+	public void deleteById(Integer id);
+
 
 }

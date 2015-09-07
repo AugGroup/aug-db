@@ -56,8 +56,8 @@ public class CardServiceImpl implements CardService {
 	}
 
 	@Override
-	public Card deleteById(Integer id) {
-		return cardRepository.deleteById(id);
+	public void deleteById(Integer id) {
+		 cardRepository.deleteById(id);
 	}
 
 }

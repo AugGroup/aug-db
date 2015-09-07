@@ -44,8 +44,8 @@ public class MasSpecialtyServiceImpl implements MasSpecialtyService{
 		return specialtyRepository.findByCriteria(specialty);
 	}
 
-	public MasSpecialty deleteById(Integer id){
-		return specialtyRepository.deleteById(id);
+	public void deleteById(Integer id){
+		 specialtyRepository.deleteById(id);
 	}
 
 }
