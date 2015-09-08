@@ -113,7 +113,7 @@ public class HealthServiceTest {
 	public void findAll() {
 	
 		List<Health> health = healthService.findAll();
-		Assert.assertEquals(2, health.size());
+		Assert.assertEquals(1, health.size());
 		
 		for(int i=0;i<health.size();i++){		
 			System.out.println("id: "+health.get(i).getId());

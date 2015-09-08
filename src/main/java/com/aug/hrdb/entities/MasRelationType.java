@@ -9,10 +9,14 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="MAS_RELATIONTYPE")
-public class MasRelationType extends BaseEntityMasterData{
+public class MasRelationType extends BaseEntity{
 	
 	private Integer id;
 	private String  relationType;
+	private String code;
+	private Boolean isActive;
+
+
 	
 	
 	@Id
@@ -39,6 +43,25 @@ public class MasRelationType extends BaseEntityMasterData{
 		this.relationType = relationType;
 	}
 
+
+	@Column(name = "CODE", nullable = false, length = 10)
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	
+	@Column(name = "ISACTIVE", nullable = false)
+	public Boolean getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Boolean isActive) {
+		this.isActive = isActive;
+	}
 
 
 	
