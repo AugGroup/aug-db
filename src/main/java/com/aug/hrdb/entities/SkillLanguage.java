@@ -3,10 +3,9 @@ package com.aug.hrdb.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -15,18 +14,16 @@ import javax.persistence.Table;
 
 public class SkillLanguage extends BaseEntity{
 	
+	
 	private Integer id;
-	@Column(name="NAMELANGUAGE")
 	private String  nameLanguage;
-	@Column(name="SPEAKING")
 	private String  speaking;
-	@Column(name="READING")
 	private String  reading;
-	@Column(name="UNDERSTANDING")
 	private String  understanding;
-	@Column(name="WRITING")
 	private String  writing;
-	//private Employee employee;
+
+	/*@ManyToOne
+	private Employee employee;*/
 	
 	
 	
@@ -41,7 +38,7 @@ public class SkillLanguage extends BaseEntity{
 		this.id = id;
 	}
 
-
+	@Column(name="NAMELANGUAGE")
 	public String getNameLanguage() {
 		return nameLanguage;
 	}
@@ -50,7 +47,7 @@ public class SkillLanguage extends BaseEntity{
 		this.nameLanguage = nameLanguage;
 	}
 
-	
+	@Column(name="SPEAKING")
 	public String getSpeaking() {
 		return speaking;
 	}
@@ -61,7 +58,7 @@ public class SkillLanguage extends BaseEntity{
 		this.speaking = speaking;
 	}
 
-	
+	@Column(name="READING")
 	public String getReading() {
 		return reading;
 	}
@@ -70,7 +67,7 @@ public class SkillLanguage extends BaseEntity{
 		this.reading = reading;
 	}
 
-
+	@Column(name="UNDERSTANDING")
 	public String getUnderstanding() {
 		return understanding;
 	}
@@ -79,7 +76,7 @@ public class SkillLanguage extends BaseEntity{
 		this.understanding = understanding;
 	}
 
-	
+	@Column(name="WRITING")
 	public String getWriting() {
 		return writing;
 	}

@@ -92,7 +92,7 @@ public class Address extends BaseEntity{
 	private String district;
 	
 	@Column(name="SUB_DISTRICT")
-	private String subDistrict;;
+	private String subDistrict;
 	
 	@Column(name="ZIPCODE")
 	private Integer zipcode;
