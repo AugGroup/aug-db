@@ -33,7 +33,7 @@ public class MasAddressType extends BaseEntity{
 	private String name;
 	
 	@Column(name="ISACTIVE", nullable = false)
-	private String isActive;
+	private Boolean isActive;
 	
 	@Column(name="CODE",nullable = false)
 	private String code;
@@ -58,13 +58,6 @@ public class MasAddressType extends BaseEntity{
 		this.name = name;
 	}
 
-	public String getIsactive() {
-		return isActive;
-	}
-
-	public void setIsactive(String isactive) {
-		this.isActive = isactive;
-	}
 
 	public String getCode() {
 		return code;
@@ -74,13 +67,15 @@ public class MasAddressType extends BaseEntity{
 		this.code = code;
 	}
 
-	public String getIsActive() {
+	public Boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(String isActive) {
+	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
+
+	
 
 	/*public Set<Address> getAddresses() {
 		return addresses;
