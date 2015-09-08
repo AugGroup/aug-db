@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.HealthDto;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.services.HealthService;
 
@@ -120,8 +121,77 @@ public class HealthServiceTest {
 	
 	
 	}
-
-
 	
+	
+	@Test
+	@Rollback(false)
+	public void deleteById() {
+	
+		Health health = healthService.find(3);
+		healthService.deleteById(health.getId());
+	
+	}
+		
+	
+	@Test
+	@Rollback(false)
+	public void createSetDtoToEnity() {
+	
+		HealthDto healthDto = new HealthDto();
+		
+		
+		healthDto.setCongenitalDisease("Yes");
+		healthDto.setCongenitalDiseaseExplain("Hypertension"); //ความดัน
+		healthDto.setCongenitalDiseaseExplain2("Allergy"); //ภูมิแพ้
+		healthDto.setCongenitalDiseaseExplain2("asthma"); //หอบหืด
+		healthDto.setGeneticDisease("Yes");
+		healthDto.setGeneticDiseaseExplain("Hypertension");
+		healthDto.setGeneticDiseaseExplain2("Allergy");
+		healthDto.setGeneticDiseaseExplain3("asthma");
+		healthDto.setIntolerance("Yes");
+		healthDto.setIntoleranceExplain("CPM");
+		healthDto.setTakeMedicine("Yes");
+		healthDto.setTakeMedicineExplain("amoxilin");
+		healthDto.setEmployeeId(1);
+		healthService.createSetDtoToEnity(healthDto);
+		
+	}
+	
+	
+	
+	
+	@Test
+	@Rollback(false)
+	public void updateSetDtoToEntity() {
+	
+		HealthDto healthDto = new HealthDto();
+		healthDto.setId(5);
+		healthDto.setCongenitalDisease("Yes"); 
+		healthDto.setCongenitalDiseaseExplain("heart disease");
+		healthDto.setGeneticDisease("Yes");
+		healthDto.setGeneticDiseaseExplain("Hypertension");
+		healthDto.setGeneticDiseaseExplain2("Allergy");
+		healthDto.setGeneticDiseaseExplain3("asthma");
+		healthDto.setIntolerance("Yes");
+		healthDto.setIntoleranceExplain("CPM");
+		healthDto.setTakeMedicine("Yes");
+		healthDto.setTakeMedicineExplain("amoxilin");
+		healthDto.setEmployeeId(1);
+		healthService.updateSetDtoToEntity(healthDto);
+		
+	}
+	
+	
+	
+	@Test
+	public void findByIdReturnToDto(){
+		
+		HealthDto healthDto = new HealthDto();
+		healthDto = healthService.findByIdReturnToDto(5);
+		
+		Assert.assertEquals("Yes", healthDto.getCongenitalDisease());
+		System.out.println("Congenital Disease: "+healthDto.getCongenitalDisease());
+		
+	}
 
 }

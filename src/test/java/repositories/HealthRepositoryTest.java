@@ -124,8 +124,15 @@ public class HealthRepositoryTest {
 	}
 	
 	
+	
+	@Test
+	@Rollback(false)
+	public void deleteById() {
+	
+		Health health = healthRepository.find(1);
+		healthRepository.deleteById(health.getId());
+	
+	}
 
 	
-
-
 }
