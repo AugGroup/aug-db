@@ -129,7 +129,7 @@ public class SiteRepositoryTest {
 	public void findAll() {
 	
 		List<Site> siteList = siteRepository.findAll();
-		Assert.assertEquals(1, siteList.size());
+		Assert.assertEquals(2, siteList.size()); //1
 		
 		for(int i=0;i<siteList.size();i++){		
 			System.out.println("id: "+siteList.get(i).getId());

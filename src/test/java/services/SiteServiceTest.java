@@ -131,7 +131,7 @@ public class SiteServiceTest {
 	public void findAll() {
 	
 		List<Site> siteList = siteService.findAll();
-		Assert.assertEquals(2, siteList.size());
+		Assert.assertEquals(3, siteList.size());//2
 		
 		for(int i=0;i<siteList.size();i++){		
 			System.out.println("id: "+siteList.get(i).getId());
@@ -174,7 +174,7 @@ public class SiteServiceTest {
 
 		
 		SiteDto siteDto = new SiteDto();
-		siteDto.setId(7);
+		siteDto.setId(1);//7
 		siteDto.setProjectName("Project HrSystem");
 		siteDto.setStartDate(calendarStartDate.getTime());
 		siteDto.setEndDate(calendarEndDate.getTime());
