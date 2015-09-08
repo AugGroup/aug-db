@@ -37,7 +37,7 @@ public class MasAddressTypeRepositoryTest {
 		MasAddressType masAddressType = new MasAddressType();
 		masAddressType.setName("Present Address");
 		masAddressType.setCode("B02");
-		masAddressType.setIsactive("1");
+		masAddressType.setIsActive(true);
 		
 		masAddressTypeRepository.getCurrentSession().save(masAddressType);
 		
