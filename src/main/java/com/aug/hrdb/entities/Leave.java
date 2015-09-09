@@ -72,14 +72,14 @@ public class Leave extends BaseEntity {
 	private String aim;
 	
 	
-	/*@ManyToOne()
+	@ManyToOne()
 	@JoinColumn(name = "LEAVETYPE_ID",nullable = false,referencedColumnName="LEAVETYPE_ID")
 	private MasLeaveType masleavetype;
 	
 	@ManyToOne()
 	@JoinColumn(name = "EMPLOYEE_ID",nullable = false,referencedColumnName="id")
 	private Employee employee;
-	*/
+	
 	
 	@Column(name="STARTTIMESTRING")
 	private String startTimeString;
@@ -103,21 +103,6 @@ public class Leave extends BaseEntity {
 	}
 
 
-/*	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}*/
 
 	public Date getStartTime() {
 		return startTime;
@@ -147,7 +132,7 @@ public class Leave extends BaseEntity {
 		this.reason = reason;
 	}
 
-	/*public MasLeaveType getMasleavetype() {
+	public MasLeaveType getMasleavetype() {
 		return masleavetype;
 	}
 
@@ -162,7 +147,7 @@ public class Leave extends BaseEntity {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-*/
+
 
 
 	

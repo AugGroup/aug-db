@@ -1072,7 +1072,7 @@ public class Employee extends BaseEntity{
    
 
    /*@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
-   private Set<SkillLanguage> skillLanguage = new HashSet<SkillLanguage>();*/
+   private Set<Language> skillLanguage = new HashSet<Language>();*/
    
    
    
@@ -1906,11 +1906,11 @@ public class Employee extends BaseEntity{
 
 
 	
-	/*public Set<SkillLanguage> getSkillLanguage() {
+	/*public Set<Language> getSkillLanguage() {
 		return skillLanguage;
 	}
 
-	public void setSkillLanguage(Set<SkillLanguage> skillLanguage) {
+	public void setSkillLanguage(Set<Language> skillLanguage) {
 		this.skillLanguage = skillLanguage;
 	}*/
 	

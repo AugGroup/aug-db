@@ -16,50 +16,50 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import com.aug.hrdb.entities.SkillLanguage;
-import com.aug.hrdb.repositories.SkillLanguageRepository;
+import com.aug.hrdb.entities.Language;
+import com.aug.hrdb.repositories.LanguageRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @Transactional
 public class SkillLanguageRepositoryTest {
 	
-	 @Autowired SkillLanguageRepository skillLanguageRepository;
+	 @Autowired LanguageRepository languageRepository;
 	 
 	 @Test
 	 @Rollback(false)
 		public void createSkillLanguage(){
-		 SkillLanguage skillLanguage=new SkillLanguage();
-		 skillLanguage.setNameLanguage("Thai");
-		 skillLanguage.setSpeaking("good");
-		 skillLanguage.setReading("good");
-		 skillLanguage.setWriting("good");
-		 skillLanguage.setUnderstanding("good");
-		 skillLanguage.setAuditFlag("C");
-		 skillLanguage.setCreatedBy(1);
-		 skillLanguage.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 skillLanguageRepository.getCurrentSession().save(skillLanguage);
+		 Language language=new Language();
+		 language.setNameLanguage("Thai");
+		 language.setSpeaking("good");
+		 language.setReading("good");
+		 language.setWriting("good");
+		 language.setUnderstanding("good");
+		 language.setAuditFlag("C");
+		 language.setCreatedBy(1);
+		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 languageRepository.getCurrentSession().save(language);
 		 
 	 }
 	 
 	 /*@Test
 	 @Rollback(false)
 		public void updateSkillLanguage(){
-		 SkillLanguage skillLanguage=(SkillLanguage)skillLanguageRepository.getCurrentSession().get(SkillLanguage.class, 1);
+		 Language skillLanguage=(Language)languageRepository.getCurrentSession().get(Language.class, 1);
 		 skillLanguage.setNameLanguage("Thai");
 		 skillLanguage.setSpeaking("well");
 		 skillLanguage.setReading("well");
 		 skillLanguage.setWriting("well");
 		 skillLanguage.setUnderstanding("well");
-		 skillLanguageRepository.getCurrentSession().update(skillLanguage);
+		 languageRepository.getCurrentSession().update(skillLanguage);
 	 }
 	 */
 	 
 	/* @Test
 	 @Rollback(false)
 		public void deleteSkillLanguage(){
-		 SkillLanguage skillLanguage=(SkillLanguage)skillLanguageRepository.getCurrentSession().get(SkillLanguage.class, 1);
-		 skillLanguageRepository.getCurrentSession().delete(skillLanguage);
+		 Language skillLanguage=(Language)languageRepository.getCurrentSession().get(Language.class, 1);
+		 languageRepository.getCurrentSession().delete(skillLanguage);
 		 
 	 }*/
 	 
@@ -68,8 +68,8 @@ public class SkillLanguageRepositoryTest {
 	@Test
 		public void listSkillLanguage(){
 			
-			Criteria c = skillLanguageRepository.getCurrentSession().createCriteria(SkillLanguage.class);
-			List<SkillLanguage> SkillLanList = c.list();
+			Criteria c = languageRepository.getCurrentSession().createCriteria(Language.class);
+			List<Language> SkillLanList = c.list();
 			Assert.assertEquals(1, SkillLanList.size());
 			
 		}*/
@@ -78,8 +78,8 @@ public class SkillLanguageRepositoryTest {
 		@Test
 		public void findAllSkillLsn(){
 			
-			Criteria c = skillLanguageRepository.getCurrentSession().createCriteria(Leave.class);
-			List<SkillLanguage> SkillLanList = c.list();
+			Criteria c = languageRepository.getCurrentSession().createCriteria(Leave.class);
+			List<Language> SkillLanList = c.list();
 			Assert.assertEquals(2, SkillLanList.size());
 			
 			

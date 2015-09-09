@@ -17,6 +17,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.codec.language.bm.Languages;
 import org.hibernate.annotations.Index;
 
 import com.aug.hrdb.dto.ApplicantDto;
@@ -250,8 +251,8 @@ public class Applicant {
 //	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 //	private List<AugEmployee> augEmployees;
 //
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Languages> languages;
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Languages> languages;
 //
 //	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 //	private List<Address> address;
@@ -706,14 +707,14 @@ public class Applicant {
 //		this.augEmployees = augEmployees;
 //	}
 //
-//	public List<Languages> getLanguages() {
-//		return languages;
-//	}
-//
-//	public void setLanguages(List<Languages> languages) {
-//		this.languages = languages;
-//	}
-//
+	public List<Languages> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(List<Languages> languages) {
+		this.languages = languages;
+	}
+
 //	public List<Address> getAddress() {
 //		return address;
 //	}
