@@ -5,8 +5,10 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -25,7 +27,8 @@ public class MasRole extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
 	
-	@OneToMany(mappedBy = "masRole")
+//	@OneToMany(mappedBy = "masRole")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masRole")
 	private Set<Login> logins = new HashSet<Login>();
 
 	public Integer getId() {

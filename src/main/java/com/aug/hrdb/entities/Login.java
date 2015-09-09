@@ -2,12 +2,15 @@ package com.aug.hrdb.entities;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -39,11 +42,22 @@ public class Login extends BaseEntity{
 //	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
 //	private Employee employee;
 	
-    @ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name= "ROLE_ID")
+//    @ManyToOne(fetch=FetchType.EAGER)
+//    @JoinColumn(name= "ROLE_ID")
+	
+	
+	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)	
+	@JoinTable(name="LoginRole", joinColumns={ @JoinColumn(name="LOGIN_ID" , referencedColumnName="ID")},
+		inverseJoinColumns={ @JoinColumn(name="MASROLE_ID" , referencedColumnName="ID")})	
     private MasRole masRole;  
     
     
+
+	@ManyToMany
+	  @JoinTable( name="EMP_PROJ", joinColumns={@JoinColumn(name="EMP_ID", referencedColumnName="ID")},
+	      inverseJoinColumns={@JoinColumn(name="PROJ_ID", referencedColumnName="ID")})
+	
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name= "MAS_LOCATION_ID")
     private MasLocation masLocation;
