@@ -41,7 +41,7 @@ public class Probation extends BaseEntity {
     @Column(name = "REASON")
     private String reason;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     private Employee employee;
 
     public Integer getId() {
