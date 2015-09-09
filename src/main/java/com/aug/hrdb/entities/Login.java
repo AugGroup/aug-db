@@ -57,9 +57,7 @@ public class Login extends BaseEntity{
 //	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
 //	private Employee employee;
 	
-//    @ManyToOne(fetch=FetchType.EAGER)
-//    @JoinColumn(name= "ROLE_ID")
-	
+
 	
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)	
 	@JoinTable(name="LoginRole", joinColumns={ @JoinColumn(name="LOGIN_ID" , referencedColumnName="ID")},

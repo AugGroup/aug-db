@@ -26,8 +26,7 @@ public class MasRole extends BaseEntity {
 	
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
-	
-//	@OneToMany(mappedBy = "masRole")
+
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masRoles")
 	private Set<Login> logins = new HashSet<Login>();
 

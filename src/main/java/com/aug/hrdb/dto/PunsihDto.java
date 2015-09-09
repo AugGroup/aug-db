@@ -16,7 +16,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name = "searchPunish",
-			query= "select punish.id,punish.datepunish,punish.description,punish.penalty,punish.employee_id from emp_punish as punish,emp_employee as emp where punish.employee_id =:empId and punish.employee_id=emp.id", 
+			query= "select punish.id, "
+					+ "punish.datepunish, "
+					+ "punish.description, "
+					+ "punish.penalty, "
+					+ "punish.employee_id "
+					+ "from emp_punish as punish,emp_employee as emp "
+					+ "where punish.employee_id =:empId and punish.employee_id=emp.id", 
 			resultClass = PunsihDto.class)
 	})
 
