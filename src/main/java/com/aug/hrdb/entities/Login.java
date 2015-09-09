@@ -52,11 +52,6 @@ public class Login extends BaseEntity{
     private MasRole masRole;  
     
     
-
-	@ManyToMany
-	  @JoinTable( name="EMP_PROJ", joinColumns={@JoinColumn(name="EMP_ID", referencedColumnName="ID")},
-	      inverseJoinColumns={@JoinColumn(name="PROJ_ID", referencedColumnName="ID")})
-	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name= "MAS_LOCATION_ID")
