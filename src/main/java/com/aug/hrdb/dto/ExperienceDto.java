@@ -12,17 +12,26 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ " FROM EXPERIENCE e LEFT JOIN APPLICANT a on e.APPLICANT_ID = a.APPLICANT_ID WHERE e.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
 
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT e.id, e.address, e.typeOfBusiness, e.dateFrom, e.dateTo, e.position, e.reason, e.reference, e.responsibility, e.salary"
-				+ " FROM EXPERIENCE e WHERE e.id = :ID", resultClass = ExperienceDto.class) })
+				+ " FROM EXPERIENCE e WHERE e.id = :ID", resultClass = ExperienceDto.class),
+		/*@NamedNativeQuery(name = "searchExperience", query = "select exp.id, "
+				+ "exp.company_name, exp.date_from, exp.date_to, "
+				+ "exp.address, exp.type_of_business, exp.position, "
+				+ "exp.reference,exp.responsibility, exp.salary, "
+				+ "exp.reason_of_regisnation, exp.employee_id, "
+				+ "emp.employee_code from emp_experience as exp, "
+				+ "emp_employee as emp "
+				+ "where exp.employee_id=:empId and emp.id = exp.employee_id", resultClass = ExperienceDto.class) 
+				*/})
 public class ExperienceDto {
-	/*@JoinColumn(name="APPLICANT_ID") private Applicant applicant;
-	  @JoinColumn(name="EMPLOYEE_ID") private Employee employee;*/
+	/*@JoinColumn(name = "APPLICANT_ID")
+	private Applicant applicant;*/
 
 	private Integer id;
 
 	private String address;
 
 	private String typeOfBusiness;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "en", timezone = "GMT")
 	private Date dateFrom;
 
@@ -118,5 +127,5 @@ public class ExperienceDto {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-	
+
 }
