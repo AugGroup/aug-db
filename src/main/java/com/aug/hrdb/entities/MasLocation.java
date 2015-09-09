@@ -40,10 +40,8 @@ public class MasLocation extends BaseEntity {
 	private Boolean isActive;
 	
 	
-	
-
-	/*@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
-	private Set<Employee> employees = new HashSet<Employee>();*/
+	@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
+	private Set<Employee> employees = new HashSet<Employee>();
 	
 	@OneToMany(mappedBy = "masLocation", cascade=CascadeType.ALL, orphanRemoval=true)
 	private Set<Login> logins = new HashSet<Login>();
@@ -93,14 +91,14 @@ public class MasLocation extends BaseEntity {
 	}
 
 
-	/*public Set<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return employees;
 	}
 
 
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
-	}*/
+	}
 
 
 	public Set<Login> getLogins() {

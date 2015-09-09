@@ -13,25 +13,40 @@ import javax.persistence.Table;
 @Table(name="HEALTH")
 public class Health extends BaseEntity{
 	
-	private Integer id;
-	private String congenitalDisease;
-	private String congenitalDiseaseExplain;
-	private String congenitalDiseaseExplain2;
-	private String congenitalDiseaseExplain3;
-	private String geneticDisease;
-	private String geneticDiseaseExplain;
-	private String geneticDiseaseExplain2;
-	private String geneticDiseaseExplain3;
-	private String takeMedicine;
-	private String takeMedicineExplain;
-	private String intolerance;
-	private String intoleranceExplain;
-	private Employee employee;
-	
-	
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
+	private Integer id;
+	@Column(name="CONGENITAL_DISEASE",nullable=false)
+	private String congenitalDisease;
+	@Column(name="CONGENITAL_DISEASE_SPECIFIED1")
+	private String congenitalDiseaseExplain;
+	@Column(name="CONGENITAL_DISEASE_SPECIFIED2")
+	private String congenitalDiseaseExplain2;
+	@Column(name="CONGENITAL_DISEASE_SPECIFIED3")
+	private String congenitalDiseaseExplain3;
+	@Column(name="GENETIC_DISEASE",nullable=false)
+	private String geneticDisease;
+	@Column(name="GENETIC_DISEASE_SPECIFIED1")
+	private String geneticDiseaseExplain;
+	@Column(name="GENETIC_DISEASE_SPECIFIED2")
+	private String geneticDiseaseExplain2;
+	@Column(name="GENETIC_DISEASE_SPECIFIED3")
+	private String geneticDiseaseExplain3;
+	@Column(name="TAKE_MEDICINE",nullable=false)
+	private String takeMedicine;
+	@Column(name="TAKE_MEDICINE_EXPLAIN")
+	private String takeMedicineExplain;
+	@Column(name="INTOLERANCE",nullable=false)
+	private String intolerance;
+	@Column(name="INTOLERANCE_EXPLAIN")
+	private String intoleranceExplain;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="EMPLOYEE_ID",nullable=false)
+	private Employee employee;
+	
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -42,7 +57,7 @@ public class Health extends BaseEntity{
 	}
 
 	
-	@Column(name="CONGENITAL_DISEASE",nullable=false)
+
 	public String getCongenitalDisease() {
 		return congenitalDisease;
 	}
@@ -52,7 +67,7 @@ public class Health extends BaseEntity{
 		this.congenitalDisease = congenitalDisease;
 	}
 	
-	@Column(name="CONGENITAL_DISEASE_SPECIFIED1")
+	
 	public String getCongenitalDiseaseExplain() {
 		return congenitalDiseaseExplain;
 	}
@@ -63,7 +78,7 @@ public class Health extends BaseEntity{
 	}
 	
 	
-	@Column(name="CONGENITAL_DISEASE_SPECIFIED2")
+
 	public String getCongenitalDiseaseExplain2() {
 		return congenitalDiseaseExplain2;
 	}
@@ -74,7 +89,6 @@ public class Health extends BaseEntity{
 	}
 
 
-	@Column(name="CONGENITAL_DISEASE_SPECIFIED3")
 	public String getCongenitalDiseaseExplain3() {
 		return congenitalDiseaseExplain3;
 	}
@@ -85,7 +99,6 @@ public class Health extends BaseEntity{
 	}
 
 	
-	@Column(name="GENETIC_DISEASE",nullable=false)
 	public String getGeneticDisease() {
 		return geneticDisease;
 	}
@@ -96,7 +109,6 @@ public class Health extends BaseEntity{
 	}
 
 	
-	@Column(name="GENETIC_DISEASE_SPECIFIED1")
 	public String getGeneticDiseaseExplain() {
 		return geneticDiseaseExplain;
 	}
@@ -107,7 +119,6 @@ public class Health extends BaseEntity{
 	}
 
 	
-	@Column(name="GENETIC_DISEASE_SPECIFIED2")
 	public String getGeneticDiseaseExplain2() {
 		return geneticDiseaseExplain2;
 	}
@@ -118,7 +129,7 @@ public class Health extends BaseEntity{
 	}
 
 	
-	@Column(name="GENETIC_DISEASE_SPECIFIED3")
+
 	public String getGeneticDiseaseExplain3() {
 		return geneticDiseaseExplain3;
 	}
@@ -129,7 +140,6 @@ public class Health extends BaseEntity{
 	}
 
 
-	@Column(name="TAKE_MEDICINE",nullable=false)
 	public String getTakeMedicine() {
 		return takeMedicine;
 	}
@@ -139,7 +149,6 @@ public class Health extends BaseEntity{
 		this.takeMedicine = takeMedicine;
 	}
 	
-	@Column(name="TAKE_MEDICINE_EXPLAIN")
 	public String getTakeMedicineExplain() {
 		return takeMedicineExplain;
 	}
@@ -149,7 +158,7 @@ public class Health extends BaseEntity{
 		this.takeMedicineExplain = takeMedicineExplain;
 	}
 	
-	@Column(name="INTOLERANCE",nullable=false)
+
 	public String getIntolerance() {
 		return intolerance;
 	}
@@ -159,7 +168,7 @@ public class Health extends BaseEntity{
 		this.intolerance = intolerance;
 	}
 	
-	@Column(name="INTOLERANCE_EXPLAIN")
+
 	public String getIntoleranceExplain() {
 		return intoleranceExplain;
 	}
@@ -170,8 +179,7 @@ public class Health extends BaseEntity{
 	}
 
 
-	@OneToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="EMPLOYEE_ID",nullable=false)
+
 	public Employee getEmployee() {
 		return employee;
 	}

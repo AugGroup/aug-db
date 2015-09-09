@@ -11,17 +11,21 @@ import javax.persistence.Table;
 @Table(name="MAS_RELATIONTYPE")
 public class MasRelationType extends BaseEntity{
 	
+	@Id
+	@GeneratedValue
+	@Column(name="ID")
 	private Integer id;
+	@Column(name="RELATIONTYPE",nullable=false)
 	private String  relationType;
+	@Column(name = "CODE", nullable = false, length = 10)
 	private String code;
+	@Column(name = "ISACTIVE", nullable = false)
 	private Boolean isActive;
 
 
 	
 	
-	@Id
-	@GeneratedValue
-	@Column(name="ID")
+	
 	public Integer getId() {
 		return id;
 	}
@@ -32,7 +36,7 @@ public class MasRelationType extends BaseEntity{
 	}
 	
 	
-	@Column(name="RELATIONTYPE",nullable=false)
+	
 	public String getRelationType() {
 		return relationType;
 	}
@@ -44,7 +48,7 @@ public class MasRelationType extends BaseEntity{
 	}
 
 
-	@Column(name = "CODE", nullable = false, length = 10)
+
 	public String getCode() {
 		return code;
 	}
@@ -54,7 +58,7 @@ public class MasRelationType extends BaseEntity{
 	}
 
 	
-	@Column(name = "ISACTIVE", nullable = false)
+	
 	public Boolean getIsActive() {
 		return isActive;
 	}

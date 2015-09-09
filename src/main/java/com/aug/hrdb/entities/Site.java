@@ -19,19 +19,29 @@ import org.hibernate.validator.constraints.NotEmpty;
 @Table(name="SITE")
 public class Site extends BaseEntity{
 	
-	
-	private Integer id;
-	private String projectName;
-	private Date startDate;
-	private Date endDate;
-	private String projectOwner;
-	private String  projectOwnerContact; 
-    private Employee employee;
-	
-	
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
+	private Integer id;
+	@Column(name="PROJECTNAME",nullable=false)
+	@NotEmpty
+	private String projectName;
+	@Column(name="STARTDATE",nullable=false)
+	private Date startDate;
+	@Column(name="ENDDATE",nullable=false)
+	private Date endDate;
+	@Column(name="PROJECTOWNER",nullable=false)
+	@NotEmpty
+	private String projectOwner;
+	@Column(name="PROJECTOWNERCONTACT",nullable=false)
+	@NotEmpty
+	private String  projectOwnerContact; 
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
+    private Employee employee;
+	
+	
+
 	public Integer getId() {
 		return id;
 	}
@@ -40,8 +50,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@Column(name="PROJECTNAME",nullable=false)
-	@NotEmpty
+	
 	public String getProjectName() {
 		return projectName;
 	}
@@ -50,7 +59,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@Column(name="STARTDATE",nullable=false)
+
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -59,7 +68,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@Column(name="ENDDATE",nullable=false)
+	
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -69,8 +78,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@Column(name="PROJECTOWNER",nullable=false)
-	@NotEmpty
+	
 	public String getProjectOwner() {
 		return projectOwner;
 	}
@@ -79,8 +87,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@Column(name="PROJECTOWNERCONTACT",nullable=false)
-	@NotEmpty
+
 	public String getProjectOwnerContact() {
 		return projectOwnerContact;
 	}
@@ -91,8 +98,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
+	
 	public Employee getEmployee() {
 		return employee;
 	}
