@@ -8,8 +8,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.HealthDto;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.repositories.HealthRepository;
+import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.HealthService;
 
 
@@ -20,8 +22,8 @@ public class HealthServiceImpl implements HealthService{
 	
 	@Autowired
 	private HealthRepository healthRepository;
-	//@Autowired
-	//private EmployeeService employeeService;
+	@Autowired
+	private EmployeeService employeeService;
 	
 	
 	@Override
@@ -62,14 +64,14 @@ public class HealthServiceImpl implements HealthService{
 		
 		
 		
-		//Employee employee = new Employee();
-		//employee = employeeService.findById(healthDto.getEmployeeId());
+		Employee employee = new Employee();
+		employee = employeeService.findById(healthDto.getEmployeeId());
 		
 		Health health = new Health();
 		health.setAuditFlag("C");
 		health.setCreatedBy(healthDto.getEmployeeId());
 		health.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		//health.setEmployee(employee);
+		health.setEmployee(employee);
 		health.setCongenitalDisease(healthDto.getCongenitalDisease());
 		health.setCongenitalDiseaseExplain(healthDto.getCongenitalDiseaseExplain());
 		health.setCongenitalDiseaseExplain2(healthDto.getCongenitalDiseaseExplain2());
@@ -112,8 +114,8 @@ public class HealthServiceImpl implements HealthService{
 		healthDto.setTakeMedicineExplain(health.getTakeMedicineExplain());
 		healthDto.setIntolerance(health.getIntolerance());		
 		healthDto.setIntoleranceExplain(health.getIntoleranceExplain());
-		//healthDto.setEmployeeId(health.getEmployee().getId());
-		//healthDto.setEmployeeCode(health.getEmployee().getEmployeeCode());
+		healthDto.setEmployeeId(health.getEmployee().getId());
+		healthDto.setEmployeeCode(health.getEmployee().getEmployeeCode());
 		
 		return healthDto;
 	}
@@ -165,8 +167,8 @@ public class HealthServiceImpl implements HealthService{
 			healthDto.setTakeMedicineExplain(health.getTakeMedicineExplain());
 			healthDto.setIntolerance(health.getIntolerance());		
 			healthDto.setIntoleranceExplain(health.getIntoleranceExplain());
-			//healthDto.setEmployeeId(health.getEmployee().getId());
-			//healthDto.setEmployeeCode(health.getEmployee().getEmployeeCode());
+			healthDto.setEmployeeId(health.getEmployee().getId());
+			healthDto.setEmployeeCode(health.getEmployee().getEmployeeCode());
 		}
 		return healthDto;
 	}

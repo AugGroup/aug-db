@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
-/*@NamedNativeQueries({
+@NamedNativeQueries({
 
 	@NamedNativeQuery(
 	        name = "deleteFamily",
@@ -42,7 +42,7 @@ import org.hibernate.validator.constraints.NotEmpty;
              	    + "where ID=:familyId",
              	    resultClass=Family.class)
     
-})*/
+})
 
 
 
