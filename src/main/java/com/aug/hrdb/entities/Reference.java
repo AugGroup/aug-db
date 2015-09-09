@@ -34,7 +34,7 @@ public class Reference extends BaseEntity{
 	private String occupation;
 
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "APPLICANT_ID" ,referencedColumnName="id", nullable=false)
+	@JoinColumn(name = "APPLICANT_ID" ,nullable=false)
 	private Applicant applicant;
 	
 	public Integer getId() {
