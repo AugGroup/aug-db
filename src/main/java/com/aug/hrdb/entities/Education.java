@@ -25,9 +25,9 @@ public class Education extends BaseEntity{
 	@Column(name = "UNIVERSITY")
 	private String university;
 	
-	@Column(name = "DEGREETYPE_ID")
+/*	@Column(name = "DEGREETYPE_ID")
 	private String degree;
-
+*/
 	@Column(name = "FACULTY")
 	private String faculty;
 
@@ -75,14 +75,14 @@ public class Education extends BaseEntity{
 		this.university = university;
 	}
 
-	public String getDegree() {
+	/*public String getDegree() {
 		return degree;
 	}
 
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
-
+*/
 	public String getFaculty() {
 		return faculty;
 	}
