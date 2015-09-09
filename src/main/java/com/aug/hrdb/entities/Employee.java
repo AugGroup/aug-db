@@ -1001,8 +1001,8 @@ public class Employee extends BaseEntity{
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Ability> abilities = new HashSet<Ability>();
     
-    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-    private Set<Reference> references = new HashSet<Reference>();
+//    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+//    private Set<Reference> references = new HashSet<Reference>();
     
    
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
@@ -1728,15 +1728,15 @@ public class Employee extends BaseEntity{
 
 
 
-	public Set<Reference> getReferences() {
-		return references;
-	}
-
-
-
-	public void setReferences(Set<Reference> references) {
-		this.references = references;
-	}
+//	public Set<Reference> getReferences() {
+//		return references;
+//	}
+//
+//
+//
+//	public void setReferences(Set<Reference> references) {
+//		this.references = references;
+//	}
 
 
 

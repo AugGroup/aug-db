@@ -240,9 +240,9 @@ public class Applicant {
 	@Column(name = "IMAGE")
 	private String image;
 
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Reference> references;
-//
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Reference> references;
+
 //	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 //	private List<Family> families;
 //
@@ -678,14 +678,14 @@ public class Applicant {
 		this.occupationMarriage = occupationMarriage;
 	}
 
-//	public List<Reference> getReferences() {
-//		return references;
-//	}
-//
-//	public void setReferences(List<Reference> references) {
-//		this.references = references;
-//	}
-//
+	public List<Reference> getReferences() {
+		return references;
+	}
+
+	public void setReferences(List<Reference> references) {
+		this.references = references;
+	}
+
 //	public List<Family> getFamilies() {
 //		return families;
 //	}

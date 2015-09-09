@@ -12,8 +12,8 @@ import javax.persistence.NamedNativeQuery;
             		+ "ref.address, ref.tel, "
             		+ "ref.occupation, "
             		+ "ref.employee_id "
-            		+ "from emp_reference as ref,emp_employee as emp "
-            		+ "where ref.employee_id =:empId and ref.employee_id=emp.id", 
+            		+ "from reference as ref,applicant as app "
+            		+ "where ref.applicant_id =:appId and ref.applicant_id=app.id", 
             resultClass = ReferenceDto.class)
   })
 
@@ -25,7 +25,7 @@ public class ReferenceDto {
 	private String address;
 	private String tel;
 	private String occupation;
-	private Integer employeeId;
+	private Integer applicantId;
 	public Integer getId() {
 		return id;
 	}
@@ -44,11 +44,11 @@ public class ReferenceDto {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public Integer getEmployeeId() {
-		return employeeId;
+	public Integer getApplicantId() {
+		return applicantId;
 	}
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 	public String getAddress() {
 		return address;

@@ -2,10 +2,13 @@ package com.aug.hrdb.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.dto.ReferenceDto;
 
 
@@ -30,6 +33,10 @@ public class Reference extends BaseEntity{
 	@Column(name = "OCCUPATION", nullable = false)
 	private String occupation;
 
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "APPLICANT_ID" ,referencedColumnName="id", nullable=false)
+	private Applicant applicant;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -70,6 +77,14 @@ public class Reference extends BaseEntity{
 		this.occupation = occupation;
 	}
 	
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
+
 	public ReferenceDto toReferenceDto(){
 		ReferenceDto referenceDto = new ReferenceDto();
 		referenceDto.setId(this.id);
@@ -77,7 +92,7 @@ public class Reference extends BaseEntity{
 		referenceDto.setAddress(this.address);
 		referenceDto.setTel(this.tel);
 		referenceDto.setOccupation(this.occupation);
-//		referenceDto.setEmployeeId(this.employee.getId());
+		referenceDto.setApplicantId(this.applicant.getId());
 		return referenceDto;
 	}
 
@@ -87,9 +102,9 @@ public class Reference extends BaseEntity{
 		reference.setName(referenceDto.getName());
 		reference.setAddress(referenceDto.getAddress());
 		reference.setTel(referenceDto.getTel());		reference.setOccupation(referenceDto.getOccupation());				
-//		Employee employee = new Employee();
-//		employee.setId(referenceDto.getEmployeeId());
-//		reference.setEmployee(employee);
+		Applicant applicant = new Applicant();
+		applicant.setId(referenceDto.getApplicantId());
+		reference.setApplicant(applicant);
 		return reference;
 	}
 	
