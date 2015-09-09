@@ -54,6 +54,9 @@ public class Login extends BaseEntity{
 	@Column(name="PASSWORD",length=13,nullable=false)
 	private String password;
 
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
+	private Employee employee;
 
 	
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)	
