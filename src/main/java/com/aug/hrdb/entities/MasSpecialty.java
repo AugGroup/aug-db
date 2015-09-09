@@ -35,7 +35,7 @@ public class MasSpecialty extends BaseEntity{
 //	@JsonIgnore
 	@OneToMany(mappedBy = "masspecialty")
 
-//	private Set<Ability> abilities;
+	private Set<Ability> abilities;
 
 	public Integer getId() {
 		return id;
@@ -93,17 +93,17 @@ public class MasSpecialty extends BaseEntity{
 
 
 
-//	public Set<Ability> getAbilities() {
-//		return abilities;
-//	}
-//
-//
-//
-//
-//	public void setAbilities(Set<Ability> abilities) {
-//		this.abilities = abilities;
-//	}
-//	
+	public Set<Ability> getAbilities() {
+		return abilities;
+	}
+
+
+
+
+	public void setAbilities(Set<Ability> abilities) {
+		this.abilities = abilities;
+	}
+	
 	
 	
 	

@@ -40,8 +40,8 @@ public class Reward extends BaseEntity{
 	@ManyToOne()
 	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName= "id",nullable = false)
 
-//	@JsonIgnore
-//	private Employee employee;
+	@JsonIgnore
+	private Employee employee;
 
 
 	public Integer getId() {
@@ -93,15 +93,15 @@ public class Reward extends BaseEntity{
 		this.isActive = isActive;
 	}
 
-//
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 
 	public RewardDto toRewardDto(){
@@ -111,23 +111,23 @@ public class Reward extends BaseEntity{
 		rewardDto.setYear(this.year);
 		rewardDto.setReason(this.reason);
 		rewardDto.setIsActive(this.isActive);
-//		rewardDto.setEmployeeId(this.employee.getId());
+		rewardDto.setEmployeeId(this.employee.getId());
 		return rewardDto;
 		
 	}
 	
 		
 	public Reward fromRewardDto(Reward reward,RewardDto rewardDto){
-	//	Reward reward = new Reward();
+//		Reward reward = new Reward();
 		reward.setId(rewardDto.getId());
 		reward.setTypereward(rewardDto.getTypereward());
 		reward.setYear(rewardDto.getYear());
 		reward.setReason(rewardDto.getReason());
 		reward.setIsActive(rewardDto.getIsActive());
 		
-//		Employee employee = new Employee();
-//		employee.setId(rewardDto.getEmployeeId());
-//		reward.setEmployee(employee);
+		Employee employee = new Employee();
+		employee.setId(rewardDto.getEmployeeId());
+		reward.setEmployee(employee);
 		return reward;
 	}	
 	

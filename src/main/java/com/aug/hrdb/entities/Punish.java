@@ -37,9 +37,9 @@ public class Punish {
 	@NotEmpty 
 	private String description;
 	
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name="EMPLOYEE_ID" , referencedColumnName="id", nullable=true)
-//	private Employee employee;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="EMPLOYEE_ID" , referencedColumnName="id", nullable=true)
+	private Employee employee;
 
 
 	@Column(name = "PENALTY" ,nullable = false)
@@ -78,14 +78,14 @@ public class Punish {
 	}
 
 
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 
 	public String getPenalty() {
@@ -117,9 +117,9 @@ public class Punish {
 		punish.setDescription(punsihDto.getDescription());
 		punish.setPenalty(punsihDto.getPenalty());
 		
-//		Employee employee = new Employee();
-//		employee.setId(punsihDto.getEmployeeId());
-//		punish.setEmployee(employee);
+		Employee employee = new Employee();
+		employee.setId(punsihDto.getEmployeeId());
+		punish.setEmployee(employee);
 		return punish;
 		
 	}
