@@ -26,7 +26,7 @@ public class Site extends BaseEntity{
 	private Date endDate;
 	private String projectOwner;
 	private String  projectOwnerContact; 
-    //private Employee employee;
+    private Employee employee;
 	
 	
 	@Id
@@ -91,7 +91,7 @@ public class Site extends BaseEntity{
 	}
 	
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
 	public Employee getEmployee() {
 		return employee;
@@ -100,7 +100,7 @@ public class Site extends BaseEntity{
 	
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}*/
+	}
 	
 	
 
