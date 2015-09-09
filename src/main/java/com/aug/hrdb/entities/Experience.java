@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @Entity
 @Table(name = "EXPERIENCE")
 public class Experience extends BaseEntity {
@@ -21,31 +20,32 @@ public class Experience extends BaseEntity {
 	@GeneratedValue
 	@Column(name = "ID")
 	private Integer id;
-	
+
 	@ManyToOne
-	@JoinColumn(name="APPLICANT_ID")
+	@JoinColumn(name = "APPLICANT_ID")
 	private Applicant applicant;
-	
-	/*@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID")
-	private Employee employee;*/
+
+	/*
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name="EMPLOYEE_ID") private Employee employee;
+	 */
 
 	@Column(name = "ADDRESS")
 	private String address;
 
 	@Column(name = "TYPE_OF_BUSINESS")
 	private String typeOfBusiness;
-	
-	@Column(name ="COMPANY_NAME")
+
+	@Column(name = "COMPANY_NAME")
 	private String companyName;
-	
-	
+
 	@Column(name = "DATE_FROM")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="DD-MM-YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateFrom;
 
 	@Column(name = "DATE_TO")
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="DD-MM-YYYY")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateTo;
 
 	@Column(name = "POSITION")
@@ -62,7 +62,6 @@ public class Experience extends BaseEntity {
 
 	@Column(name = "SALARY")
 	private long salary;
-	
 
 	public Integer getId() {
 		return id;
@@ -70,6 +69,14 @@ public class Experience extends BaseEntity {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
 	}
 
 	public String getAddress() {
@@ -151,5 +158,5 @@ public class Experience extends BaseEntity {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-	
+
 }

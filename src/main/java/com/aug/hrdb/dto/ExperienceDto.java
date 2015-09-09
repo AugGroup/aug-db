@@ -23,9 +23,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "emp.employee_code FROM EXPERIENCE as exp, EMPLOYEE as emp "
 				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) })
 public class ExperienceDto {
-	
+
 	private Applicant applicant;
-	
+
 	private Employee employee;
 
 	private Integer id;
@@ -34,10 +34,10 @@ public class ExperienceDto {
 
 	private String typeOfBusiness;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateFrom;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateTo;
 
 	private String position;
