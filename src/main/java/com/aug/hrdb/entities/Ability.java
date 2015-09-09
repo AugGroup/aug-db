@@ -40,10 +40,11 @@ public class Ability extends BaseEntity  {
 	 private Official official;*/
 	
 
-	/*@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "EMPLOYEE_ID",nullable = false,referencedColumnName="id")
 	private Employee employee;
 	
+	/*
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "SPECIALTY_ID",nullable = false,referencedColumnName="SPEC_ID")
 //	@JsonIgnore
@@ -72,7 +73,7 @@ public class Ability extends BaseEntity  {
 
 
 
-/*	public Employee getEmployee() {
+    public Employee getEmployee() {
 		return employee;
 	}
 
@@ -81,7 +82,7 @@ public class Ability extends BaseEntity  {
 	}
 
 	
-	public MasSpecialty getMasspecialty() {
+	/*	public MasSpecialty getMasspecialty() {
 		return masspecialty;
 	}
 

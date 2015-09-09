@@ -27,9 +27,9 @@ public class Allowances extends BaseEntity{
 	@Column(name = "AMOUNT" ,nullable = false)
 	private Double amount;
 
-//	@ManyToOne()
-//	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName="id", nullable = false)
-//	private Employee employee;
+	@ManyToOne()
+	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName="id", nullable = false)
+	private Employee employee;
 	
 	@ManyToOne()
 	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ALLO_ID", nullable = false)
@@ -60,14 +60,24 @@ public class Allowances extends BaseEntity{
 	public void setMasallowances(MasAllowances masallowances) {
 		this.masallowances = masallowances;
 	}
+	
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
 
 	public Allowances fromAllowancesDto(Allowances allowances, AllowancesDto allowancesDto) {
 		
 		allowances.setAmount(allowancesDto.getAmount());
 		
-//		Employee employee = new Employee();
-//		employee.setId(allowancesDto.getEmployeeId());
-//		allowances.setEmployee(employee);
+		Employee employee = new Employee();
+		employee.setId(allowancesDto.getEmployeeId());
+		allowances.setEmployee(employee);
 		
 		MasAllowances masAllowances = new MasAllowances();
 		masAllowances.setId(allowancesDto.getMasAllowancesId());
@@ -84,7 +94,7 @@ public class Allowances extends BaseEntity{
 		
 		allowancesDto.setId(this.id);
 		allowancesDto.setAmount(this.amount);
-//		allowancesDto.setEmployeeId(this.employee.getId());
+		allowancesDto.setEmployeeId(this.employee.getId());
 		allowancesDto.setMasAllowancesId(this.masallowances.getId());
 		allowancesDto.setMasallowances(this.masallowances.getAllowances_type());
 		

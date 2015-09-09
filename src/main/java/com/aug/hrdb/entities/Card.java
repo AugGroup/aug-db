@@ -54,7 +54,7 @@ public class Card {
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "EMPLOYEE_ID" ,referencedColumnName="id", nullable=false)
 //	@JsonIgnore
-//	private Employee employee;
+	private Employee employee;
 
 
 	public Integer getId() {
@@ -105,14 +105,14 @@ public class Card {
 		this.remark = remark;
 	}
 
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
-//	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+	
 	
 	public CardDto toCardDto(){
 		CardDto cardDto = new CardDto();
@@ -122,7 +122,7 @@ public class Card {
 		cardDto.setEnddate(this.enddate);
 		cardDto.setStatus(this.status);
 		cardDto.setRemark(this.remark);
-//		cardDto.setEmployeeId(this.employee.getId());
+		cardDto.setEmployeeId(this.employee.getId());
 		return cardDto;
 	}
 	
@@ -134,9 +134,9 @@ public class Card {
 		card.setStatus(cardDto.getStatus());
 		card.setRemark(cardDto.getRemark());
 		
-//		Employee employee = new Employee();
-//		employee.setId(cardDto.getEmployeeId());
-//		card.setEmployee(employee);
+		Employee employee = new Employee();
+		employee.setId(cardDto.getEmployeeId());
+		card.setEmployee(employee);
 		return card;
 		
 	}
