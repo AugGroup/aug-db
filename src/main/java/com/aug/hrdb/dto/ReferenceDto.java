@@ -8,7 +8,12 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchReference",
-            query = "select ref.id,ref.name, ref.address, ref.tel, ref.occupation, ref.employee_id from emp_reference as ref,emp_employee as emp where ref.employee_id =:empId and ref.employee_id=emp.id", 
+            query = "select ref.id,ref.name, "
+            		+ "ref.address, ref.tel, "
+            		+ "ref.occupation, "
+            		+ "ref.employee_id "
+            		+ "from emp_reference as ref,emp_employee as emp "
+            		+ "where ref.employee_id =:empId and ref.employee_id=emp.id", 
             resultClass = ReferenceDto.class)
   })
 
