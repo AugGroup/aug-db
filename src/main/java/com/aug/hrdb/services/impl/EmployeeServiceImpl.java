@@ -35,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAddressType;
@@ -140,14 +141,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public void createEmployeeAndAddress(Employee employee) {
 		employeeRepository.create(employee);
-		for(Address address:employee.getAddresses()){
+		/*for(Address address:employee.getAddresses()){
 			address.setEmployee(employee);
 			MasProvince masProvince = masProvinceService.find(address.getProvinceId());
 			address.setProvince(masProvince);
 			MasAddressType masAddressType = masAddressTypeService.findById(address.getAddressTypeId());
 			address.setAddressType(masAddressType);
 			addressService.create(address);
-		}
+		}*/
 		
 	}
 
@@ -166,36 +167,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public void saveEmpAndWithRelateTable(EmployeeDto employeeDto) {
 	
-		/*MasLocation location = masLocationService.findByLocationCode(allEmployeeDto.getMasLocation());
+		MasLocation location = masLocationService.findByLocationCode(employeeDto.getMasLocation());
 		
 		OfficialDto officialDto = new OfficialDto();
 		//Date dateOffi = new Date("12/05/2015");
 		Calendar cal = Calendar.getInstance();
-		officialDto.setOfficialDate(allEmployeeDto.getOfficialDate());
-		officialDto.setStartWorkDate(allEmployeeDto.getStartWorkDate());
-		officialDto.setEndWorkDate(allEmployeeDto.getEndWorkDate());
-		officialDto.setPositionAppliedFor(allEmployeeDto.getPositionAppliedFor());
-		officialDto.setSalaryExpected(allEmployeeDto.getSalaryExpected());
-		officialDto.setProbationDate(allEmployeeDto.getProbationDate());
+		officialDto.setOfficialDate(employeeDto.getOfficialDate());
+		officialDto.setStartWorkDate(employeeDto.getStartWorkDate());
+		officialDto.setEndWorkDate(employeeDto.getEndWorkDate());
+		officialDto.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
+		officialDto.setSalaryExpected(employeeDto.getSalaryExpected());
+		officialDto.setProbationDate(employeeDto.getProbationDate());
 	
 		afficialService.saveOfficialByNameQuery(officialDto);		
 		
 		Official official1 = afficialService.searhEmpIdtoOfficial();
 		System.out.println(official1.getId());
 	
-		allEmployeeDto.setOfficialId(official1.getId());
-		allEmployeeDto.setMasLocationId(location.getId());
+		employeeDto.setOfficialId(official1.getId());
+		employeeDto.setMasLocationId(location.getId());
 		
 		
-		employeeDao.saveByNameQuery(allEmployeeDto);
+		employeeRepository.saveByNameQuery(employeeDto);
 		
 		
-		Employee emp = employeeDao.searhEmpIdtoAddress();
+		Employee emp = employeeRepository.searhEmpIdtoAddress();
 		
-		System.out.println("empId: "+emp.getId());*/
+		System.out.println("empId: "+emp.getId());
 		
 		
-		if(employeeDto.getAddressList()!=null){
+		/*if(employeeDto.getAddressList()!=null){
 			for(AddressDto addressDto:employeeDto.getAddressList()){
 				if(addressDto.getId()!=null){
 					//addressDto.setEmployeeId(emp.getId());
@@ -204,7 +205,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				}
 				
 			}
-		}
+		}*/
   }
 
 	
@@ -329,7 +330,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
 		
 		
-	  if(employee.getAddresses()!=null){
+	  /*if(employee.getAddresses()!=null){
 		for(Address address:employee.getAddresses()){		
 				AddressDto addressDto = new AddressDto();
 				addressDto.setId(address.getId());
@@ -359,7 +360,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		employeeDto.setAddressList(addressDtoList);
 		
-	  }
+	  }*/
 		
 		return employeeDto;
 
@@ -371,7 +372,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		Employee employee=employeeRepository.find(id);		
 		EmployeeDto empDto = new EmployeeDto();
 		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		for(Address address:employee.getAddresses()){
+		/*for(Address address:employee.getAddresses()){
 		//allEmpDto.setAddressList();
 			AddressDto addressDto = new AddressDto();
 			//addressDto.setAddress1(addrerss.getAddress1());
@@ -386,7 +387,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			addressDto.setMasaddresstypeName(address.getAddressType().getName());
 			addressDto.setStatus("unmodified");
 			addressDtoList.add(addressDto);
-		}
+		}*/
 		empDto.setId(employee.getId());
 		empDto.setAddress(employee.getAddress());
 		empDto.setEmployeeCode(employee.getEmployeeCode());
@@ -681,7 +682,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 					
 					List<Address> addressList = new ArrayList<Address>();
 					addressList.add(address);
-					employee.setAddresses(addressList);
+					//employee.setAddresses(addressList);
 					addressService.create(address);
 
 				}
@@ -1025,7 +1026,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
-									employee.setAddresses(addressList);
+									//employee.setAddresses(addressList);
 									addressService.create(address);
 							
 							}else if(addressDto.getStatus().equals("edit")){
@@ -1061,7 +1062,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
-									employee.setAddresses(addressList);
+									//employee.setAddresses(addressList);
 									addressService.update(address);
 								
 								
@@ -1098,7 +1099,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		// TODO Auto-generated method stub
 		Employee employee = employeeRepository.find(id);
 		Hibernate.initialize(employee.getOfficial());
-		Hibernate.initialize(employee.getAddresses());
+		//Hibernate.initialize(employee.getAddresses());
 		Hibernate.initialize(employee.getLeaves());
 		return employee;
 	}
