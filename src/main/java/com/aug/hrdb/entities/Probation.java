@@ -29,11 +29,11 @@ public class Probation extends BaseEntity {
     @Column(name = "ID")
     private Integer id;
     @Column(name = "DATE_FROM", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateFrom;
     @Column(name = "DATE_TO", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dateTo;
     @Column(name = "STATUS", nullable = false)
