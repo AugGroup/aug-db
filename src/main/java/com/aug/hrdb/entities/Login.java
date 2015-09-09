@@ -2,6 +2,9 @@ package com.aug.hrdb.entities;
 
 
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,6 +21,18 @@ import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
+/**
+ * @author Thanyalak
+ *
+ */
+/**
+ * @author Thanyalak
+ *
+ */
+/**
+ * @author Thanyalak
+ *
+ */
 @NamedNativeQueries({            		
 @NamedNativeQuery(
            name = "searchIdEmptoLogin",
@@ -49,14 +64,14 @@ public class Login extends BaseEntity{
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)	
 	@JoinTable(name="LoginRole", joinColumns={ @JoinColumn(name="LOGIN_ID" , referencedColumnName="ID")},
 		inverseJoinColumns={ @JoinColumn(name="MASROLE_ID" , referencedColumnName="ID")})	
-    private MasRole masRole;  
-    
-    
+    private Set<MasRole> masRoles = new HashSet<MasRole>();  
+
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name= "MAS_LOCATION_ID")
     private MasLocation masLocation;
-    
+
+
 	public Integer getId() {
 		return id;
 	}
@@ -64,8 +79,9 @@ public class Login extends BaseEntity{
 
 	public void setId(Integer id) {
 		this.id = id;
-	}	
-	
+	}
+
+
 	public String getUsername() {
 		return username;
 	}
@@ -86,35 +102,26 @@ public class Login extends BaseEntity{
 	}
 
 
-	public MasRole getMasRole() {
-		return masRole;
+	public Set<MasRole> getMasRoles() {
+		return masRoles;
 	}
 
 
-	public void setMasRole(MasRole masRole) {
-		this.masRole = masRole;
+	public void setMasRoles(Set<MasRole> masRoles) {
+		this.masRoles = masRoles;
 	}
 
 
 	public MasLocation getMasLocation() {
-	   return masLocation;
+		return masLocation;
 	}
 
 
-    public void setMasLocation(MasLocation masLocation) {
+	public void setMasLocation(MasLocation masLocation) {
 		this.masLocation = masLocation;
-    }
-	
-	
+	}
+    
 
-//	public Employee getEmployee() {
-//		return employee;
-//	}
-//
-//
-//	public void setEmployee(Employee employee) {
-//		this.employee = employee;
-//	}
 
 		
 }

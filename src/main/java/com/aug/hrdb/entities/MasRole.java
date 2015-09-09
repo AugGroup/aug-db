@@ -28,7 +28,7 @@ public class MasRole extends BaseEntity {
 	private Boolean isActive;
 	
 //	@OneToMany(mappedBy = "masRole")
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masRole")
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masRoles")
 	private Set<Login> logins = new HashSet<Login>();
 
 	public Integer getId() {
