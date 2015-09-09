@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 
-@NamedNativeQueries({
+/*@NamedNativeQueries({
 
 	@NamedNativeQuery(
 	        name = "deleteFamily",
@@ -42,7 +42,7 @@ import org.hibernate.validator.constraints.NotEmpty;
              	    + "where ID=:familyId",
              	    resultClass=Family.class)
     
-})
+})*/
 
 
 
@@ -62,6 +62,8 @@ public class Family extends BaseEntity implements Serializable {
 	private String position; 
 	//private Employee employee;
 	private MasRelationType masRelationType;
+	private Applicant applicant;
+	
 	
 	
 	@Id
@@ -175,6 +177,19 @@ public class Family extends BaseEntity implements Serializable {
 	public void setMasRelationType(MasRelationType masRelationType) {
 		this.masRelationType = masRelationType;
 	}
+
+	
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="APPLICANT_ID",nullable=false)
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
 	
 	
 	
@@ -191,4 +206,8 @@ public class Family extends BaseEntity implements Serializable {
 		this.employee = employee;
 	}*/
 
+	
+	
+	
+	
 }

@@ -2,6 +2,7 @@ package com.aug.hrdb.entities;
 
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -275,6 +276,11 @@ public class Applicant {
 	
 	@OneToOne(mappedBy="applicant")
 	private Employee employee;
+	
+	
+	@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
+    private Set<Family> families = new HashSet<Family>();
+	
 
 	public String getReportType() {
 		return reportType;
@@ -911,6 +917,17 @@ public class Applicant {
 	public void setLanguages(Set<Language> languages) {
 		this.languages = languages;
 	}
+	
+	
+	public Set<Family> getFamilies() {
+		return families;
+	}
+
+	public void setFamilies(Set<Family> families) {
+		this.families = families;
+	}
+	
+	
 
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());

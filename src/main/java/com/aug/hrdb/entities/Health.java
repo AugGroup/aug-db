@@ -26,7 +26,7 @@ public class Health extends BaseEntity{
 	private String takeMedicineExplain;
 	private String intolerance;
 	private String intoleranceExplain;
-	//private Employee employee;
+	private Employee employee;
 	
 	
 	@Id
@@ -170,7 +170,7 @@ public class Health extends BaseEntity{
 	}
 
 
-	/*@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="EMPLOYEE_ID",nullable=false)
 	public Employee getEmployee() {
 		return employee;
@@ -180,7 +180,7 @@ public class Health extends BaseEntity{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	*/
+
 	
 	
 	
