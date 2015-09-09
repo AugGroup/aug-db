@@ -675,7 +675,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 					}
 					
 					address.setZipcode(addressDto.getZipcode());
-					address.setEmployee(employee);
+					//address.setEmployee(employee);
 					address.setAuditFlag("C");
 					address.setCreatedBy(employee.getId());
 					address.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -1019,7 +1019,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									}
 									
 									address.setZipcode(addressDto.getZipcode());
-									address.setEmployee(employee);
+									//address.setEmployee(employee);
 									address.setAuditFlag("C");
 									address.setCreatedBy(employee.getId());
 									address.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -1055,7 +1055,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									}
 									
 									address.setZipcode(addressDto.getZipcode());
-									address.setEmployee(employee);
+									//address.setEmployee(employee);
 									address.setAuditFlag("U");
 									address.setUpdatedBy(employee.getId());
 									address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
