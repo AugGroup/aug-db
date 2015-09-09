@@ -87,7 +87,7 @@ public class Language extends BaseEntity{
 	}
 
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "APPLICANT_ID" ,referencedColumnName="id", nullable=false)
+	@JoinColumn(name = "APPLICANT_ID" , nullable=false)
 	public Applicant getApplicant() {
 		return applicant;
 	}

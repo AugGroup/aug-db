@@ -3,6 +3,7 @@ package com.aug.hrdb.entities;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -252,7 +253,7 @@ public class Applicant {
 //	private List<AugEmployee> augEmployees;
 //
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-	private List<Languages> languages;
+	private Set<Language> languages;
 //
 //	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 //	private List<Address> address;
@@ -707,13 +708,7 @@ public class Applicant {
 //		this.augEmployees = augEmployees;
 //	}
 //
-	public List<Languages> getLanguages() {
-		return languages;
-	}
-
-	public void setLanguages(List<Languages> languages) {
-		this.languages = languages;
-	}
+	
 
 //	public List<Address> getAddress() {
 //		return address;
@@ -909,8 +904,14 @@ public class Applicant {
 		this.employee = employee;
 	}
 
-	
-	
+	public Set<Language> getLanguages() {
+		return languages;
+	}
+
+	public void setLanguages(Set<Language> languages) {
+		this.languages = languages;
+	}
+
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());
 		applicant.setFirstNameTH(applicantDto.getFirstNameTH());
