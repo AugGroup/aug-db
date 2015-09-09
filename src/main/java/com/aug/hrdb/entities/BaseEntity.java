@@ -25,14 +25,20 @@ public abstract class BaseEntity {
 	private String reportType;
 	
 	
+	@Column(name = "AUDITFLAG", nullable = false, length = 1)
 	private String auditFlag;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "CREATEDTIMESTAMP", nullable = false)
 	private Date createdTimeStamp;
+	@Column(name = "CREATEDBY", nullable = false, length = 10)
 	private Integer createdBy;
+	@Column(name="UPDATEDTIMESTAMP")
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedTimeStamp;
+	@Column(name = "UPDATEDBY", nullable = true, length = 10)
 	private Integer updatedBy;
 
 	
-	@Column(name = "AUDITFLAG", nullable = false, length = 1)
 	public String getAuditFlag() {
 		return auditFlag;
 	}
@@ -41,8 +47,7 @@ public abstract class BaseEntity {
 		this.auditFlag = auditFlag;
 	}
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "CREATEDTIMESTAMP", nullable = false)
+
 	public Date getCreatedTimeStamp() {
 		return createdTimeStamp;
 	}
@@ -51,7 +56,6 @@ public abstract class BaseEntity {
 		this.createdTimeStamp = createdTimeStamp;
 	}
 
-	@Column(name = "CREATEDBY", nullable = false, length = 10)
 	public Integer getCreatedBy() {
 		return createdBy;
 	}
@@ -60,8 +64,7 @@ public abstract class BaseEntity {
 		this.createdBy = createdBy;
 	}
 	
-	@Column(name="UPDATEDTIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
+
 	public Date getUpdatedTimeStamp() {
 		return updatedTimeStamp;
 	}
@@ -70,7 +73,6 @@ public abstract class BaseEntity {
 		this.updatedTimeStamp = updatedTimeStamp;
 	}
 
-	@Column(name = "UPDATEDBY", nullable = true, length = 10)
 	public Integer getUpdatedBy() {
 		return updatedBy;
 	}

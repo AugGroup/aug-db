@@ -52,23 +52,44 @@ public class Family extends BaseEntity implements Serializable {
 
 	
 	private static final long serialVersionUID = -5187864989377656419L;
+	@Id
+	@GeneratedValue
+	@Column(name="ID",length=6)
 	private Integer id; 
+	@Column(name="NAME")	
+	@NotNull
+	@NotEmpty
 	private String familyName;
+	@Column(name="GENDER",length=10)
+	@NotNull
+	@NotEmpty
 	private String gender;
+	@Column(name="AGE",length=3)
+	@NotNull
 	private Integer age;
+	@Column(name="TELEPHONE",length=12)
+	@NotNull
+	@NotEmpty
 	private String mobile;
+	@Column(name="ADDRESS")
+	@NotNull
+	@NotEmpty
 	private String address;
+	@Column(name="OCCUPATION")
 	private String occupation; 
+	@Column(name="POSITION")
 	private String position; 
 	//private Employee employee;
+	@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="MASRELATION_ID",nullable=false)
 	private MasRelationType masRelationType;
+	@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name="APPLICANT_ID",nullable=false)
 	private Applicant applicant;
 	
 	
 	
-	@Id
-	@GeneratedValue
-	@Column(name="ID",length=6)
+	
 	public Integer getId() {
 		return id;
 	}
@@ -79,9 +100,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 
 	
-	@Column(name="NAME")	
-	@NotNull
-	@NotEmpty
+	
 	public String getFamilyName() {
 		return familyName;
 	}
@@ -92,9 +111,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 
 
-	@Column(name="GENDER",length=10)
-	@NotNull
-	@NotEmpty
+	
 	public String getGender() {
 		return gender;
 	}
@@ -105,8 +122,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 	
 	
-	@Column(name="AGE",length=3)
-	@NotNull
+
 	public Integer getAge() {
 		return age;
 	}
@@ -119,9 +135,7 @@ public class Family extends BaseEntity implements Serializable {
 	
 	
 	
-	@Column(name="TELEPHONE",length=12)
-	@NotNull
-	@NotEmpty
+	
 	public String getMobile() {
 		return mobile;
 	}
@@ -132,9 +146,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 
 
-	@Column(name="ADDRESS")
-	@NotNull
-	@NotEmpty
+
 	public String getAddress() {
 		return address;
 	}
@@ -145,7 +157,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 	
 	
-	@Column(name="OCCUPATION")
+
 	public String getOccupation() {
 		return occupation;
 	}
@@ -155,7 +167,7 @@ public class Family extends BaseEntity implements Serializable {
 		this.occupation = occupation;
 	}
 	
-	@Column(name="POSITION")
+	
 	public String getPosition() {
 		return position;
 	}
@@ -167,8 +179,6 @@ public class Family extends BaseEntity implements Serializable {
 
 
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="MASRELATION_ID",nullable=false)
 	public MasRelationType getMasRelationType() {
 		return masRelationType;
 	}
@@ -179,9 +189,7 @@ public class Family extends BaseEntity implements Serializable {
 	}
 
 	
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="APPLICANT_ID",nullable=false)
+
 	public Applicant getApplicant() {
 		return applicant;
 	}
