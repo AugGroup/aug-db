@@ -38,9 +38,9 @@ public class MasAddressType extends BaseEntity{
 	@Column(name="CODE",nullable = false)
 	private String code;
 	
-	 /*@OneToMany(mappedBy = "addressType")
+	 @OneToMany(mappedBy = "addressType")
 	 private Set<Address> addresses = new HashSet<Address>();
-	  */
+	  
 	
 	public Integer getId() {
 		return id;
@@ -77,12 +77,12 @@ public class MasAddressType extends BaseEntity{
 
 	
 
-	/*public Set<Address> getAddresses() {
+	public Set<Address> getAddresses() {
 		return addresses;
 	}
 
 	public void setAddresses(Set<Address> addresses) {
 		this.addresses = addresses;
 	}
-   */	
+   	
 }

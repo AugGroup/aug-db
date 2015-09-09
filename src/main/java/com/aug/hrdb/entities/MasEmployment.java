@@ -41,8 +41,8 @@ public class MasEmployment extends BaseEntity {
 	private Boolean isActive;
 
 	
-	/*@OneToMany(mappedBy = "masEmployment")
-	private Set<Employee> employees = new HashSet<Employee>();*/
+	@OneToMany(mappedBy = "masEmployment")
+	private Set<Employee> employees = new HashSet<Employee>();
 
 
 	public Integer getId() {
@@ -85,14 +85,14 @@ public class MasEmployment extends BaseEntity {
 	}
 
 
-	/*public Set<Employee> getEmployees() {
+	public Set<Employee> getEmployees() {
 		return employees;
 	}
 
 
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
-	}*/
+	}
 
 
 	/*@Override
