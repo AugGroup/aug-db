@@ -5,24 +5,35 @@ import java.util.Date;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT e.id, e.address, e.typeOfBusiness, e.dateFrom, e.dateTo, e.position, e.reason, e.reference, e.responsibility, e.salary"
-				+ " FROM EXPERIENCE e LEFT JOIN APPLICANT a on e.APPLICANT_ID = a.APPLICANT_ID WHERE e.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
+		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
+				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
+				+ "FROM EXPERIENCE exp LEFT JOIN APPLICANT a on exp.APPLICANT_ID = a.APPLICANT_ID WHERE exp.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
 
-		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT e.id, e.address, e.typeOfBusiness, e.dateFrom, e.dateTo, e.position, e.reason, e.reference, e.responsibility, e.salary"
-				+ " FROM EXPERIENCE e WHERE e.id = :ID", resultClass = ExperienceDto.class) })
+		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
+				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
+				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class),
+
+		@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
+				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
+				+ "emp.employee_code FROM EXPERIENCE as exp, EMPLOYEE as emp "
+				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) })
 public class ExperienceDto {
-	/*@JoinColumn(name="APPLICANT_ID") private Applicant applicant;
-	  @JoinColumn(name="EMPLOYEE_ID") private Employee employee;*/
+	
+	private Applicant applicant;
+	
+	private Employee employee;
 
 	private Integer id;
 
 	private String address;
 
 	private String typeOfBusiness;
-	
+
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", locale = "en", timezone = "GMT")
 	private Date dateFrom;
 
@@ -38,6 +49,22 @@ public class ExperienceDto {
 	private String responsibility;
 
 	private long salary;
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 
 	public Integer getId() {
 		return id;
@@ -118,5 +145,5 @@ public class ExperienceDto {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-	
+
 }

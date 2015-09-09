@@ -6,7 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -18,11 +22,11 @@ public class Experience extends BaseEntity {
 	@Column(name = "ID")
 	private Integer id;
 	
-/*	@ManyToOne
+	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
 	private Applicant applicant;
 	
-	@ManyToOne
+	/*@ManyToOne
 	@JoinColumn(name="EMPLOYEE_ID")
 	private Employee employee;*/
 
@@ -34,11 +38,14 @@ public class Experience extends BaseEntity {
 	
 	@Column(name ="COMPANY_NAME")
 	private String companyName;
-
+	
+	
 	@Column(name = "DATE_FROM")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="DD-MM-YYYY")
 	private Date dateFrom;
 
 	@Column(name = "DATE_TO")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="DD-MM-YYYY")
 	private Date dateTo;
 
 	@Column(name = "POSITION")
