@@ -970,9 +970,9 @@ public class Employee extends BaseEntity{
 
 
 
-	@Column(name = "ADDRESS_ID",nullable = true)
+	/*@Column(name = "ADDRESS_ID",nullable = true)
 	@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-	private List<Address> addresses = new ArrayList<Address>();
+	private List<Address> addresses = new ArrayList<Address>();*/
 
 	 
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
@@ -980,8 +980,8 @@ public class Employee extends BaseEntity{
 	private Official official;
 	 
 	 
-	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
-	private Set<Education> educations = new HashSet<Education>();
+	/*@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
+	private Set<Education> educations = new HashSet<Education>();*/
 	 
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
 	private Set<Allowances> allowances = new HashSet<Allowances>();
@@ -1001,12 +1001,13 @@ public class Employee extends BaseEntity{
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Ability> abilities = new HashSet<Ability>();
     
-//    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
-//    private Set<Reference> references = new HashSet<Reference>();
-    
+
+    /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+    private Set<Reference> references = new HashSet<Reference>();*/
+
    
-    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    private Set<Certification> certifications  = new HashSet<Certification>();
+    /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    private Set<Certification> certifications  = new HashSet<Certification>();*/
     
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Leave> leaves  = new HashSet<Leave>();
@@ -1022,8 +1023,8 @@ public class Employee extends BaseEntity{
     @JoinColumn(name= "JOBLEVEL_ID", referencedColumnName="id",nullable = false)
     private MasJoblevel masJoblevel;
     
-    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    private Set<Experience> experiences = new HashSet<Experience>();
+    /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    private Set<Experience> experiences = new HashSet<Experience>();*/
 	    
 
     @ManyToOne(fetch=FetchType.EAGER) 
@@ -1031,8 +1032,8 @@ public class Employee extends BaseEntity{
     private MasTechnology technology;
     
     
-    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
-    private Set<Family> families = new HashSet<Family>(); 
+    /*@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
+    private Set<Family> families = new HashSet<Family>();*/ 
     
     
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
@@ -1070,8 +1071,8 @@ public class Employee extends BaseEntity{
    private Integer technologyId;
    
 
-   @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
-   private Set<SkillLanguage> skillLanguage = new HashSet<SkillLanguage>();
+   /*@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY,cascade={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REMOVE})
+   private Set<SkillLanguage> skillLanguage = new HashSet<SkillLanguage>();*/
    
    
    
@@ -1651,13 +1652,13 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public List<Address> getAddresses() {
+	/*public List<Address> getAddresses() {
 		return addresses;
 	}
 
 	public void setAddresses(List<Address> addresses) {
 		this.addresses = addresses;
-	}
+	}*/
 
 	public Official getOfficial() {
 		return official;
@@ -1682,7 +1683,7 @@ public class Employee extends BaseEntity{
 
 
 
-	public Set<Education> getEducations() {
+	/*public Set<Education> getEducations() {
 		return educations;
 	}
 
@@ -1690,7 +1691,7 @@ public class Employee extends BaseEntity{
 
 	public void setEducations(Set<Education> educations) {
 		this.educations = educations;
-	}
+	}*/
 
 
 
@@ -1727,16 +1728,15 @@ public class Employee extends BaseEntity{
 	}
 
 
+	/*public Set<Reference> getReferences() {
+		return references;
+	}
 
-//	public Set<Reference> getReferences() {
-//		return references;
-//	}
-//
-//
-//
-//	public void setReferences(Set<Reference> references) {
-//		this.references = references;
-//	}
+
+
+	public void setReferences(Set<Reference> references) {
+		this.references = references;
+	}*/
 
 
 
@@ -1764,7 +1764,7 @@ public class Employee extends BaseEntity{
 
 
 
-	public Set<Experience> getExperiences() {
+	/*public Set<Experience> getExperiences() {
 		return experiences;
 	}
 
@@ -1772,11 +1772,11 @@ public class Employee extends BaseEntity{
 
 	public void setExperiences(Set<Experience> experiences) {
 		this.experiences = experiences;
-	}
+	}*/
 
 
 
-	public Set<Family> getFamilies() {
+	/*public Set<Family> getFamilies() {
 		return families;
 	}
 
@@ -1785,7 +1785,9 @@ public class Employee extends BaseEntity{
 	public void setFamilies(Set<Family> families) {
 		this.families = families;
 	}
-
+	*/
+	
+	
 	public MasEmployment getMasEmployment() {
 		return masEmployment;
 	}
@@ -1897,13 +1899,13 @@ public class Employee extends BaseEntity{
 
 
 	
-	public Set<SkillLanguage> getSkillLanguage() {
+	/*public Set<SkillLanguage> getSkillLanguage() {
 		return skillLanguage;
 	}
 
 	public void setSkillLanguage(Set<SkillLanguage> skillLanguage) {
 		this.skillLanguage = skillLanguage;
-	}
+	}*/
 	
 
 	public Set<Reward> getRewards() {
@@ -1922,13 +1924,13 @@ public class Employee extends BaseEntity{
 		this.cards = cards;
 	}
 
-	public Set<Certification> getCertifications() {
+	/*public Set<Certification> getCertifications() {
 		return certifications;
 	}
 
 	public void setCertifications(Set<Certification> certifications) {
 		this.certifications = certifications;
-	}
+	}*/
 	
 	public Login getLogin() {
 		return login;

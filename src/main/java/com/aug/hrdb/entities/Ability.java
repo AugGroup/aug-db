@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
+import com.aug.hrdb.dto.AbilityDto;
+
 
 
 
@@ -34,21 +36,15 @@ public class Ability extends BaseEntity  {
 	private Integer rank;
 	
 	
-	
-	/*@ManyToOne(fetch=FetchType.EAGER)
-	 @JoinColumn(name="OFFICIAL_ID" , referencedColumnName="id")
-	 private Official official;*/
-	
-
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "EMPLOYEE_ID",nullable = false,referencedColumnName="id")
 	private Employee employee;
 	
-	/*
+	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "SPECIALTY_ID",nullable = false,referencedColumnName="SPEC_ID")
 //	@JsonIgnore
-	private MasSpecialty masspecialty;*/
+	private MasSpecialty masspecialty;
 
 	
 	
@@ -82,7 +78,7 @@ public class Ability extends BaseEntity  {
 	}
 
 	
-	/*	public MasSpecialty getMasspecialty() {
+		public MasSpecialty getMasspecialty() {
 		return masspecialty;
 	}
 
@@ -121,5 +117,5 @@ public class Ability extends BaseEntity  {
 		return ability;
 		
 	}
-	*/
+	
 }
