@@ -107,10 +107,15 @@ public class Address extends BaseEntity{
 	private Integer provinceId;
    
 	
-    @ManyToOne(fetch=FetchType.EAGER)
+    /*@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "EMPLOYEE_ID")
 //	@JsonIgnore
-    private Employee employee;
+    private Employee employee;*/
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+    @JoinColumn(name= "APPLICANT_ID")
+//	@JsonIgnore
+    private Applicant applicant;
 	
 
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -193,17 +198,24 @@ public class Address extends BaseEntity{
 	}
 
 
-	public Employee getEmployee() {
+	/*public Employee getEmployee() {
 		return employee;
 	}
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
+	}*/
 
 	public MasAddressType getAddressType() {
 		return addressType;
+	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
 	}
 
 	public void setAddressType(MasAddressType addressType) {

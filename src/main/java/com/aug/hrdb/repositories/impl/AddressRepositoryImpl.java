@@ -58,9 +58,9 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 		query.setString("DISTRICT", addressDto.getDistrict());
 		query.setString("SUB_DISTRICT", addressDto.getSubDistrict());
 		query.setInteger("ZIPCODE", addressDto.getZipcode());
-		/*query.setInteger("EMPLOYEE_ID", addressDto.getEmployeeId());
+		query.setInteger("APPLICANT_ID", addressDto.getApplicantId());
 		query.setInteger("ADDRESSTYPE_ID", addressDto.getAddressTypeId());
-		query.setInteger("PROVINCE_ID", addressDto.getMasprovinceId());*/
+		query.setInteger("PROVINCE_ID", addressDto.getMasprovinceId());
 		
 		query.executeUpdate();
 		
@@ -69,13 +69,13 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 	@Override
 	public List<Address> findAddressByEmployeeId(Integer id) {
 		Criteria c = getCurrentSession().createCriteria(Address.class,"address");
-		c.setFetchMode("employee", FetchMode.JOIN);
-		c.createCriteria("employee", "employee");
+		c.setFetchMode("applicant", FetchMode.JOIN);
+		c.createCriteria("applicant", "applicant");
 		c.setFetchMode("addressType",FetchMode.JOIN);
 		c.createAlias("addressType", "addressType");
 		c.setFetchMode("province",FetchMode.JOIN);
 		c.createAlias("province","province");
-		c.add(Restrictions.eq("address.employee.id", id));
+		c.add(Restrictions.eq("address.applicant.id", id));
 		return c.list();
 	}
 	
@@ -89,9 +89,9 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 		query.setString("DISTRICT", addressDto.getDistrict());
 		query.setString("SUB_DISTRICT", addressDto.getSubDistrict());
 		query.setInteger("ZIPCODE", addressDto.getZipcode());
-		/*query.setInteger("EMPLOYEE_ID", addressResp.getEmployeeId());
-		query.setInteger("ADDRESSTYPE_ID", addressResp.getAddressTypeId());
-		query.setInteger("PROVINCE_ID", addressResp.getMasprovinceId());*/
+		query.setInteger("APPLICANT_ID", addressDto.getApplicantId());
+		query.setInteger("ADDRESSTYPE_ID", addressDto.getAddressTypeId());
+		query.setInteger("PROVINCE_ID", addressDto.getMasprovinceId());
 		
 		
 		query.executeUpdate();

@@ -19,11 +19,11 @@ import org.springframework.stereotype.Component;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAddress",
-			query="select address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE,address.EMPLOYEE_ID "
-					+ "from EMP_ADDRESS as address join EMP_EMPLOYEE as employee on address.EMPLOYEE_ID = employee.ID "
+			query="select address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE,address.APPLICANT_ID "
+					+ "from EMP_ADDRESS as address join APPLICANT as applicant on address.APPLICANT_ID = applicant.ID "
 					+ "join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
 					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID "
-					+ "where address.EMPLOYEE_ID=:empId",
+					+ "where address.APPLICANT_ID=:appId",
 			resultClass = AddressDto.class)
 
 })
@@ -39,7 +39,6 @@ public class AddressDto {
 	
 	@Column(name="ADDRESSTYPE_ID")
 	private Integer addressTypeId;
-	
 	
 	@Column(name = "ADDRESSTYPENAME")
 	private String masaddresstypeName;
@@ -65,8 +64,11 @@ public class AddressDto {
 	@Column(name="ZIPCODE")
 	private Integer zipcode;
 	
-	@Column(name ="EMPLOYEE_ID")
-	private Integer employeeId;	
+	@Column(name ="APPLICANT_ID")
+	private Integer applicantId;
+	
+	/*@Column(name ="EMPLOYEE_ID")
+	private Integer employeeId;	*/
 	
 	
 	@Transient
@@ -113,18 +115,28 @@ public class AddressDto {
 		this.masprovinceId = masprovinceId;
 	}
 
-	public Integer getEmployeeId() {
+	/*public Integer getEmployeeId() {
 		return employeeId;
 	}
 
 
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
-	}
-
+	}*/
+	
 
 	public String getMasprovinceName() {
 		return masprovinceName;
+	}
+
+
+	public Integer getApplicantId() {
+		return applicantId;
+	}
+
+
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 
 

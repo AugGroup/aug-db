@@ -113,8 +113,8 @@ public class Official extends BaseEntity{
 		//@Temporal(TemporalType.TIMESTAMP)
 		private Date probationDate;
 	    
-		 /*@OneToOne(fetch=FetchType.LAZY,mappedBy="official")
-		 private Employee empOfficial;*/
+		 @OneToOne(fetch=FetchType.LAZY,mappedBy="official")
+		 private Employee empOfficial;
 
 
 //	------------------------------------------- getter setter ---------------------------------------------//
@@ -167,14 +167,14 @@ public class Official extends BaseEntity{
 			this.salaryExpected = salaryExpected;
 		}
 
-		/*public Employee getEmpOfficial() {
+		public Employee getEmpOfficial() {
 			return empOfficial;
 		}
 
 		public void setEmpOfficial(Employee empOfficial) {
 			this.empOfficial = empOfficial;
 		}
-*/
+
 		public Date getProbationDate() {
 			return probationDate;
 		}

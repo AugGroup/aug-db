@@ -256,8 +256,8 @@ public class Applicant {
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private Set<Language> languages;
 //
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Address> address;
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Address> address;
 //
 //	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 //	private List<Education> educations;
@@ -714,15 +714,23 @@ public class Applicant {
 //		this.augEmployees = augEmployees;
 //	}
 //
-	
 
-//	public List<Address> getAddress() {
-//		return address;
+//	public List<Languages> getLanguages() {
+//		return languages;
 //	}
 //
-//	public void setAddress(List<Address> address) {
-//		this.address = address;
+//	public void setLanguages(List<Languages> languages) {
+//		this.languages = languages;
 //	}
+//
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
 //
 //	public List<Education> getEducations() {
 //		return educations;

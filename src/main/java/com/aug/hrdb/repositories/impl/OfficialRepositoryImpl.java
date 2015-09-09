@@ -51,7 +51,7 @@ public class OfficialRepositoryImpl extends GenericRepositoryImpl<Official, Inte
 		query.setString("POSITION_APPLIED_FOR", officialDto.getPositionAppliedFor());
 		query.setString("SALARY_EXPECTED", officialDto.getSalaryExpected());
 		query.setDate("PROBATION_DATE", officialDto.getProbationDate());
-		//query.setInteger("EMPLOYEE_ID", officialDto.getEmployeeId());
+		query.setInteger("EMPLOYEE_ID", officialDto.getEmployeeId());
 		
 		query.executeUpdate();
 		
