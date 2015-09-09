@@ -5,10 +5,13 @@
  */
 package com.aug.hrdb.entities;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,8 +32,8 @@ public class MasDivision extends BaseEntity{
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
 	
-//	@OneToMany(mappedBy = "masDivision")
-//	private Set<Employee> employees;
+	@OneToMany(mappedBy = "masDivision")
+	private Set<Employee> employees;
 	
 	/*---------------------- getter / setter ----------------------*/
 
@@ -64,6 +67,14 @@ public class MasDivision extends BaseEntity{
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public Set<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(Set<Employee> employees) {
+		this.employees = employees;
 	}
 	
 }

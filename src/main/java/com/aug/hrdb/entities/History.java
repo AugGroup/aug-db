@@ -50,9 +50,9 @@ public class History extends BaseEntity{
 	@Column(name = "ADJUSTMENT_TIME")
 	private Integer adjustmentTime;
 	
-//	@ManyToOne(fetch=FetchType.EAGER)
-//	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName="id", nullable=false)
-//	private Employee employee;
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName="id", nullable=false)
+	private Employee employee;
 
 	public Integer getId() {
 		return id;
@@ -110,9 +110,17 @@ public class History extends BaseEntity{
 		this.adjustmentTime = adjustmentTime;
 	}
 
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
 	
 	/*---------------------- DTO ----------------------*/
 	
+
 	public HistoryDto toHistoryDto() {
 		
 		HistoryDto historyDto = new HistoryDto();
@@ -124,7 +132,7 @@ public class History extends BaseEntity{
 		historyDto.setDateOfAdjustment(this.dateOfAdjustment);
 		historyDto.setReasonOfAdjustment(this.reasonOfAdjustment);
 		historyDto.setAdjustmentTime(this.adjustmentTime);
-//		historyDto.setEmployeeId(this.employee.getId());
+		historyDto.setEmployeeId(this.employee.getId());
 		
 		return historyDto;
 		
@@ -142,27 +150,13 @@ public class History extends BaseEntity{
 		history.setReasonOfAdjustment(historyDto.getReasonOfAdjustment());
 		history.setAdjustmentTime(historyDto.getAdjustmentTime());
 		
-//		Employee employee = new Employee();
-//		employee.setId(historyDto.getEmployeeId());
-//		history.setEmployee(employee);
+		Employee employee = new Employee();
+		employee.setId(historyDto.getEmployeeId());
+		history.setEmployee(employee);
 		
 		return history;
 		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	

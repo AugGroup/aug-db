@@ -61,7 +61,6 @@ public class Allowances extends BaseEntity{
 		this.masallowances = masallowances;
 	}
 	
-
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -69,7 +68,6 @@ public class Allowances extends BaseEntity{
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-	
 
 	public Allowances fromAllowancesDto(Allowances allowances, AllowancesDto allowancesDto) {
 		

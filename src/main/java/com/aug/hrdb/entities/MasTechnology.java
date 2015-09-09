@@ -1,9 +1,14 @@
 package com.aug.hrdb.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,8 +29,8 @@ public class MasTechnology extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable = false)
 	private Boolean isActive;
 
-//	@OneToMany(mappedBy="technology",fetch=FetchType.LAZY)
-//	private Set<Employee> Employee = new HashSet<Employee>();
+	@OneToMany(mappedBy="technology",fetch=FetchType.LAZY)
+	private Set<Employee> Employee = new HashSet<Employee>();
 	
 	
 	public Integer getId() {
@@ -52,6 +57,12 @@ public class MasTechnology extends BaseEntity {
 	}
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+	public Set<Employee> getEmployee() {
+		return Employee;
+	}
+	public void setEmployee(Set<Employee> employee) {
+		Employee = employee;
 	}
 	
 }
