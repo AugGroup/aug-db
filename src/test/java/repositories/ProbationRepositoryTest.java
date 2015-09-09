@@ -32,14 +32,13 @@ public class ProbationRepositoryTest {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Probation probation = new Probation();
 		
-		probation.setId(1);
 		probation.setDateFrom(dateFmt.parse("04/01/2015"));
 		probation.setDateTo(dateFmt.parse("04/01/2015"));
 		probation.setName("Jutamas");
 		probation.setReason("Good");
 		probation.setStatus("Pass");
 
-		probationRepository.getCurrentSession().save(probation);
+		probationRepository.create(probation);
 	}
 	
 	@Test
@@ -64,6 +63,7 @@ public class ProbationRepositoryTest {
 	
 	
 	@Test
+	@Rollback(false)
 	public void findAll(){	
 		List<Probation> probations = probationRepository.findAll();
 		Assert.assertEquals(1, probations.size());
