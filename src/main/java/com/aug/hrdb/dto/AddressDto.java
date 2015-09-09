@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
@@ -36,12 +37,12 @@ public class AddressDto {
 	@Column(name="ID")
 	private Integer id;
 	
-	/*@Column(name="ADDRESSTYPE_ID")
+	@Column(name="ADDRESSTYPE_ID")
 	private Integer addressTypeId;
 	
 	
 	@Column(name = "ADDRESSTYPENAME")
-	private String masaddresstypeName;*/
+	private String masaddresstypeName;
 	
 	@Column(name="HOUSE_NO")
 	private String houseNo;
@@ -55,21 +56,22 @@ public class AddressDto {
 	@Column(name="SUB_DISTRICT")
 	private String subDistrict;;
 	
-	/*@Column(name = "PROVINCE_ID")
+	@Column(name = "PROVINCE_ID")
 	private Integer masprovinceId;
 	
 	@Column(name = "PROVINCENAME")
-	private String masprovinceName;*/
+	private String masprovinceName;
 	
 	@Column(name="ZIPCODE")
 	private Integer zipcode;
 	
-	/*@Column(name ="EMPLOYEE_ID")
+	@Column(name ="EMPLOYEE_ID")
 	private Integer employeeId;	
+	
 	
 	@Transient
 	private String status;
-*/
+    
 
 	public Integer getId() {
 		return id;
@@ -81,7 +83,7 @@ public class AddressDto {
 	}
 
 
-	/*public Integer getAddressTypeId() {
+	public Integer getAddressTypeId() {
 		return addressTypeId;
 	}
 
@@ -93,9 +95,9 @@ public class AddressDto {
 
 	public String getMasaddresstypeName() {
 		return masaddresstypeName;
-	}*/
+	}
 
-/*
+
 	public void setMasaddresstypeName(String masaddresstypeName) {
 		this.masaddresstypeName = masaddresstypeName;
 	}
@@ -109,9 +111,9 @@ public class AddressDto {
 
 	public void setMasprovinceId(Integer masprovinceId) {
 		this.masprovinceId = masprovinceId;
-	}*/
+	}
 
-	/*public Integer getEmployeeId() {
+	public Integer getEmployeeId() {
 		return employeeId;
 	}
 
@@ -119,16 +121,16 @@ public class AddressDto {
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
-*/
 
-	/*public String getMasprovinceName() {
+
+	public String getMasprovinceName() {
 		return masprovinceName;
 	}
 
 
 	public void setMasprovinceName(String masprovinceName) {
 		this.masprovinceName = masprovinceName;
-	}*/
+	}
 
 
 	public Integer getZipcode() {
@@ -141,14 +143,14 @@ public class AddressDto {
 	}
 
 
-	/*public String getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 
 	public void setStatus(String status) {
 		this.status = status;
-	}*/
+	}
 
 
 	public String getHouseNo() {

@@ -8,47 +8,47 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.services.masTechnologyService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @Service("masTechnologyService")
 @Transactional
-public class MasTechnologyServiceImpl implements masTechnologyService{
+public class MasTechnologyServiceImpl implements MasTechnologyService{
 
 	@Autowired
-	private MasTechnologyRepository masTechDao;
+	private MasTechnologyRepository masTechnologyRepository;
 	
 	
 	
 	@Override
 	public void create(MasTechnology masTechnology) {
 		// TODO Auto-generated method stub
-		masTechDao.create(masTechnology);
+		masTechnologyRepository.create(masTechnology);
 		
 	}
 
 	@Override
 	public void update(MasTechnology masTechnology) {
 		// TODO Auto-generated method stub
-		masTechDao.update(masTechnology);
+		masTechnologyRepository.update(masTechnology);
 	}
 
 	@Override
 	public MasTechnology find(Integer id) {
 		// TODO Auto-generated method stub
-		MasTechnology mastech = masTechDao.find(id);
+		MasTechnology mastech = masTechnologyRepository.find(id);
 		return mastech;
 	}
 	
 	@Override
 	public void delete(MasTechnology masTechnology) {
 		// TODO Auto-generated method stub
-		masTechDao.delete(masTechnology);
+		masTechnologyRepository.delete(masTechnology);
 	}
 
 	@Override
 	public List<MasTechnology> findAll() {
 		// TODO Auto-generated method stub
-		List<MasTechnology> mastech = masTechDao.findAll();
+		List<MasTechnology> mastech = masTechnologyRepository.findAll();
 		return mastech;
 	}
 

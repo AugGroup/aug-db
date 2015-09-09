@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.aug.hrdb.entities.MasTechnology;
 
-public interface masTechnologyService {
+public interface MasTechnologyService {
 	
 	public void create(MasTechnology masTechnology);
 	public void update(MasTechnology masTechnology);

@@ -66,10 +66,10 @@ public class MasLocationServiceImpl implements MasLocationService{
 		 masLocationRepository.deleteById(id);
 	}
 
-	/*@Override
+	@Override
 	public MasLocation findByLocationCode(String locationCode) {
 		
 		return masLocationRepository.findByLocationCode(locationCode);
-	}*/
+	}
 
 }

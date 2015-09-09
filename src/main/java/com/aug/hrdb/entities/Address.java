@@ -8,9 +8,13 @@ package com.aug.hrdb.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NamedNativeQueries;
@@ -97,31 +101,29 @@ public class Address extends BaseEntity{
 	@Column(name="ZIPCODE")
 	private Integer zipcode;
 	
-	/*@Transient
+	@Transient
     private Integer addressTypeId;
 	@Transient
 	private Integer provinceId;
-   */
+   
 	
-/*	@ManyToOne(fetch=FetchType.EAGER)
+    @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "EMPLOYEE_ID")
-
 //	@JsonIgnore
-    private Employee employee;*/
+    private Employee employee;
 	
-/*	
+
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "ADDRESSTYPE_ID")
-
 //	@JsonIgnore
     private MasAddressType addressType;
-	
+
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "PROVINCE_ID")
 
 //	@JsonIgnore
     private MasProvince province;
-	*/
+	
 	
 
 	public Integer getId() {
@@ -174,7 +176,7 @@ public class Address extends BaseEntity{
 		this.subDistrict = subDistrict;
 	}
 
-	/*public Integer getAddressTypeId() {
+	public Integer getAddressTypeId() {
 		return addressTypeId;
 	}
 
@@ -188,26 +190,28 @@ public class Address extends BaseEntity{
 
 	public void setProvinceId(Integer provinceId) {
 		this.provinceId = provinceId;
-	}*/
+	}
 
 
-	/*public Employee getEmployee() {
+	public Employee getEmployee() {
 		return employee;
 	}
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}*/
+	}
 
 
-	/*public MasAddressType getAddressType() {
+	public MasAddressType getAddressType() {
 		return addressType;
 	}
 
 	public void setAddressType(MasAddressType addressType) {
 		this.addressType = addressType;
 	}
-
+	 
+	
+	
 	public MasProvince getProvince() {
 		return province;
 	}
@@ -215,7 +219,7 @@ public class Address extends BaseEntity{
 	public void setProvince(MasProvince province) {
 		this.province = province;
 	}
-*/
+
 	
 	
 }

@@ -11,14 +11,14 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.services.masTechnologyService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
 public class MasTechnologyServiceTest {
 	
 	@Autowired
-	private masTechnologyService masTechService;
+	private MasTechnologyService masTechService;
 	
 	@Test
 	public void createDataMasTechnology(){
