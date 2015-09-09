@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -269,6 +270,9 @@ public class Applicant {
 	
 	@Transient
 	private String reportType;
+	
+	@OneToOne(mappedBy="applicant")
+	private Employee employee;
 
 	public String getReportType() {
 		return reportType;
@@ -894,6 +898,17 @@ public class Applicant {
 	public void setMilitaryStatus(String militaryStatus) {
 		this.militaryStatus = militaryStatus;
 	}
+	
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
+	
 	
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());

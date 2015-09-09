@@ -38,7 +38,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-@NamedNativeQueries({
+/*@NamedNativeQueries({
 	@NamedNativeQuery(
             name = "insertEmployee",
             query = "insert into EMPLOYEE("
@@ -728,7 +728,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	
             
             
-  })
+  })*/
 
 
 
@@ -1085,6 +1085,13 @@ public class Employee extends BaseEntity{
 	@OneToOne(mappedBy="employee", cascade=CascadeType.REMOVE)
 	private Health health; 
    
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="APPLICANT_ID",nullable=false)
+	private Applicant applicant;
+	
+	
+	
  //-------------------------------------- getter setter --------------------------------------------------//
 
 	public Integer getId() {
@@ -1981,6 +1988,18 @@ public class Employee extends BaseEntity{
 		this.allowances = allowances;
 	}
 
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
+
+	
+	
+	
+	
 	
 	/*@Override
 	public String toString() {
