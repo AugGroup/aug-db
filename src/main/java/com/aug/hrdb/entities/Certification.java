@@ -4,9 +4,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-//import com.aug.db.entities.Applicant;
 @Entity
 @Table(name = "CERTIFICATION")
 public class Certification extends BaseEntity {
@@ -27,15 +28,9 @@ public class Certification extends BaseEntity {
 	@Column(name = "YEAR")
 	private String year;
 
-	/*@ManyToOne
+	@ManyToOne
 	@JoinColumn(name = "APPLICANT_ID")
 	private Applicant applicant;
-	*/
-	
-	/*@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_ID")
-	private Applicant employee;
-	*/
 	
 	public Integer getId() {
 		return id;
@@ -75,6 +70,14 @@ public class Certification extends BaseEntity {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
 	}
 	
 
