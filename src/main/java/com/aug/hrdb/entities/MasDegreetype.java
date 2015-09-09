@@ -34,9 +34,9 @@ public class MasDegreetype extends BaseEntity{
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isactive;
 	
-	/*@OneToMany(mappedBy = "masdegreetype")
+	@OneToMany(mappedBy = "masdegreetype")
 	private Set<Education> educations = new HashSet<Education>();
-*/
+
 	
 	public Integer getId() {
 		return id;
@@ -71,12 +71,12 @@ public class MasDegreetype extends BaseEntity{
 		this.isactive = isactive;
 	}
 
-	/*public Set<Education> getEducations() {
+	public Set<Education> getEducations() {
 		return educations;
 	}
 
 	public void setEducations(Set<Education> educations) {
 		this.educations = educations;
-	}*/
+	}
 
 }

@@ -6,7 +6,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+
 
 @Entity
 @Table(name = "EDUCATION")
@@ -48,6 +52,11 @@ public class Education extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
 	private Applicant applicant;*/
+	
+	
+	@ManyToOne()
+	@JoinColumn(name = "DEGREETYPE_ID", nullable = false)
+	private MasDegreetype masdegreetype;
 	
 	public Integer getId() {
 		return id;
@@ -119,6 +128,14 @@ public class Education extends BaseEntity{
 
 	public void setCertification(String certification) {
 		this.certification = certification;
+	}
+
+	public MasDegreetype getMasdegreetype() {
+		return masdegreetype;
+	}
+
+	public void setMasdegreetype(MasDegreetype masdegreetype) {
+		this.masdegreetype = masdegreetype;
 	}
 	
 }

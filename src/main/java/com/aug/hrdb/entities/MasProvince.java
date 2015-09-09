@@ -34,9 +34,9 @@ public class MasProvince extends BaseEntity {
 	
 	
 
-	/*@OneToMany(mappedBy = "province")
+	@OneToMany(mappedBy = "province")
 	private Set<Address> addresss;
-	 */
+	 
 	public Integer getId() {
 		return id;
 	}
@@ -69,7 +69,7 @@ public class MasProvince extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	/*public Set<Address> getAddresss() {
+	public Set<Address> getAddresss() {
 		return addresss;
 	}
 
@@ -77,5 +77,5 @@ public class MasProvince extends BaseEntity {
 		this.addresss = addresss;
 
 	}
-	 */
+	 
 }
