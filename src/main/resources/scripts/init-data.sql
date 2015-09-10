@@ -296,7 +296,7 @@ INSERT INTO MAS_ALLOWANCES (ALLOWANCES_TYPE,AMOUNT_ALLOWANCES,CODE,ISACTIVE,audi
 ('ยกเว้นเงินได้ที่ได้จ่ายเป็นค่าซ่อมแซมรถยนต์ที่ได้รับผลกระทบจากอุทกภัยที่เกิดขึ้นในระหว่างวันที่ 25 ก.ค. 2554 – 31 ธ.ค. 2554',30000,'A29',1,'C',NOW(),0);
 
 
---
+-------
 
  INSERT INTO EXPERIENCE (ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ADDRESS,TYPE_OF_BUSINESS,DATE_FROM, DATE_TO, POSITION, REASON, REFERENCE, RESPONSIBILITY, SALARY)
  VALUES('1','C',0,NOW(),'22/3 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
