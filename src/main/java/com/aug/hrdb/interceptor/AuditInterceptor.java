@@ -30,6 +30,11 @@ public class AuditInterceptor extends EmptyInterceptor{
 	    {
 	        for (int i=0; i<propertyNames.length; i++)
 	        {
+	        	if ("auditFlag".equals(propertyNames[i]))
+	            {
+	                currentState[i] = 'U';
+	                theReturn = true;
+	            }
 	            if ("updatedTimeStamp".equals(propertyNames[i]))
 	            {
 	                currentState[i] = Calendar.getInstance().getTime();
@@ -54,6 +59,11 @@ public class AuditInterceptor extends EmptyInterceptor{
 	    {
 	        for (int i=0; i<propertyNames.length; i++)
 	        {
+	        	if ("auditFlag".equals(propertyNames[i]))
+	            {
+	                state[i] = 'C';
+	                theReturn = true;
+	            }
 				if ("createdTimeStamp".equals(propertyNames[i]))
 	            {
 	                state[i] = Calendar.getInstance().getTime();
