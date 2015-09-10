@@ -295,12 +295,21 @@ INSERT INTO MAS_ALLOWANCES (ALLOWANCES_TYPE,AMOUNT_ALLOWANCES,CODE,ISACTIVE,audi
 ('ยกเว้นเงินได้ที่ได้จ่ายเป็นค่าซ่อมแซมบ้านที่ได้รับผลกระทบจากอุทกภัยที่เกิดขึ้นในระหว่างวันที่ 25 ก.ค. 2554  – 31 ธ.ค. 2554',100000,'A28',1,'C',NOW(),0),
 ('ยกเว้นเงินได้ที่ได้จ่ายเป็นค่าซ่อมแซมรถยนต์ที่ได้รับผลกระทบจากอุทกภัยที่เกิดขึ้นในระหว่างวันที่ 25 ก.ค. 2554 – 31 ธ.ค. 2554',30000,'A29',1,'C',NOW(),0);
 
-
-
-
  INSERT INTO EXPERIENCE (ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ADDRESS,TYPE_OF_BUSINESS,DATE_FROM, DATE_TO, POSITION, REASON, REFERENCE, RESPONSIBILITY, SALARY)
  VALUES('1','C',0,NOW(),'22/3 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
  ('2','C',0,NOW(),'22/4 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
  ('3','C',0,NOW(),'22/5 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000');
  ('4','C',0,NOW(),'22/6 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
+
+INSERT INTO MAS_SKILLLANGUAGE (ID,AUDITFLAG,CODE,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE,SKILL_LANGUAGE) 
+VALUES 
+(1,'C','0293',0,NOW(),true,'thai'),
+(2,'C','0293',0,NOW(),true,'english');
+
+ --EDUCATION
+INSERT INTO EDUCATION(APPLICANT_ID, UNIVERSITY, DEGREETYPE_ID, MAJOR, FACULTY, GPA, START_DATE, GRADUATED_DATE, CERTIFICATION)
+VALUES ('1','Thammasat University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('2','Mahidol University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('3','Kasetsart University','1','Marketing','BA','2.5',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('4','Bangkok University','2','Envi','Science','2.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400');
  

@@ -27,7 +27,7 @@ public class AugRequest extends BaseEntity{
 	private Integer id;
 
 	@Column(name = "REQUEST_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date requestDate;
 
 	@Column(name = "REQUESTER_NAME")
@@ -40,7 +40,7 @@ public class AugRequest extends BaseEntity{
 	private String approvalName;
 
 	@Column(name = "APPROVE_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date approveDate;
 
 //	@ManyToOne
@@ -59,13 +59,13 @@ public class AugRequest extends BaseEntity{
 	@Transient
 	private String positionStr;
 
-	public String getPositionStr() {
+/*	public String getPositionStr() {
 		return positionStr;
 	}
 
 	public void setPositionStr(String positionStr) {
 		this.positionStr = positionStr;
-	}
+	}*/
 
 	public Integer getId() {
 		return id;
