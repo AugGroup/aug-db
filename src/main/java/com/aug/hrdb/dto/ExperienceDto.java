@@ -10,23 +10,21 @@ import com.aug.hrdb.entities.Employee;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
-				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
+		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
+				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
 				+ "FROM EXPERIENCE exp LEFT JOIN APPLICANT a on exp.APPLICANT_ID = a.APPLICANT_ID WHERE exp.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
 
-		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
-				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
-				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class),
+		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
+				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
+				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class)
 
-		@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
+		/*@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
 				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
 				+ "emp.employee_code FROM EXPERIENCE as exp, EMPLOYEE as emp "
-				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) })
+				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) */})
 public class ExperienceDto {
 
 	private Applicant applicant;
-
-	private Employee employee;
 
 	private Integer id;
 
@@ -56,14 +54,6 @@ public class ExperienceDto {
 
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
-	}
-
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
 	}
 
 	public Integer getId() {
