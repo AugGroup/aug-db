@@ -129,20 +129,13 @@ public class Applicant extends BaseEntity{
 	@Column(name = "OTHER_DESCRIPTION")
 	private String otherDescription;
 	
-//	@ManyToOne
-//	@Index(name = "position1Index")
-//	@JoinColumn(name = "POSITION1_ID", referencedColumnName = "id")
-//	private Position position1;
-//
-//	@ManyToOne
-//	@Index(name = "position2Index")
-//	@JoinColumn(name = "POSITION2_ID", referencedColumnName = "id")
-//	private Position position2;
-//
-//	@ManyToOne
-//	@Index(name = "position3Index")
-//	@JoinColumn(name = "POSITION3_ID", referencedColumnName = "id")
-//	private Position position3;
+	@ManyToOne
+	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id")
+	private MasTechnology masTechnology;
+
+	@ManyToOne
+	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id")
+	private MasJoblevel masJoblevel;
 
 	@Column(name = "TRACKING_STATUS")
 	private String trackingStatus;
@@ -245,41 +238,33 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Reference> references;
 
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Family> families;
-//
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<AugEmployee> augEmployees;
-//
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Family> families;
+
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private Set<Language> languages;
-//
+
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Address> address;
-//
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
-//	private List<Education> educations;
-//
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Skill> skills;
-//
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Experience> experiences;
-//	
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<Certificate> certificates;
-//	
+
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	private List<Education> educations;
+
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<MasCoreSkill> masCoreSkills;
+
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Experience> experiences;
+	
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+	private List<Certification> certifications;
+	
 	@Transient
 	private String reportType;
 	
 	@OneToOne(mappedBy="applicant")
 	private Employee employee;
 	
-	
-	@OneToMany(mappedBy = "applicant", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
-    private Set<Family> families = new HashSet<Family>();
-	
-
 	public String getReportType() {
 		return reportType;
 	}
@@ -696,31 +681,6 @@ public class Applicant extends BaseEntity{
 		this.references = references;
 	}
 
-//	public List<Family> getFamilies() {
-//		return families;
-//	}
-//
-//	public void setFamilies(List<Family> families) {
-//		this.families = families;
-//	}
-//
-//	public List<AugEmployee> getAugEmployees() {
-//		return augEmployees;
-//	}
-//
-//	public void setAugEmployees(List<AugEmployee> augEmployees) {
-//		this.augEmployees = augEmployees;
-//	}
-//
-
-//	public List<Languages> getLanguages() {
-//		return languages;
-//	}
-//
-//	public void setLanguages(List<Languages> languages) {
-//		this.languages = languages;
-//	}
-//
 	public List<Address> getAddress() {
 		return address;
 	}
@@ -728,31 +688,6 @@ public class Applicant extends BaseEntity{
 	public void setAddress(List<Address> address) {
 		this.address = address;
 	}
-
-//
-//	public List<Education> getEducations() {
-//		return educations;
-//	}
-//
-//	public void setEducations(List<Education> educations) {
-//		this.educations = educations;
-//	}
-//
-//	public List<Skill> getSkills() {
-//		return skills;
-//	}
-//
-//	public void setSkills(List<Skill> skills) {
-//		this.skills = skills;
-//	}
-//
-//	public List<Experience> getExperiences() {
-//		return experiences;
-//	}
-//
-//	public void setExperiences(List<Experience> experiences) {
-//		this.experiences = experiences;
-//	}
 
 	public String getTechScore() {
 		return techScore;
@@ -890,15 +825,6 @@ public class Applicant extends BaseEntity{
 		this.image = image;
 	}
 
-
-//	public List<Certificate> getCertificates() {
-//		return certificates;
-//	}
-//
-//	public void setCertificates(List<Certificate> certificates) {
-//		this.certificates = certificates;
-//	}
-
 	public String getMilitaryStatus() {
 		return militaryStatus;
 	}
@@ -925,15 +851,71 @@ public class Applicant extends BaseEntity{
 	}
 	
 	
-	public Set<Family> getFamilies() {
+//	public Set<Family> getFamilies() {
+//		return families;
+//	}
+//
+//	public void setFamilies(Set<Family> families) {
+//		this.families = families;
+//	}
+//	
+	
+
+	public List<Certification> getCertifications() {
+		return certifications;
+	}
+
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
+	}
+
+	public List<Family> getFamilies() {
 		return families;
 	}
 
-	public void setFamilies(Set<Family> families) {
+	public void setFamilies(List<Family> families) {
 		this.families = families;
 	}
-	
-	
+
+	public List<Education> getEducations() {
+		return educations;
+	}
+
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+
+	public List<MasCoreSkill> getMasCoreSkills() {
+		return masCoreSkills;
+	}
+
+	public void setMasCoreSkills(List<MasCoreSkill> masCoreSkills) {
+		this.masCoreSkills = masCoreSkills;
+	}
+
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
+
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
+	}
+
+	public MasTechnology getMasTechnology() {
+		return masTechnology;
+	}
+
+	public void setMasTechnology(MasTechnology masTechnology) {
+		this.masTechnology = masTechnology;
+	}
+
+	public MasJoblevel getMasJoblevel() {
+		return masJoblevel;
+	}
+
+	public void setMasJoblevel(MasJoblevel masJoblevel) {
+		this.masJoblevel = masJoblevel;
+	}
 
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());
