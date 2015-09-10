@@ -64,11 +64,11 @@ public class ReportStatusEmployeeDto {
 //		@Column(name="projectOwner")
 		private String projectOwner;	
 //		@Column(name="startWorkDate")
-		public Date startWorkDate;	
+		private Date startWorkDate;	
 //		@Column(name="startDate")
 		private Date startDate;	
 //		@Column(name="endDate")
-		public Date endDate;		
+		private Date endDate;		
 //		@Column(name = "year")
 		private Integer year;
 //		@Column(name = "month")
