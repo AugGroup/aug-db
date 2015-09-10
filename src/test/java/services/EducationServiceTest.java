@@ -57,7 +57,7 @@ public class EducationServiceTest {
 	@Transactional
 	public void testFindByIdEducationService() throws Exception {
 		Education education = educationService.findById(4);
-		assertNotNull(education.getDegree());
+		assertNotNull(education.getMajor());
 		
 	}
 
@@ -67,7 +67,6 @@ public class EducationServiceTest {
 		List<Education> educations = educationService.findAll();
 		for (Education education : educations){
 			System.out.println("Education : " + education.getCertification());
-			System.out.println("Education : " + education.getDegree());
 			System.out.println("Education : " + education.getFaculty());
 			System.out.println("Education : " + education.getGpa());
 			System.out.println("Education : " + education.getMajor());

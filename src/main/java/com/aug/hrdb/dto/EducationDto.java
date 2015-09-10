@@ -35,7 +35,7 @@ public class EducationDto {
 	private String university;
 	
 	@Column(name = "DEGREETYPE_ID")
-	private String degree;
+	private String masdegreetype;
 
 	@Column(name = "FACULTY")
 	private String faculty;
@@ -76,11 +76,11 @@ public class EducationDto {
 	}
 
 	public String getDegree() {
-		return degree;
+		return masdegreetype;
 	}
 
-	public void setDegree(String degree) {
-		this.degree = degree;
+	public void setDegree(String masdegreetype) {
+		this.masdegreetype = masdegreetype;
 	}
 
 	public String getFaculty() {

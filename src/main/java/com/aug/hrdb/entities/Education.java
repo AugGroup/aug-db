@@ -22,10 +22,6 @@ public class Education extends BaseEntity{
 
 	@Column(name = "UNIVERSITY")
 	private String university;
-	
-	@ManyToOne
-	@Column(name = "DEGREETYPE_ID")
-	private String degree;
 
 	@Column(name = "FACULTY")
 	private String faculty;
@@ -68,14 +64,6 @@ public class Education extends BaseEntity{
 
 	public void setUniversity(String university) {
 		this.university = university;
-	}
-
-	public String getDegree() {
-		return degree;
-	}
-
-	public void setDegree(String degree) {
-		this.degree = degree;
 	}
 
 	public String getFaculty() {
