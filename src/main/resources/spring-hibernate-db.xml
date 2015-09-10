@@ -47,7 +47,6 @@
          <!--  p:packagesToScan="com.aug.db.entities"/> -->
 
 
-
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="jpaVendorAdapter">
@@ -61,6 +60,12 @@
             </map>
         </property>
         <property name="packagesToScan" value="com.aug.hrdb"/>
+        
+     <!-- Interceptor -->
+     <property name="entityInterceptor">
+            <bean class="com.aug.hrdb.interceptor.AuditInterceptor"></bean>
+     </property>
+        
     </bean>
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
