@@ -30,7 +30,7 @@ public class MasJoblevel extends BaseEntity {
 	private Boolean isActive;
 
 	@OneToMany(mappedBy="masJoblevel",fetch=FetchType.LAZY)
-	private Set<Employee> employees = new HashSet<Employee>();
+	private Set<Applicant> applicants = new HashSet<Applicant>();
 
 	public Integer getId() {
 		return id;
@@ -64,12 +64,12 @@ public class MasJoblevel extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	public Set<Employee> getEmployees() {
-		return employees;
+	public Set<Applicant> getApplicants() {
+		return applicants;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
-		this.employees = employees;
+	public void setApplicants(Set<Applicant> applicants) {
+		this.applicants = applicants;
 	}
-	
+
 }

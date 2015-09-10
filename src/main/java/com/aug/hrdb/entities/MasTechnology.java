@@ -30,7 +30,7 @@ public class MasTechnology extends BaseEntity {
 	private Boolean isActive;
 
 	@OneToMany(mappedBy="technology",fetch=FetchType.LAZY)
-	private Set<Employee> Employee = new HashSet<Employee>();
+	private Set<Applicant> applicants = new HashSet<Applicant>();
 	
 	
 	public Integer getId() {
@@ -58,11 +58,11 @@ public class MasTechnology extends BaseEntity {
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-	public Set<Employee> getEmployee() {
-		return Employee;
+	public Set<Applicant> getApplicants() {
+		return applicants;
 	}
-	public void setEmployee(Set<Employee> employee) {
-		Employee = employee;
+	public void setApplicants(Set<Applicant> applicants) {
+		this.applicants = applicants;
 	}
 	
 }
