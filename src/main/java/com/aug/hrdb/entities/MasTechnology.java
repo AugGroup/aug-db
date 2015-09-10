@@ -29,7 +29,7 @@ public class MasTechnology extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable = false)
 	private Boolean isActive;
 
-	@OneToMany(mappedBy="technology",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="masTechnology",fetch=FetchType.LAZY)
 	private Set<Applicant> applicants = new HashSet<Applicant>();
 	
 	
