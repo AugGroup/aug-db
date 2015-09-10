@@ -33,7 +33,7 @@ public class EducationRepositoryTest {
 
 		education.setId(7);
 		education.setCertification("TOEIC 430");
-		education.setDegree("Master");
+//		education.setDegree("Master");
 		education.setFaculty("Technology and Science");
 		education.setGpa(3.0);
 		education.setGraduated_date(dateFmt.parse("07/09/2015"));

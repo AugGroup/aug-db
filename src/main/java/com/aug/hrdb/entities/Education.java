@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
-
 @Entity
 @Table(name = "EDUCATION")
 public class Education extends BaseEntity{
@@ -25,9 +23,10 @@ public class Education extends BaseEntity{
 	@Column(name = "UNIVERSITY")
 	private String university;
 	
-/*	@Column(name = "DEGREETYPE_ID")
+	@ManyToOne
+	@Column(name = "DEGREETYPE_ID")
 	private String degree;
-*/
+
 	@Column(name = "FACULTY")
 	private String faculty;
 
@@ -46,13 +45,9 @@ public class Education extends BaseEntity{
 	@Column(name = "CERTIFICATION")
 	private String certification;
 	
-/*	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID")
-	private Applicant applicant;
-	
 	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
-	private Applicant applicant;*/
+	private Applicant applicant;
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -75,14 +70,14 @@ public class Education extends BaseEntity{
 		this.university = university;
 	}
 
-	/*public String getDegree() {
+	public String getDegree() {
 		return degree;
 	}
 
 	public void setDegree(String degree) {
 		this.degree = degree;
 	}
-*/
+
 	public String getFaculty() {
 		return faculty;
 	}

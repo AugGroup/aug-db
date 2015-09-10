@@ -6,10 +6,13 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 import com.aug.hrdb.dto.EducationDto;
+import com.aug.hrdb.entities.Applicant;
 
 @Entity
 @NamedNativeQueries({
@@ -52,13 +55,9 @@ public class EducationDto {
 	@Column(name = "CERTIFICATION")
 	private String certification;
 	
-/*	@ManyToOne
-	@JoinColumn(name="EMPLOYEE_ID")
-	private Applicant applicant;
-	
 	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
-	private Applicant applicant;*/
+	private Applicant applicant;
 	
 	public Integer getId() {
 		return id;
@@ -130,6 +129,14 @@ public class EducationDto {
 
 	public void setCertification(String certification) {
 		this.certification = certification;
+	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
 	}
 	
 }

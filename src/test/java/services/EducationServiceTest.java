@@ -28,7 +28,7 @@ public class EducationServiceTest {
 	public void testInsertEducationService() throws Exception {
 		Education education = new Education();
 		education.setCertification("TOEIC 430");
-		education.setDegree("Master");
+//		education.setDegree("Master");
 		education.setFaculty("Technology and Science");
 		education.setGpa(3.0);
 		educationService.create(education);
