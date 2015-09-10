@@ -52,7 +52,7 @@ public class Applicant extends BaseEntity{
 	@Column(name = "NICKNAME_EN")
 	private String nickNameEN;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "BIRTHDATE")
 	private Date birthDate;
 
@@ -86,7 +86,7 @@ public class Applicant extends BaseEntity{
 	@Column(name = "APPLICANT_STATUS")
 	private String applicantStatus;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "APPLY_DATE")
 	private Date applyDate;
 
@@ -149,7 +149,7 @@ public class Applicant extends BaseEntity{
 	@Column(name = "CARD_ISSUED_OFFICE")
 	private String cardIssuedOffice;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "CARD_EXPIRY_DATE")
 	private Date cardExpiryDate;
 
@@ -219,7 +219,7 @@ public class Applicant extends BaseEntity{
 	@Column(name = "PREVIOUS_EMPLOYERS_REASON")
 	private String previousEmployersReason;
 	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "DATE_TO_BE_DRAFTED")
 	private Date dateToBeDrafted;
 

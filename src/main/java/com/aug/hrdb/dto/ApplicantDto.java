@@ -99,7 +99,7 @@ public class ApplicantDto {
 	@Column(name = "NICKNAME_EN")
 	private String nickNameEN;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "BIRTHDATE")
 	private Date birthDate;
 
@@ -131,7 +131,7 @@ public class ApplicantDto {
 	private String applicantStatus;
 
 	@Column(name = "APPLY_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date applyDate;
 
 	@Transient
@@ -188,7 +188,7 @@ public class ApplicantDto {
 	@Column(name = "CARD_ISSUED_OFFICE")
 	private String cardIssuedOffice;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "CARD_EXPIRY_DATE")
 	private Date cardExpiryDate;
 
@@ -261,7 +261,7 @@ public class ApplicantDto {
 	@Column(name = "PREVIOUS_EMPLOYERS_REASON")
 	private String previousEmployersReason;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy", locale = "en", timezone = "GMT")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "DATE_TO_BE_DRAFTED")
 	private Date dateToBeDrafted;
 
