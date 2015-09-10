@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "EDUCATION")
 public class Education extends BaseEntity{
@@ -32,9 +34,11 @@ public class Education extends BaseEntity{
 	@Column(name = "GPA")
 	private Double gpa;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "START_DATE")
 	private Date start_date;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "GRADUATED_DATE")
 	private Date graduated_date;
 	

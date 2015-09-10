@@ -31,7 +31,7 @@ public class AugRequestDto {
 	private Integer id;
 
 	@Column(name = "REQUEST_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date requestDate;
 
 	@Column(name = "REQUESTER_NAME")
@@ -44,7 +44,7 @@ public class AugRequestDto {
 	private String approvalName;
 
 	@Column(name = "APPROVE_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date approveDate;
 
 	@Column(name = "REQUEST_POSITION")
