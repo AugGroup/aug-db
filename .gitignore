@@ -8,6 +8,8 @@ target/
 .metadata/
 .DS_Store
 
+**/*create-schema.sql
+
 *.sw*
 *~
 build/

@@ -6,7 +6,6 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
