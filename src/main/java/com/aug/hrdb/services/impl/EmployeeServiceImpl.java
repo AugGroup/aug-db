@@ -137,27 +137,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.findByCriteria(employee);
 	}
 
-	@Override
-	@Transactional
-	public void createEmployeeAndAddress(Employee employee) {
-		employeeRepository.create(employee);
-		/*for(Address address:employee.getAddresses()){
-			address.setEmployee(employee);
-			MasProvince masProvince = masProvinceService.find(address.getProvinceId());
-			address.setProvince(masProvince);
-			MasAddressType masAddressType = masAddressTypeService.findById(address.getAddressTypeId());
-			address.setAddressType(masAddressType);
-			addressService.create(address);
-		}*/
-		
-	}
-
-	@Override
-	public void saveByNameQuery(EmployeeDto allEmployeeDto) {
-		
-		employeeRepository.saveByNameQuery(allEmployeeDto);
-	}
-
+	
 	@Override
 	public Employee searhEmpIdtoAddress() {
 		

@@ -27,8 +27,6 @@ public interface EmployeeService {
 	public List<Employee> findAll();
 	public void deleteById(Integer id);
 	public List<Employee> findByCriteria(Employee employee);
-	public void createEmployeeAndAddress(Employee employee);
-	public void saveByNameQuery(EmployeeDto allEmployeeDto);
 	public Employee searhEmpIdtoAddress();
 	public void saveEmpAndWithRelateTable(EmployeeDto allEmployeeDto);
 	public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id); 
