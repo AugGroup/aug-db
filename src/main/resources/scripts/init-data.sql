@@ -307,9 +307,9 @@ VALUES
 (2,'C','0293',0,NOW(),true,'english');
 
  --EDUCATION
-INSERT INTO EDUCATION(APPLICANT_ID, UNIVERSITY, DEGREETYPE_ID, MAJOR, FACULTY, GPA, START_DATE, GRADUATED_DATE, CERTIFICATION)
-VALUES ('1','Thammasat University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
-('2','Mahidol University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
-('3','Kasetsart University','1','Marketing','BA','2.5',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
-('4','Bangkok University','2','Envi','Science','2.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400');
+INSERT INTO EDUCATION(APPLICANT_ID, auditFlag, createdBy, createdTimeStamp, UNIVERSITY, DEGREETYPE_ID, MAJOR, FACULTY, GPA, START_DATE, GRADUATED_DATE, CERTIFICATION)
+VALUES ('1','C',0,NOW(),'Thammasat University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('2','C',0,NOW(),'Mahidol University','1','Com','Science','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('3','C',0,NOW(),'Kasetsart University','1','Marketing','BA','2.5',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
+('4','C',0,NOW(),'Bangkok University','2','Envi','Science','2.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400');
  
