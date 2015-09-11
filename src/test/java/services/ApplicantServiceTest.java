@@ -3,6 +3,7 @@ package services;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -29,6 +30,9 @@ public class ApplicantServiceTest {
 	public void testInsertApplicantService() {
 		Applicant applicant = new Applicant();
 		applicant.setFirstNameEN("Monkey");
+		applicant.setAuditFlag("C");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicantService.create(applicant);
 	}
 	
@@ -44,14 +48,17 @@ public class ApplicantServiceTest {
 	public void testUpdateApplicantService() {
 		Applicant applicant = applicantService.findById(2);
 		applicant.setFirstNameEN("wan");
+		applicant.setAuditFlag("U");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicantService.update(applicant);	
 	}
 	
 	@Test
 	@Rollback(value = false)
 	public void testDeleteByIdApplicantService() {
-		applicantService.deleteById(2);
-		assertNull(applicantService.findById(2));
+		applicantService.deleteById(5);
+		assertNull(applicantService.findById(5));
 	}
 	
 	@Test

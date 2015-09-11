@@ -28,6 +28,7 @@ public class CertificationRepositoryTest {
 		public void testInsertCertificationRepository() throws Exception {
 			Certification certification = new Certification();
 			certification.setName("Java");
+			certification.setAuditFlag("C");
 			certificationRepository.create(certification);
 		}
 		

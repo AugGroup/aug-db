@@ -2,6 +2,7 @@ package repositories;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -26,6 +27,9 @@ public class ApplicantRepositoryTest {
 	public void testInsertApplicantRepository() throws Exception {
 		Applicant applicant = new Applicant();
 		applicant.setFirstNameEN("yam");
+		applicant.setAuditFlag("C");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicantRepository.create(applicant);
 	}
 	
@@ -33,8 +37,11 @@ public class ApplicantRepositoryTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testUpdateApplicantRepository() throws Exception {
-		Applicant applicant =applicantRepository.find(1);
+		Applicant applicant =applicantRepository.find(2);
 		applicant.setFirstNameEN("net");
+		applicant.setAuditFlag("U");
+		applicant.setCreatedBy(2);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicantRepository.update(applicant);
 	}
 	
@@ -42,13 +49,13 @@ public class ApplicantRepositoryTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdApplicantRepository() throws Exception {
-		applicantRepository.deleteById(1);
+		applicantRepository.deleteById(6);
 	}
 
 	@Test
 	@Transactional
 	public void testFindByIdApplicantRepository() throws Exception {
-		Applicant applicant = applicantRepository.find(1);
+		Applicant applicant = applicantRepository.find(2);
 		assertNotNull(applicant.getFirstNameEN());
 		
 	}
