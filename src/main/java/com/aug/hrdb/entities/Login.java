@@ -26,6 +26,10 @@ import org.hibernate.annotations.NamedNativeQuery;
  *
 
  */
+/**
+ * @author Thanyalak
+ *
+ */
 @NamedNativeQueries({            		
 @NamedNativeQuery(
            name = "searchIdEmptoLogin",
@@ -110,6 +114,16 @@ public class Login extends BaseEntity{
 
 	public void setMasLocation(MasLocation masLocation) {
 		this.masLocation = masLocation;
+	}
+
+
+	public Employee getEmployee() {
+		return employee;
+	}
+
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
 	}
     
 
