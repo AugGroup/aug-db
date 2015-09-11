@@ -18,6 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAllowances;
 import com.aug.hrdb.repositories.MasAddressTypeRepository;
 import com.aug.hrdb.repositories.MasAllowancesRepository;
@@ -35,7 +36,9 @@ public class AllowancesServiceTest {
 	@Autowired
 	private MasAllowancesService masAllowancesService;
 	
-	private MasAllowances masAllowances;
+	private MasAllowances masAllowances = new MasAllowances();
+	
+	private Employee employee = new Employee();
 	
 	@Test
 	public void create() throws ParseException{
@@ -49,10 +52,12 @@ public class AllowancesServiceTest {
 		Calendar cal = Calendar.getInstance();
 		allowances.setCreatedTimeStamp(cal.getTime());
 		
-		masAllowances = masAllowancesService.find(1);
-//		masAllowances.setId(3);
+//		masAllowances = masAllowancesService.find(1);
+		masAllowances.setId(3);
 		allowances.setMasallowances(masAllowances);
 		
+		employee.setId(1);
+		allowances.setEmployee(employee);
 		
 		allowancesService.create(allowances);
 	}
