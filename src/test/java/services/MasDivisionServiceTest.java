@@ -5,6 +5,7 @@
  */
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -31,6 +32,12 @@ public class MasDivisionServiceTest {
 		masDivision.setName("PHP");
 		masDivision.setCode("004A");
 		masDivision.setIsActive(true);
+		
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masDivision.setCreatedTimeStamp(cal.getTime());
+		
 		masDivisionServices.create(masDivision);
 	}
 	

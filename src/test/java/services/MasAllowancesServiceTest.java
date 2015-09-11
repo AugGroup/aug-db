@@ -5,6 +5,7 @@
  */
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -34,6 +35,11 @@ public class MasAllowancesServiceTest {
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
 		masAllowances.setIsactive(true);
+		
+		masAllowances.setAuditFlag("C");
+		masAllowances.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masAllowances.setCreatedTimeStamp(cal.getTime());
 		
 		masAllowancesService.create(masAllowances);
 	}

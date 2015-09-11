@@ -7,6 +7,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
 import org.junit.Test;
@@ -34,19 +35,27 @@ public class AllowancesServiceTest {
 	@Autowired
 	private MasAllowancesService masAllowancesService;
 	
-//	@Test
-//	public void create() throws ParseException{
-//
-//		Allowances allowances = new Allowances();
-//		
-//		allowances.setAmount(6000d);
-//		
-//		MasAllowances masallowances = masAllowancesService.find(1);
-//		allowances.setMasallowances(masallowances);
-//		
-//		
-//		allowancesService.create(allowances);
-//	}
+	private MasAllowances masAllowances;
+	
+	@Test
+	public void create() throws ParseException{
+
+		Allowances allowances = new Allowances();
+		
+		allowances.setAmount(6000d);
+		
+		allowances.setAuditFlag("C");
+		allowances.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		allowances.setCreatedTimeStamp(cal.getTime());
+		
+		masAllowances = masAllowancesService.find(1);
+//		masAllowances.setId(3);
+		allowances.setMasallowances(masAllowances);
+		
+		
+		allowancesService.create(allowances);
+	}
 //	
 //	@Test
 //	public void update(){

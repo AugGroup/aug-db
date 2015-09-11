@@ -7,6 +7,7 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,19 +30,24 @@ public class HistoryServiceTest {
 	@Autowired
 	private HistoryService historyService;
 	
-	@Test
-	public void create() throws ParseException{
-
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
-				Locale.ENGLISH);
-		
-		History history = new History();
-		history.setPosition("Java");
-		history.setSalary(30000d);
-		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
-		
-		historyService.create(history);
-	}
+//	@Test
+//	public void create() throws ParseException{
+//
+//		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
+//				Locale.ENGLISH);
+//		
+//		History history = new History();
+//		history.setPosition("Java");
+//		history.setSalary(30000d);
+//		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
+//		
+//		history.setAuditFlag("C");
+//		history.setCreatedBy(0);
+//		Calendar cal = Calendar.getInstance();
+//		history.setCreatedTimeStamp(cal.getTime());
+//		
+//		historyService.create(history);
+//	}
 	
 //	@Test
 //	public void update(){
@@ -61,11 +67,11 @@ public class HistoryServiceTest {
 //	}
 //	
 //	
-//	@Test
-//	public void findAll(){
-//
-//		List<History> history = historyService.findAll();
-//		Assert.assertEquals(3, history.size());
-//	}
+	@Test
+	public void findAll(){
+
+		List<History> history = historyService.findAll();
+		Assert.assertEquals(0, history.size());
+	}
 	
 }

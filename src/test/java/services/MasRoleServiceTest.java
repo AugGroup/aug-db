@@ -5,6 +5,7 @@
  */
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -32,6 +33,12 @@ public class MasRoleServiceTest {
 		MasRole masRole = new MasRole();
 		masRole.setType("User");
 		masRole.setIsActive(true);
+		
+		masRole.setAuditFlag("C");
+		masRole.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masRole.setCreatedTimeStamp(cal.getTime());
+		
 		masRoleService.create(masRole);
 	}
 	

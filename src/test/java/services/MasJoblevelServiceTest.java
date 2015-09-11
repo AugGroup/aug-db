@@ -5,6 +5,7 @@
  */
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -34,6 +35,12 @@ public class MasJoblevelServiceTest {
 		masJoblevel.setName("PHP");
 		masJoblevel.setCode("004A");
 		masJoblevel.setIsActive(true);
+		
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masJoblevel.setCreatedTimeStamp(cal.getTime());
+		
 		masJoblevelServices.create(masJoblevel);
 	}
 	

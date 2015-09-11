@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -27,6 +28,12 @@ public class MasTechnologyServiceTest {
 		masTech.setName("PHP");
 		masTech.setCode("004A");
 		masTech.setIsActive(true);
+		
+		masTech.setAuditFlag("C");
+		masTech.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTech.setCreatedTimeStamp(cal.getTime());
+		
 		masTechService.create(masTech);
 	}
 	
