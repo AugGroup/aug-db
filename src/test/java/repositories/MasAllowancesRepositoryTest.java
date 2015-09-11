@@ -27,18 +27,18 @@ public class MasAllowancesRepositoryTest {
 	@Autowired
 	private MasAllowancesRepository masAllowancesRepository;
 
-	@Test
-	public void create() {
-
-		MasAllowances masAllowances = new MasAllowances();
-		masAllowances.setAllowances_type("Mother");
-		masAllowances.setAmount_allowances(40000d);
-		masAllowances.setCode("004A");
-		masAllowances.setIsactive(true);
-
-		masAllowancesRepository.getCurrentSession().save(masAllowances);
-
-	}
+//	@Test
+//	public void create() {
+//
+//		MasAllowances masAllowances = new MasAllowances();
+//		masAllowances.setAllowances_type("Mother");
+//		masAllowances.setAmount_allowances(40000d);
+//		masAllowances.setCode("004A");
+//		masAllowances.setIsactive(true);
+//
+//		masAllowancesRepository.getCurrentSession().save(masAllowances);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -59,14 +59,14 @@ public class MasAllowancesRepositoryTest {
 //		masAllowancesRepository.getCurrentSession().delete(masAllowances);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
-//				MasAllowances.class);
-//		List<MasAllowances> masAllowances = c.list();
-//		Assert.assertEquals(0, masAllowances.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
+				MasAllowances.class);
+		List<MasAllowances> masAllowances = c.list();
+		Assert.assertEquals(0, masAllowances.size());
+
+	}
 }

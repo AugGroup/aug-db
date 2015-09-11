@@ -27,17 +27,17 @@ public class MasDivisionRepositoryTest {
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
 
-	@Test
-	public void create() {
-
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-
-		masDivisionRepository.getCurrentSession().save(masDivision);
-
-	}
+//	@Test
+//	public void create() {
+//
+//		MasDivision masDivision = new MasDivision();
+//		masDivision.setName("CEO");
+//		masDivision.setIsActive(true);
+//		masDivision.setCode("01");
+//
+//		masDivisionRepository.getCurrentSession().save(masDivision);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -58,14 +58,14 @@ public class MasDivisionRepositoryTest {
 //		masDivisionRepository.getCurrentSession().delete(masDivision);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
-//				MasDivision.class);
-//		List<MasDivision> masDivisions = c.list();
-//		Assert.assertEquals(0, masDivisions.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
+				MasDivision.class);
+		List<MasDivision> masDivisions = c.list();
+		Assert.assertEquals(0, masDivisions.size());
+
+	}
 }

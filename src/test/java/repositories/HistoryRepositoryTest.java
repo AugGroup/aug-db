@@ -30,20 +30,20 @@ public class HistoryRepositoryTest {
 	@Autowired
 	private HistoryRepository historyRepository;
 
-	@Test
-	public void create() throws ParseException {
-
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
-				Locale.ENGLISH);
-		
-		History history = new History();
-		
-		history.setPosition("Java");
-		history.setSalary(30000d);
-		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
-		historyRepository.getCurrentSession().save(history);
-
-	}
+//	@Test
+//	public void create() throws ParseException {
+//
+//		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
+//				Locale.ENGLISH);
+//		
+//		History history = new History();
+//		
+//		history.setPosition("Java");
+//		history.setSalary(30000d);
+//		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
+//		historyRepository.getCurrentSession().save(history);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -64,14 +64,14 @@ public class HistoryRepositoryTest {
 //		historyRepository.getCurrentSession().delete(history);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = historyRepository.getCurrentSession().createCriteria(
-//				History.class);
-//		List<History> histories = c.list();
-//		Assert.assertEquals(0, histories.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = historyRepository.getCurrentSession().createCriteria(
+				History.class);
+		List<History> histories = c.list();
+		Assert.assertEquals(0, histories.size());
+
+	}
 }

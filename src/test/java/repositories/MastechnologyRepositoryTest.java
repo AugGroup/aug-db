@@ -1,5 +1,6 @@
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -32,15 +33,11 @@ public class MastechnologyRepositoryTest {
 		masTech.setName("java");
 		masTech.setCode("001A");
 		masTech.setIsActive(true);
+		masTech.setAuditFlag("C");
+		masTech.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTech.setCreatedTimeStamp(cal.getTime());
 		masTechnologyRepository.getCurrentSession().save(masTech);
-		
-		
-		
-		MasTechnology masTech1 = new MasTechnology();
-		masTech1.setName(".NET");
-		masTech1.setCode("002A");
-		masTech1.setIsActive(true);
-		masTechnologyRepository.getCurrentSession().save(masTech1);
 		
 	}
 	
@@ -62,17 +59,6 @@ public class MastechnologyRepositoryTest {
 //		
 //		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 3);
 //		masTechnologyRepository.getCurrentSession().delete(masTech);;
-//		
-//	}
-//	
-//	
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void listMasTechnology(){
-//		
-//		Criteria c = masTechnologyRepository.getCurrentSession().createCriteria(MasTechnology.class);
-//		List<MasTechnology> masTechnologyList = c.list();
-//		Assert.assertEquals(2, masTechnologyList.size());
 //		
 //	}
 //	

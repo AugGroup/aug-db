@@ -27,16 +27,16 @@ public class MasRoleRepositoryTest {
 
 	@Autowired MasRoleRepository masRoleRepository;
 	
-	@Test
-	public void create() {
-
-		MasRole masRole = new MasRole();
-		masRole.setType("User");
-		masRole.setIsActive(true);
-
-		masRoleRepository.getCurrentSession().save(masRole);
-
-	}
+//	@Test
+//	public void create() {
+//
+//		MasRole masRole = new MasRole();
+//		masRole.setType("User");
+//		masRole.setIsActive(true);
+//
+//		masRoleRepository.getCurrentSession().save(masRole);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -57,14 +57,14 @@ public class MasRoleRepositoryTest {
 //		masRoleRepository.getCurrentSession().delete(masRole);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
-//				MasRole.class);
-//		List<MasRole> masRoles = c.list();
-//		Assert.assertEquals(0, masRoles.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
+				MasRole.class);
+		List<MasRole> masRoles = c.list();
+		Assert.assertEquals(0, masRoles.size());
+
+	}
 }

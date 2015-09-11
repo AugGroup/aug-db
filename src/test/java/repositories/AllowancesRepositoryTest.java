@@ -36,19 +36,19 @@ public class AllowancesRepositoryTest {
 	@Autowired
 	private MasAllowancesRepository  masAllowancesRepository;
 	
-	@Test
-	public void create() throws ParseException {
-
-		Allowances allowances = new Allowances();
-		
-		allowances.setAmount(6000d);
-		
-		MasAllowances masallowances = masAllowancesRepository.find(1);
-		allowances.setMasallowances(masallowances);
-		
-		allowancesRepository.getCurrentSession().save(allowances);
-
-	}
+//	@Test
+//	public void create() throws ParseException {
+//
+//		Allowances allowances = new Allowances();
+//		
+//		allowances.setAmount(6000d);
+//		
+//		MasAllowances masallowances = masAllowancesRepository.find(1);
+//		allowances.setMasallowances(masallowances);
+//		
+//		allowancesRepository.getCurrentSession().save(allowances);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -69,14 +69,14 @@ public class AllowancesRepositoryTest {
 //		allowancesRepository.getCurrentSession().delete(allowances);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
-//				Allowances.class);
-//		List<Allowances> allowances = c.list();
-//		Assert.assertEquals(0, allowances.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
+				Allowances.class);
+		List<Allowances> allowances = c.list();
+		Assert.assertEquals(0, allowances.size());
+
+	}
 }

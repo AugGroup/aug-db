@@ -26,17 +26,17 @@ public class MasJoblevelRepositoryTest {
 
 	@Autowired MasJoblevelRepository masJoblevelRepository;
 	
-	@Test
-	public void create() {
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-
-		masJoblevelRepository.getCurrentSession().save(masJoblevel);
-
-	}
+//	@Test
+//	public void create() {
+//
+//		MasJoblevel masJoblevel = new MasJoblevel();
+//		masJoblevel.setName("CEO");
+//		masJoblevel.setIsActive(true);
+//		masJoblevel.setCode("01");
+//
+//		masJoblevelRepository.getCurrentSession().save(masJoblevel);
+//
+//	}
 
 //	@Test
 //	public void update() {
@@ -57,14 +57,14 @@ public class MasJoblevelRepositoryTest {
 //		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
 //	}
 //
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
-//				MasJoblevel.class);
-//		List<MasJoblevel> masJoblevels = c.list();
-//		Assert.assertEquals(0, masJoblevels.size());
-//
-//	}
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
+
+		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
+				MasJoblevel.class);
+		List<MasJoblevel> masJoblevels = c.list();
+		Assert.assertEquals(0, masJoblevels.size());
+
+	}
 }
