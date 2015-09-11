@@ -296,6 +296,18 @@ INSERT INTO MAS_ALLOWANCES (ALLOWANCES_TYPE,AMOUNT_ALLOWANCES,CODE,ISACTIVE,audi
 ('ยกเว้นเงินได้ที่ได้จ่ายเป็นค่าซ่อมแซมรถยนต์ที่ได้รับผลกระทบจากอุทกภัยที่เกิดขึ้นในระหว่างวันที่ 25 ก.ค. 2554 – 31 ธ.ค. 2554',30000,'A29',1,'C',NOW(),0);
 
 
+-- APPLICANT
+insert INTO APPLICANT (APPLICANT_CODE,FIRSTNAME_TH,FIRSTNAME_EN,LASTNAME_TH,LASTNAME_EN,NICKNAME_TH,NICKNAME_EN,BIRTHDATE,AGE,HEIGHT,WEIGHT,SEX,RELIGION,NATIONALITY,TEL,EMAIL,APPLICANT_STATUS,APPLY_DATE,EMERGENCY_NAME,EMERGENCY_TEL,EMERGENCY_ADDRESS,NOTICE_NEWSPAPER,NOTICE_MAGAZINE,NOTICE_FRIEND,NOTICE_WEBSITE,NOTICE_OTHER,NEWSPAPER_DESCRIPTION,MAGAZINE_DESCRIPTION,FRIEND_DESCRIPTION,WEBSITE_DESCRIPTION,OTHER_DESCRIPTION,MASJOBLEVEL_ID,MASTECHNOLOGY_ID,TRACKING_STATUS,EXPECTED_SALARY,CARD_ID,CARD_ISSUED_OFFICE,CARD_EXPIRY_DATE,MILITARY_FROM_YEAR,MILITARY_TO_YEAR,MILITARY_PLACE,MILITARY_SERVICE_NO,MILITARY_REASON,NUMBER_OF_CHILDREN,SPOUSE_NAME,MARRIAGE_CERTIFICATE_NO,ISSUE_OFFICE_MARRIAGE,OCCUPATION_MARRIAGE,PLACE_BIRTH,SCORE,TECH_SCORE,ATTITUDE_HOME,ATTITUDE_OFFICE,NOW_EMPLOYED,EMPLOYED_NAME,EMPLOYED_POSITION,EMPLOYED_RELATION,BRANCH_SERVICE,PREVIOUS_EMPLOYERS,PREVIOUS_EMPLOYERS_REASON,DATE_TO_BE_DRAFTED,MARRIAGE_ADDRESS,RESUME,TRANSCRIPT,IMAGE,MILITARY_STATUS,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP)
+VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(021) 234-5678','yam@gmail.com','Married',STR_TO_DATE('26/05/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(091) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','4','2','Waiting for consider','25000','1111-1222-2334-4','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','C#26','S#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW()),
+('C201502','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(022) 234-5678','yam@gmail.com','Married',STR_TO_DATE('27/05/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(092) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Waiting for consider','25000','1111-1222-2334-5','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','C#26','S#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW()),
+('C201503','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Male','Buddha','Thai','(023) 234-5678','yam@gmail.com','Married',STR_TO_DATE('29/06/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(093) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Waiting for consider','25000','1111-1222-2334-6','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Not','I#24','C#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW()),
+('C201504','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(024) 234-5678','yam@gmail.com','Married',STR_TO_DATE('28/06/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(094) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Waiting for consider','25000','1111-1222-2334-7','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','D#26','I#24','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW());
+
+-- CERTIFICATION
+insert INTO CERTIFICATION(APPLICANT_ID,CERTIFICATION_FORM,DESCRICPION,NAME,YEAR,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP)
+VALUES ('1','java','java','java','2010','C',0,NOW()),('2','ccna','ccna','ccna','2010','C',0,NOW()),('3','.net','.net','.net','2010','C',0,NOW()),('4','microsoft','microsoft','microsoft','2010','C',0,NOW());
+
+
  INSERT INTO EXPERIENCE (ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ADDRESS,TYPE_OF_BUSINESS,DATE_FROM, DATE_TO, POSITION, REASON, REFERENCE, RESPONSIBILITY, SALARY)
  VALUES('1','C',0,NOW(),'22/3 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
  ('2','C',0,NOW(),'22/4 Bangkok','IT',STR_TO_DATE('01/04/2012','%d/%m/%Y'),STR_TO_DATE('01/08/2012','%d/%m/%Y'),'Consultance','-','John','-','30000'),
@@ -304,6 +316,7 @@ INSERT INTO MAS_ALLOWANCES (ALLOWANCES_TYPE,AMOUNT_ALLOWANCES,CODE,ISACTIVE,audi
 
 
  --EDUCATION
+<<<<<<< HEAD
 INSERT INTO EDUCATION(ID, AUDITFLAG, CREATEDBY, CREATEDTIMESTAMP, UNIVERSITY, DEGREETYPE_ID, MAJOR, FACULTY, GPA, START_DATE, GRADUATED_DATE, CERTIFICATION)
 VALUES ('1','C',0,NOW(),'THAMMASAT UNIVERSITY','1','COM','SCIENCE','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
 ('2','C',0,NOW(),'MAHIDOL UNIVERSITY','1','COM','SCIENCE','3.0',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/01/1944','%d/%m/%Y'),'TOEIC 400'),
@@ -334,3 +347,16 @@ INSERT INTO EMP_LOGIN ( AUDITFLAG, CREATEDBY,CREATEDTIMESTAMP,USERNAME,PASSWORD,
 --REWARD
 INSERT INTO EMP_REWARD(TYPE_REWARD,YEAR,EMPLOYEE_ID)
 VALUES('nobel','1991',2);
+=======
+INSERT INTO EDUCATION(APPLICANT_ID, AUDITFLAG, CREATEDBY, CREATEDTIMESTAMP, UNIVERSITY, DEGREETYPE_ID, MAJOR, FACULTY, GPA, START_DATE, GRADUATED_DATE, CERTIFICATION)
+VALUES ('1','C',0,NOW(),'THAMMASAT UNIVERSITY','1','COM','SCIENCE','3.0',STR_TO_DATE('26/01/1940','%D/%M/%Y'),STR_TO_DATE('26/01/1944','%D/%M/%Y'),'TOEIC 400'),
+('2','C',0,NOW(),'MAHIDOL UNIVERSITY','1','COM','SCIENCE','3.0',STR_TO_DATE('26/01/1940','%D/%M/%Y'),STR_TO_DATE('26/01/1944','%D/%M/%Y'),'TOEIC 400'),
+('3','C',0,NOW(),'KASETSART UNIVERSITY','1','MARKETING','BA','2.5',STR_TO_DATE('26/01/1940','%D/%M/%Y'),STR_TO_DATE('26/01/1944','%D/%M/%Y'),'TOEIC 400'),
+('4','C',0,NOW(),'BANGKOK UNIVERSITY','2','ENVI','SCIENCE','2.0',STR_TO_DATE('26/01/1940','%D/%M/%Y'),STR_TO_DATE('26/01/1944','%D/%M/%Y'),'TOEIC 400');
+
+INSERT INTO MAS_SKILLLANGUAGE (ID,AUDITFLAG,CODE,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE,SKILL_LANGUAGE) 
+VALUES 
+(1,'C','0293',0,NOW(),true,'thai'),
+(2,'C','0293',0,NOW(),true,'english');
+
+>>>>>>> edit relation masjoblevel and technology and delete position and pom.xml

@@ -4,32 +4,45 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import com.aug.hrdb.entities.Address;
+import com.aug.hrdb.entities.Certification;
+import com.aug.hrdb.entities.Education;
+import com.aug.hrdb.entities.Experience;
+import com.aug.hrdb.entities.Family;
+import com.aug.hrdb.entities.Language;
+import com.aug.hrdb.entities.MasCoreSkill;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
+import com.aug.hrdb.entities.Reference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-
+@Entity
 @NamedNativeQueries({
-	
+		
 	@NamedNativeQuery(name = "SEARCH_BY_ID_APPLICATION", query = "SELECT a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_TH, a.FIRSTNAME_EN, a.LASTNAME_TH, a.LASTNAME_EN, a.NICKNAME_TH, a.NICKNAME_EN,"
 		+ "a.BIRTHDATE, a.PLACE_BIRTH, a.AGE, a.HEIGHT, a.WEIGHT, a.RELIGION, a.NATIONALITY, a.TEL, a.EMAIL,"
 		+ "a.APPLICANT_STATUS, a.APPLY_DATE, a.EMERGENCY_NAME, a.EMERGENCY_TEL, a.EMERGENCY_ADDRESS, a.NOTICE_NEWSPAPER, a.NOTICE_MAGAZINE, a.NOTICE_FRIEND, a.NOTICE_WEBSITE, a.NOTICE_OTHER, a.TRACKING_STATUS,"
 		+ "a.EXPECTED_SALARY, a.CARD_ID, a.CARD_ISSUED_OFFICE, a.CARD_EXPIRY_DATE, a.MILITARY_FROM_YEAR, a.MILITARY_TO_YEAR, a.MILITARY_PLACE, a.MILITARY_SERVICE_NO, a.MILITARY_REASON, a.MILITARY_STATUS, a.NEWSPAPER_DESCRIPTION, a.MAGAZINE_DESCRIPTION, a.FRIEND_DESCRIPTION, a.WEBSITE_DESCRIPTION, a.OTHER_DESCRIPTION,"
-		+ "a.NUMBER_OF_CHILDREN, a.SPOUSE_NAME, a.MARRIAGE_CERTIFICATE_NO, a.ISSUE_OFFICE_MARRIAGE, a.OCCUPATION_MARRIAGE, a.SCORE, a.TECH_SCORE, a.ATTITUDE_HOME, a.ATTITUDE_OFFICE, a.POSITION1_ID, a.POSITION2_ID, a.POSITION3_ID, a.NOW_EMPLOYED, a.EMPLOYED_NAME, a.EMPLOYED_POSITION,"
-		+ "a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS, a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, null as POSITION_NAME, a.EMERGENCY_NAME,a.EMERGENCY_TEL,a.EMERGENCY_ADDRESS,a.RESUME,a.TRANSCRIPT,a.IMAGE,a.SEX,a.POSITION1_ID,a.POSITION2_ID,a.POSITION3_ID "
+		+ "a.NUMBER_OF_CHILDREN, a.SPOUSE_NAME, a.MARRIAGE_CERTIFICATE_NO, a.ISSUE_OFFICE_MARRIAGE, a.OCCUPATION_MARRIAGE, a.SCORE, a.TECH_SCORE, a.ATTITUDE_HOME, a.ATTITUDE_OFFICE, a.MAS_JOB_LEVEL, a.MAS_TECHNOLOGY, a.NOW_EMPLOYED, a.EMPLOYED_NAME, a.EMPLOYED_POSITION,"
+		+ "a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS, a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, a.EMERGENCY_NAME,a.EMERGENCY_TEL,a.EMERGENCY_ADDRESS,a.RESUME,a.TRANSCRIPT,a.IMAGE,a.SEX,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID,a.MAS_JOB_LEVEL_NAME,a.MAS_TECHNOLOGY_NAME "
 		+ " FROM APPLICANT a WHERE a.APPLICANT_ID = :ID", resultClass = ApplicantDto.class),
 	
 	@NamedNativeQuery(name = "MAX_ID_APPLICANT", query = "SELECT null as APPLICANT_CODE, null as FIRSTNAME_TH, null as FIRSTNAME_EN, null as LASTNAME_TH, null as LASTNAME_EN, null as NICKNAME_TH, null as NICKNAME_EN,"
 			+ " null as BIRTHDATE, null as PLACE_BIRTH, null as AGE, null as HEIGHT, null as WEIGHT, null as RELIGION, null as NATIONALITY, null as TEL, null as EMAIL,"
 			+ " null as APPLICANT_STATUS, null as APPLY_DATE, null as EMERGENCY_NAME, null as EMERGENCY_TEL, null as EMERGENCY_ADDRESS, null as NOTICE_NEWSPAPER, null as NOTICE_MAGAZINE, null as NOTICE_FRIEND, null as NOTICE_WEBSITE, null as NOTICE_OTHER, a.TRACKING_STATUS,"
 			+ " null as EXPECTED_SALARY, null as CARD_ID, null as CARD_ISSUED_OFFICE, null as CARD_EXPIRY_DATE, null as MILITARY_FROM_YEAR, null as MILITARY_TO_YEAR, null as MILITARY_PLACE, null as MILITARY_SERVICE_NO, a.MILITARY_REASON, null as MILITARY_STATUS, null as NEWSPAPER_DESCRIPTION, null as MAGAZINE_DESCRIPTION, null as FRIEND_DESCRIPTION, null as WEBSITE_DESCRIPTION, null as OTHER_DESCRIPTION,"
-			+ " null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME, null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as TECH_SCORE, null as POSITION1_ID, null as POSITION2_ID, null as POSITION3_ID, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION,"
-			+ " null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as POSITION_NAME, null as EMERGENCY_NAME, null as EMERGENCY_TEL, null as EMERGENCY_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, null as SEX, null as POSITION1_ID, null as POSITION2_ID, null as POSITION3_ID, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE, null as TRACKING_STATUS,"
+			+ " null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME, null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as TECH_SCORE, null as MAS_JOB_LEVEL, null as MAS_TECHNOLOGY, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION,"
+			+ " null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as EMERGENCY_NAME, null as EMERGENCY_TEL, null as EMERGENCY_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, null as SEX, null as MASJOBLEVEL_ID, null as MASTECHNOLOGY_ID, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE, null as TRACKING_STATUS, null as MAS_JOB_LEVEL_NAME, null as MAS_TECHNOLOGY_NAME"
 			+ " MAX(a.APPLICANT_ID) AS APPLICANT_ID"
 			+ " FROM APPLICANT a ", resultClass = ApplicantDto.class),
 	
@@ -40,11 +53,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "null as MILITARY_SERVICE_NO, null as MILITARY_REASON, null as MILITARY_STATUS, null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME,"
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE, null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, "
 			+ "null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, "
-			+ "a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.POSITION1_ID, a.POSITION2_ID, a.POSITION3_ID, a.TRACKING_STATUS, p1.POSITION_NAME, p1.ID, p2.POSITION_NAME, p2.ID, p3.POSITION_NAME, p3.ID "
-			+ "FROM APPLICANT a LEFT JOIN POSITION p1 ON a.POSITION1_ID = p1.ID "
-			+ "LEFT JOIN POSITION p2 ON a.POSITION2_ID = p2.ID "
-			+ "LEFT JOIN POSITION p3 ON a.POSITION3_ID= p3.ID "
-			+ "WHERE p1.POSITION_NAME like :POSITION OR p2.POSITION_NAME like :POSITION OR p3.POSITION_NAME like :POSITION", resultClass = ApplicantDto.class),
+			+ "a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.MAS_JOB_LEVEL_NAME, job.ID, tech.MAS_TECHNOLOGY_NAME, tech.ID "
+			+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
+			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
+			+ "WHERE job.MAS_JOB_LEVEL_NAME like :JOBLEVEL OR tech.MAS_TECHNOLOGY_NAME like :TECHNOLOGY", resultClass = ApplicantDto.class),
 	
 	@NamedNativeQuery(name = "SEARCH_ALL", query = "SELECT null as FIRSTNAME_TH, null as LASTNAME_TH, null as NICKNAME_TH, null as NICKNAME_EN, "
 			+ "null as BIRTHDATE, null as AGE, null as HEIGHT, null as WEIGHT, null as SEX, null as RELIGION, null as NATIONALITY, null as APPLICANT_STATUS, null as EMERGENCY_NAME, null as EMERGENCY_TEL,"
@@ -54,8 +66,9 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE,"
 			+ "null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON,"
 			+ "null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE,"
-			+ " a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.POSITION1_ID, a.POSITION2_ID, a.POSITION3_ID, a.TRACKING_STATUS, p.POSITION_NAME, p.ID "
-			+ " FROM APPLICANT a JOIN POSITION p ON a.POSITION1_ID = p.ID "
+			+ " a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.MAS_JOB_LEVEL_NAME, job.ID, tech.MAS_TECHNOLOGY_NAME, tech.ID "
+			+ " FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASTECHNOLOGY_ID = job.ID "
+			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASJOBLEVEL_ID = tech.ID "
 			+ "ORDER BY a.APPLY_DATE DESC", resultClass = ApplicantDto.class), // ORDER BY APPLICANT_ID ASC LIMIT 0,50
 
 	@NamedNativeQuery(name = "SEARCH_BY_ID", query = "SELECT a.FIRSTNAME_TH, a.LASTNAME_TH, a.NICKNAME_TH, a.NICKNAME_EN, "
@@ -66,14 +79,22 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					+ "a.MARRIAGE_CERTIFICATE_NO, a.ISSUE_OFFICE_MARRIAGE, a.OCCUPATION_MARRIAGE, a.SCORE, a.TECH_SCORE, a.ATTITUDE_HOME, a.ATTITUDE_OFFICE,"
 					+ "a.PLACE_BIRTH, a.NOW_EMPLOYED, a.EMPLOYED_NAME, a.EMPLOYED_POSITION, a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS,"
 					+ "a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, a.RESUME, a.TRANSCRIPT, a.IMAGE,"
-					+ " a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.POSITION1_ID, a.POSITION2_ID, a.POSITION3_ID, a.TRACKING_STATUS, p.POSITION_NAME, p.ID "
-					+ " FROM APPLICANT a LEFT JOIN POSITION p ON a.POSITION1_ID = p.ID WHERE a.APPLICANT_ID = :ID", resultClass = ApplicantDto.class), 
+					+ " a.APPLICANT_ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.MAS_JOB_LEVEL_NAME, job.ID, tech.MAS_TECHNOLOGY_NAME, tech.ID "
+					+ " FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
+					+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
+					+ "WHERE a.APPLICANT_ID = :ID", resultClass = ApplicantDto.class), 
 
 	})
 public class ApplicantDto {
-	@Column(name = "POSITION_NAME")
-	private String positionName;
-
+//	@Column(name = "POSITION_NAME")
+//	private String positionName;
+	
+	@Column(name = "MAS_JOB_LEVEL_NAME")
+	private String masJobLevelName;
+	
+	@Column(name = "MAS_TECHNOLOGY_NAME")
+	private String masTechnologyName;
+	
 	@Id
 	@Column(name = "APPLICANT_ID")
 	private Integer id;
@@ -277,15 +298,12 @@ public class ApplicantDto {
 	@Column(name = "IMAGE")
 	private String image;
 	
-	@Column(name = "POSITION1_ID")
-	private Integer positionId1;
+	@Column(name = "MASJOBLEVEL_ID")
+	private Integer joblevelId;
 
-	@Column(name = "POSITION2_ID")
-	private Integer positionId2;
+	@Column(name = "MASTECHNOLOGY_ID")
+	private Integer technologyId;
 
-	@Column(name = "POSITION3_ID")
-	private Integer positionId3;
-	
 	@Transient
 	private MultipartFile resumeMultipartFile;
 	
@@ -295,75 +313,35 @@ public class ApplicantDto {
 	@Transient
 	private MultipartFile imageMultipartFile;
 
-//	@Transient
-//	private List<Reference> references;
-//
-//	@Transient
-//	private List<Family> families;
-//
-//	@Transient
-//	private List<AugEmployee> augEmployees;
-//
-//	@Transient
-//	private List<Languages> languages;
-//
-//	@Transient
-//	private List<Address> address;
-//
-//	@Transient
-//	private List<Education> educations;
-//
-//	@Transient
-//	private List<Skill> skills;
-//
-//	@Transient
-//	private List<Experience> experiences;
-//
-//	@Transient
-//	private Position position1;
-//
-//	@Transient
-//	private Position position2;
-//
-//	@Transient
-//	private Position position3;
-//
-//	@Transient
-//	private List<Certificate> certificates;
-	
 	@Transient
-	private String position1Str;
+	private List<Reference> references;
 
 	@Transient
-	private String position2Str;
+	private List<Family> families;
 
 	@Transient
-	private String position3Str;
+	private List<Language> languages;
+
+	@Transient
+	private List<Address> address;
+
+	@Transient
+	private List<Education> educations;
+
+	@Transient
+	private List<MasCoreSkill> masCoreSkills;
+
+	@Transient
+	private List<Experience> experiences;
+
+	@Transient
+	private List<Certification> certifications;
 	
-	
-	public Integer getPositionId1() {
-		return positionId1;
-	}
+	@Transient
+	private MasJoblevel joblevel;
 
-	public void setPositionId1(Integer positionId1) {
-		this.positionId1 = positionId1;
-	}
-
-	public Integer getPositionId2() {
-		return positionId2;
-	}
-
-	public void setPositionId2(Integer positionId2) {
-		this.positionId2 = positionId2;
-	}
-
-	public Integer getPositionId3() {
-		return positionId3;
-	}
-
-	public void setPositionId3(Integer positionId3) {
-		this.positionId3 = positionId3;
-	}
+	@Transient
+	private MasTechnology technology;
 
 	public String getResume() {
 		return resume;
@@ -389,77 +367,46 @@ public class ApplicantDto {
 		this.image = image;
 	}
 
-//	public List<Certificate> getCertificates() {
-//		return certificates;
-//	}
-//
-//	public void setCertificates(List<Certificate> certificates) {
-//		this.certificates = certificates;
-//	}
-//
-//	public List<Reference> getReferences() {
-//		return references;
-//	}
-//
-//	public void setReferences(List<Reference> references) {
-//		this.references = references;
-//	}
-//
-//	public List<Family> getFamilies() {
-//		return families;
-//	}
-//
-//	public void setFamilies(List<Family> families) {
-//		this.families = families;
-//	}
-//
-//	public List<AugEmployee> getAugEmployees() {
-//		return augEmployees;
-//	}
-//
-//	public void setAugEmployees(List<AugEmployee> augEmployees) {
-//		this.augEmployees = augEmployees;
-//	}
-//
-//	public List<Languages> getLanguages() {
-//		return languages;
-//	}
-//
-//	public void setLanguages(List<Languages> languages) {
-//		this.languages = languages;
-//	}
-//
-//	public List<Address> getAddress() {
-//		return address;
-//	}
-//
-//	public void setAddress(List<Address> address) {
-//		this.address = address;
-//	}
-//
-//	public List<Education> getEducations() {
-//		return educations;
-//	}
-//
-//	public void setEducations(List<Education> educations) {
-//		this.educations = educations;
-//	}
-//
-//	public List<Skill> getSkills() {
-//		return skills;
-//	}
-//
-//	public void setSkills(List<Skill> skills) {
-//		this.skills = skills;
-//	}
-//
-//	public List<Experience> getExperiences() {
-//		return experiences;
-//	}
-//
-//	public void setExperiences(List<Experience> experiences) {
-//		this.experiences = experiences;
-//	}
+
+	public List<Reference> getReferences() {
+		return references;
+	}
+
+	public void setReferences(List<Reference> references) {
+		this.references = references;
+	}
+
+	public List<Family> getFamilies() {
+		return families;
+	}
+
+	public void setFamilies(List<Family> families) {
+		this.families = families;
+	}
+
+	public List<Address> getAddress() {
+		return address;
+	}
+
+	public void setAddress(List<Address> address) {
+		this.address = address;
+	}
+
+	public List<Education> getEducations() {
+		return educations;
+	}
+
+	public void setEducations(List<Education> educations) {
+		this.educations = educations;
+	}
+
+	public List<Experience> getExperiences() {
+		return experiences;
+	}
+
+	public void setExperiences(List<Experience> experiences) {
+		this.experiences = experiences;
+	}
 
 	public String getNowEmployed() {
 		return nowEmployed;
@@ -531,14 +478,6 @@ public class ApplicantDto {
 
 	public void setMarriageAddress(String marriageAddress) {
 		this.marriageAddress = marriageAddress;
-	}
-
-	public String getPositionName() {
-		return positionName;
-	}
-
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
 	}
 
 	public Integer getId() {
@@ -956,30 +895,6 @@ public class ApplicantDto {
 	public void setAttitudeOffice(String attitudeOffice) {
 		this.attitudeOffice = attitudeOffice;
 	}
-//
-//	public Position getPosition1() {
-//		return position1;
-//	}
-//
-//	public void setPosition1(Position position1) {
-//		this.position1 = position1;
-//	}
-//
-//	public Position getPosition2() {
-//		return position2;
-//	}
-//
-//	public void setPosition2(Position position2) {
-//		this.position2 = position2;
-//	}
-//
-//	public Position getPosition3() {
-//		return position3;
-//	}
-//
-//	public void setPosition3(Position position3) {
-//		this.position3 = position3;
-//	}
 
 	public MultipartFile getResumeMultipartFile() {
 		return resumeMultipartFile;
@@ -1021,28 +936,77 @@ public class ApplicantDto {
 		this.militaryStatus = militaryStatus;
 	}
 
-	public String getPosition1Str() {
-		return position1Str;
+	public String getMasJobLevelName() {
+		return masJobLevelName;
 	}
 
-	public void setPosition1Str(String position1Str) {
-		this.position1Str = position1Str;
+	public void setMasJobLevelName(String masJobLevelName) {
+		this.masJobLevelName = masJobLevelName;
 	}
 
-	public String getPosition2Str() {
-		return position2Str;
+	public String getMasTechnologyName() {
+		return masTechnologyName;
 	}
 
-	public void setPosition2Str(String position2Str) {
-		this.position2Str = position2Str;
+	public void setMasTechnologyName(String masTechnologyName) {
+		this.masTechnologyName = masTechnologyName;
 	}
 
-	public String getPosition3Str() {
-		return position3Str;
+	public List<Language> getLanguages() {
+		return languages;
 	}
 
-	public void setPosition3Str(String position3Str) {
-		this.position3Str = position3Str;
+	public void setLanguages(List<Language> languages) {
+		this.languages = languages;
 	}
+
+	public List<MasCoreSkill> getMasCoreSkills() {
+		return masCoreSkills;
+	}
+
+	public void setMasCoreSkills(List<MasCoreSkill> masCoreSkills) {
+		this.masCoreSkills = masCoreSkills;
+	}
+
+	public List<Certification> getCertifications() {
+		return certifications;
+	}
+
+	public void setCertifications(List<Certification> certifications) {
+		this.certifications = certifications;
+	}
+
+	public Integer getJoblevelId() {
+		return joblevelId;
+	}
+
+	public void setJoblevelId(Integer joblevelId) {
+		this.joblevelId = joblevelId;
+	}
+
+	public Integer getTechnologyId() {
+		return technologyId;
+	}
+
+	public void setTechnologyId(Integer technologyId) {
+		this.technologyId = technologyId;
+	}
+
+	public MasJoblevel getJoblevel() {
+		return joblevel;
+	}
+
+	public void setJoblevel(MasJoblevel joblevel) {
+		this.joblevel = joblevel;
+	}
+
+	public MasTechnology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(MasTechnology technology) {
+		this.technology = technology;
+	}
+
 
 }

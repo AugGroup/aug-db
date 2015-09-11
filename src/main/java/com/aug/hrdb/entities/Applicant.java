@@ -131,11 +131,11 @@ public class Applicant extends BaseEntity{
 	
 	@ManyToOne
 	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id")
-	private MasTechnology masTechnology;
+	private MasTechnology technology;
 
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id")
-	private MasJoblevel masJoblevel;
+	private MasJoblevel joblevel;
 
 	@Column(name = "TRACKING_STATUS")
 	private String trackingStatus;
@@ -849,17 +849,6 @@ public class Applicant extends BaseEntity{
 	public void setLanguages(Set<Language> languages) {
 		this.languages = languages;
 	}
-	
-	
-//	public Set<Family> getFamilies() {
-//		return families;
-//	}
-//
-//	public void setFamilies(Set<Family> families) {
-//		this.families = families;
-//	}
-//	
-	
 
 	public List<Certification> getCertifications() {
 		return certifications;
@@ -901,20 +890,21 @@ public class Applicant extends BaseEntity{
 		this.experiences = experiences;
 	}
 
-	public MasTechnology getMasTechnology() {
-		return masTechnology;
+
+	public MasTechnology getTechnology() {
+		return technology;
 	}
 
-	public void setMasTechnology(MasTechnology masTechnology) {
-		this.masTechnology = masTechnology;
+	public void setTechnology(MasTechnology technology) {
+		this.technology = technology;
 	}
 
-	public MasJoblevel getMasJoblevel() {
-		return masJoblevel;
+	public MasJoblevel getJoblevel() {
+		return joblevel;
 	}
 
-	public void setMasJoblevel(MasJoblevel masJoblevel) {
-		this.masJoblevel = masJoblevel;
+	public void setJoblevel(MasJoblevel joblevel) {
+		this.joblevel = joblevel;
 	}
 
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
@@ -975,9 +965,8 @@ public class Applicant extends BaseEntity{
 		applicant.setResume(applicantDto.getResume());
 		applicant.setTranscript(applicantDto.getTranscript());
 		applicant.setImage(applicantDto.getImage());
-//		applicant.setPosition1(applicantDto.getPosition1());
-//		applicant.setPosition2(applicantDto.getPosition2());
-//		applicant.setPosition3(applicantDto.getPosition3());
+		applicant.setJoblevel(applicantDto.getJoblevel());
+		applicant.setTechnology(applicantDto.getTechnology());
 		applicant.setImage(applicantDto.getImage());
 		applicant.setTranscript(applicantDto.getTranscript());
 		applicant.setResume(applicantDto.getResume());

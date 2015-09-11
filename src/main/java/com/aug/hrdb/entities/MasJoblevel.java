@@ -29,7 +29,7 @@ public class MasJoblevel extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable = false)
 	private Boolean isActive;
 
-	@OneToMany(mappedBy="masJoblevel",fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
 	private Set<Applicant> applicants = new HashSet<Applicant>();
 
 	public Integer getId() {
