@@ -35,17 +35,17 @@ public class MasSpecialtyRepositoryTest {
 //	}
 	
 	
-	@Test
-	@Rollback(false)
-	public void updateMasSpecialty(){
-		
-		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyRepository.find(1);
-		masSpecialty.setName(".net");
-		masSpecialty.setCode("02");
-		masSpecialty.setIsActive(true);
-		masSpecialtyRepository.update(masSpecialty);
-	}
-	
+//	@Test
+//	@Rollback(false)
+//	public void updateMasSpecialty(){
+//		
+//		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyRepository.find(1);
+//		masSpecialty.setName(".net");
+//		masSpecialty.setCode("02");
+//		masSpecialty.setIsActive(true);
+//		masSpecialtyRepository.update(masSpecialty);
+//	}
+//	
 	
 //	@Test
 //	@Rollback(false)

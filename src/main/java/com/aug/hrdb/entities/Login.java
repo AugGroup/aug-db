@@ -24,14 +24,7 @@ import org.hibernate.annotations.NamedNativeQuery;
 /**
  * @author Thanyalak
  *
- */
-/**
- * @author Thanyalak
- *
- */
-/**
- * @author Thanyalak
- *
+
  */
 @NamedNativeQueries({            		
 @NamedNativeQuery(

@@ -24,28 +24,28 @@ public class PunishRepositoryTest {
 	
 	@Autowired
 	private PunishRepository punishRepository;
+//	
+//	@Test
+//	@Rollback(false)
+//	public void createPunish(){
+//		Punish punish=new Punish();
+//		Calendar cal = Calendar.getInstance();
+//		punish.setDatepunish(cal.getTime());
+//		punish.setDescription("aaaa");
+//		punish.setPenalty("test");
+//		punishRepository.getCurrentSession().save(punish);
+//		
+//	}
+//	
 	
-	@Test
-	@Rollback(false)
-	public void createPunish(){
-		Punish punish=new Punish();
-		Calendar cal = Calendar.getInstance();
-		punish.setDatepunish(cal.getTime());
-		punish.setDescription("aaaa");
-		punish.setPenalty("test");
-		punishRepository.getCurrentSession().save(punish);
-		
-	}
-	
-	
-	@Test
-	@Rollback(false)
-	public void updatePunish(){
-		
-		Punish punish = (Punish)punishRepository.find(1);
-		punish.setDescription("bbb");;	
-		punishRepository.update(punish);
-	}
+//	@Test
+//	@Rollback(false)
+//	public void updatePunish(){
+//		
+//		Punish punish = (Punish)punishRepository.find(1);
+//		punish.setDescription("bbb");;	
+//		punishRepository.update(punish);
+//	}
 	
 //	@Test
 //	@Rollback(false)

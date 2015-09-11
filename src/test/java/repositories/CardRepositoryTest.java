@@ -26,61 +26,61 @@ public class CardRepositoryTest {
 	@Autowired 
 	private CardRepository cardRepository;
 	
-	@Test
-	@Rollback(false)
-	public void createDataCard(){
-		
-		Card card=new Card();
-		card.setCard_no("111");
-		Calendar cal = Calendar.getInstance();
-		card.setStartdate(cal.getTime());
-		card.setEnddate(cal.getTime());
-		card.setStatus("yes");
-		card.setRemark("aaa");
-		cardRepository.getCurrentSession().save(card);
-	}
+//	@Test
+//	@Rollback(false)
+//	public void createDataCard(){
+//		
+//		Card card=new Card();
+//		card.setCard_no("111");
+//		Calendar cal = Calendar.getInstance();
+//		card.setStartdate(cal.getTime());
+//		card.setEnddate(cal.getTime());
+//		card.setStatus("yes");
+//		card.setRemark("aaa");
+//		cardRepository.getCurrentSession().save(card);
+//	}
 	
 
-	@Test
-	@Rollback(false)
-	public void updateCard(){
-		
-		Card card = (Card)cardRepository.find(1);
-		card.setStatus("no");
-		card.setRemark("bbbb");
-		cardRepository.update(card);
-	}
+//	@Test
+//	@Rollback(false)
+//	public void updateCard(){
+//		
+//		Card card = (Card)cardRepository.find(1);
+//		card.setStatus("no");
+//		card.setRemark("bbbb");
+//		cardRepository.update(card);
+//	}
 	
-	@Test
-	@Rollback(false)
-	public void deleteCard(){
-		
-		Card card = (Card) cardRepository.getCurrentSession().get(Card.class,1);
-		cardRepository.getCurrentSession().delete(card);
-	}
+//	@Test
+//	@Rollback(false)
+//	public void deleteCard(){
+//		
+//		Card card = (Card) cardRepository.getCurrentSession().get(Card.class,1);
+//		cardRepository.getCurrentSession().delete(card);
+//	}
+//	
 	
 	
-	
-	@Test
-	public void listCard(){
-		
-		Criteria c = cardRepository.getCurrentSession().createCriteria(Card.class);
-		List<Card> CardList = c.list();
-		Assert.assertEquals(2, CardList.size());
-		
-	}
+//	@Test
+//	public void listCard(){
+//		
+//		Criteria c = cardRepository.getCurrentSession().createCriteria(Card.class);
+//		List<Card> CardList = c.list();
+//		Assert.assertEquals(2, CardList.size());
+//		
+//	}
 
-	
-	@Test
-	public void findByIdCard(){
-		
-		Card card = (Card) cardRepository.getCurrentSession().get(Card.class, 1);		
-		int id = card.getId();
-		Assert.assertEquals(1, id);
-		
-	}
-	
-	
+//	
+//	@Test
+//	public void findByIdCard(){
+//		
+//		Card card = (Card) cardRepository.getCurrentSession().get(Card.class, 1);		
+//		int id = card.getId();
+//		Assert.assertEquals(1, id);
+//		
+//	}
+//	
+//	
 
 	
 }

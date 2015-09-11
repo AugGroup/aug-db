@@ -35,14 +35,14 @@ public class PunishServiceTest {
 	}
 	
 	
-	@Test
-	@Rollback(false)
-	public void updateDataPunish(){
-		Punish punish= punishService.findById(2);
-		punish.setDescription("aaaa");
-		punishService.update(punish);
-		
-	}
+//	@Test
+//	@Rollback(false)
+//	public void updateDataPunish(){
+//		Punish punish= punishService.findById(2);
+//		punish.setDescription("aaaa");
+//		punishService.update(punish);
+//		
+//	}
 	
 
 	
