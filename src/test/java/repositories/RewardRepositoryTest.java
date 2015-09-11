@@ -45,16 +45,22 @@ public class RewardRepositoryTest {
 	
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void updateReward(){
-//		
-//		Reward reward = (Reward)rewardRepository.find(1);
-//		reward.setTypereward("b");
-//		reward.setYear("2015");
-//		reward.setReason("rrrrr");
-//		rewardRepository.update(reward);
-//	}
+	@Test
+	@Rollback(false)
+	public void updateReward(){
+		
+		Reward reward = (Reward)rewardRepository.find(1);
+		reward.setTypereward("b");
+		reward.setYear("2015");
+		reward.setReason("rrrrr");
+		Calendar cal = Calendar.getInstance();
+		reward.setAuditFlag("C");
+		reward.setCreatedBy(0);
+		reward.setCreatedTimeStamp(cal.getTime());
+		rewardRepository.update(reward);
+	}
+	
+	
 	
 //	@Test
 //	@Rollback(false)
