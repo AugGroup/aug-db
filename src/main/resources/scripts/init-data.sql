@@ -320,3 +320,17 @@ VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แ�
 -- CERTIFICATION
 insert INTO CERTIFICATION(APPLICANT_ID,CERTIFICATION_FORM,DESCRICPION,NAME,YEAR)
 VALUES ('1','java','java','java','2010'),('2','ccna','ccna','ccna','2010'),('3','.net','.net','.net','2010'),('4','microsoft','microsoft','microsoft','2010');
+
+
+
+--LOGIN
+INSERT INTO EMP_LOGIN ( AUDITFLAG, CREATEDBY,CREATEDTIMESTAMP,USERNAME,PASSWORD,EMPLOYEE_ID,ROLE_ID,MAS_LOCATION_ID) VALUES
+('C',0,NOW(),'admin','password',1,1,1),
+('C',0,NOW(),'staff','password',2,2,2),
+('C',0,NOW(),'hr','password',3,3,2);
+
+
+
+--REWARD
+INSERT INTO EMP_REWARD(TYPE_REWARD,YEAR,EMPLOYEE_ID)
+VALUES('nobel','1991',2);
