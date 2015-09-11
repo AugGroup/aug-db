@@ -1,5 +1,6 @@
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import junit.framework.Assert;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.RewardRepository;
 
@@ -23,16 +25,25 @@ public class RewardRepositoryTest {
 	@Autowired
 	private RewardRepository rewardRepository;
 	
-//	@Test
-//	@Rollback(false)
-//	public void createReward(){
-//		Reward reward=new Reward();
-////	reward.setEmployee(null);
-//		reward.setTypereward("aa");
-//		reward.setYear("1991");
-//		reward.setReason("reason");
-//		rewardRepository.getCurrentSession().save(reward);
-//	}
+	@Test
+	@Rollback(false)
+	public void createReward(){
+		Reward reward=new Reward();
+		Employee employee = new Employee();
+		employee.setId(1);
+      	reward.setEmployee(employee);
+		reward.setTypereward("aa");
+		reward.setYear("1991");
+		reward.setReason("reason");
+		Calendar cal = Calendar.getInstance();
+		reward.setAuditFlag("C");
+		reward.setCreatedBy(0);
+		reward.setCreatedTimeStamp(cal.getTime());
+		rewardRepository.getCurrentSession().save(reward);
+	}
+	
+	
+	
 	
 //	@Test
 //	@Rollback(false)

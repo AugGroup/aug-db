@@ -1,5 +1,6 @@
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,10 +28,14 @@ public class RewardServiceTest {
 	public void createDataReward(){
 		
 		Reward reward=new Reward();
-//	    reward.setEmployee(null);
+	    reward.setEmployee(null);
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");
+		Calendar cal = Calendar.getInstance();
+		reward.setAuditFlag("C");
+		reward.setCreatedBy(0);
+		reward.setCreatedTimeStamp(cal.getTime());
 		rewardService.create(reward);
 		
 	}
