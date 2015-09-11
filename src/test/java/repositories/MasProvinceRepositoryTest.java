@@ -5,6 +5,8 @@
  */
 package repositories;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +31,22 @@ public class MasProvinceRepositoryTest {
 		masProvince.setName("Bangkok");
 		masProvince.setCode("PRO-01");
 		masProvince.setIsActive(true);
+		masProvince.setAuditFlag("C");
+		masProvince.setCreatedBy(1);
+		masProvince.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masProvinceRepository.getCurrentSession().save(masProvince);
 		
 		MasProvince masProvince1 = new MasProvince();
 		masProvince1.setName("trad");
 		masProvince1.setCode("PRO-02");
 		masProvince1.setIsActive(true);
+		masProvince1.setAuditFlag("C");
+		masProvince1.setCreatedBy(1);
+		masProvince1.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masProvinceRepository.getCurrentSession().save(masProvince);
 	}
 	
-/*	@Test
+	/*@Test
 	@Rollback(false)
 	public void updateMasProvince(){
 		
@@ -48,9 +56,9 @@ public class MasProvinceRepositoryTest {
 		masProvinceRepository.getCurrentSession().update(masProvince);
 		
 		
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void deleteMasProvince(){
 		

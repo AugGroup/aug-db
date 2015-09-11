@@ -25,9 +25,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Ability;
+import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasSpecialty;
 import com.aug.hrdb.repositories.AbilityRepository;
+import com.aug.hrdb.repositories.EmployeeRepository;
+import com.aug.hrdb.repositories.MasSpecialtyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -35,22 +38,21 @@ import com.aug.hrdb.repositories.AbilityRepository;
 public class AbilityRepositoryTest {
 
 	@Autowired AbilityRepository abilityRepository;
+	@Autowired EmployeeRepository employeeRepository;
+	@Autowired MasSpecialtyRepository MasSpecialtyRepository;
 	
 	@Test
 	@Rollback(false)
 	public void createAbility(){
 		
 		
-		Employee employee=new Employee();
-		employee.setId(1);
+		Employee employee=employeeRepository.find(1);
+		MasSpecialty masspecialty=MasSpecialtyRepository.find(1);
 		
-		MasSpecialty masspecialty=new MasSpecialty();
-		masspecialty.setId(1);
-		masspecialty.setName("JAVA");
+
 		
 		Ability ability=new Ability();
 		ability.setRank(10);
-		ability.setAuditFlag("C");
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -60,44 +62,50 @@ public class AbilityRepositoryTest {
 	
 	}
 	
+	
+	
 	/*@Test
 	@Rollback(false)
 	public void updateAbility(){
-		Ability ability=(Ability)abilityRepository.getCurrentSession().get(Ability.class,2);
+		Ability ability= abilityRepository.find(5);
 		ability.setRank(2);
-		abilityRepository.getCurrentSession().update(ability);
+		
+		abilityRepository.update(ability);
 	
-	}
-	*/
+	}*/
+	
 	/*@Test
 	@Rollback(false)
 	public void deleteAbility(){
 	
-		Ability ability = (Ability) abilityRepository.getCurrentSession().get(Ability.class,1);
+		Ability ability = (Ability) abilityRepository.getCurrentSession().get(Ability.class,5);
 		abilityRepository.getCurrentSession().delete(ability);
 	}
 	*/
 	
-	/*
-	@Test
+	
+	
+	
+	
+	/*@Test
 	public void listAbility(){
 		
 		Criteria c = abilityRepository.getCurrentSession().createCriteria(Ability.class);
 		List<Ability> AbilityList = c.list();
 		Assert.assertEquals(1, AbilityList.size());
 		
-	}
-	*/
+	}*/
 	
-/*	@SuppressWarnings({ "unchecked", "deprecation" })
+	/*
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Test
 	public void findAllAbility(){
 		
 		Criteria c = abilityRepository.getCurrentSession().createCriteria(Ability.class);
 		List<Ability> AbilityList = c.list();
-		Assert.assertEquals(2, AbilityList.size());
+		Assert.assertEquals(1, AbilityList.size());
 		
 		
-	}
-	*/
+	}*/
+	
 }

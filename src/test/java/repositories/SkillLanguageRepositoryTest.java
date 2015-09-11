@@ -6,7 +6,10 @@
 package repositories;
 
 import java.util.Calendar;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 
+
+
+
+
+
+
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Language;
+import com.aug.hrdb.entities.Leave;
 import com.aug.hrdb.repositories.LanguageRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,6 +41,10 @@ public class SkillLanguageRepositoryTest {
 	 @Test
 	 @Rollback(false)
 		public void createSkillLanguage(){
+		
+		Applicant applicant = new Applicant();
+		applicant.setId(1);
+		 
 		 Language language=new Language();
 		 language.setNameLanguage("Thai");
 		 language.setSpeaking("good");
@@ -38,6 +54,7 @@ public class SkillLanguageRepositoryTest {
 		 language.setAuditFlag("C");
 		 language.setCreatedBy(1);
 		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 language.setApplicant(applicant);
 		 languageRepository.getCurrentSession().save(language);
 		 
 	 }
@@ -63,8 +80,8 @@ public class SkillLanguageRepositoryTest {
 		 
 	 }*/
 	 
-	/* 
-	 @SuppressWarnings({ "deprecation", "unchecked" })
+	 /*
+	 @SuppressWarnings({ "unchecked" })
 	@Test
 		public void listSkillLanguage(){
 			
@@ -78,14 +95,14 @@ public class SkillLanguageRepositoryTest {
 		@Test
 		public void findAllSkillLsn(){
 			
-			Criteria c = languageRepository.getCurrentSession().createCriteria(Leave.class);
+			Criteria c = languageRepository.getCurrentSession().createCriteria(Language.class);
 			List<Language> SkillLanList = c.list();
-			Assert.assertEquals(2, SkillLanList.size());
+			Assert.assertEquals(1, SkillLanList.size());
 			
 			
 		}
-	 */
 	 
+	 */
 	 
 
 }

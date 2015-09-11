@@ -5,6 +5,8 @@
  */
 package repositories;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +33,10 @@ public class MasLocationRepositoryTest {
 		masLocation.setName("thailand");
 		masLocation.setCode("LO-01");
 		masLocation.setIsActive(true);
+		masLocation.setAuditFlag("C");
+		masLocation.setCreatedBy(1);
+		masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
 	    masLocationRepository.getCurrentSession().save(masLocation);
 		
 	}
@@ -41,9 +47,9 @@ public class MasLocationRepositoryTest {
 	MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
 	masLocation.setName("singpore");
 	masLocationRepository.getCurrentSession().update(masLocation);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void deleteMasLocation(){ 
 		MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);

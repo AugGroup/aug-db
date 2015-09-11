@@ -5,6 +5,8 @@
  */
 package repositories;
 
+import java.util.Calendar;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +30,12 @@ public class MasDegreeTypeRepositoryTest {
 	@Rollback(false)
 	public void createMasDegreeType(){
 		MasDegreetype masDegreetype=new MasDegreetype();
-		masDegreetype.setName("Master");
-		masDegreetype.setCode("DE-01");
+		masDegreetype.setName("DR");
+		masDegreetype.setCode("DE-02");
 		masDegreetype.setIsactive(true);
+		masDegreetype.setAuditFlag("C");
+		masDegreetype.setCreatedBy(1);
+		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masDegreetypeRepository.getCurrentSession().save(masDegreetype);
 	}
 
@@ -50,6 +55,6 @@ public class MasDegreeTypeRepositoryTest {
 		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,3);
 		masDegreetypeRepository.getCurrentSession().delete(masDegreetype);
 		
-	}
-	*/
+	}*/
+	
 }

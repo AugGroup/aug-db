@@ -5,6 +5,14 @@
  */
 package repositories;
 
+import java.util.Calendar;
+import java.util.List;
+
+
+
+
+import org.hibernate.Criteria;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +23,21 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
+
+
+
+
+
+
+
+
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Leave;
+import com.aug.hrdb.entities.MasLeaveType;
+import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.LeaveRepository;
+import com.aug.hrdb.repositories.MasLeaveTypeRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,20 +46,31 @@ import com.aug.hrdb.repositories.LeaveRepository;
 public class LeaveRepositoryTest {
 	
 	@Autowired LeaveRepository leaveRepository;
+	@Autowired EmployeeRepository employeeRepository;
+	@Autowired MasLeaveTypeRepository masLeaveTypeRepository;
 	
 	@Test
 	@Rollback(false)
 	public void createLeave(){
+		
+		Employee employee= employeeRepository.find(1);
+		MasLeaveType masLeaveType =masLeaveTypeRepository.find(1);
+		
 		Leave leave=new Leave();
 		leave.setReason("tire");
 		leave.setAim("boy");
 		leave.setStartTimeString("20-12-2014 09:00");
 		leave.setEndTimeString("22-12-2014 16:00");
+		leave.setAuditFlag("C");
+		leave.setCreatedBy(1);
+		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		leave.setEmployee(employee);
+		leave.setMasleavetype(masLeaveType);
 		leaveRepository.getCurrentSession().save(leave);
 	}
 	
-	/*
-	@Test
+	
+	/*@Test
 	@Rollback(false)
 	public void updateLeave(){
 		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,3);
@@ -51,25 +83,25 @@ public class LeaveRepositoryTest {
 
 	
 	
-	/*@Test
+/*	@Test
 	@Rollback(false)
 	public void deleteLeave(){
-		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,2);
+		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,3);
 		leaveRepository.getCurrentSession().delete(leave);
 	}*/
 	
-	
-	/*@SuppressWarnings({ "unchecked", "deprecation" })
+	/*
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Test
 	public void findAllLeave(){
 		
 		Criteria c = leaveRepository.getCurrentSession().createCriteria(Leave.class);
 		List<Leave> LeaveList = c.list();
-		Assert.assertEquals(2, LeaveList.size());
+		Assert.assertEquals(1, LeaveList.size());
 		
 		
-	}
-	*/
+	}*/
+	
 	
 	
 }
