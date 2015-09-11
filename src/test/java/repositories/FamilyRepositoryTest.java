@@ -3,6 +3,7 @@ package repositories;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ import com.aug.hrdb.entities.MasRelationType;
 import com.aug.hrdb.repositories.FamilyRepository;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
 
-import junit.framework.Assert;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })

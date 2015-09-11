@@ -139,8 +139,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	
 	@Override
-	public Employee searhEmpIdtoAddress() {
-		
+	public Employee searhEmpIdtoAddress() {		
 		return employeeRepository.searhEmpIdtoAddress();
 	}
 

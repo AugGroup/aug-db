@@ -189,6 +189,8 @@ public class EmployeeDto {
 	private Integer officialId;
 	
 	private EmployeeCodeDto employeeCodeDto;
+	
+	private Integer applicateId;
 
 	
 	public Integer getId() {
@@ -950,6 +952,15 @@ public class EmployeeDto {
 
 	public void setProbationDate(Date probationDate) {
 		this.probationDate = probationDate;
+	}
+	
+
+	public Integer getApplicateId() {
+		return applicateId;
+	}
+
+	public void setApplicateId(Integer applicateId) {
+		this.applicateId = applicateId;
 	}
 
 	

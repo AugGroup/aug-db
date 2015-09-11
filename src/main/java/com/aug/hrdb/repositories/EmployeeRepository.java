@@ -28,9 +28,8 @@ public interface EmployeeRepository extends GenericRepository<Employee, Integer>
 	public List<EmployeeDto> searchEmployee();
 	
 	public List<AimEmployeeDto> listEmployeeAim();
-	public void saveEmployee();
 	public void saveByNameQuery(EmployeeDto allEmployeeDto);
-	public Employee searhEmpIdtoAddress();
+	public Employee searhEmpIdtoAddress(); 	//find last id of employee
 	public List<ReportEmployeeDto> reportEmployee(String nameEng);
 	public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff);
 	public EmployeeCodeDto serchRunningNo(String code);

@@ -38,7 +38,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
-/*@NamedNativeQueries({
+@NamedNativeQueries({
 	@NamedNativeQuery(
             name = "insertEmployee",
             query = "insert into EMPLOYEE("
@@ -111,7 +111,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             		+ "STATUSEMP,"
             		+ "createdTimeStamp,"
             	    + "createdBy,"
-            	    + "auditFlag " 
+            	    + "auditFlag," 
+            	    + "APPLICANT_ID"
             		+ ") "
             		+ " values("
             		+ ":EMPLOYEE_CODE,"
@@ -183,7 +184,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             		+ ":STATUSEMP,"
             		+ "NOW(),"
             		+ "0,"
-            		+ "'C'" 
+            		+ "'C',"
+            		+ ":APPLICANT_ID"
             		+ ")"
             		,resultClass= Employee.class),
             		
@@ -259,7 +261,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            		+ "STATUSEMP,"
             	            		+ "createdTimeStamp,"
             	            	    + "createdBy,"
-            	            	    + "auditFlag " 
+            	            	    + "auditFlag," 
+            	             	    + "APPLICANT_ID"
             	            		+ ") "
             	            		+ " values("
             	            		+ ":EMPLOYEE_CODE,"
@@ -331,7 +334,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            		+ ":STATUSEMP,"
             	            		+ "NOW(),"
             	            		+ "0,"
-            	            		+ "'C'" 
+            	            		+ "'C'," 
+            	             	    + ":APPLICANT_ID"
             	            		+ ")"
             	            		,resultClass= Employee.class),
             	            		
@@ -408,7 +412,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            	            		+ "STATUSEMP,"
             	            	            		+ "createdTimeStamp,"
             	            	            	    + "createdBy,"
-            	            	            	    + "auditFlag " 
+            	            	            	    + "auditFlag,"
+            	            	             	    + "APPLICANT_ID"
             	            	            		+ ") "
             	            	            		+ " values("
             	            	            		+ ":EMPLOYEE_CODE,"
@@ -480,7 +485,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            	            		+ ":STATUSEMP,"
             	            	            		+ "NOW(),"
             	            	            		+ "0,"
-            	            	            		+ "'C'" 
+            	            	            		+ "'C'," 
+            	            	             	    + ":APPLICANT_ID"
             	            	            		+ ")"
             	            	            		,resultClass= Employee.class),
             	            	            		
@@ -557,7 +563,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            	            	            		+ "STATUSEMP,"
             	            	            	            		+ "createdTimeStamp,"
             	            	            	            		+ "createdBy,"
-            	            	            	            		+ "auditFlag "
+            	            	            	            		+ "auditFlag,"
+            	            	            	             	    + "APPLICANT_ID"
             	            	            	            		+ ") "
             	            	            	            		+ " values("
             	            	            	            		+ ":EMPLOYEE_CODE,"
@@ -629,7 +636,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             	            	            	            		+ ":STATUSEMP,"
             	            	            	            		+ "NOW(),"
             	            	            	            		+ "0,"
-            	            	            	            		+ "'C'" 
+            	            	            	            		+ "'C'," 
+            	            	            	             	    + ":APPLICANT_ID"
             	            	            	            		+ ")"
             	            	            	            		,resultClass= Employee.class),           	 
 
@@ -714,7 +722,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
                     		+ "STATUSEMP =:STATUSEMP,"
                     		+"updatedTimeStamp = NOW(), "
                         	+ "updatedBy =:id,"
-                        	+ "auditFlag ='U'"
+                        	+ "auditFlag ='U', "
+                        	+ "APPLICANT_ID =:APPLICANT_ID "
                     		+ "where ID =:id ",
                     		
                     resultClass = Employee.class),
@@ -728,7 +737,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 	
             
             
-  })*/
+  })
 
 
 
