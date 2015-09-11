@@ -60,7 +60,7 @@ public class Login extends BaseEntity{
 
 	
 	@ManyToMany(fetch=FetchType.EAGER,cascade = CascadeType.ALL)	
-	@JoinTable(name="LoginRole", joinColumns={ @JoinColumn(name="LOGIN_ID" , referencedColumnName="ID")},
+	@JoinTable(name="LOGINROLE", joinColumns={ @JoinColumn(name="LOGIN_ID" , referencedColumnName="ID")},
 		inverseJoinColumns={ @JoinColumn(name="MASROLE_ID" , referencedColumnName="ID")})	
     private Set<MasRole> masRoles = new HashSet<MasRole>();  
 
