@@ -37,19 +37,16 @@ public class MasJoblevelServiceImpl implements MasJoblevelService {
 
 	@Override
 	public MasJoblevel find(Integer id) {
-		
 		return masJoblevelRepository.find(id);
 	}
 
 	@Override
 	public List<MasJoblevel> findAll() {
-		// TODO Auto-generated method stub
 		return masJoblevelRepository.findAll();
 	}
 
 	@Override
 	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel) {
-		// TODO Auto-generated method stub
 		return masJoblevelRepository.findByCriteria(masJoblevel);
 	}
 

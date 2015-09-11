@@ -48,13 +48,8 @@ public class MasDivisionServiceImpl implements MasDivisionService {
 	}
 
 	@Override
-	public List<MasDivision> findByCriteria(MasDivision masDivision) {
-		return null;
-	}
-
-	@Override
-	public MasDivision deleteById(Integer id) {
-		return null;
+	public void deleteById(Integer id) {
+		masDivisionRepository.deleteById(id);
 	}
 
 	

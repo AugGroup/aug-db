@@ -12,10 +12,6 @@ import com.aug.hrdb.entities.Allowances;
 
 public interface AllowancesRepository extends GenericRepository<Allowances, Integer>{
 
-//	public List<Allowances> findByCriteria(Allowances allowances);
-
-//	public Allowances deleteById(Integer id);
-
 	public List<AllowancesDto> searchAllowances(Integer id);
 
 }

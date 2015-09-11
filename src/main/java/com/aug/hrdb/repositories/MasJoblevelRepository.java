@@ -8,5 +8,4 @@ public interface MasJoblevelRepository extends GenericRepository<MasJoblevel,Int
 
 	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel);
 
-
 }

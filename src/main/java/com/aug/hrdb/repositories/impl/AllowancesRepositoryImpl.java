@@ -7,15 +7,12 @@ package com.aug.hrdb.repositories.impl;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AllowancesDto;
 import com.aug.hrdb.entities.Allowances;
 import com.aug.hrdb.repositories.AllowancesRepository;
-import com.mysql.jdbc.StringUtils;
 
 @Repository
 public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowances, Integer> implements AllowancesRepository{
@@ -23,17 +20,6 @@ public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowances, 
 	public AllowancesRepositoryImpl() {
 		super(Allowances.class);
 	}
-
-//	@SuppressWarnings("unchecked")
-//	@Override
-//	public List<Allowances> findByCriteria(Allowances allowances) {
-//		Criteria c = getCurrentSession().createCriteria(Allowances.class);
-//		if (!StringUtils.isNullOrEmpty(allowances.getName())) {
-//			c.add(Restrictions.like("name", "%" + allowances.getName() + "%"));
-//		}
-//		return c.list();
-//	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override

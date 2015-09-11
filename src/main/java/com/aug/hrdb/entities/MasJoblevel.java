@@ -16,7 +16,7 @@ import javax.persistence.Table;
 public class MasJoblevel extends BaseEntity {
 	
 	@Id
-	@Column(name="ID" ,nullable=false)
+	@Column(name="ID")
 	@GeneratedValue
 	private Integer id;
 	

@@ -16,6 +16,5 @@ public interface AllowancesService {
 	public void update(Allowances allowances);
 	public void delete(Allowances allowances);
 	public Allowances findById(Integer id);
-//	public List<Allowances> findByCriteria(Allowances allowances);
 	public void deleteById(Integer id);
 }

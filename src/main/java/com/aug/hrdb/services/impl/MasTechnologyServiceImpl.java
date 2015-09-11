@@ -21,35 +21,28 @@ public class MasTechnologyServiceImpl implements MasTechnologyService{
 	
 	@Override
 	public void create(MasTechnology masTechnology) {
-		// TODO Auto-generated method stub
 		masTechnologyRepository.create(masTechnology);
 		
 	}
 
 	@Override
 	public void update(MasTechnology masTechnology) {
-		// TODO Auto-generated method stub
 		masTechnologyRepository.update(masTechnology);
 	}
 
 	@Override
 	public MasTechnology find(Integer id) {
-		// TODO Auto-generated method stub
-		MasTechnology mastech = masTechnologyRepository.find(id);
-		return mastech;
+		return masTechnologyRepository.find(id);
 	}
 	
 	@Override
 	public void delete(MasTechnology masTechnology) {
-		// TODO Auto-generated method stub
 		masTechnologyRepository.delete(masTechnology);
 	}
 
 	@Override
 	public List<MasTechnology> findAll() {
-		// TODO Auto-generated method stub
-		List<MasTechnology> mastech = masTechnologyRepository.findAll();
-		return mastech;
+		 return masTechnologyRepository.findAll();
 	}
 
 }

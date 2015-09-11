@@ -17,6 +17,6 @@ public interface MasAllowancesService {
 	public MasAllowances find(Integer id);
 	public List<MasAllowances> findAll();
 	public List<MasAllowances> findByCriteria(MasAllowances masAllowances);
-	public MasAllowances deleteById(Integer id);
+	public void deleteById(Integer id);
 	
 }

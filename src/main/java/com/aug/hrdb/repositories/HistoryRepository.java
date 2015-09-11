@@ -14,7 +14,5 @@ public interface HistoryRepository extends GenericRepository<History, Integer>{
 
 	public List<History> findByCriteria(History history);
 
-//	public History deleteById(Integer id);
-
 	public List<HistoryDto> searchHistory(Integer id);
 }
