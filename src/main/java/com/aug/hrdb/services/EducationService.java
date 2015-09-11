@@ -15,7 +15,7 @@ public interface EducationService {
 
 	public void delete(Education education);
 	
-	public void deleteByApplicantId(Integer id);
+	public void deleteById(Integer id);
 
 	public List<Education> findAll();
 	

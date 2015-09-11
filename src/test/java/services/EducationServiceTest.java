@@ -2,7 +2,9 @@ package services;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,11 +28,15 @@ public class EducationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testInsertEducationService() throws Exception {
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Education education = new Education();
 		education.setCertification("TOEIC 430");
-//		education.setDegree("Master");
+		education.setMasdegreetype(education.getMasdegreetype());
 		education.setFaculty("Technology and Science");
 		education.setGpa(3.0);
+		education.setAuditFlag("C");
+		education.setCreatedBy(0);
+		education.setCreatedTimeStamp(dateFmt.parse("04/09/2015"));
 		educationService.create(education);
 	}
 
@@ -50,7 +56,7 @@ public class EducationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdEducationService() throws Exception {
-		educationService.deleteByApplicantId(2);
+		educationService.deleteById(2);
 	}
 
 	@Test
@@ -65,13 +71,14 @@ public class EducationServiceTest {
 	@Transactional
 	public void testFindAllEducationService() throws Exception {
 		List<Education> educations = educationService.findAll();
-		for (Education education : educations){
-			System.out.println("Education : " + education.getCertification());
-			System.out.println("Education : " + education.getFaculty());
-			System.out.println("Education : " + education.getGpa());
-			System.out.println("Education : " + education.getMajor());
-			System.out.println("Education : " + education.getUniversity());
-		}
+		assertNotNull(educations);
+//		for (Education education : educations){
+//			System.out.println("Education : " + education.getCertification());
+//			System.out.println("Education : " + education.getFaculty());
+//			System.out.println("Education : " + education.getGpa());
+//			System.out.println("Education : " + education.getMajor());
+//			System.out.println("Education : " + education.getUniversity());
+//		}
 	}
 
 }
