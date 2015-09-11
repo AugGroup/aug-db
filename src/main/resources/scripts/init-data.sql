@@ -291,10 +291,25 @@ VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แ�
 ('C201503','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Male','Buddha','Thai','(023) 234-5678','yam@gmail.com','Married',STR_TO_DATE('29/06/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(093) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Waiting for consider','25000','1111-1222-2334-6','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Not','I#24','C#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW()),
 ('C201504','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(024) 234-5678','yam@gmail.com','Married',STR_TO_DATE('28/06/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(094) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Waiting for consider','25000','1111-1222-2334-7','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','D#26','I#24','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW());
 
+
+
+--OFFICIAL
+INSERT INTO OFFICIAL(OFFICIAL_DATE,START_WORK_DATE,END_WORK_DATE,POSITION_APPLIED_FOR,SALARY_EXPECTED,PROBATION_DATE,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES (NOW(),'2010-03-04',NOW(),'Programmer',30000.00,NOW(),'C',0,NOW());
+
+
+
 --EMPLOYEE
 INSERT INTO EMPLOYEE (EMPLOYEE_CODE,NAME_THAI,NAME_ENG,TEL_HOME,TEL_MOBILE,EMERGENCY_CONTACT,
-EMERGENCY_CONTACT_PHONE_NUMBER,DATEOFBIRTH,ID_CARD,DIVISION_ID,JOBLEVEL_ID,TECHNOLOGY_ID,EMAIL,LOCATION_ID,EMPLOYMENT_ID,OFFICIAL_ID,STATUSEMP,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES
-('TH2009188','Bill','Bill',0811111111,0822222222,'Mom',191,'1991-01-01',12345678,1,1,1,'bill@gmail.com',1,1,1,'Employee','No','C',0,NOW());
+EMERGENCY_CONTACT_PHONE_NUMBER,DATEOFBIRTH,ID_CARD,DIVISION_ID,JOBLEVEL_ID,TECHNOLOGY_ID,EMAIL,LOCATION_ID,EMPLOYMENT_ID,OFFICIAL_ID,STATUSEMP,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,APPLICANT_ID) VALUES
+('TH2009188','Bill','Bill',0811111111,0822222222,'Mom',191,'1991-01-01',12345678,1,1,1,'bill@gmail.com',1,1,1,'Employee','C',0,NOW(),1);
+
+
+--LOGIN
+INSERT INTO LOGIN ( AUDITFLAG, CREATEDBY,CREATEDTIMESTAMP,USERNAME,PASSWORD,EMPLOYEE_ID,MAS_LOCATION_ID) VALUES
+('C',0,NOW(),'admin','password',1,1),
+('C',0,NOW(),'staff','password',1,2),
+('C',0,NOW(),'hr','password',1,2);
+
 
 
 --CERTIFICATION
@@ -319,11 +334,6 @@ VALUES ('1','C',0,NOW(),'THAMMASAT UNIVERSITY','1','COM','SCIENCE','3.0',STR_TO_
 
 
 
---LOGIN
-INSERT INTO LOGIN ( AUDITFLAG, CREATEDBY,CREATEDTIMESTAMP,USERNAME,PASSWORD,EMPLOYEE_ID,MAS_LOCATION_ID) VALUES
-('C',0,NOW(),'admin','password',1,1),
-('C',0,NOW(),'staff','password',2,2),
-('C',0,NOW(),'hr','password',3,2);
 
 
 --LOGINROLE
@@ -333,5 +343,5 @@ INSERT INTO LOGINROLE ( LOGIN_ID,MASROLE_ID) VALUES
 
 
 --REWARD
-INSERT INTO EMP_REWARD(TYPE_REWARD,YEAR,EMPLOYEE_ID)
-VALUES('nobel','1991',2);
+INSERT INTO REWARD(TYPE_REWARD,YEAR,EMPLOYEE_ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP)
+VALUES('nobel','1991',1,'C',0,NOW());
