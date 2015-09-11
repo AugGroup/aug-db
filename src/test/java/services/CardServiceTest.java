@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Card;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.services.CardService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,12 +23,16 @@ public class CardServiceTest {
 	
 	@Autowired
 	private CardService cardService;
+	private Employee employee = new Employee();
 	
 	@Test
 	@Rollback(false)
 	public void createDataCard(){
 		
 		Card card = new Card();
+		employee.setId(1);		
+		card.setEmployee(employee);
+		
 		card.setCard_no("111");
 		Calendar cal = Calendar.getInstance();
 		card.setStartdate(cal.getTime());

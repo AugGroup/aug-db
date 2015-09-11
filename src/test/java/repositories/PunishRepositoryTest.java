@@ -12,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import junit.framework.Assert;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.repositories.PunishRepository;
 
@@ -24,19 +25,23 @@ public class PunishRepositoryTest {
 	
 	@Autowired
 	private PunishRepository punishRepository;
-//	
-//	@Test
-//	@Rollback(false)
-//	public void createPunish(){
-//		Punish punish=new Punish();
-//		Calendar cal = Calendar.getInstance();
-//		punish.setDatepunish(cal.getTime());
-//		punish.setDescription("aaaa");
-//		punish.setPenalty("test");
-//		punishRepository.getCurrentSession().save(punish);
-//		
-//	}
-//	
+	private Employee employee = new Employee();
+	
+	@Test
+	@Rollback(false)
+	public void createPunish(){
+		Punish punish=new Punish();
+		employee.setId(1);
+		punish.setEmployee(employee);
+		
+		Calendar cal = Calendar.getInstance();
+		punish.setDatepunish(cal.getTime());
+		punish.setDescription("aaaa");
+		punish.setPenalty("test");
+		punishRepository.getCurrentSession().save(punish);
+		
+	}
+	
 	
 //	@Test
 //	@Rollback(false)

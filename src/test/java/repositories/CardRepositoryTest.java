@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import junit.framework.Assert;
 
 import com.aug.hrdb.entities.Card;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.CardRepository;
 
 
@@ -25,20 +26,23 @@ public class CardRepositoryTest {
 
 	@Autowired 
 	private CardRepository cardRepository;
+	private Employee employee = new Employee();
 	
-//	@Test
-//	@Rollback(false)
-//	public void createDataCard(){
-//		
-//		Card card=new Card();
-//		card.setCard_no("111");
-//		Calendar cal = Calendar.getInstance();
-//		card.setStartdate(cal.getTime());
-//		card.setEnddate(cal.getTime());
-//		card.setStatus("yes");
-//		card.setRemark("aaa");
-//		cardRepository.getCurrentSession().save(card);
-//	}
+	@Test
+	@Rollback(false)
+	public void createDataCard(){
+		
+		Card card=new Card();
+		employee.setId(1);
+		card.setEmployee(employee);
+		card.setCard_no("111");
+		Calendar cal = Calendar.getInstance();
+		card.setStartdate(cal.getTime());
+		card.setEnddate(cal.getTime());
+		card.setStatus("yes");
+		card.setRemark("aaa");
+		cardRepository.getCurrentSession().save(card);
+	}
 	
 
 //	@Test

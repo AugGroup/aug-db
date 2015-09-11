@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasSpecialty;
 import com.aug.hrdb.repositories.MasSpecialtyRepository;
 
@@ -27,7 +28,6 @@ public class MasSpecialtyRepositoryTest {
 //	@Rollback(false)
 //	public void createMasSpecialty(){
 //		MasSpecialty masSpecialty=new MasSpecialty();
-//   //	masSpecialty.setEmployee(null);
 //		masSpecialty.setName("Java");
 //		masSpecialty.setCode("01");
 //		masSpecialty.setIsActive(true);

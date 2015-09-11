@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.services.RewardService;
 
@@ -22,13 +23,16 @@ public class RewardServiceTest {
 	
 	@Autowired
 	private RewardService rewardService;
+	private Employee employee = new Employee();
 	
 	@Test
 	@Rollback(false)
 	public void createDataReward(){
 		
-		Reward reward=new Reward();
-	    reward.setEmployee(null);
+		Reward reward=new Reward();	
+		employee.setId(1);		
+		reward.setEmployee(employee);
+
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");

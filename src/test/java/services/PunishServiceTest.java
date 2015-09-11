@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.services.PunishService;
 
@@ -22,11 +23,15 @@ public class PunishServiceTest {
 	
 	@Autowired
 	private PunishService punishService;
+	private Employee employee = new Employee();
 	
 	@Test
 	@Rollback(false)
 	public void createDataPunish(){
 		Punish punish=new Punish();
+		employee.setId(1);		
+		punish.setEmployee(employee);
+		
 		Calendar cal = Calendar.getInstance();
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");

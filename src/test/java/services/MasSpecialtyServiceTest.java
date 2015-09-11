@@ -22,17 +22,17 @@ public class MasSpecialtyServiceTest {
 	@Autowired
 	private MasSpecialtyService masSpecialtyService;
 	
-	@Test
-	@Rollback(false)
-	public void createDataMasSpecialty(){
-		MasSpecialty masSpecialty=new MasSpecialty();
-   //	masSpecialty.setEmployee(null);
-		masSpecialty.setName("Java");
-		masSpecialty.setCode("01");
-		masSpecialty.setIsActive(true);
-	    masSpecialtyService.create(masSpecialty);
-	}
-	
+//	@Test
+//	@Rollback(false)
+//	public void createDataMasSpecialty(){
+//		MasSpecialty masSpecialty=new MasSpecialty();
+//   //	masSpecialty.setEmployee(null);
+//		masSpecialty.setName("Java");
+//		masSpecialty.setCode("01");
+//		masSpecialty.setIsActive(true);
+//	    masSpecialtyService.create(masSpecialty);
+//	}
+//	
 	
 //	@Test
 //	@Rollback(false)
