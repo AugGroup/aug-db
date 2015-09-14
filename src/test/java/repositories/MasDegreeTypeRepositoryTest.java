@@ -36,7 +36,7 @@ public class MasDegreeTypeRepositoryTest {
 		masDegreetype.setAuditFlag("C");
 		masDegreetype.setCreatedBy(1);
 		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeRepository.getCurrentSession().save(masDegreetype);
+		masDegreetypeRepository.create(masDegreetype);
 	}
 
 	/*@Test
@@ -46,7 +46,7 @@ public class MasDegreeTypeRepositoryTest {
 		masDegreetype.setName("DR");
 		masDegreetype.setCode("DE-01");
 		masDegreetype.setIsactive(true);
-		masDegreetypeRepository.getCurrentSession().update(masDegreetype);
+		masDegreetypeRepository.update(masDegreetype);
 	}*/
 	
 	/*@Test

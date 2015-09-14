@@ -5,6 +5,11 @@
  */
 package services;
 
+import java.util.Calendar;
+import java.util.List;
+
+import junit.framework.Assert;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Ability;
+import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasSpecialty;
 import com.aug.hrdb.services.AbilityService;
+import com.aug.hrdb.services.EmployeeService;
+import com.aug.hrdb.services.MasSpecialtyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -22,12 +31,22 @@ import com.aug.hrdb.services.AbilityService;
 public class AbilityServiceTest {
 	
 	@Autowired AbilityService abilityService;
+	@Autowired EmployeeService employeeService;
+	@Autowired MasSpecialtyService masSpecialtyService;
 	
 	@Test
 	@Rollback(false)
 	public void createAbility() {
+		
+		Employee employee=employeeService.findById(1);
+		MasSpecialty masSpecialty=masSpecialtyService.findById(1);
 		Ability ability=new Ability();
 		ability.setRank(10);
+		ability.setAuditFlag("C");
+		ability.setCreatedBy(1);
+		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		ability.setEmployee(employee);
+		ability.setMasspecialty(masSpecialty);
 		abilityService.create(ability);
 		
 	}
@@ -36,34 +55,35 @@ public class AbilityServiceTest {
 	@Rollback(false)
 	public void updateAbility() {
 	
-	Ability ability=(Ability)abilityService.find(2);
+	Ability ability=(Ability)abilityService.find(1);
 	ability.setRank(2);
 	abilityService.update(ability);
-	}
-*/
-	
-	/*@Test
+	}*/
+
+/*	
+	@Test
 	public void deleteAbility(){
-		Ability ability=abilityService.find(3);
+		Ability ability=abilityService.find(1);
 		abilityService.delete(ability);
-	}
-	*/
+	}*/
 	
-	/*@Test
+	/*
+	@Test
 	public void findAllDataAbility(){
 
 		List<Ability> ability = abilityService.findAll();
-		Assert.assertEquals(2, ability.size());
-	}
-	*/
+		Assert.assertEquals(1, ability.size());
+	}*/
 	
 	
-/*	@Test
+	/*
+	@SuppressWarnings("deprecation")
+	@Test
 	public void findDatabyIdAbility(){
 
-		Ability ability =(Ability) abilityService.find(2);
+		Ability ability =(Ability) abilityService.find(1);
 		int id = ability.getId();
-		Assert.assertEquals(2,id);
+		Assert.assertEquals(1,id);
 		
 		
 		

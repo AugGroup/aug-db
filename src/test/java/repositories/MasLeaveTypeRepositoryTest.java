@@ -36,20 +36,20 @@ public class MasLeaveTypeRepositoryTest {
 		masLeaveType.setCreatedBy(1);
 		masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
-		masLeaveTypeRepository.getCurrentSession().save(masLeaveType);
+		masLeaveTypeRepository.create(masLeaveType);
 	}
 	
 	
-	/*@Test
+/*	@Test
 	@Rollback(false)
 	public void updateMasLeaveType(){ 
 		
 		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class, 1);
 		masLeaveType.setName("Annual");
 		
-		masLeaveTypeRepository.getCurrentSession().update(masLeaveType);
-	}
-	*/
+		masLeaveTypeRepository.update(masLeaveType);
+	}*/
+	
 /*	@Test
 	@Rollback(false)
 	public void deletemasLeaveType(){ 

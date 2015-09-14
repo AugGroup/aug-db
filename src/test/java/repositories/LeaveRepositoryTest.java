@@ -66,30 +66,30 @@ public class LeaveRepositoryTest {
 		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		leave.setEmployee(employee);
 		leave.setMasleavetype(masLeaveType);
-		leaveRepository.getCurrentSession().save(leave);
+		leaveRepository.create(leave);
 	}
-	
-	
-	/*@Test
-	@Rollback(false)
-	public void updateLeave(){
-		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,3);
-		leave.setReason("sick2");
-		leave.setAim("girl2");
-		leave.setStartTimeString("04-09-2014 09:00");
-		leave.setEndTimeString("05-09-2014 16:00");
-		leaveRepository.getCurrentSession().update(leave);
-	}*/
-
 	
 	
 /*	@Test
 	@Rollback(false)
-	public void deleteLeave(){
-		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,3);
-		leaveRepository.getCurrentSession().delete(leave);
+	public void updateLeave(){
+		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,1);
+		leave.setReason("sick2");
+		leave.setAim("girl2");
+		leave.setStartTimeString("04-09-2014 09:00");
+		leave.setEndTimeString("05-09-2014 16:00");
+		leaveRepository.update(leave);
 	}*/
+
 	
+	
+	/*@Test
+	@Rollback(false)
+	public void deleteLeave(){
+		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,1);
+		leaveRepository.getCurrentSession().delete(leave);
+	}
+	*/
 	/*
 	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Test
