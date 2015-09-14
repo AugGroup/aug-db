@@ -37,7 +37,7 @@ public class ApplicantRepositoryTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testUpdateApplicantRepository() throws Exception {
-		Applicant applicant =applicantRepository.find(2);
+		Applicant applicant =applicantRepository.find(7);
 		applicant.setFirstNameEN("net");
 		applicant.setAuditFlag("U");
 		applicant.setCreatedBy(2);
@@ -49,7 +49,7 @@ public class ApplicantRepositoryTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdApplicantRepository() throws Exception {
-		applicantRepository.deleteById(6);
+		applicantRepository.deleteById(7);
 	}
 
 	@Test

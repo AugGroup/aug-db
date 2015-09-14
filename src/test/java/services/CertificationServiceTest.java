@@ -39,7 +39,7 @@ public class CertificationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testUpdateCertificationService() throws Exception {
-		Certification certification = certificationService.findById(5);
+		Certification certification = certificationService.findById(6);
 		certification.setName(".Net");
 		certification.setAuditFlag("U");
 		certification.setCreatedBy(1);
@@ -51,7 +51,7 @@ public class CertificationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdCertificationService() throws Exception {
-		certificationService.deleteById(4);
+		certificationService.deleteById(6);
 	}
 
 	@Test

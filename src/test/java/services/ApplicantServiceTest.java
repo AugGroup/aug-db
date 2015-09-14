@@ -46,7 +46,7 @@ public class ApplicantServiceTest {
 	@Test
 	@Rollback(value = false)
 	public void testUpdateApplicantService() {
-		Applicant applicant = applicantService.findById(2);
+		Applicant applicant = applicantService.findById(3);
 		applicant.setFirstNameEN("wan");
 		applicant.setAuditFlag("U");
 		applicant.setCreatedBy(1);
