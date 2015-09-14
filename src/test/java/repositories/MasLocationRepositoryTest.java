@@ -7,6 +7,7 @@ package repositories;
 
 import java.util.Calendar;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,31 @@ public class MasLocationRepositoryTest {
 	
 	@Autowired MasLocationRepository masLocationRepository;
 
+	
+	@Before
+	public void setValue(){
+		MasLocation masLocation = new MasLocation();
+		masLocation.setName("thailand");
+		masLocation.setCode("LO-01");
+		masLocation.setIsActive(true);
+		masLocation.setAuditFlag("C");
+		masLocation.setCreatedBy(1);
+		masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());	
+	    masLocationRepository.create(masLocation);
+	    
+	    
+	    MasLocation masLocation1 = new MasLocation();
+		masLocation1.setName("thailand");
+		masLocation1.setCode("LO-01");
+		masLocation1.setIsActive(true);
+		masLocation1.setAuditFlag("C");
+		masLocation1.setCreatedBy(1);
+		masLocation1.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+	    masLocationRepository.create(masLocation1);
+		
+	}
+	
 	@Test
 	@Rollback(false)
 	public void createMasLocation(){
@@ -37,23 +63,23 @@ public class MasLocationRepositoryTest {
 		masLocation.setCreatedBy(1);
 		masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
-	    masLocationRepository.getCurrentSession().save(masLocation);
+	    masLocationRepository.create(masLocation);
 		
 	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void updateMasLocation(){ 
 	MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
 	masLocation.setName("singpore");
-	masLocationRepository.getCurrentSession().update(masLocation);
-	}*/
+	masLocationRepository.update(masLocation);
+	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void deleteMasLocation(){ 
 		MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
-		masLocationRepository.getCurrentSession().delete(masLocation);
-	}*/
+		masLocationRepository.delete(masLocation);
+	}
 	
 }

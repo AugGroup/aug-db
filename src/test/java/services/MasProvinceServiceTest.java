@@ -9,8 +9,10 @@ package services;
 import java.util.Calendar;
 import java.util.List;
 
-import junit.framework.Assert;
 
+
+
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.repositories.MasProvinceRepository;
 import com.aug.hrdb.services.MasProvinceService;
@@ -33,7 +34,7 @@ public class MasProvinceServiceTest {
 	
 		@Autowired private MasProvinceService masProvinceService;
 		
-		/*@Test
+		@Test
 		@Rollback(false)
 		public void createMasProvince(){
 			
@@ -59,44 +60,44 @@ public class MasProvinceServiceTest {
 			
 			
 			masProvinceService.create(masProvince1);
-		}*/
+		}
 		
-		/*@Test
+		@Test
 		@Rollback(false)
 		public void updateMasProvince(){
 			
-			MasProvince masProvince=(MasProvince) masProvinceService.find(8);
+			MasProvince masProvince=(MasProvince) masProvinceService.find(1);
 			//System.out.println("id: "+masProvince.getId());
 			masProvince.setName("changmai");
 			masProvinceService.update(masProvince);
 			
 			
-		}*/
+		}
 		
-		/*@Test
+		@Test
 		@Rollback(false)
 		public void deleteMasProvince(){
 			
-			MasProvince masProvince = (MasProvince) masProvinceService.find(10);
+			MasProvince masProvince = (MasProvince) masProvinceService.find(2);
 			masProvinceService.delete(masProvince);
-		}*/
+		}
 
-		/*@Test
+		@Test
 		@Rollback(false)
 		public void findAllProvince(){
 
 			List<MasProvince> province = masProvinceService.findAll();
-			Assert.assertEquals(78, province.size());
-		}*/
+			Assert.assertEquals(2, province.size());
+		}
 		
 		
 		
 		@Test
 		public void findbyIdProvince(){
 
-			MasProvince masProvince =(MasProvince) masProvinceService.find(15);
+			MasProvince masProvince =(MasProvince) masProvinceService.find(1);
 			int id = masProvince.getId();
-			Assert.assertEquals(15,id);
+			Assert.assertEquals(1,id);
 			
 			
 			

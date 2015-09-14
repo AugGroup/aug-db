@@ -8,11 +8,17 @@ package services;
 import java.util.Calendar;
 import java.util.List;
 
-import junit.framework.Assert;
 
+
+
+
+
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +32,33 @@ import com.aug.hrdb.services.MasLocationService;
 public class MasLocationServiceTest {
 	@Autowired MasLocationService masLocationService;
 	
+	
+	@Before
+	public void setValue(){
+		MasLocation masLocation = new MasLocation();
+		masLocation.setName("thailand");
+		masLocation.setCode("LO-01");
+		masLocation.setIsActive(true);
+		masLocation.setAuditFlag("C");
+		masLocation.setCreatedBy(1);
+		masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());	
+		masLocationService.create(masLocation);
+	    
+	    
+	    MasLocation masLocation1 = new MasLocation();
+		masLocation1.setName("thailand");
+		masLocation1.setCode("LO-01");
+		masLocation1.setIsActive(true);
+		masLocation1.setAuditFlag("C");
+		masLocation1.setCreatedBy(1);
+		masLocation1.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masLocationService.create(masLocation1);
+		
+	}
+	
 	@Test
+	@Rollback(false)
 	public void create(){
 		MasLocation masLocation=new MasLocation();
 		masLocation.setName("Thailand");
@@ -41,33 +73,37 @@ public class MasLocationServiceTest {
 
 	
 	
-	/*@Test
+	@Test
+	@Rollback(false)
 	public void update(){
 		MasLocation masLocation=(MasLocation)masLocationService.find(1);
 		masLocation.setName("SG");
 		masLocationService.update(masLocation);
 		
-	}*/
+	}
 	
-/*	@Test
+	@Test
+	@Rollback(false)
 	public void delete(){
 
-		MasLocation masLocation=masLocationService.find(1);
+		MasLocation masLocation=masLocationService.find(3);
 		masLocationService.delete(masLocation);
-	}*/
+	}
 	
-/*	@SuppressWarnings("deprecation")
+	
 	@Test
+	@Rollback(false)
 	public void findAll(){
 		List<MasLocation>masLocations=masLocationService.findAll();
-		Assert.assertEquals(4,masLocations.size());
+		Assert.assertEquals(6,masLocations.size());
 	}
-	*/
-	/*@SuppressWarnings("deprecation")
+	
+	
 	@Test
+	@Rollback(false)
 	public void findById(){
 		MasLocation masLocation=masLocationService.find(1);
 		int id = masLocation.getId();
 		Assert.assertEquals(1,id);
-	}*/
+	}
 }

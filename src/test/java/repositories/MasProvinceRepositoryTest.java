@@ -46,24 +46,24 @@ public class MasProvinceRepositoryTest {
 		masProvinceRepository.getCurrentSession().save(masProvince);
 	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void updateMasProvince(){
 		
-		MasProvince masProvince=(MasProvince)masProvinceRepository.getCurrentSession().get(MasProvince.class,5);
+		MasProvince masProvince=(MasProvince)masProvinceRepository.getCurrentSession().get(MasProvince.class,1);
 		//System.out.println("id: "+masProvince.getId());
 		masProvince.setName("changmai");
 		masProvinceRepository.getCurrentSession().update(masProvince);
 		
 		
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void deleteMasProvince(){
 		
-		MasProvince masProvince = (MasProvince) masProvinceRepository.getCurrentSession().get(MasProvince.class,5);
+		MasProvince masProvince = (MasProvince) masProvinceRepository.getCurrentSession().get(MasProvince.class,1);
 		masProvinceRepository.getCurrentSession().delete(masProvince);
-	}*/
+	}
 
 }

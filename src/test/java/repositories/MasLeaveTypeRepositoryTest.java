@@ -7,6 +7,7 @@ package repositories;
 
 import java.util.Calendar;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,20 @@ public class MasLeaveTypeRepositoryTest {
 
 	@Autowired private MasLeaveTypeRepository masLeaveTypeRepository;
 	
+	
+	@Before
+	public void setValue(){
+		MasLeaveType masLeaveType=new MasLeaveType();
+		masLeaveType.setName("Holiday1");
+		masLeaveType.setCode("MD-01");
+		masLeaveType.setIsactive(true);
+		masLeaveType.setAuditFlag("C");
+		masLeaveType.setCreatedBy(1);
+		masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masLeaveTypeRepository.create(masLeaveType);
+	}
+	
 	@Test
 	@Rollback(false)
 	public void createMasLeaveType(){
@@ -40,21 +55,21 @@ public class MasLeaveTypeRepositoryTest {
 	}
 	
 	
-/*	@Test
+	@Test
 	@Rollback(false)
 	public void updateMasLeaveType(){ 
 		
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class, 1);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class, 2);
 		masLeaveType.setName("Annual");
 		
 		masLeaveTypeRepository.update(masLeaveType);
-	}*/
+	}
 	
-/*	@Test
+	@Test
 	@Rollback(false)
 	public void deletemasLeaveType(){ 
 		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class,1);
 		masLeaveTypeRepository.getCurrentSession().delete(masLeaveType);
 		
-	}*/
+	}
 }
