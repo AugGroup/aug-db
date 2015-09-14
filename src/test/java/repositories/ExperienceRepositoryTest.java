@@ -48,28 +48,34 @@ public class ExperienceRepositoryTest {
 		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
 
 		experienceRepository.getCurrentSession().save(experience);
+		System.out.println("ExperienceId : "+experience.getId());
 		System.out.println("ExperienceRepositoryTest : " + experience.getDateTo());
+
 	}
 
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void findByIdExperienceRepositoryTest() {
 		Experience experience = experienceRepository.find(1);
-		System.out.println("Experience Address : "+experience.getAddress());
+		System.out.println("Experience Address : "+experience.getName());
 
 	}
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void findAllExperienceRepositoryTest() {
 		List<Experience> experience = experienceRepository.findAll();
-		//System.out.println("Experience Address : "+experience.getAddress());
-
+		for(Experience exp : experience){
+		System.out.println("Experience Address : "+exp.getName());
+		}
 	}
 	
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void updateExperienceRepositoryTest() {
-		Experience experience = experienceRepository.find(1);
+		Experience experience = experienceRepository.find(2);
 		experience.setCompanyName("companyNameUpdateTest ");
 		experience.setAuditFlag("U");
 		experience.setCreatedBy(1);

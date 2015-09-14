@@ -2,8 +2,10 @@ package services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Locale;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,13 @@ public class ExperienceServiceTest {
 	private ExperienceService experienceService;
 
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void insertExperienceServiceTest() throws ParseException {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",
 				Locale.ENGLISH);
 		Experience experience = new Experience();
 
-		experience.setId(1);
 		experience.setAddress("ExperienceAddressTest");
 		experience.setTypeOfBusiness("TypeTest");
 		experience.setCompanyName("companyNameTest");
@@ -39,12 +41,17 @@ public class ExperienceServiceTest {
 		experience.setReference("referenceTest");
 		experience.setResponsibility("responsibilityTest");
 		experience.setSalary(40000);
+		
+		experience.setAuditFlag("C");
+		experience.setCreatedBy(1);
+		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
 
 		experienceService.create(experience);
 		System.out.println("ExperienceServiceTest " + experience.getDateTo());
 	}
 	
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void findByIdExperienceServiceTest() {
 		Experience experience = experienceService.findById(1);
@@ -53,20 +60,25 @@ public class ExperienceServiceTest {
 	}
 	
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void updateExperienceServiceTest() {
-		Experience experience = experienceService.findById(1);
+		Experience experience = experienceService.findById(4);
 		experience.setCompanyName("companyNameUpdateServiceTest ");
+		experience.setAuditFlag("U");
+		experience.setCreatedBy(1);
+		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		experienceService.update(experience);
-		System.out.println("Experience Name : " + experience.getCompanyName());
+		System.out.println("Experience Name : " + experience.getId());
 
 	}
 	
 	@Test
+	@Ignore
 	@Rollback(false)
 	public void deleteByIdExperienceServiceTest() {
 		//Experience experience =  experienceService.findById(5);
-		experienceService.deleteById(5);
+		experienceService.deleteById(7);
 		System.out.println("Delete Experience : " + experienceService.findById(5));
 	}
 
