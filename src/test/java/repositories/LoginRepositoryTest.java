@@ -32,7 +32,7 @@ public class LoginRepositoryTest {
 	public void createLogin(){
 		
 		Login login =new Login();	
-		employee.setId(1);
+		employee.setId(9);
 		login.setEmployee(employee);
 		
 		login.setUsername("Kik");

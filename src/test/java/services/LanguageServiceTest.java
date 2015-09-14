@@ -18,7 +18,9 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Ability;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Language;
+import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.LanguageService;
 
 
@@ -28,10 +30,12 @@ import com.aug.hrdb.services.LanguageService;
 public class LanguageServiceTest {
 
 	@Autowired LanguageService languageService;
+	@Autowired ApplicantService applicantService;
 	
 	@Test
 	@Rollback(false)
 	public void create() {
+		Applicant applicant=applicantService.findById(1);
 		Language language=new Language();
 		language.setNameLanguage("Thai");
 		 language.setSpeaking("good");
@@ -41,6 +45,7 @@ public class LanguageServiceTest {
 		 language.setAuditFlag("C");
 		 language.setCreatedBy(1);
 		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 language.setApplicant(applicant);
 		 languageService.create(language);
 		
 	}
