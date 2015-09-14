@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -27,36 +28,40 @@ public class MasRoleRepositoryTest {
 
 	@Autowired MasRoleRepository masRoleRepository;
 	
-//	@Test
-//	public void create() {
-//
-//		MasRole masRole = new MasRole();
-//		masRole.setType("User");
-//		masRole.setIsActive(true);
-//
-//		masRoleRepository.getCurrentSession().save(masRole);
-//
-//	}
+	@Test
+	public void create() {
 
-//	@Test
-//	public void update() {
-//
-//		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-//				MasRole.class, 1);
-//		masRole.setName("IT");
-//
-//		masRoleRepository.getCurrentSession().update(masRole);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-//				MasRole.class, 1);
-//
-//		masRoleRepository.getCurrentSession().delete(masRole);
-//	}
-//
+		MasRole masRole = new MasRole();
+		masRole.setType("User");
+		masRole.setIsActive(true);
+
+		masRole.setAuditFlag("C");
+		masRole.setCreatedBy(1);
+		masRole.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masRoleRepository.getCurrentSession().save(masRole);
+
+	}
+
+	@Test
+	public void update() {
+
+		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
+				MasRole.class, 1);
+		masRole.setName("IT");
+
+		masRoleRepository.getCurrentSession().update(masRole);
+	}
+
+	@Test
+	public void Delete() {
+
+		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
+				MasRole.class, 1);
+
+		masRoleRepository.getCurrentSession().delete(masRole);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void list() {
@@ -64,7 +69,7 @@ public class MasRoleRepositoryTest {
 		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
 				MasRole.class);
 		List<MasRole> masRoles = c.list();
-		Assert.assertEquals(0, masRoles.size());
+		Assert.assertEquals(3, masRoles.size());
 
 	}
 }

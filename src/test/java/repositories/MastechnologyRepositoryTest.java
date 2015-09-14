@@ -8,7 +8,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,7 +24,6 @@ public class MastechnologyRepositoryTest {
 	private MasTechnologyRepository masTechnologyRepository;
 	
 	@Test
-	@Rollback(false)
 	public void createMasTechnology(){
 		
 		
@@ -42,35 +40,42 @@ public class MastechnologyRepositoryTest {
 	}
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void updateMasTechnology(){
-//		
-//		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 1);
-//		masTech.setName("SAP");
-//		masTechnologyRepository.getCurrentSession().update(masTech);
-//		
-//	}
-//	
-//	
-//	@Test
-//	@Rollback(false)
-//	public void deleteMasTechnology(){
-//		
-//		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 3);
-//		masTechnologyRepository.getCurrentSession().delete(masTech);;
-//		
-//	}
-//	
-//	
-//	@Test
-//	public void findByIdMasTechnology(){
-//		
-//		MasTechnology masTechnology = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 1);		
-//		int id = masTechnology.getId();
-//		Assert.assertEquals(3, id);
-//		
-//	}
+	@Test
+	public void updateMasTechnology(){
+		
+		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 1);
+		masTech.setName("SAP");
+		masTechnologyRepository.getCurrentSession().update(masTech);
+		
+	}
 	
+	
+	@Test
+	public void deleteMasTechnology(){
+		
+		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 1);
+		masTechnologyRepository.getCurrentSession().delete(masTech);;
+		
+	}
+	
+	
+	@Test
+	public void findByIdMasTechnology(){
+		
+		MasTechnology masTechnology = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, 1);		
+		int id = masTechnology.getId();
+		Assert.assertEquals(1, id);
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void list() {
 
+		Criteria c = masTechnologyRepository.getCurrentSession().createCriteria(
+				MasTechnology.class);
+		List<MasTechnology> masTechnologies = c.list();
+		Assert.assertEquals(9, masTechnologies.size());
+
+	}
 }

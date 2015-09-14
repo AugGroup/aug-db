@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -27,38 +28,43 @@ public class MasAllowancesRepositoryTest {
 	@Autowired
 	private MasAllowancesRepository masAllowancesRepository;
 
-//	@Test
-//	public void create() {
-//
-//		MasAllowances masAllowances = new MasAllowances();
-//		masAllowances.setAllowances_type("Mother");
-//		masAllowances.setAmount_allowances(40000d);
-//		masAllowances.setCode("004A");
-//		masAllowances.setIsactive(true);
-//
-//		masAllowancesRepository.getCurrentSession().save(masAllowances);
-//
-//	}
+	@Test
+	public void create() {
 
-//	@Test
-//	public void update() {
-//
-//		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-//				MasAllowances.class, 1);
-//		masAllowances.setAllowances_type("Father");
-//
-//		masAllowancesRepository.getCurrentSession().update(masAllowances);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-//				MasAllowances.class, 1);
-//
-//		masAllowancesRepository.getCurrentSession().delete(masAllowances);
-//	}
-//
+		MasAllowances masAllowances = new MasAllowances();
+		
+		masAllowances.setAllowances_type("Mother");
+		masAllowances.setAmount_allowances(40000d);
+		masAllowances.setCode("004A");
+		masAllowances.setIsactive(true);
+		
+		masAllowances.setAuditFlag("C");
+		masAllowances.setCreatedBy(1);
+		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
+
+		masAllowancesRepository.getCurrentSession().save(masAllowances);
+
+	}
+
+	@Test
+	public void update() {
+
+		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
+				MasAllowances.class, 1);
+		masAllowances.setAllowances_type("Father");
+
+		masAllowancesRepository.getCurrentSession().update(masAllowances);
+	}
+
+	@Test
+	public void Delete() {
+
+		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
+				MasAllowances.class, 1);
+
+		masAllowancesRepository.getCurrentSession().delete(masAllowances);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void list() {
@@ -66,7 +72,7 @@ public class MasAllowancesRepositoryTest {
 		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
 				MasAllowances.class);
 		List<MasAllowances> masAllowances = c.list();
-		Assert.assertEquals(0, masAllowances.size());
+		Assert.assertEquals(27, masAllowances.size());
 
 	}
 }

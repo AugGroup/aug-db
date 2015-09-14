@@ -7,6 +7,7 @@ package repositories;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -20,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAllowances;
 import com.aug.hrdb.repositories.AllowancesRepository;
 import com.aug.hrdb.repositories.MasAllowancesRepository;
@@ -36,39 +38,47 @@ public class AllowancesRepositoryTest {
 	@Autowired
 	private MasAllowancesRepository  masAllowancesRepository;
 	
-//	@Test
-//	public void create() throws ParseException {
-//
-//		Allowances allowances = new Allowances();
-//		
-//		allowances.setAmount(6000d);
-//		
-//		MasAllowances masallowances = masAllowancesRepository.find(1);
-//		allowances.setMasallowances(masallowances);
-//		
-//		allowancesRepository.getCurrentSession().save(allowances);
-//
-//	}
+	@Test
+	public void create() throws ParseException {
 
-//	@Test
-//	public void update() {
-//
-//		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-//				Allowances.class, 1);
-//		allowances.setAmount(6000d);
-//
-//		allowancesRepository.getCurrentSession().update(allowances);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-//				Allowances.class, 1);
-//
-//		allowancesRepository.getCurrentSession().delete(allowances);
-//	}
-//
+		Allowances allowances = new Allowances();
+		
+		allowances.setAmount(6000d);
+		
+		allowances.setAuditFlag("C");
+		allowances.setCreatedBy(1);
+		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		MasAllowances masallowances = masAllowancesRepository.find(1);
+		allowances.setMasallowances(masallowances);
+		
+		Employee employee = new Employee();
+		employee.setId(1);
+		allowances.setEmployee(employee);
+		
+		allowancesRepository.getCurrentSession().save(allowances);
+
+	}
+
+	@Test
+	public void update() {
+
+		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
+				Allowances.class, 1);
+		allowances.setAmount(1000d);
+
+		allowancesRepository.getCurrentSession().update(allowances);
+	}
+
+	@Test
+	public void Delete() {
+
+		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
+				Allowances.class, 1);
+
+		allowancesRepository.getCurrentSession().delete(allowances);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void list() {
@@ -76,7 +86,7 @@ public class AllowancesRepositoryTest {
 		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
 				Allowances.class);
 		List<Allowances> allowances = c.list();
-		Assert.assertEquals(0, allowances.size());
+		Assert.assertEquals(2, allowances.size());
 
 	}
 }

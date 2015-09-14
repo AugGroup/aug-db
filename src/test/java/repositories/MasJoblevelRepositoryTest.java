@@ -5,6 +5,7 @@
  */
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -26,37 +27,41 @@ public class MasJoblevelRepositoryTest {
 
 	@Autowired MasJoblevelRepository masJoblevelRepository;
 	
-//	@Test
-//	public void create() {
-//
-//		MasJoblevel masJoblevel = new MasJoblevel();
-//		masJoblevel.setName("CEO");
-//		masJoblevel.setIsActive(true);
-//		masJoblevel.setCode("01");
-//
-//		masJoblevelRepository.getCurrentSession().save(masJoblevel);
-//
-//	}
+	@Test
+	public void create() {
 
-//	@Test
-//	public void update() {
-//
-//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-//				MasJoblevel.class, 1);
-//		masJoblevel.setName("IT");
-//
-//		masJoblevelRepository.getCurrentSession().update(masJoblevel);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-//				MasJoblevel.class, 1);
-//
-//		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
-//	}
-//
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+
+		masJoblevelRepository.getCurrentSession().save(masJoblevel);
+
+	}
+
+	@Test
+	public void update() {
+
+		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+				MasJoblevel.class, 1);
+		masJoblevel.setName("IT");
+
+		masJoblevelRepository.getCurrentSession().update(masJoblevel);
+	}
+
+	@Test
+	public void Delete() {
+
+		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+				MasJoblevel.class, 1);
+
+		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Test
 	public void list() {
@@ -64,7 +69,7 @@ public class MasJoblevelRepositoryTest {
 		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
 				MasJoblevel.class);
 		List<MasJoblevel> masJoblevels = c.list();
-		Assert.assertEquals(0, masJoblevels.size());
+		Assert.assertEquals(14, masJoblevels.size());
 
 	}
 }
