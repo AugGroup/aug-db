@@ -2,6 +2,7 @@ package repositories;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -28,6 +29,9 @@ public class CertificationRepositoryTest {
 		public void testInsertCertificationRepository() throws Exception {
 			Certification certification = new Certification();
 			certification.setName("Java");
+			certification.setAuditFlag("C");
+			certification.setCreatedBy(1);
+			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			certificationRepository.create(certification);
 		}
 		
@@ -35,8 +39,11 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = false)
 		public void testUpdateCertificationRepository() throws Exception {
-			Certification certification = certificationRepository.find(7);
+			Certification certification = certificationRepository.find(5);
 			certification.setName(".Net");
+			certification.setAuditFlag("U");
+			certification.setCreatedBy(2);
+			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			certificationRepository.update(certification);
 		}
 		
@@ -44,13 +51,13 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = false)
 		public void testDeleteByIdCertificationRepository() throws Exception {
-			certificationRepository.deleteById(6);
+			certificationRepository.deleteById(4);
 		}
 
 		@Test
 		@Transactional
 		public void testFindByIdCertificateRepository() throws Exception {
-			Certification certification = certificationRepository.find(6);
+			Certification certification = certificationRepository.find(3);
 			assertNotNull(certification.getName());
 			
 		}

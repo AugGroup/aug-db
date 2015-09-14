@@ -2,6 +2,7 @@ package services;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Test;
@@ -28,6 +29,9 @@ public class CertificationServiceTest {
 	public void testInsertCertificationService() throws Exception {
 		Certification certification = new Certification();
 		certification.setName("Java");
+		certification.setAuditFlag("C");
+		certification.setCreatedBy(1);
+		certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		certificationService.create(certification);
 	}
 	
@@ -35,8 +39,11 @@ public class CertificationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testUpdateCertificationService() throws Exception {
-		Certification certification = certificationService.findById(5);
+		Certification certification = certificationService.findById(6);
 		certification.setName(".Net");
+		certification.setAuditFlag("U");
+		certification.setCreatedBy(1);
+		certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		certificationService.update(certification);
 	}
 	
@@ -44,7 +51,7 @@ public class CertificationServiceTest {
 	@Transactional
 	@Rollback(value = false)
 	public void testDeleteByIdCertificationService() throws Exception {
-		certificationService.deleteById(4);
+		certificationService.deleteById(6);
 	}
 
 	@Test
