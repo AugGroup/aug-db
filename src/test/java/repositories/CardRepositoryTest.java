@@ -17,6 +17,7 @@ import junit.framework.Assert;
 import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.CardRepository;
+import com.aug.hrdb.repositories.EmployeeRepository;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,12 +27,15 @@ public class CardRepositoryTest {
 
 	@Autowired 
 	private CardRepository cardRepository;
-	private Employee employee = new Employee();
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
 	
 	@Test
 	@Rollback(false)
 	public void createDataCard(){
 		
+		Employee employee =  employeeRepository.find(1);
 		Card card=new Card();
 		employee.setId(1);
 		card.setEmployee(employee);
@@ -41,20 +45,25 @@ public class CardRepositoryTest {
 		card.setEnddate(cal.getTime());
 		card.setStatus("yes");
 		card.setRemark("aaa");
-		cardRepository.getCurrentSession().save(card);
+		cardRepository.create(card);
 	}
 	
 
+	
 //	@Test
 //	@Rollback(false)
 //	public void updateCard(){
 //		
-//		Card card = (Card)cardRepository.find(1);
+//		Card card = (Card)cardRepository.getCurrentSession().get(Card.class,3);
 //		card.setStatus("no");
 //		card.setRemark("bbbb");
 //		cardRepository.update(card);
 //	}
+//	
 	
+	
+	
+//	
 //	@Test
 //	@Rollback(false)
 //	public void deleteCard(){
@@ -65,14 +74,7 @@ public class CardRepositoryTest {
 //	
 	
 	
-//	@Test
-//	public void listCard(){
-//		
-//		Criteria c = cardRepository.getCurrentSession().createCriteria(Card.class);
-//		List<Card> CardList = c.list();
-//		Assert.assertEquals(2, CardList.size());
-//		
-//	}
+
 
 //	
 //	@Test

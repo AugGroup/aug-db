@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Reward;
+import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.RewardService;
 
 
@@ -23,16 +24,18 @@ public class RewardServiceTest {
 	
 	@Autowired
 	private RewardService rewardService;
-	private Employee employee = new Employee();
+	@Autowired
+	private EmployeeService EmployeeService;
+	
 	
 	@Test
 	@Rollback(false)
 	public void createDataReward(){
 		
+		Employee employee=EmployeeService.findById(1);		
 		Reward reward=new Reward();	
 		employee.setId(1);		
 		reward.setEmployee(employee);
-
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");
@@ -49,14 +52,14 @@ public class RewardServiceTest {
 //	@Test
 //	@Rollback(false)
 //	public void updateDataReward(){
-//		Reward reward= rewardService.findById(2);
+//		Reward reward=(Reward)rewardService.findById(2);
 //		reward.setTypereward("b");
 //		reward.setYear("2015");
 //		reward.setReason("rrrrr");
 //		rewardService.update(reward);
 //		
 //	}
-//	
+	
 
 	
 	

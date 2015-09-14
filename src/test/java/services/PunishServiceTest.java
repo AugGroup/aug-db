@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Punish;
+import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.PunishService;
 
 
@@ -23,15 +24,17 @@ public class PunishServiceTest {
 	
 	@Autowired
 	private PunishService punishService;
-	private Employee employee = new Employee();
+	@Autowired
+	private EmployeeService EmployeeService;
 	
 	@Test
 	@Rollback(false)
 	public void createDataPunish(){
+		
+		Employee employee=EmployeeService.findById(1);	
 		Punish punish=new Punish();
 		employee.setId(1);		
-		punish.setEmployee(employee);
-		
+		punish.setEmployee(employee);	
 		Calendar cal = Calendar.getInstance();
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");
@@ -40,14 +43,14 @@ public class PunishServiceTest {
 	}
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void updateDataPunish(){
-//		Punish punish= punishService.findById(2);
-//		punish.setDescription("aaaa");
-//		punishService.update(punish);
-//		
-//	}
+	@Test
+	@Rollback(false)
+	public void updateDataPunish(){
+		Punish punish= (Punish)punishService.findById(2);
+		punish.setDescription("aaaa");
+		punishService.update(punish);
+		
+	}
 	
 
 	

@@ -14,6 +14,7 @@ import junit.framework.Assert;
 
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Punish;
+import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.PunishRepository;
 
 
@@ -25,20 +26,24 @@ public class PunishRepositoryTest {
 	
 	@Autowired
 	private PunishRepository punishRepository;
-	private Employee employee = new Employee();
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	
 	
 	@Test
 	@Rollback(false)
 	public void createPunish(){
+		
+		Employee employee =  employeeRepository.find(1);
 		Punish punish=new Punish();
 		employee.setId(1);
-		punish.setEmployee(employee);
-		
+		punish.setEmployee(employee);	
 		Calendar cal = Calendar.getInstance();
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");
-		punish.setPenalty("test");
-		punishRepository.getCurrentSession().save(punish);
+		punish.setPenalty("test");		
+		punishRepository.create(punish);
 		
 	}
 	
@@ -47,28 +52,24 @@ public class PunishRepositoryTest {
 //	@Rollback(false)
 //	public void updatePunish(){
 //		
-//		Punish punish = (Punish)punishRepository.find(1);
-//		punish.setDescription("bbb");;	
+//		Punish punish = (Punish) punishRepository.getCurrentSession().get(Punish.class,3);
+//		Calendar cal = Calendar.getInstance();
+//		punish.setDatepunish(cal.getTime());
+//		punish.setDescription("bbb");
+//		punish.setPenalty("test");
 //		punishRepository.update(punish);
 //	}
+	
 	
 //	@Test
 //	@Rollback(false)
 //	public void deletePunish(){
 //		
-//		Punish punish = (Punish) punishRepository.getCurrentSession().get(Punish.class,1);
+//		Punish punish = (Punish) punishRepository.getCurrentSession().get(Punish.class,3);
 //		punishRepository.getCurrentSession().delete(punish);
 //	}
 	
 	
-//	@Test
-//	public void listPunish(){
-//		
-//		Criteria c = punishRepository.getCurrentSession().createCriteria(Punish.class);
-//		List<Punish> PunishList = c.list();
-//		Assert.assertEquals(2, PunishList.size());
-//		
-//	}
 
 	
 //	@Test
@@ -79,7 +80,7 @@ public class PunishRepositoryTest {
 //		Assert.assertEquals(1, id);
 //		
 //	}
-//	
+	
 	
 	
 

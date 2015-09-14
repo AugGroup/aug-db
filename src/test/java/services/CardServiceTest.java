@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.services.CardService;
+import com.aug.hrdb.services.EmployeeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -23,16 +24,17 @@ public class CardServiceTest {
 	
 	@Autowired
 	private CardService cardService;
-	private Employee employee = new Employee();
+	@Autowired
+	private EmployeeService EmployeeService;
 	
 	@Test
 	@Rollback(false)
 	public void createDataCard(){
 		
+		Employee employee=EmployeeService.findById(1);	
 		Card card = new Card();
 		employee.setId(1);		
-		card.setEmployee(employee);
-		
+		card.setEmployee(employee);		
 		card.setCard_no("111");
 		Calendar cal = Calendar.getInstance();
 		card.setStartdate(cal.getTime());

@@ -1,5 +1,6 @@
 package repositories;
 
+import java.util.Calendar;
 import java.util.List;
 import org.hibernate.Criteria;
 import junit.framework.Assert;
@@ -24,15 +25,19 @@ public class MasSpecialtyRepositoryTest {
 	private MasSpecialtyRepository masSpecialtyRepository;
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void createMasSpecialty(){
-//		MasSpecialty masSpecialty=new MasSpecialty();
-//		masSpecialty.setName("Java");
-//		masSpecialty.setCode("01");
-//		masSpecialty.setIsActive(true);
-//		masSpecialtyRepository.getCurrentSession().save(masSpecialty);
-//	}
+	@Test
+	@Rollback(false)
+	public void createMasSpecialty(){
+		MasSpecialty masSpecialty=new MasSpecialty();
+		masSpecialty.setName("Java");
+		masSpecialty.setCode("01");
+		masSpecialty.setIsActive(true);
+		masSpecialty.setAuditFlag("C");
+		masSpecialty.setCreatedBy(1);	
+		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masSpecialtyRepository.create(masSpecialty);
+	}
+
 	
 	
 //	@Test
@@ -43,9 +48,14 @@ public class MasSpecialtyRepositoryTest {
 //		masSpecialty.setName(".net");
 //		masSpecialty.setCode("02");
 //		masSpecialty.setIsActive(true);
+//		masSpecialty.setAuditFlag("C");
+//		masSpecialty.setCreatedBy(1);	
+//		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
 //		masSpecialtyRepository.update(masSpecialty);
 //	}
 //	
+	
+	
 	
 //	@Test
 //	@Rollback(false)
@@ -54,7 +64,9 @@ public class MasSpecialtyRepositoryTest {
 //		MasSpecialty masSpecialty = (MasSpecialty) masSpecialtyRepository.getCurrentSession().get(MasSpecialty.class,1);
 //		masSpecialtyRepository.getCurrentSession().delete(masSpecialty);
 //	}
-//	
+
+	
+	
 	
 //	@Test
 //	public void listMasSpecialty(){

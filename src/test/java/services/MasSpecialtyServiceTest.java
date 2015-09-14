@@ -2,6 +2,7 @@ package services;
 
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.List;
 import org.junit.Assert;
 import org.junit.runner.RunWith;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasSpecialty;
+import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasSpecialtyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,30 +23,37 @@ public class MasSpecialtyServiceTest {
 
 	@Autowired
 	private MasSpecialtyService masSpecialtyService;
+	@Autowired
+	private EmployeeService EmployeeService;
 	
-//	@Test
-//	@Rollback(false)
-//	public void createDataMasSpecialty(){
-//		MasSpecialty masSpecialty=new MasSpecialty();
-//   //	masSpecialty.setEmployee(null);
-//		masSpecialty.setName("Java");
-//		masSpecialty.setCode("01");
-//		masSpecialty.setIsActive(true);
-//	    masSpecialtyService.create(masSpecialty);
-//	}
-//	
+	@Test
+	@Rollback(false)
+	public void createDataMasSpecialty(){
+		MasSpecialty masSpecialty=new MasSpecialty();
+		masSpecialty.setName("Java");
+		masSpecialty.setCode("01");
+		masSpecialty.setIsActive(true);
+		masSpecialty.setAuditFlag("C");
+		masSpecialty.setCreatedBy(1);	
+		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	    masSpecialtyService.create(masSpecialty);
+	}
+	
 	
 //	@Test
 //	@Rollback(false)
 //	public void updateDataMasSpecialty(){
 //		
-//		MasSpecialty masSpecialty = masSpecialtyService.findById(1);
+//		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyService.findById(1);
 //		masSpecialty.setName(".net");
 //		masSpecialty.setCode("02");
 //		masSpecialty.setIsActive(true);
+//		masSpecialty.setAuditFlag("C");
+//		masSpecialty.setCreatedBy(1);	
+//		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
 //		masSpecialtyService.update(masSpecialty);
 //	}
-	
+//	
 	
 //	@Test
 //	public void deleteDataMasSpecialty(){
