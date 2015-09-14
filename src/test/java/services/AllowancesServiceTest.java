@@ -6,10 +6,10 @@
 package services;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Allowances;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAllowances;
-import com.aug.hrdb.repositories.MasAddressTypeRepository;
-import com.aug.hrdb.repositories.MasAllowancesRepository;
 import com.aug.hrdb.services.AllowancesService;
 import com.aug.hrdb.services.MasAllowancesService;
 
@@ -36,10 +34,6 @@ public class AllowancesServiceTest {
 	@Autowired
 	private MasAllowancesService masAllowancesService;
 	
-	private MasAllowances masAllowances = new MasAllowances();
-	
-	private Employee employee = new Employee();
-	
 	@Test
 	public void create() throws ParseException{
 
@@ -52,32 +46,54 @@ public class AllowancesServiceTest {
 		Calendar cal = Calendar.getInstance();
 		allowances.setCreatedTimeStamp(cal.getTime());
 		
-//		masAllowances = masAllowancesService.find(1);
-		masAllowances.setId(3);
+		MasAllowances masAllowances = new MasAllowances();
+		masAllowances = masAllowancesService.find(1);
 		allowances.setMasallowances(masAllowances);
 		
+		Employee employee = new Employee();
 		employee.setId(1);
 		allowances.setEmployee(employee);
 		
 		allowancesService.create(allowances);
 	}
-//	
-//	@Test
-//	public void update(){
-//
-//		Allowances allowances = allowancesService.findById(2);
-//		allowances.setAmount(600077d);
-//		allowancesService.update(allowances);
-//		
-//	}
-//	
-//	@Test
-//	public void delete(){
-//
-//		Allowances allowances = allowancesService.findById(2);
-//		allowancesService.delete(allowances);
-//		
-//	}
+	
+	@Test
+	public void update(){
+
+		Allowances allowances = allowancesService.findById(2);
+		allowances.setAmount(600077d);
+		allowancesService.update(allowances);
+		
+	}
+	
+	@Test
+	public void delete(){
+
+		Allowances allowances = allowancesService.findById(2);
+		allowancesService.delete(allowances);
+		
+	}
+	
+	@Test
+	public void findAllData(){
+
+		List<Allowances> allowances = allowancesService.findAll();
+		Assert.assertEquals(2, allowances.size());
+	}
+	
+	@Test
+	public void findDatabyId(){
+
+		Allowances allowances =(Allowances) allowancesService.findById(2);
+		int id = allowances.getId();
+		Assert.assertEquals(2,id);
+		
+	}
+	
+	@Test
+	public void deleteDatabyId(){
+		allowancesService.deleteById(2);
+	}
 	
 	
 }

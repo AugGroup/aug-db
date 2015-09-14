@@ -42,28 +42,28 @@ public class MasRoleServiceTest {
 		masRoleService.create(masRole);
 	}
 	
-//	@Test
-//	public void update(){
-//
-//		MasRole masRole = masRoleService.find(2);
-//		masRole.setType("Admin");
-//		masRoleService.update(masRole);
-//		
-//	}
-//	
-//	@Test
-//	public void delete(){
-//
-//		MasRole masRole = masRoleService.find(2);
-//		masRoleService.delete(masRole);
-//		
-//	}
-//	
-//	
-//	@Test
-//	public void findAll(){
-//
-//		List<MasRole> masRole = masRoleService.findAll();
-//		Assert.assertEquals(3, masRole.size());
-//	}
+	@Test
+	public void update(){
+
+		MasRole masRole = masRoleService.find(2);
+		masRole.setType("Admin");
+		masRoleService.update(masRole);
+		
+	}
+	
+	@Test
+	public void delete(){
+
+		MasRole masRole = masRoleService.find(2);
+		masRoleService.delete(masRole);
+		
+	}
+	
+	
+	@Test
+	public void findAll(){
+
+		List<MasRole> masRole = masRoleService.findAll();
+		Assert.assertEquals(3, masRole.size());
+	}
 }

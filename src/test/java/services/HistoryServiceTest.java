@@ -19,6 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.History;
 import com.aug.hrdb.services.HistoryService;
 
@@ -30,48 +31,52 @@ public class HistoryServiceTest {
 	@Autowired
 	private HistoryService historyService;
 	
-//	@Test
-//	public void create() throws ParseException{
-//
-//		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
-//				Locale.ENGLISH);
-//		
-//		History history = new History();
-//		history.setPosition("Java");
-//		history.setSalary(30000d);
-//		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
-//		
-//		history.setAuditFlag("C");
-//		history.setCreatedBy(0);
-//		Calendar cal = Calendar.getInstance();
-//		history.setCreatedTimeStamp(cal.getTime());
-//		
-//		historyService.create(history);
-//	}
+	@Test
+	public void create() throws ParseException{
+
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
+				Locale.ENGLISH);
+		
+		History history = new History();
+		history.setPosition("Java");
+		history.setSalary(30000d);
+		history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
+		
+		history.setAuditFlag("C");
+		history.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		history.setCreatedTimeStamp(cal.getTime());
+		
+		Employee employee = new Employee();
+		employee.setId(1);
+		history.setEmployee(employee);
+		
+		historyService.create(history);
+	}
 	
-//	@Test
-//	public void update(){
-//
-//		History history = historyService.findById(2);
-//		history.setPosition(".Net");
-//		historyService.update(history);
-//		
-//	}
-//	
-//	@Test
-//	public void delete(){
-//
-//		History history = historyService.findById(2);
-//		historyService.delete(history);
-//		
-//	}
-//	
-//	
+	@Test
+	public void update(){
+
+		History history = historyService.findById(2);
+		history.setPosition(".Net");
+		historyService.update(history);
+		
+	}
+	
+	@Test
+	public void delete(){
+
+		History history = historyService.findById(2);
+		historyService.delete(history);
+		
+	}
+	
+	
 	@Test
 	public void findAll(){
 
 		List<History> history = historyService.findAll();
-		Assert.assertEquals(0, history.size());
+		Assert.assertEquals(2, history.size());
 	}
 	
 }

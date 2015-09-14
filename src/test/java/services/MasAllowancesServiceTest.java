@@ -44,37 +44,38 @@ public class MasAllowancesServiceTest {
 		masAllowancesService.create(masAllowances);
 	}
 	
-//	@Test
-//	public void update(){
-//
-//		MasAllowances masAllowances = masAllowancesService.find(2);
-//		masAllowances.setAllowances_type("Father");
-//		masAllowancesService.update(masAllowances);
-//		
-//	}
-//	
-//	@Test
-//	public void delete(){
-//
-//		MasAllowances masAllowances = masAllowancesService.find(2);
-//		masAllowancesService.delete(masAllowances);
-//		
-//	}
-//	
-//	
-//	@Test
-//	public void findAll(){
-//
-//		List<MasAllowances> masAllowances = masAllowancesService.findAll();
-//		Assert.assertEquals(3, masAllowances.size());
-//	}
-//	
-//	
-//	@Test
-//	public void findbyId(){
-//
-//		MasAllowances  masAllowances = masAllowancesService.find(2);
-//		Assert.assertEquals("Mother",masAllowances.getAllowances_type());
-//		
-//	}
+	@Test
+	public void update(){
+
+		MasAllowances masAllowances = masAllowancesService.find(2);
+		masAllowances.setAllowances_type("Father");
+		masAllowancesService.update(masAllowances);
+		
+	}
+	
+	@Test
+	public void delete(){
+
+		MasAllowances masAllowances = masAllowancesService.find(2);
+		masAllowancesService.delete(masAllowances);
+		
+	}
+	
+	
+	@Test
+	public void findAll(){
+
+		List<MasAllowances> masAllowances = masAllowancesService.findAll();
+		Assert.assertEquals(27, masAllowances.size());
+	}
+	
+	
+	@Test
+	public void findbyId(){
+
+		MasAllowances  masAllowances = masAllowancesService.find(2);
+		int id = masAllowances.getId();
+		Assert.assertEquals(2,id);
+		
+	}
 }
