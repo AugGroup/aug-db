@@ -104,14 +104,6 @@ public class EmployeeRepositoryTest {
         employee.setTelHome("089-0851022");
         employee.setTelMobile("089-0851022");
         employee.setEmergencyContactPhoneNumber("089-085-1022");
-        
-        
-        Applicant applicant = applicantRepository.find(1);
-        Hibernate.initialize(applicant);
-        
-        
-        employee.setApplicant(applicant);
-         
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -123,8 +115,23 @@ public class EmployeeRepositoryTest {
 	@Rollback(false)
 	public void create() {
 		
+		Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicant.setAuditFlag("1");
+		applicantRepository.create(applicant);
+		
+        
+        Applicant applicant1 = applicantRepository.find(1);
+        Hibernate.initialize(applicant1);
+        
+        
+        employee.setApplicant(applicant);
+         
 
-	    //create masdivision
+	
 		MasDivision masDivision = new MasDivision();
 		masDivision.setName("CEO");
 		masDivision.setIsActive(true);
@@ -579,7 +586,7 @@ public class EmployeeRepositoryTest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void reportEmployee() {
 		
 		//search last id of EMPLOYEE

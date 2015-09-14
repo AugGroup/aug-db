@@ -1,4 +1,3 @@
-<?xml  version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
            xmlns:mvc="http://www.springframework.org/schema/mvc"
            xmlns:context="http://www.springframework.org/schema/context"
@@ -7,48 +6,56 @@
            xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
            xmlns:p="http://www.springframework.org/schema/p" xmlns:tx="http://www.springframework.org/schema/tx"
            xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+           xmlns:jdbc="http://www.springframework.org/schema/jdbc"
            xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
-        http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.1.xsd
-        http://www.springframework.org/schema/mvc
-        http://www.springframework.org/schema/mvc/spring-mvc.xsd
-        http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+       	   http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-2.1.xsd
+           http://www.springframework.org/schema/integration/stream http://www.springframework.org/schema/integration/stream/spring-integration-stream-2.1.xsd
+           http://www.springframework.org/schema/mvc
+           http://www.springframework.org/schema/mvc/spring-mvc.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd 
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd 
+           http://www.springframework.org/schema/data/jpa 
+           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+           http://www.springframework.org/schema/jdbc 
+           http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 
-
-    <context:annotation-config/>
-    <context:component-scan base-package="com.aug.hrdb.dto"/>
+	<context:annotation-config/>
     <context:component-scan base-package="com.aug.hrdb.repositories"/>
     <context:component-scan base-package="com.aug.hrdb.services"/>
     <tx:annotation-driven/>
-
-    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/aug_hr_db"/>
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-    </bean>
-<!-- 
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="username" value="sa"/>
-        <property name="password" value="sa"/>
-        <property name="url" value="jdbc:h2:mem:test"/>
-        <property name="driverClassName" value="org.h2.Driver"/>
+    
+    <!-- <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+         <property name="username" value="sa"/>
+         <property name="password" value="sa"/>
+         <property name="url" value="jdbc:h2:mem:test"/>
+         <property name="driverClassName" value="org.h2.Driver"/>
     </bean> -->
+    
+
+    <bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource">
+        <property name="URL" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
+        <property name="user" value="sa"/>
+        <property name="password" value=""/>
+    </bean>
+
+    <jdbc:initialize-database>
+        <jdbc:script location="classpath:scripts/schema.sql"/>
+        <jdbc:script location="classpath:scripts/test-data.sql"/>
+    </jdbc:initialize-database>
 
 
-
-    <!--Hibernate SessionFactory using p name space -->
+	<!--Hibernate SessionFactory using p name space -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:hibernate.cfg.xml"
           p:packagesToScan="com.aug.hrdb.entities"/>
 
 
-<!--     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/> -->
-
+	<!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/> -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
