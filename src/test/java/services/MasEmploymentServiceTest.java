@@ -6,6 +6,7 @@
 
 package services;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
@@ -39,38 +40,41 @@ public class MasEmploymentServiceTest {
 		masEmployment.setName("WWWWW");
 		masEmployment.setCode("001W");
 		masEmployment.setIsActive(true);
+		masEmployment.setAuditFlag("C");
+		masEmployment.setCreatedBy(1);
+		masEmployment.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masEmploymentService.create(masEmployment);
 		
 	}
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void update(){
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(1);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(5);
 		masEmployment.setName("BBBBB");
 		masEmploymentService.update(masEmployment);
 		
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void delete() {
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(1);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(5);
 		masEmploymentService.delete(masEmployment);
 		
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void findAll(){
 		
 		List<MasEmployment> masEmployments = masEmploymentService.findAll();
-		Assert.assertEquals(1, masEmployments.size());
+		Assert.assertEquals(3, masEmployments.size());
 		
-	}
+	}*/
 	
 	
 	@Test

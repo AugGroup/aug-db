@@ -39,49 +39,52 @@ public class OfficialServiceTest {
 		official.setOfficialDate(cal.getTime());
 		official.setStartWorkDate(cal.getTime());
 		official.setEndWorkDate(cal.getTime());
-		official.setPositionAppliedFor("Programmer");
+		official.setPositionAppliedFor("Account");
 		official.setSalaryExpected("500000000");
 		official.setProbationDate(cal.getTime());
+		official.setAuditFlag("C");
+		official.setCreatedBy(1);
+		official.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		officialService.create(official);
 		
 	}
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void updateOfficial(){
 		
-		Official official = (Official)officialService.findById(2);
-		official.setPositionAppliedFor("Account");
+		Official official = (Official)officialService.findById(5);
+		official.setPositionAppliedFor("Developper");
 		officialService.update(official);
 		
 	}
-	
+	*/
 
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void deleteOfficial(){
 		
-		Official official = (Official)officialService.findById(2);
+		Official official = (Official)officialService.findById(6);
 		officialService.delete(official);
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void findAllOfficial(){
 
 		List<Official> ability = officialService.findAll();
-		Assert.assertEquals(2, ability.size());
+		Assert.assertEquals(3, ability.size());
 	}
-	
+	*/
 	
 	
 	@Test
 	public void findbyIdOfficial(){
 
-		Official official =(Official) officialService.findById(2);
+		Official official =(Official) officialService.findById(4);
 		int id = official.getId();
-		Assert.assertEquals(2,id);
+		Assert.assertEquals(4,id);
 		
 		
 		

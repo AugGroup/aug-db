@@ -6,6 +6,12 @@
 
 package repositories;
 
+import java.util.Calendar;
+import java.util.List;
+
+import junit.framework.Assert;
+
+import org.hibernate.Criteria;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +36,18 @@ public class MasEmploymentRepositoryTest {
 	public void create() {
 		
 		MasEmployment masEmployment = new MasEmployment();
-		masEmployment.setName("AAAA");
+		masEmployment.setName("BBBBB");
 		masEmployment.setCode("B05");
 		masEmployment.setIsActive(true);
+		masEmployment.setAuditFlag("C");
+		masEmployment.setCreatedBy(1);
+		masEmployment.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masEmploymentRepository.getCurrentSession().save(masEmployment);
 		
 	}
 	
-	@Test
+	/*@Test
 	@Rollback(false)
 	public void updateMasEmployment(){
 		
@@ -46,27 +55,27 @@ public class MasEmploymentRepositoryTest {
 			masEmployment.setName("Office");
 			masEmploymentRepository.getCurrentSession().update(masEmployment);
 	}
-	
-	@Test
+	*/
+	/*@Test
 	@Rollback(false)
 	public void deleteMasEmployment(){
-		MasEmployment masEmployment = (MasEmployment) masEmploymentRepository.getCurrentSession().get(MasEmployment.class, 1);
+		MasEmployment masEmployment = (MasEmployment) masEmploymentRepository.getCurrentSession().get(MasEmployment.class, 4);
 		masEmploymentRepository.getCurrentSession().delete(masEmployment);;
-	}
+	}*/
 
 	/*@Test
 	public void listMasEmployment(){
-		Criteria cri= masEmploymentDao.getCurrentSession().createCriteria(MasEmployment.class);
+		Criteria cri= masEmploymentRepository.getCurrentSession().createCriteria(MasEmployment.class);
 		List<MasEmployment> masEmploymentList = cri.list();
-		Assert.assertEquals(1, masEmploymentList.size());
+		Assert.assertEquals(3, masEmploymentList.size());
 	}
-	
+	*/
 	@Test
 	public void findByIdMasEmployment(){
 		
-		MasEmployment masEmployment = (MasEmployment) masEmploymentDao.getCurrentSession().get(MasEmployment.class, 1);		
+		MasEmployment masEmployment = (MasEmployment) masEmploymentRepository.getCurrentSession().get(MasEmployment.class, 1);		
 		int id = masEmployment.getId();
 		Assert.assertEquals(1, id);
 		
-	}*/
+	}
 }
