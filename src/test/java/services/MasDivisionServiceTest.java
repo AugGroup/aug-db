@@ -41,28 +41,28 @@ public class MasDivisionServiceTest {
 		masDivisionServices.create(masDivision);
 	}
 	
-	@Test
-	public void updateDatamasDivision(){
-
-		MasDivision masDivision = masDivisionServices.findById(2);
-		masDivision.setName("JAVA");
-		masDivisionServices.update(masDivision);
-		
-	}
-	
-	@Test
-	public void deleteDatamasDivision(){
-
-		MasDivision masDivision = masDivisionServices.findById(2);
-		masDivisionServices.delete(masDivision);
-		
-	}
-	
-	@Test
-	public void findbyIdmasDivision(){
-
-		MasDivision  masDivision = masDivisionServices.findById(2);
-		Assert.assertEquals("JAVA",masDivision.getName());
-		
-	}
+//	@Test
+//	public void updateDatamasDivision(){
+//
+//		MasDivision masDivision = masDivisionServices.findById(2);
+//		masDivision.setName("JAVA");
+//		masDivisionServices.update(masDivision);
+//		
+//	}
+//	
+//	@Test
+//	public void deleteDatamasDivision(){
+//
+//		MasDivision masDivision = masDivisionServices.findById(2);
+//		masDivisionServices.delete(masDivision);
+//		
+//	}
+//	
+//	@Test
+//	public void findbyIdmasDivision(){
+//
+//		MasDivision  masDivision = masDivisionServices.findById(2);
+//		Assert.assertEquals("JAVA",masDivision.getName());
+//		
+//	}
 }

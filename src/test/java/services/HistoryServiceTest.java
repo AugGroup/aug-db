@@ -54,29 +54,29 @@ public class HistoryServiceTest {
 		historyService.create(history);
 	}
 	
-	@Test
-	public void update(){
-
-		History history = historyService.findById(2);
-		history.setPosition(".Net");
-		historyService.update(history);
-		
-	}
-	
-	@Test
-	public void delete(){
-
-		History history = historyService.findById(2);
-		historyService.delete(history);
-		
-	}
-	
-	
-	@Test
-	public void findAll(){
-
-		List<History> history = historyService.findAll();
-		Assert.assertEquals(2, history.size());
-	}
+//	@Test
+//	public void update(){
+//
+//		History history = historyService.findById(2);
+//		history.setPosition(".Net");
+//		historyService.update(history);
+//		
+//	}
+//	
+//	@Test
+//	public void delete(){
+//
+//		History history = historyService.findById(2);
+//		historyService.delete(history);
+//		
+//	}
+//	
+//	
+//	@Test
+//	public void findAll(){
+//
+//		List<History> history = historyService.findAll();
+//		Assert.assertEquals(2, history.size());
+//	}
 	
 }

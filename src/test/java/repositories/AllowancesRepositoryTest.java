@@ -60,33 +60,33 @@ public class AllowancesRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, 1);
-		allowances.setAmount(1000d);
-
-		allowancesRepository.getCurrentSession().update(allowances);
-	}
-
-	@Test
-	public void Delete() {
-
-		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, 1);
-
-		allowancesRepository.getCurrentSession().delete(allowances);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
-				Allowances.class);
-		List<Allowances> allowances = c.list();
-		Assert.assertEquals(2, allowances.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
+//				Allowances.class, 1);
+//		allowances.setAmount(1000d);
+//
+//		allowancesRepository.getCurrentSession().update(allowances);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
+//				Allowances.class, 1);
+//
+//		allowancesRepository.getCurrentSession().delete(allowances);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
+//				Allowances.class);
+//		List<Allowances> allowances = c.list();
+//		Assert.assertEquals(2, allowances.size());
+//
+//	}
 }

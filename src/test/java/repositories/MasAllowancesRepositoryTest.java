@@ -46,33 +46,33 @@ public class MasAllowancesRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-				MasAllowances.class, 1);
-		masAllowances.setAllowances_type("Father");
-
-		masAllowancesRepository.getCurrentSession().update(masAllowances);
-	}
-
-	@Test
-	public void Delete() {
-
-		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-				MasAllowances.class, 1);
-
-		masAllowancesRepository.getCurrentSession().delete(masAllowances);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
-				MasAllowances.class);
-		List<MasAllowances> masAllowances = c.list();
-		Assert.assertEquals(27, masAllowances.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
+//				MasAllowances.class, 1);
+//		masAllowances.setAllowances_type("Father");
+//
+//		masAllowancesRepository.getCurrentSession().update(masAllowances);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
+//				MasAllowances.class, 1);
+//
+//		masAllowancesRepository.getCurrentSession().delete(masAllowances);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
+//				MasAllowances.class);
+//		List<MasAllowances> masAllowances = c.list();
+//		Assert.assertEquals(27, masAllowances.size());
+//
+//	}
 }

@@ -43,33 +43,33 @@ public class MasRoleRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-				MasRole.class, 1);
-		masRole.setName("IT");
-
-		masRoleRepository.getCurrentSession().update(masRole);
-	}
-
-	@Test
-	public void Delete() {
-
-		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-				MasRole.class, 1);
-
-		masRoleRepository.getCurrentSession().delete(masRole);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
-				MasRole.class);
-		List<MasRole> masRoles = c.list();
-		Assert.assertEquals(3, masRoles.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
+//				MasRole.class, 1);
+//		masRole.setName("IT");
+//
+//		masRoleRepository.getCurrentSession().update(masRole);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
+//				MasRole.class, 1);
+//
+//		masRoleRepository.getCurrentSession().delete(masRole);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
+//				MasRole.class);
+//		List<MasRole> masRoles = c.list();
+//		Assert.assertEquals(3, masRoles.size());
+//
+//	}
 }

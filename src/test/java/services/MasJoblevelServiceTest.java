@@ -44,38 +44,38 @@ public class MasJoblevelServiceTest {
 		masJoblevelServices.create(masJoblevel);
 	}
 	
-	@Test
-	public void update(){
-
-		MasJoblevel masJoblevel = masJoblevelServices.find(2);
-		masJoblevel.setName("JAVA");
-		masJoblevelServices.update(masJoblevel);
-		
-	}
-	
-	@Test
-	public void delete(){
-
-		MasJoblevel masJoblevel = masJoblevelServices.find(2);
-		masJoblevelServices.delete(masJoblevel);
-		
-	}
-	
-	
-	@Test
-	public void findAll(){
-
-		List<MasJoblevel> masJoblevel = masJoblevelServices.findAll();
-		Assert.assertEquals(14, masJoblevel.size());
-	}
-	
-	
-	@Test
-	public void findbyId(){
-
-		MasJoblevel  masJoblevel = masJoblevelServices.find(2);
-		Assert.assertEquals("Account Manager",masJoblevel.getName());
-		
-	}
+//	@Test
+//	public void update(){
+//
+//		MasJoblevel masJoblevel = masJoblevelServices.find(2);
+//		masJoblevel.setName("JAVA");
+//		masJoblevelServices.update(masJoblevel);
+//		
+//	}
+//	
+//	@Test
+//	public void delete(){
+//
+//		MasJoblevel masJoblevel = masJoblevelServices.find(2);
+//		masJoblevelServices.delete(masJoblevel);
+//		
+//	}
+//	
+//	
+//	@Test
+//	public void findAll(){
+//
+//		List<MasJoblevel> masJoblevel = masJoblevelServices.findAll();
+//		Assert.assertEquals(14, masJoblevel.size());
+//	}
+//	
+//	
+//	@Test
+//	public void findbyId(){
+//
+//		MasJoblevel  masJoblevel = masJoblevelServices.find(2);
+//		Assert.assertEquals("Account Manager",masJoblevel.getName());
+//		
+//	}
 	
 }

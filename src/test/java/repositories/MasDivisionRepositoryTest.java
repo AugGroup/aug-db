@@ -44,33 +44,33 @@ public class MasDivisionRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
-				MasDivision.class, 1);
-		masDivision.setName("IT");
-
-		masDivisionRepository.getCurrentSession().update(masDivision);
-	}
-
-	@Test
-	public void Delete() {
-
-		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
-				MasDivision.class, 1);
-
-		masDivisionRepository.getCurrentSession().delete(masDivision);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
-				MasDivision.class);
-		List<MasDivision> masDivisions = c.list();
-		Assert.assertEquals(6, masDivisions.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
+//				MasDivision.class, 1);
+//		masDivision.setName("IT");
+//
+//		masDivisionRepository.getCurrentSession().update(masDivision);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
+//				MasDivision.class, 1);
+//
+//		masDivisionRepository.getCurrentSession().delete(masDivision);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
+//				MasDivision.class);
+//		List<MasDivision> masDivisions = c.list();
+//		Assert.assertEquals(6, masDivisions.size());
+//
+//	}
 }

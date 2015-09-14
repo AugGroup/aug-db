@@ -56,33 +56,33 @@ public class HistoryRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		History history = (History) historyRepository.getCurrentSession().get(
-				History.class, 1);
-		history.setPosition(".Net");
-
-		historyRepository.getCurrentSession().update(history);
-	}
-
-	@Test
-	public void Delete() {
-
-		History history = (History) historyRepository.getCurrentSession().get(
-				History.class, 1);
-
-		historyRepository.getCurrentSession().delete(history);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = historyRepository.getCurrentSession().createCriteria(
-				History.class);
-		List<History> histories = c.list();
-		Assert.assertEquals(2, histories.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		History history = (History) historyRepository.getCurrentSession().get(
+//				History.class, 1);
+//		history.setPosition(".Net");
+//
+//		historyRepository.getCurrentSession().update(history);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		History history = (History) historyRepository.getCurrentSession().get(
+//				History.class, 1);
+//
+//		historyRepository.getCurrentSession().delete(history);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = historyRepository.getCurrentSession().createCriteria(
+//				History.class);
+//		List<History> histories = c.list();
+//		Assert.assertEquals(2, histories.size());
+//
+//	}
 }

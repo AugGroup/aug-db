@@ -43,33 +43,33 @@ public class MasJoblevelRepositoryTest {
 
 	}
 
-	@Test
-	public void update() {
-
-		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-				MasJoblevel.class, 1);
-		masJoblevel.setName("IT");
-
-		masJoblevelRepository.getCurrentSession().update(masJoblevel);
-	}
-
-	@Test
-	public void Delete() {
-
-		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-				MasJoblevel.class, 1);
-
-		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	public void list() {
-
-		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
-				MasJoblevel.class);
-		List<MasJoblevel> masJoblevels = c.list();
-		Assert.assertEquals(14, masJoblevels.size());
-
-	}
+//	@Test
+//	public void update() {
+//
+//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+//				MasJoblevel.class, 1);
+//		masJoblevel.setName("IT");
+//
+//		masJoblevelRepository.getCurrentSession().update(masJoblevel);
+//	}
+//
+//	@Test
+//	public void Delete() {
+//
+//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+//				MasJoblevel.class, 1);
+//
+//		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
+//	}
+//
+//	@SuppressWarnings("unchecked")
+//	@Test
+//	public void list() {
+//
+//		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
+//				MasJoblevel.class);
+//		List<MasJoblevel> masJoblevels = c.list();
+//		Assert.assertEquals(14, masJoblevels.size());
+//
+//	}
 }

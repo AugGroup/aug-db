@@ -57,43 +57,43 @@ public class AllowancesServiceTest {
 		allowancesService.create(allowances);
 	}
 	
-	@Test
-	public void update(){
-
-		Allowances allowances = allowancesService.findById(2);
-		allowances.setAmount(600077d);
-		allowancesService.update(allowances);
-		
-	}
-	
-	@Test
-	public void delete(){
-
-		Allowances allowances = allowancesService.findById(2);
-		allowancesService.delete(allowances);
-		
-	}
-	
-	@Test
-	public void findAllData(){
-
-		List<Allowances> allowances = allowancesService.findAll();
-		Assert.assertEquals(2, allowances.size());
-	}
-	
-	@Test
-	public void findDatabyId(){
-
-		Allowances allowances =(Allowances) allowancesService.findById(2);
-		int id = allowances.getId();
-		Assert.assertEquals(2,id);
-		
-	}
-	
-	@Test
-	public void deleteDatabyId(){
-		allowancesService.deleteById(2);
-	}
+//	@Test
+//	public void update(){
+//
+//		Allowances allowances = allowancesService.findById(2);
+//		allowances.setAmount(600077d);
+//		allowancesService.update(allowances);
+//		
+//	}
+//	
+//	@Test
+//	public void delete(){
+//
+//		Allowances allowances = allowancesService.findById(2);
+//		allowancesService.delete(allowances);
+//		
+//	}
+//	
+//	@Test
+//	public void findAllData(){
+//
+//		List<Allowances> allowances = allowancesService.findAll();
+//		Assert.assertEquals(2, allowances.size());
+//	}
+//	
+//	@Test
+//	public void findDatabyId(){
+//
+//		Allowances allowances =(Allowances) allowancesService.findById(2);
+//		int id = allowances.getId();
+//		Assert.assertEquals(2,id);
+//		
+//	}
+//	
+//	@Test
+//	public void deleteDatabyId(){
+//		allowancesService.deleteById(2);
+//	}
 	
 	
 }
