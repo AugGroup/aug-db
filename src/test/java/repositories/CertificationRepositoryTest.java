@@ -21,12 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Certification;
-import com.aug.hrdb.entities.Education;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasDegreetype;
-import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
-import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.CertificationRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
@@ -45,11 +40,9 @@ public class CertificationRepositoryTest {
 		private ApplicantRepository applicantRepository;
 		@Autowired
 		private MasJoblevelRepository masJoblevelRepository;
-		@Autowired
-		private MasDivisionRepository masDivisionRepository;
 		
 		@Before
-		public void setCertification() throws ParseException {
+		public void setCertificationRepository() throws ParseException {
 	        
 	        Applicant applicant = new Applicant();
 	        applicant.setCardId("115310905001-9");
