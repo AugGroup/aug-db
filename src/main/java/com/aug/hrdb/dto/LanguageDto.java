@@ -15,10 +15,10 @@ import org.hibernate.annotations.NamedNativeQuery;
             		 query = "select language.ID as ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING as SPEAKKING, "
                       		+ "language.READING as READING, "
-                      		+ "language.UNDERSTANDIND as UNDERSTANDDING, "
+                      		+ "language.UNDERSTANDING as UNDERSTANDDING, "
                       		+ "language.WRITING as WRITING "
                       		+ "from LANGUAGE as language,APPLICANT as app, EMPLOYEE as emp  "
-                      		+ "where emp.id =: empId and emp.applicant_id = ref.applicant_id", 
+                      		+ "where emp.id =:empId and emp.applicant_id = language.applicant_id", 
                resultClass = LanguageDto.class)
   })
 

@@ -31,11 +31,11 @@ import javax.persistence.NamedNativeQuery;
             		+ "mas_division.name as divisionName, "
             		+ "mas_technology.name as technologyName "
             		+ "from employee as emp "
-            		+ "join emp_official as official on emp.official_id = official.id "
+            		+ "join official as official on emp.official_id = official.id "
             		+ "join mas_employment on emp.employment_id = mas_employment.id "
             		+ "join mas_division on emp.division_id = mas_division.id "
             		+ "join mas_technology on emp.technology_id = mas_technology.id "
-            		+"join emp_experience as exp on exp.employee_id =emp.id "
+            		+ "join experience as exp on exp.employee_id =emp.id "
             		+ "where emp.name_eng like :name", 
             resultClass = ReportEmployeeDto.class),
             @NamedNativeQuery(

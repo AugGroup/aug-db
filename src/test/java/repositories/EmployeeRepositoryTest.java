@@ -77,6 +77,7 @@ public class EmployeeRepositoryTest {
 	@Before
     public void setUp() {
 		
+		
         employee = new Employee();
         employee.setIdCard("115310905001-9");
         employee.setNameThai("อภิวาท์");
@@ -115,6 +116,7 @@ public class EmployeeRepositoryTest {
 	@Rollback(false)
 	public void create() {
 		
+		
 		Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -123,12 +125,11 @@ public class EmployeeRepositoryTest {
 		applicant.setAuditFlag("1");
 		applicantRepository.create(applicant);
 		
-        
         Applicant applicant1 = applicantRepository.find(1);
         Hibernate.initialize(applicant1);
         
         
-        employee.setApplicant(applicant);
+        employee.setApplicant(applicant1);
          
 
 	
@@ -185,6 +186,15 @@ public class EmployeeRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void saveByNameQueryNullIsMangerAndAimID() {
+		
+
+			Applicant applicant = new Applicant();
+			applicant.setCreatedBy(1);
+			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			applicant.setAuditFlag("C");
+			applicant.setCardId("115310905001-9");
+			applicant.setAuditFlag("1");
+			applicantRepository.create(applicant);
 		
 		    
 		    MasEmployment masEmployment  = new MasEmployment();
@@ -288,10 +298,10 @@ public class EmployeeRepositoryTest {
 			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
 	        
 	        
-	        Applicant applicant = applicantRepository.find(1);
-	        Hibernate.initialize(applicant);
+	        Applicant applicant1 = applicantRepository.find(2);
+	        Hibernate.initialize(applicant1);
 	        
-	        employeeDto.setApplicateId(applicant.getId());
+	        employeeDto.setApplicateId(applicant1.getId());
 	         
 	        MasDivision masDivision = masDivisionRepository.find(1);
 	        
@@ -302,7 +312,7 @@ public class EmployeeRepositoryTest {
 	        
 	        MasEmployment masEmployment2  = masEmploymentRepository.find(1);
 	        
-	        employeeDto.setMasEmployment(masEmployment.getId());
+	        employeeDto.setMasEmployment(masEmployment2.getId());
 	        
 	        MasTechnology masTechnology2 = masTechnologyRepository.find(1);
 	        employeeDto.setTechnology(masTechnology2.getId());
@@ -312,7 +322,7 @@ public class EmployeeRepositoryTest {
 	        employeeDto.setMasCoreSkill(masCoreSkill2.getId());
 	        
 	        MasStaffType masStaffType2 = masStaffTypeRepository.find(1);
-	        employeeDto.setMasStaffType(masStaffType.getId());
+	        employeeDto.setMasStaffType(masStaffType2.getId());
 	        
 	        MasLocation masLocation2 = masLocationRepository.find(1);
 	        employeeDto.setMasLocationId(masLocation2.getId());
@@ -364,11 +374,19 @@ public class EmployeeRepositoryTest {
 			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
 			employeeDto.setAimempid(1);
 	        
+			
+			Applicant applicant = new Applicant();
+			applicant.setCreatedBy(1);
+			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			applicant.setAuditFlag("C");
+			applicant.setCardId("115310905001-9");
+			applicant.setAuditFlag("1");
+			applicantRepository.create(applicant);
+			
+	        Applicant applicant1 = applicantRepository.find(5);
+	        Hibernate.initialize(applicant1);
 	        
-	        Applicant applicant = applicantRepository.find(1);
-	        Hibernate.initialize(applicant);
-	        
-	        employeeDto.setApplicateId(applicant.getId());
+	        employeeDto.setApplicateId(applicant1.getId());
 	         
 	        MasDivision masDivision = masDivisionRepository.find(1);	        
 	        employeeDto.setMasDivision(masDivision.getId());
@@ -392,7 +410,7 @@ public class EmployeeRepositoryTest {
 	        MasLocation masLocation2 = masLocationRepository.find(1);
 	        employeeDto.setMasLocationId(masLocation2.getId());
 	        
-	        Official official2 = officialRepository.find(1);
+	        Official official2 = officialRepository.find(2);
 	        employeeDto.setOfficialId(official2.getId());
 	      
 	        employeeRepository.saveByNameQuery(employeeDto);
@@ -408,6 +426,7 @@ public class EmployeeRepositoryTest {
 	@Rollback(false)
 	public void saveByNameQueryNotNullIsMangerAndNullAimID() {
 		
+			
 		    
 		 	EmployeeDto employeeDto = new EmployeeDto();
 		 	employeeDto.setIdCard("115310905001-9");
@@ -440,12 +459,20 @@ public class EmployeeRepositoryTest {
 			employeeDto.setTelMobile("089-0851022");
 			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
 			employeeDto.setIsManager(1);
+			
+			Applicant applicant = new Applicant();
+			applicant.setCreatedBy(1);
+			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			applicant.setAuditFlag("C");
+			applicant.setCardId("115310905001-9");
+			applicant.setAuditFlag("1");
+			applicantRepository.create(applicant);
 	        
 	        
-	        Applicant applicant = applicantRepository.find(1);
-	        Hibernate.initialize(applicant);
+	        Applicant applicant1 = applicantRepository.find(3);
+	        Hibernate.initialize(applicant1);
 	        
-	        employeeDto.setApplicateId(applicant.getId());
+	        employeeDto.setApplicateId(applicant1.getId());
 	         
 	        MasDivision masDivision = masDivisionRepository.find(1);	        
 	        employeeDto.setMasDivision(masDivision.getId());
@@ -485,6 +512,15 @@ public class EmployeeRepositoryTest {
 	@Rollback(false)
 	public void saveByNameQueryNotNullIsMangerAndNotNullAimID() {
 		
+		
+			Applicant applicant = new Applicant();
+			applicant.setCreatedBy(2);
+			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			applicant.setAuditFlag("C");
+			applicant.setCardId("115310905001-9");
+			applicant.setAuditFlag("1");
+			applicantRepository.create(applicant);
+		
 		   
 		    Official official = new Official();
 		    official.setAuditFlag("C");
@@ -519,7 +555,7 @@ public class EmployeeRepositoryTest {
 	    	String dateInString1 = "31-08-1982";
 	    	Date date2 = null;
 			try {
-				date2 = sdf.parse(dateInString);
+				date2 = sdf1.parse(dateInString1);
 			} catch (ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -564,7 +600,7 @@ public class EmployeeRepositoryTest {
 	        MasLocation masLocation2 = masLocationRepository.find(1);
 	        employeeDto.setMasLocationId(masLocation2.getId());
 	        
-	        Official official2 = officialRepository.find(3);
+	        Official official2 = officialRepository.find(2);
 	        employeeDto.setOfficialId(official2.getId());
 	      
 	        employeeRepository.saveByNameQuery(employeeDto);
@@ -579,7 +615,7 @@ public class EmployeeRepositoryTest {
 		
 		//search last id of EMPLOYEE
 		Employee employee = employeeRepository.searhEmpIdtoAddress();
-		Assert.assertEquals(10, employee.getId().intValue());
+		Assert.assertEquals(5, employee.getId().intValue());
 	
 	}
 	
