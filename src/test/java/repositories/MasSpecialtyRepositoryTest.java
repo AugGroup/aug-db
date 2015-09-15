@@ -26,7 +26,7 @@ public class MasSpecialtyRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createMasSpecialty(){
 		MasSpecialty masSpecialty=new MasSpecialty();
 		masSpecialty.setName("Java");
@@ -40,51 +40,43 @@ public class MasSpecialtyRepositoryTest {
 
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void updateMasSpecialty(){
-//		
-//		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyRepository.find(1);
-//		masSpecialty.setName(".net");
-//		masSpecialty.setCode("02");
-//		masSpecialty.setIsActive(true);
-//		masSpecialty.setAuditFlag("C");
-//		masSpecialty.setCreatedBy(1);	
-//		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
-//		masSpecialtyRepository.update(masSpecialty);
-//	}
-//	
+	@Test
+	@Rollback(true)
+	public void updateMasSpecialty(){
+		
+		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyRepository.find(1);
+		masSpecialty.setName(".net");
+		masSpecialty.setCode("02");
+		masSpecialty.setIsActive(true);
+		masSpecialty.setAuditFlag("C");
+		masSpecialty.setCreatedBy(1);	
+		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masSpecialtyRepository.update(masSpecialty);
+	}
 	
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void deleteMasSpecialty(){
-//		
-//		MasSpecialty masSpecialty = (MasSpecialty) masSpecialtyRepository.getCurrentSession().get(MasSpecialty.class,1);
-//		masSpecialtyRepository.getCurrentSession().delete(masSpecialty);
-//	}
+	
+	@Test
+	@Rollback(true)
+	public void deleteMasSpecialty(){
+		
+		MasSpecialty masSpecialty = (MasSpecialty) masSpecialtyRepository.getCurrentSession().get(MasSpecialty.class,1);
+		masSpecialtyRepository.getCurrentSession().delete(masSpecialty);
+	}
 
 	
 	
 	
-//	@Test
-//	public void listMasSpecialty(){
-//		
-//		Criteria c = masSpecialtyRepository.getCurrentSession().createCriteria(MasSpecialty.class);
-//		List<MasSpecialty> MasSpecialtyList = c.list();
-//		Assert.assertEquals(2, MasSpecialtyList.size());
-//		
-//	}
 
 	
-//	@Test
-//	public void findByIdMasSpecialty(){
-//		
-//		MasSpecialty masSpecialty = (MasSpecialty) masSpecialtyRepository.getCurrentSession().get(MasSpecialty.class, 1);		
-//		int id = masSpecialty.getId();
-//		Assert.assertEquals(1, id);
-//		
-//	}
+	@Test
+	public void findByIdMasSpecialty(){
+		
+		MasSpecialty masSpecialty = (MasSpecialty) masSpecialtyRepository.getCurrentSession().get(MasSpecialty.class, 1);		
+		int id = masSpecialty.getId();
+		Assert.assertEquals(1, id);
+		
+	}
 
 }

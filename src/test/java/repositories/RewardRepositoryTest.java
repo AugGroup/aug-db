@@ -26,7 +26,6 @@ import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.RewardRepository;
-
 import junit.framework.Assert;
 
 
@@ -46,10 +45,10 @@ public class RewardRepositoryTest {
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
 	private Employee employee1;
-	
 	Employee employee;
+	
+	
 	@Before
-//	@Rollback(true)
 	public void setReward() {
 		employee = new Employee();
         employee.setIdCard("115310905001-9");
@@ -87,7 +86,7 @@ public class RewardRepositoryTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicant.setAuditFlag("1");
+//		applicant.setAuditFlag("1");
 		applicantRepository.create(applicant);
 		
         Applicant applicant1 = applicantRepository.find(1);
@@ -148,10 +147,10 @@ public class RewardRepositoryTest {
 		
 	}
 	
+
 	
-	/*
 	@Test
-	@Rollback(false) save จริง
+	@Rollback(true) 
 	public void createReward(){
 		
 		Employee employee =  employeeRepository.find(1);
@@ -167,7 +166,6 @@ public class RewardRepositoryTest {
 		reward.setCreatedTimeStamp(cal.getTime());
 		rewardRepository.create(reward);
 	}
-	*/
 	
 	
 	
@@ -198,17 +196,17 @@ public class RewardRepositoryTest {
 	
 	
 	
-		
+
 	
-	
-	/*@Test
+	@Test
+	@Rollback(true)
 	public void findByIdReward(){
 		
-		Reward reward = (Reward) rewardRepository.getCurrentSession().get(Reward.class, 2);		
+		Reward reward = (Reward) rewardRepository.getCurrentSession().get(Reward.class, 1);		
 		int id = reward.getId();
 		Assert.assertEquals(1, id);
 		
-	}*/
+	}
 	
 
 }
