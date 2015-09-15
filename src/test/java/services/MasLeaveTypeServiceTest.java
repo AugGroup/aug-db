@@ -30,7 +30,7 @@ import com.aug.hrdb.services.MasLeaveTypeService;
 public class MasLeaveTypeServiceTest {
 	@Autowired MasLeaveTypeService masLeaveTypeService;
 
-	
+	int id;
 	
 	
 	@Before
@@ -55,6 +55,7 @@ public class MasLeaveTypeServiceTest {
 		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masLeaveTypeService.create(masLeaveType1);
+		id = masLeaveType1.getId();
 	}
 	
 	@Test
@@ -74,7 +75,7 @@ public class MasLeaveTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void update(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(3);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
 		masLeaveType.setName("Annual");
 		
 		masLeaveTypeService.update(masLeaveType);
@@ -84,7 +85,7 @@ public class MasLeaveTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void delete(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(10);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
 		masLeaveTypeService.delete(masLeaveType);
 	}
 	
@@ -101,9 +102,9 @@ public class MasLeaveTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void findById(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(2);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
 		int id = masLeaveType.getId();
-		Assert.assertEquals(2,id);
+		Assert.assertEquals(id,id);
 		
 	}
 }

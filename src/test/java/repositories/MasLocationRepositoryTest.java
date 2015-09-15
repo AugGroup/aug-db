@@ -28,7 +28,7 @@ public class MasLocationRepositoryTest {
 	
 	@Autowired MasLocationRepository masLocationRepository;
 
-	
+	int id;
 	@Before
 	public void setValue(){
 		MasLocation masLocation = new MasLocation();
@@ -50,6 +50,7 @@ public class MasLocationRepositoryTest {
 		masLocation1.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 	    masLocationRepository.create(masLocation1);
+	    id = masLocation1.getId();
 		
 	}
 	
@@ -71,15 +72,14 @@ public class MasLocationRepositoryTest {
 	@Test
 	@Rollback(true)
 	public void updateMasLocation(){ 
-	MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
+	MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,id);
 	masLocation.setName("singpore");
 	masLocationRepository.update(masLocation);
 	}
-	
 	@Test
 	@Rollback(true)
 	public void deleteMasLocation(){ 
-		MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
+		MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,id);
 		masLocationRepository.delete(masLocation);
 	}
 	
