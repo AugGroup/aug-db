@@ -55,7 +55,19 @@ public class MasDegreeTypeServiceTest {
 		masDegreetype1.setCreatedBy(1);
 		masDegreetype1.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masDegreetypeService.create(masDegreetype1);
+	
 		
+		
+		
+		
+		/*MasDegreetype masDegreetype2=new MasDegreetype();
+		masDegreetype2.setName("DR");
+		masDegreetype2.setCode("DE-02");
+		masDegreetype2.setIsactive(true);
+		masDegreetype2.setAuditFlag("C");
+		masDegreetype2.setCreatedBy(1);
+		masDegreetype2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDegreetypeService.create(masDegreetype2);*/
 	}
 	
 	
@@ -63,7 +75,7 @@ public class MasDegreeTypeServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create(){
 		MasDegreetype masDegreetype=new MasDegreetype();
 		masDegreetype.setName("DR");
@@ -74,16 +86,36 @@ public class MasDegreeTypeServiceTest {
 		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masDegreetypeService.create(masDegreetype);
 		
+		/*MasDegreetype masDegreetype1=new MasDegreetype();
+		masDegreetype1.setName("DR");
+		masDegreetype1.setCode("DE-02");
+		masDegreetype1.setIsactive(true);
+		masDegreetype1.setAuditFlag("C");
+		masDegreetype1.setCreatedBy(1);
+		masDegreetype1.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDegreetypeService.create(masDegreetype1);*/
+	
 		
+		
+		
+		/*
+		MasDegreetype masDegreetype2=new MasDegreetype();
+		masDegreetype2.setName("DR");
+		masDegreetype2.setCode("DE-02");
+		masDegreetype2.setIsactive(true);
+		masDegreetype2.setAuditFlag("C");
+		masDegreetype2.setCreatedBy(1);
+		masDegreetype2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDegreetypeService.create(masDegreetype2);*/
 		
 	}
 	
 	
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeService.find(3);
+		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeService.find(2);
 		masDegreetype.setName("DR");
 		masDegreetype.setCode("DE-01");
 		masDegreetypeService.update(masDegreetype);
@@ -92,7 +124,7 @@ public class MasDegreeTypeServiceTest {
 	}
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete(){
 	MasDegreetype masDegreetype=masDegreetypeService.find(1);
 	masDegreetypeService.delete(masDegreetype);
@@ -101,16 +133,16 @@ public class MasDegreeTypeServiceTest {
 
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findAll(){
 		List<MasDegreetype>masDegreetypes=masDegreetypeService.findAll();
-		Assert.assertEquals(6,masDegreetypes.size());
+		Assert.assertEquals(2,masDegreetypes.size());
 		
 	}
 
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findById(){
 		MasDegreetype masDegreetype=masDegreetypeService.find(3);
 		int id = masDegreetype.getId();

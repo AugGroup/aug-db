@@ -58,7 +58,7 @@ public class MasDegreeTypeRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createMasDegreeType(){
 		MasDegreetype masDegreetype=new MasDegreetype();
 		masDegreetype.setName("DR");
@@ -71,9 +71,9 @@ public class MasDegreeTypeRepositoryTest {
 	}
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateMasDegreeType(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,2);
+		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,3);
 		masDegreetype.setName("DR");
 		masDegreetype.setCode("DE-01");
 		masDegreetype.setIsactive(true);
@@ -82,7 +82,7 @@ public class MasDegreeTypeRepositoryTest {
 	
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteMasDegreeType(){
 		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,1);
 		masDegreetypeRepository.getCurrentSession().delete(masDegreetype);

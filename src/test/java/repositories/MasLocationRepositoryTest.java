@@ -1,5 +1,6 @@
 /**
  *
+
  * @author Pranrajit
  * @date 4 ก.ย. 2558
  */
@@ -53,7 +54,7 @@ public class MasLocationRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createMasLocation(){
 		MasLocation masLocation = new MasLocation();
 		masLocation.setName("thailand");
@@ -68,7 +69,7 @@ public class MasLocationRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateMasLocation(){ 
 	MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
 	masLocation.setName("singpore");
@@ -76,7 +77,7 @@ public class MasLocationRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteMasLocation(){ 
 		MasLocation masLocation=(MasLocation)masLocationRepository.getCurrentSession().get(MasLocation.class,1);
 		masLocationRepository.delete(masLocation);
