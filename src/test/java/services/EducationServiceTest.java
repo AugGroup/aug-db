@@ -120,12 +120,17 @@ public class EducationServiceTest {
 	@Rollback(value = true)
 	public void testInsertEducationService() throws Exception {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
+		MasDegreetype masDegreetype = masDegreetypeService.find(1);
 		Education education = new Education();
 		education.setId(1);
 		education.setCertification("TOEIC 430");
+		education.setMasdegreetype(masDegreetype);
 		education.setFaculty("Technology and Science");
 		education.setGpa(3.0);
 		education.setGraduated_date(dateFmt.parse("07/09/2015"));
+		education.setAuditFlag("C");
+		education.setCreatedBy(0);
+		education.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		educationService.create(education);
 	}
 
