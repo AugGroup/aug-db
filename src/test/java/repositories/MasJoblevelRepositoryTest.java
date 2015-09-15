@@ -10,9 +10,11 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,7 +29,28 @@ public class MasJoblevelRepositoryTest {
 
 	@Autowired MasJoblevelRepository masJoblevelRepository;
 	
+	int id;
+	@Before
+	public void setJob(){
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("PHP");
+		masJoblevel.setCode("004A");
+		masJoblevel.setIsActive(true);
+		
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masJoblevel.setCreatedTimeStamp(cal.getTime());
+		
+		masJoblevelRepository.create(masJoblevel);
+		
+		id = masJoblevel.getId();
+	}
+	
+	
+	
 	@Test
+	@Rollback(true)
 	public void create() {
 
 		MasJoblevel masJoblevel = new MasJoblevel();
@@ -43,33 +66,35 @@ public class MasJoblevelRepositoryTest {
 
 	}
 
-//	@Test
-//	public void update() {
-//
-//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-//				MasJoblevel.class, 1);
-//		masJoblevel.setName("IT");
-//
-//		masJoblevelRepository.getCurrentSession().update(masJoblevel);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-//				MasJoblevel.class, 1);
-//
-//		masJoblevelRepository.getCurrentSession().delete(masJoblevel);
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
-//				MasJoblevel.class);
-//		List<MasJoblevel> masJoblevels = c.list();
-//		Assert.assertEquals(14, masJoblevels.size());
-//
-//	}
+	@Test
+	@Rollback(true)
+	public void update() {
+
+		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+				MasJoblevel.class, id);
+		masJoblevel.setName("IT");
+
+		masJoblevelRepository.getCurrentSession().update(masJoblevel);
+	}
+
+	@Test
+	@Rollback(true)
+	public void Delete() {
+
+		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
+				MasJoblevel.class, id);
+
+		masJoblevelRepository.delete(masJoblevel);
+	}
+
+	
+	@Test
+	@Rollback(true)
+	public void list() {
+
+		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
+				MasJoblevel.class);
+		List<MasJoblevel> masJoblevels = c.list();
+		
+	}
 }

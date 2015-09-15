@@ -9,9 +9,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,27 @@ public class MasJoblevelServiceTest {
 	@Autowired
 	private MasJoblevelService masJoblevelServices;
 	
+	int id;
+	@Before
+	public void setJob(){
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("PHP");
+		masJoblevel.setCode("004A");
+		masJoblevel.setIsActive(true);
+		
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masJoblevel.setCreatedTimeStamp(cal.getTime());
+		
+		masJoblevelServices.create(masJoblevel);
+		
+		id = masJoblevel.getId();
+	}
+	
+	
 	@Test
+	@Rollback(true)
 	public void create(){
 
 		MasJoblevel masJoblevel = new MasJoblevel();
@@ -44,38 +66,42 @@ public class MasJoblevelServiceTest {
 		masJoblevelServices.create(masJoblevel);
 	}
 	
-//	@Test
-//	public void update(){
-//
-//		MasJoblevel masJoblevel = masJoblevelServices.find(2);
-//		masJoblevel.setName("JAVA");
-//		masJoblevelServices.update(masJoblevel);
-//		
-//	}
-//	
-//	@Test
-//	public void delete(){
-//
-//		MasJoblevel masJoblevel = masJoblevelServices.find(2);
-//		masJoblevelServices.delete(masJoblevel);
-//		
-//	}
-//	
-//	
-//	@Test
-//	public void findAll(){
-//
-//		List<MasJoblevel> masJoblevel = masJoblevelServices.findAll();
-//		Assert.assertEquals(14, masJoblevel.size());
-//	}
-//	
-//	
-//	@Test
-//	public void findbyId(){
-//
-//		MasJoblevel  masJoblevel = masJoblevelServices.find(2);
-//		Assert.assertEquals("Account Manager",masJoblevel.getName());
-//		
-//	}
+	@Test
+	@Rollback(true)
+	public void update(){
+
+		MasJoblevel masJoblevel = masJoblevelServices.find(id);
+		masJoblevel.setName("JAVA");
+		masJoblevelServices.update(masJoblevel);
+		
+	}
+	
+	@Test
+	@Rollback(true)
+	public void delete(){
+
+		MasJoblevel masJoblevel = masJoblevelServices.find(id);
+		masJoblevelServices.delete(masJoblevel);
+		
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void findAll(){
+
+		List<MasJoblevel> masJoblevel = masJoblevelServices.findAll();
+		
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void findbyId(){
+
+		MasJoblevel  masJoblevel = masJoblevelServices.find(id);
+		int id = masJoblevel.getId();
+		Assert.assertEquals(id,id);
+	}
 	
 }
