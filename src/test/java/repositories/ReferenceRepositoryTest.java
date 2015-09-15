@@ -65,6 +65,6 @@ public class ReferenceRepositoryTest {
 	@Test
 	public void findAll(){	
 		List<Reference> references = referenceRepository.findAll();
-		Assert.assertEquals(5, references.size());
+		Assert.assertEquals(4, references.size());
 	}
 }

@@ -28,7 +28,7 @@ public class ProbationRepositoryTest {
 	
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void create() throws ParseException{
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Probation probation = new Probation();
@@ -46,13 +46,13 @@ public class ProbationRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+//	@Rollback(true)
 	public void findById(){
 		Probation probation = probationRepository.find(1);
 	}
 	
 	@Test
-	@Rollback(false)
+//	@Rollback(true)
 	public void update(){
 		Probation probation = probationRepository.find(2);
 		probation.setStatus("Not pass");
@@ -61,14 +61,14 @@ public class ProbationRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+//	@Rollback(true)
 	public void findAll(){	
 		List<Probation> probations = probationRepository.findAll();
-		Assert.assertEquals(1, probations.size());
+		Assert.assertEquals(2, probations.size());
 	}
 	
 	@Test
-	@Rollback(false)
+//	@Rollback(true)
 	public void delete(){
 		probationRepository.deleteById(1);
 	}

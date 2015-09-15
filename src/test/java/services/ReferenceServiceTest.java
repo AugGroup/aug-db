@@ -1,8 +1,8 @@
 package services;
 
 import java.util.Calendar;
-
-import org.hibernate.exception.ConstraintViolationException;
+import java.util.List;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Reference;
+import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.ReferenceService;
 
 
@@ -23,10 +24,12 @@ import com.aug.hrdb.services.ReferenceService;
 public class ReferenceServiceTest {
 	@Autowired
 	private ReferenceService referenceService;
+	@Autowired 
+	ApplicantService applicantService;
 
 	@Test
 	@Rollback(true)
-	public void createReferenceShouldSuccess(){
+	public void createReference(){
 		Reference reference = new Reference();
 		reference.setAddress("Bangkok");
 		reference.setAuditFlag("C");
@@ -35,61 +38,44 @@ public class ReferenceServiceTest {
 		reference.setName("Jutamas");
 		reference.setOccupation("Programmer");
 		reference.setTel("0817334542");
+		reference.setApplicant(applicantService.findById(1));
 		referenceService.create(reference);
 
 	}
-
-    @Test(expected = ConstraintViolationException.class)
-    @Rollback(true)
-    public void createReferenceWithoutRequiredFieldShouldFailed(){
-        Reference reference = new Reference();
-        reference.setName("Phicha");
-
-        referenceService.create(reference);
-    }
 	
-	
-
-//
-//	@Test
-//	@Rollback(false)
-//	public void updateReference(){
-//		
-//		Reference reference = (Reference)referenceService.find(7);
-//		reference.setName("Phiicha");
-//		referenceService.update(reference);
-//	}
+	@Test
+	public void updateReference(){	
+		Reference reference = (Reference)referenceService.findById(2);
+		reference.setName("Phicha");
+		referenceService.update(reference);
+	}
 
 	
 	
-//	@Test
-//	@Rollback(false)
-//	public void deleteReference(){
-//		
-//		Reference reference = (Reference)referenceService.find(7);
-//		referenceService.deleteById(reference);
-//	}
-//	
+	@Test
+	public void deleteReference(){		
+		Reference reference = (Reference)referenceService.findById(2);
+		referenceService.deleteById(reference.getId());
+	}
+	
 	
 
-//	@Test
-//	public void findAllReference(){
-//		
-//		List<Reference> references = referenceService.findAll();
-//		Assert.assertEquals(18, references.size());
-//		
-//		
-//	}
+	@Test
+	public void findAllReference(){		
+		List<Reference> references = referenceService.findAll();
+		Assert.assertEquals(4, references.size());
+		
+		
+	}
 	
 	
-//
-//	@Test
-//	public void findByIdReference(){
-//		
-//		Reference reference = (Reference)referenceService.find(19);	
-//		int id = reference.getId();
-//		Assert.assertEquals(19,id);
-//		
-//		
-//	}
+
+	@Test
+	public void findByIdReference(){	
+		Reference reference = (Reference) referenceService.findById(1);	
+		int id = reference.getId();
+		Assert.assertEquals(1,id);
+		
+		
+	}
 }
