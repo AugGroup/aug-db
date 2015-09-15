@@ -3,7 +3,6 @@ package repositories;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import org.hibernate.Hibernate;
@@ -19,18 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
-import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDegreetype;
-import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
-import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EducationRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDegreetypeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
-import com.aug.hrdb.repositories.RewardRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -56,7 +51,7 @@ public class EducationRepositoryTest {
 	private MasDegreetypeRepository masDegreetypeRepository;
 	
 	@Before
-	public void setReward() throws ParseException {
+	public void setEducation() throws ParseException {
         
         Applicant applicant = new Applicant();
         applicant.setCardId("115310905001-9");

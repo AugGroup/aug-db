@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +32,25 @@ public class MasEmploymentServiceTest {
 	@Autowired
 	private MasEmploymentService masEmploymentService;
 	
-
+	int id;
+	
+	@Before
+	public void setUp(){
+		MasEmployment masEmployment = new MasEmployment();
+		masEmployment.setName("BBBBB");
+		masEmployment.setCode("B05");
+		masEmployment.setIsActive(true);
+		masEmployment.setAuditFlag("C");
+		masEmployment.setCreatedBy(1);
+		masEmployment.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masEmploymentService.create(masEmployment);
+		id = masEmployment.getId();
+		
+	}
+	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create() {
 		
 		MasEmployment masEmployment = new MasEmployment();
@@ -48,42 +65,41 @@ public class MasEmploymentServiceTest {
 		
 	}
 	
-	/*@Test
-	@Rollback(false)
+	@Test
+	@Rollback(true)
 	public void update(){
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(5);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(id);
 		masEmployment.setName("BBBBB");
 		masEmploymentService.update(masEmployment);
 		
-	}*/
+	}
 	
-	/*@Test
-	@Rollback(false)
+	@Test
+	@Rollback(true)
 	public void delete() {
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(5);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(id);
 		masEmploymentService.delete(masEmployment);
 		
-	}*/
+	}
 	
-	/*@Test
-	@Rollback(false)
+	@Test
+	@Rollback(true)
 	public void findAll(){
 		
 		List<MasEmployment> masEmployments = masEmploymentService.findAll();
-		Assert.assertEquals(3, masEmployments.size());
 		
-	}*/
+	}
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findById() {
 		
-		MasEmployment masEmployment = masEmploymentService.findById(1);	
+		MasEmployment masEmployment = masEmploymentService.findById(id);	
 		int id = masEmployment.getId();
-		Assert.assertEquals(1,id);
+		Assert.assertEquals("BBBBB",masEmployment.getName());
 	}
 	
 }
