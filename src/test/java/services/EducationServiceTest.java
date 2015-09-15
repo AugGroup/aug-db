@@ -3,6 +3,7 @@ package services;
 import static org.junit.Assert.assertNotNull;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -15,6 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Education;
+import com.aug.hrdb.entities.MasAllowances;
+import com.aug.hrdb.entities.MasDegreetype;
 import com.aug.hrdb.services.EducationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -24,14 +27,17 @@ public class EducationServiceTest {
 	@Autowired
 	private EducationService educationService;
 
+	private MasDegreetype masDegreeType = new MasDegreetype();
+	
 	@Test
 	@Transactional
 	@Rollback(value = false)
 	public void testInsertEducationService() throws Exception {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Education education = new Education();
+		masDegreeType.setName("Test");
 		education.setCertification("TOEIC 430");
-		education.setMasdegreetype(education.getMasdegreetype());
+		education.setMasdegreetype(masDegreeType);
 		education.setFaculty("Technology and Science");
 		education.setGpa(3.0);
 		education.setAuditFlag("C");
