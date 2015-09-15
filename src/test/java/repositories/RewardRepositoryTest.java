@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import org.hibernate.Hibernate;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,7 +27,7 @@ import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.RewardRepository;
-import junit.framework.Assert;
+
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,19 +46,19 @@ public class RewardRepositoryTest {
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
 	private Employee employee1;
-	Employee employee;
+	private Employee employee;
 	
 	
 	@Before
 	public void setReward() {
 		employee = new Employee();
         employee.setIdCard("115310905001-9");
-        employee.setNameThai("อภิวาท์");
-        employee.setNameEng("apiva");
-        employee.setNicknameThai("va");
-        employee.setNicknameEng("va");
-        employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");
+        employee.setNameThai("ธัญลักษณ์์");
+        employee.setNameEng("thanyalak");
+        employee.setNicknameThai("กิ๊ก");
+        employee.setNicknameEng("kik");
+        employee.setSurnameThai("พิมสวรรค์");
+        employee.setSurnameEng("Pimsawan");
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -72,7 +73,7 @@ public class RewardRepositoryTest {
 		employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
         employee.setEmergencyContact("mom");
-        employee.setEmployeeCode("EMP-01");
+        employee.setEmployeeCode("EMP-09");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
         employee.setTelMobile("089-0851022");
@@ -140,10 +141,6 @@ public class RewardRepositoryTest {
 		reward.setCreatedBy(0);
 		reward.setCreatedTimeStamp(cal.getTime());
 		rewardRepository.create(reward);
-		
-		
-		
-	
 		
 	}
 	
