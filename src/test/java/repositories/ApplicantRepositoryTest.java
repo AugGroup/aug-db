@@ -53,6 +53,7 @@ public class ApplicantRepositoryTest {
         applicant.setAuditFlag("C");
         applicant.setCreatedBy(1);
         applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        applicantRepository.create(applicant);
     }
 	
 	
