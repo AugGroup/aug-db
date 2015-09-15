@@ -2,6 +2,7 @@ package repositories;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,7 +24,7 @@ import com.aug.hrdb.repositories.ProbationRepository;
 @Transactional
 public class ProbationRepositoryTest {
 	
-	@Autowired ProbationRepository probationRepository;
+	@Autowired private ProbationRepository probationRepository;
 	
 	@Test
 	@Ignore
@@ -31,7 +32,10 @@ public class ProbationRepositoryTest {
 	public void create() throws ParseException{
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Probation probation = new Probation();
-		
+		probation.setId(1);
+		probation.setAuditFlag("C");
+		probation.setCreatedBy(1);
+		probation.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		probation.setDateFrom(dateFmt.parse("04/01/2015"));
 		probation.setDateTo(dateFmt.parse("04/01/2015"));
 		probation.setName("Jutamas");
@@ -50,15 +54,9 @@ public class ProbationRepositoryTest {
 	@Test
 	@Rollback(false)
 	public void update(){
-		Probation probation = probationRepository.find(1);
+		Probation probation = probationRepository.find(2);
 		probation.setStatus("Not pass");
-	}
-	
-	@Test
-	@Rollback(false)
-	public void delete(){
-		Probation probation = probationRepository.find(1);
-		probationRepository.delete(probation);
+		probationRepository.update(probation);
 	}
 	
 	
@@ -67,5 +65,11 @@ public class ProbationRepositoryTest {
 	public void findAll(){	
 		List<Probation> probations = probationRepository.findAll();
 		Assert.assertEquals(1, probations.size());
+	}
+	
+	@Test
+	@Rollback(false)
+	public void delete(){
+		probationRepository.deleteById(1);
 	}
 }

@@ -25,7 +25,7 @@ public class ReferenceRepositoryTest {
 	@Autowired private ReferenceRepository referenceRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create(){
 		Reference reference = new Reference();
 		reference.setId(1);
@@ -36,15 +36,15 @@ public class ReferenceRepositoryTest {
 		reference.setName("Jutamas");
 		reference.setOccupation("Programmer");
 		reference.setTel("0817334542");
-//		Applicant applicant = new Applicant();
-//		applicant.setId(1);
-//		reference.setApplicant(applicant);
+		Applicant applicant = new Applicant();
+		applicant.setId(1);
+		reference.setApplicant(applicant);
 		referenceRepository.create(reference);
 	}
 
 	@Test
 	public void update(){
-		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,1);
+		Reference reference = (Reference) referenceRepository.getCurrentSession().get(Reference.class,2);
 		reference.setOccupation("HR");
 		referenceRepository.getCurrentSession().update(reference);
 	}
@@ -65,6 +65,6 @@ public class ReferenceRepositoryTest {
 	@Test
 	public void findAll(){	
 		List<Reference> references = referenceRepository.findAll();
-		Assert.assertEquals(1, references.size());
+		Assert.assertEquals(5, references.size());
 	}
 }
