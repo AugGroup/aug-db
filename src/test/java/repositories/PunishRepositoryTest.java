@@ -132,9 +132,9 @@ public class PunishRepositoryTest {
 		employeeRepository.create(employee);
 		
 		
-	    employee1 =  employeeRepository.find(1);
+	    Employee employee =  employeeRepository.find(1);
 	    Punish punish=new Punish();
-		punish.setEmployee(employee1);	
+		punish.setEmployee(employee);	
 		Calendar cal = Calendar.getInstance();
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");
@@ -146,13 +146,11 @@ public class PunishRepositoryTest {
 	
 	
 	
-	
-
-	
 	@Test
 	@Rollback(true)
 	public void createPunish(){
 		
+		Employee employee1 =  employeeRepository.find(1);
 		Punish punish=new Punish();
 		punish.setEmployee(employee1);	
 		Calendar cal = Calendar.getInstance();

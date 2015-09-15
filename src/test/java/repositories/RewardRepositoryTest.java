@@ -45,7 +45,7 @@ public class RewardRepositoryTest {
 	private ApplicantRepository applicantRepository;
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
-	private Employee employee1;
+
 	private Employee employee;
 	
 	
@@ -130,9 +130,9 @@ public class RewardRepositoryTest {
 		employeeRepository.create(employee);
 		
 		
-	    employee1 =  employeeRepository.find(1);
+	    Employee employee =  employeeRepository.find(1);
 		Reward reward=new Reward();
-		reward.setEmployee(employee1);     	
+		reward.setEmployee(employee);     	
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");
@@ -150,10 +150,10 @@ public class RewardRepositoryTest {
 	@Rollback(true) 
 	public void createReward(){
 		
-		Employee employee =  employeeRepository.find(1);
+		Employee employee1 =  employeeRepository.find(1);
 		Reward reward=new Reward();
-		employee.setId(2);
-		reward.setEmployee(employee);     	
+		employee1.setId(2);
+		reward.setEmployee(employee1);     	
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");

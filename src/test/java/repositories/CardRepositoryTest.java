@@ -55,7 +55,7 @@ public class CardRepositoryTest {
 	
 	
 	@Before
-	public void setReward() {
+	public void setCard() {
 		employee = new Employee();
 		employee.setIdCard("110370065933-1");
         employee.setNameThai("ธัญลักษณ์์");
@@ -153,9 +153,9 @@ public class CardRepositoryTest {
 	@Rollback(true)
 	public void createDataCard(){
 		
-		   employee1 =  employeeRepository.find(1);
+		    Employee employee =  employeeRepository.find(1);
 		    Card card=new Card();
-			card.setEmployee(employee1);	
+			card.setEmployee(employee);	
 			Calendar cal = Calendar.getInstance();
 			card.setCard_no("111");
 			card.setStartdate(cal.getTime());
@@ -175,7 +175,9 @@ public class CardRepositoryTest {
 	@Rollback(true)
 	public void updateCard(){
 		
+		Employee employee1 =  employeeRepository.find(1);
 		Card card = (Card)cardRepository.find(id);
+		card.setEmployee(employee1);  
 		card.setStatus("no");
 		card.setRemark("bbbb");
 		id = card.getId();
