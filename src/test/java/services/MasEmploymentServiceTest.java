@@ -32,6 +32,8 @@ public class MasEmploymentServiceTest {
 	@Autowired
 	private MasEmploymentService masEmploymentService;
 	
+	int id;
+	
 	@Before
 	public void setUp(){
 		MasEmployment masEmployment = new MasEmployment();
@@ -43,16 +45,7 @@ public class MasEmploymentServiceTest {
 		masEmployment.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masEmploymentService.create(masEmployment);
-		
-		MasEmployment masEmployment1 = new MasEmployment();
-		masEmployment1.setName("BBBBB");
-		masEmployment1.setCode("B05");
-		masEmployment1.setIsActive(true);
-		masEmployment1.setAuditFlag("C");
-		masEmployment1.setCreatedBy(1);
-		masEmployment1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		masEmploymentService.create(masEmployment1);
+		id = masEmployment.getId();
 		
 	}
 	
@@ -76,7 +69,7 @@ public class MasEmploymentServiceTest {
 	@Rollback(true)
 	public void update(){
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(1);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(id);
 		masEmployment.setName("BBBBB");
 		masEmploymentService.update(masEmployment);
 		
@@ -86,7 +79,7 @@ public class MasEmploymentServiceTest {
 	@Rollback(true)
 	public void delete() {
 		
-		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(1);
+		MasEmployment masEmployment = (MasEmployment)masEmploymentService.findById(id);
 		masEmploymentService.delete(masEmployment);
 		
 	}
@@ -96,7 +89,6 @@ public class MasEmploymentServiceTest {
 	public void findAll(){
 		
 		List<MasEmployment> masEmployments = masEmploymentService.findAll();
-		Assert.assertEquals(2, masEmployments.size());
 		
 	}
 	
@@ -105,9 +97,9 @@ public class MasEmploymentServiceTest {
 	@Rollback(true)
 	public void findById() {
 		
-		MasEmployment masEmployment = masEmploymentService.findById(1);	
+		MasEmployment masEmployment = masEmploymentService.findById(id);	
 		int id = masEmployment.getId();
-		Assert.assertEquals(1,id);
+		Assert.assertEquals("BBBBB",masEmployment.getName());
 	}
 	
 }

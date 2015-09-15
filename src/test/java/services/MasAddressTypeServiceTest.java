@@ -47,7 +47,7 @@ public class MasAddressTypeServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createAddressType() {
 		
 		MasAddressType masAddressType = new MasAddressType();
@@ -62,17 +62,17 @@ public class MasAddressTypeServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateAddressType() {
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(5);
+		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(3);
 		masAddressType.setName("MMMMM");
 		masAddressTypeService.update(masAddressType);
 		
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteAddressType() {
 		
 		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(2);
@@ -81,16 +81,17 @@ public class MasAddressTypeServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findAllAddressType(){
 
 		List<MasAddressType> ability = masAddressTypeService.findAll();
-		Assert.assertEquals(1, ability.size());
+		Assert.assertEquals(4, ability.size());
 	}
 	
 	
 	
 	@Test
+	@Rollback(true)
 	public void findbyIdAddressType(){
 
 		MasAddressType masAddressType =(MasAddressType) masAddressTypeService.findById(1);
