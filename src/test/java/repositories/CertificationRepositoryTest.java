@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.hibernate.Hibernate;
 import org.junit.Before;
@@ -20,7 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Certification;
+import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasDegreetype;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.Reward;
@@ -46,23 +49,25 @@ public class CertificationRepositoryTest {
 		private MasDivisionRepository masDivisionRepository;
 		
 		@Before
-//		@Rollback(true)
-		public void setReward() {
-			
+		public void setCertification() throws ParseException {
+	        
 	        Applicant applicant = new Applicant();
+	        applicant.setCardId("115310905001-9");
+	        applicant.setFirstNameTH("อรอนงค์");
+	        applicant.setFirstNameEN("Ornanong");
+	        applicant.setNickNameEN("nong");
+	        applicant.setNickNameTH("นงค์");
+	        applicant.setLastNameEN("Namlongnamken");
+	        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
 			applicant.setCreatedBy(1);
 			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			applicant.setAuditFlag("C");
 			applicant.setCardId("115310905001-9");
-			applicant.setAuditFlag("1");
 			applicantRepository.create(applicant);
 			
 	        Applicant applicant1 = applicantRepository.find(1);
 	        Hibernate.initialize(applicant1);
-	        
-	        
-//	        employee.setApplicant(applicant1);
-	         
+
 			MasJoblevel masJoblevel = new MasJoblevel();
 			masJoblevel.setName("CEO");
 			masJoblevel.setIsActive(true);
@@ -74,23 +79,20 @@ public class CertificationRepositoryTest {
 
 			masJoblevelRepository.create(masJoblevel);
 			masJoblevelRepository.find(1);
-//			
-//			employee.setMasJoblevel(masJoblevel);
-//			
-//			
-//			employeeRepository.create(employee);
-//			
-//			
-//		    employee1 =  employeeRepository.find(1);
-			Certification certification = new Certification();
-			certification.setApplicant(applicant1);     	
-			certification.setName("Java");
+
+			applicant.setJoblevel(masJoblevel);
+			applicantRepository.create(applicant);
+			
+			
+		    applicant1 =  applicantRepository.find(1);
+		    Certification certification = new Certification();
+			certification.setName("SAP");
 			certification.setAuditFlag("C");
 			certification.setCreatedBy(1);
 			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			certificationRepository.create(certification);
-			
 		}
+		
 		@Test
 		@Transactional
 		@Rollback(value = true)
@@ -119,7 +121,7 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = true)
 		public void testDeleteByIdCertificationRepository() throws Exception {
-			certificationRepository.deleteById(4);
+			certificationRepository.deleteById(1);
 		}
 
 		@Test
