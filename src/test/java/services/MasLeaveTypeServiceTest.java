@@ -58,7 +58,7 @@ public class MasLeaveTypeServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create(){
 		MasLeaveType masLeaveType=new MasLeaveType();
 		masLeaveType.setName("DR");
@@ -72,7 +72,7 @@ public class MasLeaveTypeServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update(){
 		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(3);
 		masLeaveType.setName("Annual");
@@ -82,24 +82,24 @@ public class MasLeaveTypeServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(1);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(10);
 		masLeaveTypeService.delete(masLeaveType);
 	}
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findAll(){
 		List<MasLeaveType>masLeaveTypes=masLeaveTypeService.findAll();
-		Assert.assertEquals(6,masLeaveTypes.size());
+		
 		
 	}
 	
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findById(){
 		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(2);
 		int id = masLeaveType.getId();

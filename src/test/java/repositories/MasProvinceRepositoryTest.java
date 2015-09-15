@@ -25,7 +25,7 @@ public class MasProvinceRepositoryTest {
 	@Autowired MasProvinceRepository masProvinceRepository;
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createMasProvince(){
 		MasProvince masProvince = new MasProvince();
 		masProvince.setName("Bangkok");
@@ -47,7 +47,7 @@ public class MasProvinceRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateMasProvince(){
 		
 		MasProvince masProvince=(MasProvince)masProvinceRepository.getCurrentSession().get(MasProvince.class,1);
@@ -59,7 +59,7 @@ public class MasProvinceRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteMasProvince(){
 		
 		MasProvince masProvince = (MasProvince) masProvinceRepository.getCurrentSession().get(MasProvince.class,1);

@@ -73,7 +73,7 @@ public class MasDegreeTypeRepositoryTest {
 	@Test
 	@Rollback(true)
 	public void updateMasDegreeType(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,3);
+		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,2);
 		masDegreetype.setName("DR");
 		masDegreetype.setCode("DE-01");
 		masDegreetype.setIsactive(true);

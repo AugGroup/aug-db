@@ -58,7 +58,7 @@ public class MasLocationServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create(){
 		MasLocation masLocation=new MasLocation();
 		masLocation.setName("Thailand");
@@ -74,7 +74,7 @@ public class MasLocationServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update(){
 		MasLocation masLocation=(MasLocation)masLocationService.find(1);
 		masLocation.setName("SG");
@@ -83,7 +83,7 @@ public class MasLocationServiceTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete(){
 
 		MasLocation masLocation=masLocationService.find(3);
@@ -92,15 +92,15 @@ public class MasLocationServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findAll(){
 		List<MasLocation>masLocations=masLocationService.findAll();
-		Assert.assertEquals(6,masLocations.size());
+	
 	}
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findById(){
 		MasLocation masLocation=masLocationService.find(1);
 		int id = masLocation.getId();

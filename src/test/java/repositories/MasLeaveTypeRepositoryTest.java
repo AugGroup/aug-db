@@ -41,7 +41,7 @@ public class MasLeaveTypeRepositoryTest {
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createMasLeaveType(){
 		MasLeaveType masLeaveType=new MasLeaveType();
 		masLeaveType.setName("Holiday");
@@ -56,19 +56,19 @@ public class MasLeaveTypeRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateMasLeaveType(){ 
 		
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class, 2);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class, 3);
 		masLeaveType.setName("Annual");
 		
 		masLeaveTypeRepository.update(masLeaveType);
 	}
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deletemasLeaveType(){ 
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class,1);
+		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeRepository.getCurrentSession().get(MasLeaveType.class,2);
 		masLeaveTypeRepository.getCurrentSession().delete(masLeaveType);
 		
 	}
