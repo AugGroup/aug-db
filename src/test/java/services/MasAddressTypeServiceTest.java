@@ -11,6 +11,7 @@ import java.util.List;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,20 @@ public class MasAddressTypeServiceTest {
 	@Autowired
 	private MasAddressTypeService masAddressTypeService;
 	
+	@Before
+	public void setUp() {
+		
+		MasAddressType masAddressType = new MasAddressType();
+		masAddressType.setName("Present Address");
+		masAddressType.setCode("B02");
+		masAddressType.setIsActive(true);
+		masAddressType.setAuditFlag("C");
+		masAddressType.setCreatedBy(1);
+		masAddressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masAddressTypeService.create(masAddressType);
+	}
+	
 	@Test
 	@Rollback(false)
 	public void createAddressType() {
@@ -46,7 +61,7 @@ public class MasAddressTypeServiceTest {
 		masAddressTypeService.create(masAddressType);
 	}
 	
-/*	@Test
+	@Test
 	@Rollback(false)
 	public void updateAddressType() {
 		
@@ -54,33 +69,33 @@ public class MasAddressTypeServiceTest {
 		masAddressType.setName("MMMMM");
 		masAddressTypeService.update(masAddressType);
 		
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void deleteAddressType() {
 		
 		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(2);
 		masAddressTypeService.delete(masAddressType);
 		
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void findAllAddressType(){
 
 		List<MasAddressType> ability = masAddressTypeService.findAll();
-		Assert.assertEquals(3, ability.size());
-	}*/
+		Assert.assertEquals(1, ability.size());
+	}
 	
 	
 	
 	@Test
 	public void findbyIdAddressType(){
 
-		MasAddressType masAddressType =(MasAddressType) masAddressTypeService.findById(5);
+		MasAddressType masAddressType =(MasAddressType) masAddressTypeService.findById(1);
 		int id = masAddressType.getId();
-		Assert.assertEquals(5,id);
+		Assert.assertEquals(1,id);
 		
 		
 		

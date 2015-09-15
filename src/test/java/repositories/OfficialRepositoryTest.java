@@ -59,31 +59,31 @@ public class OfficialRepositoryTest {
 		
 	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void updateOfficial() {
 		
 		Official official = (Official) officialRepository.getCurrentSession().get(Official.class, 2);
 		official.setPositionAppliedFor("BBA");
 		officialRepository.update(official);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	@Rollback(false)
 	public void deleteOfficial() {
 		
 		Official official = (Official) officialRepository.getCurrentSession().get(Official.class, 3);
 		officialRepository.delete(official);
-	}*/
+	}
 	
-	/*@Test
+	@Test
 	public void findByIdOfficial(){
 		
 		Official official = (Official) officialRepository.getCurrentSession().get(Official.class, 3);		
 		int id = official.getId();
 		Assert.assertEquals(3, id);
 		
-	}*/
+	}
 	
 	@Test
 	@Rollback(false)
