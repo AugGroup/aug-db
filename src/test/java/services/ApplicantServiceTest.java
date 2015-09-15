@@ -60,6 +60,7 @@ public class ApplicantServiceTest {
         applicant.setAuditFlag("C");
         applicant.setCreatedBy(1);
         applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        applicantService.create(applicant);
     }
 	
 	@Test
