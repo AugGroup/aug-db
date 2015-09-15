@@ -10,9 +10,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasDegreetype;
 
 @Entity
 @NamedNativeQueries({
@@ -58,6 +60,9 @@ public class EducationDto {
 	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
 	private Applicant applicant;
+	
+	@Transient
+	private MasDegreetype degreeType;
 	
 	public Integer getId() {
 		return id;
@@ -137,6 +142,22 @@ public class EducationDto {
 
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
+	}
+
+	public String getMasdegreetype() {
+		return masdegreetype;
+	}
+
+	public void setMasdegreetype(String masdegreetype) {
+		this.masdegreetype = masdegreetype;
+	}
+
+	public MasDegreetype getDegreeType() {
+		return degreeType;
+	}
+
+	public void setDegreeType(MasDegreetype degreeType) {
+		this.degreeType = degreeType;
 	}
 	
 }

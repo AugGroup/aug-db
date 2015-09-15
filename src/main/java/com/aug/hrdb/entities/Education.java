@@ -125,5 +125,13 @@ public class Education extends BaseEntity{
 	public void setMasdegreetype(MasDegreetype masdegreetype) {
 		this.masdegreetype = masdegreetype;
 	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
 	
 }
