@@ -32,7 +32,7 @@ import com.aug.hrdb.services.MasLocationService;
 public class MasLocationServiceTest {
 	@Autowired MasLocationService masLocationService;
 	
-	
+	int id;
 	@Before
 	public void setValue(){
 		MasLocation masLocation = new MasLocation();
@@ -54,7 +54,7 @@ public class MasLocationServiceTest {
 		masLocation1.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masLocationService.create(masLocation1);
-		
+		 id = masLocation1.getId();
 	}
 	
 	@Test
@@ -102,8 +102,8 @@ public class MasLocationServiceTest {
 	@Test
 	@Rollback(true)
 	public void findById(){
-		MasLocation masLocation=masLocationService.find(1);
+		MasLocation masLocation=masLocationService.find(id);
 		int id = masLocation.getId();
-		Assert.assertEquals(1,id);
+		Assert.assertEquals(id,id);
 	}
 }

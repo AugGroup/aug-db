@@ -12,7 +12,9 @@ import java.util.List;
 
 
 
+
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,26 @@ public class MasProvinceServiceTest {
 
 	
 		@Autowired private MasProvinceService masProvinceService;
+		
+		
+		
+		int id;
+		
+		@Before
+		public void setProvince(){
+			MasProvince masProvince = new MasProvince();
+			masProvince.setName("Bangkok");
+			masProvince.setCode("PRO-01");
+			masProvince.setIsActive(true);
+			masProvince.setAuditFlag("C");
+			masProvince.setCreatedBy(1);
+			masProvince.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			masProvinceService.create(masProvince);
+			
+			id = masProvince.getId();
+			
+		}
+		
 		
 		@Test
 		@Rollback(true)
@@ -66,7 +88,7 @@ public class MasProvinceServiceTest {
 		@Rollback(true)
 		public void updateMasProvince(){
 			
-			MasProvince masProvince=(MasProvince) masProvinceService.find(1);
+			MasProvince masProvince=(MasProvince) masProvinceService.find(id);
 			//System.out.println("id: "+masProvince.getId());
 			masProvince.setName("changmai");
 			masProvinceService.update(masProvince);
@@ -78,7 +100,7 @@ public class MasProvinceServiceTest {
 		@Rollback(true)
 		public void deleteMasProvince(){
 			
-			MasProvince masProvince = (MasProvince) masProvinceService.find(2);
+			MasProvince masProvince = (MasProvince) masProvinceService.find(id);
 			masProvinceService.delete(masProvince);
 		}
 

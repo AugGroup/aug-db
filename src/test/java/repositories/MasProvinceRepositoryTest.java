@@ -7,6 +7,7 @@ package repositories;
 
 import java.util.Calendar;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,24 @@ import com.aug.hrdb.repositories.MasProvinceRepository;
 public class MasProvinceRepositoryTest {
 	@Autowired MasProvinceRepository masProvinceRepository;
 	
+	int id;
+	
+	@Before
+	public void setProvince(){
+		MasProvince masProvince = new MasProvince();
+		masProvince.setName("Bangkok");
+		masProvince.setCode("PRO-01");
+		masProvince.setIsActive(true);
+		masProvince.setAuditFlag("C");
+		masProvince.setCreatedBy(1);
+		masProvince.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masProvinceRepository.create(masProvince);
+		
+		id = masProvince.getId();
+		
+	}
+	
+	
 	@Test
 	@Rollback(true)
 	public void createMasProvince(){
@@ -34,7 +53,7 @@ public class MasProvinceRepositoryTest {
 		masProvince.setAuditFlag("C");
 		masProvince.setCreatedBy(1);
 		masProvince.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masProvinceRepository.getCurrentSession().save(masProvince);
+		masProvinceRepository.create(masProvince);
 		
 		MasProvince masProvince1 = new MasProvince();
 		masProvince1.setName("trad");
@@ -43,17 +62,17 @@ public class MasProvinceRepositoryTest {
 		masProvince1.setAuditFlag("C");
 		masProvince1.setCreatedBy(1);
 		masProvince1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masProvinceRepository.getCurrentSession().save(masProvince);
+		masProvinceRepository.create(masProvince1);
 	}
 	
 	@Test
 	@Rollback(true)
 	public void updateMasProvince(){
 		
-		MasProvince masProvince=(MasProvince)masProvinceRepository.getCurrentSession().get(MasProvince.class,1);
+		MasProvince masProvince=(MasProvince)masProvinceRepository.getCurrentSession().get(MasProvince.class,id);
 		//System.out.println("id: "+masProvince.getId());
 		masProvince.setName("changmai");
-		masProvinceRepository.getCurrentSession().update(masProvince);
+		masProvinceRepository.update(masProvince);
 		
 		
 	}
@@ -62,8 +81,8 @@ public class MasProvinceRepositoryTest {
 	@Rollback(true)
 	public void deleteMasProvince(){
 		
-		MasProvince masProvince = (MasProvince) masProvinceRepository.getCurrentSession().get(MasProvince.class,1);
-		masProvinceRepository.getCurrentSession().delete(masProvince);
+		MasProvince masProvince = (MasProvince) masProvinceRepository.getCurrentSession().get(MasProvince.class,id);
+		masProvinceRepository.delete(masProvince);
 	}
 
 }

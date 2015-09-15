@@ -33,7 +33,7 @@ public class MasDegreeTypeServiceTest {
 	@Autowired MasDegreetypeService masDegreetypeService;
 	
 	
-	
+	int id;
 
 	@Before
 	public void setValue(){
@@ -57,17 +57,10 @@ public class MasDegreeTypeServiceTest {
 		masDegreetypeService.create(masDegreetype1);
 	
 		
+		id = masDegreetype1.getId();
 		
 		
-		
-		/*MasDegreetype masDegreetype2=new MasDegreetype();
-		masDegreetype2.setName("DR");
-		masDegreetype2.setCode("DE-02");
-		masDegreetype2.setIsactive(true);
-		masDegreetype2.setAuditFlag("C");
-		masDegreetype2.setCreatedBy(1);
-		masDegreetype2.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeService.create(masDegreetype2);*/
+	
 	}
 	
 	
@@ -86,27 +79,7 @@ public class MasDegreeTypeServiceTest {
 		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masDegreetypeService.create(masDegreetype);
 		
-		/*MasDegreetype masDegreetype1=new MasDegreetype();
-		masDegreetype1.setName("DR");
-		masDegreetype1.setCode("DE-02");
-		masDegreetype1.setIsactive(true);
-		masDegreetype1.setAuditFlag("C");
-		masDegreetype1.setCreatedBy(1);
-		masDegreetype1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeService.create(masDegreetype1);*/
-	
 		
-		
-		
-		/*
-		MasDegreetype masDegreetype2=new MasDegreetype();
-		masDegreetype2.setName("DR");
-		masDegreetype2.setCode("DE-02");
-		masDegreetype2.setIsactive(true);
-		masDegreetype2.setAuditFlag("C");
-		masDegreetype2.setCreatedBy(1);
-		masDegreetype2.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeService.create(masDegreetype2);*/
 		
 	}
 	
@@ -115,7 +88,7 @@ public class MasDegreeTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void update(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeService.find(2);
+		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeService.find(id);
 		masDegreetype.setName("DR");
 		masDegreetype.setCode("DE-01");
 		masDegreetypeService.update(masDegreetype);
@@ -126,7 +99,7 @@ public class MasDegreeTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void delete(){
-	MasDegreetype masDegreetype=masDegreetypeService.find(1);
+	MasDegreetype masDegreetype=masDegreetypeService.find(id);
 	masDegreetypeService.delete(masDegreetype);
 		
 	}
@@ -144,9 +117,9 @@ public class MasDegreeTypeServiceTest {
 	@Test
 	@Rollback(true)
 	public void findById(){
-		MasDegreetype masDegreetype=masDegreetypeService.find(3);
+		MasDegreetype masDegreetype=masDegreetypeService.find(id);
 		int id = masDegreetype.getId();
-		Assert.assertEquals(3,id);
+		Assert.assertEquals(id,id);
 		
 	}
 }
