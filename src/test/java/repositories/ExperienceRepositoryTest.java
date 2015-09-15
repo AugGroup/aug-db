@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 
+import org.hibernate.Hibernate;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,8 +17,15 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Experience;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.repositories.ApplicantRepository;
+import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.ExperienceRepository;
+import com.aug.hrdb.repositories.MasDegreetypeRepository;
+import com.aug.hrdb.repositories.MasDivisionRepository;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -25,10 +34,83 @@ public class ExperienceRepositoryTest {
 
 	@Autowired
 	private ExperienceRepository experienceRepository;
+	
+	@Autowired
+	private EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private MasJoblevelRepository masJoblevelRepository;
+	
+	@Autowired
+	private ApplicantRepository applicantRepository;
+	
+	@Autowired
+	private MasDivisionRepository masDivisionRepository;
+	
+	@Autowired
+	private MasDegreetypeRepository masDegreetypeRepository;
+	
+	@Before
+	public void setExperience() throws ParseException {
+        
+        Applicant applicant = new Applicant();
+        applicant.setCardId("115310905001-9");
+        applicant.setFirstNameTH("อรอนงค์");
+        applicant.setFirstNameEN("Ornanong");
+        applicant.setNickNameEN("nong");
+        applicant.setNickNameTH("นงค์");
+        applicant.setLastNameEN("Namlongnamken");
+        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicantRepository.create(applicant);
+		
+        Applicant applicant1 = applicantRepository.find(1);
+        Hibernate.initialize(applicant1);
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masJoblevelRepository.find(1);
+
+		applicant.setJoblevel(masJoblevel);
+		
+		applicantRepository.create(applicant);
+		
+		
+	    applicant1 =  applicantRepository.find(1);
+		Experience experience = new Experience();
+		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
+		experience.setApplicant(applicant);
+		experience.setAddress("ExperienceAddressTest");
+		experience.setTypeOfBusiness("TypeTest");
+		experience.setCompanyName("companyNameTest");
+		experience.setDateFrom(dateFmt.parse("04/01/2015"));
+		experience.setDateTo(dateFmt.parse("04/09/2015"));
+		experience.setPosition("positionTest");
+		experience.setReason("reasonTest");
+		experience.setReference("referenceTest");
+		experience.setResponsibility("responsibilityTest");
+		experience.setSalary(20000);
+		experience.setAuditFlag("C");
+		experience.setCreatedBy(1);
+		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		experienceRepository.create(experience);
+		
+	}
 
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void insertExperienceRepositoryTest() throws ParseException {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		Experience experience = new Experience();
@@ -55,7 +137,7 @@ public class ExperienceRepositoryTest {
 
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void findByIdExperienceRepositoryTest() {
 		Experience experience = experienceRepository.find(1);
 		System.out.println("Experience Address : "+experience.getName());
@@ -63,7 +145,7 @@ public class ExperienceRepositoryTest {
 	}
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void findAllExperienceRepositoryTest() {
 		List<Experience> experience = experienceRepository.findAll();
 		for(Experience exp : experience){
@@ -73,7 +155,7 @@ public class ExperienceRepositoryTest {
 	
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void updateExperienceRepositoryTest() {
 		Experience experience = experienceRepository.find(2);
 		experience.setCompanyName("companyNameUpdateTest ");
@@ -87,7 +169,7 @@ public class ExperienceRepositoryTest {
 	
 	@Test
 	@Ignore
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteByIdExperienceRepositoryTest() {
 		//Experience experience = experienceRepository.find(5);
 		experienceRepository.deleteById(5);
