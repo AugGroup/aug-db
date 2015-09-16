@@ -10,9 +10,11 @@ import java.util.List;
 
 import org.hibernate.Criteria;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +30,26 @@ public class MasDivisionRepositoryTest {
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
 
+	
+	int id;
+	@Before
+	public void setValue(){
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+		masDivisionRepository.create(masDivision);
+			
+		id = masDivision.getId();
+	}
+	
 	@Test
+	@Rollback(true)
 	public void create() {
 
 		MasDivision masDivision = new MasDivision();
@@ -40,37 +61,39 @@ public class MasDivisionRepositoryTest {
 		masDivision.setCreatedBy(1);
 		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
-		masDivisionRepository.getCurrentSession().save(masDivision);
-
+		masDivisionRepository.create(masDivision);
 	}
 
-//	@Test
-//	public void update() {
-//
-//		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
-//				MasDivision.class, 1);
-//		masDivision.setName("IT");
-//
-//		masDivisionRepository.getCurrentSession().update(masDivision);
-//	}
-//
-//	@Test
-//	public void Delete() {
-//
-//		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
-//				MasDivision.class, 1);
-//
-//		masDivisionRepository.getCurrentSession().delete(masDivision);
-//	}
-//
-//	@SuppressWarnings("unchecked")
-//	@Test
-//	public void list() {
-//
-//		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
-//				MasDivision.class);
-//		List<MasDivision> masDivisions = c.list();
-//		Assert.assertEquals(6, masDivisions.size());
-//
-//	}
+	@Test
+	@Rollback(true)
+	public void update() {
+
+		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
+				MasDivision.class, id);
+		masDivision.setName("IT");
+
+		masDivisionRepository.update(masDivision);
+	}
+
+	@Test
+	@Rollback(true)
+	public void Delete() {
+
+		MasDivision masDivision = (MasDivision) masDivisionRepository.getCurrentSession().get(
+				MasDivision.class, id);
+
+		masDivisionRepository.delete(masDivision);
+	}
+
+	
+	@Test
+	@Rollback(true)
+	public void list() {
+
+		Criteria c = masDivisionRepository.getCurrentSession().createCriteria(
+				MasDivision.class);
+		List<MasDivision> masDivisions = c.list();
+		
+
+	}
 }

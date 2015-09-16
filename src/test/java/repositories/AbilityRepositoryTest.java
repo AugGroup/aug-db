@@ -43,12 +43,12 @@ import com.aug.hrdb.services.MasJoblevelService;
 @Transactional
 public class AbilityRepositoryTest {
 
-	@Autowired AbilityRepository abilityRepository;
-	@Autowired EmployeeRepository employeeRepository;
-	@Autowired MasSpecialtyRepository MasSpecialtyRepository;
-	@Autowired MasJoblevelRepository massJoblevelRepository;
-	@Autowired ApplicantRepository applicantRepository;
-	@Autowired MasDivisionRepository masDivisionRepository;
+	@Autowired private AbilityRepository abilityRepository;
+	@Autowired private EmployeeRepository employeeRepository;
+	@Autowired private MasSpecialtyRepository MasSpecialtyRepository;
+	@Autowired private MasJoblevelRepository massJoblevelRepository;
+	@Autowired private ApplicantRepository applicantRepository;
+	@Autowired private MasDivisionRepository masDivisionRepository;
 	
 	private	 Employee employee;
 	int id;
