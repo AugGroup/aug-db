@@ -61,6 +61,7 @@
 		<mapping class="com.aug.hrdb.entities.Applicant" />
 		
 		<mapping class="com.aug.hrdb.entities.Employee" />
+		<mapping class="com.aug.hrdb.entities.AugRequest"/>
 		
 
 	</session-factory>
