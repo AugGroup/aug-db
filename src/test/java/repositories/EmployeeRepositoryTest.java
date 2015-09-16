@@ -4,6 +4,7 @@ package repositories;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -20,7 +21,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.AddressDto;
+import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.dto.EmployeeIdDto;
 import com.aug.hrdb.dto.ReportEmployeeDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
@@ -72,6 +76,12 @@ public class EmployeeRepositoryTest {
 	private OfficialRepository officialRepository;
 	
 	private Employee employee;
+	private Integer id;
+	private Integer idApplicant;
+    private Integer idMasJoblevel;
+	private Integer idMasDivision;
+	private Integer idMasLocation;
+	
 	
 	
 	@Before
@@ -86,6 +96,9 @@ public class EmployeeRepositoryTest {
         employee.setNicknameEng("va");
         employee.setSurnameThai("กิมเกถนอม");
         employee.setSurnameEng("kimkatanom");
+        employee.setAge(25);
+        employee.setHeight(165);
+        employee.setWeigth(55);
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -100,7 +113,7 @@ public class EmployeeRepositoryTest {
 		employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
         employee.setEmergencyContact("mom");
-        employee.setEmployeeCode("EMP-01");
+        employee.setEmployeeCode("JP10017");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
         employee.setTelMobile("089-0851022");
@@ -108,24 +121,19 @@ public class EmployeeRepositoryTest {
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-    }
-
-	 
-	 
-	@Test
-	@Rollback(false)
-	public void create() {
-		
-		
-		Applicant applicant = new Applicant();
+        employee.setStatusemp("Employee");
+        employee.setAddress("1/1");
+        
+        
+        Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
 		applicant.setAuditFlag("1");
 		applicantRepository.create(applicant);
-		
-        Applicant applicant1 = applicantRepository.find(1);
+		idApplicant = applicant.getId();
+        Applicant applicant1 = applicantRepository.find(idApplicant);
         Hibernate.initialize(applicant1);
         
         
@@ -143,8 +151,9 @@ public class EmployeeRepositoryTest {
 		masDivision.setCode("Division-01");
 		
 		masDivisionRepository.create(masDivision);
-		masDivisionRepository.find(1);
-		employee.setMasDivision(masDivision);
+		idMasDivision = masDivision.getId();
+		MasDivision masDivision1 = masDivisionRepository.find(idMasDivision);
+		employee.setMasDivision(masDivision1);
 		
 
 		MasJoblevel masJoblevel = new MasJoblevel();
@@ -157,457 +166,75 @@ public class EmployeeRepositoryTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelRepository.create(masJoblevel);
-		masJoblevelRepository.find(1);
+		idMasJoblevel = masJoblevel.getId();
+		MasJoblevel masJobLevel1 = masJoblevelRepository.find(idMasJoblevel);
 		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasJoblevel(masJobLevel1);
 		
+		
+		
+
+	    
+	    MasLocation masLocation = new MasLocation();
+	    masLocation.setIsActive(true);
+	    masLocation.setAuditFlag("C");
+	    masLocation.setCreatedBy(1);
+	    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	    masLocation.setName("MASLOCATION-TESTEMP");
+	    masLocation.setCode("JP");
+	    masLocationRepository.create(masLocation);
+	    idMasLocation = masLocation.getId();	
+	    MasLocation masLocation2 = masLocationRepository.find(idMasLocation);
+	    
+	    employee.setMasLocation(masLocation2);
 		
 		employeeRepository.create(employee);
+		id=employee.getId();
+		System.out.println("id: "+id);
+    }
+
+
+	
+	
+	 
+	 
+	@Test
+	@Rollback(true)
+	public void create() {
+		
+		
+		Employee emp =  employeeRepository.find(id);
+		Assert.assertEquals("อภิวาท์", emp.getNameThai());
+		
 			
 	}
 	
 	
-	@Test
-	@Rollback(false)
-	public void update() {
 	
+	
+	@Test
+	@Rollback(true)
+	public void update() {
+	    
+		System.out.println("id#: "+id);	 
 		Employee employee1 = new Employee();
-		employee1 = employeeRepository.find(1);
+		employee1 = employeeRepository.find(id);
 		employee1.setUpdatedBy(1);
 		employee1.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 		employee1.setAuditFlag("U");
 		employee1.setNameThai("เทส");
 		employeeRepository.update(employee1);
+		
+		Employee employee2 = new Employee();
+		employee2 = employeeRepository.find(id);
+		
+		Assert.assertEquals("เทส", employee2.getNameThai());
+		
+		
 
 	}
 	
 	
-	
-	@Test
-	@Rollback(false)
-	public void saveByNameQueryNullIsMangerAndAimID() {
-		
-
-			Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setAuditFlag("1");
-			applicantRepository.create(applicant);
-		
-		    
-		    MasEmployment masEmployment  = new MasEmployment();
-		    masEmployment.setIsActive(true);
-		    masEmployment.setAuditFlag("C");
-		    masEmployment.setCreatedBy(1);
-		    masEmployment.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    masEmployment.setCode("EMPLOYMENT-01");
-		    masEmployment.setName("TEST-EMP");
-		    masEmploymentRepository.create(masEmployment);
-		    
-		    MasTechnology masTechnology= new MasTechnology();
-		    masTechnology.setIsActive(true);
-		    masTechnology.setAuditFlag("C");
-		    masTechnology.setCreatedBy(1);
-		    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    masTechnology.setName("TECH-TESTEMP");
-		    masTechnology.setCode("TECHNOLOGY-01");
-		    masTechnologyRepository.create(masTechnology);
-		    
-		    
-		    MasCoreSkill masCoreSkill= new MasCoreSkill();
-		    masCoreSkill.setIsActive(true);
-		    masCoreSkill.setAuditFlag("C");
-		    masCoreSkill.setCreatedBy(1);
-		    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    masCoreSkill.setName("TECH-TESTEMP");
-		    masCoreSkill.setCode("TECHNOLOGY-01");
-		    masCoreSkillRepository.create(masCoreSkill);
-		    
-		    
-		    MasStaffType masStaffType = new MasStaffType();
-		    masStaffType.setIsActive(true);
-		    masStaffType.setAuditFlag("C");
-		    masStaffType.setCreatedBy(1);
-		    masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    masStaffType.setName("MASSTAFFTYPE-TESTEMP");
-		    masStaffType.setCode("STAFFTYPE-01");
-		    masStaffTypeRepository.create(masStaffType);
-	
-		    
-		    MasLocation masLocation = new MasLocation();
-		    masLocation.setIsActive(true);
-		    masLocation.setAuditFlag("C");
-		    masLocation.setCreatedBy(1);
-		    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    masLocation.setName("MASSTAFFTYPE-TESTEMP");
-		    masLocation.setCode("STAFFTYPE-01");
-		    masLocationRepository.create(masLocation);
-		    
-		    
-	        SimpleDateFormat dateformat = new SimpleDateFormat("dd/MM/yyyy");
-	        Date date = null;
-	        try {
-			    date = dateformat.parse("17/07/1989");
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-
-		    
-		    Official official = new Official();
-		    official.setAuditFlag("C");
-		    official.setCreatedBy(1);
-		    official.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    official.setOfficialDate(date);
-	        officialRepository.create(official);
-		    
-		    
-		    
-		 	EmployeeDto employeeDto = new EmployeeDto();
-		 	employeeDto.setIdCard("115310905001-9");
-		 	employeeDto.setNameThai("อภิวาท์");
-		 	employeeDto.setNameEng("apiva");
-		 	employeeDto.setNicknameThai("va");
-		 	employeeDto.setNicknameEng("va");
-		 	employeeDto.setSurnameThai("กิมเกถนอม");
-		 	employeeDto.setSurnameEng("kimkatanom");
-		 	employeeDto.setAge(25);
-		 	employeeDto.setHeight(165);
-		 	employeeDto.setWeigth(55);
-	        
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date1 = null;
-			try {
-				date1 = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			employeeDto.setDateOfBirth(date1);
-			employeeDto.setEmail("test@gmail.com");
-			employeeDto.setEmergencyContact("mom");
-			employeeDto.setEmployeeCode("EMP-02");
-			employeeDto.setStatusemp("Employee");
-			employeeDto.setTelHome("089-0851022");
-			employeeDto.setTelMobile("089-0851022");
-			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-	        
-	        
-	        Applicant applicant1 = applicantRepository.find(2);
-	        Hibernate.initialize(applicant1);
-	        
-	        employeeDto.setApplicateId(applicant1.getId());
-	         
-	        MasDivision masDivision = masDivisionRepository.find(1);
-	        
-	        employeeDto.setMasDivision(masDivision.getId());
-	        
-	        MasJoblevel masJoblevel = masJoblevelRepository.find(1);
-	        employeeDto.setMasJoblevel(masJoblevel.getId());
-	        
-	        MasEmployment masEmployment2  = masEmploymentRepository.find(1);
-	        
-	        employeeDto.setMasEmployment(masEmployment2.getId());
-	        
-	        MasTechnology masTechnology2 = masTechnologyRepository.find(1);
-	        employeeDto.setTechnology(masTechnology2.getId());
-	        
-	        
-	        MasCoreSkill masCoreSkill2 = masCoreSkillRepository.find(1);
-	        employeeDto.setMasCoreSkill(masCoreSkill2.getId());
-	        
-	        MasStaffType masStaffType2 = masStaffTypeRepository.find(1);
-	        employeeDto.setMasStaffType(masStaffType2.getId());
-	        
-	        MasLocation masLocation2 = masLocationRepository.find(1);
-	        employeeDto.setMasLocationId(masLocation2.getId());
-	        
-	        Official official2 = officialRepository.find(1);
-	        employeeDto.setOfficialId(official2.getId());
-	      
-	        employeeRepository.saveByNameQuery(employeeDto);
-
-	}
-	
-	
-	
-	
-	@Test
-	@Rollback(false)
-	public void saveByNameQueryNullIsMangerAndNotNullAimID() {
-		
-		    
-		 	EmployeeDto employeeDto = new EmployeeDto();
-		 	employeeDto.setIdCard("115310905001-9");
-		 	employeeDto.setNameThai("อภิวาท์");
-		 	employeeDto.setNameEng("apiva");
-		 	employeeDto.setNicknameThai("va");
-		 	employeeDto.setNicknameEng("va");
-		 	employeeDto.setSurnameThai("กิมเกถนอม");
-		 	employeeDto.setSurnameEng("kimkatanom");
-		 	employeeDto.setAge(25);
-		 	employeeDto.setHeight(165);
-		 	employeeDto.setWeigth(55);
-	        
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date1 = null;
-			try {
-				date1 = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			employeeDto.setDateOfBirth(date1);
-			employeeDto.setEmail("test@gmail.com");
-			employeeDto.setEmergencyContact("mom");
-			employeeDto.setEmployeeCode("EMP-03");
-			employeeDto.setStatusemp("Employee");
-			employeeDto.setTelHome("089-0851022");
-			employeeDto.setTelMobile("089-0851022");
-			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-			employeeDto.setAimempid(1);
-	        
-			
-			Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setAuditFlag("1");
-			applicantRepository.create(applicant);
-			
-	        Applicant applicant1 = applicantRepository.find(5);
-	        Hibernate.initialize(applicant1);
-	        
-	        employeeDto.setApplicateId(applicant1.getId());
-	         
-	        MasDivision masDivision = masDivisionRepository.find(1);	        
-	        employeeDto.setMasDivision(masDivision.getId());
-	        
-	        MasJoblevel masJoblevel = masJoblevelRepository.find(1);
-	        employeeDto.setMasJoblevel(masJoblevel.getId());
-	        
-	        MasEmployment masEmployment2  = masEmploymentRepository.find(1);	        
-	        employeeDto.setMasEmployment(masEmployment2.getId());
-	        
-	        MasTechnology masTechnology2 = masTechnologyRepository.find(1);
-	        employeeDto.setTechnology(masTechnology2.getId());
-	        
-	        
-	        MasCoreSkill masCoreSkill2 = masCoreSkillRepository.find(1);
-	        employeeDto.setMasCoreSkill(masCoreSkill2.getId());
-	        
-	        MasStaffType masStaffType2 = masStaffTypeRepository.find(1);
-	        employeeDto.setMasStaffType(masStaffType2.getId());
-	        
-	        MasLocation masLocation2 = masLocationRepository.find(1);
-	        employeeDto.setMasLocationId(masLocation2.getId());
-	        
-	        Official official2 = officialRepository.find(2);
-	        employeeDto.setOfficialId(official2.getId());
-	      
-	        employeeRepository.saveByNameQuery(employeeDto);
-
-	}
-	
-	
-	
-	
-	
-	
-	@Test
-	@Rollback(false)
-	public void saveByNameQueryNotNullIsMangerAndNullAimID() {
-		
-			
-		    
-		 	EmployeeDto employeeDto = new EmployeeDto();
-		 	employeeDto.setIdCard("115310905001-9");
-		 	employeeDto.setNameThai("อภิวาท์");
-		 	employeeDto.setNameEng("apiva");
-		 	employeeDto.setNicknameThai("va");
-		 	employeeDto.setNicknameEng("va");
-		 	employeeDto.setSurnameThai("กิมเกถนอม");
-		 	employeeDto.setSurnameEng("kimkatanom");
-		 	employeeDto.setAge(25);
-		 	employeeDto.setHeight(165);
-		 	employeeDto.setWeigth(55);
-	        
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date1 = null;
-			try {
-				date1 = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			employeeDto.setDateOfBirth(date1);
-			employeeDto.setEmail("test@gmail.com");
-			employeeDto.setEmergencyContact("mom");
-			employeeDto.setEmployeeCode("EMP-04");
-			employeeDto.setStatusemp("Employee");
-			employeeDto.setTelHome("089-0851022");
-			employeeDto.setTelMobile("089-0851022");
-			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-			employeeDto.setIsManager(1);
-			
-			Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setAuditFlag("1");
-			applicantRepository.create(applicant);
-	        
-	        
-	        Applicant applicant1 = applicantRepository.find(3);
-	        Hibernate.initialize(applicant1);
-	        
-	        employeeDto.setApplicateId(applicant1.getId());
-	         
-	        MasDivision masDivision = masDivisionRepository.find(1);	        
-	        employeeDto.setMasDivision(masDivision.getId());
-	        
-	        MasJoblevel masJoblevel = masJoblevelRepository.find(1);
-	        employeeDto.setMasJoblevel(masJoblevel.getId());
-	        
-	        MasEmployment masEmployment2  = masEmploymentRepository.find(1);	        
-	        employeeDto.setMasEmployment(masEmployment2.getId());
-	        
-	        MasTechnology masTechnology2 = masTechnologyRepository.find(1);
-	        employeeDto.setTechnology(masTechnology2.getId());
-	        
-	        
-	        MasCoreSkill masCoreSkill2 = masCoreSkillRepository.find(1);
-	        employeeDto.setMasCoreSkill(masCoreSkill2.getId());
-	        
-	        MasStaffType masStaffType2 = masStaffTypeRepository.find(1);
-	        employeeDto.setMasStaffType(masStaffType2.getId());
-	        
-	        MasLocation masLocation2 = masLocationRepository.find(1);
-	        employeeDto.setMasLocationId(masLocation2.getId());
-	        
-	        Official official2 = officialRepository.find(1);
-	        employeeDto.setOfficialId(official2.getId());
-	      
-	        employeeRepository.saveByNameQuery(employeeDto);
-
-	}
-
-
-	
-	
-	
-	
-	@Test
-	@Rollback(false)
-	public void saveByNameQueryNotNullIsMangerAndNotNullAimID() {
-		
-		
-			Applicant applicant = new Applicant();
-			applicant.setCreatedBy(2);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setAuditFlag("1");
-			applicantRepository.create(applicant);
-		
-		   
-		    Official official = new Official();
-		    official.setAuditFlag("C");
-		    official.setCreatedBy(1);
-		    official.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date1 = null;
-			try {
-				date1 = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-			
-			official.setOfficialDate(date1);
-			officialRepository.create(official);
-		
-		 	EmployeeDto employeeDto = new EmployeeDto();
-		 	employeeDto.setIdCard("115310905001-9");
-		 	employeeDto.setNameThai("อภิวาท์");
-		 	employeeDto.setNameEng("apiva");
-		 	employeeDto.setNicknameThai("va");
-		 	employeeDto.setNicknameEng("va");
-		 	employeeDto.setSurnameThai("กิมเกถนอม");
-		 	employeeDto.setSurnameEng("kimkatanom");
-		 	employeeDto.setAge(25);
-		 	employeeDto.setHeight(165);
-		 	employeeDto.setWeigth(55);
-	        
-	        SimpleDateFormat sdf1 = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString1 = "31-08-1982";
-	    	Date date2 = null;
-			try {
-				date2 = sdf1.parse(dateInString1);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			employeeDto.setDateOfBirth(date2);
-			employeeDto.setEmail("test@gmail.com");
-			employeeDto.setEmergencyContact("mom");
-			employeeDto.setEmployeeCode("EMP-06");
-			employeeDto.setStatusemp("Employee");
-			employeeDto.setTelHome("089-0851022");
-			employeeDto.setTelMobile("089-0851022");
-			employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-			employeeDto.setIsManager(1);
-			employeeDto.setAimempid(1);
-	        
-	        
-	        Applicant applicant1 = applicantRepository.find(4);
-	        Hibernate.initialize(applicant1);
-	        
-	        employeeDto.setApplicateId(applicant1.getId());
-	         
-	        MasDivision masDivision = masDivisionRepository.find(1);	        
-	        employeeDto.setMasDivision(masDivision.getId());
-	        
-	        MasJoblevel masJoblevel = masJoblevelRepository.find(1);
-	        employeeDto.setMasJoblevel(masJoblevel.getId());
-	        
-	        MasEmployment masEmployment2  = masEmploymentRepository.find(1);	        
-	        employeeDto.setMasEmployment(masEmployment2.getId());
-	        
-	        MasTechnology masTechnology2 = masTechnologyRepository.find(1);
-	        employeeDto.setTechnology(masTechnology2.getId());
-	        
-	        
-	        MasCoreSkill masCoreSkill2 = masCoreSkillRepository.find(1);
-	        employeeDto.setMasCoreSkill(masCoreSkill2.getId());
-	        
-	        MasStaffType masStaffType2 = masStaffTypeRepository.find(1);
-	        employeeDto.setMasStaffType(masStaffType2.getId());
-	        
-	        MasLocation masLocation2 = masLocationRepository.find(1);
-	        employeeDto.setMasLocationId(masLocation2.getId());
-	        
-	        Official official2 = officialRepository.find(2);
-	        employeeDto.setOfficialId(official2.getId());
-	      
-	        employeeRepository.saveByNameQuery(employeeDto);
-
-	}
-
-
 	
 	
 	@Test
@@ -615,14 +242,14 @@ public class EmployeeRepositoryTest {
 		
 		//search last id of EMPLOYEE
 		Employee employee = employeeRepository.searhEmpIdtoAddress();
-		Assert.assertEquals(5, employee.getId().intValue());
+		Assert.assertEquals(id.intValue(), employee.getId().intValue());
 	
 	}
 	
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void reportEmployee() {
 		
 		//search last id of EMPLOYEE
@@ -632,9 +259,28 @@ public class EmployeeRepositoryTest {
 	}
 	
 	
+	@Test
+	public void serchRunningNo(){
+		
+		
+		MasLocation masLocation = masLocationRepository.find(idMasLocation);
+		EmployeeCodeDto employeeCodeDto = employeeRepository.serchRunningNo(masLocation.getCode());
+		Assert.assertEquals(17, employeeCodeDto.getRungingNumber().intValue());
+		
+	}
 	
+	
+	
+	@Test 
+	public void findCurrentId(){
+		
+		EmployeeIdDto employeeIdDto = employeeRepository.findCurrentId();
+		Assert.assertEquals(id.intValue(), employeeIdDto.getId().intValue());
 
-
+		
+	}
+	
+	
 
 
 }

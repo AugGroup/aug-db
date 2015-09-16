@@ -53,7 +53,7 @@
     <!-- <bean id="dataSource" class="org.h2.jdbcx.JdbcDataSource">
         <property name="URL" value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1"/>
         <property name="user" value="sa"/>
-        <property name="password" value=""/>R
+        <property name="password" value=""/>
     </bean> -->
 
     <!-- <jdbc:initialize-database>

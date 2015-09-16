@@ -28,7 +28,6 @@ public interface EmployeeService {
 	public void deleteById(Integer id);
 	public List<Employee> findByCriteria(Employee employee);
 	public Employee searhEmpIdtoAddress(); 	//find last id of employee
-	public void saveEmpAndWithRelateTable(EmployeeDto allEmployeeDto);
 	public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id); 
 	public Employee createEmployeeAndReturnId(EmployeeDto allEmployeeDto,String employeeCode) throws JDBCException;
 	public Employee updateEmployeeAndReturnId(EmployeeDto allEmployeeDto,String employeeCode) throws DataIntegrityViolationException;

@@ -143,49 +143,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.searhEmpIdtoAddress();
 	}
 
-	@Override
-	public void saveEmpAndWithRelateTable(EmployeeDto employeeDto) {
 	
-		MasLocation location = masLocationService.findByLocationCode(employeeDto.getMasLocation());
-		
-		OfficialDto officialDto = new OfficialDto();
-		//Date dateOffi = new Date("12/05/2015");
-		Calendar cal = Calendar.getInstance();
-		officialDto.setOfficialDate(employeeDto.getOfficialDate());
-		officialDto.setStartWorkDate(employeeDto.getStartWorkDate());
-		officialDto.setEndWorkDate(employeeDto.getEndWorkDate());
-		officialDto.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
-		officialDto.setSalaryExpected(employeeDto.getSalaryExpected());
-		officialDto.setProbationDate(employeeDto.getProbationDate());
-	
-		afficialService.saveOfficialByNameQuery(officialDto);		
-		
-		Official official1 = afficialService.searhEmpIdtoOfficial();
-		System.out.println(official1.getId());
-	
-		employeeDto.setOfficialId(official1.getId());
-		employeeDto.setMasLocationId(location.getId());
-		
-		
-		employeeRepository.saveByNameQuery(employeeDto);
-		
-		
-		Employee emp = employeeRepository.searhEmpIdtoAddress();
-		
-		System.out.println("empId: "+emp.getId());
-		
-		
-		/*if(employeeDto.getAddressList()!=null){
-			for(AddressDto addressDto:employeeDto.getAddressList()){
-				if(addressDto.getId()!=null){
-					//addressDto.setEmployeeId(emp.getId());
-					//addressService.saveAddressByNameQuery(addressDto);
-				    System.out.println(addressDto);
-				}
-				
-			}
-		}*/
-  }
 
 	
 

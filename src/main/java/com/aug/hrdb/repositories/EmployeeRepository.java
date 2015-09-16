@@ -22,22 +22,16 @@ import com.aug.hrdb.entities.Employee;
 public interface EmployeeRepository extends GenericRepository<Employee, Integer>{
 	
 	public List<Employee> findByCriteria(Employee employee);
-
 	public void deleteById(Integer id);
-
-	public List<EmployeeDto> searchEmployee();
-	
+	public List<EmployeeDto> searchEmployee();	
 	public List<AimEmployeeDto> listEmployeeAim();
-	public void saveByNameQuery(EmployeeDto allEmployeeDto);
 	public Employee searhEmpIdtoAddress(); 	//find last id of employee
 	public List<ReportEmployeeDto> reportEmployee(String nameEng);
 	public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff);
 	public EmployeeCodeDto serchRunningNo(String code);
 	public List<ReportLeaveDto> reportLeave(String nameEng);
-	public void updateByNameQuery(EmployeeDto allEmployeeDto);
 	public EmployeeIdDto findCurrentId();
 	public Employee findEmployeeAndOfficial(Integer id);
-	public void deleteEmployeeByNameQuery(Employee employee);
 	public List<Employee> findAimRelateWithEmployee(Integer id);
 	public Employee findOfficial(Integer id);
 	public List<ReportEmployeeDto> findByName(Employee employee);
