@@ -317,5 +317,19 @@ public class EmployeeServiceTest {
 	
 	
 	
+	
+	@Test 
+	public void findByCriteria(){
+		
+		Employee employee = employeeService.findById(id);
+		List<Employee> empList = employeeService.findByCriteria(employee);
+		Assert.assertEquals(true, empList.contains(employee));		
+
+		
+		
+	}
+	
+	
+	
 
 }

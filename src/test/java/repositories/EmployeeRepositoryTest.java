@@ -483,6 +483,19 @@ public class EmployeeRepositoryTest {
 		
 		
 	}
+	
+	
+	
+	@Test 
+	public void findByCriteria(){
+		
+		Employee employee = employeeRepository.find(id);
+		List<Employee> empList = employeeRepository.findByCriteria(employee);
+		Assert.assertEquals(true, empList.contains(employee));		
+
+		
+		
+	}
 
 
 }

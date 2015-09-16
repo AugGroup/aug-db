@@ -40,7 +40,7 @@ public class EmployeerepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 		
 		Criteria c = getCurrentSession().createCriteria(Employee.class);
 		if (!StringUtils.isNullOrEmpty(employee.getNameEng())) {
-			c.add(Restrictions.like("name", "%" + employee.getNameEng() + "%"));
+			c.add(Restrictions.like("nameEng", "%" + employee.getNameEng() + "%"));
 		}
 		return c.list();
 		
