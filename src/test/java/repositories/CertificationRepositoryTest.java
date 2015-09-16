@@ -22,11 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.CertificationRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -40,11 +41,13 @@ public class CertificationRepositoryTest {
 		private ApplicantRepository applicantRepository;
 		@Autowired
 		private MasJoblevelRepository masJoblevelRepository;
+		@Autowired
+		private MasTechnologyRepository masTechnologyRepository;
 		
 		@Before
 		public void setCertificationRepository() throws ParseException {
 	        
-	        Applicant applicant = new Applicant();
+			Applicant applicant = new Applicant();
 	        applicant.setCardId("115310905001-9");
 	        applicant.setFirstNameTH("อรอนงค์");
 	        applicant.setFirstNameEN("Ornanong");
@@ -55,11 +58,8 @@ public class CertificationRepositoryTest {
 			applicant.setCreatedBy(1);
 			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			applicant.setAuditFlag("C");
-			applicantRepository.create(applicant);
+			applicant.setCardId("115310905001-9");
 			
-	        Applicant applicant1 = applicantRepository.find(1);
-	        Hibernate.initialize(applicant1);
-
 			MasJoblevel masJoblevel = new MasJoblevel();
 			masJoblevel.setName("CEO");
 			masJoblevel.setIsActive(true);
@@ -70,13 +70,25 @@ public class CertificationRepositoryTest {
 			masJoblevel.setCode("Division-01");
 
 			masJoblevelRepository.create(masJoblevel);
-			masJoblevelRepository.find(1);
+			MasJoblevel mJoblevel= masJoblevelRepository.find(1);
 
-			applicant.setJoblevel(masJoblevel);
+			MasTechnology masTechnology = new MasTechnology();
+			masTechnology.setName("java");
+			masTechnology.setCode("001A");
+			masTechnology.setIsActive(true);
+			masTechnology.setAuditFlag("C");
+			masTechnology.setCreatedBy(0);
+			Calendar cal = Calendar.getInstance();
+			masTechnology.setCreatedTimeStamp(cal.getTime());
+			masTechnologyRepository.create(masTechnology);
+			
+			MasTechnology mTechnology= masTechnologyRepository.find(1);
+			
+			applicant.setJoblevel(mJoblevel);
+			applicant.setTechnology(mTechnology);
 			applicantRepository.create(applicant);
 			
-			
-		    applicant1 =  applicantRepository.find(1);
+		    Applicant applicant1 =  applicantRepository.find(1);
 		    Certification certification = new Certification();
 			certification.setName("SAP");
 			certification.setAuditFlag("C");
@@ -101,7 +113,7 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = true)
 		public void testUpdateCertificationRepository() throws Exception {
-			Certification certification = certificationRepository.find(5);
+			Certification certification = certificationRepository.find(1);
 			certification.setName(".Net");
 			certification.setAuditFlag("U");
 			certification.setCreatedBy(2);

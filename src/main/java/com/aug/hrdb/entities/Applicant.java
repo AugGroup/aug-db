@@ -130,11 +130,11 @@ public class Applicant extends BaseEntity{
 	private String otherDescription;
 	
 	@ManyToOne
-	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id")
+	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
 	private MasTechnology technology;
 
 	@ManyToOne
-	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id")
+	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
 	private MasJoblevel joblevel;
 
 	@Column(name = "TRACKING_STATUS")

@@ -19,12 +19,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.CertificationService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -38,6 +40,8 @@ public class CertificationServiceTest {
 	
 	@Autowired
 	private MasJoblevelService masJoblevelService;
+	@Autowired
+	private MasTechnologyService masTechnologyService;
 	@Before
 	public void setCertificationService() throws ParseException {
         
@@ -53,11 +57,7 @@ public class CertificationServiceTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantService.create(applicant);
 		
-        Applicant applicant1 = applicantService.findById(1);
-        Hibernate.initialize(applicant1);
-
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
@@ -68,13 +68,25 @@ public class CertificationServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
+		MasJoblevel mJoblevel= masJoblevelService.find(1);
 
-		applicant.setJoblevel(masJoblevel);
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyService.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
 		applicantService.create(applicant);
 		
-		
-	    applicant1 =  applicantService.findById(1);
+	    Applicant applicant1 =  applicantService.findById(1);
 	    Certification certification = new Certification();
 		certification.setName("SAP");
 		certification.setAuditFlag("C");
@@ -125,7 +137,7 @@ public class CertificationServiceTest {
 	@Test
 	@Transactional
 	public void testFindByIdCertificateService() throws Exception {
-		Certification certification = certificationService.findById(5);
+		Certification certification = certificationService.findById(1);
 		assertNotNull(certification.getName());
 		
 	}
@@ -138,7 +150,6 @@ public class CertificationServiceTest {
 			System.out.println("certification : "
 					+ certification.getName());
 	}
-	
 	
 	
 
