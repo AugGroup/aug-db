@@ -64,7 +64,6 @@ public class EducationRepositoryTest {
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
 		applicantRepository.create(applicant);
 		
         Applicant applicant1 = applicantRepository.find(1);
@@ -151,10 +150,16 @@ public class EducationRepositoryTest {
 	
 	@Test
 	@Rollback(true)
-	public void deleteByIdEducationRepositoryTest() {
+	public void deleteEducationRepositoryTest() {
 		Education experience = educationRepository.find(3);
 		educationRepository.delete(experience);
 		System.out.println("Delete Experience : " + educationRepository.find(1));
+	}
+	
+	@Test
+	@Rollback(true)
+	public void deleteByIdEducationRepositoryTest() {
+		educationRepository.deleteById(3);
 	}
 
 

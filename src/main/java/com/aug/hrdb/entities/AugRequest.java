@@ -17,6 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 *
 * @author Supannika Pattanodom
 */
+
 @Entity
 @Table(name = "AUG_REQUEST")
 public class AugRequest extends BaseEntity{

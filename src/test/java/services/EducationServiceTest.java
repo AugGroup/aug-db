@@ -65,7 +65,6 @@ public class EducationServiceTest {
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
 		applicantService.create(applicant);
 		
         Applicant applicant1 = applicantService.findById(1);
@@ -145,6 +144,14 @@ public class EducationServiceTest {
 		education.setUniversity("Thammasat");
 		educationService.update(education);
 	}
+	
+	@Test
+	@Transactional
+	@Rollback(value = true)
+	public void testDeleteEducationService() throws Exception {
+		Education education = educationService.findById(4);
+		educationService.delete(education);
+	}
 
 	@Test
 	@Transactional
@@ -166,13 +173,6 @@ public class EducationServiceTest {
 	public void testFindAllEducationService() throws Exception {
 		List<Education> educations = educationService.findAll();
 		assertNotNull(educations);
-//		for (Education education : educations){
-//			System.out.println("Education : " + education.getCertification());
-//			System.out.println("Education : " + education.getFaculty());
-//			System.out.println("Education : " + education.getGpa());
-//			System.out.println("Education : " + education.getMajor());
-//			System.out.println("Education : " + education.getUniversity());
-//		}
 	}
 
 }
