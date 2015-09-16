@@ -16,6 +16,8 @@ import java.util.List;
 
 
 
+
+
 import org.hibernate.Hibernate;
 import org.junit.Assert;
 import org.junit.Before;
@@ -33,6 +35,7 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasSpecialty;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
@@ -43,6 +46,7 @@ import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasSpecialtyService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -52,15 +56,18 @@ public class AbilityServiceTest {
 	@Autowired private AbilityService abilityService;
 	@Autowired private EmployeeService employeeService;
 	@Autowired private MasSpecialtyService masSpecialtyService;
-	
 	@Autowired private MasJoblevelService masJoblevelService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private MasDivisionService masDivisionService;
-	
+	@Autowired private MasTechnologyService masTechnologyService;
 
 	
 	private	 Employee employee;
 	int id;
+	int empId;
+	int masjobId;
+	int appId; 
+	int mastecId;
 	
 	@Before
 	public void setAbility() {
@@ -95,14 +102,47 @@ public class AbilityServiceTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        
+        
+        
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastecId = masTechnology.getId();
+		MasTechnology mTechnology = masTechnologyService.find(mastecId);
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId = masJoblevel.getId();
+		MasJoblevel mJob = masJoblevelService.find(masjobId);
+         			
+        
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantService.create(applicant);
+		appId=applicant.getId();
 		
-        Applicant applicant1 = applicantService.findById(1);
+        Applicant applicant1 = applicantService.findById(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -121,26 +161,14 @@ public class AbilityServiceTest {
 		
 		masDivisionService.create(masDivision);
 		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
 		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasDivision(masDivision);	
+		employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
-		
+		empId=employee.getId();
 		
 	
-		Employee employee=employeeService.findById(1);
+		Employee employee=employeeService.findById(empId);
 		MasSpecialty masSpecialty=masSpecialtyService.findById(1);
 		Ability ability=new Ability();
 		ability.setRank(10);
@@ -152,7 +180,7 @@ public class AbilityServiceTest {
 		abilityService.create(ability);
 		
 	    id = ability.getId();
-	    System.out.println("id: "+id);
+	    //System.out.println("id: "+id);
 	
 	}
 	
@@ -161,7 +189,7 @@ public class AbilityServiceTest {
 	@Rollback(true)
 	public void createAbility() {
 		
-		Employee employee=employeeService.findById(1);
+		Employee employee=employeeService.findById(empId);
 		MasSpecialty masSpecialty=masSpecialtyService.findById(1);
 		Ability ability=new Ability();
 		ability.setRank(10);

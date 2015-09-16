@@ -30,12 +30,14 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasSpecialty;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.AbilityRepository;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasSpecialtyRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.MasJoblevelService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,12 +48,18 @@ public class AbilityRepositoryTest {
 	@Autowired private AbilityRepository abilityRepository;
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private MasSpecialtyRepository MasSpecialtyRepository;
-	@Autowired private MasJoblevelRepository massJoblevelRepository;
+	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
+	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	
 	private	 Employee employee;
 	int id;
+	int masdiId;
+	int appId;
+	int masjobId;
+	int mastecId;
+	int empId;
 	
 	@Before
 	public void setAbility() {
@@ -86,14 +94,48 @@ public class AbilityRepositoryTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+ 		mastecId=masTechnology.getId();
+		MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+ 		
+	
+
+        
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantRepository.create(applicant);
 		
-        Applicant applicant1 = applicantRepository.find(1);
+		appId=applicant.getId();
+        Applicant applicant1 = applicantRepository.find(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -113,34 +155,25 @@ public class AbilityRepositoryTest {
 		masDivision.setCode("Division-01");
 		
 		masDivisionRepository.create(masDivision);
-		masDivisionRepository.find(1);
+		masdiId=masDivision.getId();
+		masDivisionRepository.find(masdiId);
 		employee.setMasDivision(masDivision);
 		
 
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		massJoblevelRepository.create(masJoblevel);
-		massJoblevelRepository.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+			
+		employee.setMasJoblevel(mJob);
 		employeeRepository.create(employee);
+		empId=employee.getId();
 		
-		
-		Employee employee=employeeRepository.find(1);
-		MasSpecialty masspecialty=MasSpecialtyRepository.find(1);
+		Employee employee=employeeRepository.find(empId);
+		MasSpecialty maspecialty=MasSpecialtyRepository.find(1);
 		Ability ability=new Ability();
 		ability.setRank(10);
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		ability.setEmployee(employee);
-		ability.setMasspecialty(masspecialty);
+		ability.setMasspecialty(maspecialty);
 		abilityRepository.create(ability);
 	
 		
@@ -160,7 +193,7 @@ public class AbilityRepositoryTest {
 		
 		
 		Employee employee=employeeRepository.find(1);
-		MasSpecialty masspecialty=MasSpecialtyRepository.find(1);
+		MasSpecialty maspecialty=MasSpecialtyRepository.find(1);
 		
 
 		
@@ -170,7 +203,7 @@ public class AbilityRepositoryTest {
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		ability.setEmployee(employee);
-		ability.setMasspecialty(masspecialty);
+		ability.setMasspecialty(maspecialty);
 		abilityRepository.create(ability);
 	
 	}

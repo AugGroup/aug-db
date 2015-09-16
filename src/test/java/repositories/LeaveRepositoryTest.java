@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
 import org.junit.Assert;
@@ -21,18 +22,22 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Leave;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasLeaveType;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.LeaveRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasLeaveTypeRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
+import com.aug.hrdb.services.MasTechnologyService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,15 +45,21 @@ import com.aug.hrdb.repositories.MasLeaveTypeRepository;
 @Transactional
 public class LeaveRepositoryTest {
 	
-	@Autowired LeaveRepository leaveRepository;
-	@Autowired EmployeeRepository employeeRepository;
-	@Autowired MasLeaveTypeRepository masLeaveTypeRepository;
-	@Autowired MasJoblevelRepository massJoblevelRepository;
-	@Autowired ApplicantRepository applicantRepository;
-	@Autowired MasDivisionRepository masDivisionRepository;
+	@Autowired private LeaveRepository leaveRepository;
+	@Autowired private EmployeeRepository employeeRepository;
+	@Autowired private MasLeaveTypeRepository masLeaveTypeRepository;
+	@Autowired private MasJoblevelRepository masJoblevelRepository;
+	@Autowired private ApplicantRepository applicantRepository;
+	@Autowired private MasDivisionRepository masDivisionRepository;
+	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	
 	private	 Employee employee;
 	int id;
+	int masdiId;
+	int appId;
+	int masjobId;
+	int mastecId;
+	int empId;
 	
 	@Before
 	public void setleave() {
@@ -83,14 +94,46 @@ public class LeaveRepositoryTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        
+        
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		mastecId=masTechnology.getId();
+		MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+ 		
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantRepository.create(applicant);
+		appId=applicant.getId();
 		
-        Applicant applicant1 = applicantRepository.find(1);
+        Applicant applicant1 = applicantRepository.find(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -110,22 +153,13 @@ public class LeaveRepositoryTest {
 		masDivision.setCode("Division-01");
 		
 		masDivisionRepository.create(masDivision);
-		masDivisionRepository.find(1);
+		masdiId=masDivision.getId();
+		masDivisionRepository.find(masdiId);
 		employee.setMasDivision(masDivision);
 		
 
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		massJoblevelRepository.create(masJoblevel);
-		massJoblevelRepository.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+		
+		employee.setMasJoblevel(mJob);
 		employeeRepository.create(employee);
 		
 		
