@@ -18,8 +18,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -29,6 +33,11 @@ public class ApplicantRepositoryTest {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	private Applicant applicant;
+	@Autowired
+	private MasJoblevelRepository masJoblevelRepository;
+	@Autowired
+	private MasTechnologyRepository masTechnologyRepository;
+	
 	@Before
     public void setUp() {
 		
@@ -53,7 +62,34 @@ public class ApplicantRepositoryTest {
         applicant.setAuditFlag("C");
         applicant.setCreatedBy(1);
         applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        applicantRepository.create(applicant);
+        MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		MasJoblevel mJoblevel= masJoblevelRepository.find(1);
+
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyRepository.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
+		applicantRepository.create(applicant);
+		
     }
 	
 	
@@ -67,6 +103,31 @@ public class ApplicantRepositoryTest {
 		applicant.setAuditFlag("C");
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		MasJoblevel mJoblevel= masJoblevelRepository.find(1);
+
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName(".NET");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyRepository.find(1);
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
 		applicantRepository.create(applicant);
 	}
 	

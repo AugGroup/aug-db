@@ -40,8 +40,10 @@ public class CertificationServiceTest {
 	
 	@Autowired
 	private MasJoblevelService masJoblevelService;
+	
 	@Autowired
 	private MasTechnologyService masTechnologyService;
+	
 	@Before
 	public void setCertificationService() throws ParseException {
         

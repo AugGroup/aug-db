@@ -20,8 +20,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
+import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -33,6 +37,12 @@ public class ApplicantServiceTest {
 	
 	@Autowired
 	private EmployeeService employeeService;
+	
+	@Autowired
+	private MasJoblevelService masJoblevelService;
+	
+	@Autowired
+	private MasTechnologyService masTechnologyService;
 	
 	private Applicant applicant;
 	@Before
@@ -59,6 +69,33 @@ public class ApplicantServiceTest {
         applicant.setAuditFlag("C");
         applicant.setCreatedBy(1);
         applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        
+        MasJoblevel masJoblevel = new MasJoblevel();
+    	masJoblevel.setName("CEO");
+    	masJoblevel.setIsActive(true);
+    	masJoblevel.setCode("01");
+    	masJoblevel.setAuditFlag("C");
+    	masJoblevel.setCreatedBy(1);
+    	masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    	masJoblevel.setCode("Division-01");
+
+    	masJoblevelService.create(masJoblevel);
+    	MasJoblevel mJoblevel= masJoblevelService.find(1);
+
+    	MasTechnology masTechnology = new MasTechnology();
+    	masTechnology.setName("java");
+    	masTechnology.setCode("001A");
+    	masTechnology.setIsActive(true);
+    	masTechnology.setAuditFlag("C");
+    	masTechnology.setCreatedBy(0);
+    	Calendar cal = Calendar.getInstance();
+    	masTechnology.setCreatedTimeStamp(cal.getTime());
+    	masTechnologyService.create(masTechnology);
+    		
+    	MasTechnology mTechnology= masTechnologyService.find(1);
+    		
+    	applicant.setJoblevel(mJoblevel);
+    	applicant.setTechnology(mTechnology);
         applicantService.create(applicant);
     }
 	
@@ -70,7 +107,33 @@ public class ApplicantServiceTest {
 		applicant.setAuditFlag("C");
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicantService.create(applicant);
+		 
+        MasJoblevel masJoblevel = new MasJoblevel();
+    	masJoblevel.setName("CEO");
+    	masJoblevel.setIsActive(true);
+    	masJoblevel.setCode("01");
+    	masJoblevel.setAuditFlag("C");
+    	masJoblevel.setCreatedBy(1);
+    	masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    	masJoblevel.setCode("Division-01");
+
+    	masJoblevelService.create(masJoblevel);
+    	MasJoblevel mJoblevel= masJoblevelService.find(1);
+
+    	MasTechnology masTechnology = new MasTechnology();
+    	masTechnology.setName("java");
+    	masTechnology.setCode("001A");
+    	masTechnology.setIsActive(true);
+    	masTechnology.setAuditFlag("C");
+    	masTechnology.setCreatedBy(0);
+    	Calendar cal = Calendar.getInstance();
+    	masTechnology.setCreatedTimeStamp(cal.getTime());
+    	masTechnologyService.create(masTechnology);
+    		
+    	MasTechnology mTechnology= masTechnologyService.find(1);
+    	applicant.setJoblevel(mJoblevel);
+    	applicant.setTechnology(mTechnology);
+        applicantService.create(applicant);
 	}
 	
 	@Test
