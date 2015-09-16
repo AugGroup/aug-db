@@ -21,11 +21,13 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Probation;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.ProbationRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -38,6 +40,7 @@ public class ProbationRepositoryTest {
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
+	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	
 	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 	int id;
@@ -70,11 +73,36 @@ public class ProbationRepositoryTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantRepository.create(applicant);
 		
 		Applicant app = applicantRepository.find(1);
 	    Hibernate.initialize(app);
-	        
+	    
+	    MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masJoblevelRepository.find(1);
+		
+		applicant.setJoblevel(masJoblevel);
+		employee.setMasJoblevel(masJoblevel);
+		
+		MasTechnology masTech = new MasTechnology();
+		masTech.setName("Java");
+		masTech.setCode("001A");
+		masTech.setIsActive(true);
+		masTech.setAuditFlag("C");
+		masTech.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTech.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTech);
+		applicant.setTechnology(masTech);
+		
 	    employee.setApplicant(app);
 		
         MasDivision masDivision = new MasDivision();
@@ -90,19 +118,7 @@ public class ProbationRepositoryTest {
 		masDivisionRepository.find(1);
 		employee.setMasDivision(masDivision);
         
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelRepository.create(masJoblevel);
-		masJoblevelRepository.find(1);
 		
-		employee.setMasJoblevel(masJoblevel);
 		employeeRepository.create(employee);
 		
 		Employee employee1 =  employeeRepository.find(1);

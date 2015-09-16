@@ -21,7 +21,9 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Probation;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
@@ -40,6 +42,7 @@ public class ProbationServiceTest {
 	@Autowired private MasJoblevelService masJoblevelService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private MasDivisionService masDivisionService;
+	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	
 	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 	int id;
@@ -72,26 +75,10 @@ public class ProbationServiceTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantService.create(applicant);
 		
 		Applicant app = applicantService.findById(1);
 	    Hibernate.initialize(app);
-	        
-	    employee.setApplicant(app);
-		
-        MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
-        
+	    
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
@@ -105,6 +92,32 @@ public class ProbationServiceTest {
 		masJoblevelService.find(1);
 		
 		employee.setMasJoblevel(masJoblevel);
+	    
+	    MasTechnology masTech = new MasTechnology();
+		masTech.setName("Java");
+		masTech.setCode("001A");
+		masTech.setIsActive(true);
+		masTech.setAuditFlag("C");
+		masTech.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTech.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTech);
+		applicant.setTechnology(masTech);
+	    
+	    employee.setApplicant(app);
+		
+        MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");		
+		masDivisionService.create(masDivision);
+		masDivisionService.findById(1);
+		employee.setMasDivision(masDivision);
+        
 		employeeService.create(employee);
 		
 		Employee employee1 =  employeeService.findById(1);

@@ -30,12 +30,14 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAllowances;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.AllowancesRepository;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasAllowancesRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.MasAllowancesService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,10 +48,10 @@ public class AllowancesRepositoryTest {
 	@Autowired private AllowancesRepository allowancesRepository;
 	@Autowired private MasAllowancesRepository  masAllowancesRepository;
 	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasJoblevelRepository massJoblevelRepository;
+	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
-	
+	@Autowired private MasTechnologyRepository masTechnologyRepository;	
 	
 	
 	private	 Employee employee;
@@ -93,33 +95,12 @@ public class AllowancesRepositoryTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantRepository.create(applicant);
+	
 		
         Applicant applicant1 = applicantRepository.find(1);
         Hibernate.initialize(applicant1);
         
-        
-       
-        
-        employee.setApplicant(applicant1);
-         
-    
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionRepository.create(masDivision);
-		masDivisionRepository.find(1);
-		employee.setMasDivision(masDivision);
-		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
+        MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -127,25 +108,58 @@ public class AllowancesRepositoryTest {
 		masJoblevel.setCreatedBy(1);
 		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masJoblevel.setCode("Division-01");
-
-		massJoblevelRepository.create(masJoblevel);
-		massJoblevelRepository.find(1);		
+		masJoblevelRepository.create(masJoblevel);
+		masJoblevelRepository.find(1);
+		applicant.setJoblevel(masJoblevel);
 		employee.setMasJoblevel(masJoblevel);
+		
+		MasTechnology masTech = new MasTechnology();
+		masTech.setName("Java");
+		masTech.setCode("001A");
+		masTech.setIsActive(true);
+		masTech.setAuditFlag("C");
+		masTech.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTech.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTech);
+		applicant.setTechnology(masTech);
+		
+		applicantRepository.create(applicant);
+              
+        employee.setApplicant(applicant1);
+         	
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");	
+		masDivisionRepository.create(masDivision);
+		masDivisionRepository.find(1);
+		employee.setMasDivision(masDivision);			
+	
 		employeeRepository.create(employee);
 	
-		Allowances allowances = new Allowances();
+		MasAllowances masAllowances = new MasAllowances();	
+		masAllowances.setAllowances_type("Mother");
+		masAllowances.setAmount_allowances(40000d);
+		masAllowances.setCode("004A");
+		masAllowances.setIsactive(true);	
+		masAllowances.setAuditFlag("C");
+		masAllowances.setCreatedBy(1);
+		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masAllowancesRepository.create(masAllowances);
 		
-		allowances.setAmount(6000d);
 		
+		Allowances allowances = new Allowances();	
+		allowances.setAmount(6000d);	
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(1);
 		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
 		MasAllowances masallowances = masAllowancesRepository.find(1);
 		allowances.setMasallowances(masallowances);
-		
-		Employee employee = new Employee();
-		employee.setId(1);
 		allowances.setEmployee(employee);
 		
 		allowancesRepository.create(allowances);
@@ -158,19 +172,13 @@ public class AllowancesRepositoryTest {
 	@Rollback(true)
 	public void create()  {
 
-		Allowances allowances = new Allowances();
-		
-		allowances.setAmount(6000d);
-		
+		Allowances allowances = new Allowances();		
+		allowances.setAmount(6000d);		
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(1);
-		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
+		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());	
 		MasAllowances masallowances = masAllowancesRepository.find(1);
 		allowances.setMasallowances(masallowances);
-		
-		Employee employee = new Employee();
-		employee.setId(1);
 		allowances.setEmployee(employee);
 		
 		allowancesRepository.create(allowances);
@@ -182,7 +190,7 @@ public class AllowancesRepositoryTest {
 	public void update() {
 
 		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, 1);
+				Allowances.class, id);
 		allowances.setAmount(1000d);
 
 		allowancesRepository.update(allowances);
@@ -190,10 +198,10 @@ public class AllowancesRepositoryTest {
 
 	@Test
 	@Rollback(true)
-	public void Delete() {
+	public void delete() {
 
 		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, 1);
+				Allowances.class, id);
 
 		allowancesRepository.delete(allowances);
 	}
@@ -206,7 +214,7 @@ public class AllowancesRepositoryTest {
 		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
 				Allowances.class);
 		List<Allowances> allowances = c.list();
-		
+		Assert.assertEquals(3, allowances.size());
 
 	}
 }
