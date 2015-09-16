@@ -132,12 +132,10 @@ public class FamilyServiceImpl implements FamilyService{
 		
 		
 		Applicant applicant = new Applicant();
-		applicant = applicantRepo.find(familyDto.getAppId());
-		//Employee employee = new Employee();
-		//employee = empFamilyDao.findEmployeeById(familyDto.getEmployeeId());		
-		//family.setEmployee(employee);
-		/*family.setFirstName(familyDto.getFirstName());
-		family.setLastName(familyDto.getLastName());*/
+		if(familyDto.getAppId()!=null){
+			applicant = applicantRepo.find(familyDto.getAppId());
+		}
+		family.setApplicant(applicant);
 		family.setFamilyName(familyDto.getFamilyName());
 		family.setAge(familyDto.getAge());
 		family.setAddress(familyDto.getAddress());

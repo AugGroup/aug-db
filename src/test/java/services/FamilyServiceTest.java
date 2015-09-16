@@ -15,14 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.FamilyDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Family;
+import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasRelationType;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.FamilyRepository;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.FamilyService;
+import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasRelationTypeService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 import junit.framework.Assert;
 
@@ -38,22 +43,61 @@ public class FamilyServiceTest {
 	private MasRelationTypeService masRelationTypeService;
 	@Autowired
 	private ApplicantService applicantService;
+	@Autowired
+	private MasTechnologyService masTechnologyService;
+	@Autowired
+	private MasJoblevelService masJoblevelService;
+	
+	private Employee employee;
 	
 	int id;
 	int idMasRelationType;
+	int masdi;
+	int appId;
+	int masjobId;
+	int mastec;
 	
 	@Before
 	public void setUp() {
 		
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastec=masTechnology.getId();
+ 		
+		MasTechnology mTechnology= masTechnologyService.find(mastec);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelService.find(masjobId);
+		
 		 Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicantService.create(applicant);
-			int appId = applicant.getId();
-	        Applicant applicant1 = applicantService.findById(appId);
-	        Hibernate.initialize(applicant1);
+		 applicant.setCreatedBy(1);
+		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 applicant.setAuditFlag("C");
+		 applicant.setCardId("115310905001-9");
+		 applicant.setTechnology(mTechnology);
+		 applicant.setJoblevel(mJob);
+		 applicantService.create(applicant);
+		 appId = applicant.getId();
+	     Applicant applicant1 = applicantService.findById(appId);
+	     Hibernate.initialize(applicant1);
 	        
 	   
 	        
@@ -200,6 +244,8 @@ public class FamilyServiceTest {
 		familyDto.setPosition("PROGRAMER");
 		familyDto.setOccupation("ITS");
 		familyDto.setGender("Female");
+		familyDto.setAppId(appId);
+		familyDto.setMasRelationTypeId(idMasRelationType);
 		familyService.createFindMasRelationAndEmployee(familyDto);
 
 		

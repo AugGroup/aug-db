@@ -22,11 +22,13 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Site;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.SiteRepository;
 
 import junit.framework.Assert;
@@ -40,13 +42,18 @@ public class SiteRepositoryTest {
 	
 	@Autowired SiteRepository siteRepository;
 	@Autowired EmployeeRepository employeeRepository;
-	@Autowired MasJoblevelRepository massJoblevelRepository;
+	@Autowired MasJoblevelRepository masJoblevelRepository;
 	@Autowired ApplicantRepository applicantRepository;
 	@Autowired MasDivisionRepository masDivisionRepository;
+	@Autowired MasTechnologyRepository masTechnologyRepository;
 	
 	private Employee employee;
 	int id;
 	int empId;
+	int masdi;
+	int appId;
+	int masjobId;
+	int mastec;
 	
 	@Before
 	public void setUp() {
@@ -82,11 +89,40 @@ public class SiteRepositoryTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		mastec=masTechnology.getId();
+ 		
+		MasTechnology mTechnology= masTechnologyRepository.find(mastec);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantRepository.create(applicant);
 		int appId = applicant.getId();
         Applicant applicant1 = applicantRepository.find(appId);
@@ -114,23 +150,9 @@ public class SiteRepositoryTest {
 		employee.setMasDivision(masDivision);
 		
 
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		massJoblevelRepository.create(masJoblevel);
-		int masJobLevelId = masJoblevel.getId();
-		
-		massJoblevelRepository.find(masJobLevelId);		
-		employee.setMasJoblevel(masJoblevel);
+				
+		employee.setMasJoblevel(mJob);
 		employeeRepository.create(employee);
-		int empId = employee.getId();
-		Employee employee1= employeeRepository.find(empId);
 		
 		
 		Calendar calendarStartDate = new GregorianCalendar(2013,10,28);	//GregorianCalendar jan=0,12=Jan
@@ -143,7 +165,7 @@ public class SiteRepositoryTest {
 		site.setEndDate(calendarEndDate.getTime());
 		site.setProjectOwner("Augmentis");
 		site.setProjectOwnerContact("PM");
-		site.setEmployee(employee1);
+		site.setEmployee(employee);
 		site.setAuditFlag("C");
 		site.setCreatedBy(1);
 		site.setCreatedTimeStamp(Calendar.getInstance().getTime());

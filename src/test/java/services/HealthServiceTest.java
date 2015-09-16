@@ -22,11 +22,13 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.HealthService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 import junit.framework.Assert;
 
@@ -40,10 +42,15 @@ public class HealthServiceTest {
 	@Autowired MasJoblevelService masJoblevelService;
 	@Autowired ApplicantService applicantService;
 	@Autowired MasDivisionService masDivisionService;
+	@Autowired MasTechnologyService masTechnologyService;
 	
 	private Employee employee;
 	int id;
 	int empId;
+	int masdi;
+	int appId;
+	int masjobId;
+	int mastec;
 	
 	@Before
 	public void setUp() {
@@ -79,11 +86,40 @@ public class HealthServiceTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastec=masTechnology.getId();
+ 		
+		MasTechnology mTechnology= masTechnologyService.find(mastec);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelService.find(masjobId);
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantService.create(applicant);
 		int appId = applicant.getId();
         Applicant applicant1 = applicantService.findById(appId);
@@ -110,24 +146,8 @@ public class HealthServiceTest {
 		masDivisionService.findById(masDivisionId);
 		employee.setMasDivision(masDivision);
 		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		int masJobLevelId = masJoblevel.getId();
-		
-		masJoblevelService.find(masJobLevelId);		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
-		empId = employee.getId();
-		Employee employee= employeeService.findById(empId);
 		
 		Health health = new Health();
 		health.setCongenitalDisease("Yes");

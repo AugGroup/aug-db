@@ -19,11 +19,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.FamilyDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Family;
+import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasRelationType;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.FamilyRepository;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 
 
@@ -38,20 +43,56 @@ public class FamilyRepositoryTest {
 	private MasRelationTypeRepository masRelationTypeRepository;
 	@Autowired
 	private ApplicantRepository applicantRepository;
+	@Autowired 
+	private MasTechnologyRepository masTechnologyRepository;
+	@Autowired
+	private MasJoblevelRepository masJoblevelRepository;
 	
+	private Employee employee;
 	int id;
 	int idMasRelationType;
-	
+	int appId;
+	int masjobId;
+	int mastec;
 	
 	
 	@Before
 	public void setUp() {
+		
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		mastec=masTechnology.getId();
+ 		
+		MasTechnology mTechnology= masTechnologyRepository.find(mastec);
+ 		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
 		
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantRepository.create(applicant);
 		int appId = applicant.getId();
         Applicant applicant1 = applicantRepository.find(appId);
