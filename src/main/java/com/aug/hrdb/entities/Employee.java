@@ -44,15 +44,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 		            name = "searchIdEmptoAddress",
 		            //query = "select * from EMP_EMPLOYEE  ORDER BY createdTimeStamp LIMIT 1;", 
 		            query = "select * from EMPLOYEE  ORDER BY ID desc LIMIT 1;",
-		            resultClass = Employee.class),
-              
-            @NamedNativeQuery(
-                    name = "deleteEmployee",
-                    query = "delete from EMPLOYEE where ID=:id",                    		
-                    resultClass = Employee.class)
-	
-            
-            
+		            resultClass = Employee.class)
   })
 
 
