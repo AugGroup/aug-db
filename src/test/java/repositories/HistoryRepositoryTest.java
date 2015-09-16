@@ -29,12 +29,14 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.History;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.HistoryRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasSpecialtyRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -43,18 +45,23 @@ public class HistoryRepositoryTest {
 	
 	@Autowired private HistoryRepository historyRepository;
 	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasJoblevelRepository massJoblevelRepository;
+	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
-
+	@Autowired private MasTechnologyRepository masTechnologyRepository;
+	
 	
 	
 	
 	
 	private	 Employee employee;
 	int id;
-	int idEmp; 
-	
+	int empId; 
+	int masdiId;
+	int appId;
+	int masjobId;
+	int mastecId;
+
 	@Before
 	public void setHistory() {
 			
@@ -89,11 +96,40 @@ public class HistoryRepositoryTest {
 	        employee.setCreatedBy(1);
 	        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	        
+	        MasTechnology masTechnology = new MasTechnology();
+			masTechnology.setName("java");
+			masTechnology.setCode("001A");
+			masTechnology.setIsActive(true);
+			masTechnology.setAuditFlag("C");
+			masTechnology.setCreatedBy(0);
+			Calendar cal = Calendar.getInstance();
+			masTechnology.setCreatedTimeStamp(cal.getTime());
+			masTechnologyRepository.create(masTechnology);
+			mastecId=masTechnology.getId();
+			MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
+	 		
+
+			MasJoblevel masJoblevel = new MasJoblevel();
+			masJoblevel.setName("CEO");
+			masJoblevel.setIsActive(true);
+			masJoblevel.setCode("01");
+			masJoblevel.setAuditFlag("C");
+			masJoblevel.setCreatedBy(1);
+			masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			masJoblevel.setCode("Division-01");
+
+			masJoblevelRepository.create(masJoblevel);
+			masjobId=masJoblevel.getId();
+			MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+	 		
+	        
 	        Applicant applicant = new Applicant();
 			applicant.setCreatedBy(1);
 			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			applicant.setAuditFlag("C");
 			applicant.setCardId("115310905001-9");
+			applicant.setTechnology(mTechnology);
+			applicant.setJoblevel(mJob);
 			applicantRepository.create(applicant);
 			Integer appId = applicant.getId();
 	        Applicant applicant1 = applicantRepository.find(appId);
@@ -121,23 +157,12 @@ public class HistoryRepositoryTest {
 			employee.setMasDivision(masDivision);
 			
 
-			MasJoblevel masJoblevel = new MasJoblevel();
-			masJoblevel.setName("CEO");
-			masJoblevel.setIsActive(true);
-			masJoblevel.setCode("01");
-			masJoblevel.setAuditFlag("C");
-			masJoblevel.setCreatedBy(1);
-			masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masJoblevel.setCode("Division-01");
-
-			massJoblevelRepository.create(masJoblevel);
-			Integer masJobLevelId = masJoblevel.getId();
-			massJoblevelRepository.find(masJobLevelId);		
-			employee.setMasJoblevel(masJoblevel);
+			
+			employee.setMasJoblevel(mJob);
 			employeeRepository.create(employee);
 			
-			 idEmp = employee.getId();
-			Employee emp = employeeRepository.find(idEmp);
+			 empId = employee.getId();
+			Employee emp = employeeRepository.find(empId);
 			
 			
 			SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
@@ -166,7 +191,7 @@ public class HistoryRepositoryTest {
 	@Test
 	@Rollback(true)
 	public void create() {
-		Employee emp = employeeRepository.find(idEmp);
+		Employee emp = employeeRepository.find(empId);
 		
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
