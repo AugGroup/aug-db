@@ -55,7 +55,6 @@ public class CertificationRepositoryTest {
 			applicant.setCreatedBy(1);
 			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
 			applicantRepository.create(applicant);
 			
 	        Applicant applicant1 = applicantRepository.find(1);
@@ -114,9 +113,16 @@ public class CertificationRepositoryTest {
 		@Transactional
 		@Rollback(value = true)
 		public void testDeleteByIdCertificationRepository() throws Exception {
-			certificationRepository.deleteById(1);
+			certificationRepository.deleteById(2);
 		}
 
+		@Test
+		@Transactional
+		@Rollback(value = true)
+		public void testDeleteCertificateRepository() throws Exception {
+			Certification certification = certificationRepository.find(3);
+			certificationRepository.delete(certification);			
+		}
 		@Test
 		@Transactional
 		public void testFindByIdCertificateRepository() throws Exception {

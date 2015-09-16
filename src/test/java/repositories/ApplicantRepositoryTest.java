@@ -88,7 +88,15 @@ public class ApplicantRepositoryTest {
 	public void testDeleteByIdApplicantRepository() throws Exception {
 		applicantRepository.deleteById(1);
 	}
-
+	
+	@Test
+	@Transactional
+	@Rollback(value = true)
+	public void testDeleteApplicantRepository() throws Exception {
+		Applicant applicant = applicantRepository.find(3);
+		applicantRepository.delete(applicant);			
+	}
+	
 	@Test
 	@Transactional
 	public void testFindByIdApplicantRepository() throws Exception {

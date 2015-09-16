@@ -113,6 +113,14 @@ public class CertificationServiceTest {
 	public void testDeleteByIdCertificationService() throws Exception {
 		certificationService.deleteById(2);
 	}
+	
+	@Test
+	@Transactional
+	@Rollback(value = true)
+	public void testDeleteCertificateService() throws Exception {
+		Certification certification = certificationService.findById(3);
+		certificationService.delete(certification);			
+	}
 
 	@Test
 	@Transactional
