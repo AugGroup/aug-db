@@ -3,6 +3,7 @@ package services;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +25,27 @@ public class MasRelationTypeServiceTest {
 	@Autowired
 	private MasRelationTypeService masRelationTypeService;
 	
+	int id;
+	
+	@Before
+	public void setUp() {
+		
+		MasRelationType masRelationType = new MasRelationType();
+		masRelationType.setRelationType("Parent");
+		masRelationType.setAuditFlag("C");
+		masRelationType.setCode("REL-06");
+		masRelationType.setCreatedBy(1);
+		masRelationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masRelationType.setIsActive(true);
+
+		masRelationTypeService.create(masRelationType);
+		
+		id = masRelationType.getId();
+	}
+	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create() {
 
 		MasRelationType masRelationType = new MasRelationType();
@@ -44,10 +63,10 @@ public class MasRelationTypeServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 
-		MasRelationType masRelationType = masRelationTypeService.find(4);
+		MasRelationType masRelationType = masRelationTypeService.find(id);
 		masRelationType.setRelationType("Daughter");
 		masRelationType.setAuditFlag("U");
 		masRelationType.setUpdatedBy(1);
@@ -60,10 +79,10 @@ public class MasRelationTypeServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 
-		MasRelationType masRelationType = masRelationTypeService.find(4);
+		MasRelationType masRelationType = masRelationTypeService.find(id);
 		masRelationTypeService.delete(masRelationType);
 
 	}
@@ -71,38 +90,33 @@ public class MasRelationTypeServiceTest {
 	
 	
 	@Test
+	@Rollback(true)
 	public void find() {
 
-		MasRelationType masRelationType = masRelationTypeService.find(1);
-		int id = masRelationType.getId().intValue();
-		Assert.assertEquals(1, id);
+		MasRelationType masRelationType = masRelationTypeService.find(id);
+		Assert.assertEquals(id, id);
 
 
 	}
 	
 	
 	@Test
+	@Rollback(true)
 	public void findAll() {
 
 		List<MasRelationType> masRelationTypeList = masRelationTypeService.findAll();
-		Assert.assertEquals(2, masRelationTypeList.size());
 		
-		for(int i=0;i<masRelationTypeList.size();i++){		
-			System.out.println("id: "+masRelationTypeList.get(i).getId());
-		}
-
-
 	}
 	
 	
 	
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void findByName() {
 	
-		MasRelationType masRelationType = masRelationTypeService.findByName("Mother");
-		Assert.assertEquals("Mother", masRelationType.getRelationType());
+		MasRelationType masRelationType = masRelationTypeService.findByName("Parent");
+		Assert.assertEquals("Parent", masRelationType.getRelationType());
 	
 	}
 	

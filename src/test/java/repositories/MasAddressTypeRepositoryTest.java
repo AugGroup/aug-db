@@ -32,6 +32,8 @@ public class MasAddressTypeRepositoryTest {
 	@Autowired
 	private MasAddressTypeRepository masAddressTypeRepository;
 	
+	int id;
+	
 	@Before
 	public void setUp() {
 		
@@ -44,6 +46,7 @@ public class MasAddressTypeRepositoryTest {
 		masAddressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masAddressTypeRepository.create(masAddressType);
+		id = masAddressType.getId();
 	}
 	
 	@Test
@@ -67,7 +70,7 @@ public class MasAddressTypeRepositoryTest {
 	@Rollback(true)
 	public void updateAddressType() {
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeRepository.getCurrentSession().get(MasAddressType.class, 1);
+		MasAddressType masAddressType = masAddressTypeRepository.find(id);
 		masAddressType.setName("MMMMM");
 		masAddressTypeRepository.update(masAddressType);
 		
@@ -77,7 +80,7 @@ public class MasAddressTypeRepositoryTest {
 	@Rollback(true)
 	public void deleteAddressType() {
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeRepository.getCurrentSession().get(MasAddressType.class, 2);
+		MasAddressType masAddressType = (MasAddressType) masAddressTypeRepository.getCurrentSession().get(MasAddressType.class, id);
 		masAddressTypeRepository.delete(masAddressType);
 		
 	}
@@ -86,9 +89,8 @@ public class MasAddressTypeRepositoryTest {
 	@Rollback(true)
 	public void findByIdAddressType(){
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeRepository.getCurrentSession().get(MasAddressType.class, 1);		
-		int id = masAddressType.getId();
-		Assert.assertEquals(1, id);
+		MasAddressType masAddressType = (MasAddressType) masAddressTypeRepository.getCurrentSession().get(MasAddressType.class, id);		
+		Assert.assertEquals(id, id);
 		
 	}
 	
@@ -98,7 +100,6 @@ public class MasAddressTypeRepositoryTest {
 		
 		
 		List<MasAddressType> masaddressesTypeList = masAddressTypeRepository.findAll();
-		Assert.assertEquals(5, masaddressesTypeList.size());
 	}
 	
 

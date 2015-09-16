@@ -7,17 +7,18 @@ import javax.persistence.Id;
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
- @NamedNativeQueries({
+
+@NamedNativeQueries({
 	@NamedNativeQuery(
             name = "listFamily",
-              query = "select family.ID as ID,family.FIRSTNAME as FIRSTNAME,family.LASTNAME as LASTNAME, "
+              query = "select family.ID as ID,family.NAME, "
               		+ "family.GENDER as GENDER,family.AGE as AGE,family.TEL as TEL,family.ADDRESS as ADDRESS, "
-              		+ "family.OCCUPATION as OCCUPATION,family.POSITION as POSITION,family.EMPLOYEE_ID as EMPLOYEE_ID, "
-              		+ "employee.EMPLOYEE_CODE as EMPLOYEE_CODE,family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
-              		+ "from  EMP_EMPLOYEEFAMILY as family join MAS_RELATIONTYPE as mas_relation "
+              		+ "family.OCCUPATION as OCCUPATION,family.POSITION as POSITION,family.APPLICANT_ID as APPLICANT_ID, "
+              		+ "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
+              		+ "from EMPLOYEEFAMILY as family join MAS_RELATIONTYPE as mas_relation "
               		+ "on mas_relation.ID = family.MASRELATION_ID "
-              		+ "join EMP_EMPLOYEE as employee on employee.ID = family.EMPLOYEE_ID "
-              		+ "where family.EMPLOYEE_ID=:empId",
+              		+ "join APPICANT as app on app.ID = family.APPLICANT_ID "
+              		+ "where family.APPLICANT_ID=:appId",
             resultClass = FamilyDto.class)
   })
 
@@ -29,13 +30,7 @@ public class FamilyDto {
 	@Column(name="ID")
 	private Integer id; 
 	
-	/*@Column(name="FIRSTNAME")	
-	private String firstName;
-	
-	@Column(name="LASTNAME")
-	private String lastName;*/
-	
-	@Column(name="NAME")
+	@Column(name="NAME")	
 	private String familyName;
 	
 	
@@ -45,7 +40,7 @@ public class FamilyDto {
 	@Column(name="AGE")
 	private Integer age;
 	
-	@Column(name="TELEPHONE")
+	@Column(name="TEL")
 	private String mobile;
 	
 	@Column(name="ADDRESS")
@@ -57,11 +52,9 @@ public class FamilyDto {
 	@Column(name="POSITION")
 	private String position; 
 	
-	@Column(name="EMPLOYEE_ID")
-	private Integer employeeId;
+	@Column(name="APPLICANT_ID")
+	private Integer appId;
 	
-	@Column(name="EMPLOYEE_CODE")
-	private String  employeeCode;
 	
 	@Column(name="MASRELATIONTYPE_ID")
 	private Integer masRelationTypeId;
@@ -77,25 +70,8 @@ public class FamilyDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+
 	
-	
-
-	/*public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}*/
-
 
 	public String getFamilyName() {
 		return familyName;
@@ -104,12 +80,10 @@ public class FamilyDto {
 	public void setFamilyName(String familyName) {
 		this.familyName = familyName;
 	}
-	
-	
+
 	public String getGender() {
 		return gender;
 	}
-
 
 	public void setGender(String gender) {
 		this.gender = gender;
@@ -155,20 +129,13 @@ public class FamilyDto {
 		this.position = position;
 	}
 
-	public Integer getEmployeeId() {
-		return employeeId;
+	
+	public Integer getAppId() {
+		return appId;
 	}
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	public String getEmployeeCode() {
-		return employeeCode;
-	}
-
-	public void setEmployeeCode(String employeeCode) {
-		this.employeeCode = employeeCode;
+	public void setAppId(Integer appId) {
+		this.appId = appId;
 	}
 
 	public Integer getMasRelationTypeId() {
@@ -185,6 +152,4 @@ public class FamilyDto {
 
 	public void setMasRelationTypeName(String masRelationTypeName) {
 		this.masRelationTypeName = masRelationTypeName;
-	}
-
-}
+	}}

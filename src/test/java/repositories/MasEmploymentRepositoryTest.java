@@ -96,8 +96,9 @@ public class MasEmploymentRepositoryTest {
 	@Rollback(true)
 	public void findByIdMasEmployment(){
 		
-		MasEmployment masEmployment = (MasEmployment) masEmploymentRepository.getCurrentSession().get(MasEmployment.class, 1);		
-		Assert.assertEquals("Permanent", masEmployment.getName());
+		MasEmployment masEmployment = (MasEmployment) masEmploymentRepository.getCurrentSession().get(MasEmployment.class, id);		
+		Assert.assertEquals("BBBBBvv", masEmployment.getName());
+		//Assert.assertEquals(id,id);
 		
 	}
 }

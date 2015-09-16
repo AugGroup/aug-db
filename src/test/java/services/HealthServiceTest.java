@@ -1,8 +1,13 @@
 package services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +17,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.HealthDto;
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Health;
+import com.aug.hrdb.entities.MasDivision;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.services.ApplicantService;
+import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.HealthService;
+import com.aug.hrdb.services.MasDivisionService;
+import com.aug.hrdb.services.MasJoblevelService;
 
 import junit.framework.Assert;
 
@@ -22,23 +35,109 @@ import junit.framework.Assert;
 @Transactional
 public class HealthServiceTest {
 	
-	@Autowired
-	private HealthService healthService;
+	@Autowired HealthService healthService;
+	@Autowired EmployeeService employeeService;
+	@Autowired MasJoblevelService masJoblevelService;
+	@Autowired ApplicantService applicantService;
+	@Autowired MasDivisionService masDivisionService;
 	
+	private Employee employee;
+	int id;
+	int empId;
 	
-	@Test
-	@Rollback(false)
-	public void create() {
+	@Before
+	public void setUp() {
+		
+		employee = new Employee();
+        employee.setIdCard("115310905001-9");
+        employee.setNameThai("อภิวาท์");
+        employee.setNameEng("apiva");
+        employee.setNicknameThai("va");
+        employee.setNicknameEng("va");
+        employee.setSurnameThai("กิมเกถนอม");
+        employee.setSurnameEng("kimkatanom");
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInString = "31-08-1982";
+    	Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        
+		employee.setDateOfBirth(date);
+        employee.setEmail("test@gmail.com");
+        employee.setEmergencyContact("mom");
+        employee.setEmployeeCode("EMP-09");
+        employee.setStatusemp("Employee");
+        employee.setTelHome("089-0851022");
+        employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");
+        employee.setAuditFlag("C");
+        employee.setCreatedBy(1);
+        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        
+        Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicantService.create(applicant);
+		int appId = applicant.getId();
+        Applicant applicant1 = applicantService.findById(appId);
+        Hibernate.initialize(applicant1);
+        
+        
+       
+        
+        employee.setApplicant(applicant1);
+         
+    
 	
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");
+		
+		masDivisionService.create(masDivision);
+		int masDivisionId = masDivision.getId();
+		masDivisionService.findById(masDivisionId);
+		employee.setMasDivision(masDivision);
+		
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		int masJobLevelId = masJoblevel.getId();
+		
+		masJoblevelService.find(masJobLevelId);		
+		employee.setMasJoblevel(masJoblevel);
+		employeeService.create(employee);
+		empId = employee.getId();
+		Employee employee= employeeService.findById(empId);
+		
 		Health health = new Health();
 		health.setCongenitalDisease("Yes");
-		health.setCongenitalDiseaseExplain("Hypertension"); //ความดัน
+		health.setCongenitalDiseaseExplain("Hypertensions"); //ความดัน
 		health.setCongenitalDiseaseExplain2("Allergy"); //ภูมิแพ้
 		health.setCongenitalDiseaseExplain2("asthma"); //หอบหืด
 		health.setGeneticDisease("Yes");
 		health.setGeneticDiseaseExplain("Hypertension");
-		//health.setGeneticDiseaseExplain2("Allergy");
-		//health.setGeneticDiseaseExplain3("asthma");
+		health.setGeneticDiseaseExplain2("Allergy");
+		health.setGeneticDiseaseExplain3("asthma");
 		health.setIntolerance("Yes");
 		health.setIntoleranceExplain("CPM");
 		health.setTakeMedicine("Yes");
@@ -46,36 +145,28 @@ public class HealthServiceTest {
 		health.setAuditFlag("C");
 		health.setCreatedBy(1);
 		health.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		health.setEmployee(employee);
 		healthService.create(health);
 		
-		
-		
-		
-		Health health2 = new Health();
-		health2.setCongenitalDisease("Yes");
-		health2.setCongenitalDiseaseExplain("Hypertension"); //ความดัน
-		health2.setCongenitalDiseaseExplain2("Allergy"); //ภูมิแพ้
-		health2.setGeneticDisease("Yes");
-		health2.setGeneticDiseaseExplain("Allergy");
-		health2.setIntolerance("Yes");
-		health2.setIntoleranceExplain("CPM");
-		health2.setTakeMedicine("Yes");
-		health2.setTakeMedicineExplain("amoxilin");
-		health2.setAuditFlag("C");
-		health2.setCreatedBy(1);
-		health2.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		healthService.create(health2);
+		id = health.getId();
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void create() {
+	
+		Health health = healthService.find(id);
+		Assert.assertEquals("Hypertensions", health.getCongenitalDiseaseExplain());
 	
 	}
 	
 	
-	
-	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 	
-		Health health = healthService.find(4);
+		Health health = healthService.find(id);
 		health.setCongenitalDiseaseExplain("heart disease");
 		health.setAuditFlag("U");
 		health.setUpdatedBy(1);
@@ -87,10 +178,10 @@ public class HealthServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 	
-		Health health = healthService.find(4);
+		Health health = healthService.find(id);
 		healthService.delete(health);
 		
 	}
@@ -100,9 +191,8 @@ public class HealthServiceTest {
 	@Test
 	public void find() {
 	
-		Health health = healthService.find(3);
-		int id = health.getId().intValue();
-		Assert.assertEquals(3, id);
+		Health health = healthService.find(id);
+		Assert.assertEquals(id, id);
 	}
 	
 	
@@ -113,28 +203,23 @@ public class HealthServiceTest {
 	public void findAll() {
 	
 		List<Health> health = healthService.findAll();
-		Assert.assertEquals(1, health.size());
-		
-		for(int i=0;i<health.size();i++){		
-			System.out.println("id: "+health.get(i).getId());
-		}
 	
 	
 	}
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteById() {
 	
-		Health health = healthService.find(3);
+		Health health = healthService.find(id);
 		healthService.deleteById(health.getId());
 	
 	}
 		
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createSetDtoToEnity() {
 	
 		HealthDto healthDto = new HealthDto();
@@ -161,11 +246,11 @@ public class HealthServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateSetDtoToEntity() {
 	
 		HealthDto healthDto = new HealthDto();
-		healthDto.setId(5);
+		healthDto.setId(id);
 		healthDto.setCongenitalDisease("Yes"); 
 		healthDto.setCongenitalDiseaseExplain("heart disease");
 		healthDto.setGeneticDisease("Yes");
@@ -187,7 +272,7 @@ public class HealthServiceTest {
 	public void findByIdReturnToDto(){
 		
 		HealthDto healthDto = new HealthDto();
-		healthDto = healthService.findByIdReturnToDto(5);
+		healthDto = healthService.findByIdReturnToDto(id);
 		
 		Assert.assertEquals("Yes", healthDto.getCongenitalDisease());
 		System.out.println("Congenital Disease: "+healthDto.getCongenitalDisease());

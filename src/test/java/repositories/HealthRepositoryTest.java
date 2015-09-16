@@ -1,8 +1,13 @@
 package repositories;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +16,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Health;
+import com.aug.hrdb.entities.MasDivision;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.repositories.ApplicantRepository;
+import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.HealthRepository;
+import com.aug.hrdb.repositories.MasDivisionRepository;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
+
 import junit.framework.Assert;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,18 +34,102 @@ import junit.framework.Assert;
 @Transactional
 public class HealthRepositoryTest {
 	
-	@Autowired
-	private HealthRepository healthRepository;
+	@Autowired HealthRepository healthRepository;
+	@Autowired EmployeeRepository employeeRepository;
+	@Autowired MasJoblevelRepository massJoblevelRepository;
+	@Autowired ApplicantRepository applicantRepository;
+	@Autowired MasDivisionRepository masDivisionRepository;
 	
+	private Employee employee;
+	int id;
 	
+	@Before
+	public void setUp() {
+		
+		employee = new Employee();
+        employee.setIdCard("115310905001-9");
+        employee.setNameThai("อภิวาท์");
+        employee.setNameEng("apiva");
+        employee.setNicknameThai("va");
+        employee.setNicknameEng("va");
+        employee.setSurnameThai("กิมเกถนอม");
+        employee.setSurnameEng("kimkatanom");
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInString = "31-08-1982";
+    	Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        
+		employee.setDateOfBirth(date);
+        employee.setEmail("test@gmail.com");
+        employee.setEmergencyContact("mom");
+        employee.setEmployeeCode("EMP-09");
+        employee.setStatusemp("Employee");
+        employee.setTelHome("089-0851022");
+        employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");
+        employee.setAuditFlag("C");
+        employee.setCreatedBy(1);
+        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        
+        Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicantRepository.create(applicant);
+		int appId = applicant.getId();
+        Applicant applicant1 = applicantRepository.find(appId);
+        Hibernate.initialize(applicant1);
+        
+        
+       
+        
+        employee.setApplicant(applicant1);
+         
+    
+	
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");
+		
+		masDivisionRepository.create(masDivision);
+		int masDivisionId = masDivision.getId();
+		masDivisionRepository.find(masDivisionId);
+		employee.setMasDivision(masDivision);
+		
 
-	@Test
-	@Rollback(false)
-	public void create() {
-	
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		massJoblevelRepository.create(masJoblevel);
+		int masJobLevelId = masJoblevel.getId();
+		
+		massJoblevelRepository.find(masJobLevelId);		
+		employee.setMasJoblevel(masJoblevel);
+		employeeRepository.create(employee);
+		int empId = employee.getId();
+		Employee employee= employeeRepository.find(empId);
+		
 		Health health = new Health();
 		health.setCongenitalDisease("Yes");
-		health.setCongenitalDiseaseExplain("Hypertension"); //ความดัน
+		health.setCongenitalDiseaseExplain("Hypertensions"); //ความดัน
 		health.setCongenitalDiseaseExplain2("Allergy"); //ภูมิแพ้
 		health.setCongenitalDiseaseExplain2("asthma"); //หอบหืด
 		health.setGeneticDisease("Yes");
@@ -45,26 +143,22 @@ public class HealthRepositoryTest {
 		health.setAuditFlag("C");
 		health.setCreatedBy(1);
 		health.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		health.setEmployee(employee);
 		healthRepository.create(health);
 		
+		id = health.getId();
 		
 		
-		
-		Health health2 = new Health();
-		health2.setCongenitalDisease("Yes");
-		health2.setCongenitalDiseaseExplain("Hypertension"); //ความดัน
-		health2.setCongenitalDiseaseExplain2("Allergy"); //ภูมิแพ้
-		health2.setGeneticDisease("Yes");
-		health2.setGeneticDiseaseExplain("Hypertension");
-		health2.setGeneticDiseaseExplain2("Allergy");
-		health2.setIntolerance("Yes");
-		health2.setIntoleranceExplain("CPM");
-		health2.setTakeMedicine("Yes");
-		health2.setTakeMedicineExplain("amoxilin");
-		health2.setAuditFlag("C");
-		health2.setCreatedBy(1);
-		health2.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		healthRepository.create(health2);
+	}
+	
+	
+
+	@Test
+	@Rollback(true)
+	public void create() {
+	
+		Health health = healthRepository.find(id);
+		Assert.assertEquals("Hypertensions", health.getCongenitalDiseaseExplain());
 
 	
 	}
@@ -73,10 +167,10 @@ public class HealthRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 	
-		Health health = healthRepository.find(2);
+		Health health = healthRepository.find(id);
 		health.setCongenitalDiseaseExplain("heart disease");
 		health.setAuditFlag("U");
 		health.setUpdatedBy(1);
@@ -88,10 +182,10 @@ public class HealthRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 	
-		Health health = healthRepository.find(2);
+		Health health = healthRepository.find(id);
 		healthRepository.delete(health);
 		
 	}
@@ -101,9 +195,8 @@ public class HealthRepositoryTest {
 	@Test
 	public void find() {
 	
-		Health health = healthRepository.find(1);
-		int id = health.getId().intValue();
-		Assert.assertEquals(1, id);
+		Health health = healthRepository.find(id);
+		Assert.assertEquals(id, id);
 	}
 	
 	
@@ -114,11 +207,6 @@ public class HealthRepositoryTest {
 	public void findAll() {
 	
 		List<Health> health = healthRepository.findAll();
-		Assert.assertEquals(1, health.size());
-		
-		for(int i=0;i<health.size();i++){		
-			System.out.println("id: "+health.get(i).getId());
-		}
 	
 	
 	}
@@ -126,10 +214,10 @@ public class HealthRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteById() {
 	
-		Health health = healthRepository.find(1);
+		Health health = healthRepository.find(id);
 		healthRepository.deleteById(health.getId());
 	
 	}

@@ -3,6 +3,7 @@ package repositories;
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,26 @@ public class MasRelationTypeRepositoryTest {
 private MasRelationTypeRepository masRelationTypeRepository;
 
 
+int id;
+
+@Before
+public void setUp() {
+	
+	MasRelationType masRelationType = new MasRelationType();
+	masRelationType.setRelationType("Parent");
+	masRelationType.setAuditFlag("C");
+	masRelationType.setCode("REL-03");
+	masRelationType.setCreatedBy(1);
+	masRelationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	masRelationType.setIsActive(true);
+
+	masRelationTypeRepository.create(masRelationType);
+	id = masRelationType.getId();
+	
+}
 
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create() {
 	
 		MasRelationType masRelationType = new MasRelationType();
@@ -74,11 +92,11 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 	
 	
-		MasRelationType masRelationType = masRelationTypeRepository.find(3);
+		MasRelationType masRelationType = masRelationTypeRepository.find(id);
 		masRelationType.setRelationType("Daughter");
 		masRelationType.setAuditFlag("U");
 		masRelationType.setUpdatedBy(1);
@@ -92,10 +110,10 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 	
-		MasRelationType masRelationType = masRelationTypeRepository.find(3);
+		MasRelationType masRelationType = masRelationTypeRepository.find(id);
 		masRelationTypeRepository.delete(masRelationType);
 	
 	}
@@ -106,9 +124,8 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	@Test
 	public void find() {
 	
-		MasRelationType masRelationType = masRelationTypeRepository.find(1);
-		int id = masRelationType.getId().intValue();
-		Assert.assertEquals(1, id);
+		MasRelationType masRelationType = masRelationTypeRepository.find(id);
+		Assert.assertEquals(id, id);
 	
 	
 	}
@@ -118,11 +135,7 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	public void findAll() {
 	
 		List<MasRelationType> masRelationTypeList = masRelationTypeRepository.findAll();
-		Assert.assertEquals(2, masRelationTypeList.size());
 		
-		for(int i=0;i<masRelationTypeList.size();i++){		
-			System.out.println("id: "+masRelationTypeList.get(i).getId());
-		}
 	
 	
 	}
@@ -131,11 +144,10 @@ private MasRelationTypeRepository masRelationTypeRepository;
 	
 	
 	@Test
-	@Rollback(false)
 	public void findByName() {
 	
-		MasRelationType masRelationType = masRelationTypeRepository.findByName("Father");
-		Assert.assertEquals("Father", masRelationType.getRelationType());
+		MasRelationType masRelationType = masRelationTypeRepository.findByName("Parent");
+		Assert.assertEquals("Parent", masRelationType.getRelationType());
 	
 	}
 

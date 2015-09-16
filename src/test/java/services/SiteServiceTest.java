@@ -1,9 +1,14 @@
 package services;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +19,15 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.HealthDto;
 import com.aug.hrdb.dto.SiteDto;
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasDivision;
+import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.Site;
+import com.aug.hrdb.services.ApplicantService;
+import com.aug.hrdb.services.EmployeeService;
+import com.aug.hrdb.services.MasDivisionService;
+import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.SiteService;
 
 import junit.framework.Assert;
@@ -28,64 +41,136 @@ public class SiteServiceTest {
 	
 	
 	
-	@Autowired
-	private SiteService siteService;
+	@Autowired SiteService siteService;
+	@Autowired EmployeeService employeeService;
+	@Autowired MasJoblevelService masJoblevelService;
+	@Autowired ApplicantService applicantService;
+	@Autowired MasDivisionService masDivisionService;
 	
+	private Employee employee;
+	int id;
+	int empId;
 	
+	@Before
+	public void setUp() {
+		
+		employee = new Employee();
+        employee.setIdCard("115310905001-9");
+        employee.setNameThai("อภิวาท์");
+        employee.setNameEng("apiva");
+        employee.setNicknameThai("va");
+        employee.setNicknameEng("va");
+        employee.setSurnameThai("กิมเกถนอม");
+        employee.setSurnameEng("kimkatanom");
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInString = "31-08-1982";
+    	Date date = null;
+		try {
+			date = sdf.parse(dateInString);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+        
+		employee.setDateOfBirth(date);
+        employee.setEmail("test@gmail.com");
+        employee.setEmergencyContact("mom");
+        employee.setEmployeeCode("EMP-09");
+        employee.setStatusemp("Employee");
+        employee.setTelHome("089-0851022");
+        employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");
+        employee.setAuditFlag("C");
+        employee.setCreatedBy(1);
+        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+        
+        Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicantService.create(applicant);
+		int appId = applicant.getId();
+        Applicant applicant1 = applicantService.findById(appId);
+        Hibernate.initialize(applicant1);
+        
+        
+       
+        
+        employee.setApplicant(applicant1);
+         
+    
+	
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");
+		
+		masDivisionService.create(masDivision);
+		int masDivisionId = masDivision.getId();
+		masDivisionService.findById(masDivisionId);
+		employee.setMasDivision(masDivision);
+		
 
-	@Test
-	@Rollback(false)
-	public void create() {
-	
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		int masJobLevelId = masJoblevel.getId();
+		
+		masJoblevelService.find(masJobLevelId);		
+		employee.setMasJoblevel(masJoblevel);
+		employeeService.create(employee);
+		int empId = employee.getId();
+		Employee employee1= employeeService.findById(empId);
+		
+		
 		Calendar calendarStartDate = new GregorianCalendar(2013,10,28);	//GregorianCalendar jan=0,12=Jan
 		Calendar calendarEndDate = new GregorianCalendar(2014,11,28);
 
 		
 		Site site = new Site();
-		site.setProjectName("Augmentis-04");
+		site.setProjectName("Augmentis-01");
 		site.setStartDate(calendarStartDate.getTime());
 		site.setEndDate(calendarEndDate.getTime());
 		site.setProjectOwner("Augmentis");
 		site.setProjectOwnerContact("PM");
+		site.setEmployee(employee1);
 		site.setAuditFlag("C");
 		site.setCreatedBy(1);
 		site.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		siteService.create(site);
 		
-		
-		
-		
-		Site site2 = new Site();
-		site2.setProjectName("Augmentis-05");
-		site2.setStartDate(calendarStartDate.getTime());
-		site2.setEndDate(calendarEndDate.getTime());
-		site2.setProjectOwner("Augmentis");
-		site2.setProjectOwnerContact("PM");
-		site2.setAuditFlag("C");
-		site2.setCreatedBy(1);
-		site2.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		siteService.create(site2);
+		id = site.getId();
+	}
+	
 
-		
-		Site site3 = new Site();
-		site3.setProjectName("Augmentis-06");
-		site3.setStartDate(calendarStartDate.getTime());
-		site3.setEndDate(calendarEndDate.getTime());
-		site3.setProjectOwner("Augmentis");
-		site3.setProjectOwnerContact("PM");
-		site3.setAuditFlag("C");
-		site3.setCreatedBy(1);
-		site3.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		siteService.create(site3);
+	@Test
+	@Rollback(true)
+	public void create() {
+	
+		Site site = siteService.find(id);
+		Assert.assertEquals("Augmentis-01", site.getProjectName());
 	}
 	
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 				
-				Site site = siteService.find(4);
+				Site site = siteService.find(id);
 				site.setProjectName("Migrate HrIsSystemRecurement");
 				site.setAuditFlag("U");
 				site.setUpdatedBy(4);
@@ -96,10 +181,10 @@ public class SiteServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 				
-				Site site = siteService.find(5);
+				Site site = siteService.find(id);
 				siteService.delete(site);
 	}
 
@@ -107,10 +192,10 @@ public class SiteServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteById() {
 				
-				Site site = siteService.find(6);
+				Site site = siteService.find(id);
 				siteService.deleteById(site.getId());;
 	}
 	
@@ -118,9 +203,8 @@ public class SiteServiceTest {
 	@Test
 	public void find() {
 	
-		Site site = siteService.find(4);
-		int id = site.getId().intValue();
-		Assert.assertEquals(4, id);
+		Site site = siteService.find(id);
+		Assert.assertEquals(id, id);
 	}
 	
 	
@@ -131,18 +215,13 @@ public class SiteServiceTest {
 	public void findAll() {
 	
 		List<Site> siteList = siteService.findAll();
-		Assert.assertEquals(3, siteList.size());//2
-		
-		for(int i=0;i<siteList.size();i++){		
-			System.out.println("id: "+siteList.get(i).getId());
-		}
 	}
 
 	
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void createSetDtoToEnity(){
 		
 		
@@ -165,7 +244,7 @@ public class SiteServiceTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateSetDtoToEntity(){
 		
 		
@@ -174,7 +253,7 @@ public class SiteServiceTest {
 
 		
 		SiteDto siteDto = new SiteDto();
-		siteDto.setId(1);//7
+		siteDto.setId(id);//7
 		siteDto.setProjectName("Project HrSystem");
 		siteDto.setStartDate(calendarStartDate.getTime());
 		siteDto.setEndDate(calendarEndDate.getTime());
@@ -192,9 +271,9 @@ public class SiteServiceTest {
 	public void findByIdReturnToDto(){
 		
 		SiteDto siteDto = new SiteDto();
-		siteDto = siteService.findByIdReturnToDto(4);
+		siteDto = siteService.findByIdReturnToDto(id);
 		
-		Assert.assertEquals("Migrate HrIsSystemRecurement", siteDto.getProjectName());
+		Assert.assertEquals("Augmentis-01", siteDto.getProjectName());
 		System.out.println("Project Name: "+siteDto.getProjectName());
 		
 	}

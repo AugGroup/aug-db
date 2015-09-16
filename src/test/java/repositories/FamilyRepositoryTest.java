@@ -1,9 +1,14 @@
 package repositories;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +18,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.FamilyDto;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Family;
 import com.aug.hrdb.entities.MasRelationType;
+import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.FamilyRepository;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
 
@@ -26,17 +33,46 @@ import com.aug.hrdb.repositories.MasRelationTypeRepository;
 public class FamilyRepositoryTest {
 	
 	@Autowired
-	private FamilyRepository familyRepository;
+    FamilyRepository familyRepository;
 	@Autowired
 	private MasRelationTypeRepository masRelationTypeRepository;
+	@Autowired
+	private ApplicantRepository applicantRepository;
+	
+	int id;
+	int idMasRelationType;
 	
 	
-
-	@Test
-	@Rollback(false)
-	public void create() {
 	
-		Family family = new Family();
+	@Before
+	public void setUp() {
+		
+        Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicantRepository.create(applicant);
+		int appId = applicant.getId();
+        Applicant applicant1 = applicantRepository.find(appId);
+        Hibernate.initialize(applicant1);
+        
+   
+        
+        MasRelationType masRelationType1 = new MasRelationType();
+    	masRelationType1.setRelationType("Parent");
+    	masRelationType1.setAuditFlag("C");
+    	masRelationType1.setCode("REL-03");
+    	masRelationType1.setCreatedBy(1);
+    	masRelationType1.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    	masRelationType1.setIsActive(true);
+    	masRelationTypeRepository.create(masRelationType1);
+    	
+        idMasRelationType = masRelationType1.getId();
+    	MasRelationType masRelationType = masRelationTypeRepository.find(idMasRelationType);
+    	
+    	
+    	Family family = new Family();
 
 		family.setFamilyName("Apiva kim");
 		family.setGender("Female");
@@ -45,8 +81,8 @@ public class FamilyRepositoryTest {
 		family.setAddress("1/1");
 		family.setOccupation("ITS");
 		family.setPosition("Programmer");
-		
-		MasRelationType masRelationType = masRelationTypeRepository.find(1);
+		family.setApplicant(applicant1);
+
 		family.setMasRelationType(masRelationType);
 		
 		family.setAuditFlag("C");
@@ -54,28 +90,17 @@ public class FamilyRepositoryTest {
 		family.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	
 		familyRepository.create(family);
-		
-		
-		
-		
-		Family family2 = new Family();
-
-		family2.setFamilyName("Augmentis");
-		family2.setGender("Female");
-		family2.setAge(25);
-		family2.setMobile("029-085-1022");
-		family2.setAddress("1/1");
-		family2.setOccupation("ITS");
-		family2.setPosition("Programmer");
-		
-		MasRelationType masRelationType2 = masRelationTypeRepository.find(1);
-		family2.setMasRelationType(masRelationType2);
-		
-		family2.setAuditFlag("C");
-		family2.setCreatedBy(1);
-		family2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		id = family.getId();
+	}
 	
-		familyRepository.create(family2);
+	
+
+	@Test
+	@Rollback(true)
+	public void create() {
+	
+		Family family = familyRepository.find(id);
+		Assert.assertEquals("Apiva kim", family.getFamilyName());
 
 	
 	}
@@ -86,11 +111,11 @@ public class FamilyRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void update() {
 	
 	
-		Family family = familyRepository.find(2);
+		Family family = familyRepository.find(id);
 		family.setFamilyName("Augmentis test");
 		family.setAuditFlag("U");
 		family.setUpdatedBy(1);
@@ -104,10 +129,10 @@ public class FamilyRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void delete() {
 	
-		Family family = familyRepository.find(2);
+		Family family = familyRepository.find(id);
 		familyRepository.delete(family);
 	
 	}
@@ -118,9 +143,8 @@ public class FamilyRepositoryTest {
 	@Test
 	public void find() {
 	
-		Family family = familyRepository.find(1);
-		int id = family.getId().intValue();
-		Assert.assertEquals(1, id);
+		Family family = familyRepository.find(id);
+		Assert.assertEquals(id, id);
 	}
 	
 	
@@ -131,22 +155,16 @@ public class FamilyRepositoryTest {
 	public void findAll() {
 	
 		List<Family> family = familyRepository.findAll();
-		Assert.assertEquals(1, family.size());
-		
-		for(int i=0;i<family.size();i++){		
-			System.out.println("id: "+family.get(i).getId());
-		}
-	
 	
 	}
 	
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteByNameQuery(){
 		
-		Family family = familyRepository.find(1);
+		Family family = familyRepository.find(id);
 		FamilyDto familyDto = new FamilyDto();
 		familyDto.setId(family.getId());
 		familyRepository.deleteByNameQuery(familyDto);
@@ -156,10 +174,10 @@ public class FamilyRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateByNameQuery(){
 		
-		Family family = familyRepository.find(5);
+		Family family = familyRepository.find(id);
 		FamilyDto familyDto = new FamilyDto();
 		familyDto.setId(family.getId());
 		familyDto.setFamilyName("test data");

@@ -88,9 +88,9 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 				query.setString("POSITION", family.getPosition());
 				query.setString("TEL", family.getMobile());
 				query.setInteger("MASRELATION_ID", family.getMasRelationTypeId());
-				query.setInteger("EMPLOYEE_ID", family.getEmployeeId());
+				query.setInteger("APPLICANT_ID", family.getAppId());
 				query.setString("GENDER", family.getGender());
-				query.setInteger("CREATEDBY", family.getEmployeeId());
+				query.setInteger("CREATEDBY", family.getAppId());
 				query.executeUpdate();
 			
 	}

@@ -12,8 +12,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.FamilyDto;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Family;
 import com.aug.hrdb.entities.MasRelationType;
+import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.FamilyRepository;
 import com.aug.hrdb.services.FamilyService;
 import com.aug.hrdb.services.MasRelationTypeService;
@@ -26,6 +28,8 @@ public class FamilyServiceImpl implements FamilyService{
 	
 	@Autowired
 	private FamilyRepository familyRepository;
+	@Autowired
+	private ApplicantRepository applicantRepo;
 	
 	//@Autowired
 	//private EmployeeService employeeService;
@@ -127,6 +131,8 @@ public class FamilyServiceImpl implements FamilyService{
 		family.setCreatedTimeStamp(cal.getTime());
 		
 		
+		Applicant applicant = new Applicant();
+		applicant = applicantRepo.find(familyDto.getAppId());
 		//Employee employee = new Employee();
 		//employee = empFamilyDao.findEmployeeById(familyDto.getEmployeeId());		
 		//family.setEmployee(employee);
@@ -191,7 +197,7 @@ public class FamilyServiceImpl implements FamilyService{
 		Calendar cal = Calendar.getInstance();
 		familyObj.setUpdatedTimeStamp(cal.getTime());
 		familyObj.setAuditFlag("U");
-		familyObj.setUpdatedBy(familyDto.getEmployeeId());
+		familyObj.setUpdatedBy(familyDto.getAppId());
 		
 		familyRepository.update(familyObj);
 		

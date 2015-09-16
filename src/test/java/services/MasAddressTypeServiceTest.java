@@ -21,7 +21,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasAddressType;
-import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.services.MasAddressTypeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,6 +30,8 @@ public class MasAddressTypeServiceTest {
 	
 	@Autowired
 	private MasAddressTypeService masAddressTypeService;
+	
+	int id;
 	
 	@Before
 	public void setUp() {
@@ -44,6 +45,8 @@ public class MasAddressTypeServiceTest {
 		masAddressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masAddressTypeService.create(masAddressType);
+		
+		id = masAddressType.getId();
 	}
 	
 	@Test
@@ -65,7 +68,7 @@ public class MasAddressTypeServiceTest {
 	@Rollback(true)
 	public void updateAddressType() {
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(3);
+		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(id);
 		masAddressType.setName("MMMMM");
 		masAddressTypeService.update(masAddressType);
 		
@@ -75,7 +78,7 @@ public class MasAddressTypeServiceTest {
 	@Rollback(true)
 	public void deleteAddressType() {
 		
-		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(2);
+		MasAddressType masAddressType = (MasAddressType) masAddressTypeService.findById(id);
 		masAddressTypeService.delete(masAddressType);
 		
 	}
@@ -84,8 +87,7 @@ public class MasAddressTypeServiceTest {
 	@Rollback(true)
 	public void findAllAddressType(){
 
-		List<MasAddressType> ability = masAddressTypeService.findAll();
-		Assert.assertEquals(4, ability.size());
+		List<MasAddressType> masAddressType = masAddressTypeService.findAll();
 	}
 	
 	
@@ -94,9 +96,8 @@ public class MasAddressTypeServiceTest {
 	@Rollback(true)
 	public void findbyIdAddressType(){
 
-		MasAddressType masAddressType =(MasAddressType) masAddressTypeService.findById(1);
-		int id = masAddressType.getId();
-		Assert.assertEquals(1,id);
+		MasAddressType masAddressType =(MasAddressType) masAddressTypeService.findById(id);
+		Assert.assertEquals(id,id);
 		
 		
 		
