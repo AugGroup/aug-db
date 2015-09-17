@@ -4,6 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,25 @@ public class MasStaffTypeRepositoryTest {
 	@Autowired
 	private MasStaffTypeRepository masStaffTypeRepository;
 	
+	int id;
+	
+	@Before
+	public void setUp() {
+		
+		MasStaffType masStaffType = new MasStaffType();
+		masStaffType.setName("Augmentis");
+		masStaffType.setAuditFlag("C");
+		masStaffType.setCode("STAFF-03");
+		masStaffType.setCreatedBy(1);
+		masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masStaffType.setIsActive(true);
+
+		masStaffTypeRepository.create(masStaffType);
+		id = masStaffType.getId();
+	}
+	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void create() {
 
 		MasStaffType masStaffType = new MasStaffType();
@@ -43,10 +61,10 @@ public class MasStaffTypeRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void updateMasStaffType(){
 
-		MasStaffType masStaffType =  masStaffTypeRepository.find(2);
+		MasStaffType masStaffType =  masStaffTypeRepository.find(id);
 		masStaffType.setCode("STAFF-04");
 		masStaffType.setAuditFlag("U");
 		masStaffType.setUpdatedBy(1);
@@ -57,10 +75,10 @@ public class MasStaffTypeRepositoryTest {
 	
 	
 	@Test
-	@Rollback(false)
+	@Rollback(true)
 	public void deleteMasStaffType(){
 		
-		MasStaffType masStaffType = masStaffTypeRepository.find(1);;
+		MasStaffType masStaffType = masStaffTypeRepository.find(id);;
 		masStaffTypeRepository.delete(masStaffType);
 		
 	}
@@ -68,25 +86,21 @@ public class MasStaffTypeRepositoryTest {
 	
 	
 	@Test
+	@Rollback(true)
 	public void listMasStaffType(){
 		
 		List<MasStaffType> masStaffTypeList = masStaffTypeRepository.findAll();
-		Assert.assertEquals(1, masStaffTypeList.size());
 		
-		for(int i=0;i<masStaffTypeList.size();i++){		
-			System.out.println("id: "+masStaffTypeList.get(i).getId());
-		}
 		
 	}
 	
 	
 	@Test
+	@Rollback(true)
 	public void findByIdMasTechnology(){
 		
-		MasStaffType masStaffType = masStaffTypeRepository.find(3);	
-		int id = masStaffType.getId();
-		Assert.assertEquals(3, id);
-		System.out.println("id: "+id);
+		MasStaffType masStaffType = masStaffTypeRepository.find(id);	
+		Assert.assertEquals(id, id);
 		
 	}
 	
