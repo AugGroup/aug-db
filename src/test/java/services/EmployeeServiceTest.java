@@ -787,10 +787,292 @@ public class EmployeeServiceTest {
 		Assert.assertEquals("1/6", addUpdate.getHouseNo());
 		Assert.assertEquals(2, addressListDto3.size());
 		
-		
-
-
 	}
 	
+	
+	@Test
+	@Rollback(true)
+	public void findEmployeeCode(){
+		
+		/*********************************************** create employee  **********************************************************/
+		
+		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasLocation masLocation = masLocationService.find(idMasLocation);
+		
+		
+		 Applicant applicant = new Applicant();
+		 applicant.setCreatedBy(1);
+		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 applicant.setAuditFlag("C");
+		 applicant.setCardId("115310905001-9");
+		 applicant.setAuditFlag("1");
+		 applicant.setJoblevel(masJobLevel);
+		 applicant.setTechnology(masTechnology);
+		 applicantService.create(applicant);
+		 int idApplicant2 = applicant.getId();
+		 System.out.println("id applicant: "+idApplicant2);
+	     Applicant applicant1 = applicantService.findById(idApplicant2);
+		
+		
+		EmployeeDto employeeDto = new EmployeeDto();
+		
+		employeeDto.setNameThai("อภิวาท์");
+		employeeDto.setNameEng("apiva");
+		employeeDto.setSurnameEng("viva");
+		employeeDto.setSurnameThai("กิมเกถนอม");
+		employeeDto.setNicknameEng("va");
+		employeeDto.setNicknameThai("วา");
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	    	String dateInString = "31-08-2014";
+	    	Date date = null;
+			try {
+				date = sdf.parse(dateInString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+		employeeDto.setStartWorkDate(date);
+		
+		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
+   	    String dateInStringEnd = "31-12-2016";
+   	    Date dateEnd = null;
+		try {
+			dateEnd = sdfEnd.parse(dateInStringEnd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setEndWorkDate(dateEnd);
+		employeeDto.setPositionAppliedFor("Programmer");
+		employeeDto.setOfficialDate(date);
+		
+		
+		employee.setEmployeeCode("EMP-19");
+		employeeDto.setIdCard("115310905001-9");
+		employeeDto.setAge(25);
+		employeeDto.setEmail("test@gmail.com");
+		employeeDto.setEmergencyContact("mom");
+		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
+		
+		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
+   	    String dateInStringDOB = "12-01-1991";
+     	Date dateDOB = null;
+   	
+		try {
+			dateDOB = sdfDOB.parse(dateInStringDOB);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setDateOfBirth(dateDOB);
+		employeeDto.setStatusemp("Employee");
+		employeeDto.setApplicateId(applicant1.getId());
+		
+		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
+		
+		AddressDto addressDto = new AddressDto();
+		
+		addressDto.setId(0);
+		addressDto.setAddressTypeId(idMasAddressType);
+		addressDto.setApplicantId(applicant1.getId());
+		addressDto.setMasprovinceId(idMasProvice);
+		addressDto.setMasprovinceName(masProvince.getName());
+		addressDto.setHouseNo("1/11");
+		addressDto.setDistrict("nongsamwong");
+		addressDto.setSubDistrict("nongsua");
+		addressDto.setRoad("sathon");
+		addressDto.setStatus("add");
+		
+		addressDtoList.add(addressDto);
+		
+		
+		employeeDto.setIsManager(1);
+		employeeDto.setAimempid(id);
+		
+		
+		employeeDto.setMasJoblevel(idMasJoblevel);
+		employeeDto.setMasDivision(idMasDivision);
+		
+		employeeDto.setTelHome("0890851022");
+		employeeDto.setTelMobile("0890851022");
+		employeeDto.setAddressList(addressDtoList);
+		
+		Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "JP10020");
+		
+		
+	/*******************************************************************************************************************************/	
+		
+		
+		
+		Employee employee = employeeService.findEmployeeCode(idMasLocation);		
+		Assert.assertEquals("JP10020", employee.getEmployeeCode());
+		
+		
+	}
+	
+	
+	
+	@Test
+	public void generateEmployeeCode(){
+		
+		
+		EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(id);		
+		String employeeCode = employeeService.generateEmployeeCode(employeeDto);
+		System.out.println("emp code: "+employeeCode);
+		Assert.assertEquals("JP10020", employeeCode);
+		
+		
+	}
+	
+	
+	
+	
+
+	@Test
+	public void findOfficial(){
+		
+		Employee employee = employeeService.findOfficial(id);		
+		Assert.assertEquals(idOfficial, employee.getOfficial().getId());
+		
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void findAimRelateWithEmployee() {
+		
+		
+		/*********************************************** create employee  **********************************************************/
+		
+		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasLocation masLocation = masLocationService.find(idMasLocation);
+		
+		
+		 Applicant applicant = new Applicant();
+		 applicant.setCreatedBy(1);
+		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 applicant.setAuditFlag("C");
+		 applicant.setCardId("115310905001-9");
+		 applicant.setAuditFlag("1");
+		 applicant.setJoblevel(masJobLevel);
+		 applicant.setTechnology(masTechnology);
+		 applicantService.create(applicant);
+		 int idApplicant2 = applicant.getId();
+		 System.out.println("id applicant: "+idApplicant2);
+	     Applicant applicant1 = applicantService.findById(idApplicant2);
+		
+		
+		EmployeeDto employeeDto = new EmployeeDto();
+		
+		employeeDto.setNameThai("อภิวาท์");
+		employeeDto.setNameEng("apiva");
+		employeeDto.setSurnameEng("viva");
+		employeeDto.setSurnameThai("กิมเกถนอม");
+		employeeDto.setNicknameEng("va");
+		employeeDto.setNicknameThai("วา");
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	    	String dateInString = "31-08-2014";
+	    	Date date = null;
+			try {
+				date = sdf.parse(dateInString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+		employeeDto.setStartWorkDate(date);
+		
+		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
+  	    String dateInStringEnd = "31-12-2016";
+  	    Date dateEnd = null;
+		try {
+			dateEnd = sdfEnd.parse(dateInStringEnd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setEndWorkDate(dateEnd);
+		employeeDto.setPositionAppliedFor("Programmer");
+		employeeDto.setOfficialDate(date);
+		
+		
+		employee.setEmployeeCode("EMP-19");
+		employeeDto.setIdCard("115310905001-9");
+		employeeDto.setAge(25);
+		employeeDto.setEmail("test@gmail.com");
+		employeeDto.setEmergencyContact("mom");
+		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
+		
+		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
+  	    String dateInStringDOB = "12-01-1991";
+    	Date dateDOB = null;
+  	
+		try {
+			dateDOB = sdfDOB.parse(dateInStringDOB);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setDateOfBirth(dateDOB);
+		employeeDto.setStatusemp("Employee");
+		employeeDto.setApplicateId(applicant1.getId());
+		
+		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
+		
+		AddressDto addressDto = new AddressDto();
+		
+		addressDto.setId(0);
+		addressDto.setAddressTypeId(idMasAddressType);
+		addressDto.setApplicantId(applicant1.getId());
+		addressDto.setMasprovinceId(idMasProvice);
+		addressDto.setMasprovinceName(masProvince.getName());
+		addressDto.setHouseNo("1/11");
+		addressDto.setDistrict("nongsamwong");
+		addressDto.setSubDistrict("nongsua");
+		addressDto.setRoad("sathon");
+		addressDto.setStatus("add");
+		
+		addressDtoList.add(addressDto);
+		
+		
+		employeeDto.setIsManager(1);
+		employeeDto.setAimempid(id);
+		
+		
+		employeeDto.setMasJoblevel(idMasJoblevel);
+		employeeDto.setMasDivision(idMasDivision);
+		
+		employeeDto.setTelHome("0890851022");
+		employeeDto.setTelMobile("0890851022");
+		employeeDto.setAddressList(addressDtoList);
+		employeeDto.setAimempid(id);
+		employeeDto.setIsManager(1);
+		
+		Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "JP10020");
+		
+		
+		
+	 /***********************************************************************************************************************************/
+		
+		
+		
+		List<Employee> employeeList = employeeService.findAimRelateWithEmployee(emp.getAimempid().getId());
+		Assert.assertEquals(1, employeeList.size());
+		
+		
+	}
 
 }
