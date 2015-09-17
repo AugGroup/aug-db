@@ -78,10 +78,10 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public List<AddressDto> findAddressByEmployeeId(Integer id) {
+	public List<AddressDto> findAddressByApplicantId(Integer id) {
 		
 		
-		List<Address> addressList = addressResp.findAddressByEmployeeId(id);
+		List<Address> addressList = addressResp.findAddressByApplicantId(id);
 		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
 		for(Address address:addressList){
 			
@@ -90,13 +90,12 @@ public class AddressServiceImpl implements AddressService{
 		   addressDto.setHouseNo(address.getHouseNo());
 		   addressDto.setRoad(address.getRoad());
 		   addressDto.setDistrict(address.getDistrict());
-		   addressDto.setSubDistrict(address.getSubDistrict());
-		   
-		   /*addressDto.setAddressTypeId(address.getAddressType().getId());
-		   addressDto.setEmployeeId(id);
+		   addressDto.setSubDistrict(address.getSubDistrict());		   
+		   addressDto.setAddressTypeId(address.getAddressType().getId());
+		   addressDto.setApplicantId(id);
 		   addressDto.setMasaddresstypeName(address.getAddressType().getName());
 		   addressDto.setMasprovinceId(address.getProvince().getId());
-		   addressDto.setMasprovinceName(address.getProvince().getName());*/
+		   addressDto.setMasprovinceName(address.getProvince().getName());
 		   addressDto.setZipcode(address.getZipcode());
 		   
 		   addressDtoList.add(addressDto);

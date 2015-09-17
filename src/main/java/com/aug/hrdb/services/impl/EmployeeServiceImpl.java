@@ -37,6 +37,7 @@ import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Address;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.entities.MasCoreSkill;
@@ -50,6 +51,7 @@ import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.services.AddressService;
+import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
@@ -92,6 +94,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private MasTechnologyService masTechnologyService;
 	@Autowired
 	private MasStaffTypeService masStaffTypeService;
+	@Autowired
+	private ApplicantService applicantService;
+	
 	/*@Autowired
 	private UploadService uploadService;*/
 	
@@ -152,6 +157,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		Employee employee = employeeRepository.find(id);
 		Hibernate.initialize(employee.getOfficial());
+		Hibernate.initialize(employee.getApplicant());
+
 		
 		//System.out.println(employee.getOfficial().getId());
 		
@@ -218,7 +225,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDto.setDescriptionOther(employee.getDescriptionOther());
         employeeDto.setKnowEmployed(employee.getKnowEmployed());
         employeeDto.setDescriptionYes(employee.getDescriptionYes());
-        /*allEmployeeDto.setKnowEmployerNo(employee.getKnowEmployerNo());*/
+        /*employeeDto.setKnowEmployerNo(employee.getKnowEmployerNo());*/
         employeeDto.setMilitaryService(employee.getMilitaryService());
         employeeDto.setFromYear(employee.getFromYear());
         employeeDto.setToYear(employee.getToYear());
@@ -263,156 +270,29 @@ public class EmployeeServiceImpl implements EmployeeService {
         	employeeDto.setMasLocationId(employee.getMasLocation().getId());
         }
 
-
-        List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		
-		
-	  /*if(employee.getAddresses()!=null){
-		for(Address address:employee.getAddresses()){		
-				AddressDto addressDto = new AddressDto();
-				addressDto.setId(address.getId());
-				//addressDto.setAddress1(address.getAddress1());
-				//addressDto.setAddress2(address.getAddress2());
-				addressDto.setHouseNo(address.getHouseNo());
-				addressDto.setSubDistrict(address.getSubDistrict());
-				addressDto.setDistrict(address.getSubDistrict());
-				addressDto.setRoad(address.getRoad());
-				
-				if(address.getAddressType()!=null){
-					addressDto.setAddressTypeId(address.getAddressType().getId());
-					addressDto.setMasaddresstypeName(address.getAddressType().getName());
-				}
-				addressDto.setEmployeeId(employee.getId());
-				
-				if(address.getProvince()!=null){
-				addressDto.setMasprovinceId(address.getProvince().getId());
-				addressDto.setMasprovinceName(address.getProvince().getName());
-				}
-				
-				addressDto.setZipcode(address.getZipcode());
-				
-				addressDtoList.add(addressDto);
-		}
-		
-		
-		employeeDto.setAddressList(addressDtoList);
-		
-	  }*/
+        
+        employeeDto.setApplicateId(employee.getApplicant().getId());
+        
+        List<AddressDto> addressDtoList  = addressService.findAddressByApplicantId(employee.getApplicant().getId());
+        
+        
+        if(addressDtoList!=null && addressDtoList.isEmpty()==false){
+        	employeeDto.setAddressList(addressDtoList);
+        }
 		
 		return employeeDto;
 
 	}
 	
 	
-	public EmployeeDto findEmpInitEdit(Integer id) {
-		
-		Employee employee=employeeRepository.find(id);		
-		EmployeeDto empDto = new EmployeeDto();
-		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		/*for(Address address:employee.getAddresses()){
-		//allEmpDto.setAddressList();
-			AddressDto addressDto = new AddressDto();
-			//addressDto.setAddress1(addrerss.getAddress1());
-			//addressDto.setAddress2(addrerss.getAddress2());
-			addressDto.setHouseNo(address.getHouseNo());
-			addressDto.setSubDistrict(address.getSubDistrict());
-			addressDto.setDistrict(address.getSubDistrict());
-			addressDto.setRoad(address.getRoad());
-			addressDto.setAddressTypeId(address.getAddressType().getId());
-			addressDto.setId(address.getId());
-			addressDto.setZipcode(address.getZipcode());
-			addressDto.setMasaddresstypeName(address.getAddressType().getName());
-			addressDto.setStatus("unmodified");
-			addressDtoList.add(addressDto);
-		}*/
-		empDto.setId(employee.getId());
-		empDto.setAddress(employee.getAddress());
-		empDto.setEmployeeCode(employee.getEmployeeCode());
-		empDto.setNameThai(employee.getNameThai());
-		empDto.setSurnameThai(employee.getSurnameThai());
-		empDto.setNicknameThai(employee.getNicknameThai());
-		empDto.setNameEng(employee.getNameEng());
-		
-		empDto.setSurnameEng(employee.getSurnameEng());
-		empDto.setNicknameEng(employee.getNicknameEng());
-		empDto.setEmail(employee.getEmail());
-		empDto.setTelHome(employee.getTelHome());
-		empDto.setTelMobile(employee.getTelMobile());
-		empDto.setTelFax(employee.getTelFax());
-		
-		empDto.setCongenitalDisease(employee.getCongenitalDisease());
-		empDto.setHospital(employee.getHospital());
-		empDto.setEmergencyContact(employee.getEmergencyContact());
-		empDto.setRelationshipWithEmergencyContact(employee.getRelationshipWithEmergencyContact());
-		empDto.setEmergencyContactAddress(employee.getEmergencyContactAddress());
-		empDto.setEmergencyContactPhoneNumber(employee.getEmergencyContactPhoneNumber());
-		empDto.setDateOfBirth(employee.getDateOfBirth());
-		empDto.setPlaceOfBirth(employee.getPlaceOfBirth());
-		
-		empDto.setAge(employee.getAge());
-		empDto.setReligion(employee.getReligion());
-		empDto.setIdCard(employee.getIdCard());
-		empDto.setIssuedOffice(employee.getIssuedOffice());
-		empDto.setExpiryDate(employee.getExpiryDate());
-		empDto.setHeight(employee.getHeight());
-		empDto.setWeigth(employee.getWeigth());
-		empDto.setSex(employee.getSex());
-		
-		empDto.setMaritalStatus(employee.getMaritalStatus());
-		empDto.setIssuedOffice2(employee.getIssuedOffice2());
-		empDto.setAddress(employee.getAddress());
-		empDto.setOccupation(employee.getOccupation());
-		empDto.setKnowAugNewspaper(employee.getKnowAugNewspaper());
-		empDto.setDescriptionNewspaper(employee.getDescriptionNewspaper());
-		empDto.setKnowAugMagazine(employee.getKnowAugMagazine());
-		empDto.setDescriptionMagazine(employee.getDescriptionMagazine());
-		
-		empDto.setKnowAugWebsite(employee.getKnowAugWebsite());
-		empDto.setDescriptionWebsite(employee.getDescriptionWebsite());
-		empDto.setKnowAugFriend(employee.getKnowAugFriend());
-		empDto.setDescriptionFriend(employee.getDescriptionFriend());
-		empDto.setKnowAugOther(employee.getKnowAugOther());
-		empDto.setDescriptionOther(employee.getDescriptionOther());
-		empDto.setKnowEmployed(employee.getKnowEmployed());
-		
-		empDto.setMilitaryService(employee.getMilitaryService());
-		empDto.setFromYear(employee.getFromYear());
-		empDto.setToYear(employee.getToYear());
-		empDto.setBranchOfService(employee.getBranchOfService());
-		empDto.setServiceNo(employee.getServiceNo());
-		empDto.setReasonsNo(employee.getReasonsNo());
-		
-		empDto.setDateToBeDrafted(employee.getDateToBeDrafted());
-		empDto.setPreviousEmployer(employee.getPreviousEmployer());
-		empDto.setPreviousEmpreasonsNo(employee.getPreviousEmpreasonsNo());
-		empDto.setImage(employee.getImage());
-		empDto.setStatusemp(employee.getStatusemp());
-		
-		empDto.setIsManager(employee.getIsManager());
-		if(employee.getAimempid()!=null){
-			empDto.setAimempid(employee.getAimempid().getId());
-		}
-		empDto.setOfficialId(employee.getOfficial().getId());
-		empDto.setMasCoreSkill(employee.getMasCoreSkill().getId());
-		empDto.setMasEmployment(employee.getMasEmployment().getId());
-		empDto.setMasJoblevel(employee.getMasJoblevel().getId());
-		empDto.setMasDivision(employee.getMasDivision().getId());
-		empDto.setTechnology(employee.getTechnology().getId());
-		empDto.setMasStaffType(employee.getMasStaffType().getId());
-		empDto.setMasLocation(employee.getMasLocation().getCode());
-		
-		return empDto;
-		
-	}
+	
 	
 
 	@Override
 	@Transactional
 	public Employee createEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode) throws JDBCException{
 		
-		
-		//List<AllEmployeeDto> allEDtos = new ArrayList<AllEmployeeDto>();
-		
+				
 		//Save Official 
 		Official official = new Official();
 		official.setAuditFlag("C");
@@ -478,7 +358,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setDescriptionOther(employeeDto.getDescriptionOther()); 
 		employee.setKnowEmployed(employeeDto.getKnowEmployed());
 		employee.setDescriptionYes(employeeDto.getDescriptionYes());
-		/*employee.setKnowEmployerNo(allEmployeeDto.getKnowEmployerNo());*/
 		employee.setMilitaryService(employeeDto.getMilitaryService());
 		employee.setFromYear(employeeDto.getFromYear());
 		employee.setToYear(employeeDto.getToYear());
@@ -526,7 +405,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		if(employeeDto.getMasLocation()!=null||employeeDto.getMasLocation().isEmpty()==false){
+		if(employeeDto.getMasLocation()!=null&&employeeDto.getMasLocation().isEmpty()==false){
 			MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
 			System.out.println("id location: "+masLocation.getId());
 			if(masLocation.getId()!=null){
@@ -558,6 +437,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setCreatedBy(0);
 		employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
+		Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
+		if(employeeDto.getApplicateId()!=null){
+			employee.setApplicant(applicant);
+		}
 		
 		try{
 			
@@ -593,8 +476,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				if(addressDto.getId()!=null){
 					
 					Address address = new Address();
-					//address.setAddress1(addressDto.getAddress1());
-					//address.setAddress2(addressDto.getAddress2());
 					address.setHouseNo(addressDto.getHouseNo());
 					address.setSubDistrict(addressDto.getSubDistrict());
 					address.setDistrict(addressDto.getSubDistrict());
@@ -602,24 +483,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 					
 					
 					MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
-					if(masProvince.getId()!=null){
+					if(masProvince!=null){
 						address.setProvince(masProvince);
 					}
 					
 					MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
-					if(masProvince.getId()!=null){
+					if(masProvince!=null){
 						address.setAddressType(masAddressType);
 					}
 					
 					address.setZipcode(addressDto.getZipcode());
-					//address.setEmployee(employee);
+					
+								
+					if(applicant!=null){
+						address.setApplicant(applicant);
+					}
+					
 					address.setAuditFlag("C");
 					address.setCreatedBy(employee.getId());
 					address.setCreatedTimeStamp(Calendar.getInstance().getTime());
 					
 					List<Address> addressList = new ArrayList<Address>();
 					addressList.add(address);
-					//employee.setAddresses(addressList);
+					
 					addressService.create(address);
 
 				}
@@ -725,7 +611,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setDescriptionOther(employeeDto.getDescriptionOther()); 
 		employee.setKnowEmployed(employeeDto.getKnowEmployed());
 		employee.setDescriptionYes(employeeDto.getDescriptionYes());
-		/*employee.setKnowEmployerNo(allEmployeeDto.getKnowEmployerNo());*/
 		employee.setMilitaryService(employeeDto.getMilitaryService());
 		employee.setFromYear(employeeDto.getFromYear());
 		employee.setToYear(employeeDto.getToYear());
@@ -924,7 +809,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 			if(employeeDto.getAddressList()!=null){
 		
-		     System.out.println(employeeDto.getAddressList().get(0));
 					
 					for(AddressDto addressDto:employeeDto.getAddressList()){
 						
@@ -937,8 +821,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 							if(addressDto.getStatus().equals("add")&&addressDto.getId()==0){
 							
 									Address address = new Address();		
-									//address.setAddress1(addressDto.getAddress1());
-									//address.setAddress2(addressDto.getAddress2());
 									address.setHouseNo(addressDto.getHouseNo());
 									address.setSubDistrict(addressDto.getSubDistrict());
 									address.setDistrict(addressDto.getSubDistrict());
@@ -946,24 +828,29 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									
 									MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
-									if(masProvince.getId()!=null){
+									if(masProvince!=null){
 										address.setProvince(masProvince);
 									}
 									
 									MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
-									if(masProvince.getId()!=null){
+									if(masProvince!=null){
 										address.setAddressType(masAddressType);
 									}
 									
 									address.setZipcode(addressDto.getZipcode());
-									//address.setEmployee(employee);
+									
+									Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
+									
+									if(applicant!=null){
+										address.setApplicant(applicant);
+									}
+								
 									address.setAuditFlag("C");
 									address.setCreatedBy(employee.getId());
 									address.setCreatedTimeStamp(Calendar.getInstance().getTime());
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
-									//employee.setAddresses(addressList);
 									addressService.create(address);
 							
 							}else if(addressDto.getStatus().equals("edit")){
@@ -974,8 +861,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 								
 									Address address = new Address();
 									address = addressService.find(addressDto.getId());
-									//address.setAddress1(addressDto.getAddress1());
-									//address.setAddress2(addressDto.getAddress2());
 									address.setHouseNo(addressDto.getHouseNo());
 									address.setSubDistrict(addressDto.getSubDistrict());
 									address.setDistrict(addressDto.getSubDistrict());
@@ -992,21 +877,27 @@ public class EmployeeServiceImpl implements EmployeeService {
 									}
 									
 									address.setZipcode(addressDto.getZipcode());
-									//address.setEmployee(employee);
+									
+									Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
+									
+									if(applicant!=null){
+										address.setApplicant(applicant);
+									}
+										
 									address.setAuditFlag("U");
 									address.setUpdatedBy(employee.getId());
 									address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
-									//employee.setAddresses(addressList);
+
 									addressService.update(address);
 								
 								
 							}else if(addressDto.getStatus().equals("delete")){
 								
 									
-									System.out.println("delete#1: "+addressDto.getStatus());
+									System.out.println("delete address: "+addressDto.getStatus());
 									Address address = new Address();
 									address = addressService.find(addressDto.getId());
 									addressService.delete(address);

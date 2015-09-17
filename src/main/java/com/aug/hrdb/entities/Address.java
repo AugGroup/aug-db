@@ -107,26 +107,18 @@ public class Address extends BaseEntity{
 	private Integer provinceId;
    
 	
-    /*@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name= "EMPLOYEE_ID")
-//	@JsonIgnore
-    private Employee employee;*/
 	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "APPLICANT_ID")
-//	@JsonIgnore
     private Applicant applicant;
 	
 
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "ADDRESSTYPE_ID")
-//	@JsonIgnore
     private MasAddressType addressType;
 
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "PROVINCE_ID")
-
-//	@JsonIgnore
     private MasProvince province;
 	
 	

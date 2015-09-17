@@ -67,7 +67,7 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 	}
 
 	@Override
-	public List<Address> findAddressByEmployeeId(Integer id) {
+	public List<Address> findAddressByApplicantId(Integer id) {
 		Criteria c = getCurrentSession().createCriteria(Address.class,"address");
 		c.setFetchMode("applicant", FetchMode.JOIN);
 		c.createCriteria("applicant", "applicant");

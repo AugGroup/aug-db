@@ -18,11 +18,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.AddressDto;
+import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasLocation;
+import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.ApplicantRepository;
@@ -35,13 +40,16 @@ import com.aug.hrdb.repositories.MasLocationRepository;
 import com.aug.hrdb.repositories.MasStaffTypeRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.OfficialRepository;
+import com.aug.hrdb.services.AddressService;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
+import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasEmploymentService;
 import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasLocationService;
+import com.aug.hrdb.services.MasProvinceService;
 import com.aug.hrdb.services.MasStaffTypeService;
 import com.aug.hrdb.services.MasTechnologyService;
 import com.aug.hrdb.services.OfficialService;
@@ -72,6 +80,12 @@ public class EmployeeServiceTest {
 	private MasLocationService masLocationService;
 	@Autowired
 	private OfficialService officialService;
+	@Autowired
+	private AddressService addressService;
+	@Autowired
+	private MasAddressTypeService addressTypeService;
+	@Autowired
+	private MasProvinceService provinceService;
 	
 	
 	
@@ -82,7 +96,14 @@ public class EmployeeServiceTest {
 	private Integer idMasDivision;
 	private Integer idMasLocation;
 	private Integer idOfficial;
+	private Integer idAddress1;
+	private Integer idMasAddressType;
+	private Integer idMasProvice;
+	private Integer masTechId;
 	
+	
+	MasAddressType addressType;
+	MasProvince province;
 	
 	
 	@Before
@@ -148,7 +169,7 @@ public class EmployeeServiceTest {
         masTechnology.setIsActive(true);
         masTechnology.setName("MASTECH-01");
         masTechnologyService.create(masTechnology);
-        int masTechId = masTechnology.getId();
+        masTechId = masTechnology.getId();
         MasTechnology masTechnology2 = masTechnologyService.find(masTechId);
         
         
@@ -164,10 +185,100 @@ public class EmployeeServiceTest {
 		idApplicant = applicant.getId();
         Applicant applicant1 = applicantService.findById(idApplicant);
         Hibernate.initialize(applicant1);
+    
+       
         
         
-        employee.setApplicant(applicant1);
-         
+		addressType = new MasAddressType();
+		addressType.setName("Permanent");
+		addressType.setIsActive(true);
+		addressType.setCreatedBy(1);
+		addressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		addressType.setAuditFlag("C");
+		addressType.setCode("MAS-ADDTYPE01");
+		addressTypeService.create(addressType);
+		idMasAddressType = addressType.getId();
+		MasAddressType masAddressType = addressTypeService.findById(idMasAddressType);
+		
+		
+		province = new MasProvince();
+		province.setName("Bangkok");
+		province.setCode("B001");
+		province.setIsActive(true);
+		province.setCreatedBy(1);
+		province.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		province.setAuditFlag("C");
+		provinceService.create(province);
+		idMasProvice = province.getId();
+		MasProvince masProvince = provinceService.find(idMasProvice);
+		
+		
+
+		Address address = new Address();
+		address.setHouseNo("18559");
+		address.setRoad("Sukhumvit");
+		address.setDistrict("Mung");
+		address.setSubDistrict("AmphurMung");
+		address.setZipcode(10252);
+		address.setAddressType(masAddressType);
+		address.setProvince(masProvince);
+		address.setAuditFlag("C");
+		address.setCreatedBy(1);
+		address.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		address.setApplicant(applicant1);
+
+		
+		addressService.create(address);
+		idAddress1 = address.getId();
+		
+		
+		
+		
+		addressType = new MasAddressType();
+		addressType.setName("Present");
+		addressType.setIsActive(true);
+		addressType.setCreatedBy(1);
+		addressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		addressType.setAuditFlag("C");
+		addressType.setCode("MAS-ADDTYPE03");
+		addressTypeService.create(addressType);
+		int idMasAddressType1 = addressType.getId();
+		MasAddressType masAddressType1 = addressTypeService.findById(idMasAddressType1);
+		
+		
+		province = new MasProvince();
+		province.setName("Pathumtani");
+		province.setCode("B002");
+		province.setIsActive(true);
+		province.setCreatedBy(1);
+		province.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		province.setAuditFlag("C");
+		provinceService.create(province);
+		int idMasProvice1 = province.getId();
+		MasProvince masProvince1 = provinceService.find(idMasProvice1);
+		
+		
+
+		Address address1 = new Address();
+		address1.setHouseNo("1855");
+		address1.setRoad("Sukhumvit");
+		address1.setDistrict("Mung");
+		address1.setSubDistrict("AmphurMung");
+		address1.setZipcode(10252);
+		address1.setAddressType(masAddressType1);
+		address1.setProvince(masProvince1);
+		address1.setAuditFlag("C");
+		address1.setCreatedBy(1);
+		address1.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		address1.setApplicant(applicant1);
+		
+		
+		addressService.create(address1);
+		
+		
+		
+		
+		
 
 	
 		MasDivision masDivision = new MasDivision();
@@ -214,7 +325,11 @@ public class EmployeeServiceTest {
 	    Official official2 = officialService.findById(idOfficial);
 	    
 	    employee.setOfficial(official2);
-	 
+	    
+	    
+	    employee.setApplicant(applicant1);
+        
+        
 		
 		employeeService.create(employee);
 		id=employee.getId();
@@ -330,6 +445,150 @@ public class EmployeeServiceTest {
 	}
 	
 	
+	@Test
+	public void searhEmpIdtoAddress() {
+		
+		//search last id of EMPLOYEE
+		Employee employee = employeeService.searhEmpIdtoAddress();
+		Assert.assertEquals(id.intValue(), employee.getId().intValue());
+	
+	}
+	
+	
+	
+	@Test
+	public void findEmployeeByEmployeeIdWithSetToDto(){
+		
+		EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(id);
+		List<AddressDto> addressDto =  addressService.findAddressByApplicantId(idApplicant);
+		
+		
+		System.out.println("id address dto1 "+addressDto.get(0).getId());
+		System.out.println("id address dto2 "+employeeDto.getAddressList().get(0).getId());
+
+		Assert.assertEquals(addressDto.get(0).getId(), employeeDto.getAddressList().get(0).getId());
+		
+	    
+		
+	}
+	
+	
+	
+	
+	@Test
+	@Rollback(true)
+	public void createEmployeeAndReturnId(){
+		
+		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasProvince masProvince = provinceService.find(idMasProvice);
+		
+		
+		 Applicant applicant = new Applicant();
+		 applicant.setCreatedBy(1);
+		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 applicant.setAuditFlag("C");
+		 applicant.setCardId("115310905001-9");
+		 applicant.setAuditFlag("1");
+		 applicant.setJoblevel(masJobLevel);
+		 applicant.setTechnology(masTechnology);
+		 applicantService.create(applicant);
+		 int idApplicant2 = applicant.getId();
+		 System.out.println("id applicant: "+idApplicant2);
+	     Applicant applicant1 = applicantService.findById(idApplicant2);
+		
+		
+		EmployeeDto employeeDto = new EmployeeDto();
+		
+		employeeDto.setNameThai("อภิวาท์");
+		employeeDto.setNameEng("apiva");
+		employeeDto.setSurnameEng("viva");
+		employeeDto.setSurnameThai("กิมเกถนอม");
+		employeeDto.setNicknameEng("va");
+		employeeDto.setNicknameThai("วา");
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	    	String dateInString = "31-08-2014";
+	    	Date date = null;
+			try {
+				date = sdf.parse(dateInString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+		employeeDto.setStartWorkDate(date);
+		
+		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInStringEnd = "31-12-2016";
+    	Date dateEnd = null;
+		try {
+			dateEnd = sdfEnd.parse(dateInStringEnd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setEndWorkDate(dateEnd);
+		employeeDto.setPositionAppliedFor("Programmer");
+		employeeDto.setOfficialDate(date);
+		
+		
+		employee.setEmployeeCode("EMP-19");
+		employeeDto.setIdCard("115310905001-9");
+		employeeDto.setAge(25);
+		employeeDto.setEmail("test@gmail.com");
+		employeeDto.setEmergencyContact("mom");
+		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
+		
+		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInStringDOB = "12-01-1991";
+    	Date dateDOB = null;
+    	
+		try {
+			dateDOB = sdfDOB.parse(dateInStringDOB);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setDateOfBirth(dateDOB);
+		employeeDto.setStatusemp("Employee");
+		employeeDto.setApplicateId(applicant1.getId());
+		
+		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
+		
+		AddressDto addressDto = new AddressDto();
+		
+		addressDto.setAddressTypeId(idMasAddressType);
+		addressDto.setApplicantId(idApplicant);
+		addressDto.setMasprovinceId(idMasProvice);
+		addressDto.setMasprovinceName(masProvince.getName());
+		addressDto.setHouseNo("1/11");
+		addressDto.setDistrict("nongsamwong");
+		addressDto.setSubDistrict("nongsua");
+		addressDto.setRoad("sathon");
+		addressDto.setStatus("add");
+		
+		
+		
+		employeeDto.setIsManager(1);
+		employeeDto.setAimempid(id);
+		
+		
+		employeeDto.setMasJoblevel(idMasJoblevel);
+		employeeDto.setMasDivision(idMasDivision);
+		
+		employeeDto.setTelHome("0890851022");
+		employeeDto.setTelMobile("0890851022");
+		
+		employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
+		
+		
+	    
+		
+	}
 	
 
 }

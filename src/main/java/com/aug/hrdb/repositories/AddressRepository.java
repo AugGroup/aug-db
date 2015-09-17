@@ -22,7 +22,7 @@ public interface AddressRepository extends GenericRepository<Address, Integer>{
 	
 	public List<AddressDto> searchAddress(Integer id);
 	public void saveAddressByNameQuery(AddressDto addressDto);
-	public List<Address> findAddressByEmployeeId(Integer id);
+	public List<Address> findAddressByApplicantId(Integer id);
 	public void updateAddressByNameQuery(AddressDto addressDto);
 	public void deleteAddressByNameQuery(Integer id);
 	public List<Address> findAll();

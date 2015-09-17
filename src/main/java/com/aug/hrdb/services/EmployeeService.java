@@ -36,5 +36,5 @@ public interface EmployeeService {
 	public List<Employee> findAimRelateWithEmployee(Integer id);
 	public Employee findOfficial(Integer id);
 	public Employee findEmployeeCode(Integer locationId);
-	public String generateEmployeeCode(EmployeeDto allEmployeeDto);
+	public String generateEmployeeCode(EmployeeDto employeeDto);
 }
