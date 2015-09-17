@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.aug.hrdb.dto.AbilityDto;
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.repositories.EducationRepository;
@@ -33,6 +34,14 @@ public class EducationRepositoryImpl extends GenericRepositoryImpl<Education, Se
 		List<EducationDto> result = query.list();
 		EducationDto app = result.get(0);
 		return app;
+	}
+
+	@Override
+	public List<EducationDto> searchEducation(Integer id) {
+		Query namedQuery = getCurrentSession().getNamedQuery("SEARCH_EDUCATION").setInteger("empId" ,id);
+		//namedQuery.executeUpdate();
+		List<EducationDto> edDto = namedQuery.list();
+	     return edDto;
 	}
 
 }

@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.aug.hrdb.dto.EducationDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -133,5 +134,53 @@ public class Education extends BaseEntity{
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
 	}
+
+public EducationDto toEducationDto() {
+		
+		EducationDto educationDto = new EducationDto();
+		
+		educationDto.setId(this.id);
+		educationDto.setUniversity(this.university);
+		educationDto.setGpa(this.gpa);
+		educationDto.setFaculty(this.faculty);
+		educationDto.setMajor(this.major);
+		/*educationDto.setCertificate(this.certificate);
+		educationDto.setDescription(this.description);
+		educationDto.setStartDate(this.startDate);
+		educationDto.setGraduatedDate(this.graduatedDate);
+		educationDto.setEmployeeId(this.employee.getId());
+		educationDto.setMasDegreeTypeId(this.masdegreetype.getId() );*/
+		educationDto.setMasdegreetype(this.masdegreetype.getName() );
+		
+		return educationDto;
+		
+	}
+	
+	public Education fromEducationDto(Education education, EducationDto educationDto) {
+		
+//		education.setId(educationDto.getId());
+		education.setUniversity(educationDto.getUniversity());
+		education.setGpa(educationDto.getGpa());
+		education.setFaculty(educationDto.getFaculty());
+		education.setMajor(educationDto.getMajor());
+		/*education.setCertificate(educationDto.getCertificate());
+		education.setDescription(educationDto.getDescription());
+		education.setStartDate(educationDto.getStartDate());
+		education.setGraduatedDate(educationDto.getGraduatedDate());*/
+		
+		Applicant applicant = new Applicant();
+		applicant.setId(educationDto.getId());
+		education.setApplicant(applicant);
+		
+		MasDegreetype masDegreetype = new MasDegreetype();
+		masDegreetype.setId(id);
+		masDegreetype.setName(educationDto.getMasdegreetype());
+		education.setMasdegreetype(masDegreetype);
+		
+		return education;
+		
+	}
+	
+
 	
 }

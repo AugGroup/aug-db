@@ -12,4 +12,6 @@ public interface ExperienceRepository extends GenericRepository<Experience, Seri
 
 	public ExperienceDto findExperience(Integer id);
 
+	public List<ExperienceDto> searchExperience(Integer id);
+
 }

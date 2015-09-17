@@ -12,5 +12,7 @@ public interface EducationRepository extends GenericRepository<Education, Serial
 	
 	public EducationDto findByEducationId(Integer id);
 
+	public List<EducationDto> searchEducation(Integer id);
+
 }
 

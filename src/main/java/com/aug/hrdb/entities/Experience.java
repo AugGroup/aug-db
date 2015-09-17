@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
+import com.aug.hrdb.dto.ExperienceDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -158,5 +160,51 @@ public class Experience extends BaseEntity {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
+	
+
+	 public ExperienceDto toExperienceDto() {
+			ExperienceDto experienceDto = new ExperienceDto();
+			experienceDto.setId(this.id);
+			experienceDto.setDateFrom(this.dateFrom);
+			experienceDto.setDateTo(this.dateTo);
+			/*experienceDto.setEmployeeCode(this.employee.getEmployeeCode());
+			experienceDto.setEmployeeId(this.employee.getId());*/
+			experienceDto.setAddress(this.address);
+			/*experienceDto.setBusinessType(this.businessType);
+			experienceDto.setCompanyName(this.companyName);*/
+			experienceDto.setPosition(this.position);
+			experienceDto.setReference(this.reference);
+			experienceDto.setResponsibility(this.responsibility);
+			experienceDto.setSalary(this.salary);
+			experienceDto.setReason(this.reason);
+			return experienceDto;
+		}
+
+		public Experience fromExperienceDto(Experience experience, ExperienceDto experienceDto) {
+			//experience.setId(experience.getId());
+			experience.setDateFrom(experienceDto.getDateFrom());
+			experience.setDateTo(experienceDto.getDateTo());
+			experience.setAddress(experienceDto.getAddress());
+			/*experience.setBusinessType(experienceDto.getBusinessType());
+			experience.setCompanyName(experienceDto.getCompanyName());*/
+			experience.setPosition(experienceDto.getPosition());
+			experience.setReference(experienceDto.getReference());
+			experience.setResponsibility(experienceDto.getResponsibility());
+			experience.setSalary(experienceDto.getSalary());
+			experience.setReason(experienceDto.getReason());
+			
+			
+			
+			Applicant applicant = new Applicant();
+			applicant.setId(experienceDto.getId());
+			experience.setApplicant(applicant);;
+			
+			
+			
+			
+			return experience;
+		}
+
+	
 
 }

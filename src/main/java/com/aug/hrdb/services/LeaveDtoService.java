@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.LeaveDto;
+import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.repositories.LeaveRepository;
 
 
@@ -24,6 +25,11 @@ public class LeaveDtoService {
 	
 	public List<LeaveDto> searchLeave(Integer id){
 		return leaveRepository.searchLeave(id);
+	}
+
+	public List<ReportLeaveDto> reportLeave(String searchText) {
+		// TODO Auto-generated method stub
+		return leaveRepository.reportLeave(searchText);
 	}
 
 

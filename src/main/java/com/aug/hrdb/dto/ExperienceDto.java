@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
+
 import com.aug.hrdb.entities.Applicant;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -23,7 +24,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) */})
 public class ExperienceDto {
 
-	private Applicant applicant;
+	private Integer applicantId;
 
 	private Integer id;
 
@@ -47,12 +48,12 @@ public class ExperienceDto {
 
 	private long salary;
 
-	public Applicant getApplicant() {
-		return applicant;
+	public Integer getApplicant() {
+		return applicantId;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setApplicant(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 
 	public Integer getId() {
@@ -134,5 +135,7 @@ public class ExperienceDto {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
+	
+	
 
 }

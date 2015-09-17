@@ -59,7 +59,7 @@ public class EducationDto {
 	
 	@ManyToOne
 	@JoinColumn(name="APPLICANT_ID")
-	private Applicant applicant;
+	private Integer applicantId;
 	
 	@Transient
 	private MasDegreetype degreeType;
@@ -136,12 +136,12 @@ public class EducationDto {
 		this.certification = certification;
 	}
 
-	public Applicant getApplicant() {
-		return applicant;
+	public Integer getApplicant() {
+		return applicantId;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setApplicant( Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 
 	public String getMasdegreetype() {
