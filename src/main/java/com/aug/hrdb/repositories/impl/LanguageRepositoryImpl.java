@@ -34,7 +34,7 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<LanguageDto> listSkillLanguageByEmployee(Integer id) {
-		Query nameQuery = getCurrentSession().getNamedQuery("listSkillLanguage").setInteger("applicant_id" ,id);
+		Query nameQuery = getCurrentSession().getNamedQuery("listSkillLanguage").setInteger("appId" ,id);
 		//namedQuery.executeUpdate();
 		List<LanguageDto> skillDto = nameQuery.list();
 	     return skillDto;
