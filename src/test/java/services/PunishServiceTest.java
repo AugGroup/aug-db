@@ -84,7 +84,7 @@ public class PunishServiceTest {
 		employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
         employee.setEmergencyContact("mom");
-        employee.setEmployeeCode("EMP-31");
+        employee.setEmployeeCode("EMP-99");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
         employee.setTelMobile("089-0851022");
