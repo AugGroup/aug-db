@@ -470,7 +470,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 				
 		
 		//Save Address
-		if(employeeDto.getAddressList()!=null){
+		/*if(employeeDto.getAddressList()!=null){
 			
 			for(AddressDto addressDto:employeeDto.getAddressList()){
 				if(addressDto.getId()!=null){
@@ -510,7 +510,115 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 				}
 			}
-		}
+		}*/
+		
+		
+		
+		//System.out.println("add size: "+employeeDto.getAddressList().size());
+
+		if(employeeDto.getAddressList()!=null){
+			
+			
+			 System.out.println("aaaa");
+	
+				
+				for(AddressDto addressDto:employeeDto.getAddressList()){
+					
+					
+					
+					if(addressDto.getId()!=null){
+						
+						
+						if(addressDto.getStatus().equals("add")&&addressDto.getId()==0){
+							    
+							    System.out.println("add address");
+						
+								Address address = new Address();		
+								address.setHouseNo(addressDto.getHouseNo());
+								address.setSubDistrict(addressDto.getSubDistrict());
+								address.setDistrict(addressDto.getSubDistrict());
+								address.setRoad(addressDto.getRoad());
+								
+								
+								MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
+								if(masProvince!=null){
+									address.setProvince(masProvince);
+								}
+								
+								MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
+								if(masProvince!=null){
+									address.setAddressType(masAddressType);
+								}
+								
+								address.setZipcode(addressDto.getZipcode());
+								
+								
+								if(applicant!=null){
+									address.setApplicant(applicant);
+								}
+							
+								address.setAuditFlag("C");
+								address.setCreatedBy(employee.getId());
+								address.setCreatedTimeStamp(Calendar.getInstance().getTime());
+								
+								List<Address> addressList = new ArrayList<Address>();
+								addressList.add(address);
+								addressService.create(address);
+						
+						}else if(addressDto.getStatus().equals("edit")){
+							
+							
+							   System.out.println("address edit: "+addressDto.getStatus());
+
+							
+								Address address = new Address();
+								address = addressService.find(addressDto.getId());
+								address.setHouseNo(addressDto.getHouseNo());
+								address.setSubDistrict(addressDto.getSubDistrict());
+								address.setDistrict(addressDto.getSubDistrict());
+								address.setRoad(addressDto.getRoad());
+								
+								MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
+								if(masProvince.getId()!=null){
+									address.setProvince(masProvince);
+								}
+								
+								MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
+								if(masProvince.getId()!=null){
+									address.setAddressType(masAddressType);
+								}
+								
+								address.setZipcode(addressDto.getZipcode());
+								
+								
+								if(applicant!=null){
+									address.setApplicant(applicant);
+								}
+									
+								address.setAuditFlag("U");
+								address.setUpdatedBy(employee.getId());
+								address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
+								
+								List<Address> addressList = new ArrayList<Address>();
+								addressList.add(address);
+
+								addressService.update(address);
+							
+							
+						}else if(addressDto.getStatus().equals("delete")){
+							
+								
+								System.out.println("delete address: "+addressDto.getStatus());
+								Address address = new Address();
+								address = addressService.find(addressDto.getId());
+								addressService.delete(address);
+							
+						}
+
+					}
+				}
+			}
+
 		
 		return employee;
 	}
@@ -658,7 +766,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		if(employeeDto.getMasLocation()!=null||employeeDto.getMasLocation().isEmpty()==false){
+		if(employeeDto.getMasLocation()!=null&&employeeDto.getMasLocation().isEmpty()==false){
 			MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
 			if(masLocation.getId()!=null){
 				employee.setMasLocation(masLocation); 
@@ -816,9 +924,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 						
 						if(addressDto.getId()!=null){
 							
-							System.out.println("address delete: "+addressDto.getStatus());
+							System.out.println("address : "+addressDto.getStatus());
 							
 							if(addressDto.getStatus().equals("add")&&addressDto.getId()==0){
+								
+								    System.out.println("add");
 							
 									Address address = new Address();		
 									address.setHouseNo(addressDto.getHouseNo());

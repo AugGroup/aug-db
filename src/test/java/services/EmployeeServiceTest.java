@@ -561,8 +561,9 @@ public class EmployeeServiceTest {
 		
 		AddressDto addressDto = new AddressDto();
 		
+		addressDto.setId(0);
 		addressDto.setAddressTypeId(idMasAddressType);
-		addressDto.setApplicantId(idApplicant);
+		addressDto.setApplicantId(applicant1.getId());
 		addressDto.setMasprovinceId(idMasProvice);
 		addressDto.setMasprovinceName(masProvince.getName());
 		addressDto.setHouseNo("1/11");
@@ -571,6 +572,7 @@ public class EmployeeServiceTest {
 		addressDto.setRoad("sathon");
 		addressDto.setStatus("add");
 		
+		addressDtoList.add(addressDto);
 		
 		
 		employeeDto.setIsManager(1);
@@ -582,12 +584,212 @@ public class EmployeeServiceTest {
 		
 		employeeDto.setTelHome("0890851022");
 		employeeDto.setTelMobile("0890851022");
+		employeeDto.setAddressList(addressDtoList);
 		
-		employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
+		Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
+		Employee emp2 = employeeService.findById(emp.getId());
+	
+			
+		Assert.assertEquals("EMP-1119", emp2.getEmployeeCode());
+		
+		List<AddressDto> addressDtoList1 = addressService.findAddressByApplicantId(applicant1.getId());
+		System.out.println("address list size: "+addressDtoList1.size());
+		
+	
+		
+		Assert.assertEquals("1/11", addressDtoList1.get(0).getHouseNo());
+
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void deleteEmployeeByHibernate (){
+		
+		Employee employee = employeeService.findById(id);
+		employeeService.deleteEmployeeByHibernate(employee);
+		Employee employee2 = employeeService.findById(id);
+		Assert.assertNull(employee2);
+		
+	}
+	
+	
+	
+	
+	@Test
+	@Rollback(true)
+	public void updateEmployeeAndReturnId(){
 		
 		
-	    
+		/*********************************************** create employee  **********************************************************/
 		
+		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasProvince masProvince = provinceService.find(idMasProvice);
+		
+		
+		 Applicant applicant = new Applicant();
+		 applicant.setCreatedBy(1);
+		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		 applicant.setAuditFlag("C");
+		 applicant.setCardId("115310905001-9");
+		 applicant.setAuditFlag("1");
+		 applicant.setJoblevel(masJobLevel);
+		 applicant.setTechnology(masTechnology);
+		 applicantService.create(applicant);
+		 int idApplicant2 = applicant.getId();
+		 System.out.println("id applicant: "+idApplicant2);
+	     Applicant applicant1 = applicantService.findById(idApplicant2);
+		
+		
+		EmployeeDto employeeDto = new EmployeeDto();
+		
+		employeeDto.setNameThai("อภิวาท์");
+		employeeDto.setNameEng("apiva");
+		employeeDto.setSurnameEng("viva");
+		employeeDto.setSurnameThai("กิมเกถนอม");
+		employeeDto.setNicknameEng("va");
+		employeeDto.setNicknameThai("วา");
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+	    	String dateInString = "31-08-2014";
+	    	Date date = null;
+			try {
+				date = sdf.parse(dateInString);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} 
+		
+		employeeDto.setStartWorkDate(date);
+		
+		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInStringEnd = "31-12-2016";
+    	Date dateEnd = null;
+		try {
+			dateEnd = sdfEnd.parse(dateInStringEnd);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setEndWorkDate(dateEnd);
+		employeeDto.setPositionAppliedFor("Programmer");
+		employeeDto.setOfficialDate(date);
+		
+		
+		employee.setEmployeeCode("EMP-19");
+		employeeDto.setIdCard("115310905001-9");
+		employeeDto.setAge(25);
+		employeeDto.setEmail("test@gmail.com");
+		employeeDto.setEmergencyContact("mom");
+		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
+		
+		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
+    	String dateInStringDOB = "12-01-1991";
+    	Date dateDOB = null;
+    	
+		try {
+			dateDOB = sdfDOB.parse(dateInStringDOB);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		employeeDto.setDateOfBirth(dateDOB);
+		employeeDto.setStatusemp("Employee");
+		employeeDto.setApplicateId(applicant1.getId());
+		
+		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
+		
+		AddressDto addressDto = new AddressDto();
+		
+		addressDto.setId(0);
+		addressDto.setAddressTypeId(idMasAddressType);
+		addressDto.setApplicantId(applicant1.getId());
+		addressDto.setMasprovinceId(idMasProvice);
+		addressDto.setMasprovinceName(masProvince.getName());
+		addressDto.setHouseNo("1/11");
+		addressDto.setDistrict("nongsamwong");
+		addressDto.setSubDistrict("nongsua");
+		addressDto.setRoad("sathon");
+		addressDto.setStatus("add");
+		
+		addressDtoList.add(addressDto);
+		
+		
+		employeeDto.setIsManager(1);
+		employeeDto.setAimempid(id);
+		
+		
+		employeeDto.setMasJoblevel(idMasJoblevel);
+		employeeDto.setMasDivision(idMasDivision);
+		
+		employeeDto.setTelHome("0890851022");
+		employeeDto.setTelMobile("0890851022");
+		employeeDto.setAddressList(addressDtoList);
+		
+		Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
+		
+		
+	/*******************************************************************************************************************************/	
+		
+		
+		EmployeeDto emp2 = employeeService.findEmployeeByEmployeeIdWithSetToDto(emp.getId());	
+		List<AddressDto> addressDtoList1 = addressService.findAddressByApplicantId(emp2.getApplicateId());
+		emp2.setNameEng("test");
+		
+		
+		List<AddressDto> addressDto1 = new  ArrayList<AddressDto>();
+		AddressDto addressDto2 = new AddressDto();
+		
+		addressDto2.setId(0);
+		addressDto2.setAddressTypeId(idMasAddressType);
+		addressDto2.setApplicantId(applicant1.getId());
+		addressDto2.setMasprovinceId(idMasProvice);
+		addressDto2.setMasprovinceName(masProvince.getName());
+		addressDto2.setHouseNo("1/19");
+		addressDto2.setDistrict("nongsamwong");
+		addressDto2.setSubDistrict("nongsua");
+		addressDto2.setRoad("sathon");
+		addressDto2.setStatus("add");
+		
+		addressDto1.add(addressDto2);
+		
+		AddressDto addressDto3 = new AddressDto();
+		addressDto3.setId(addressDtoList1.get(0).getId());
+		addressDto3.setAddressTypeId(addressDtoList1.get(0).getAddressTypeId());
+		addressDto3.setApplicantId(addressDtoList1.get(0).getApplicantId());
+		addressDto3.setMasprovinceId(addressDtoList1.get(0).getMasprovinceId());
+		addressDto3.setMasprovinceName(addressDtoList1.get(0).getMasprovinceName());
+		addressDto3.setHouseNo("1/6");
+		addressDto3.setDistrict(addressDtoList1.get(0).getDistrict());
+		addressDto3.setSubDistrict(addressDtoList1.get(0).getSubDistrict());
+		addressDto3.setRoad(addressDtoList1.get(0).getRoad());
+		addressDto3.setStatus("edit");
+		
+		
+		addressDto1.add(addressDto3);
+		
+		System.out.println("size: "+addressDto1.size());
+		
+		emp2.setAddressList(addressDto1);
+		
+		employeeService.updateEmployeeAndReturnId(emp2, emp2.getEmployeeCode());
+		
+		
+		Employee empFindData = employeeService.findById(emp.getId());
+		Address addUpdate = addressService.find(addressDtoList1.get(0).getId());
+		List<AddressDto> addressListDto3 = addressService.findAddressByApplicantId(addressDtoList1.get(0).getApplicantId());
+		
+		Assert.assertEquals("test", empFindData.getNameEng());
+		Assert.assertEquals("1/6", addUpdate.getHouseNo());
+		Assert.assertEquals(2, addressListDto3.size());
+		
+		
+
+
 	}
 	
 
