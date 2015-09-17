@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.aug.hrdb.dto.AbilityDto;
 import com.aug.hrdb.dto.CertificationDto;
 import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.repositories.CertificationRepository;
@@ -35,5 +36,14 @@ public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certifica
 		CertificationDto app = result.get(0);
 		return app;
 	}
+
+
 	
+	@SuppressWarnings("unchecked")
+	public List<CertificationDto> searchCertification(Integer id) {
+		Query namedQuery = getCurrentSession().getNamedQuery("searchCertification").setInteger("empId" ,id);
+		//namedQuery.executeUpdate();
+		List<CertificationDto> cerDto = namedQuery.list();
+	     return cerDto;
+	}
 }

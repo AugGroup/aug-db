@@ -2,7 +2,6 @@ package com.aug.hrdb.dto;
 
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import com.aug.hrdb.entities.Applicant;
 
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
@@ -23,7 +22,7 @@ public class CertificationDto {
 	
 	private String year;
 	
-	private Applicant applicant;
+	private Integer applicantId;
 
 	public Integer getId() {
 		return id;
@@ -65,12 +64,14 @@ public class CertificationDto {
 		this.year = year;
 	}
 
-	public Applicant getApplicant() {
-		return applicant;
+	public Integer getApplicantId() {
+		return applicantId;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
+
+	
 
 }
