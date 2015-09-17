@@ -22,13 +22,20 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 	}
 
 	@Override
-	public List<ApplicantDto> findByPosition(String position) {
+	public List<ApplicantDto> findByTechnology(String technology) {
 		Query query = getCurrentSession().getNamedQuery("SEARCH_APPLICANT");
-		query.setParameter("POSITION", "%" + position + "%");
+		query.setParameter("TECHNOLOGY", "%" + technology + "%");
 		List<ApplicantDto> results = query.list();
 		return results;
 	}
-
+	
+	@Override
+	public List<ApplicantDto> findByJoblevel(String joblevel) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_APPLICANT");
+		query.setParameter("JOBLEVEL", "%" + joblevel + "%");
+		List<ApplicantDto> results = query.list();
+		return results;
+	}
 	@Override
 	public List<ApplicantDto> findAllApplicant() {
 		Query query = getCurrentSession().getNamedQuery("SEARCH_ALL");
@@ -53,15 +60,21 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 	}
 
 	@Override
-	public List<ReportApplicantDto> findReportByCriteria(Integer position, String degree, String major, String schoolName, Double gpa) {
+	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, String degree, String major, String schoolName, Double gpa) {
 		Query query = getCurrentSession().getNamedQuery(
 				"REPORT_SEARCH_BY_CRITERIA");
 		String queryStr = query.getQueryString();
-		if (position > 0) {
+		if (technology > 0) {
 			queryStr = query.getQueryString();
-			queryStr += " AND (positionId1.ID = :POSITION OR positionId2.ID = :POSITION OR positionId3.ID = :POSITION ) ";
+			queryStr += " AND (tech.ID = :TECHNOLOGY) ";
 			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
-			query.setParameter("POSITION", position);
+			query.setParameter("TECHNOLOGY", technology);
+		}
+		if (joblevel > 0) {
+			queryStr = query.getQueryString();
+			queryStr += " AND (job.ID = :JOBLEVEL) ";
+			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
+			query.setParameter("JOBLEVEL", joblevel);
 		}
 		if (gpa != null) {
 			queryStr = query.getQueryString();
@@ -70,8 +83,11 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 			query.setParameter("GPA", gpa);
 		}
 		query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
-		if (position > 0) {
-			query.setParameter("POSITION", position);
+		if (technology > 0) {
+			query.setParameter("TECHNOLOGY", technology);
+		}
+		if (joblevel > 0) {
+			query.setParameter("JOBLEVEL", joblevel);
 		}
 		if (gpa != null) {
 			query.setParameter("GPA", gpa);

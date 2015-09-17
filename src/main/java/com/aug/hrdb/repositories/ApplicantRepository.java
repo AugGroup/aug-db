@@ -8,7 +8,10 @@ import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
 
 public interface ApplicantRepository extends GenericRepository<Applicant, Serializable> {
-	public List<ApplicantDto> findByPosition(String position);
+
+	public List<ApplicantDto> findByTechnology(String technology);
+	
+	public List<ApplicantDto> findByJoblevel(String joblevel);
 	
 	public List<ApplicantDto> findAllApplicant();
 	
@@ -19,7 +22,7 @@ public interface ApplicantRepository extends GenericRepository<Applicant, Serial
 	/*-------------------- report --------------------*/
 	public List<ReportApplicantDto> reportApplicant();
 	
-	public List<ReportApplicantDto> findReportByCriteria(Integer position, String degree, String major, String schoolName, Double gpa);
+	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, String degree, String major, String schoolName, Double gpa);
 
 	/*-------------------- Monthly report --------------------*/
 	public List<ReportApplicantDto> findReportByMonth(String startDate,String endDate);	

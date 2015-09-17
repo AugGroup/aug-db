@@ -342,6 +342,12 @@ public class ApplicantDto {
 
 	@Transient
 	private MasTechnology technology;
+	
+	@Transient
+	private String joblevelStr;
+
+	@Transient
+	private String technologyStr;
 
 	public String getResume() {
 		return resume;
@@ -1006,6 +1012,22 @@ public class ApplicantDto {
 
 	public void setTechnology(MasTechnology technology) {
 		this.technology = technology;
+	}
+
+	public String getJoblevelStr() {
+		return joblevelStr;
+	}
+
+	public void setJoblevelStr(String joblevelStr) {
+		this.joblevelStr = joblevelStr;
+	}
+
+	public String getTechnologyStr() {
+		return technologyStr;
+	}
+
+	public void setTechnologyStr(String technologyStr) {
+		this.technologyStr = technologyStr;
 	}
 
 

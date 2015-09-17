@@ -1,5 +1,4 @@
 package com.aug.hrdb.services.impl;
-
 import java.text.ParseException;
 import java.util.List;
 
@@ -11,20 +10,24 @@ import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.repositories.ApplicantRepository;
+import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.ApplicantService;
+
 
 @Service(value = "applicantService")
 @Transactional
-public class ApplicantServiceImpl implements ApplicantService{
+public class ApplicantServiceImpl implements ApplicantService {
+
 	@Autowired
 	private ApplicantRepository applicantRepository;
 	
-//	@Autowired
-//	private PositionRepository positionRepository;
+	@Autowired
+	private MasTechnologyRepository masTechnologyRepository;
 	
-//	@Autowired
-//	private AddressRepository addressRepository;
-
+	@Autowired
+	private MasJoblevelRepository masJoblevelRepository;
+	
 	@Override
 	public Applicant findById(Integer id) {
 		return applicantRepository.find(id);
@@ -60,46 +63,47 @@ public class ApplicantServiceImpl implements ApplicantService{
 		return applicants;
 	}
 
-//	@Override
-//	public List<ApplicantDto> findByPosition(String position) {
-//		List<ApplicantDto> applicants = applicantRepository.findByPosition(position);
-//		for (ApplicantDto appl : applicants) {
-//			String position1 = positionRepository.findById(appl.getPositionId1()).getPositionName();
-//			String position2 = positionRepository.findById(appl.getPositionId2()).getPositionName();
-//			String position3 = positionRepository.findById(appl.getPositionId3()).getPositionName();
-//			appl.setPosition1Str(position1);
-//			appl.setPosition2Str(position2);
-//			appl.setPosition3Str(position3);
-//		}
-//		return applicants;
-//	}
+	@Override
+	public List<ApplicantDto> findByTechnology(String technology){
+		List<ApplicantDto> applicants = applicantRepository.findByTechnology(technology);
+		for (ApplicantDto appl : applicants) {
+			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
+			appl.setTechnologyStr(tech);
+		}
+		return applicants;
+	}
 
-//	@Override
-//	public List<ApplicantDto> findAllApplicant() {
-//		List<ApplicantDto> applicants = applicantRepository.findAllApplicant();
-//		for (ApplicantDto appl : applicants) {
-//			String position1 = positionRepository.findById(appl.getPositionId1()).getPositionName();
-//			String position2 = positionRepository.findById(appl.getPositionId2()).getPositionName();
-//			String position3 = positionRepository.findById(appl.getPositionId3()).getPositionName();
-//			appl.setPosition1Str(position1);
-//			appl.setPosition2Str(position2);
-//			appl.setPosition3Str(position3);
-//		}
-//		return applicants;
-//	}
+	@Override
+	public List<ApplicantDto> findByJoblevel(String joblevel){
+		List<ApplicantDto> applicants = applicantRepository.findByJoblevel(joblevel);
+		for (ApplicantDto appl : applicants) {
+			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
+			appl.setJoblevelStr(job);
+		}
+		return applicants;
+	}
+	@Override
+	public List<ApplicantDto> findAllApplicant() {
+		List<ApplicantDto> applicants = applicantRepository.findAllApplicant();
+		for (ApplicantDto appl : applicants) {
+			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
+			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
+			appl.setTechnologyStr(tech);
+			appl.setJoblevelStr(job);
+		}
+		return applicants;
+	}
 
-//	@Override
-//	public ApplicantDto findApplicantById(Integer id) {
-//		ApplicantDto applicants = applicantRepository.findApplicantById(id);
-//		String position1 = positionRepository.findById(applicants.getPositionId1()).getPositionName();
-//		String position2 = positionRepository.findById(applicants.getPositionId2()).getPositionName();
-//		String position3 = positionRepository.findById(applicants.getPositionId3()).getPositionName();
-//		applicants.setPosition1Str(position1);
-//		applicants.setPosition2Str(position2);
-//		applicants.setPosition3Str(position3);
-//
-//		return applicants;
-//	}
+	@Override
+	public ApplicantDto findApplicantById(Integer id) {
+		ApplicantDto applicants = applicantRepository.findApplicantById(id);
+		String tech = masTechnologyRepository.find(applicants.getTechnologyId()).getName();
+		String job = masJoblevelRepository.find(applicants.getJoblevelId()).getName();
+		applicants.setTechnologyStr(tech);
+		applicants.setJoblevelStr(job);
+
+		return applicants;
+	}
 
 	
 	@Override
@@ -139,8 +143,8 @@ public class ApplicantServiceImpl implements ApplicantService{
 		}
 		//find by criteria
 		@Override
-		public List<ReportApplicantDto> findReportByCriteria(Integer position, String degree, String major, String schoolName, Double gpa) {
-			return applicantRepository.findReportByCriteria(position, degree, major, schoolName, gpa);
+		public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, String degree, String major, String schoolName, Double gpa) {
+			return applicantRepository.findReportByCriteria(technology,joblevel, degree, major, schoolName, gpa);
 		}
 		
 		/*-------------------- Monthly report --------------------*/
