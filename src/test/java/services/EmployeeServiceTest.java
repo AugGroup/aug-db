@@ -1074,5 +1074,17 @@ public class EmployeeServiceTest {
 		
 		
 	}
+	
+	
+	
+
+	@Test
+	public void findAndinitializeOfficial(){
+		
+		Employee employee = employeeService.findAndinitializeOfficial(id);		
+		Assert.assertEquals(idOfficial, employee.getOfficial().getId());
+		
+	}
+	
 
 }
