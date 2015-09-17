@@ -20,12 +20,14 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 import com.aug.hrdb.services.PunishService;
 
 
@@ -36,19 +38,24 @@ public class PunishServiceTest {
 	
 	@Autowired
 	private PunishService punishService;
-	@Autowired
-	private EmployeeService EmployeeService;
-	@Autowired
+	@Autowired 
 	private EmployeeService employeeService;
-	@Autowired
+	@Autowired 
 	private MasJoblevelService masJoblevelService;
 	@Autowired 
 	private ApplicantService applicantService;
 	@Autowired 
 	private MasDivisionService masDivisionService;
+	@Autowired 
+	private MasTechnologyService masTechnologyService;
 	
 	private	 Employee employee;
-	private  int id;
+	int id;
+	int empId;
+	int masjobId;
+	int appId; 
+	int mastecId;
+	
 	
 	
 	
@@ -86,14 +93,44 @@ public class PunishServiceTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastecId = masTechnology.getId();
+		MasTechnology mTechnology = masTechnologyService.find(mastecId);
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId = masJoblevel.getId();
+		MasJoblevel mJob = masJoblevelService.find(masjobId);
+         			
+        
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantService.create(applicant);
+		appId=applicant.getId();
 		
-        Applicant applicant1 = applicantService.findById(1);
+        Applicant applicant1 = applicantService.findById(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -112,22 +149,11 @@ public class PunishServiceTest {
 		
 		masDivisionService.create(masDivision);
 		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
 		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasDivision(masDivision);	
+		employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
+		empId=employee.getId();
 		
 		
 	
@@ -136,10 +162,13 @@ public class PunishServiceTest {
 		Punish punish=new Punish();
 		employee.setId(1);		
 		punish.setEmployee(employee);	
-		Calendar cal = Calendar.getInstance();
+//		Calendar cal = Calendar.getInstance();
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");
 	    punish.setPenalty("test");
+	    punish.setAuditFlag("C");
+	    punish.setCreatedBy(0);
+	    punish.setCreatedTimeStamp(cal.getTime());
 		punishService.create(punish);
 		
 		
@@ -153,7 +182,7 @@ public class PunishServiceTest {
 	@Rollback(true)
 	public void createDataPunish(){
 		
-		Employee employee=EmployeeService.findById(1);	
+		Employee employee=employeeService.findById(1);	
 		Punish punish=new Punish();
 		employee.setId(1);		
 		punish.setEmployee(employee);	
@@ -161,6 +190,9 @@ public class PunishServiceTest {
 		punish.setDatepunish(cal.getTime());
 		punish.setDescription("aaaa");
 	    punish.setPenalty("test");
+	    punish.setAuditFlag("C");
+	    punish.setCreatedBy(0);
+	    punish.setCreatedTimeStamp(cal.getTime());
 		punishService.create(punish);		
 	}
 	

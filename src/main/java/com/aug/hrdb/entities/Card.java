@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "CARD")
-public class Card {
+public class Card extends BaseEntity{
 	
 		
 	@Id

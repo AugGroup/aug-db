@@ -22,12 +22,14 @@ import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.CardService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -36,19 +38,23 @@ public class CardServiceTest {
 	
 	@Autowired
 	private CardService cardService;
-	@Autowired
-	private EmployeeService EmployeeService;
-	@Autowired
+	@Autowired 
 	private EmployeeService employeeService;
-	@Autowired
+	@Autowired 
 	private MasJoblevelService masJoblevelService;
 	@Autowired 
 	private ApplicantService applicantService;
 	@Autowired 
 	private MasDivisionService masDivisionService;
+	@Autowired 
+	private MasTechnologyService masTechnologyService;
 	
 	private	 Employee employee;
-	private  int id;
+	int id;
+	int empId;
+	int masjobId;
+	int appId; 
+	int mastecId;
 	
 	
 	@Before
@@ -84,14 +90,44 @@ public class CardServiceTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastecId = masTechnology.getId();
+		MasTechnology mTechnology = masTechnologyService.find(mastecId);
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId = masJoblevel.getId();
+		MasJoblevel mJob = masJoblevelService.find(masjobId);
+         			
+        
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantService.create(applicant);
+		appId=applicant.getId();
 		
-        Applicant applicant1 = applicantService.findById(1);
+        Applicant applicant1 = applicantService.findById(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -110,22 +146,11 @@ public class CardServiceTest {
 		
 		masDivisionService.create(masDivision);
 		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
 		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasDivision(masDivision);	
+		employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
+		empId=employee.getId();
 		
 		
 	
@@ -133,12 +158,15 @@ public class CardServiceTest {
 		Card card=new Card();
 		employee.setId(1);		
 		card.setEmployee(employee);	
-		Calendar cal = Calendar.getInstance();
+//		Calendar cal = Calendar.getInstance();
 		card.setCard_no("111");
 		card.setStartdate(cal.getTime());
 		card.setEnddate(cal.getTime());
 		card.setStatus("yes");
 		card.setRemark("aaa");
+		card.setAuditFlag("C");
+		card.setCreatedBy(0);
+		card.setCreatedTimeStamp(cal.getTime());
 		cardService.create(card);
 		
 		
@@ -153,7 +181,7 @@ public class CardServiceTest {
 	@Rollback(true)
 	public void createDataCard(){
 		
-		Employee employee=EmployeeService.findById(1);	
+		Employee employee= employeeService.findById(1);	
 		Card card = new Card();
 		employee.setId(1);		
 		card.setEmployee(employee);		
@@ -163,6 +191,9 @@ public class CardServiceTest {
 		card.setEnddate(cal.getTime());
 		card.setStatus("yes");
 		card.setRemark("aaa");
+		card.setAuditFlag("C");
+		card.setCreatedBy(0);
+		card.setCreatedTimeStamp(cal.getTime());
 		cardService.create(card);
 	}
 	

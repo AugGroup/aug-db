@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "PUNISH")
-public class Punish {
+public class Punish extends BaseEntity {
 	
 	@Id
 	@GeneratedValue
@@ -97,6 +97,9 @@ public class Punish {
 		this.penalty = penalty;
 	}
 
+	
+	
+	
 
 	public PunsihDto toPunishDto(){
 		PunsihDto punsihDto = new PunsihDto();

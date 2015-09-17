@@ -21,11 +21,14 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasSpecialtyRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.RewardRepository;
 
 
@@ -37,16 +40,24 @@ public class RewardRepositoryTest {
 	
 	@Autowired
 	private RewardRepository rewardRepository;
-	@Autowired
+	@Autowired 
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private MasJoblevelRepository masJoblevelRepository;
-	@Autowired
+	@Autowired 
 	private ApplicantRepository applicantRepository;
-	@Autowired
+	@Autowired 
 	private MasDivisionRepository masDivisionRepository;
+	@Autowired 
+	private MasTechnologyRepository masTechnologyRepository;
 
 	private Employee employee;
+	int id;
+	int masdiId;
+	int appId;
+	int masjobId;
+	int mastecId;
+	int empId;
 	
 	
 	@Before
@@ -82,35 +93,19 @@ public class RewardRepositoryTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-//		applicant.setAuditFlag("1");
-		applicantRepository.create(applicant);
-		
-        Applicant applicant1 = applicantRepository.find(1);
-        Hibernate.initialize(applicant1);
         
-        
-        employee.setApplicant(applicant1);
-         
-
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionRepository.create(masDivision);
-		masDivisionRepository.find(1);
-		employee.setMasDivision(masDivision);
-		
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+ 		mastecId=masTechnology.getId();
+		MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
+ 		
 
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
@@ -122,24 +117,65 @@ public class RewardRepositoryTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelRepository.create(masJoblevel);
-		masJoblevelRepository.find(1);
+		masjobId=masJoblevel.getId();
+		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+ 		
+	
+
+        
+        
+        Applicant applicant = new Applicant();
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
+		applicantRepository.create(applicant);
 		
-		employee.setMasJoblevel(masJoblevel);
+		appId=applicant.getId();
+        Applicant applicant1 = applicantRepository.find(appId);
+        Hibernate.initialize(applicant1);
+        
+        
+       
+        
+        employee.setApplicant(applicant1);
+         
+    
+	
+		MasDivision masDivision = new MasDivision();
+		masDivision.setName("CEO");
+		masDivision.setIsActive(true);
+		masDivision.setCode("01");
+		masDivision.setAuditFlag("C");
+		masDivision.setCreatedBy(1);
+		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDivision.setCode("Division-01");
 		
+		masDivisionRepository.create(masDivision);
+		masdiId=masDivision.getId();
+		masDivisionRepository.find(masdiId);
+		employee.setMasDivision(masDivision);
 		
+
+			
+		employee.setMasJoblevel(mJob);
 		employeeRepository.create(employee);
+		empId=employee.getId();
 		
 		
 	    Employee employee =  employeeRepository.find(1);
 		Reward reward=new Reward();
+		
 		reward.setEmployee(employee);     	
 		reward.setTypereward("aa");
 		reward.setYear("1991");
 		reward.setReason("reason");
-		Calendar cal = Calendar.getInstance();
+//		Calendar cal = Calendar.getInstance();
 		reward.setAuditFlag("C");
 		reward.setCreatedBy(0);
-		reward.setCreatedTimeStamp(cal.getTime());
+		reward.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		rewardRepository.create(reward);
 		
 	}

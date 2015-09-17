@@ -23,12 +23,14 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.entities.MasSpecialty;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasSpecialtyService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -37,19 +39,23 @@ public class MasSpecialtyServiceTest {
 
 	@Autowired
 	private MasSpecialtyService masSpecialtyService;
-	@Autowired
-	private EmployeeService EmployeeService;
-	@Autowired
+	@Autowired 
 	private EmployeeService employeeService;
-	@Autowired
+	@Autowired 
 	private MasJoblevelService masJoblevelService;
 	@Autowired 
 	private ApplicantService applicantService;
 	@Autowired 
 	private MasDivisionService masDivisionService;
+	@Autowired 
+	private MasTechnologyService masTechnologyService;
 	
 	private	 Employee employee;
-	private  int id;
+	int id;
+	int empId;
+	int masjobId;
+	int appId; 
+	int mastecId;
 	
 	
 	@Before
@@ -85,14 +91,44 @@ public class MasSpecialtyServiceTest {
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
+        MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		mastecId = masTechnology.getId();
+		MasTechnology mTechnology = masTechnologyService.find(mastecId);
+
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelService.create(masJoblevel);
+		masjobId = masJoblevel.getId();
+		MasJoblevel mJob = masJoblevelService.find(masjobId);
+         			
+        
+        
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
+		applicant.setTechnology(mTechnology);
+		applicant.setJoblevel(mJob);
 		applicantService.create(applicant);
+		appId=applicant.getId();
 		
-        Applicant applicant1 = applicantService.findById(1);
+        Applicant applicant1 = applicantService.findById(appId);
         Hibernate.initialize(applicant1);
         
         
@@ -111,23 +147,11 @@ public class MasSpecialtyServiceTest {
 		
 		masDivisionService.create(masDivision);
 		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
 		
-
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);		
-		employee.setMasJoblevel(masJoblevel);
+		employee.setMasDivision(masDivision);	
+		employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
-		
+		empId=employee.getId();
 		
 	
 		Employee employee =employeeService.findById(1);
