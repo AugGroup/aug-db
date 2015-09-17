@@ -853,7 +853,7 @@ public class EmployeeServiceTest {
 		employeeDto.setOfficialDate(date);
 		
 		
-		employee.setEmployeeCode("EMP-19");
+		//employeeDto.setEmployeeCode("JP10020");
 		employeeDto.setIdCard("115310905001-9");
 		employeeDto.setAge(25);
 		employeeDto.setEmail("test@gmail.com");
@@ -912,7 +912,7 @@ public class EmployeeServiceTest {
 		
 		
 		Employee employee = employeeService.findEmployeeCode(idMasLocation);		
-		Assert.assertEquals("JP10020", employee.getEmployeeCode());
+		Assert.assertEquals("JP10020", emp.getEmployeeCode());
 		
 		
 	}
