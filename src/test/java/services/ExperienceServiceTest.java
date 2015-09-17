@@ -18,11 +18,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.ExperienceService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -42,6 +44,9 @@ public class ExperienceServiceTest {
 	
 	@Autowired
 	private MasDivisionService masDivisionService;
+	
+	@Autowired
+	private MasTechnologyService masTechnologyService;
 
 	@Before
 	public void setEducation() throws ParseException {
@@ -58,11 +63,7 @@ public class ExperienceServiceTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantService.create(applicant);
 		
-        Applicant applicant1 = applicantService.findById(1);
-        Hibernate.initialize(applicant1);
-
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
@@ -73,14 +74,25 @@ public class ExperienceServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
+		MasJoblevel mJoblevel= masJoblevelService.find(1);
 
-		applicant.setJoblevel(masJoblevel);
-
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyService.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
 		applicantService.create(applicant);
 		
-		
-	    applicant1 =  applicantService.findById(1);
+	    Applicant applicant1 =  applicantService.findById(1);
 		Experience experience = new Experience();
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		experience.setAddress("ExperienceAddressTest");

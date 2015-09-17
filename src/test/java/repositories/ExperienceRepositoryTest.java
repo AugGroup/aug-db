@@ -20,12 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.ExperienceRepository;
 import com.aug.hrdb.repositories.MasDegreetypeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -50,10 +52,13 @@ public class ExperienceRepositoryTest {
 	@Autowired
 	private MasDegreetypeRepository masDegreetypeRepository;
 	
+	@Autowired
+	private MasTechnologyRepository masTechnologyRepository;
+	
 	@Before
 	public void setExperience() throws ParseException {
         
-        Applicant applicant = new Applicant();
+		Applicant applicant = new Applicant();
         applicant.setCardId("115310905001-9");
         applicant.setFirstNameTH("อรอนงค์");
         applicant.setFirstNameEN("Ornanong");
@@ -65,11 +70,7 @@ public class ExperienceRepositoryTest {
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
-		applicantRepository.create(applicant);
 		
-        Applicant applicant1 = applicantRepository.find(1);
-        Hibernate.initialize(applicant1);
-
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
@@ -80,14 +81,25 @@ public class ExperienceRepositoryTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelRepository.create(masJoblevel);
-		masJoblevelRepository.find(1);
+		MasJoblevel mJoblevel= masJoblevelRepository.find(1);
 
-		applicant.setJoblevel(masJoblevel);
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
 		
+		MasTechnology mTechnology= masTechnologyRepository.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
 		applicantRepository.create(applicant);
 		
-		
-	    applicant1 =  applicantRepository.find(1);
+	    Applicant applicant1 =  applicantRepository.find(1);
 		Experience experience = new Experience();
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		experience.setApplicant(applicant);

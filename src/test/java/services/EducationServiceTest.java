@@ -52,14 +52,25 @@ public class EducationServiceTest {
 	
 	@Autowired
 	private MasDegreetypeService masDegreetypeService;
-	
-	
+
 	@Autowired
-	private MasTechnologyService mastechnologyService;
+	private MasTechnologyService masTechnologyService;
 	
 	@Before
 	public void setEducation() throws ParseException {
-		
+
+        Applicant applicant = new Applicant();
+        applicant.setCardId("115310905001-9");
+        applicant.setFirstNameTH("อรอนงค์");
+        applicant.setFirstNameEN("Ornanong");
+        applicant.setNickNameEN("nong");
+        applicant.setNickNameTH("นงค์");
+        applicant.setLastNameEN("Namlongnamken");
+        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setAuditFlag("C");
+		applicant.setCardId("115310905001-9");
 		
 		MasJoblevel masJoblevel = new MasJoblevel();
 		masJoblevel.setName("CEO");
@@ -69,44 +80,27 @@ public class EducationServiceTest {
 		masJoblevel.setCreatedBy(1);
 		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masJoblevel.setCode("Division-01");
-	
+
 		masJoblevelService.create(masJoblevel);
-		int masJobId =masJoblevel.getId();
-		MasJoblevel masjob = masJoblevelService.find(masJobId);
-		
-		
+		MasJoblevel mJoblevel= masJoblevelService.find(1);
+
 		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
 		masTechnology.setIsActive(true);
-		masTechnology.setCode("01");
 		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(1);
-		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masTechnology.setCode("Division-01");
-		masTechnology.setName("MAS-TECH");
-		mastechnologyService.create(masTechnology);
-		int masTechId = masTechnology.getId();
-		MasTechnology mastech2 = mastechnologyService.find(masTechId);
-        
-        
-        Applicant applicant = new Applicant();
-        applicant.setCardId("115310905001-9");
-        applicant.setFirstNameTH("อรอนงค์");
-        applicant.setFirstNameEN("Ornanong");
-        applicant.setNickNameEN("nong");
-        applicant.setNickNameTH("นงค์");
-        applicant.setLastNameEN("Namlongnamken");
-        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
-        applicant.setJoblevel(masjob);
-        applicant.setTechnology(mastech2);
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyService.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyService.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
 		applicantService.create(applicant);
 		
-        Applicant applicant1 = applicantService.findById(1);
-        Hibernate.initialize(applicant1);
-
-		
+	    Applicant applicant1 =  applicantService.findById(1);
 		
 		MasDegreetype masDegreetype = new MasDegreetype();
 		masDegreetype.setName("CEO");
@@ -118,11 +112,7 @@ public class EducationServiceTest {
 		
 		masDegreetypeService.create(masDegreetype);
 		masDegreetype = masDegreetypeService.find(1);
-
-		applicantService.create(applicant);
 		
-		
-	    applicant1 =  applicantService.findById(1);
 		Education education = new Education();
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		education.setApplicant(applicant);

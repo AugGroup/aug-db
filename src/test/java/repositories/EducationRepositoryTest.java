@@ -16,6 +16,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.entities.MasDegreetype;
@@ -55,38 +56,10 @@ public class EducationRepositoryTest {
 	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
 	
-	
-	
 	@Before
 	public void setEducation() throws ParseException {
-		
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-	
-		masJoblevelRepository.create(masJoblevel);
-		int masJobId =masJoblevel.getId();
-		MasJoblevel masjob = masJoblevelRepository.find(masJobId);
-		
-		
-		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setIsActive(true);
-		masTechnology.setCode("01");
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(1);
-		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masTechnology.setCode("Division-01");
-		masTechnology.setName("MAS-TECH");
-		masTechnologyRepository.create(masTechnology);
-		int masTechId = masTechnology.getId();
-		MasTechnology mastech2 = masTechnologyRepository.find(masTechId);
         
-        Applicant applicant = new Applicant();
+		Applicant applicant = new Applicant();
         applicant.setCardId("115310905001-9");
         applicant.setFirstNameTH("อรอนงค์");
         applicant.setFirstNameEN("Ornanong");
@@ -97,16 +70,38 @@ public class EducationRepositoryTest {
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
-		applicant.setJoblevel(masjob);
-		applicant.setTechnology(mastech2);
-		
-		applicantRepository.create(applicant);
-		int appId= applicant.getId();
-		
-        Applicant applicant1 = applicantRepository.find(1);
-        Hibernate.initialize(applicant1);
 
-        
+		applicant.setCardId("115310905001-9");
+		
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+
+		masJoblevelRepository.create(masJoblevel);
+		MasJoblevel mJoblevel= masJoblevelRepository.find(1);
+
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setName("java");
+		masTechnology.setCode("001A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnologyRepository.create(masTechnology);
+		
+		MasTechnology mTechnology= masTechnologyRepository.find(1);
+		
+		applicant.setJoblevel(mJoblevel);
+		applicant.setTechnology(mTechnology);
+		applicantRepository.create(applicant);
+		
+	    Applicant applicant1 =  applicantRepository.find(1);
 
 		MasDegreetype masDegreetype = new MasDegreetype();
 		masDegreetype.setName("CEO");
@@ -118,11 +113,9 @@ public class EducationRepositoryTest {
 		
 		masDegreetypeRepository.create(masDegreetype);
 		masDegreetypeRepository.find(1);
-		
+
 		applicantRepository.create(applicant);
-		
-		
-	    applicant1 =  applicantRepository.find(appId);
+
 		Education education = new Education();
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		education.setApplicant(applicant);
