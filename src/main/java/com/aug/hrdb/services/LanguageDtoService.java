@@ -12,7 +12,7 @@ import com.aug.hrdb.repositories.LanguageRepository;
 
 @Service(value="skillLanguageDtoService")
 @Transactional
-public class SkillLanguageDtoService {
+public class LanguageDtoService {
 
 	@Autowired
 	private LanguageRepository languageRepository;
