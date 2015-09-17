@@ -22,12 +22,14 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.entities.MasDegreetype;
 import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EducationService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDegreetypeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-bean-db-test.xml")
@@ -51,8 +53,40 @@ public class EducationServiceTest {
 	@Autowired
 	private MasDegreetypeService masDegreetypeService;
 	
+	
+	@Autowired
+	private MasTechnologyService mastechnologyService;
+	
 	@Before
 	public void setEducation() throws ParseException {
+		
+		
+		MasJoblevel masJoblevel = new MasJoblevel();
+		masJoblevel.setName("CEO");
+		masJoblevel.setIsActive(true);
+		masJoblevel.setCode("01");
+		masJoblevel.setAuditFlag("C");
+		masJoblevel.setCreatedBy(1);
+		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJoblevel.setCode("Division-01");
+	
+		masJoblevelService.create(masJoblevel);
+		int masJobId =masJoblevel.getId();
+		MasJoblevel masjob = masJoblevelService.find(masJobId);
+		
+		
+		MasTechnology masTechnology = new MasTechnology();
+		masTechnology.setIsActive(true);
+		masTechnology.setCode("01");
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(1);
+		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masTechnology.setCode("Division-01");
+		masTechnology.setName("MAS-TECH");
+		mastechnologyService.create(masTechnology);
+		int masTechId = masTechnology.getId();
+		MasTechnology mastech2 = mastechnologyService.find(masTechId);
+        
         
         Applicant applicant = new Applicant();
         applicant.setCardId("115310905001-9");
@@ -62,6 +96,8 @@ public class EducationServiceTest {
         applicant.setNickNameTH("นงค์");
         applicant.setLastNameEN("Namlongnamken");
         applicant.setLastNameTH("น้ำลงน้ำขึ้น");
+        applicant.setJoblevel(masjob);
+        applicant.setTechnology(mastech2);
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		applicant.setAuditFlag("C");
@@ -70,19 +106,7 @@ public class EducationServiceTest {
         Applicant applicant1 = applicantService.findById(1);
         Hibernate.initialize(applicant1);
 
-		MasJoblevel masJoblevel = new MasJoblevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
-
-		applicant.setJoblevel(masJoblevel);
+		
 		
 		MasDegreetype masDegreetype = new MasDegreetype();
 		masDegreetype.setName("CEO");
