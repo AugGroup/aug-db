@@ -3,6 +3,7 @@ package com.aug.hrdb.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
@@ -11,7 +12,7 @@ import org.hibernate.annotations.NamedNativeQuery;
 
  @NamedNativeQueries({
 	@NamedNativeQuery(
-            name = "listSkillLanguage",
+            name = "listLanguage",
             		 query = "select language.ID as ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING as SPEAKKING, "
                       		+ "language.READING as READING, "
@@ -28,12 +29,14 @@ public class LanguageDto {
 	
 	@Id
 	private Integer id;
-    private String nameLanguage;
+    private String  nameLanguage;
 	private String  speaking;
 	private String  reading;
 	private String  understanding;
 	private String  writing;
 	private Integer applicantId;
+	@Transient
+	private Integer employeeId;
 	
 	
 	public Integer getId() {
@@ -106,6 +109,19 @@ public class LanguageDto {
 	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
+
+
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+	
+	
+	
 	
 	
 	

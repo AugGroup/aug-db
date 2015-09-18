@@ -18,8 +18,8 @@ public class LanguageDtoService {
 	private LanguageRepository languageRepository;
 	
 	
-	public List<LanguageDto> listSkillLanguage(Integer id){
-		return  languageRepository.listSkillLanguageByEmployee(id);
+	public List<LanguageDto> listLanguage(Integer id){
+		return  languageRepository.listLanguageByEmployee(id);
 	}
 	
 }

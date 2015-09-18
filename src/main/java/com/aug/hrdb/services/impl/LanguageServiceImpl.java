@@ -1,18 +1,19 @@
 package com.aug.hrdb.services.impl;
 
 
+import java.util.Calendar;
 import java.util.List;
 
 
-
-
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.aug.hrdb.dto.LanguageDto;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Language;
 import com.aug.hrdb.repositories.LanguageRepository;
+import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.LanguageService;
 
 
@@ -24,8 +25,10 @@ public class LanguageServiceImpl implements LanguageService{
 
 	@Autowired
 	private LanguageRepository languageRepository;
-	/*@Autowired
-	private EmployeeService employeeService;*/
+	
+	@Autowired
+	private ApplicantService applicantService;
+
 
 	@Override
 	public void create(Language language) {
@@ -82,6 +85,67 @@ public class LanguageServiceImpl implements LanguageService{
 	
 	
 	
+	@Override
+	@Transactional
+	public void saveByFindEmployee(Integer employeeId,
+			LanguageDto languageDto) {
+		// TODO Auto-generated method stub
+		try{
+			
+			
+    		Applicant applicant = applicantService.findById(languageDto.getApplicantId());
+     		Language languageObj = new Language(); 
+     		languageObj.setReading(languageDto.getReading());
+     		languageObj.setWriting(languageDto.getWriting());
+     		languageObj.setUnderstanding(languageDto.getUnderstanding());
+     		languageObj.setSpeaking(languageDto.getSpeaking());
+     		languageObj.setApplicant(applicant);
+     		languageObj.setCreatedBy(employeeId);
+			Calendar cal = Calendar.getInstance();
+			languageObj.setCreatedTimeStamp(cal.getTime());
+			languageObj.setAuditFlag("C");
+			languageRepository.create(languageObj);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	@Transactional
+	public LanguageDto findLanguageById(Integer id) {
+		// TODO Auto-generated method stub
+		
+		Language language = languageRepository.findIdJoinEmployee(id);
+		Hibernate.initialize(language.getApplicant());
+		
+		Applicant applicant = applicantService.findById(language.getApplicant().getId());
+	
+		LanguageDto languageDto = new LanguageDto();
+		languageDto.setReading(language.getReading());
+		languageDto.setWriting(language.getWriting());
+		languageDto.setUnderstanding(language.getUnderstanding());
+		languageDto.setSpeaking(language.getSpeaking());
+		languageDto.setApplicantId(language.getApplicant().getId());
+		languageDto.setEmployeeId(applicant.getEmployee().getId());
+	
+		return languageDto;
+	}
 
 	
+	
+	@Override
+	public void updateSetLanguage(LanguageDto languageDto) {
+		// TODO Auto-generated method stub
+		Language languageUpdate = languageRepository.find(languageDto.getId());
+		languageUpdate.setAuditFlag("U");
+		languageUpdate.setUpdatedTimeStamp(Calendar.getInstance().getTime());
+		languageUpdate.setUpdatedBy(languageDto.getEmployeeId());
+		languageUpdate.setReading(languageDto.getReading());
+		languageUpdate.setSpeaking(languageDto.getSpeaking());
+		languageUpdate.setUnderstanding(languageDto.getUnderstanding());
+		languageUpdate.setWriting(languageDto.getWriting());
+		languageRepository.update(languageUpdate);
+	}
+
 }

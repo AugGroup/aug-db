@@ -2,7 +2,10 @@ package com.aug.hrdb.repositories.impl;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.LanguageDto;
@@ -20,13 +23,14 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<LanguageDto> listSkillLanguageByEmployee(Integer id) {
-		Query nameQuery = getCurrentSession().getNamedQuery("listSkillLanguage").setInteger("appId" ,id);
-		//namedQuery.executeUpdate();
-		List<LanguageDto> skillDto = nameQuery.list();
-	     return skillDto;
+
+	public List<LanguageDto> listLanguageByEmployee(Integer id) {
+		Query nameQuery = getCurrentSession().getNamedQuery("listLanguage").setInteger("empId" ,id);
+		List<LanguageDto> LanguageDtoList = nameQuery.list();
+	    return LanguageDtoList;
 	}
 	
+
 	@Override
 	public List<LanguageDto> findLanguagesById(Integer id) {
 		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGES");
@@ -45,5 +49,19 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 		return app;
 	}
 
+
+	@Override
+	public Language findIdJoinEmployee(Integer id) {
+		// TODO Auto-generated method stub
+		Criteria c = getCurrentSession().createCriteria(Language.class,"language");
+		c.setFetchMode("applicant",FetchMode.JOIN);
+		c.createAlias("applicant", "applicant");
+		c.setFetchMode("employee",FetchMode.JOIN);
+		c.createAlias("employee", "employee");
+		c.add(Restrictions.eq("language.id", id));
+		Language language = (Language) c.uniqueResult();
+		return language;
+	}
+	
 	
 }
