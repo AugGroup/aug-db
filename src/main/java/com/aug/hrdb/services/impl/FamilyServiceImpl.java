@@ -30,10 +30,6 @@ public class FamilyServiceImpl implements FamilyService{
 	private FamilyRepository familyRepository;
 	@Autowired
 	private ApplicantRepository applicantRepo;
-	
-	//@Autowired
-	//private EmployeeService employeeService;
-	
 	@Autowired
 	private MasRelationTypeService masRelationService;
 
@@ -73,18 +69,10 @@ public class FamilyServiceImpl implements FamilyService{
 	@Override
 	public List<Family> findFamilyByEmployeeId(Integer Id) {
 		// TODO Auto-generated method stub
-		List<Family> empFamilyList = familyRepository.findFamilyByEmployeeId(Id);
+		List<Family> empFamilyList = familyRepository.findFamilyByApplicantId(Id);
 		return empFamilyList;
 	}
 
-	
-	/*@Override
-	public Employee findEmployeeById(Integer Id) {
-		// TODO Auto-generated method stub
-		Employee employee = empFamilyDao.findEmployeeById(Id);
-		return employee;
-	}*/
-	
 	
 
 	@Override
@@ -94,17 +82,6 @@ public class FamilyServiceImpl implements FamilyService{
 		return empfamily;
 	}
 
-	@Override
-	public void saveByNameQuery(FamilyDto family) {
-		// TODO Auto-generated method stub
-		familyRepository.saveByNameQuery(family);
-	}
-
-	@Override
-	public void updateByNameQuery(FamilyDto family) {
-		// TODO Auto-generated method stub
-		familyRepository.updateByNameQuery(family);
-	}
 
 	@Override
 	public void deleteByNameQuery(FamilyDto family) {
@@ -119,7 +96,7 @@ public class FamilyServiceImpl implements FamilyService{
 		Family family = new Family();
 
 		MasRelationType masRelationType = new MasRelationType();
-		
+				
 		if(familyDto.getMasRelationTypeId()!=null){
 			masRelationType = masRelationService.find(familyDto.getMasRelationTypeId());
 			family.setMasRelationType(masRelationType);		
@@ -158,8 +135,6 @@ public class FamilyServiceImpl implements FamilyService{
        
         FamilyDto familyDto = new FamilyDto();
         familyDto.setId(familyEdit.getId());
-        /*familyDto.setFirstName(familyEdit.getFirstName());
-        familyDto.setLastName(familyEdit.getLastName());*/
         familyDto.setFamilyName(familyEdit.getFamilyName());
         familyDto.setAge(familyEdit.getAge());
         familyDto.setAddress(familyEdit.getAddress());
@@ -182,8 +157,6 @@ public class FamilyServiceImpl implements FamilyService{
 		
 		Family familyObj = new Family();
 		familyObj = familyRepository.findLastFamily(familyDto.getId());	
-		/*familyObj.setFirstName(familyDto.getFirstName());
-		familyObj.setLastName(familyDto.getLastName());*/
 		familyObj.setFamilyName(familyDto.getFamilyName());
 		familyObj.setGender(familyDto.getGender());
 		familyObj.setAge(familyDto.getAge());
@@ -195,8 +168,7 @@ public class FamilyServiceImpl implements FamilyService{
 		Calendar cal = Calendar.getInstance();
 		familyObj.setUpdatedTimeStamp(cal.getTime());
 		familyObj.setAuditFlag("U");
-		familyObj.setUpdatedBy(familyDto.getAppId());
-		
+		familyObj.setUpdatedBy(familyDto.getAppId());	
 		familyRepository.update(familyObj);
 		
 	}
@@ -219,6 +191,7 @@ public class FamilyServiceImpl implements FamilyService{
 		FamilyDto family = familyRepository.findFamily(id);
 		return family;
 	}
+
 
 	
 	

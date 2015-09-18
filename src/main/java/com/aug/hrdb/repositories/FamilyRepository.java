@@ -17,18 +17,15 @@ public interface FamilyRepository extends GenericRepository<Family, Integer> {
 	 public void deleteById(Integer id);
 	
 
-	 public List<Family> findFamilyByEmployeeId(Integer Id);
-	 //public Employee findEmployeeById(Integer Id);
+	 public List<Family> findFamilyByApplicantId(Integer Id);
 	 public Family findLastFamily(Integer Id);
-	 
-	 public void saveByNameQuery(FamilyDto family);
-	 public void updateByNameQuery(FamilyDto family);
 	 public void deleteByNameQuery(FamilyDto family);
-	 public List<FamilyDto> findFamilyList(Integer id);
+	
 	 
-	public List<FamilyDto> findFamilyById(Integer id);
-		
-	public FamilyDto findFamily(Integer id);
+	 public List<FamilyDto> findFamilyList(Integer id); 
+	 public List<FamilyDto> findFamilyById(Integer id);
+	 
+	 public FamilyDto findFamily(Integer id);
 	 
 
 }

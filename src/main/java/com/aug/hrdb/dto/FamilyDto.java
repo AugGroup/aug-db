@@ -3,6 +3,7 @@ package com.aug.hrdb.dto;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
@@ -61,6 +62,10 @@ public class FamilyDto {
 	
 	@Column(name="MASRELATIONTYPENAME")
 	private String masRelationTypeName;
+	
+	
+	@Transient
+	private Integer employeeId;
 
 
 	public Integer getId() {
@@ -152,4 +157,18 @@ public class FamilyDto {
 
 	public void setMasRelationTypeName(String masRelationTypeName) {
 		this.masRelationTypeName = masRelationTypeName;
-	}}
+	}
+
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+	
+	
+	
+	
+
+}

@@ -19,10 +19,7 @@ public interface FamilyService {
 	public List<Family> findFamilyByEmployeeId(Integer Id);
 	
 	
-    //public Employee findEmployeeById(Integer Id);
     public Family findLastFamily(Integer Id);
-    public void saveByNameQuery(FamilyDto family);
-    public void updateByNameQuery(FamilyDto family);
     public void deleteByNameQuery(FamilyDto family);
     public void createFindMasRelationAndEmployee(FamilyDto familyDto);
     public FamilyDto findForInitEdit(FamilyDto family);

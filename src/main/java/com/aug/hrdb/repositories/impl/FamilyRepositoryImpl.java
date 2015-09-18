@@ -33,15 +33,15 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 
 	
 	@Override
-	public List<Family> findFamilyByEmployeeId(Integer Id) {
+	public List<Family> findFamilyByApplicantId(Integer Id) {
 		// TODO Auto-generated method stub
 		
 		Criteria c = getCurrentSession().createCriteria(Family.class,"family");		
-		c.setFetchMode("employee",FetchMode.JOIN);
-		c.createAlias("employee", "employee");
+		c.setFetchMode("applicant",FetchMode.JOIN);
+		c.createAlias("applicant", "employee");
 		c.setFetchMode("masRelation",FetchMode.JOIN);
 		c.createAlias("masRelation", "masRelation");
-		c.add(Restrictions.eq("family.employee.id", Id));
+		c.add(Restrictions.eq("family.applicant.id", Id));
 	  
 		return c.list();
 		
@@ -49,22 +49,13 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 
 	
 	
-
-	/*@Override
-	public Employee findEmployeeById(Integer Id) {
-		// TODO Auto-generated method stub
-		Employee employee = (Employee) getCurrentSession().get(Employee.class,Id);
-		return employee;
-	}*/
-
-	
 	
 	@Override
 	public Family findLastFamily(Integer Id) {
 		// TODO Auto-generated method stub
 		Criteria c = getCurrentSession().createCriteria(Family.class,"family");
-		c.setFetchMode("employee",FetchMode.JOIN);
-		c.createAlias("employee", "employee");
+		c.setFetchMode("applicant",FetchMode.JOIN);
+		c.createAlias("applicant", "employee");
 		c.setFetchMode("masRelation",FetchMode.JOIN);
 		c.createAlias("masRelation", "masRelation");
 		c.add(Restrictions.eq("id", Id));
@@ -72,50 +63,6 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 		return empFamily;
 	}
 
-
-
-
-	@Override
-	public void saveByNameQuery(FamilyDto family) {
-		// TODO Auto-generated method stub
-		
-		Query query =  getCurrentSession().getNamedQuery("insertFamily");
-				//query.setString("FIRSTNAME" ,family.getFirstName());
-				//query.setString("LASTNAME", family.getLastName());
-				query.setString("NAME", family.getFamilyName());
-				query.setInteger("AGE", family.getAge());
-				query.setString("ADDRESS", family.getAddress());
-				query.setString("OCCUPATION", family.getOccupation());
-				query.setString("POSITION", family.getPosition());
-				query.setString("TEL", family.getMobile());
-				query.setInteger("MASRELATION_ID", family.getMasRelationTypeId());
-				query.setInteger("APPLICANT_ID", family.getAppId());
-				query.setString("GENDER", family.getGender());
-				query.setInteger("CREATEDBY", family.getAppId());
-				query.executeUpdate();
-			
-	}
-
-
-
-
-	@Override
-	public void updateByNameQuery(FamilyDto family) {
-		// TODO Auto-generated method stub
-		Query query =  getCurrentSession().getNamedQuery("updateFamily");
-		query.setString("NAME", family.getFamilyName());
-		query.setInteger("AGE", family.getAge());
-		query.setString("ADDRESS", family.getAddress());
-		query.setString("OCCUPATION", family.getOccupation());
-		query.setString("POSITION", family.getPosition());
-		query.setString("TEL", family.getMobile());
-		query.setInteger("MASRELATION_ID", family.getMasRelationTypeId());
-		//query.setInteger("EMPLOYEE_ID", family.getEmployeeId());
-		query.setString("GENDER", family.getGender());
-		//query.setInteger("UPDATEDBY", family.getEmployeeId()); //set update
-		query.setInteger("familyId", family.getId());
-		query.executeUpdate();
-	}
 
 
 
@@ -134,7 +81,7 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 	@Override
 	public List<FamilyDto> findFamilyList(Integer id) {
 		// TODO Auto-generated method stub
-		Query query =  getCurrentSession().getNamedQuery("listFamily").setInteger("empId" ,id);
+		Query query =  getCurrentSession().getNamedQuery("listFamily").setInteger("appId" ,id);
 		List<FamilyDto> familyDtoList = query.list();
 		return familyDtoList;
 	}

@@ -23,25 +23,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 	        name = "deleteFamily",
 	        query = "delete from FAMILY where ID=:familyId",
 	        resultClass=Family.class),
-	
-	@NamedNativeQuery(
-            name = "updateFamily",
-            query = "update FAMILY "
-            		+ "SET NAME=:NAME,"
-            		+ "AGE=:AGE,"
-            		+ "ADDRESS=:ADDRESS,"
-            		+ "OCCUPATION=:OCCUPATION,"
-            		+ "POSITION=:POSITION,"
-            		+ "TELEPHONE=:TEL,"
-            		+ "MASRELATION_ID=:MASRELATION_ID, "
-             	   // + "EMPLOYEE_ID=:EMPLOYEE_ID,"
-             	    + "GENDER=:GENDER,"
-             	    + "AUDITFLAG='U',"
-             	   // + "UPDATEDBY=:UPDATEDBY,"
-             	    + "UPDATEDTIMESTAMP=NOW() "
-             	    + "where ID=:familyId",
-             	    resultClass=Family.class)
-    
 })
 
 
@@ -56,33 +37,49 @@ public class Family extends BaseEntity implements Serializable {
 	@GeneratedValue
 	@Column(name="ID",length=6)
 	private Integer id; 
+	
 	@Column(name="NAME")	
 	@NotNull
 	@NotEmpty
 	private String familyName;
+	
+	
 	@Column(name="GENDER",length=10)
 	@NotNull
 	@NotEmpty
 	private String gender;
+	
+	
 	@Column(name="AGE",length=3)
 	@NotNull
 	private Integer age;
+	
+	
 	@Column(name="TELEPHONE",length=12)
 	@NotNull
 	@NotEmpty
 	private String mobile;
+	
+	
 	@Column(name="ADDRESS")
 	@NotNull
 	@NotEmpty
 	private String address;
+	
+	
 	@Column(name="OCCUPATION")
 	private String occupation; 
+	
+	
 	@Column(name="POSITION")
 	private String position; 
-	//private Employee employee;
+
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="MASRELATION_ID",nullable=false)
 	private MasRelationType masRelationType;
+	
+	
+	
 	@ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name="APPLICANT_ID",nullable=false)
 	private Applicant applicant;
@@ -198,24 +195,5 @@ public class Family extends BaseEntity implements Serializable {
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
 	}
-	
-	
-	
-	
-    /*@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name="EMPLOYEE_ID",nullable=false)
-	public Employee getEmployee() {
-		return employee;
-	}
-
-	
-
-	public void setEmployee(Employee employee){
-		this.employee = employee;
-	}*/
-
-	
-	
-	
 	
 }

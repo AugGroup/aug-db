@@ -210,26 +210,6 @@ public class FamilyServiceTest {
 	
 	
 	
-	@Test
-	@Rollback(true)
-	public void updateByNameQuery(){
-		
-		Family family = familyService.find(id);
-		FamilyDto familyDto = new FamilyDto();
-		familyDto.setId(family.getId());
-		familyDto.setFamilyName("test family data");
-		familyDto.setAge(family.getAge());
-		familyDto.setAddress(family.getAddress());
-		familyDto.setMasRelationTypeId(family.getMasRelationType().getId());
-		familyDto.setMobile(family.getMobile());
-		familyDto.setPosition(family.getPosition());
-		familyDto.setOccupation(family.getOccupation());
-		familyDto.setGender(family.getGender());
-		familyService.updateByNameQuery(familyDto);
-	
-	}
-	
-	
 	
 	@Test
 	@Rollback(true)

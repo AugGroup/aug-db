@@ -20,11 +20,13 @@ import com.aug.hrdb.entities.MasDegreetype;
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR,"
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID"
-		+ " FROM EDUCATION ed LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID = :ID", resultClass = EducationDto.class),
+		+ " FROM EDUCATION ed LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID =:ID",
+		resultClass = EducationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR,"
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID"
-		+ " FROM EDUCATION ed WHERE ed.ID = :ID", resultClass = EducationDto.class)
+		+ " FROM EDUCATION ed WHERE ed.ID =:ID",
+		resultClass = EducationDto.class)
 	})
 public class EducationDto {
 	
@@ -57,8 +59,7 @@ public class EducationDto {
 	@Column(name = "CERTIFICATION")
 	private String certification;
 	
-	@ManyToOne
-	@JoinColumn(name="APPLICANT_ID")
+	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
 	
 	@Transient
