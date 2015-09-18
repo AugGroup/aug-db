@@ -64,11 +64,11 @@ public class LeaveServiceImpl implements LeaveService {
 		 leaveRepository.deleteById(id);
 	}
 
-	/*@Override
+	@Override
 	public List<Leave> findLeaveType(Integer idLeave,Integer idEmp) {
 		// TODO Auto-generated method stub
 		return leaveRepository.findLeaveType(idLeave,idEmp);
-	}*/
+	}
 
 	
 }

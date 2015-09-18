@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.aug.hrdb.dto.LeaveDto;
+
 
 
 @Entity
@@ -210,7 +212,7 @@ public class Leave extends BaseEntity {
 		this.sumTime = sumTime;
 	}
 
-	/*public LeaveDto toLeaveDto(){
+	public LeaveDto toLeaveDto(){
 		LeaveDto leaveDto = new LeaveDto();
 		leaveDto.setId(this.id);
 		//leaveDto.setStartDate(this.startDate);
@@ -271,6 +273,6 @@ public class Leave extends BaseEntity {
 		
 		return leave;
 		
-	}*/
+	}
 	
 }

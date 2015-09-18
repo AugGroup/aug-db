@@ -28,7 +28,7 @@ public interface LeaveRepository extends GenericRepository<Leave, Integer>{
 
 	public List<ReportLeaveDto> reportLeave(String searchText);
 	
-	//public List<Leave> findLeaveType(Integer idLeave,Integer idEmp);
+	public List<Leave> findLeaveType(Integer idLeave,Integer idEmp);
 
 	//public List<ReportLeaveDto> reportLeave(String nameEng);
 }
