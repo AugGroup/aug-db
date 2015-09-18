@@ -25,7 +25,7 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 	@Override
 
 	public List<LanguageDto> listLanguageByEmployee(Integer id) {
-		Query nameQuery = getCurrentSession().getNamedQuery("listLanguage").setInteger("empId" ,id);
+		Query nameQuery = getCurrentSession().getNamedQuery("listLanguage").setInteger("appId" ,id);
 		List<LanguageDto> LanguageDtoList = nameQuery.list();
 	    return LanguageDtoList;
 	}
