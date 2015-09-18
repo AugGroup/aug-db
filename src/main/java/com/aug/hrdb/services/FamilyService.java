@@ -2,7 +2,6 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-
 import com.aug.hrdb.dto.FamilyDto;
 import com.aug.hrdb.entities.Family;
 
@@ -28,6 +27,10 @@ public interface FamilyService {
     public void createFindMasRelationAndEmployee(FamilyDto familyDto);
     public FamilyDto findForInitEdit(FamilyDto family);
     public void updateFindMasRelationAndEmployee(FamilyDto familyDto);
+    
+    
+	public List<FamilyDto> findFamilyById(Integer id);
+	public FamilyDto findFamily(Integer id);
 
 
 }

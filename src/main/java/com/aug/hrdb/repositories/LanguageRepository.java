@@ -15,5 +15,9 @@ public interface LanguageRepository extends GenericRepository<Language,Integer>{
 	
 
 	public List<LanguageDto> listSkillLanguageByEmployee(Integer id);
+	
+	public List<LanguageDto> findLanguagesById(Integer id);
+	
+	public LanguageDto findByLanguagesId(Integer id);
 
 }

@@ -208,6 +208,18 @@ public class FamilyServiceImpl implements FamilyService{
 		
 	}
 
+	@Override
+	public List<FamilyDto> findFamilyById(Integer id) {
+		List<FamilyDto> families = familyRepository.findFamilyById(id);
+		return families;
+	}
+
+	@Override
+	public FamilyDto findFamily(Integer id) {
+		FamilyDto family = familyRepository.findFamily(id);
+		return family;
+	}
+
 	
 	
 }

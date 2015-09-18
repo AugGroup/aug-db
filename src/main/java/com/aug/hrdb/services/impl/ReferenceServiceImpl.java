@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.aug.hrdb.dto.ReferenceDto;
 import com.aug.hrdb.entities.Reference;
 import com.aug.hrdb.repositories.ReferenceRepository;
 import com.aug.hrdb.services.ReferenceService;
@@ -53,5 +55,19 @@ public class ReferenceServiceImpl implements ReferenceService{
 	public void deleteById(Integer id) {
 		referenceRepository.deleteById(id);
 
+	}
+	
+	@Override
+	public List<ReferenceDto> findReferenceById(Integer id){
+		
+		List<ReferenceDto> references = referenceRepository.findReferenceById(id);
+		return references;
+	}
+	
+	@Override
+	public ReferenceDto findReference(Integer id){
+		
+		ReferenceDto references = referenceRepository.findReference(id);
+		return references;
 	}
 }

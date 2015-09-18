@@ -116,6 +116,18 @@ public class AddressServiceImpl implements AddressService{
 		
 	}
 
+	@Override
+	public List<AddressDto> findAddressById(Integer id) {
+		List<AddressDto> addresses = addressResp.findAddressById(id);
+		return addresses;
+	}
+
+	@Override
+	public AddressDto findAddress(Integer id) {
+		AddressDto address = addressResp.findByAddressId(id);
+		return address;
+	}
+
 
 	
 

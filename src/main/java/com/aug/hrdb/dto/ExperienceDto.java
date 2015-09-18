@@ -45,6 +45,8 @@ public class ExperienceDto {
 	private String reference;
 
 	private String responsibility;
+	
+	private String companyName;
 
 	private long salary;
 
@@ -138,4 +140,13 @@ public class ExperienceDto {
 	
 	
 
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	
 }

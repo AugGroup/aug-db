@@ -28,7 +28,8 @@ public interface AddressService {
 	public List<AddressDto> findAddressByApplicantId(Integer id);
 	public List<AddressDto> searchAddress(Integer id);
 	public void deleteAddressByNameQuery(Integer id);
-
+	public List<AddressDto> findAddressById(Integer id);
+	public AddressDto findAddress(Integer id);
 
 
 	

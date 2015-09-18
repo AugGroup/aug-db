@@ -21,7 +21,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 
 	@Autowired
 	private ApplicantRepository applicantRepository;
-	
+
 	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
 	
@@ -91,6 +91,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 			appl.setTechnologyStr(tech);
 			appl.setJoblevelStr(job);
 		}
+
 		return applicants;
 	}
 
@@ -101,6 +102,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 		String job = masJoblevelRepository.find(applicants.getJoblevelId()).getName();
 		applicants.setTechnologyStr(tech);
 		applicants.setJoblevelStr(job);
+
 
 		return applicants;
 	}

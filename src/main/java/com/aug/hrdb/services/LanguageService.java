@@ -2,6 +2,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Language;
 
 
@@ -16,5 +17,8 @@ public interface LanguageService {
 	
 	public void deleteById(Integer id);
 	//public List<Employee> findByCriteria(Employee employee);
+	
+	public List<LanguageDto> findLanguagesById(Integer id);
+	public LanguageDto findLanguages(Integer id);
 	
 }

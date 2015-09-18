@@ -3,6 +3,7 @@ package com.aug.hrdb.repositories.impl;
 
 import java.io.Serializable;
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Query;
@@ -138,4 +139,24 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 		return familyDtoList;
 	}
 
+
+
+
+	@Override
+	public List<FamilyDto> findFamilyById(Integer id) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_FAMILY");
+		query.setParameter("ID", id);
+		List<FamilyDto> result = query.list();
+		System.out.println("QUERYADDRESS :: " + result);
+		return result;
+	}
+
+	@Override
+	public FamilyDto findFamily(Integer id) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_FAMILY_ID");
+		query.setParameter("ID", id);
+		List<FamilyDto> result = query.list();
+		FamilyDto app = result.get(0);
+		return app;
+	}
 }

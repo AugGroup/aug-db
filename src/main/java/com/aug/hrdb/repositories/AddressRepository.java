@@ -26,5 +26,7 @@ public interface AddressRepository extends GenericRepository<Address, Integer>{
 	public void updateAddressByNameQuery(AddressDto addressDto);
 	public void deleteAddressByNameQuery(Integer id);
 	public List<Address> findAll();
+	public List<AddressDto> findAddressById(Integer id);
+	public AddressDto findByAddressId(Integer id);
 
 }

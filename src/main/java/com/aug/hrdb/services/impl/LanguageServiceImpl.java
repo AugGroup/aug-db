@@ -4,10 +4,13 @@ package com.aug.hrdb.services.impl;
 import java.util.List;
 
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Language;
 import com.aug.hrdb.repositories.LanguageRepository;
 import com.aug.hrdb.services.LanguageService;
@@ -61,6 +64,19 @@ public class LanguageServiceImpl implements LanguageService{
 		// TODO Auto-generated method stub
 		 languageRepository.deleteById(id);
 	}
+
+	@Override
+	public List<LanguageDto> findLanguagesById(Integer id) {
+		List<LanguageDto> languageses = languageRepository.findLanguagesById(id);
+		return languageses;
+	}
+
+	@Override
+	public LanguageDto findLanguages(Integer id) {
+		LanguageDto languages = languageRepository.findByLanguagesId(id);
+		return languages;
+	}
+
 
 	
 	

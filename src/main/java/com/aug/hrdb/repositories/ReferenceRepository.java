@@ -9,4 +9,6 @@ public interface ReferenceRepository extends GenericRepository<Reference, Intege
 
 	public List<Reference> findByCriteria(Reference reference);
 	public List<ReferenceDto> searchReference(Integer id);
+	public List<ReferenceDto> findReferenceById(Integer id);
+	public ReferenceDto findReference(Integer id);
 }

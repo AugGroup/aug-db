@@ -2,6 +2,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.ReferenceDto;
 import com.aug.hrdb.entities.Reference;
 
 
@@ -14,4 +15,6 @@ public interface ReferenceService {
 	public List<Reference> findAll();
 	public List<Reference> findByCriteria(Reference reference);
 	public void deleteById(Integer id);
+	public List<ReferenceDto> findReferenceById(Integer id);
+	public ReferenceDto findReference(Integer id);
 }

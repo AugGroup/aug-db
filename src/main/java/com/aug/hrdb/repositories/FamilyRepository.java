@@ -26,6 +26,10 @@ public interface FamilyRepository extends GenericRepository<Family, Integer> {
 	 public void deleteByNameQuery(FamilyDto family);
 	 public List<FamilyDto> findFamilyList(Integer id);
 	 
+	public List<FamilyDto> findFamilyById(Integer id);
+		
+	public FamilyDto findFamily(Integer id);
+	 
 
 }
 
