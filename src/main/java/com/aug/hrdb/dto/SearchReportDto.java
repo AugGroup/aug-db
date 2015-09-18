@@ -1,13 +1,13 @@
 package com.aug.hrdb.dto;
 
 public class SearchReportDto {
-	
+	private Integer joblevel;
+	private Integer technology;
 	private Integer position;
 	private String degree;
 	private String major;
 	private String schoolName;
 	private Double gpa;
-//	private Date applyDate;
 	private String applyDateStr;
 
 	public String getApplyDateStr() {
@@ -69,12 +69,19 @@ public class SearchReportDto {
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
 	}
-//	public Date getApplyDate() {
-//		return applyDate;
-//	}
-//	public void setApplyDate(Date applyDate) {
-//		this.applyDate = applyDate;
-//	}
+
+	public Integer getJoblevel() {
+		return joblevel;
+	}
+	public void setJoblevel(Integer joblevel) {
+		this.joblevel = joblevel;
+	}
+	public Integer getTechnology() {
+		return technology;
+	}
+	public void setTechnology(Integer technology) {
+		this.technology = technology;
+	}
 	
 
 }
