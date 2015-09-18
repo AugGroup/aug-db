@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+
 import com.aug.hrdb.entities.MasCoreSkill;
 import com.aug.hrdb.repositories.MasCoreSkillRepository;
 import com.mysql.jdbc.StringUtils;
@@ -31,6 +32,12 @@ public class MasCoreSkillRepositoryImpl extends GenericRepositoryImpl<MasCoreSki
 		MasCoreSkill masCoreSkill =(MasCoreSkill)getCurrentSession().load(MasCoreSkill.class, id);
 		getCurrentSession().delete(masCoreSkill);
 		}
+
+	@Override
+	public List<MasCoreSkill> findByIdMasCoreSkills(Integer id) {
+        return (List<MasCoreSkill>) getCurrentSession().get(MasCoreSkill.class, id);
+
+	}
 	
 
 }

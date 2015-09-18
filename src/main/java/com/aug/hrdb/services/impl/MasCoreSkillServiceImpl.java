@@ -67,4 +67,10 @@ public class MasCoreSkillServiceImpl implements MasCoreSkillService{
 		masCoreSkillRepository.deleteById(id);
 	}
 
+	@Override
+	public List<MasCoreSkill> findByIdMasCoreSkills(Integer id) {
+		// TODO Auto-generated method stub
+		return masCoreSkillRepository.findByIdMasCoreSkills(id);
+	}
+
 }
