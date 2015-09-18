@@ -14,9 +14,14 @@ import javax.persistence.NamedNativeQuery;
             		+ "ref.applicant_id"
             		+ "from reference as ref,applicant as app "
             		+ "where app.id =:appId and ref.applicant_id = app.id", 
-            resultClass = ReferenceDto.class)
-  })
-
+            resultClass = ReferenceDto.class),
+	@NamedNativeQuery(name = "SEARCH_REFERENCE_ID", query = "select ref.id,ref.name,"
+            		+ "ref.address, ref.telephone,"
+            		+ "ref.occupation,"
+            		+ "ref.applicant_id"
+            		+ "from reference as ref"
+            		+ " FROM REFERENCE ref WHERE ref.ID = :ID", resultClass = ReferenceDto.class)
+	})
 @Entity
 public class ReferenceDto {
 	@Id

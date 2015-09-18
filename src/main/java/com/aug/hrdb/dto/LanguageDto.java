@@ -8,8 +8,6 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
-
-
  @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "listLanguage",
@@ -20,8 +18,14 @@ import org.hibernate.annotations.NamedNativeQuery;
                       		+ "language.WRITING as WRITING "
                       		+ "from LANGUAGE as language,APPLICANT as app, EMPLOYEE as emp  "
                       		+ "where app.id =:appId and emp.applicant_id = language.applicant_id", 
-               resultClass = LanguageDto.class)
-  })
+               resultClass = LanguageDto.class),
+    @NamedNativeQuery(name = "SEARCH_LANGUAGES_ID", query = "select language.ID,"
+            		 		+ "language.NAMELANGUAGE,language.SPEAKING, "
+                      		+ "language.READING, "
+                      		+ "language.UNDERSTANDING, "
+                      		+ "language.WRITING "
+                      		+ " FROM LANGUAGE language WHERE language.ID = :ID", resultClass = LanguageDto.class)
+    })
 
 
 @Entity
