@@ -103,7 +103,7 @@ public class FamilyServiceImpl implements FamilyService{
 		}
 		
 		family.setAuditFlag("C");
-		family.setCreatedBy(0);
+		family.setCreatedBy(familyDto.getEmployeeId());
 		Calendar cal = Calendar.getInstance();
 		family.setCreatedTimeStamp(cal.getTime());
 		
@@ -144,6 +144,7 @@ public class FamilyServiceImpl implements FamilyService{
         familyDto.setPosition(familyEdit.getPosition());
         familyDto.setMasRelationTypeId(familyEdit.getMasRelationType().getId());
         familyDto.setMasRelationTypeName(familyEdit.getMasRelationType().getRelationType());
+        familyDto.setAppId(family.getAppId());
 		return familyDto;
 	}
 

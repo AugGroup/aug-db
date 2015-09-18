@@ -127,7 +127,6 @@ public class LanguageServiceImpl implements LanguageService{
 		languageDto.setUnderstanding(language.getUnderstanding());
 		languageDto.setSpeaking(language.getSpeaking());
 		languageDto.setApplicantId(language.getApplicant().getId());
-		languageDto.setEmployeeId(applicant.getEmployee().getId());
 	
 		return languageDto;
 	}
