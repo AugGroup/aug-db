@@ -8,7 +8,6 @@ package com.aug.hrdb.repositories.impl;
 import java.util.List;
 
 import org.hibernate.Criteria;
-
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -16,7 +15,9 @@ import org.springframework.stereotype.Repository;
 
 
 
+
 import com.aug.hrdb.dto.LeaveDto;
+import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.entities.Leave;
 import com.aug.hrdb.repositories.LeaveRepository;
 import com.mysql.jdbc.StringUtils;
@@ -50,6 +51,13 @@ public class LeaveRepositoryImpl extends GenericRepositoryImpl<Leave, Integer> i
 		List<LeaveDto> leaDto = namedQuery.list();
 	     return leaDto;
 
+	}
+
+	@Override
+	public List<ReportLeaveDto> reportLeave(String searchText) {
+		Query query = getCurrentSession().getNamedQuery("reportLeave").setString("name","%"+ searchText +"%");
+		List<ReportLeaveDto> leaves = query.list();	
+return leaves;
 	}
 
 	/*@Override

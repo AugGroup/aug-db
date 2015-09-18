@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
+import com.aug.hrdb.dto.AbilityDto;
 import com.aug.hrdb.dto.ExperienceDto;
 import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.repositories.ExperienceRepository;
@@ -35,6 +36,14 @@ public class ExperienceRepositoryImpl extends GenericRepositoryImpl<Experience, 
 		List<ExperienceDto> result = query.list();
 		ExperienceDto app = result.get(0);
 		return app;
+	}
+
+	@Override
+	public List<ExperienceDto> searchExperience(Integer id) {
+		Query namedQuery = getCurrentSession().getNamedQuery("SEARCH_EXPERIENCE").setInteger("appId" ,id);
+		//namedQuery.executeUpdate();
+		List<ExperienceDto> expDto = namedQuery.list();
+	     return expDto;
 	}
 	
 
