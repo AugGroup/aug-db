@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchHistory",
-            query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id from history as his, emp_employee as emp where his.employee_id=:empId and emp.id = his.employee_id", 
+            query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id from history as his, employee as emp where his.employee_id=:empId and emp.id = his.employee_id", 
             resultClass = HistoryDto.class)
   })
 

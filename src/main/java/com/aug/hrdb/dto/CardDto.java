@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
             		+ "card.status, "
             		+ "card.remark, "
             		+ "card.employee_id "
-            		+ "from card,emp_employee as emp "
+            		+ "from card,employee as emp "
             		+ "where card.employee_id =:empId and card.employee_id=emp.id",
             resultClass = CardDto.class),
 })

@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					+ "punish.description, "
 					+ "punish.penalty, "
 					+ "punish.employee_id "
-					+ "from emp_punish as punish,emp_employee as emp "
+					+ "from emp_punish as punish,employee as emp "
 					+ "where punish.employee_id =:empId and punish.employee_id=emp.id", 
 			resultClass = PunsihDto.class)
 	})

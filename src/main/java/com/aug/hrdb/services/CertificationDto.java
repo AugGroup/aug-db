@@ -16,11 +16,11 @@ import javax.persistence.NamedNativeQuery;
 			name="searchCertification",
 			query="select c.id,"
 					+ "c.year,"
-					+ "c.name,"
+					+ "c.name, "
 					+ "c.certification_from,"
 					+ "c.description,"
 					+ "c.employee_id "
-					+ "from emp_certification as c,emp_employee where c.employee_id=:empId  and c.employee_id = emp_employee.id",																																																																					
+					+ "from emp_certification as c,employee where c.employee_id=:empId  and c.employee_id = employee.id",																																																																					
 			resultClass = CertificationDto.class)
 			
 })

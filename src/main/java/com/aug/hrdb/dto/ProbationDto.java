@@ -16,7 +16,7 @@ import javax.persistence.NamedNativeQuery;
             		+ "pro.reason,"
             		+ "pro.employee_id, "
             		+ "emp.employee_code "
-            		+ "from emp_probation as pro, emp_employee as emp "
+            		+ "from emp_probation as pro, employee as emp "
             		+ "where pro.employee_id=:empId and emp.id = pro.employee_id",
             resultClass = ProbationDto.class),
 //    @NamedNativeQuery(name = "createProbation", 
