@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.dto.EmployeeListDto;
 import com.aug.hrdb.dto.ReportEmployeeDto;
 import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.dto.ReportStatusEmployeeDto;
@@ -25,7 +26,7 @@ public class EmployeeDtoService {
 
 	@Autowired private EmployeeRepository employeeDaoRepository;
 	
-	public List<EmployeeDto> searchEmployee(){
+	public List<EmployeeListDto> searchEmployee(){
 		return employeeDaoRepository.searchEmployee();
 	}
 	

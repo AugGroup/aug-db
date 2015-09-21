@@ -19,6 +19,7 @@ import com.aug.hrdb.dto.AimEmployeeDto;
 import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.EmployeeIdDto;
+import com.aug.hrdb.dto.EmployeeListDto;
 import com.aug.hrdb.dto.ReportEmployeeDto;
 import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.dto.ReportStatusEmployeeDto;
@@ -58,9 +59,9 @@ public class EmployeerepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
 
 	@SuppressWarnings("unchecked")
-	public List<EmployeeDto> searchEmployee() {
+	public List<EmployeeListDto> searchEmployee() {
 		Query namedQuery = getCurrentSession().getNamedQuery("searchEmployee");
-		List<EmployeeDto> empDto = namedQuery.list();
+		List<EmployeeListDto> empDto = namedQuery.list();
 		return empDto;
 	}
 
