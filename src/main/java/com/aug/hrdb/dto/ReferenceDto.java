@@ -1,5 +1,6 @@
 package com.aug.hrdb.dto;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
@@ -28,8 +29,10 @@ public class ReferenceDto {
 	private Integer id;	
 	private String name;		
 	private String address;
+	@Column(name="TELEPHONE")
 	private String tel;
 	private String occupation;
+	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
 	public Integer getId() {
 		return id;
