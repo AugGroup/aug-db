@@ -2,11 +2,13 @@ package com.aug.hrdb.interceptor;
 
 import java.io.Serializable;
 import java.util.Calendar;
+
 import org.hibernate.type.Type;
 import org.hibernate.EmptyInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 
 import com.aug.hrdb.entities.BaseEntity;
 import com.aug.hrdb.services.LoginService;
