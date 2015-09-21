@@ -225,6 +225,7 @@ public class FamilyServiceTest {
 		familyDto.setOccupation("ITS");
 		familyDto.setGender("Female");
 		familyDto.setAppId(appId);
+		familyDto.setEmployeeId(id);
 		familyDto.setMasRelationTypeId(idMasRelationType);
 		familyService.createFindMasRelationAndEmployee(familyDto);
 
