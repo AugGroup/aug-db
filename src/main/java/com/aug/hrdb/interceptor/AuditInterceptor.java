@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Calendar;
 
 
+
+
 import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
@@ -11,29 +13,31 @@ import org.hibernate.Criteria;
 import org.hibernate.EmptyInterceptor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import com.aug.hrdb.entities.BaseEntity;
 import com.aug.hrdb.entities.Login;
+import com.aug.hrdb.repositories.LoginRepository;
 
 @Component
 public class AuditInterceptor extends EmptyInterceptor{
 
 	private static final long serialVersionUID = 1L;
-	private static SessionFactory factory;
-	
-	
+	private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
+
+
 	private Login getUser()
 	{
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        factory = new Configuration().configure().buildSessionFactory();
         Session session = factory.openSession();
         Criteria c = session.createCriteria(Login.class);
-        c.add(Restrictions.eq("username", user.getUsername()));   
-		return  (Login) c.uniqueResult();
-		
+        c.add(Restrictions.eq("username", user.getUsername()));  
+        Login login = (Login) c.uniqueResult();
+        session.close();
+		return  login;
 	}
 
 
