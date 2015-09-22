@@ -31,15 +31,23 @@ import org.hibernate.annotations.NamedNativeQuery;
 @Entity
 public class LanguageDto {
 	
+	@Column(name="ID")
 	@Id
 	private Integer id;
+	@Column(name="NAMELANGUAGE")
     private String  nameLanguage;
+	@Column(name="SPEAKING")
 	private String  speaking;
+	@Column(name="READING")
 	private String  reading;
+	@Column(name="UNDERSTANDING")
 	private String  understanding;
+	@Column(name="WRITING")
 	private String  writing;
+	@Column(name = "APPLICANT_ID")
 	private Integer applicantId;
-	@Transient
+	
+	@Column(name ="EMPLOYEE_ID")
 	private Integer employeeId;
 	
 	
