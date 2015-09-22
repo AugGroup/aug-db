@@ -3,6 +3,7 @@ package com.aug.hrdb.entities;
 
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -15,12 +16,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
+
 /**
  * @author Thanyalak
  *
@@ -65,6 +68,9 @@ public class Login extends BaseEntity{
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name= "MAS_LOCATION_ID")
     private MasLocation masLocation;
+	
+	@OneToMany(mappedBy = "login")
+	List<Appointment> appointments;
 
 
 	public Integer getId() {
@@ -124,6 +130,16 @@ public class Login extends BaseEntity{
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
+	}
+
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
 	}
     
 

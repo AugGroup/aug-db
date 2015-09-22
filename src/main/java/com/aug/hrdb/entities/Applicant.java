@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import org.apache.commons.codec.language.bm.Languages;
 import org.hibernate.annotations.Index;
+
 import com.aug.hrdb.dto.ApplicantDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -258,6 +259,9 @@ public class Applicant extends BaseEntity{
 	
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Certification> certifications;
+	
+	@OneToMany(mappedBy ="applicant")
+	private List<Appointment> appointments;
 	
 	@Transient
 	private String reportType;
