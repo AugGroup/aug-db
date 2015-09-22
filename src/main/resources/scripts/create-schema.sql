@@ -9,7 +9,7 @@
 
     alter table ADDRESS 
         drop 
-        foreign key FKE66327D469E31F6A;
+        foreign key FKE66327D4548E13EB;
 
     alter table ADDRESS 
         drop 
@@ -17,23 +17,23 @@
 
     alter table ADDRESS 
         drop 
-        foreign key FKE66327D4548E13EB;
-
-    alter table ALLOWANCES 
-        drop 
-        foreign key FKCD0A575BA405A4AA;
+        foreign key FKE66327D469E31F6A;
 
     alter table ALLOWANCES 
         drop 
         foreign key FKCD0A575B9B593F69;
 
-    alter table APPLICANT 
+    alter table ALLOWANCES 
         drop 
-        foreign key FK29852EE2D4BCA2EB;
+        foreign key FKCD0A575BA405A4AA;
 
     alter table APPLICANT 
         drop 
         foreign key FK29852EE28EBCA94B;
+
+    alter table APPLICANT 
+        drop 
+        foreign key FK29852EE2D4BCA2EB;
 
     alter table CARD 
         drop 
@@ -45,15 +45,11 @@
 
     alter table EDUCATION 
         drop 
-        foreign key FK94C37788CA8BBAA;
+        foreign key FK94C37788548E13EB;
 
     alter table EDUCATION 
         drop 
-        foreign key FK94C37788548E13EB;
-
-    alter table EMPLOYEE 
-        drop 
-        foreign key FK75C8D6AE8EDB100A;
+        foreign key FK94C37788CA8BBAA;
 
     alter table EMPLOYEE 
         drop 
@@ -61,15 +57,7 @@
 
     alter table EMPLOYEE 
         drop 
-        foreign key FK75C8D6AEF9C1D24A;
-
-    alter table EMPLOYEE 
-        drop 
-        foreign key FK75C8D6AEAAFB154A;
-
-    alter table EMPLOYEE 
-        drop 
-        foreign key FK75C8D6AE46DC55EA;
+        foreign key FK75C8D6AE548E13EB;
 
     alter table EMPLOYEE 
         drop 
@@ -77,7 +65,11 @@
 
     alter table EMPLOYEE 
         drop 
-        foreign key FK75C8D6AE53A0AB49;
+        foreign key FK75C8D6AE2B7331EA;
+
+    alter table EMPLOYEE 
+        drop 
+        foreign key FK75C8D6AEF9C1D24A;
 
     alter table EMPLOYEE 
         drop 
@@ -85,11 +77,19 @@
 
     alter table EMPLOYEE 
         drop 
-        foreign key FK75C8D6AE2B7331EA;
+        foreign key FK75C8D6AE46DC55EA;
 
     alter table EMPLOYEE 
         drop 
-        foreign key FK75C8D6AE548E13EB;
+        foreign key FK75C8D6AE8EDB100A;
+
+    alter table EMPLOYEE 
+        drop 
+        foreign key FK75C8D6AEAAFB154A;
+
+    alter table EMPLOYEE 
+        drop 
+        foreign key FK75C8D6AE53A0AB49;
 
     alter table EXPERIENCE 
         drop 
@@ -97,11 +97,11 @@
 
     alter table FAMILY 
         drop 
-        foreign key FK7B2B4F6430240285;
+        foreign key FK7B2B4F64548E13EB;
 
     alter table FAMILY 
         drop 
-        foreign key FK7B2B4F64548E13EB;
+        foreign key FK7B2B4F6430240285;
 
     alter table HEALTH 
         drop 
@@ -125,11 +125,11 @@
 
     alter table LOGIN 
         drop 
-        foreign key FK453F7498239026A;
+        foreign key FK453F7499B593F69;
 
     alter table LOGIN 
         drop 
-        foreign key FK453F7499B593F69;
+        foreign key FK453F7498239026A;
 
     alter table LOGINROLE 
         drop 
@@ -944,10 +944,10 @@
         references EMPLOYEE (ID);
 
     alter table ADDRESS 
-        add index FKE66327D469E31F6A (PROVINCE_ID), 
-        add constraint FKE66327D469E31F6A 
-        foreign key (PROVINCE_ID) 
-        references MAS_PROVINCE (ID);
+        add index FKE66327D4548E13EB (APPLICANT_ID), 
+        add constraint FKE66327D4548E13EB 
+        foreign key (APPLICANT_ID) 
+        references APPLICANT (APPLICANT_ID);
 
     alter table ADDRESS 
         add index FKE66327D44094956A (ADDRESSTYPE_ID), 
@@ -956,16 +956,10 @@
         references MAS_ADDRESSTYPE (ID);
 
     alter table ADDRESS 
-        add index FKE66327D4548E13EB (APPLICANT_ID), 
-        add constraint FKE66327D4548E13EB 
-        foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
-
-    alter table ALLOWANCES 
-        add index FKCD0A575BA405A4AA (MAS_ALLOWANCES_ID), 
-        add constraint FKCD0A575BA405A4AA 
-        foreign key (MAS_ALLOWANCES_ID) 
-        references MAS_ALLOWANCES (ALLO_ID);
+        add index FKE66327D469E31F6A (PROVINCE_ID), 
+        add constraint FKE66327D469E31F6A 
+        foreign key (PROVINCE_ID) 
+        references MAS_PROVINCE (ID);
 
     alter table ALLOWANCES 
         add index FKCD0A575B9B593F69 (EMPLOYEE_ID), 
@@ -973,17 +967,23 @@
         foreign key (EMPLOYEE_ID) 
         references EMPLOYEE (ID);
 
-    alter table APPLICANT 
-        add index FK29852EE2D4BCA2EB (MASTECHNOLOGY_ID), 
-        add constraint FK29852EE2D4BCA2EB 
-        foreign key (MASTECHNOLOGY_ID) 
-        references MAS_TECHNOLOGY (ID);
+    alter table ALLOWANCES 
+        add index FKCD0A575BA405A4AA (MAS_ALLOWANCES_ID), 
+        add constraint FKCD0A575BA405A4AA 
+        foreign key (MAS_ALLOWANCES_ID) 
+        references MAS_ALLOWANCES (ALLO_ID);
 
     alter table APPLICANT 
         add index FK29852EE28EBCA94B (MASJOBLEVEL_ID), 
         add constraint FK29852EE28EBCA94B 
         foreign key (MASJOBLEVEL_ID) 
         references MAS_JOBLEVEL (ID);
+
+    alter table APPLICANT 
+        add index FK29852EE2D4BCA2EB (MASTECHNOLOGY_ID), 
+        add constraint FK29852EE2D4BCA2EB 
+        foreign key (MASTECHNOLOGY_ID) 
+        references MAS_TECHNOLOGY (ID);
 
     alter table CARD 
         add index FK1F73109B593F69 (EMPLOYEE_ID), 
@@ -998,22 +998,16 @@
         references APPLICANT (APPLICANT_ID);
 
     alter table EDUCATION 
-        add index FK94C37788CA8BBAA (DEGREETYPE_ID), 
-        add constraint FK94C37788CA8BBAA 
-        foreign key (DEGREETYPE_ID) 
-        references MAS_DEGREETYPE (DEGREETYPE_ID);
-
-    alter table EDUCATION 
         add index FK94C37788548E13EB (APPLICANT_ID), 
         add constraint FK94C37788548E13EB 
         foreign key (APPLICANT_ID) 
         references APPLICANT (APPLICANT_ID);
 
-    alter table EMPLOYEE 
-        add index FK75C8D6AE8EDB100A (JOBLEVEL_ID), 
-        add constraint FK75C8D6AE8EDB100A 
-        foreign key (JOBLEVEL_ID) 
-        references MAS_JOBLEVEL (ID);
+    alter table EDUCATION 
+        add index FK94C37788CA8BBAA (DEGREETYPE_ID), 
+        add constraint FK94C37788CA8BBAA 
+        foreign key (DEGREETYPE_ID) 
+        references MAS_DEGREETYPE (DEGREETYPE_ID);
 
     alter table EMPLOYEE 
         add index FK75C8D6AE20E569EA (EMPLOYMENT_ID), 
@@ -1022,22 +1016,10 @@
         references MAS_EMPLOYMENT (ID);
 
     alter table EMPLOYEE 
-        add index FK75C8D6AEF9C1D24A (DIVISION_ID), 
-        add constraint FK75C8D6AEF9C1D24A 
-        foreign key (DIVISION_ID) 
-        references MAS_DIVISION (ID);
-
-    alter table EMPLOYEE 
-        add index FK75C8D6AEAAFB154A (LOCATION_ID), 
-        add constraint FK75C8D6AEAAFB154A 
-        foreign key (LOCATION_ID) 
-        references MAS_LOCATION (ID);
-
-    alter table EMPLOYEE 
-        add index FK75C8D6AE46DC55EA (TECHNOLOGY_ID), 
-        add constraint FK75C8D6AE46DC55EA 
-        foreign key (TECHNOLOGY_ID) 
-        references MAS_TECHNOLOGY (ID);
+        add index FK75C8D6AE548E13EB (APPLICANT_ID), 
+        add constraint FK75C8D6AE548E13EB 
+        foreign key (APPLICANT_ID) 
+        references APPLICANT (APPLICANT_ID);
 
     alter table EMPLOYEE 
         add index FK75C8D6AEB0E87A49 (OFFICIAL_ID), 
@@ -1046,10 +1028,16 @@
         references OFFICIAL (ID);
 
     alter table EMPLOYEE 
-        add index FK75C8D6AE53A0AB49 (AIM_EMP_ID), 
-        add constraint FK75C8D6AE53A0AB49 
-        foreign key (AIM_EMP_ID) 
-        references EMPLOYEE (ID);
+        add index FK75C8D6AE2B7331EA (STAFFTYPE_ID), 
+        add constraint FK75C8D6AE2B7331EA 
+        foreign key (STAFFTYPE_ID) 
+        references MAS_STAFFTYPE (ID);
+
+    alter table EMPLOYEE 
+        add index FK75C8D6AEF9C1D24A (DIVISION_ID), 
+        add constraint FK75C8D6AEF9C1D24A 
+        foreign key (DIVISION_ID) 
+        references MAS_DIVISION (ID);
 
     alter table EMPLOYEE 
         add index FK75C8D6AE6607D3CB (MAS_CORE_SKILL_ID), 
@@ -1058,16 +1046,28 @@
         references MAS_CORESKILL (ID);
 
     alter table EMPLOYEE 
-        add index FK75C8D6AE2B7331EA (STAFFTYPE_ID), 
-        add constraint FK75C8D6AE2B7331EA 
-        foreign key (STAFFTYPE_ID) 
-        references MAS_STAFFTYPE (ID);
+        add index FK75C8D6AE46DC55EA (TECHNOLOGY_ID), 
+        add constraint FK75C8D6AE46DC55EA 
+        foreign key (TECHNOLOGY_ID) 
+        references MAS_TECHNOLOGY (ID);
 
     alter table EMPLOYEE 
-        add index FK75C8D6AE548E13EB (APPLICANT_ID), 
-        add constraint FK75C8D6AE548E13EB 
-        foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        add index FK75C8D6AE8EDB100A (JOBLEVEL_ID), 
+        add constraint FK75C8D6AE8EDB100A 
+        foreign key (JOBLEVEL_ID) 
+        references MAS_JOBLEVEL (ID);
+
+    alter table EMPLOYEE 
+        add index FK75C8D6AEAAFB154A (LOCATION_ID), 
+        add constraint FK75C8D6AEAAFB154A 
+        foreign key (LOCATION_ID) 
+        references MAS_LOCATION (ID);
+
+    alter table EMPLOYEE 
+        add index FK75C8D6AE53A0AB49 (AIM_EMP_ID), 
+        add constraint FK75C8D6AE53A0AB49 
+        foreign key (AIM_EMP_ID) 
+        references EMPLOYEE (ID);
 
     alter table EXPERIENCE 
         add index FK17D0456A548E13EB (APPLICANT_ID), 
@@ -1076,16 +1076,16 @@
         references APPLICANT (APPLICANT_ID);
 
     alter table FAMILY 
-        add index FK7B2B4F6430240285 (MASRELATION_ID), 
-        add constraint FK7B2B4F6430240285 
-        foreign key (MASRELATION_ID) 
-        references MAS_RELATIONTYPE (ID);
-
-    alter table FAMILY 
         add index FK7B2B4F64548E13EB (APPLICANT_ID), 
         add constraint FK7B2B4F64548E13EB 
         foreign key (APPLICANT_ID) 
         references APPLICANT (APPLICANT_ID);
+
+    alter table FAMILY 
+        add index FK7B2B4F6430240285 (MASRELATION_ID), 
+        add constraint FK7B2B4F6430240285 
+        foreign key (MASRELATION_ID) 
+        references MAS_RELATIONTYPE (ID);
 
     alter table HEALTH 
         add index FK7EC7F65C9B593F69 (EMPLOYEE_ID), 
@@ -1118,16 +1118,16 @@
         references EMPLOYEE (ID);
 
     alter table LOGIN 
-        add index FK453F7498239026A (MAS_LOCATION_ID), 
-        add constraint FK453F7498239026A 
-        foreign key (MAS_LOCATION_ID) 
-        references MAS_LOCATION (ID);
-
-    alter table LOGIN 
         add index FK453F7499B593F69 (EMPLOYEE_ID), 
         add constraint FK453F7499B593F69 
         foreign key (EMPLOYEE_ID) 
         references EMPLOYEE (ID);
+
+    alter table LOGIN 
+        add index FK453F7498239026A (MAS_LOCATION_ID), 
+        add constraint FK453F7498239026A 
+        foreign key (MAS_LOCATION_ID) 
+        references MAS_LOCATION (ID);
 
     alter table LOGINROLE 
         add index FK3FABA33F1BEB470B (LOGIN_ID), 
