@@ -193,6 +193,9 @@ public class EmployeeDto {
 	
 	private Integer applicateId;
 
+	private String applicateIdCard;
+	
+	private String applicateName;
 	
 	public Integer getId() {
 		return id;
@@ -963,6 +966,29 @@ public class EmployeeDto {
 	public void setApplicateId(Integer applicateId) {
 		this.applicateId = applicateId;
 	}
+
+	
+	public String getApplicateIdCard() {
+		return applicateIdCard;
+	}
+
+	
+	public void setApplicateIdCard(String applicateIdCard) {
+		this.applicateIdCard = applicateIdCard;
+	}
+
+	
+	public String getApplicateName() {
+		return applicateName;
+	}
+
+	
+	public void setApplicateName(String applicateName) {
+		this.applicateName = applicateName;
+	}
+	
+	
+	
 
 	
 	

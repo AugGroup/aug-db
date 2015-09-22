@@ -70,8 +70,8 @@ public class AddressDto {
 	@Column(name ="APPLICANT_ID")
 	private Integer applicantId;
 	
-	/*@Column(name ="EMPLOYEE_ID")
-	private Integer employeeId;	*/
+	@Transient
+	private Integer employeeId;	
 	
 	
 	@Transient
@@ -208,6 +208,17 @@ public class AddressDto {
 	}
 
 
+	public Integer getEmployeeId() {
+		return employeeId;
+	}
+
+
+	public void setEmployeeId(Integer employeeId) {
+		this.employeeId = employeeId;
+	}
+
+	
+	
 	
 	
 	
