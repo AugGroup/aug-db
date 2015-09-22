@@ -3,28 +3,41 @@ package com.aug.hrdb.interceptor;
 import java.io.Serializable;
 import java.util.Calendar;
 
+
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.type.Type;
+import org.hibernate.Criteria;
 import org.hibernate.EmptyInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
 import com.aug.hrdb.entities.BaseEntity;
-import com.aug.hrdb.services.LoginService;
+import com.aug.hrdb.entities.Login;
 
+@Component
 public class AuditInterceptor extends EmptyInterceptor{
 
 	private static final long serialVersionUID = 1L;
+	private static SessionFactory factory;
 	
-	@Autowired LoginService loginService;
-
-	private com.aug.hrdb.entities.Login getUser()
+	
+	private Login getUser()
 	{
 		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return loginService.findByUserName(user.getUsername());
+        factory = new Configuration().configure().buildSessionFactory();
+        Session session = factory.openSession();
+        Criteria c = session.createCriteria(Login.class);
+        c.add(Restrictions.eq("username", user.getUsername()));   
+		return  (Login) c.uniqueResult();
+		
 	}
-	
+
+
+
 	@Override
     public boolean onFlushDirty(Object entity, Serializable id, Object[] currentState, Object[] previousState, String[] propertyNames, org.hibernate.type.Type[] types) {
 		boolean theReturn = false;
@@ -34,7 +47,7 @@ public class AuditInterceptor extends EmptyInterceptor{
 	        {
 	        	if ("auditFlag".equals(propertyNames[i]))
 	            {
-	                currentState[i] = 'U';
+	                currentState[i] = "U";
 	                theReturn = true;
 	            }
 	            if ("updatedTimeStamp".equals(propertyNames[i]))
@@ -63,7 +76,7 @@ public class AuditInterceptor extends EmptyInterceptor{
 	        {
 	        	if ("auditFlag".equals(propertyNames[i]))
 	            {
-	                state[i] = 'C';
+	                state[i] = "C";
 	                theReturn = true;
 	            }
 				if ("createdTimeStamp".equals(propertyNames[i]))
