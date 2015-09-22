@@ -35,6 +35,14 @@
         drop 
         foreign key FK29852EE2D4BCA2EB;
 
+    alter table APPOINTMENT 
+        drop 
+        foreign key FK2868EF7F1BEB470B;
+
+    alter table APPOINTMENT 
+        drop 
+        foreign key FK2868EF7F548E13EB;
+
     alter table CARD 
         drop 
         foreign key FK1F73109B593F69;
@@ -170,6 +178,8 @@
     drop table if exists ALLOWANCES;
 
     drop table if exists APPLICANT;
+
+    drop table if exists APPOINTMENT;
 
     drop table if exists AUG_REQUEST;
 
@@ -358,6 +368,17 @@
         MASJOBLEVEL_ID integer not null,
         MASTECHNOLOGY_ID integer not null,
         primary key (APPLICANT_ID)
+    );
+
+    create table APPOINTMENT (
+        ID integer not null auto_increment,
+        DETAIL varchar(255),
+        END datetime,
+        START datetime,
+        TITLE varchar(255),
+        APPLICANT_ID integer,
+        LOGIN_ID integer,
+        primary key (ID)
     );
 
     create table AUG_REQUEST (
@@ -984,6 +1005,18 @@
         add constraint FK29852EE2D4BCA2EB 
         foreign key (MASTECHNOLOGY_ID) 
         references MAS_TECHNOLOGY (ID);
+
+    alter table APPOINTMENT 
+        add index FK2868EF7F1BEB470B (LOGIN_ID), 
+        add constraint FK2868EF7F1BEB470B 
+        foreign key (LOGIN_ID) 
+        references LOGIN (ID);
+
+    alter table APPOINTMENT 
+        add index FK2868EF7F548E13EB (APPLICANT_ID), 
+        add constraint FK2868EF7F548E13EB 
+        foreign key (APPLICANT_ID) 
+        references APPLICANT (APPLICANT_ID);
 
     alter table CARD 
         add index FK1F73109B593F69 (EMPLOYEE_ID), 
