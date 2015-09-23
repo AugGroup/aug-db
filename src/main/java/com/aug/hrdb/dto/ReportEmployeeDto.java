@@ -35,7 +35,7 @@ import javax.persistence.NamedNativeQuery;
             		+ "join mas_employment on emp.employment_id = mas_employment.id "
             		+ "join mas_division on emp.division_id = mas_division.id "
             		+ "join mas_technology on emp.technology_id = mas_technology.id "
-            		+ "join experience as exp on exp.employee_id =emp.id "
+            		+ "join experience as exp on exp.applicant_id =emp.applicant_id "
             		+ "where emp.name_eng like :name", 
             resultClass = ReportEmployeeDto.class),
             @NamedNativeQuery(
@@ -64,7 +64,7 @@ import javax.persistence.NamedNativeQuery;
                     		+ "join mas_employment on emp.employment_id = mas_employment.id "
                     		+ "join mas_division on emp.division_id = mas_division.id "
                     		+ "join mas_technology on emp.technology_id = mas_technology.id "
-                    		+ "join experience as exp on exp.employee_id =emp.id "
+                    		+ "join experience as exp on exp.applicant_id =emp.applicant_id "
                     		+ "where emp.employee_code like :code", 
                     resultClass = ReportEmployeeDto.class)
   })
