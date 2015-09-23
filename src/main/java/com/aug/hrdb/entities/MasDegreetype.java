@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class MasDegreetype extends BaseEntity{
 
 	@Id
-	@Column(name = "DEGREETYPE_ID")
+	@Column(name = "ID")
 	@GeneratedValue
 	private Integer id;
 

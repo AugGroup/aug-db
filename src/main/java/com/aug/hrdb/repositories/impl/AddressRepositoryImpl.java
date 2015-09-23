@@ -107,8 +107,8 @@ public class AddressRepositoryImpl extends GenericRepositoryImpl<Address, Intege
 	
 	@Override
 	public List<AddressDto> findAddressById(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_ADDRESS");
-		query.setParameter("ID", id);
+		Query query = getCurrentSession().getNamedQuery("searchAddress");
+		query.setParameter("appId", id);
 		List<AddressDto> result = query.list();
 		System.out.println("QUERYADDRESS :: " + result);
 		return result;
