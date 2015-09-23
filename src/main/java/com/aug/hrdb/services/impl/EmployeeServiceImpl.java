@@ -634,9 +634,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		if(employee.getOfficial()==null){
 			Official official = new Official();
-			official.setAuditFlag("C");
-			official.setCreatedBy(0);
-			official.setCreatedTimeStamp(Calendar.getInstance().getTime());
+			//official.setAuditFlag("C");
+			//official.setCreatedBy(0);
+			//official.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			official.setStartWorkDate(employeeDto.getStartWorkDate());
 			official.setEndWorkDate(employeeDto.getEndWorkDate());
 			official.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
@@ -660,9 +660,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 				official1.setSalaryExpected(employeeDto.getSalaryExpected());
 				official1.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
 				official1.setProbationDate(employeeDto.getProbationDate());
-				official1.setAuditFlag("U");
-				official1.setUpdatedBy(employeeDto.getId());
-				official1.setUpdatedTimeStamp(Calendar.getInstance().getTime());			
+				//official1.setAuditFlag("U");
+				//official1.setUpdatedBy(employeeDto.getId());
+				//official1.setUpdatedTimeStamp(Calendar.getInstance().getTime());			
 				afficialService.update(official1);
 			  }
 			
@@ -886,9 +886,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		employee.setAuditFlag("U");
-		employee.setUpdatedBy(employee.getId());
-		employee.setUpdatedTimeStamp(Calendar.getInstance().getTime());
+		//employee.setAuditFlag("U");
+		//employee.setUpdatedBy(employee.getId());
+		//employee.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 				
 		
 		try{
@@ -933,7 +933,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									Address address = new Address();		
 									address.setHouseNo(addressDto.getHouseNo());
 									address.setSubDistrict(addressDto.getSubDistrict());
-									address.setDistrict(addressDto.getSubDistrict());
+									address.setDistrict(addressDto.getDistrict());
 									address.setRoad(addressDto.getRoad());
 									
 									
@@ -949,15 +949,15 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									address.setZipcode(addressDto.getZipcode());
 									
-									Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
+									Applicant applicant = applicantService.findById(addressDto.getApplicantId());
 									
 									if(applicant!=null){
 										address.setApplicant(applicant);
 									}
 								
-									address.setAuditFlag("C");
-									address.setCreatedBy(employee.getId());
-									address.setCreatedTimeStamp(Calendar.getInstance().getTime());
+									//address.setAuditFlag("C");
+									//address.setCreatedBy(employee.getId());
+									//address.setCreatedTimeStamp(Calendar.getInstance().getTime());
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
@@ -977,26 +977,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 									address.setRoad(addressDto.getRoad());
 									
 									MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
-									if(masProvince.getId()!=null){
+									if(masProvince!=null){
 										address.setProvince(masProvince);
 									}
 									
 									MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
-									if(masProvince.getId()!=null){
+									if(masProvince!=null){
 										address.setAddressType(masAddressType);
 									}
 									
 									address.setZipcode(addressDto.getZipcode());
 									
-									Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
+									Applicant applicant = applicantService.findById(addressDto.getApplicantId());
 									
 									if(applicant!=null){
 										address.setApplicant(applicant);
 									}
 										
-									address.setAuditFlag("U");
-									address.setUpdatedBy(employee.getId());
-									address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
+									//address.setAuditFlag("U");
+									//address.setUpdatedBy(employee.getId());
+									//address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);

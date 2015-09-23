@@ -101,9 +101,9 @@ public class LanguageServiceImpl implements LanguageService{
      		languageObj.setSpeaking(languageDto.getSpeaking());
      		languageObj.setApplicant(applicant);
      		languageObj.setCreatedBy(employeeId);
-			Calendar cal = Calendar.getInstance();
+			/*Calendar cal = Calendar.getInstance();
 			languageObj.setCreatedTimeStamp(cal.getTime());
-			languageObj.setAuditFlag("C");
+			languageObj.setAuditFlag("C");*/
 			languageRepository.create(languageObj);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -137,9 +137,9 @@ public class LanguageServiceImpl implements LanguageService{
 	public void updateSetLanguage(LanguageDto languageDto) {
 		// TODO Auto-generated method stub
 		Language languageUpdate = languageRepository.find(languageDto.getId());
-		languageUpdate.setAuditFlag("U");
+		/*languageUpdate.setAuditFlag("U");
 		languageUpdate.setUpdatedTimeStamp(Calendar.getInstance().getTime());
-		languageUpdate.setUpdatedBy(languageDto.getEmployeeId());
+		languageUpdate.setUpdatedBy(languageDto.getEmployeeId());*/
 		languageUpdate.setReading(languageDto.getReading());
 		languageUpdate.setSpeaking(languageDto.getSpeaking());
 		languageUpdate.setUnderstanding(languageDto.getUnderstanding());

@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
             name = "listSite",
               query = "select site.ID,site.PROJECTNAME,site.STARTDATE,site.ENDDATE,site.PROJECTOWNER, "
               		+ "site.PROJECTOWNERCONTACT,site.EMPLOYEE_ID,emp.EMPLOYEE_CODE "
-              		+ "from EMP_SITE site join EMP_EMPLOYEE emp on emp.ID=site.EMPLOYEE_ID "
+              		+ "from SITE site join EMPLOYEE emp on emp.ID=site.EMPLOYEE_ID "
               		+ "where site.EMPLOYEE_ID=:empId",
             resultClass = SiteDto.class)
   })

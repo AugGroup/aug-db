@@ -11,13 +11,15 @@ import org.hibernate.annotations.NamedNativeQuery;
  @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "listLanguage",
-            		 query = "select language.ID as ID,"
-            		 		+ "language.NAMELANGUAGE,language.SPEAKING as SPEAKKING, "
-                      		+ "language.READING as READING, "
-                      		+ "language.UNDERSTANDING as UNDERSTANDDING, "
-                      		+ "language.WRITING as WRITING "
-                      		+ "from LANGUAGE as language,APPLICANT as app, EMPLOYEE as emp  "
-                      		+ "where app.id =:appId and emp.applicant_id = language.applicant_id", 
+            		 query = "select lang.id as ID,"
+            		 		+ "lang.nameLanguage as NAMELANGUAGE,lang.speaking as SPEAKKING, "
+                      		+ "lang.reading as READING, "
+                      		+ "lang.understanding as UNDERSTANDDING, "
+                      		+ "lang.writing as WRITING "
+                      		+ "from LANGUAGE as lang,APPLICANT as app, EMPLOYEE as emp "
+                      		+ "where app.applicant_id =:appId and emp.applicant_id = lang.applicant_id", 
+            				 
+           
                resultClass = LanguageDto.class),
     @NamedNativeQuery(name = "SEARCH_LANGUAGES_ID", query = "select language.ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING, "
@@ -31,15 +33,23 @@ import org.hibernate.annotations.NamedNativeQuery;
 @Entity
 public class LanguageDto {
 	
+	@Column(name="ID")
 	@Id
 	private Integer id;
+	@Column(name="NAMELANGUAGE")
     private String  nameLanguage;
+	@Column(name="SPEAKING")
 	private String  speaking;
+	@Column(name="READING")
 	private String  reading;
+	@Column(name="UNDERSTANDING")
 	private String  understanding;
+	@Column(name="WRITING")
 	private String  writing;
+	@Column(name = "APPLICANT_ID")
 	private Integer applicantId;
-	@Transient
+	
+	@Column(name ="EMPLOYEE_ID")
 	private Integer employeeId;
 	
 	

@@ -18,8 +18,9 @@ import com.aug.hrdb.services.LoginService;
 @Service("loginService")
 @Transactional
 public class LoginServiceImpl implements LoginService{
-
-	@Autowired private LoginRepository loginRepository;
+	
+	@Autowired 
+	private LoginRepository loginRepository;
 	
 	@Override
 	public void create(Login login) {
