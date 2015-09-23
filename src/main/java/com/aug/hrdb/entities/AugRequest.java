@@ -45,12 +45,12 @@ public class AugRequest extends BaseEntity{
 	private Date approveDate;
 
 	@ManyToOne
-	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
-	private MasTechnology technology;
+	@JoinColumn(name = "REQUEST_MASTECHNOLOGY")
+	private MasTechnology requestTechnology;
 
 	@ManyToOne
-	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
-	private MasJoblevel joblevel;
+	@JoinColumn(name = "REQUEST_MASJOBLEVEL")
+	private MasJoblevel requestJoblevel;
 	
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
@@ -83,20 +83,20 @@ public class AugRequest extends BaseEntity{
 		this.technologyStr = technologyStr;
 	}
 
-	public MasTechnology getTechnology() {
-		return technology;
+	public MasTechnology getRequestTechnology() {
+		return requestTechnology;
 	}
 
-	public void setTechnology(MasTechnology technology) {
-		this.technology = technology;
+	public void setRequestTechnology(MasTechnology requestTechnology) {
+		this.requestTechnology = requestTechnology;
 	}
 
-	public MasJoblevel getJoblevel() {
-		return joblevel;
+	public MasJoblevel getRequestJoblevel() {
+		return requestJoblevel;
 	}
 
-	public void setJoblevel(MasJoblevel joblevel) {
-		this.joblevel = joblevel;
+	public void setRequestJoblevel(MasJoblevel requestJoblevel) {
+		this.requestJoblevel = requestJoblevel;
 	}
 
 	public Integer getId() {

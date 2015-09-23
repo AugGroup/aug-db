@@ -5,31 +5,40 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.AugRequestDto;
+import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasTechnology;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "SEARCH_ALL_REQUEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_POSITION, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE, p.POSITION_NAME, p.ID FROM AUG_REQUEST a JOIN POSITION p ON a.REQUEST_POSITION = p.ID ORDER BY REQUEST_DATE DESC", resultClass = AugRequestDto.class), //REQUEST_ID ASC LIMIT 0,50
-		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_POSITION, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE, p.POSITION_NAME, p.ID FROM AUG_REQUEST a JOIN POSITION p ON a.REQUEST_POSITION = p.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class),
+		@NamedNativeQuery(name = "SEARCH_ALL_REQUEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+				+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID ORDER BY REQUEST_DATE DESC", resultClass = AugRequestDto.class), //REQUEST_ID ASC LIMIT 0,50
+		
+		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+				+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class),
 		//TEST SQLGrammaException		
-		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID_TEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_POSITION, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-						+ " a.YEAR_EXPERIENCE, p.POSITION_NAME, p.IDFROMAUG_REQUEST a JOIN POSITION p ON a.REQUEST_POSITION = p.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class)})
+		
+		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID_TEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+						+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class)})
 public class AugRequestDto {
-
-	@Column(name = "POSITION_NAME")
-	private String positionName;
 
 	@Id
 	@Column(name = "REQUEST_ID")
 	private Integer id;
 
+	@Column(name = "MAS_JOB_LEVEL_NAME")
+	private String masJobLevelName;
+	
+	@Column(name = "MAS_TECHNOLOGY_NAME")
+	private String masTechnologyName;
+	
 	@Column(name = "REQUEST_DATE")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date requestDate;
@@ -47,8 +56,11 @@ public class AugRequestDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date approveDate;
 
-	@Column(name = "REQUEST_POSITION")
-	private Integer positionRequest;
+	@Column(name = "REQUEST_MASTECHNOLOGY")
+	private Integer requestTechnology;
+
+	@Column(name = "REQUEST_MASJOBLEVEL")
+	private Integer requestJoblevel;
 
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
@@ -60,23 +72,10 @@ public class AugRequestDto {
 	private Integer yearExperience;
 
 	@Transient
-	private String positionStr;
-
-	public String getPositionStr() {
-		return positionStr;
-	}
-
-	public void setPositionStr(String positionStr) {
-		this.positionStr = positionStr;
-	}
-
-	public String getPositionName() {
-		return positionName;
-	}
-
-	public void setPositionName(String positionName) {
-		this.positionName = positionName;
-	}
+	private String jobLevelStr;
+	
+	@Transient
+	private String technologyStr;
 
 	public Integer getId() {
 		return id;
@@ -126,14 +125,6 @@ public class AugRequestDto {
 		this.approveDate = approveDate;
 	}
 
-	public Integer getPositionRequest() {
-		return positionRequest;
-	}
-
-	public void setPositionRequest(Integer positionRequest) {
-		this.positionRequest = positionRequest;
-	}
-
 	public Integer getNumberApplicant() {
 		return numberApplicant;
 	}
@@ -157,6 +148,55 @@ public class AugRequestDto {
 	public void setYearExperience(Integer yearExperience) {
 		this.yearExperience = yearExperience;
 	}
+
+	public String getMasJobLevelName() {
+		return masJobLevelName;
+	}
+
+	public void setMasJobLevelName(String masJobLevelName) {
+		this.masJobLevelName = masJobLevelName;
+	}
+
+	public String getMasTechnologyName() {
+		return masTechnologyName;
+	}
+
+	public void setMasTechnologyName(String masTechnologyName) {
+		this.masTechnologyName = masTechnologyName;
+	}
+
+	public String getJobLevelStr() {
+		return jobLevelStr;
+	}
+
+	public void setJobLevelStr(String jobLevelStr) {
+		this.jobLevelStr = jobLevelStr;
+	}
+
+	public String getTechnologyStr() {
+		return technologyStr;
+	}
+
+	public void setTechnologyStr(String technologyStr) {
+		this.technologyStr = technologyStr;
+	}
+
+	public Integer getRequestTechnology() {
+		return requestTechnology;
+	}
+
+	public void setRequestTechnology(Integer requestTechnology) {
+		this.requestTechnology = requestTechnology;
+	}
+
+	public Integer getRequestJoblevel() {
+		return requestJoblevel;
+	}
+
+	public void setRequestJoblevel(Integer requestJoblevel) {
+		this.requestJoblevel = requestJoblevel;
+	}
+
 
 }
 
