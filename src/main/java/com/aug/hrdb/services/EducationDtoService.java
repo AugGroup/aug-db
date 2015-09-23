@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.repositories.EducationRepository;
@@ -26,6 +27,11 @@ public class EducationDtoService {
 	
 	public List<EducationDto> searchEducation(Integer id){
 		return educationRepository.searchEducation(id);
+	}
+
+	public List<EducationDto> findEducationById(Integer id) {
+		// TODO Auto-generated method stub
+		return educationRepository.findEducationById(id);
 	}
 	
 }
