@@ -40,7 +40,7 @@ public class ExperienceRepositoryImpl extends GenericRepositoryImpl<Experience, 
 
 	@Override
 	public List<ExperienceDto> searchExperience(Integer id) {
-		Query namedQuery = getCurrentSession().getNamedQuery("SEARCH_EXPERIENCE").setInteger("appId" ,id);
+		Query namedQuery = getCurrentSession().getNamedQuery("searchExperience").setInteger("ID" ,id);
 		//namedQuery.executeUpdate();
 		List<ExperienceDto> expDto = namedQuery.list();
 	     return expDto;

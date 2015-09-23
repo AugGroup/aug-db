@@ -2,9 +2,11 @@ package com.aug.hrdb.dto;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-
 
 import com.aug.hrdb.entities.Applicant;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -16,25 +18,37 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
 				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
-				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class)
+				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class),
 
-		/*@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, exp.address, exp.typeOfBusiness, "
-				+ "exp.dateFrom, exp.dateTo, exp.position, exp.reason, exp.reference, exp.responsibility, exp.salary "
-				+ "emp.employee_code FROM EXPERIENCE as exp, EMPLOYEE as emp "
-				+ "WHERE exp.employee_id=:empId AND emp.id = exp.employee_id", resultClass = ExperienceDto.class) */})
+		@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, "
+				+ "exp.address, "
+				+ "exp.type_of_Business, "
+				+ "exp.date_from, "
+				+ "exp.date_to, "
+				+ "exp.position, "
+				+ "exp.reason, "
+				+ "exp.reference, "
+				+ "exp.responsibility, "
+				+ "exp.salary, "
+				+ "exp.company_name,"
+				+ "exp.applicant_id "
+				+ "FROM EXPERIENCE as exp, EMPLOYEE as emp , APPLICANT as app "
+				+ "WHERE app.applicant_id=:ID AND exp.applicant_id = app.applicant_id", resultClass = ExperienceDto.class) })
+@Entity
 public class ExperienceDto {
-
+	
+	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
-
+	@Id
 	private Integer id;
 
 	private String address;
-
+	@Column(name = "TYPE_OF_BUSINESS")
 	private String typeOfBusiness;
-
+	@Column(name = "DATE_FROM")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateFrom;
-
+	@Column(name = "DATE_TO")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date dateTo;
 
@@ -45,7 +59,7 @@ public class ExperienceDto {
 	private String reference;
 
 	private String responsibility;
-	
+	@Column(name = "COMPANY_NAME")
 	private String companyName;
 
 	private long salary;
@@ -137,8 +151,15 @@ public class ExperienceDto {
 	public void setSalary(long salary) {
 		this.salary = salary;
 	}
-	
-	
+		
+
+	public Integer getApplicantId() {
+		return applicantId;
+	}
+
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
+	}
 
 	public String getCompanyName() {
 		return companyName;
