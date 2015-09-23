@@ -44,10 +44,14 @@ public class AugRequest extends BaseEntity{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date approveDate;
 
-//	@ManyToOne
-//	@JoinColumn(name = "REQUEST_POSITION", referencedColumnName = "id")
-//	private Position positionRequest;
+	@ManyToOne
+	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
+	private MasTechnology technology;
 
+	@ManyToOne
+	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
+	private MasJoblevel joblevel;
+	
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
 
@@ -58,15 +62,42 @@ public class AugRequest extends BaseEntity{
 	private Integer yearExperience;
 	
 	@Transient
-	private String positionStr;
+	private String jobLevelStr;
+	
+	@Transient
+	private String technologyStr;
 
-/*	public String getPositionStr() {
-		return positionStr;
+	public String getJobLevelStr() {
+		return jobLevelStr;
 	}
 
-	public void setPositionStr(String positionStr) {
-		this.positionStr = positionStr;
-	}*/
+	public void setJobLevelStr(String jobLevelStr) {
+		this.jobLevelStr = jobLevelStr;
+	}
+
+	public String getTechnologyStr() {
+		return technologyStr;
+	}
+
+	public void setTechnologyStr(String technologyStr) {
+		this.technologyStr = technologyStr;
+	}
+
+	public MasTechnology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(MasTechnology technology) {
+		this.technology = technology;
+	}
+
+	public MasJoblevel getJoblevel() {
+		return joblevel;
+	}
+
+	public void setJoblevel(MasJoblevel joblevel) {
+		this.joblevel = joblevel;
+	}
 
 	public Integer getId() {
 		return id;
@@ -115,14 +146,6 @@ public class AugRequest extends BaseEntity{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-//	public Position getPositionRequest() {
-//		return positionRequest;
-//	}
-//
-//	public void setPositionRequest(Position positionRequest) {
-//		this.positionRequest = positionRequest;
-//	}
 
 	public Integer getNumberApplicant() {
 		return numberApplicant;
