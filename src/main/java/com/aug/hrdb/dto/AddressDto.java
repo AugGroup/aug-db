@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 	@NamedNativeQuery(
 			name="searchAddress",
 			query="select address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE,address.APPLICANT_ID "
-					+ "from ADDRESS as address join APPLICANT as applicant on address.APPLICANT_ID = applicant.ID "
+					+ "from ADDRESS as address join APPLICANT as applicant on address.APPLICANT_ID = applicant.APPLICANT_ID "
 					+ "join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
 					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID "
 					+ "where address.APPLICANT_ID=:appId",
