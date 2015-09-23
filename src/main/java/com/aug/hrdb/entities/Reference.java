@@ -101,7 +101,8 @@ public class Reference extends BaseEntity{
 		reference.setId(referenceDto.getId());
 		reference.setName(referenceDto.getName());
 		reference.setAddress(referenceDto.getAddress());
-		reference.setTel(referenceDto.getTel());		reference.setOccupation(referenceDto.getOccupation());				
+		reference.setTel(referenceDto.getTel());		
+		reference.setOccupation(referenceDto.getOccupation());				
 		Applicant applicant = new Applicant();
 		applicant.setId(referenceDto.getApplicantId());
 		reference.setApplicant(applicant);
