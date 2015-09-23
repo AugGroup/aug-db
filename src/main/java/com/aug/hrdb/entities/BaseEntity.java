@@ -8,6 +8,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 
 @MappedSuperclass
 public abstract class BaseEntity {
@@ -27,11 +29,13 @@ public abstract class BaseEntity {
 	
 	@Column(name = "AUDITFLAG", nullable = false, length = 1)
 	private String auditFlag;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATEDTIMESTAMP", nullable = false)
 	private Date createdTimeStamp;
 	@Column(name = "CREATEDBY", nullable = false, length = 10)
 	private Integer createdBy;
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name="UPDATEDTIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedTimeStamp;
