@@ -320,7 +320,7 @@ INSERT INTO LOGIN ( AUDITFLAG, CREATEDBY,CREATEDTIMESTAMP,USERNAME,PASSWORD,EMPL
 
 
 --CERTIFICATION
-insert INTO CERTIFICATION(APPLICANT_ID,CERTIFICATION_FORM,DESCRICPION,NAME,YEAR,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP)
+insert INTO CERTIFICATION(APPLICANT_ID,CERTIFICATION_FORM,DESCRIPTION,NAME,YEAR,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP)
 VALUES ('1','java','java','java','2010','C',0,NOW()),('2','ccna','ccna','ccna','2010','C',0,NOW()),('3','.net','.net','.net','2010','C',0,NOW()),('4','microsoft','microsoft','microsoft','2010','C',0,NOW());
 
 
@@ -385,6 +385,7 @@ VALUES (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrow
 INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
 VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
 
+
 --Appointment
 INSERT INTO APPOINTMENT(ID,DETAIL,END,START,TOPIC,APPLICANT_ID,LOGIN_ID)
 VALUES 
@@ -392,3 +393,18 @@ VALUES
 (2,'นัดเซ็นสัญญา',STR_TO_DATE('12/09/2015 14:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('12/09/2015 13:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Piyawut',2,2),
 (3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
 (4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2)
+
+--FAMILY
+INSERT INTO EMP_EMPLOYEEFAMILY(
+ AUDITFLAG,
+ CREATEDBY,
+ CREATEDTIMESTAMP,
+ ADDRESS,
+ AGE,
+ NAME,
+ GENDER,
+ TELEPHONE,
+ APPLICANT_ID,
+ MASRELATION_ID
+) values
+('C',0,NOW(),'7/7 m.8 nongsamwong nongsua pathumtani 12170',24,'AAA','Female','0890851022',1,1);

@@ -66,7 +66,7 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:hibernate.cfg.xml"
-          p:packagesToScan="com.aug.hrdb"/>
+          p:packagesToScan="com.aug.hrdb.*"/>
 
 
 	<!-- <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"/> -->

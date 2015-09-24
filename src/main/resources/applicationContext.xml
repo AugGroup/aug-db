@@ -69,7 +69,7 @@
     <!--Hibernate SessionFactory using p name space -->
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
          <property name="dataSource" ref="dataSource"/>
-   		 <property name="packagesToScan" value="com.aug.hrdb"/>
+   		 <property name="packagesToScan" value="com.aug.hrdb.*"/>
      </bean>
 
 

@@ -44,7 +44,7 @@
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
           p:dataSource-ref="dataSource"
           p:configLocation="classpath:hibernate.cfg.xml"
-          p:packagesToScan="com.aug.hrdb"/>
+          p:packagesToScan="com.aug.hrdb.*"/>
          <!--  p:packagesToScan="com.aug.db.entities"/> -->
 
 
@@ -60,7 +60,7 @@
                 <entry key="hibernate.show_sql" value="${hibernate.show_sql}"/>
             </map>
         </property>
-        <property name="packagesToScan" value="com.aug.hrdb"/>
+        <property name="packagesToScan" value="com.aug.hrdb.*"/>
         
      <!-- Interceptor -->
      <property name="entityInterceptor">

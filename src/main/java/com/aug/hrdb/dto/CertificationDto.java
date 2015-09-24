@@ -1,27 +1,46 @@
 package com.aug.hrdb.dto;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATE c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
+	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID"
+		+ " FROM CERTIFICATION c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
 		
-	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRICPION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATE c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDto.class)
+	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID"
+		+ " FROM CERTIFICATION c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDto.class),
+		
+	@NamedNativeQuery(name = "searchCertification",
+					  query = "SELECT c.id, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID "
+					  			+ "FROM CERTIFICATION c "	
+							    + "WHERE c.APPLICANT_ID =:ID", resultClass = CertificationDto.class)	
 	})
+
+
+@Entity
 public class CertificationDto {
 	
+	@Id
+	@Column(name="ID")
 	private Integer id;
+
 	
+	@Column(name="CERTIFICATION_FORM")
 	private String certificationForm;
 	
-	private String descricption;
+	@Column(name="DESCRIPTION")
+	private String description;
 	
+	@Column(name="NAME")
 	private String name;
 	
+	@Column(name="YEAR")
 	private String year;
 	
+	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
 
 	public Integer getId() {
@@ -40,12 +59,13 @@ public class CertificationDto {
 		this.certificationForm = certificationForm;
 	}
 
-	public String getDescricption() {
-		return descricption;
+
+	public String getDescription() {
+		return description;
 	}
 
-	public void setDescricption(String descricption) {
-		this.descricption = descricption;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getName() {

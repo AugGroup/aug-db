@@ -40,7 +40,7 @@ public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certifica
 	
 	@SuppressWarnings("unchecked")
 	public List<CertificationDto> searchCertification(Integer id) {
-		Query namedQuery = getCurrentSession().getNamedQuery("searchCertification").setInteger("appId" ,id);
+		Query namedQuery = getCurrentSession().getNamedQuery("searchCertification").setInteger("ID" ,id);
 		//namedQuery.executeUpdate();
 		List<CertificationDto> cerDto = namedQuery.list();
 	     return cerDto;
