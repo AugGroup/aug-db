@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class MasSpecialty extends BaseEntity{
 	
 	@Id
-	@Column(name="SPEC_ID")
+	@Column(name="ID")
 	@GeneratedValue
 	private Integer id;
 

@@ -20,7 +20,7 @@ import javax.persistence.Table;
 @Table(name="MAS_LEAVETYPE")
 public class MasLeaveType extends BaseEntity{
 	@Id
-	@Column(name = "LEAVETYPE_ID")
+	@Column(name = "ID")
 	@GeneratedValue
 	private Integer id;
 

@@ -132,6 +132,8 @@ public class History extends BaseEntity{
 		historyDto.setDateOfAdjustment(this.dateOfAdjustment);
 		historyDto.setReasonOfAdjustment(this.reasonOfAdjustment);
 		historyDto.setAdjustmentTime(this.adjustmentTime);
+		historyDto.setCreatedBy(this.getCreatedBy());
+		historyDto.setCreatedTimeStamp(this.getCreatedTimeStamp());
 		historyDto.setEmployeeId(this.employee.getId());
 		
 		return historyDto;
@@ -149,6 +151,8 @@ public class History extends BaseEntity{
 		history.setDateOfAdjustment(historyDto.getDateOfAdjustment());
 		history.setReasonOfAdjustment(historyDto.getReasonOfAdjustment());
 		history.setAdjustmentTime(historyDto.getAdjustmentTime());
+		history.setCreatedBy(historyDto.getCreatedBy());
+		history.setCreatedTimeStamp(historyDto.getCreatedTimeStamp());
 		
 		Employee employee = new Employee();
 		employee.setId(historyDto.getEmployeeId());

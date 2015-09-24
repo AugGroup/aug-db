@@ -75,7 +75,7 @@ public class Leave extends BaseEntity {
 	
 	
 	@ManyToOne()
-	@JoinColumn(name = "LEAVETYPE_ID",nullable = false,referencedColumnName="LEAVETYPE_ID")
+	@JoinColumn(name = "LEAVETYPE_ID",nullable = false,referencedColumnName="ID")
 	private MasLeaveType masleavetype;
 	
 	@ManyToOne()

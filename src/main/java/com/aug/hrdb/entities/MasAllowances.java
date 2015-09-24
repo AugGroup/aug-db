@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class MasAllowances extends BaseEntity{
 
 	@Id
-	@Column(name = "ALLO_ID")
+	@Column(name = "ID")
 	@GeneratedValue
 	private Integer id;
 	

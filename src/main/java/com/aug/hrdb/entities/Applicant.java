@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class Applicant extends BaseEntity{
 	@Id
 	@GeneratedValue
-	@Column(name = "APPLICANT_ID")
+	@Column(name = "ID")
 	private Integer id;
 
 	@Column(name = "APPLICANT_CODE")
