@@ -42,7 +42,7 @@ public class Ability extends BaseEntity  {
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "SPECIALTY_ID",nullable = false,referencedColumnName="SPEC_ID")
+	@JoinColumn(name = "SPECIALTY_ID",nullable = false,referencedColumnName="ID")
 //	@JsonIgnore
 	private MasSpecialty masspecialty;
 
