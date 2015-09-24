@@ -387,8 +387,9 @@ INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADD
 VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
 
 --Appointment
-INSERT INTO APPOINTMENT(ID,DETAIL,END,START,TOPIC,APPICANT_ID,LOGIN_ID)
-VALUES (1,'นัดทำข้อสอบและสอบสัมภาษณ์','12.00 am','9.00 am','นัดทำข้อสอบคุณ Yam',1,1),
-(2,'นัดเซ็นสัญญา','2.00 pm','1.00 pm','นัดเซ็นสัญญาคุณ Piyawut',2,2),
-(3,'นัดเซ็นสัญญา','11.00 am','10.00 am','นัดเซ็นสัญญาคุณ Anut',3,2),
-(4,'นัดทำข้อสอบและสอบสัมภาษณ์','12.00 am','10.00 am','นัดทำข้อสอบคุณ Thanatchapong',4,2)
+INSERT INTO APPOINTMENT(ID,DETAIL,END,START,TOPIC,APPLICANT_ID,LOGIN_ID)
+VALUES 
+(1,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('09/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('09/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Yam',1,1),
+(2,'นัดเซ็นสัญญา',STR_TO_DATE('12/09/2015 14:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('12/09/2015 13:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Piyawut',2,2),
+(3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
+(4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2)
