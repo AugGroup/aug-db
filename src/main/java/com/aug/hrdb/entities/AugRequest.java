@@ -24,7 +24,7 @@ public class AugRequest extends BaseEntity{
 
 	@Id
 	@GeneratedValue
-	@Column(name = "REQUEST_ID")
+	@Column(name = "ID")
 	private Integer id;
 
 	@Column(name = "REQUEST_DATE")
@@ -44,10 +44,14 @@ public class AugRequest extends BaseEntity{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date approveDate;
 
-//	@ManyToOne
-//	@JoinColumn(name = "REQUEST_POSITION", referencedColumnName = "id")
-//	private Position positionRequest;
+	@ManyToOne
+	@JoinColumn(name = "REQUEST_MASTECHNOLOGY")
+	private MasTechnology requestTechnology;
 
+	@ManyToOne
+	@JoinColumn(name = "REQUEST_MASJOBLEVEL")
+	private MasJoblevel requestJoblevel;
+	
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
 
@@ -58,15 +62,42 @@ public class AugRequest extends BaseEntity{
 	private Integer yearExperience;
 	
 	@Transient
-	private String positionStr;
+	private String jobLevelStr;
+	
+	@Transient
+	private String technologyStr;
 
-/*	public String getPositionStr() {
-		return positionStr;
+	public String getJobLevelStr() {
+		return jobLevelStr;
 	}
 
-	public void setPositionStr(String positionStr) {
-		this.positionStr = positionStr;
-	}*/
+	public void setJobLevelStr(String jobLevelStr) {
+		this.jobLevelStr = jobLevelStr;
+	}
+
+	public String getTechnologyStr() {
+		return technologyStr;
+	}
+
+	public void setTechnologyStr(String technologyStr) {
+		this.technologyStr = technologyStr;
+	}
+
+	public MasTechnology getRequestTechnology() {
+		return requestTechnology;
+	}
+
+	public void setRequestTechnology(MasTechnology requestTechnology) {
+		this.requestTechnology = requestTechnology;
+	}
+
+	public MasJoblevel getRequestJoblevel() {
+		return requestJoblevel;
+	}
+
+	public void setRequestJoblevel(MasJoblevel requestJoblevel) {
+		this.requestJoblevel = requestJoblevel;
+	}
 
 	public Integer getId() {
 		return id;
@@ -115,14 +146,6 @@ public class AugRequest extends BaseEntity{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-//	public Position getPositionRequest() {
-//		return positionRequest;
-//	}
-//
-//	public void setPositionRequest(Position positionRequest) {
-//		this.positionRequest = positionRequest;
-//	}
 
 	public Integer getNumberApplicant() {
 		return numberApplicant;

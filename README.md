@@ -8,3 +8,5 @@ How to run generate schema for Development
 How to run generate schema for Production
     
     mvn hibernate3:hbm2ddl sql:execute -P prod
+    
+    mvn clean install -DskipTests=true

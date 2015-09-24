@@ -32,7 +32,7 @@ public class Allowances extends BaseEntity{
 	private Employee employee;
 	
 	@ManyToOne()
-	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ALLO_ID", nullable = false)
+	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ID", nullable = false)
 	private MasAllowances masallowances;
 	
 	/*---------------------- getter / setter ----------------------*/

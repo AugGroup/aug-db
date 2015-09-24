@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchHistory",
-            query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id from history as his, employee as emp where his.employee_id=:empId and emp.id = his.employee_id", 
+            query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id, his.CREATEDBY, his.CREATEDTIMESTAMP  from history as his, employee as emp where his.employee_id=:empId and emp.id = his.employee_id", 
             resultClass = HistoryDto.class)
   })
 
@@ -53,6 +53,14 @@ public class HistoryDto {
 	
 	@Column(name = "EMPLOYEE_ID")
 	private Integer employeeId;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@Column(name = "CREATEDTIMESTAMP", nullable = false)
+	private Date createdTimeStamp;
+	
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	@Column(name = "CREATEDBY", nullable = false, length = 10)
+	private Integer createdBy;
 
 	public Integer getId() {
 		return id;
@@ -118,4 +126,23 @@ public class HistoryDto {
 		this.employeeId = employeeId;
 	}
 
+	public Date getCreatedTimeStamp() {
+		return createdTimeStamp;
+	}
+
+	public void setCreatedTimeStamp(Date createdTimeStamp) {
+		this.createdTimeStamp = createdTimeStamp;
+	}
+
+	public Integer getCreatedBy() {
+		return createdBy;
+	}
+
+	public void setCreatedBy(Integer createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	
+	
+	
 }
