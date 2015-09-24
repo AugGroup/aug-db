@@ -1,5 +1,6 @@
 package com.aug.hrdb.services.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,7 +63,5 @@ public class AppointmentServiceImpl implements AppointmentService {
 		// TODO Auto-generated method stub
 		appointmentRepository.create(appointment);
 	}
-
-
 
 }

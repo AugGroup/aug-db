@@ -1,5 +1,6 @@
 package com.aug.hrdb.services;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.aug.hrdb.entities.Applicant;
