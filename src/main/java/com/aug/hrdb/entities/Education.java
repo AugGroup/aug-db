@@ -52,7 +52,7 @@ public class Education extends BaseEntity{
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "DEGREETYPE_ID",nullable = false)
+	@JoinColumn(name = "DEGREETYPE_ID",nullable = false ,referencedColumnName="ID")
 	private MasDegreetype masdegreetype;
 	
 	public Integer getId() {
@@ -144,12 +144,12 @@ public EducationDto toEducationDto() {
 		educationDto.setGpa(this.gpa);
 		educationDto.setFaculty(this.faculty);
 		educationDto.setMajor(this.major);
-		/*educationDto.setCertificate(this.certificate);
-		educationDto.setDescription(this.description);
-		educationDto.setStartDate(this.startDate);
-		educationDto.setGraduatedDate(this.graduatedDate);
-		educationDto.setEmployeeId(this.employee.getId());
-		educationDto.setMasDegreeTypeId(this.masdegreetype.getId() );*/
+		educationDto.setCertification(this.certification);
+		educationDto.setStart_date(this.start_date);
+		educationDto.setGraduated_date(this.graduated_date);
+		educationDto.setApplicantId(this.applicant.getId());
+		//educationDto.setEmployeeId(this.employee.getId());
+		educationDto.setMasdegreetypeId(this.masdegreetype.getId() );
 		educationDto.setMasdegreetype(this.masdegreetype.getName() );
 		
 		return educationDto;
@@ -163,17 +163,16 @@ public EducationDto toEducationDto() {
 		education.setGpa(educationDto.getGpa());
 		education.setFaculty(educationDto.getFaculty());
 		education.setMajor(educationDto.getMajor());
-		/*education.setCertificate(educationDto.getCertificate());
-		education.setDescription(educationDto.getDescription());
-		education.setStartDate(educationDto.getStartDate());
-		education.setGraduatedDate(educationDto.getGraduatedDate());*/
+		education.setCertification(educationDto.getCertification());
+		education.setStart_date(educationDto.getStart_date());
+		education.setGraduated_date(educationDto.getGraduated_date());
 		
 		Applicant applicant = new Applicant();
 		applicant.setId(educationDto.getId());
 		education.setApplicant(applicant);
 		
 		MasDegreetype masDegreetype = new MasDegreetype();
-		masDegreetype.setId(id);
+		masDegreetype.setId(educationDto.getMasdegreetypeId());
 		masDegreetype.setName(educationDto.getMasdegreetype());
 		education.setMasdegreetype(masDegreetype);
 		

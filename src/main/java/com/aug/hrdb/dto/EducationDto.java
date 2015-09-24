@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.EducationDto;
@@ -16,10 +18,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.name, ed.FACULTY, ed.MAJOR, "
+	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.NAME, ed.FACULTY, ed.MAJOR, "
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID,ed.DEGREETYPE_ID "
 		+ "FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
-		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID = :ID", resultClass = EducationDto.class),
+		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR, "
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID "
@@ -36,7 +38,12 @@ public class EducationDto {
 	@Column(name = "UNIVERSITY")
 	private String university;
 	
+	
 	@Column(name = "DEGREETYPE_ID")
+	private Integer masdegreetypeId;
+	
+	//@Column(name = "DEGREETYPE_ID")
+	@Column(name = "NAME")
 	private String masdegreetype;
 
 	@Column(name = "FACULTY")
@@ -62,8 +69,7 @@ public class EducationDto {
 	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
 	
-	@Transient
-	private MasDegreetype degreeType;
+	
 	
 	public Integer getId() {
 		return id;
@@ -81,13 +87,6 @@ public class EducationDto {
 		this.university = university;
 	}
 
-	public String getDegree() {
-		return masdegreetype;
-	}
-
-	public void setDegree(String masdegreetype) {
-		this.masdegreetype = masdegreetype;
-	}
 
 	public Integer getApplicantId() {
 		return applicantId;
@@ -153,6 +152,15 @@ public class EducationDto {
 		this.applicantId = applicantId;
 	}
 
+
+	public Integer getMasdegreetypeId() {
+		return masdegreetypeId;
+	}
+
+	public void setMasdegreetypeId(Integer masdegreetypeId) {
+		this.masdegreetypeId = masdegreetypeId;
+	}
+
 	public String getMasdegreetype() {
 		return masdegreetype;
 	}
@@ -161,13 +169,6 @@ public class EducationDto {
 		this.masdegreetype = masdegreetype;
 	}
 
-	public MasDegreetype getDegreeType() {
-		return degreeType;
-	}
-
-	public void setDegreeType(MasDegreetype degreeType) {
-		this.degreeType = degreeType;
-	}
 	
 }
 

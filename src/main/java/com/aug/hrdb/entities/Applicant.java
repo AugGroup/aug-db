@@ -260,8 +260,8 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Certification> certifications;
 	
-	@OneToMany(mappedBy ="applicant")
-	private List<Appointment> appointments;
+	//@OneToMany(mappedBy ="applicant")
+	//private List<Appointment> appointments;
 	
 	@Transient
 	private String reportType;
