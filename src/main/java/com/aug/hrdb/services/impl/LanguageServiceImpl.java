@@ -95,6 +95,7 @@ public class LanguageServiceImpl implements LanguageService{
 			
     		Applicant applicant = applicantService.findById(languageDto.getApplicantId());
      		Language languageObj = new Language(); 
+     		languageObj.setNameLanguage(languageDto.getNameLanguage());
      		languageObj.setReading(languageDto.getReading());
      		languageObj.setWriting(languageDto.getWriting());
      		languageObj.setUnderstanding(languageDto.getUnderstanding());
@@ -122,6 +123,7 @@ public class LanguageServiceImpl implements LanguageService{
 		Applicant applicant = applicantService.findById(language.getApplicant().getId());
 	
 		LanguageDto languageDto = new LanguageDto();
+		languageDto.setNameLanguage(language.getNameLanguage());
 		languageDto.setReading(language.getReading());
 		languageDto.setWriting(language.getWriting());
 		languageDto.setUnderstanding(language.getUnderstanding());
@@ -140,6 +142,7 @@ public class LanguageServiceImpl implements LanguageService{
 		/*languageUpdate.setAuditFlag("U");
 		languageUpdate.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 		languageUpdate.setUpdatedBy(languageDto.getEmployeeId());*/
+		languageUpdate.setNameLanguage(languageDto.getNameLanguage());
 		languageUpdate.setReading(languageDto.getReading());
 		languageUpdate.setSpeaking(languageDto.getSpeaking());
 		languageUpdate.setUnderstanding(languageDto.getUnderstanding());

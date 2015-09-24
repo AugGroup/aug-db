@@ -12,21 +12,23 @@ import org.hibernate.annotations.NamedNativeQuery;
 	@NamedNativeQuery(
             name = "listLanguage",
             		 query = "select lang.id as ID,"
-            		 		+ "lang.nameLanguage as NAMELANGUAGE,lang.speaking as SPEAKKING, "
+            		 		+ "lang.nameLanguage as NAMELANGUAGE,"
+            		 		+ "lang.speaking as SPEAKING, "
                       		+ "lang.reading as READING, "
-                      		+ "lang.understanding as UNDERSTANDDING, "
-                      		+ "lang.writing as WRITING "
+                      		+ "lang.understanding as UNDERSTANDING, "
+                      		+ "lang.writing as WRITING, "
+                      		+ "lang.applicant_id as APPLICANT_ID "
+                      		//+ "emp.ID as EMPLOYEE_ID "                     		
                       		+ "from LANGUAGE as lang,APPLICANT as app, EMPLOYEE as emp "
                       		+ "where app.applicant_id =:appId and emp.applicant_id = lang.applicant_id", 
-            				 
-           
-               resultClass = LanguageDto.class),
+                       		resultClass = LanguageDto.class),
     @NamedNativeQuery(name = "SEARCH_LANGUAGES_ID", query = "select language.ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING, "
                       		+ "language.READING, "
                       		+ "language.UNDERSTANDING, "
                       		+ "language.WRITING "
-                      		+ " FROM LANGUAGE language WHERE language.ID = :ID", resultClass = LanguageDto.class)
+                      		+ "FROM LANGUAGE language WHERE language.ID = :ID", 
+                      		resultClass = LanguageDto.class)
     })
 
 
@@ -49,7 +51,8 @@ public class LanguageDto {
 	@Column(name = "APPLICANT_ID")
 	private Integer applicantId;
 	
-	@Column(name ="EMPLOYEE_ID")
+	//@Column(name ="EMPLOYEE_ID")
+	@Transient
 	private Integer employeeId;
 	
 	

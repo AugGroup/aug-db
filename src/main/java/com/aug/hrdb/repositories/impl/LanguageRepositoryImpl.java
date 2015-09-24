@@ -56,8 +56,6 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 		Criteria c = getCurrentSession().createCriteria(Language.class,"language");
 		c.setFetchMode("applicant",FetchMode.JOIN);
 		c.createAlias("applicant", "applicant");
-		c.setFetchMode("employee",FetchMode.JOIN);
-		c.createAlias("employee", "employee");
 		c.add(Restrictions.eq("language.id", id));
 		Language language = (Language) c.uniqueResult();
 		return language;
