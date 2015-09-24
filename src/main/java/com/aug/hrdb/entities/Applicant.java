@@ -982,6 +982,8 @@ public class Applicant extends BaseEntity{
 		applicant.setAttitudeHome(applicantDto.getAttitudeHome());
 		applicant.setAttitudeOffice(applicantDto.getAttitudeOffice());
 		applicant.setTrackingStatus(applicantDto.getTrackingStatus());
+		applicant.setCreatedBy(applicantDto.getCreatedBy());
+		applicant.setCreatedTimeStamp(applicantDto.getCreatedTimeStamp());
 		return applicant;
 
 	}
