@@ -80,8 +80,7 @@ values('Account Execute','AE',1,'C',NOW(),0),
 
 
 --MASADDRESSTYPE
-INSERT INTO MAS_ADDRESSTYPE(ADDRESSTYPENAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES ('Present address','P01',1,'C',NOW(),0),('Permanent address','M02',1,'C',NOW(),0),
-('Permanent address','M02',1,'C',NOW(),0);
+INSERT INTO MAS_ADDRESSTYPE(ADDRESSTYPENAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES ('Present address','P01',1,'C',NOW(),0),('Permanent address','M02',1,'C',NOW(),0);
 
 
 --MASDEGREETYPE
