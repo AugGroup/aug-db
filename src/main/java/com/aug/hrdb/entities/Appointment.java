@@ -51,7 +51,7 @@ public class Appointment {
 		this.id = id;
 	}
 
-	public String getTOpic() {
+	public String getTopic() {
 		return topic;
 	}
 

@@ -1,5 +1,6 @@
 package com.aug.hrdb.services.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public List<Appointment> findByApplicant(Applicant applicant) {
 		// TODO Auto-generated method stub
 		return appointmentRepository.findByApplicant(applicant);
+	}
+
+	@Override
+	public void create(Appointment appointment) {
+		// TODO Auto-generated method stub
+		appointmentRepository.create(appointment);
 	}
 
 }

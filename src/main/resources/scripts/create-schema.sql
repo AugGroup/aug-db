@@ -375,7 +375,7 @@
         DETAIL varchar(255),
         END datetime,
         START datetime,
-        TITLE varchar(255),
+        TOPIC varchar(255),
         APPLICANT_ID integer,
         LOGIN_ID integer,
         primary key (ID)
@@ -706,7 +706,7 @@
     );
 
     create table MAS_DEGREETYPE (
-        DEGREETYPE_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -715,7 +715,7 @@
         CODE varchar(255) not null,
         ISACTIVE bit not null,
         NAME varchar(200) not null,
-        primary key (DEGREETYPE_ID)
+        primary key (ID)
     );
 
     create table MAS_DIVISION (
@@ -1040,7 +1040,7 @@
         add index FK94C37788CA8BBAA (DEGREETYPE_ID), 
         add constraint FK94C37788CA8BBAA 
         foreign key (DEGREETYPE_ID) 
-        references MAS_DEGREETYPE (DEGREETYPE_ID);
+        references MAS_DEGREETYPE (ID);
 
     alter table EMPLOYEE 
         add index FK75C8D6AE20E569EA (EMPLOYMENT_ID), 
