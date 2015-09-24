@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class AugRequestDto {
 
 	@Id
-	@Column(name = "REQUEST_ID")
+	@Column(name = "ID")
 	private Integer id;
 
 	@Column(name = "MAS_JOB_LEVEL_NAME")

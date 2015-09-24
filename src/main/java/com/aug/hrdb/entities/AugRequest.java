@@ -24,7 +24,7 @@ public class AugRequest extends BaseEntity{
 
 	@Id
 	@GeneratedValue
-	@Column(name = "REQUEST_ID")
+	@Column(name = "ID")
 	private Integer id;
 
 	@Column(name = "REQUEST_DATE")
