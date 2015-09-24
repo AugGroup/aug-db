@@ -385,3 +385,10 @@ VALUES (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrow
 --Address
 INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
 VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
+
+--Appointment
+INSERT INTO APPOINTMENT(ID,DETAIL,END,START,TOPIC,APPICANT_ID,LOGIN_ID)
+VALUES (1,'นัดทำข้อสอบและสอบสัมภาษณ์','12.00 am','9.00 am','นัดทำข้อสอบคุณ Yam',1,1),
+(2,'นัดเซ็นสัญญา','2.00 pm','1.00 pm','นัดเซ็นสัญญาคุณ Piyawut',2,2),
+(3,'นัดเซ็นสัญญา','11.00 am','10.00 am','นัดเซ็นสัญญาคุณ Anut',3,2),
+(4,'นัดทำข้อสอบและสอบสัมภาษณ์','12.00 am','10.00 am','นัดทำข้อสอบคุณ Thanatchapong',4,2)
