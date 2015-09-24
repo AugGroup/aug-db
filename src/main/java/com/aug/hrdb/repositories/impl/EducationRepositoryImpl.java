@@ -38,7 +38,7 @@ public class EducationRepositoryImpl extends GenericRepositoryImpl<Education, Se
 
 	@Override
 	public List<EducationDto> searchEducation(Integer id) {
-		Query namedQuery = getCurrentSession().getNamedQuery("SEARCH_EDUCATION").setInteger("empId" ,id);
+		Query namedQuery = getCurrentSession().getNamedQuery("SEARCH_EDUCATION").setInteger("ID" ,id);
 		//namedQuery.executeUpdate();
 		List<EducationDto> edDto = namedQuery.list();
 	     return edDto;

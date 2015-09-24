@@ -12,17 +12,18 @@ import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.MasDegreetype;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREETYPE_ID, ed.FACULTY, ed.MAJOR,"
-		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID"
-		+ " FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
+	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.name, ed.FACULTY, ed.MAJOR, "
+		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID,ed.DEGREETYPE_ID "
+		+ "FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
 		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID = :ID", resultClass = EducationDto.class),
 		
-	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR,"
-		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID"
-		+ " FROM EDUCATION ed WHERE ed.ID =:ID",
+	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR, "
+		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID "
+		+ "FROM EDUCATION ed WHERE ed.ID =:ID",
 		resultClass = EducationDto.class)
 	})
 public class EducationDto {
@@ -47,9 +48,11 @@ public class EducationDto {
 	@Column(name = "GPA")
 	private Double gpa;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "START_DATE")
 	private Date start_date;
 	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "GRADUATED_DATE")
 	private Date graduated_date;
 	
@@ -84,6 +87,14 @@ public class EducationDto {
 
 	public void setDegree(String masdegreetype) {
 		this.masdegreetype = masdegreetype;
+	}
+
+	public Integer getApplicantId() {
+		return applicantId;
+	}
+
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 
 	public String getFaculty() {
