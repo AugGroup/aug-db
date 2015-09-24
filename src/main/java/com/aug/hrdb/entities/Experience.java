@@ -167,11 +167,10 @@ public class Experience extends BaseEntity {
 			experienceDto.setId(this.id);
 			experienceDto.setDateFrom(this.dateFrom);
 			experienceDto.setDateTo(this.dateTo);
-			/*experienceDto.setEmployeeCode(this.employee.getEmployeeCode());
-			experienceDto.setEmployeeId(this.employee.getId());*/
+			experienceDto.setApplicantId(this.applicant.getId());
 			experienceDto.setAddress(this.address);
-			/*experienceDto.setBusinessType(this.businessType);
-			experienceDto.setCompanyName(this.companyName);*/
+			experienceDto.setTypeOfBusiness(typeOfBusiness);
+			experienceDto.setCompanyName(this.companyName);
 			experienceDto.setPosition(this.position);
 			experienceDto.setReference(this.reference);
 			experienceDto.setResponsibility(this.responsibility);
@@ -185,14 +184,14 @@ public class Experience extends BaseEntity {
 			experience.setDateFrom(experienceDto.getDateFrom());
 			experience.setDateTo(experienceDto.getDateTo());
 			experience.setAddress(experienceDto.getAddress());
-			/*experience.setBusinessType(experienceDto.getBusinessType());
-			experience.setCompanyName(experienceDto.getCompanyName());*/
+			experience.setTypeOfBusiness(experienceDto.getTypeOfBusiness());
+			experience.setCompanyName(experienceDto.getCompanyName());
 			experience.setPosition(experienceDto.getPosition());
 			experience.setReference(experienceDto.getReference());
 			experience.setResponsibility(experienceDto.getResponsibility());
 			experience.setSalary(experienceDto.getSalary());
 			experience.setReason(experienceDto.getReason());
-			
+		
 			
 			
 			Applicant applicant = new Applicant();

@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
 				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
-				+ "FROM EXPERIENCE exp LEFT JOIN APPLICANT a on exp.APPLICANT_ID = a.APPLICANT_ID WHERE exp.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
+				+ "FROM EXPERIENCE exp LEFT JOIN APPLICANT a on exp.APPLICANT_ID = a.ID WHERE exp.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
 
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
 				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
@@ -32,8 +32,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.salary, "
 				+ "exp.company_name,"
 				+ "exp.applicant_id "
-				+ "FROM EXPERIENCE as exp, EMPLOYEE as emp , APPLICANT as app "
-				+ "WHERE app.applicant_id=:ID AND exp.applicant_id = app.applicant_id", resultClass = ExperienceDto.class) })
+				+ "FROM EXPERIENCE as exp, APPLICANT as app "
+				+ "WHERE exp.applicant_id=:ID", resultClass = ExperienceDto.class) })
 @Entity
 public class ExperienceDto {
 	
@@ -64,11 +64,11 @@ public class ExperienceDto {
 
 	private long salary;
 
-	public Integer getApplicant() {
+	public Integer getApplicantId() {
 		return applicantId;
 	}
 
-	public void setApplicant(Integer applicantId) {
+	public void setApplicantId(Integer applicantId) {
 		this.applicantId = applicantId;
 	}
 
@@ -144,23 +144,6 @@ public class ExperienceDto {
 		this.responsibility = responsibility;
 	}
 
-	public long getSalary() {
-		return salary;
-	}
-
-	public void setSalary(long salary) {
-		this.salary = salary;
-	}
-		
-
-	public Integer getApplicantId() {
-		return applicantId;
-	}
-
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
-	}
-
 	public String getCompanyName() {
 		return companyName;
 	}
@@ -169,5 +152,12 @@ public class ExperienceDto {
 		this.companyName = companyName;
 	}
 
+	public long getSalary() {
+		return salary;
+	}
+
+	public void setSalary(long salary) {
+		this.salary = salary;
+	}
 	
 }
