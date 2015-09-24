@@ -124,7 +124,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public ApplicantDto saveInformations(ApplicantDto applicantDto) {
 		Applicant applicant = new Applicant();
-		applicant.setTrackingStatus("Pending Test/Interview");
+		applicantDto.setTrackingStatus("Pending Test/Interview");
 		try {
 			applicantRepository.create(applicant.fromApplicantDTO(applicant,applicantDto));
 			
