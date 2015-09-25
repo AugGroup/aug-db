@@ -20,17 +20,20 @@ import javax.persistence.NamedNativeQuery;
             		+ "ref.address, ref.telephone,"
             		+ "ref.occupation,"
             		+ "ref.applicant_id"
-            		+ "from reference as ref"
             		+ " FROM REFERENCE ref WHERE ref.ID =:ID", resultClass = ReferenceDto.class)
 	})
 @Entity
 public class ReferenceDto {
 	@Id
+	@Column(name="ID")
 	private Integer id;	
-	private String name;		
+	@Column(name="NAME")
+	private String name;
+	@Column(name="ADDRESS")
 	private String address;
 	@Column(name="TELEPHONE")
 	private String tel;
+	@Column(name="OCCUPATION")
 	private String occupation;
 	@Column(name="APPLICANT_ID")
 	private Integer applicantId;
