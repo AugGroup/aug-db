@@ -19,7 +19,7 @@ import javax.persistence.NamedNativeQuery;
 					+ "allowances.EMPLOYEE_ID,"
 					+ "mas_allowances.ALLOWANCES_TYPE,"
 					+ "allowances.EMPLOYEE_ID,"
-					+ "mas_allowances.ALLO_ID, "
+					+ "mas_allowances.ID as ALLO_ID, "
 					+ "mas_allowances.AMOUNT_ALLOWANCES "
 					+ "from allowances,"
 					+ "employee as emp ,"
@@ -27,7 +27,7 @@ import javax.persistence.NamedNativeQuery;
 					+ "where "
 					+ "allowances.employee_id=:empId "
 					+ "and allowances.employee_id = emp.id "
-					+ "and allowances.MAS_ALLOWANCES_ID = mas_allowances.ALLO_ID",																																																																					
+					+ "and allowances.MAS_ALLOWANCES_ID = mas_allowances.ID",																																																																					
 			resultClass = AllowancesDto.class)
 			
 })
