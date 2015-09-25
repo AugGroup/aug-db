@@ -175,7 +175,7 @@ public class AbilityServiceTest {
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		ability.setEmployee(employee);
+		//ability.setEmployee(employee);
 		ability.setMasspecialty(masSpecialty);
 		abilityService.create(ability);
 		
@@ -196,7 +196,7 @@ public class AbilityServiceTest {
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		ability.setEmployee(employee);
+		//ability.setEmployee(employee);
 		ability.setMasspecialty(masSpecialty);
 		abilityService.create(ability);
 		

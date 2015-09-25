@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
 import org.apache.commons.codec.language.bm.Languages;
 import org.hibernate.annotations.Index;
 
@@ -248,7 +249,7 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Address> address;
 
-	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Education> educations;
 
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
@@ -259,6 +260,11 @@ public class Applicant extends BaseEntity{
 	
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Certification> certifications;
+	
+	
+	@OneToMany(mappedBy = "applicant",  cascade=CascadeType.REMOVE)
+    private List<Ability> abilities ;
+    
 	
 	//@OneToMany(mappedBy ="applicant")
 	//private List<Appointment> appointments;
@@ -911,6 +917,16 @@ public class Applicant extends BaseEntity{
 		this.joblevel = joblevel;
 	}
 
+	
+	
+	public List<Ability> getAbilities() {
+		return abilities;
+	}
+
+	public void setAbilities(List<Ability> abilities) {
+		this.abilities = abilities;
+	}
+
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());
 		applicant.setFirstNameTH(applicantDto.getFirstNameTH());
@@ -987,4 +1003,5 @@ public class Applicant extends BaseEntity{
 		return applicant;
 
 	}
+	
 }
