@@ -136,7 +136,7 @@ public class FamilyServiceImpl implements FamilyService{
 	public FamilyDto findForInitEdit(FamilyDto family) {
 		// TODO Auto-generated method stub
 
-        Family familyEdit = familyRepository.findLastFamily(new Integer(family.getId()));
+        Family familyEdit = familyRepository.findLastFamily(family.getId());
         Hibernate.initialize(familyEdit.getMasRelationType());
        
         FamilyDto familyDto = new FamilyDto();

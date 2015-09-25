@@ -56,8 +56,8 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 		Criteria c = getCurrentSession().createCriteria(Family.class,"family");
 		c.setFetchMode("applicant",FetchMode.JOIN);
 		c.createAlias("applicant", "employee");
-		c.setFetchMode("masRelation",FetchMode.JOIN);
-		c.createAlias("masRelation", "masRelation");
+		c.setFetchMode("masRelationType",FetchMode.JOIN);
+		c.createAlias("masRelationType", "masRelationType");
 		c.add(Restrictions.eq("id", Id));
 		Family empFamily = (Family)c.uniqueResult();
 		return empFamily;
