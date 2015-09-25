@@ -23,7 +23,21 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAbility",
-			query="select ability.id,ability.rank,mas_specialty.name,ability.employee_id,emp.employee_code,mas_specialty.id from ability as ability ,employee as emp, mas_specialty where ability.employee_id=:empId and ability.employee_id = emp.id and  ability.specialty_id = mas_specialty.ID ",
+			query="select ability.id,ability.rank,mas_specialty.name,"
+					+ "ability.applicant_id,mas_specialty.id "
+					+ "from ability as ability "
+					+ "left join mas_specialty on mas_specialty.ID=ability.specialty_id "
+					+ "left join APPLICANT a on ability.APPLICANT_ID = a.ID WHERE ability.APPLICANT_ID =:ID",
+					/*+ ""
+					+ ",employee as emp, mas_specialty "
+					+ "where ability.employee_id=:empId and ability.employee_id = emp.id"
+					+ " and  ability.specialty_id = mas_specialty.ID ",
+					
+					
+					FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
+							+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
+							*/
+					
 			resultClass = AbilityDto.class)
 			
 	
@@ -45,13 +59,19 @@ public class AbilityDto {
 	@Column(name = "NAME")
 	private String masspecialty;
 	
-	@Column(name ="EMPLOYEE_ID")
+	/*@Column(name ="EMPLOYEE_ID")
 	private Integer employeeId;	
 	@Column(name = "EMPLOYEE_CODE")
 	private String employeeCode;
-	
+	*/
 	@Column(name = "SPEC_ID")
 	private Integer masspecialtyId;
+	
+	
+	
+	@Column(name="APPLICANT_ID")
+	private Integer applicantId;
+	
 	
 	public Integer getId() {
 		return id;
@@ -71,7 +91,7 @@ public class AbilityDto {
 
 	
 
-	public Integer getEmployeeId() {
+/*	public Integer getEmployeeId() {
 		return employeeId;
 	}
 
@@ -85,7 +105,7 @@ public class AbilityDto {
 
 	public void setEmployeeCode(String employeeCode) {
 		this.employeeCode = employeeCode;
-	}
+	}*/
 
 	public String getMasspecialty() {
 		return masspecialty;
@@ -101,6 +121,14 @@ public class AbilityDto {
 
 	public void setMasspecialtyId(Integer masspecialtyId) {
 		this.masspecialtyId = masspecialtyId;
+	}
+
+	public Integer getApplicantId() {
+		return applicantId;
+	}
+
+	public void setApplicantId(Integer applicantId) {
+		this.applicantId = applicantId;
 	}
 
 	

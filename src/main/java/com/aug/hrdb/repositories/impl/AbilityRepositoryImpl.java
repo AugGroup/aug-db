@@ -37,7 +37,7 @@ public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability,Integer
 
 	@SuppressWarnings("unchecked")
 	public List<AbilityDto> searchAbility(Integer id) {
-		Query namedQuery = getCurrentSession().getNamedQuery("searchAbility").setInteger("empId" ,id);
+		Query namedQuery = getCurrentSession().getNamedQuery("searchAbility").setInteger("ID" ,id);
 		//namedQuery.executeUpdate();
 		List<AbilityDto> abiDto = namedQuery.list();
 	     return abiDto;

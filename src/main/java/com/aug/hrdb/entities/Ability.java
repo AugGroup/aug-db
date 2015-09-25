@@ -36,11 +36,16 @@ public class Ability extends BaseEntity  {
 	private Integer rank;
 	
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	
+	@ManyToOne
+	@JoinColumn(name="APPLICANT_ID")
+	private Applicant applicant;
+	
+	/*@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "EMPLOYEE_ID",nullable = false,referencedColumnName="id")
 	private Employee employee;
 	
-	
+	*/
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "SPECIALTY_ID",nullable = false,referencedColumnName="ID")
 //	@JsonIgnore
@@ -69,14 +74,14 @@ public class Ability extends BaseEntity  {
 
 
 
-    public Employee getEmployee() {
+  /*  public Employee getEmployee() {
 		return employee;
 	}
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
-
+*/
 	
 		public MasSpecialty getMasspecialty() {
 		return masspecialty;
@@ -89,12 +94,21 @@ public class Ability extends BaseEntity  {
 	
  
 	
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(Applicant applicant) {
+		this.applicant = applicant;
+	}
+
 	public AbilityDto toAbilityDto(){
 		AbilityDto abilityDto = new AbilityDto();
 		abilityDto.setId(this.id);
 		abilityDto.setRank(this.rank);
-		abilityDto.setEmployeeCode(this.employee.getEmployeeCode());
-		abilityDto.setEmployeeId(this.employee.getId());
+		/*abilityDto.setEmployeeCode(this.employee.getEmployeeCode());
+		abilityDto.setEmployeeId(this.employee.getId());*/
+		abilityDto.setApplicantId(this.applicant.getId());
 		abilityDto.setMasspecialtyId(this.masspecialty.getId());
 		abilityDto.setMasspecialty(this.masspecialty.getName());;
 		return abilityDto;
@@ -106,14 +120,21 @@ public class Ability extends BaseEntity  {
 		//ability.setId(abilityDto.getId());
 		ability.setRank(abilityDto.getRank());
 		
+		
+		Applicant applicant = new Applicant();
+		applicant.setId(abilityDto.getId());
+		ability.setApplicant(applicant);
+		
+		
+		
 		MasSpecialty masspecialty=new MasSpecialty();
 		masspecialty.setId(abilityDto.getMasspecialtyId());
 		masspecialty.setName(abilityDto.getMasspecialty());
 		ability.setMasspecialty(masspecialty);
 		
-		Employee employee = new Employee();
-		employee.setId(abilityDto.getEmployeeId());
-		ability.setEmployee(employee);
+		/*Employee employee = new Employee();
+		employee.setId(abilityDto.getEmployeeId());*/
+		//ability.setEmployee(employee);
 		return ability;
 		
 	}

@@ -172,7 +172,7 @@ public class AbilityRepositoryTest {
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		ability.setEmployee(employee);
+		//ability.setEmployee(employee);
 		ability.setMasspecialty(maspecialty);
 		abilityRepository.create(ability);
 	
@@ -202,7 +202,7 @@ public class AbilityRepositoryTest {
 		ability.setAuditFlag("C");
 		ability.setCreatedBy(1);
 		ability.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		ability.setEmployee(employee);
+		//ability.setEmployee(employee);
 		ability.setMasspecialty(maspecialty);
 		abilityRepository.create(ability);
 	

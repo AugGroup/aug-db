@@ -315,9 +315,9 @@ public class Employee extends BaseEntity{
     @JsonIgnore
     private MasEmployment masEmployment;
     
-    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Ability> abilities = new HashSet<Ability>();
-    
+    */
 
     /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
     private Set<Reference> references = new HashSet<Reference>();*/
@@ -1041,7 +1041,7 @@ public class Employee extends BaseEntity{
 
 
 
-	public Set<Ability> getAbilities() {
+	/*public Set<Ability> getAbilities() {
 		return abilities;
 	}
 
@@ -1049,7 +1049,7 @@ public class Employee extends BaseEntity{
 
 	public void setAbilities(Set<Ability> abilities) {
 		this.abilities = abilities;
-	}
+	}*/
 
 
 	/*public Set<Reference> getReferences() {
