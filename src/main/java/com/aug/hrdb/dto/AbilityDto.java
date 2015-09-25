@@ -23,11 +23,13 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAbility",
-			query="select ability.id,ability.rank,mas_specialty.name,"
-					+ "ability.applicant_id,mas_specialty.id as SPEC_ID"
-					+ "from ability as ability "
-					+ "left join mas_specialty on mas_specialty.ID=ability.specialty_id "
-					+ "left join APPLICANT a on ability.APPLICANT_ID = a.ID WHERE ability.APPLICANT_ID=:ID",
+			query="select ability.id, "
+					+ "ability.rank, "
+					+ "mas_specialty.name, "
+					+ "ability.applicant_id,"
+					+ "mas_specialty.id as SPEC_ID "
+					+ "from ability, mas_specialty "
+					+ "WHERE ability.APPLICANT_ID=:ID and ability.specialty_id = mas_specialty.id",
 					/*+ ""
 					+					+ ",employee as emp, mas_specialty "
 					+					+ "where ability.employee_id=:empId and ability.employee_id = emp.id"

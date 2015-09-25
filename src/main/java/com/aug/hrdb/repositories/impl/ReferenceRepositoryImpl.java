@@ -33,7 +33,7 @@ public class ReferenceRepositoryImpl extends GenericRepositoryImpl<Reference, In
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<ReferenceDto> searchReference(Integer id) {
-		 Query   namedQuery = getCurrentSession().getNamedQuery("searchReference").setInteger("appId" ,id);
+		 Query   namedQuery = getCurrentSession().getNamedQuery("searchReference").setInteger("empId" ,id);
 			List<ReferenceDto> refDto = namedQuery.list();
 			return refDto;
 	}
