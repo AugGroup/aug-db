@@ -14,7 +14,7 @@ import javax.persistence.NamedNativeQuery;
             		+ "ref.address, "
             		+ "ref.telephone, "
             		+ "ref.occupation, "
-            		+ "ref.applicant_id, "
+            		+ "ref.applicant_id "
             		+ "from reference as ref "
             		+ "inner join employee as emp "
             		+ "on emp.id=:empId and ref.applicant_id=emp.applicant_id",
