@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.salary, "
 				+ "exp.company_name,"
 				+ "exp.applicant_id "
-				+ "FROM EXPERIENCE as exp, APPLICANT as app "
+				+ "FROM EXPERIENCE as exp "
 				+ "WHERE exp.applicant_id=:ID", resultClass = ExperienceDto.class) })
 @Entity
 public class ExperienceDto {
