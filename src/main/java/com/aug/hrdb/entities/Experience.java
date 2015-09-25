@@ -64,6 +64,9 @@ public class Experience extends BaseEntity {
 
 	@Column(name = "SALARY")
 	private long salary;
+	
+	@Column(name= "DATE_WORK")
+	private String applyDateStr;
 
 	public Integer getId() {
 		return id;
@@ -162,7 +165,15 @@ public class Experience extends BaseEntity {
 	}
 	
 
-	 public ExperienceDto toExperienceDto() {
+	 public String getApplyDateStr() {
+		return applyDateStr;
+	}
+
+	public void setApplyDateStr(String applyDateStr) {
+		this.applyDateStr = applyDateStr;
+	}
+
+	public ExperienceDto toExperienceDto() {
 			ExperienceDto experienceDto = new ExperienceDto();
 			experienceDto.setId(this.id);
 			experienceDto.setDateFrom(this.dateFrom);

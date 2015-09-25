@@ -8,7 +8,7 @@ import javax.persistence.NamedNativeQuery;
 
 @NamedNativeQueries({
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATION c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.APPLICANT_ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
+		+ " FROM CERTIFICATION c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID"
 		+ " FROM CERTIFICATION c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDto.class),
