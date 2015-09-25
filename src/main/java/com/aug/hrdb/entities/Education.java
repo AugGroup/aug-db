@@ -158,7 +158,7 @@ public EducationDto toEducationDto() {
 	
 	public Education fromEducationDto(Education education, EducationDto educationDto) {
 		
-//		education.setId(educationDto.getId());
+		education.setId(educationDto.getId());
 		education.setUniversity(educationDto.getUniversity());
 		education.setGpa(educationDto.getGpa());
 		education.setFaculty(educationDto.getFaculty());

@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.aug.hrdb.dto.LeaveDto;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 
@@ -55,12 +56,12 @@ public class Leave extends BaseEntity {
 	
 	
 	
-	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy hh:mm a")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy hh:mm a")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="START_TIME")
 	private  Date startTime;
 	
-	//@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy hh:mm a")
+	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="dd-MM-yyyy hh:mm a")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="END_TIME")
 	private Date endTime;
