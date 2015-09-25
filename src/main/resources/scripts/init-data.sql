@@ -394,17 +394,4 @@ VALUES
 (3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
 (4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2)
 
---FAMILY
-INSERT INTO EMP_EMPLOYEEFAMILY(
- AUDITFLAG,
- CREATEDBY,
- CREATEDTIMESTAMP,
- ADDRESS,
- AGE,
- NAME,
- GENDER,
- TELEPHONE,
- APPLICANT_ID,
- MASRELATION_ID
-) values
-('C',0,NOW(),'7/7 m.8 nongsamwong nongsua pathumtani 12170',24,'AAA','Female','0890851022',1,1);
+
