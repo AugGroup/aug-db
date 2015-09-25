@@ -23,6 +23,7 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAbility",
+
 			query="select ability.id, "
 					+ "ability.rank, "
 					+ "mas_specialty.name, "
@@ -39,6 +40,7 @@ import javax.persistence.NamedNativeQuery;
 					+					FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
 					+							+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
 					+							*/
+
 									
 					resultClass = AbilityDto.class)	
 })
