@@ -191,15 +191,7 @@ public class Experience extends BaseEntity {
 			experience.setResponsibility(experienceDto.getResponsibility());
 			experience.setSalary(experienceDto.getSalary());
 			experience.setReason(experienceDto.getReason());
-		
-			
-			
-			Applicant applicant = new Applicant();
-			applicant.setId(experienceDto.getId());
-			experience.setApplicant(applicant);;
-			
-			
-			
+
 			
 			return experience;
 		}
