@@ -36,11 +36,11 @@ public class Appointment {
 	private Date end;
 	
 	@ManyToOne
-	@JoinColumn(name = "APPLICANT_ID")
+	@JoinColumn(name = "APPLICANT_ID", referencedColumnName="ID")
 	private Applicant applicant;
 	
 	@ManyToOne
-	@JoinColumn(name = "LOGIN_ID")
+	@JoinColumn(name = "LOGIN_ID", referencedColumnName="ID")
 	private Login login;
 
 	public Integer getId() {
