@@ -11,12 +11,12 @@ import javax.persistence.NamedNativeQuery;
 		+ " FROM CERTIFICATION c LEFT JOIN APPLICANT a on c.APPLICANT_ID = a.ID WHERE c.APPLICANT_ID = :ID", resultClass = CertificationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_CERTIFICATE_ID", query = "SELECT c.ID, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID"
-		+ " FROM CERTIFICATION c WHERE c.CERTIFICATE_ID = :ID", resultClass = CertificationDto.class),
+		+ " FROM CERTIFICATION c WHERE c.ID = :ID", resultClass = CertificationDto.class),
 		
 	@NamedNativeQuery(name = "searchCertification",
 					  query = "SELECT c.id, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID "
 					  			+ "FROM CERTIFICATION c "	
-							    + "WHERE c.APPLICANT_ID =:ID", resultClass = CertificationDto.class)	
+							    + "WHERE c.ID =:ID", resultClass = CertificationDto.class)	
 	})
 
 
