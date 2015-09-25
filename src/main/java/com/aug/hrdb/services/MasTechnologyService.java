@@ -11,6 +11,4 @@ public interface MasTechnologyService {
 	public void delete(MasTechnology masTechnology);
 	public MasTechnology find(Integer Id);
 	public List<MasTechnology> findAll();
-	
-
 }

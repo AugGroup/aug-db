@@ -32,12 +32,4 @@ public class MasCoreSkillRepositoryImpl extends GenericRepositoryImpl<MasCoreSki
 		MasCoreSkill masCoreSkill =(MasCoreSkill)getCurrentSession().load(MasCoreSkill.class, id);
 		getCurrentSession().delete(masCoreSkill);
 		}
-
-	@Override
-	public List<MasCoreSkill> findByIdMasCoreSkills(Integer id) {
-        return (List<MasCoreSkill>) getCurrentSession().get(MasCoreSkill.class, id);
-
-	}
-	
-
 }

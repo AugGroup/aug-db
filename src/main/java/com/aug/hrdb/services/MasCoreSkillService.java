@@ -19,6 +19,4 @@ public interface MasCoreSkillService {
 	public MasCoreSkill find(Integer id);
 	public List<MasCoreSkill> findAll();
 	public List<MasCoreSkill> findByCriteria(MasCoreSkill masCoreSkill);
-	public void deleteById(Integer id);
-	public List<MasCoreSkill> findByIdMasCoreSkills(Integer id);
 }

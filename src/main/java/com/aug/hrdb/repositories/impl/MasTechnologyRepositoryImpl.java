@@ -1,5 +1,7 @@
 package com.aug.hrdb.repositories.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.entities.MasTechnology;

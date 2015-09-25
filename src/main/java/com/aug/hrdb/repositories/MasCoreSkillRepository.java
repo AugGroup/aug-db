@@ -10,6 +10,4 @@ public interface MasCoreSkillRepository extends GenericRepository<MasCoreSkill, 
 
 	public List<MasCoreSkill> findByCriteria(MasCoreSkill masCoreSkill);
 	public void deleteById(Integer id);
-	public List<MasCoreSkill> findByIdMasCoreSkills(Integer id);
-
 }
