@@ -24,12 +24,10 @@ import org.springframework.stereotype.Component;
 					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID "
 					+ "where address.APPLICANT_ID=:appId",
 			resultClass = AddressDto.class),
-	@NamedNativeQuery(name = "SEARCH_ADDRESS_ID", query = "select address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,"
-					+ "address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,"
-					+ "address.ZIPCODE,address.ID"
-					+ "join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
-					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID "
-					+ " FROM ADDRESS address WHERE address.ID = :ID", resultClass = AddressDto.class)
+	@NamedNativeQuery(name = "SEARCH_ADDRESS_ID", query = "select null as APPLICANT_ID,address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,"
+					+ "address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE"
+					+ " FROM ADDRESS address join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
+					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID WHERE address.ID = :ID", resultClass = AddressDto.class)
 })
 
 @Component
