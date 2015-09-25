@@ -28,11 +28,11 @@ public class Appointment {
 	private String detail;
 	
 	@Column(name = "START")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
 	@Column(name = "END")
-    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date end;
 	
 	@ManyToOne
@@ -98,6 +98,14 @@ public class Appointment {
 	public void setLogin(Login login) {
 		this.login = login;
 	}
+
+	@Override
+	public String toString() {
+		return "Appointment [id=" + id + ", topic=" + topic + ", detail="
+				+ detail + ", start=" + start + ", end=" + end + ", applicant="
+				+ applicant + ", login=" + login + "]";
+	}
+	
 	
 	
 }
