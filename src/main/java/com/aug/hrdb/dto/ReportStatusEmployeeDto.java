@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 						+"emp.DATEOFBIRTH as dateOfBirth, "
 						+"emp.AGE as age, "
 						+"staff.STAFFTYPENAME as statusStaff, "
-						+"EMP_OFFICIAL.START_WORK_DATE as startWorkDate, "
+						+"OFFICIAL.START_WORK_DATE as startWorkDate, "
 						+"site.PROJECTOWNER as projectOwner, "
 						+"site.STARTDATE as startDate, "
 						+"site.ENDDATE as endDate, "			
@@ -36,8 +36,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 						+"MONTH(curdate()) - MONTH(START_WORK_DATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(START_WORK_DATE), '/', DAY(START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthwork, "
 						+"DAY(curdate()) - DAY(START_WORK_DATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(START_WORK_DATE), '/', DAY(START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as daywork "
 						+"from EMPLOYEE as emp "
-						+"join EMP_SITE as site on site.employee_ID = emp.ID "
-						+"join EMP_OFFICIAL on emp.OFFICIAL_ID = EMP_OFFICIAL.ID "
+						+"join SITE as site on site.employee_ID = emp.ID "
+						+"join OFFICIAL on emp.OFFICIAL_ID = OFFICIAL.ID "
 						+"join MAS_STAFFTYPE as staff on staff.ID = emp.ID " 
 						+"where staff.STAFFTYPENAME like :statusStaff",
 		
