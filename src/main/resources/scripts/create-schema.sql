@@ -43,6 +43,14 @@
         drop 
         foreign key FK2868EF7F548E13EB;
 
+    alter table AUG_REQUEST 
+        drop 
+        foreign key FK218E0C3C881F2B7;
+
+    alter table AUG_REQUEST 
+        drop 
+        foreign key FK218E0C3981C202D;
+
     alter table CARD 
         drop 
         foreign key FK1F73109B593F69;
@@ -295,7 +303,7 @@
     );
 
     create table APPLICANT (
-        APPLICANT_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -367,7 +375,7 @@
         WEIGHT integer,
         MASJOBLEVEL_ID integer not null,
         MASTECHNOLOGY_ID integer not null,
-        primary key (APPLICANT_ID)
+        primary key (ID)
     );
 
     create table APPOINTMENT (
@@ -382,7 +390,7 @@
     );
 
     create table AUG_REQUEST (
-        REQUEST_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -396,7 +404,9 @@
         SPECIFIC_SKILL varchar(255),
         STATUS varchar(255),
         YEAR_EXPERIENCE integer,
-        primary key (REQUEST_ID)
+        REQUEST_MASJOBLEVEL integer,
+        REQUEST_MASTECHNOLOGY integer,
+        primary key (ID)
     );
 
     create table CARD (
@@ -678,7 +688,7 @@
     );
 
     create table MAS_ALLOWANCES (
-        ALLO_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -688,7 +698,7 @@
         AMOUNT_ALLOWANCES double precision,
         CODE varchar(255) not null,
         ISACTIVE bit not null,
-        primary key (ALLO_ID)
+        primary key (ID)
     );
 
     create table MAS_CORESKILL (
@@ -758,7 +768,7 @@
     );
 
     create table MAS_LEAVETYPE (
-        LEAVETYPE_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -767,7 +777,7 @@
         CODE varchar(255) not null,
         ISACTIVE bit not null,
         NAME varchar(255) not null,
-        primary key (LEAVETYPE_ID)
+        primary key (ID)
     );
 
     create table MAS_LOCATION (
@@ -822,7 +832,7 @@
     );
 
     create table MAS_SPECIALTY (
-        SPEC_ID integer not null auto_increment,
+        ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
@@ -831,7 +841,7 @@
         CODE varchar(255) not null,
         ISACTIVE bit,
         NAME varchar(255) not null,
-        primary key (SPEC_ID)
+        primary key (ID)
     );
 
     create table MAS_STAFFTYPE (
@@ -956,7 +966,7 @@
         add index FKE33D410A4FFE234A (SPECIALTY_ID), 
         add constraint FKE33D410A4FFE234A 
         foreign key (SPECIALTY_ID) 
-        references MAS_SPECIALTY (SPEC_ID);
+        references MAS_SPECIALTY (ID);
 
     alter table ABILITY 
         add index FKE33D410A9B593F69 (EMPLOYEE_ID), 
@@ -968,7 +978,7 @@
         add index FKE66327D4548E13EB (APPLICANT_ID), 
         add constraint FKE66327D4548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table ADDRESS 
         add index FKE66327D44094956A (ADDRESSTYPE_ID), 
@@ -992,7 +1002,7 @@
         add index FKCD0A575BA405A4AA (MAS_ALLOWANCES_ID), 
         add constraint FKCD0A575BA405A4AA 
         foreign key (MAS_ALLOWANCES_ID) 
-        references MAS_ALLOWANCES (ALLO_ID);
+        references MAS_ALLOWANCES (ID);
 
     alter table APPLICANT 
         add index FK29852EE28EBCA94B (MASJOBLEVEL_ID), 
@@ -1016,7 +1026,19 @@
         add index FK2868EF7F548E13EB (APPLICANT_ID), 
         add constraint FK2868EF7F548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
+
+    alter table AUG_REQUEST 
+        add index FK218E0C3C881F2B7 (REQUEST_MASTECHNOLOGY), 
+        add constraint FK218E0C3C881F2B7 
+        foreign key (REQUEST_MASTECHNOLOGY) 
+        references MAS_TECHNOLOGY (ID);
+
+    alter table AUG_REQUEST 
+        add index FK218E0C3981C202D (REQUEST_MASJOBLEVEL), 
+        add constraint FK218E0C3981C202D 
+        foreign key (REQUEST_MASJOBLEVEL) 
+        references MAS_JOBLEVEL (ID);
 
     alter table CARD 
         add index FK1F73109B593F69 (EMPLOYEE_ID), 
@@ -1028,13 +1050,13 @@
         add index FK93536C9A548E13EB (APPLICANT_ID), 
         add constraint FK93536C9A548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table EDUCATION 
         add index FK94C37788548E13EB (APPLICANT_ID), 
         add constraint FK94C37788548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table EDUCATION 
         add index FK94C37788CA8BBAA (DEGREETYPE_ID), 
@@ -1052,7 +1074,7 @@
         add index FK75C8D6AE548E13EB (APPLICANT_ID), 
         add constraint FK75C8D6AE548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table EMPLOYEE 
         add index FK75C8D6AEB0E87A49 (OFFICIAL_ID), 
@@ -1106,13 +1128,13 @@
         add index FK17D0456A548E13EB (APPLICANT_ID), 
         add constraint FK17D0456A548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table FAMILY 
         add index FK7B2B4F64548E13EB (APPLICANT_ID), 
         add constraint FK7B2B4F64548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table FAMILY 
         add index FK7B2B4F6430240285 (MASRELATION_ID), 
@@ -1136,13 +1158,13 @@
         add index FKCE788358548E13EB (APPLICANT_ID), 
         add constraint FKCE788358548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table LEAVES 
         add index FK859B7C9CFC5BE8A (LEAVETYPE_ID), 
         add constraint FK859B7C9CFC5BE8A 
         foreign key (LEAVETYPE_ID) 
-        references MAS_LEAVETYPE (LEAVETYPE_ID);
+        references MAS_LEAVETYPE (ID);
 
     alter table LEAVES 
         add index FK859B7C9C9B593F69 (EMPLOYEE_ID), 
@@ -1178,7 +1200,7 @@
         add index FKE782F6F2548E13EB (APPLICANT_ID), 
         add constraint FKE782F6F2548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table PROBATION 
         add index FK62EA74A09B593F69 (EMPLOYEE_ID), 
@@ -1196,7 +1218,7 @@
         add index FK6EF34F2B548E13EB (APPLICANT_ID), 
         add constraint FK6EF34F2B548E13EB 
         foreign key (APPLICANT_ID) 
-        references APPLICANT (APPLICANT_ID);
+        references APPLICANT (ID);
 
     alter table REWARD 
         add index FK8FE2432F9B593F69 (EMPLOYEE_ID), 
