@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.NAME, ed.FACULTY, ed.MAJOR, "
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID,ed.DEGREETYPE_ID "
 		+ "FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
-		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.APPLICANT_ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
+		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
 		
 	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREE, ed.FACULTY, ed.MAJOR, "
 		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID "
