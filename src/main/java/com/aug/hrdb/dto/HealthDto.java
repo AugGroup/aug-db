@@ -25,7 +25,7 @@ import org.hibernate.annotations.NamedNativeQuery;
               		+ "WHEN CONGENITAL_DISEASE_SPECIFIED1=''&&CONGENITAL_DISEASE_SPECIFIED2=''&&CONGENITAL_DISEASE_SPECIFIED3!=''  THEN CONGENITAL_DISEASE_SPECIFIED3 "
               		+ "ELSE '' "
               		+ "END ) AS CONGENITAL_DISEASE_SPECIFIED "
-              		+ "from  EMP_HEALTH  health join EMP_EMPLOYEE emp on health.EMPLOYEE_ID=emp.ID "
+              		+ "from  HEALTH  health join EMPLOYEE emp on health.EMPLOYEE_ID=emp.ID "
               		+ "where health.EMPLOYEE_ID=:empId",
             resultClass = HealthDto.class)
   })
