@@ -14,7 +14,7 @@ import javax.persistence.NamedNativeQuery;
             query = "Select emp.id, "
             		+ "emp.employee_code as employeeCode,"
             		+ "official.start_work_date as startWorkDate, "
-            		+"exp.salary as salary, "
+            		+ "exp.salary as salary, "
             		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
             		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
             		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
@@ -31,11 +31,11 @@ import javax.persistence.NamedNativeQuery;
             		+ "mas_division.name as divisionName, "
             		+ "mas_technology.name as technologyName "
             		+ "from employee as emp "
-            		+ "join official as official on emp.official_id = official.id "
-            		+ "join mas_employment on emp.employment_id = mas_employment.id "
-            		+ "join mas_division on emp.division_id = mas_division.id "
-            		+ "join mas_technology on emp.technology_id = mas_technology.id "
-            		+ "join experience as exp on exp.applicant_id =emp.applicant_id "
+            		+ "left join official as official on emp.official_id = official.id "
+            		+ "left join mas_employment on emp.employment_id = mas_employment.id "
+            		+ "left join mas_division on emp.division_id = mas_division.id "
+            		+ "left join mas_technology on emp.technology_id = mas_technology.id "
+            		+ "left join experience as exp on exp.applicant_id =emp.applicant_id "
             		+ "where emp.name_eng like :name", 
             resultClass = ReportEmployeeDto.class),
             @NamedNativeQuery(
