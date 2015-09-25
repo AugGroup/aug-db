@@ -20,7 +20,7 @@ import org.hibernate.annotations.NamedNativeQuery;
                       		+ "lang.applicant_id as APPLICANT_ID "
                       		//+ "emp.ID as EMPLOYEE_ID "                     		
                       		+ "from LANGUAGE as lang,APPLICANT as app, EMPLOYEE as emp "
-                      		+ "where app.applicant_id =:appId and emp.applicant_id = lang.applicant_id", 
+                      		+ "where app.id =:appId and emp.applicant_id = lang.applicant_id", 
                        		resultClass = LanguageDto.class),
     @NamedNativeQuery(name = "SEARCH_LANGUAGES_ID", query = "select language.ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING, "

@@ -102,17 +102,23 @@ public class FamilyServiceImpl implements FamilyService{
 			family.setMasRelationType(masRelationType);		
 		}
 		
-		family.setAuditFlag("C");
-		family.setCreatedBy(familyDto.getEmployeeId());
-		Calendar cal = Calendar.getInstance();
-		family.setCreatedTimeStamp(cal.getTime());
+		//family.setAuditFlag("C");
+		//family.setCreatedBy(familyDto.getEmployeeId());
+		//Calendar cal = Calendar.getInstance();
+		//family.setCreatedTimeStamp(cal.getTime());
 		
 		
 		Applicant applicant = new Applicant();
-		if(familyDto.getAppId()!=null){
-			applicant = applicantRepo.find(familyDto.getAppId());
+		
+		System.out.println("app: "+familyDto.getAppId());
+		applicant = applicantRepo.find(familyDto.getAppId());
+		
+		
+		if(applicant!=null){
+			family.setApplicant(applicant);
+			System.out.println("appid: "+applicant.getId());
 		}
-		family.setApplicant(applicant);
+		
 		family.setFamilyName(familyDto.getFamilyName());
 		family.setAge(familyDto.getAge());
 		family.setAddress(familyDto.getAddress());
@@ -131,7 +137,7 @@ public class FamilyServiceImpl implements FamilyService{
 		// TODO Auto-generated method stub
 
         Family familyEdit = familyRepository.findLastFamily(new Integer(family.getId()));
-        Hibernate.initialize(familyEdit);
+        Hibernate.initialize(familyEdit.getMasRelationType());
        
         FamilyDto familyDto = new FamilyDto();
         familyDto.setId(familyEdit.getId());
