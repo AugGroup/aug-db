@@ -24,6 +24,7 @@ import org.hibernate.annotations.Index;
 
 import com.aug.hrdb.dto.ApplicantDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "APPLICANT")
@@ -237,31 +238,39 @@ public class Applicant extends BaseEntity{
 	@Column(name = "IMAGE")
 	private String image;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Reference> references;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Family> families;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private Set<Language> languages;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Address> address;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Education> educations;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<MasCoreSkill> masCoreSkills;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Experience> experiences;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Certification> certifications;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",  cascade=CascadeType.REMOVE)
     private List<Ability> abilities ;
     
@@ -272,6 +281,7 @@ public class Applicant extends BaseEntity{
 	@Transient
 	private String reportType;
 	
+	@JsonIgnore
 	@OneToOne(mappedBy="applicant")
 	private Employee employee;
 	

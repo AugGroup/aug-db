@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="MAS_JOBLEVEL")
 public class MasJoblevel extends BaseEntity {
@@ -29,6 +31,7 @@ public class MasJoblevel extends BaseEntity {
 	@Column(name = "ISACTIVE" ,nullable = false)
 	private Boolean isActive;
 
+	@JsonIgnore
 	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
 	private Set<Applicant> applicants = new HashSet<Applicant>();
 

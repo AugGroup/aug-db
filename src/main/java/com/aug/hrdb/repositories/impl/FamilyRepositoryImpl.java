@@ -91,8 +91,8 @@ public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer>
 
 	@Override
 	public List<FamilyDto> findFamilyById(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_FAMILY");
-		query.setParameter("ID", id);
+		Query query = getCurrentSession().getNamedQuery("listFamily");
+		query.setParameter("appId", id);
 		List<FamilyDto> result = query.list();
 		System.out.println("QUERYADDRESS :: " + result);
 		return result;

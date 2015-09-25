@@ -231,7 +231,7 @@ INSERT INTO MAS_RELATIONTYPE(
  RELATIONTYPE
 ) values
 ('C','01',0,NOW(),true,'SON'),
-('C','2',0,NOW(),true,'DAUGTHER');
+('C','02',0,NOW(),true,'DAUGTHER');
 
 
 --MASLEAVETYPE
@@ -384,6 +384,13 @@ VALUES (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrow
 --Address
 INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
 VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
+
+--Family
+insert INTO FAMILY (APPLICANT_ID,MASRELATION_ID,ADDRESS,NAME,AGE,GENDER,OCCUPATION,POSITION,TELEPHONE,auditFlag,createdBy,createdTimeStamp) VALUES 
+('1','2','House No.197, Charoenrat Road, Watgate sub-district, Mueang Chiang Mai district, Chiang Mai province, 50000, Thailand','Olivia','23','Female','Photographer','Manager','021234567','C',0,NOW()),
+('2','2','888 Ekachai Road, Soi Kamnanmaen 7, Sub-soi 1, Bangbon Sub-district, Bangbon District, Bangkok 10150','Michael','33','Male','Doctor','Manager','0890111111','C',0,NOW()),
+('3','1','No.115, Moo 2, San Klang Sub District, San Kam Peang District, Chiangmai','Daniel','30','Male','Scientist','Manager','0890111222','C',0,NOW()),
+('4','1','House No.39, Village No.3, Nhong Kwai sub-district, Chiang Mai','Emily','28','Female','Engineer','Manager','0890144321','C',0,NOW());
 
 
 --Appointment
