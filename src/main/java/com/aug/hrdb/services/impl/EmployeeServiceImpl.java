@@ -129,7 +129,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public Employee findById(Integer Id) {
-		return employeeRepository.find(Id);
+		
+		return  employeeRepository.find(Id);
 	}
 
 	@Override
@@ -295,9 +296,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				
 		//Save Official 
 		Official official = new Official();
-		official.setAuditFlag("C");
-		official.setCreatedBy(0);
-		official.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		official.setStartWorkDate(employeeDto.getStartWorkDate());
 		official.setEndWorkDate(employeeDto.getEndWorkDate());
 		official.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
@@ -433,9 +431,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 		
 		employee.setOfficial(official);
-		employee.setAuditFlag("C");
-		employee.setCreatedBy(0);
-		employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		Applicant applicant = applicantService.findById(employeeDto.getApplicateId());
 		if(employeeDto.getApplicateId()!=null){
@@ -464,58 +459,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		
-		//Update CreatedBy Official
-		official.setCreatedBy(employee.getId());
-		afficialService.update(official);
-				
-		
-		//Save Address
-		/*if(employeeDto.getAddressList()!=null){
-			
-			for(AddressDto addressDto:employeeDto.getAddressList()){
-				if(addressDto.getId()!=null){
-					
-					Address address = new Address();
-					address.setHouseNo(addressDto.getHouseNo());
-					address.setSubDistrict(addressDto.getSubDistrict());
-					address.setDistrict(addressDto.getSubDistrict());
-					address.setRoad(addressDto.getRoad());
-					
-					
-					MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
-					if(masProvince!=null){
-						address.setProvince(masProvince);
-					}
-					
-					MasAddressType masAddressType = masAddressTypeService.findById(addressDto.getAddressTypeId());
-					if(masProvince!=null){
-						address.setAddressType(masAddressType);
-					}
-					
-					address.setZipcode(addressDto.getZipcode());
-					
-								
-					if(applicant!=null){
-						address.setApplicant(applicant);
-					}
-					
-					address.setAuditFlag("C");
-					address.setCreatedBy(employee.getId());
-					address.setCreatedTimeStamp(Calendar.getInstance().getTime());
-					
-					List<Address> addressList = new ArrayList<Address>();
-					addressList.add(address);
-					
-					addressService.create(address);
-
-				}
-			}
-		}*/
 		
 		
-		
-		//System.out.println("add size: "+employeeDto.getAddressList().size());
-
+		//Address
 		if(employeeDto.getAddressList()!=null){
 			
 			
@@ -557,9 +503,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 									address.setApplicant(applicant);
 								}
 							
-								address.setAuditFlag("C");
-								address.setCreatedBy(employee.getId());
-								address.setCreatedTimeStamp(Calendar.getInstance().getTime());
 								
 								List<Address> addressList = new ArrayList<Address>();
 								addressList.add(address);
@@ -595,9 +538,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 									address.setApplicant(applicant);
 								}
 									
-								address.setAuditFlag("U");
-								address.setUpdatedBy(employee.getId());
-								address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 								
 								List<Address> addressList = new ArrayList<Address>();
 								addressList.add(address);
@@ -623,20 +563,20 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employee;
 	}
 
+	
+	
 	@Override
-	public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode) throws DataIntegrityViolationException {
+	@Transactional
+	public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode,String img) throws DataIntegrityViolationException {
 		// TODO Auto-generated method stub
 		
-		Employee employee = employeeRepository.find(employeeDto.getId());
-		Hibernate.initialize(employee.getOfficial());
+		 Employee employee = employeeRepository.find(employeeDto.getId());
+		 Hibernate.initialize(employee.getOfficial());
 		
 		//update official if id is null but id not null it change to save
 		
 		if(employee.getOfficial()==null){
 			Official official = new Official();
-			//official.setAuditFlag("C");
-			//official.setCreatedBy(0);
-			//official.setCreatedTimeStamp(Calendar.getInstance().getTime());
 			official.setStartWorkDate(employeeDto.getStartWorkDate());
 			official.setEndWorkDate(employeeDto.getEndWorkDate());
 			official.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
@@ -660,9 +600,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				official1.setSalaryExpected(employeeDto.getSalaryExpected());
 				official1.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
 				official1.setProbationDate(employeeDto.getProbationDate());
-				//official1.setAuditFlag("U");
-				//official1.setUpdatedBy(employeeDto.getId());
-				//official1.setUpdatedTimeStamp(Calendar.getInstance().getTime());			
 				afficialService.update(official1);
 			  }
 			
@@ -783,100 +720,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		/*if(employeeDto.getFileupload().getOriginalFilename()==null){
-			
-			if(employee.getImage()==null||employee.getImage().equals("")){
-				
-					employee.setImage(null);
-				
-			}else if(employee.getImage()!=null||employee.getImage().equals("")==false){
-				
-					employee.setImage(employee.getImage());
-				
-			}
-			
-		}else if(employeeDto.getFileupload().getOriginalFilename()!=null){
-					
-					System.out.println("img name: "+employeeDto.getImage());
-					System.out.println("original file name: "+employeeDto.getFileupload().getOriginalFilename());
-					String[] result =  StringUtils.split(employeeDto.getFileupload().getOriginalFilename(),'.');	
-				
-									
-					if(result.length==2){
-						
-						
-						if(employee.getImage()==null){
-							
-							
-							   
-							 //upload file
-								try {
-									uploadService.uploadImage("EMPLOYEE",employeeDto.getEmployeeCode()+"."+result[1], employeeDto.getFileupload());
-									employee.setImage(employeeDto.getEmployeeCode()+"."+result[1]);
-								
-								} catch (RuntimeException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								} catch (IOException e) {
-									// TODO Auto-generated catch block
-									e.printStackTrace();
-								}
-							
-								
-							
-						}else if(employee.getImage()!=null){
-							
-	
-						//delete file upload
-
-						   try {
-								uploadService .deleteImage("EMPLOYEE", employee.getImage());
-							} catch (RuntimeException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
-									
-						  
-						   
-						 //upload file
-							try {
-								uploadService.uploadImage("EMPLOYEE",employeeDto.getEmployeeCode()+"."+result[1], employeeDto.getFileupload());
-								//allEmployeeDto.setImage(allEmployeeDto.getEmployeeCode()+"."+result[1]);
-								employee.setImage(employeeDto.getEmployeeCode()+"."+result[1]);
-							
-							} catch (RuntimeException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							} catch (IOException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-				
-						}
-						
-				
-				
-					}
-					
-					
-			
-			
-		}*/
-		
-		
-		
-		
+		employee.setImage(img);
 		employee.setIsManager(employeeDto.getIsManager());
 		
 		if(employeeDto.getAimempid()!=null){
@@ -886,10 +730,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		//employee.setAuditFlag("U");
-		//employee.setUpdatedBy(employee.getId());
-		//employee.setUpdatedTimeStamp(Calendar.getInstance().getTime());
-				
+		
+		if(employeeDto.getAimempid()==null){
+			employee.setAimempid(null);
+		}
+		
 		
 		try{
 			
@@ -901,7 +746,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 			   System.out.println("massge exception: "+jdbce.getMessage());
 			   if(jdbce.getMessage()!=null){
 								
-				//System.out.println("SQLState: "+jdbce.getSQLState());
 				throw jdbce;
 											
 			   }			
@@ -955,10 +799,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 										address.setApplicant(applicant);
 									}
 								
-									//address.setAuditFlag("C");
-									//address.setCreatedBy(employee.getId());
-									//address.setCreatedTimeStamp(Calendar.getInstance().getTime());
-									
+								
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);
 									addressService.create(address);
@@ -994,9 +835,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 										address.setApplicant(applicant);
 									}
 										
-									//address.setAuditFlag("U");
-									//address.setUpdatedBy(employee.getId());
-									//address.setUpdatedTimeStamp(Calendar.getInstance().getTime());
 									
 									List<Address> addressList = new ArrayList<Address>();
 									addressList.add(address);

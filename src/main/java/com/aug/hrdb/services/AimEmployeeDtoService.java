@@ -27,4 +27,10 @@ public class AimEmployeeDtoService {
 		return employeeRepository.listEmployeeAim();
 
 	}
+	
+	
+	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id){
+		return employeeRepository.listEmployeeAimForUpdate(id);
+
+	}
 }

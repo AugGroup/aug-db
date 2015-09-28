@@ -203,5 +203,13 @@ public Employee findOfficial(Integer id) {
 		return  (Employee) c.uniqueResult();
 	}
 
+
+	@Override
+	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id) {
+		Query aimnamedQuery = getCurrentSession().getNamedQuery("listEmployeeAimUpdateEmployee").setInteger("empId", id);
+		List<AimEmployeeDto> aimemp = aimnamedQuery.list();
+		return aimemp;
+	}
+
 }
 	
