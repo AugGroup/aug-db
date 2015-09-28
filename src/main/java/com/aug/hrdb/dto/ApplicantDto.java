@@ -84,14 +84,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					+ "WHERE a.ID = :ID", resultClass = ApplicantDto.class), 
 	
 	@NamedNativeQuery(name = "SEARCH_BY_TRACKINGSTATUS", query = "SELECT null as FIRSTNAME_TH, null as LASTNAME_TH, null as NICKNAME_TH, null as NICKNAME_EN, "
-			+ "null as MAS_JOB_LEVEL_NAME, null as MAS_TECHNOLOGY_NAME, null as BIRTHDATE, null as AGE, null as HEIGHT, null as WEIGHT, null as SEX, null as RELIGION, null as NATIONALITY, null as APPLICANT_STATUS, null as EMERGENCY_NAME, null as EMERGENCY_TEL,"
+			+ "job.NAME as MAS_JOB_LEVEL_NAME,tech.NAME as MAS_TECHNOLOGY_NAME, null as BIRTHDATE, null as AGE, null as HEIGHT, null as WEIGHT, null as SEX, null as RELIGION, null as NATIONALITY, null as APPLICANT_STATUS, null as EMERGENCY_NAME, null as EMERGENCY_TEL,"
 			+ "null as EMERGENCY_ADDRESS, null as NOTICE_NEWSPAPER, null as NOTICE_MAGAZINE, null as NOTICE_FRIEND, null as NOTICE_WEBSITE, null as NOTICE_OTHER, null as NEWSPAPER_DESCRIPTION, null as MAGAZINE_DESCRIPTION, null as FRIEND_DESCRIPTION, null as WEBSITE_DESCRIPTION, null as OTHER_DESCRIPTION,"
 			+ "null as EXPECTED_SALARY, null as CARD_ID, null as CARD_ISSUED_OFFICE, null as CARD_EXPIRY_DATE, null as MILITARY_FROM_YEAR, null as MILITARY_TO_YEAR, null as MILITARY_PLACE,"
 			+ "null as MILITARY_SERVICE_NO, null as MILITARY_REASON, null as MILITARY_STATUS, null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME,"
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE,"
 			+ "null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS,"
-			+ "null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE,"
-			+ " a.ID, null as APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, null as TEL, null as EMAIL, null as APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID "
+			+ "null as PREVIOUS_EMPLOYERS_REASON, null as CREATEDBY, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE,"
+			+ " a.ID, null as APPLICANT_CODE,null as CREATEDTIMESTAMP, a.FIRSTNAME_EN, a.LASTNAME_EN, null as TEL, null as EMAIL, null as APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID "
 			+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
 			+ "WHERE a.TRACKING_STATUS = :TRACKING_STATUS", resultClass = ApplicantDto.class),
