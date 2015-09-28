@@ -382,8 +382,8 @@ VALUES (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrow
 (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrown',STR_TO_DATE('27/05/2015','%d/%m/%Y'),'2','HibernateSping','3','C',0,NOW());
 
 --Address
-INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
-VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
+--INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
+--VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
 
 --Family
 insert INTO FAMILY (APPLICANT_ID,MASRELATION_ID,ADDRESS,NAME,AGE,GENDER,OCCUPATION,POSITION,TELEPHONE,auditFlag,createdBy,createdTimeStamp) VALUES 

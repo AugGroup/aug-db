@@ -63,6 +63,6 @@
 		<mapping class="com.aug.hrdb.entities.Employee" />
 		<mapping class="com.aug.hrdb.entities.AugRequest"/>
 		
-
+		<mapping class="com.aug.hrdb.entities.MailTemplate"/>
 	</session-factory>
 </hibernate-configuration>
