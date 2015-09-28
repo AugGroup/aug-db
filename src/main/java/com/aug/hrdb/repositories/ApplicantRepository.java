@@ -18,6 +18,8 @@ public interface ApplicantRepository extends GenericRepository<Applicant, Serial
 	public ApplicantDto findApplicantById(Integer id);
 	
 	public ApplicantDto findApplicationById(Integer id);
+	
+	public List<ApplicantDto> findByTrackingStatus(String trackingStatus);
 
 	/*-------------------- report --------------------*/
 	public List<ReportApplicantDto> reportApplicant();
@@ -29,5 +31,7 @@ public interface ApplicantRepository extends GenericRepository<Applicant, Serial
 	public void update(ApplicantDto applicantDto);
 	
 	public ApplicantDto getMaxApplicantId();
+
+	
 
 }

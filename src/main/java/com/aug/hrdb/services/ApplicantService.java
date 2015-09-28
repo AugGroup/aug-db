@@ -32,6 +32,8 @@ public interface ApplicantService {
 	public ApplicantDto findByIdApplicant(Integer id);
 	
 	public ApplicantDto findApplicationById(Integer id);
+	
+	public List<ApplicantDto> findByTrackingStatus(String trackingStatus);
 
 	/*-------------------- report search --------------------*/
 	public List<ReportApplicantDto> reportApplicant();

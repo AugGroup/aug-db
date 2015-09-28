@@ -137,6 +137,10 @@ public class ApplicantServiceImpl implements ApplicantService {
 	}
 	
 
+	@Override
+	public List<ApplicantDto> findByTrackingStatus(String trackingStatus) {
+		return applicantRepository.findByTrackingStatus(trackingStatus);
+	}
    
 	  /*-------------------- Report --------------------*/
 		//findAll
@@ -165,4 +169,8 @@ public class ApplicantServiceImpl implements ApplicantService {
 		public ApplicantDto getMaxApplicantId() {
 			return applicantRepository.getMaxApplicantId();
 		}
+
+		
+
+		
 }

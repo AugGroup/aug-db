@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.List;
 
+import javax.mail.Session;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
@@ -51,6 +53,15 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 		ApplicantDto app = result.get(0);
 		return app;
 	}
+	
+	@Override
+	public List<ApplicantDto> findByTrackingStatus(String trackingStatus) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_BY_TRACKINGSTATUS");
+		query.setParameter("TRACKING_STATUS",trackingStatus);
+		List<ApplicantDto> applicants = query.list();
+		return applicants;
+	}
+	
 /*-------------------- report --------------------*/
 	@Override
 	public List<ReportApplicantDto> reportApplicant() {
@@ -146,6 +157,10 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 		ApplicantDto app = result.get(0);
 		return app;
 	}
+
+	
+
+
 	
 	
 
