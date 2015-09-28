@@ -33,8 +33,8 @@ import javax.persistence.NamedNativeQuery;
 								+ "SUM((CASE when l.leavetype_id= 4 then (l.sumTime/8) else 0 end)+(CASE when l.leavetype_id= 3 then (l.sumTime/8)else 0 end)+"
 								+ "(CASE when l.leavetype_id= 1 then (l.sumTime/8) else 0 end )) as totalDayLeave "
 								+ "from employee emp "
-								+ "join emp_official off on emp.`OFFICIAL_ID`=off.`ID` "
-								+ "join emp_leave as l "
+								+ "join official off on emp.OFFICIAL_ID=off.ID "
+								+ "join leaves as l "
 								+ "on emp.id = l.employee_id "
 								+ "where emp.name_eng like :name "
 								+ "group by emp.employee_code",
