@@ -28,11 +28,11 @@ public class Appointment {
 	private String detail;
 	
 	@Column(name = "START")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	private Date start;
 	
 	@Column(name = "END")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	private Date end;
 	
 	@ManyToOne
