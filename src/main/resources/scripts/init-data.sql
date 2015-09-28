@@ -392,6 +392,12 @@ insert INTO FAMILY (APPLICANT_ID,MASRELATION_ID,ADDRESS,NAME,AGE,GENDER,OCCUPATI
 ('3','1','No.115, Moo 2, San Klang Sub District, San Kam Peang District, Chiangmai','Daniel','30','Male','Scientist','Manager','0890111222','C',0,NOW()),
 ('4','1','House No.39, Village No.3, Nhong Kwai sub-district, Chiang Mai','Emily','28','Female','Engineer','Manager','0890144321','C',0,NOW());
 
+-- Site
+INSERT INTO SITE (ID,PROJECTNAME,STARTDATE,ENDDATE,PROJECTOWNER,PROJECTOWNERCONTACT,EMPLOYEE_ID,auditFlag,createdBy,createdTimeStamp) VALUES
+('1','HrSystem',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/05/2015','%d/%m/%Y'),'TMB','333','1','C',0,NOW()),
+('2','MarKetWeb',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/05/2015','%d/%m/%Y'),'AIS','111','2','C',0,NOW()),
+('3','Game',STR_TO_DATE('26/01/1940','%d/%m/%Y'),STR_TO_DATE('26/05/2015','%d/%m/%Y'),'Dtac','444','3','C',0,NOW());
+
 
 --Appointment
 INSERT INTO APPOINTMENT(ID,DETAIL,END,START,TOPIC,APPLICANT_ID,LOGIN_ID)
