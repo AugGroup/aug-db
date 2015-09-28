@@ -408,76 +408,53 @@ VALUES
 (4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2)
 
 --MailTemplate
-INSERT INTO MAIL_TEMPLATE VALUES(1,"Interview Java","Dear K. $firstName
+INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA',"<p>Dear K. $firstName&nbsp; &nbsp;</p>
 
+<p>Thank you for interesting a Augmentis (Thailand) Limited.&nbsp; &nbsp;</p>
 
+<p>I would like to &nbsp;confirm you about test and interview information below.&nbsp; &nbsp;</p>
 
-Thank you for interesting a Augmentis (Thailand) Limited.
+<p>Testing process $date &nbsp;($time)&nbsp;</p>
 
+<p>1. &nbsp;&nbsp;&nbsp;Personality Test &nbsp; &nbsp; &nbsp; &nbsp;10 minute&nbsp;</p>
 
+<p>2. &nbsp;&nbsp;&nbsp;IQ Test &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;10 minute&nbsp;&nbsp;</p>
 
-I would like to  confirm you about test and interview information below.
+<p>3. &nbsp;&nbsp;&nbsp;New Grad Test &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;60 minute&nbsp;&nbsp;</p>
 
+<p>4. &nbsp;&nbsp;&nbsp;Write Application&nbsp;</p>
 
+<p>5. &nbsp;&nbsp;&nbsp;Interview&nbsp; &nbsp;</p>
 
-Testing process $date  ($time)
+<p>&nbsp;</p>
 
-1.    Personality Test        10 minute
+<p>Document preparation&nbsp;</p>
 
-2.    IQ Test                      10 minute 
+<p>1. ID card (copy)&nbsp;</p>
 
-3.    New Grad Test          60 minute 
+<p>2. House registration (copy)&nbsp;&nbsp;</p>
 
-4.    Write Application
+<p>3. Transcript (copy)&nbsp;</p>
 
-5.    Interview
+<p>4. Photo&nbsp;</p>
 
+<p>5. Resume&nbsp;</p>
 
+<p>6. Certificates (if has)&nbsp;</p>
 
-Document preparation
+<p>&nbsp;</p>
 
-1. ID card (copy)
+<p>Then I attached the Augmentis map file by following.&nbsp; &nbsp;</p>
 
-2. House registration (copy) 
+<p>&nbsp;</p>
 
-3. Transcript (copy)
+<p>หมายเหตุ: การเดินทางโดย BTS ให้ลงสถานทีช่องนนทรี ออกทางออกที่ 5 พอถึงตึก&nbsp; Empire ให้ติดต่อแลกบัตรชั้นM ที่ประชาสัมพันธ์ แล้วให้ใช้ลิฟท์ Low zone&nbsp; (Tower2) เบอร์ 27,28,31,32 ขึ้นมาที่ชั้น 18 ค่ะ&nbsp; &nbsp;</p>
 
-4. Photo
+<p>&nbsp;</p>
 
-5. Resume
+<p>So, if you have any information and additional, please do not hesitate to&nbsp; contact me.&nbsp; &nbsp;</p>
 
-6. Certificates (if has)
+<p>&nbsp;</p>
 
-Then I attached the Augmentis map file by following.
-
-
-
-หมายเหตุ: การเดินทางโดย BTS ให้ลงสถานทีช่องนนทรี ออกทางออกที่ 5 พอถึงตึก
-
-Empire ให้ติดต่อแลกบัตรชั้นM ที่ประชาสัมพันธ์ แล้วให้ใช้ลิฟท์ Low zone
-
-(Tower2) เบอร์ 27,28,31,32 ขึ้นมาที่ชั้น 18 ค่ะ
-
-
-
-So, if you have any information and additional, please do not hesitate to
-
-contact me.
-
-
-
-Best Regards,
-
-
-
-$recruitName 
-
-$recruitPosition
-
-P : +66 2670 0930 # 112 | M : +$recruitPhone
-
-Augmentis Group <http://www.augmentis.biz/> 
-
-Bangkok | Singapore | Melbourne | Sydney | Jakarta
-
-<http://www.augmentis.biz/>  ");
+<p>Best Regards,&nbsp; &nbsp; $recruitName&nbsp;&nbsp; $recruitPosition&nbsp; P : +66 2670 0930 # 112 | M : +$recruitPhone&nbsp; Augmentis Group &lt;http://www.augmentis.biz/&gt;&nbsp;&nbsp; Bangkok | Singapore | Melbourne | Sydney | Jakarta&nbsp; &lt;http://www.augmentis.biz/&gt;</p>
+");
