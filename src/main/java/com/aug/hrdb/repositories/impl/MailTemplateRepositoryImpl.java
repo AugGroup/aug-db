@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.aug.hrdb.entities.MailTemplate;
 import com.aug.hrdb.repositories.MailTemplateRepository;
 
-@Repository
+@Repository("MailTemplateRepository")
 public class MailTemplateRepositoryImpl extends GenericRepositoryImpl<MailTemplate,Integer>implements MailTemplateRepository{
 
 	public MailTemplateRepositoryImpl() {

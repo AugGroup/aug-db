@@ -2,6 +2,9 @@ package com.aug.hrdb.entities;
 
 import javax.persistence.*;
 
+@NamedQueries(
+		@NamedQuery(name = "FIND_BY_NAME_MAIL_TEMPLATE", query = "FROM MailTemplate WHERE name =:NAME")
+	)
 @Table(name="MAIL_TEMPLATE")
 @Entity
 public class MailTemplate {

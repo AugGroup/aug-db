@@ -30,8 +30,7 @@ public class MailTemplateRepositoryTest {
 		MailTemplate mailTemplate = new MailTemplate();
 		mailTemplate.setName("JAVA TEMPLATE");
 		mailTemplate.setTemplate("TEMPLATE");
-		mailTemplateRepository.create(mailTemplate);
-		
+		mailTemplateRepository.create(mailTemplate);		
 	}
 	
 	@Test
@@ -62,17 +61,14 @@ public class MailTemplateRepositoryTest {
 	@Rollback(true)
 	public void deleteMailTemplate(){
 		MailTemplate mailTemplate = mailTemplateRepository.find(1);
-		mailTemplateRepository.delete(mailTemplate);
-	
+		mailTemplateRepository.delete(mailTemplate);	
 	}
 	
 	@Test
 	@Rollback(true)
 	public void findByNameMailTemplate(){
-		Query query = mailTemplateRepository.getCurrentSession().getNamedQuery("FIND_BY_NAME_MAIL_TEMPLATE");
-		query.setParameter("NAME", "JAVA TEMPLATE");
-		List<MailTemplate> mailTemplates = query.list();
-		assertEquals(1, mailTemplates.size());
+		MailTemplate mailTemplate = mailTemplateRepository.findByName("JAVA TEMPLATE");
+		assertNotNull(mailTemplate);
 	}
 	
 }

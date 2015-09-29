@@ -1,6 +1,7 @@
 package services;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -65,6 +66,13 @@ public class MailTemplateServiceTest {
 		MailTemplate mailTemplate = mailTemplateService.findById(1);
 		mailTemplateService.delete(mailTemplate);
 	
+	}
+	
+	@Test
+	@Rollback(true)
+	public void findByNameMailTemplate(){
+		MailTemplate mailTemplate = mailTemplateService.findByName("JAVA TEMPLATE");
+		assertNotNull(mailTemplate);
 	}
 	
 }
