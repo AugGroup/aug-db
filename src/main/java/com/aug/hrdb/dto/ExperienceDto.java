@@ -34,7 +34,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.company_name,"
 				+ "exp.applicant_id "
 				+ "FROM EXPERIENCE as exp "
-				+ "WHERE exp.applicant_id=:ID", resultClass = ExperienceDto.class) })
+				+ "inner join employee as emp "
+				+ "on emp.id=:ID and exp.applicant_id = emp.applicant_id", resultClass = ExperienceDto.class) })
 @Entity
 public class ExperienceDto {
 	
