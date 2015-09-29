@@ -1,12 +1,14 @@
 package com.aug.hrdb.services.impl;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.AppointmentDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Appointment;
 import com.aug.hrdb.repositories.AppointmentRepository;
@@ -28,9 +30,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public Appointment findById(Integer id) {
+	public AppointmentDto findById(Integer id) {
 		// TODO Auto-generated method stub
-		return appointmentRepository.find(id);
+		return appointmentRepository.findById(id);
 	}
 
 	@Override
@@ -62,6 +64,12 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public void create(Appointment appointment) {
 		// TODO Auto-generated method stub
 		appointmentRepository.create(appointment);
+	}
+
+	@Override
+	public List<AppointmentDto> findAppointment(String start, String end) {
+		// TODO Auto-generated method stub
+		return appointmentRepository.findAppointment(start, end);
 	}
 
 }

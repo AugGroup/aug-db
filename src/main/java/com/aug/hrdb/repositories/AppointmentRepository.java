@@ -1,8 +1,9 @@
 package com.aug.hrdb.repositories;
 
-import java.io.Serializable;
+//import java.sql.Date;
 import java.util.List;
 
+import com.aug.hrdb.dto.AppointmentDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Appointment;
 
@@ -11,4 +12,8 @@ public interface AppointmentRepository extends GenericRepository<Appointment, In
 	List<Appointment> findByApplicant(Applicant applicant);
 
 	void create(Appointment appointment);
+	
+	List<AppointmentDto> findAppointment(String start, String end);
+	
+	public AppointmentDto findById(Integer id);
 }
