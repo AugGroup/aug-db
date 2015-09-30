@@ -13,11 +13,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
-				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
+				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY, exp.DATE_WORK "
 				+ "FROM EXPERIENCE exp LEFT JOIN APPLICANT a on exp.APPLICANT_ID = a.ID WHERE exp.APPLICANT_ID = :ID", resultClass = ExperienceDto.class),
 
 		@NamedNativeQuery(name = "SEARCH_EXPERIENCE_ID", query = "SELECT exp.ID, exp.ADDRESS, exp.TYPE_OF_BUSINESS, "
-				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY "
+				+ "exp.DATE_FORM, exp.DATE_TO, exp.POSITION, exp.REASON, exp.REFERENCE, exp.RESPONSIBILITY, exp.SALARY, exp.DATE_WORK "
 				+ "FROM EXPERIENCE exp WHERE exp.id = :ID", resultClass = ExperienceDto.class),
 
 		@NamedNativeQuery(name = "searchExperience", query = "SELECT exp.id, "
@@ -30,10 +30,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.reference, "
 				+ "exp.responsibility, "
 				+ "exp.salary, "
-				+ "exp.company_name,"
+//				+ "null as DATE_WORK "
+				+ "exp.company_name, "
 				+ "exp.applicant_id "
 				+ "FROM EXPERIENCE as exp "
-				+ "WHERE exp.applicant_id=:ID", resultClass = ExperienceDto.class) })
+				+ "inner join employee as emp "
+				+ "on emp.id=:ID and exp.applicant_id = emp.applicant_id", resultClass = ExperienceDto.class) })
 @Entity
 public class ExperienceDto {
 	
@@ -63,6 +65,9 @@ public class ExperienceDto {
 	private String companyName;
 
 	private long salary;
+	
+//	@Column(name= "DATE_WORK")
+//	private String applyDateStr;
 
 	public Integer getApplicantId() {
 		return applicantId;
@@ -155,6 +160,14 @@ public class ExperienceDto {
 	public long getSalary() {
 		return salary;
 	}
+
+//	public String getApplyDateStr() {
+//		return applyDateStr;
+//	}
+//
+//	public void setApplyDateStr(String applyDateStr) {
+//		this.applyDateStr = applyDateStr;
+//	}
 
 	public void setSalary(long salary) {
 		this.salary = salary;

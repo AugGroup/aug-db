@@ -54,6 +54,8 @@
         <spring.social.facebook.version>1.1.0.RELEASE</spring.social.facebook.version>
         <spring.social.twitter.version>1.1.0.RELEASE</spring.social.twitter.version>
         <querydsl.version>2.3.2</querydsl.version>
+<jackson.version>2.4.1</jackson.version>
+		<jackson-jaxrs.version>1.9.13</jackson-jaxrs.version>
 
         <build.profile.id>dev</build.profile.id>
         <jdk.version>1.7</jdk.version>
@@ -81,6 +83,28 @@
     </dependencyManagement>
 
     <dependencies>
+    <!-- JSON Processing -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>${jackson.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<version>${jackson-jaxrs.version}</version>
+		</dependency>
+		
 
         <!-- Spring -->
         <dependency>

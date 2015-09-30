@@ -8,10 +8,10 @@ package com.aug.hrdb.repositories.impl;
 import java.util.List;
 
 import org.hibernate.Query;
-
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AbilityDto;
+import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Ability;
 import com.aug.hrdb.repositories.AbilityRepository;
 
@@ -43,11 +43,16 @@ public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability,Integer
 	     return abiDto;
 	}
 
-	
-
-
-
+	@Override
+	public AbilityDto findByAbilityId(Integer id) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_ABILITY_ID");
+		query.setParameter("ID", id);
+		List<AbilityDto> result = query.list();
+		AbilityDto app = result.get(0);
+		return app;
 	}
+
+}
 
 	
 

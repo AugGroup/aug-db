@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.AbilityDto;
+import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Ability;
 import com.aug.hrdb.repositories.AbilityRepository;
 import com.aug.hrdb.services.AbilityService;
@@ -70,8 +72,16 @@ public class AbilityServiceImpl implements AbilityService{
 		return null;
 	}
 
-	
+	@Override
+	public AbilityDto findAbility(Integer id) {
+		AbilityDto ability = abilityRepository.findByAbilityId(id);
+		return ability;
+	}
 
+	@Override
+	public List<AbilityDto> findAbilityList(Integer id) {
+		List<AbilityDto> abilitys = abilityRepository.searchAbility(id);
+		return abilitys;
+	}
 	
-
 }
