@@ -10,7 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.aug.hrdb.entities.Applicant;
@@ -53,16 +56,16 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
-
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
-
 	@Column(name = "START")
+	@Temporal(TemporalType.TIMESTAMP)
+	@JsonSerialize(using = CustomDateSerializer.class)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
-
 	@Column(name = "END")
+	@Temporal(TemporalType.TIMESTAMP)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date end;
 	
@@ -101,7 +104,8 @@ public class AppointmentDto {
 	public void setDetail(String detail) {
 		this.detail = detail;
 	}
-
+	
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getStart() {
 		return start;
 	}

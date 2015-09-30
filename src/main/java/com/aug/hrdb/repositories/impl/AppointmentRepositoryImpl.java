@@ -1,8 +1,10 @@
 package com.aug.hrdb.repositories.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 //import java.sql.Date;
 import java.util.List;
+
 
 
 import org.springframework.stereotype.Repository;
@@ -39,6 +41,7 @@ public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment
 		query.setParameter("START", start);
 		query.setParameter("END", end);
 		List<AppointmentDto> appointments = query.list();
+		
 		return appointments;
 	}
 
