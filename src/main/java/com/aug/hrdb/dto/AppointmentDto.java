@@ -26,21 +26,27 @@ import com.sun.mail.handlers.image_gif;
 	
 	@NamedNativeQuery(name = "FIND_APPOINTMENT", 
 			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID  ," +
-					"CONCAT(APPLICANT.FIRSTNAME_EN,' ',APPLICANT.LASTNAME_EN) as APPLICANT_NAME ,null as APPLICANT_POSITION "+
+					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
+					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE ,"+
+					"null as LOGIN_NAME "+
 					"FROM APPOINTMENT " +
-					"LEFT JOIN APPLICANT  on APPOINTMENT.APPLICANT_ID = APPLICANT.ID " + 
+					"LEFT JOIN APPLICANT appl on APPOINTMENT.APPLICANT_ID = appl.ID " + 
+					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
+					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
 					"LEFT JOIN  LOGIN  on APPOINTMENT.LOGIN_ID = LOGIN.ID " +
 					"WHERE DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d')", resultClass = AppointmentDto.class),
 	
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
-					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION "+
+					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION ,CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( '+CONCAT(mt.NAME,' ',mj.NAME)+' )') as TITLE, "+
+					"CONCAT(em.NAME_ENG,' ',em.SURNAME_ENG) as LOGIN_NAME "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
 					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
-					"LEFT JOIN  LOGIN  lo on appo.LOGIN_ID = lo.ID " +
+					"LEFT JOIN LOGIN lo on appo.LOGIN_ID = lo.ID " +
+					"LEFT JOIN EMPLOYEE em ON em.ID = lo.EMPLOYEE_ID "+
 					"WHERE appo.ID = :ID", resultClass = AppointmentDto.class)
 })
 
@@ -56,14 +62,14 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss z")
 	@Column(name = "START")
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonSerialize(using = CustomDateSerializer.class)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss z")
 	@Column(name = "END")
 	@Temporal(TemporalType.TIMESTAMP)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -80,6 +86,12 @@ public class AppointmentDto {
 	
 	@Column(name = "APPLICANT_POSITION")
 	private String applicantPosition;
+	
+	@Column(name = "TITLE")
+	private String title;
+	
+	@Column(name = "LOGIN_NAME")
+	private String loginName;
 	
 	public Integer getId() {
 		return id;
@@ -153,6 +165,23 @@ public class AppointmentDto {
 	public void setApplicantPosition(String applicantPosition) {
 		this.applicantPosition = applicantPosition;
 	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
+	}
+	
 	
 	
 }
