@@ -102,10 +102,10 @@ public class Official extends BaseEntity{
 		//@Temporal(TemporalType.TIMESTAMP)
 		private Date endWorkDate;
 
-	 	@Column(name = "POSITION_APPLIED_FOR", nullable = true)
+	 	@Column(name = "POSITION_APPLIED_FOR", nullable = false)
 		private String positionAppliedFor;
 		
-		@Column(name = "SALARY_EXPECTED", nullable = true)
+		@Column(name = "SALARY_EXPECTED", nullable = false)
 		private String salaryExpected;
 		
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
