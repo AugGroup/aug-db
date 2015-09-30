@@ -26,7 +26,6 @@ import javax.persistence.NamedNativeQuery;
             		+ "ref.address, ref.telephone,"
             		+ "ref.occupation,"
             		+ "ref.applicant_id "
-            		+ "from reference as ref"
             		+ " FROM REFERENCE ref WHERE ref.ID =:ID", resultClass = ReferenceDto.class)
   
 	})
