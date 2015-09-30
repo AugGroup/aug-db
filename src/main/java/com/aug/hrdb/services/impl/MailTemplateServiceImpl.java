@@ -42,5 +42,7 @@ public class MailTemplateServiceImpl implements MailTemplateService{
 		mailTemplateRepository.delete(model);
 	}
 	
-	
+	public void deleteById(Integer id) {
+		mailTemplateRepository.deleteById(id);
+	}
 }
