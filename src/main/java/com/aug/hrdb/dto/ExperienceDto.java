@@ -30,8 +30,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.reference, "
 				+ "exp.responsibility, "
 				+ "exp.salary, "
-				+ "null as exp.DATE_WORK "
-				+ "exp.company_name,"
+//				+ "null as DATE_WORK "
+				+ "exp.company_name, "
 				+ "exp.applicant_id "
 				+ "FROM EXPERIENCE as exp "
 				+ "inner join employee as emp "
@@ -66,8 +66,8 @@ public class ExperienceDto {
 
 	private long salary;
 	
-	@Column(name= "DATE_WORK")
-	private String applyDateStr;
+//	@Column(name= "DATE_WORK")
+//	private String applyDateStr;
 
 	public Integer getApplicantId() {
 		return applicantId;
@@ -161,13 +161,13 @@ public class ExperienceDto {
 		return salary;
 	}
 
-	public String getApplyDateStr() {
-		return applyDateStr;
-	}
-
-	public void setApplyDateStr(String applyDateStr) {
-		this.applyDateStr = applyDateStr;
-	}
+//	public String getApplyDateStr() {
+//		return applyDateStr;
+//	}
+//
+//	public void setApplyDateStr(String applyDateStr) {
+//		this.applyDateStr = applyDateStr;
+//	}
 
 	public void setSalary(long salary) {
 		this.salary = salary;
