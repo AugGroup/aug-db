@@ -238,35 +238,35 @@ public class Applicant extends BaseEntity{
 	@Column(name = "IMAGE")
 	private String image;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Reference> references;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Family> families;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private Set<Language> languages;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Address> address;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<Education> educations;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<MasCoreSkill> masCoreSkills;
 
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Experience> experiences;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Certification> certifications;
 	
@@ -274,6 +274,7 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Ability> abilities;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="applicant")
 	private List<Appointment> appointments;
 	

@@ -19,6 +19,9 @@ import javax.persistence.NamedNativeQuery;
             		+ "inner join employee as emp "
             		+ "on emp.id=:empId and ref.applicant_id=emp.applicant_id",
             resultClass = ReferenceDto.class),
+	@NamedNativeQuery(name = "SEARCH_REFERENCE", query = "SELECT r.ID, r.ADDRESS, r.NAME, r.OCCUPATION, r.TELEPHONE, r.APPLICANT_ID"
+			+ " FROM REFERENCE r LEFT JOIN APPLICANT a on r.APPLICANT_ID = a.ID WHERE r.APPLICANT_ID = :ID", resultClass = ReferenceDto.class),
+	
 	@NamedNativeQuery(name = "SEARCH_REFERENCE_ID", query = "select ref.id,ref.name,"
             		+ "ref.address, ref.telephone,"
             		+ "ref.occupation,"

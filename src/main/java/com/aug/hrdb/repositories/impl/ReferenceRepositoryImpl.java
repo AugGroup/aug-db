@@ -40,8 +40,8 @@ public class ReferenceRepositoryImpl extends GenericRepositoryImpl<Reference, In
 	
 	@Override
 	public List<ReferenceDto> findReferenceById(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("searchReference");
-		query.setParameter("appId", id);
+		Query query = getCurrentSession().getNamedQuery("SEARCH_REFERENCE");
+		query.setParameter("ID", id);
 		List<ReferenceDto> result = query.list();
 		System.out.println("QUERYADDRESS :: " + result);
 		return result;
