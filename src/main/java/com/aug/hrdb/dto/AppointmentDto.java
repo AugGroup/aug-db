@@ -53,12 +53,15 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm:ss")
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
+
 	@Column(name = "START")
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss")
+
 	@Column(name = "END")
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date end;

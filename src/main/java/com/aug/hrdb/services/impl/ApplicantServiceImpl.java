@@ -85,12 +85,12 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public List<ApplicantDto> findAllApplicant() {
 		List<ApplicantDto> applicants = applicantRepository.findAllApplicant();
-		for (ApplicantDto appl : applicants) {
-			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
-			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
-			appl.setTechnologyStr(tech);
-			appl.setJoblevelStr(job);
-		}
+//		for (ApplicantDto appl : applicants) {
+//			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
+//			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
+//			appl.setTechnologyStr(tech);
+//			appl.setJoblevelStr(job);
+//		}
 
 		return applicants;
 	}
