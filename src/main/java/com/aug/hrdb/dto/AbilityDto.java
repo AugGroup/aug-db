@@ -42,7 +42,14 @@ import javax.persistence.NamedNativeQuery;
 					+							*/
 
 									
-					resultClass = AbilityDto.class)	
+					resultClass = AbilityDto.class)
+	,@NamedNativeQuery(name = "SEARCH_ABILITY_ID", query="select ability.id, "
+			+ "ability.rank, "
+			+ "mas_specialty.name, "
+			+ "ability.applicant_id,"
+			+ "mas_specialty.id as SPEC_ID "
+			+ "from ability, mas_specialty "
+			+ "WHERE ability.APPLICANT_ID=:ID and ability.specialty_id = mas_specialty.id", resultClass = AddressDto.class)
 })
 
 

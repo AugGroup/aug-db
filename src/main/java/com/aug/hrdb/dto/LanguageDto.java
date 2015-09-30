@@ -22,15 +22,16 @@ import org.hibernate.annotations.NamedNativeQuery;
                       		+ "from LANGUAGE as lang,APPLICANT as app, EMPLOYEE as emp "
                       		+ "where app.id =:appId and emp.applicant_id = lang.applicant_id", 
                        		resultClass = LanguageDto.class),
-    @NamedNativeQuery(name = "SEARCH_LANGUAGES_ID", query = "select language.ID,"
+    @NamedNativeQuery(name = "SEARCH_LANGUAGE_ID", query = "select language.ID, language.APPLICANT_ID,"
             		 		+ "language.NAMELANGUAGE,language.SPEAKING, "
                       		+ "language.READING, "
                       		+ "language.UNDERSTANDING, "
                       		+ "language.WRITING "
                       		+ "FROM LANGUAGE language WHERE language.ID = :ID", 
-                      		resultClass = LanguageDto.class)
+                      		resultClass = LanguageDto.class),
+   @NamedNativeQuery(name = "SEARCH_LANGUAGE", query = "SELECT LANGUAGE.ID,LANGUAGE.APPLICANT_ID, LANGUAGE.NAMELANGUAGE, LANGUAGE.SPEAKING, LANGUAGE.READING, LANGUAGE.UNDERSTANDING, LANGUAGE.WRITING "
+                      		+ " FROM LANGUAGE LEFT JOIN APPLICANT on LANGUAGE.APPLICANT_ID = APPLICANT.ID WHERE LANGUAGE.APPLICANT_ID = :ID", resultClass = LanguageDto.class),
     })
-
 
 @Entity
 public class LanguageDto {

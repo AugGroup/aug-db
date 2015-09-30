@@ -33,7 +33,7 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 
 	@Override
 	public List<LanguageDto> findLanguagesById(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGES");
+		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGE");
 		query.setParameter("ID", id);
 		List<LanguageDto> result = query.list();
 		System.out.println("QUERYADDRESS :: " + result);
@@ -42,7 +42,7 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 
 	@Override
 	public LanguageDto findByLanguagesId(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGES_ID");
+		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGE_ID");
 		query.setParameter("ID", id);
 		List<LanguageDto> result = query.list();
 		LanguageDto app = result.get(0);

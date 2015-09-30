@@ -17,6 +17,6 @@ public interface AbilityRepository extends GenericRepository<Ability, Integer> {
 	
 
 	public List<AbilityDto> searchAbility(Integer id);
-
+	public AbilityDto findByAbilityId(Integer id);
 	
 }
