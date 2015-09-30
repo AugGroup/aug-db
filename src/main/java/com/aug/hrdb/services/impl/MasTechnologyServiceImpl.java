@@ -45,4 +45,10 @@ public class MasTechnologyServiceImpl implements MasTechnologyService{
 		 return masTechnologyRepository.findAll();
 	}
 
+	@Override
+	public void deleteById(Integer id) {
+		masTechnologyRepository.deleteById(id);
+		
+	}
+
 }
