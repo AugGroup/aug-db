@@ -62,14 +62,14 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss z")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-dd'T'HH:mm:ss")
 	@Column(name = "START")
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonSerialize(using = CustomDateSerializer.class)
+	//@JsonSerialize(using = CustomDateSerializer.class)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="MM/dd/yyyy HH:mm:ss z")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-dd'T'HH:mm:ss")
 	@Column(name = "END")
 	@Temporal(TemporalType.TIMESTAMP)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -117,8 +117,9 @@ public class AppointmentDto {
 		this.detail = detail;
 	}
 	
-	@JsonSerialize(using = CustomDateSerializer.class)
+	//@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getStart() {
+		System.out.println(start);
 		return start;
 	}
 
