@@ -55,7 +55,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, a.CREATEDTIMESTAMP, a.CREATEDBY, job.NAME, job.ID, tech.NAME, tech.ID "
 			+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
-			+ "WHERE job.MAS_JOB_LEVEL_NAME like :JOBLEVEL OR tech.MAS_TECHNOLOGY_NAME like :TECHNOLOGY", resultClass = ApplicantDto.class),
+			+ "WHERE job.NAME like :JOBLEVEL OR tech.NAME like :TECHNOLOGY", resultClass = ApplicantDto.class),
 	
 	@NamedNativeQuery(name = "SEARCH_ALL", query = "SELECT null as FIRSTNAME_TH, null as LASTNAME_TH, null as NICKNAME_TH, null as NICKNAME_EN, "
 			+ "job.NAME as JOB_LEVEL_NAME,tech.NAME as TECHNOLOGY_NAME,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,null as BIRTHDATE, null as AGE, null as HEIGHT, null as WEIGHT, null as SEX, null as RELIGION, null as NATIONALITY, null as APPLICANT_STATUS, null as EMERGENCY_NAME, null as EMERGENCY_TEL,"
