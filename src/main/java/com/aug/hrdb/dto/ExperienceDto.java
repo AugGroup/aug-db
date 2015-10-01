@@ -30,7 +30,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "exp.reference, "
 				+ "exp.responsibility, "
 				+ "exp.salary, "
-				+ "null as DATE_WORK "
+				+ "null as DATE_WORK, "
 				+ "exp.company_name, "
 				+ "exp.applicant_id "
 				+ "FROM EXPERIENCE as exp "
