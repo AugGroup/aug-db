@@ -54,7 +54,7 @@ public class Login extends BaseEntity{
 	@Column(name="PASSWORD",length=13,nullable=false)
 	private String password;
 
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name = "EMPLOYEE_ID",nullable = false)
 	private Employee employee;
 
@@ -69,7 +69,7 @@ public class Login extends BaseEntity{
 	@JoinColumn(name= "MAS_LOCATION_ID")
     private MasLocation masLocation;
 	
-	@OneToMany(mappedBy = "login")
+	@OneToMany(mappedBy = "login",cascade = CascadeType.ALL)
 	List<Appointment> appointments;
 
 
