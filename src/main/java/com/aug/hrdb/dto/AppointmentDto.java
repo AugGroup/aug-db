@@ -62,14 +62,15 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-dd'T'HH:mm:ss")
+
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Column(name = "START")
 	@Temporal(TemporalType.TIMESTAMP)
 	//@JsonSerialize(using = CustomDateSerializer.class)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="YYYY-MM-dd'T'HH:mm:ss")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Column(name = "END")
 	@Temporal(TemporalType.TIMESTAMP)
   //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
