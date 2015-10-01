@@ -13,7 +13,13 @@ public interface AppointmentRepository extends GenericRepository<Appointment, In
 
 	void create(Appointment appointment);
 	
+	void update(Appointment appointment);
+
+	void delete(Appointment appointment);
+
 	List<AppointmentDto> findAppointment(String start, String end);
 	
 	public AppointmentDto findById(Integer id);
+	
+	public Appointment find(Integer id);
 }

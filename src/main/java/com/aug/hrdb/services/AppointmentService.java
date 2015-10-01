@@ -18,4 +18,5 @@ public interface AppointmentService {
 	public void delete(Appointment appointment);
 	public void create(Appointment appointment);
 	public  List<AppointmentDto> findAppointment(String start, String end);
+	public Appointment find(Integer id);
 }

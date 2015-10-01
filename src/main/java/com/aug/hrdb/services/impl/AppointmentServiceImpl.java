@@ -22,7 +22,6 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Autowired
 	AppointmentRepository appointmentRepository;
 	
-	
 	@Override
 	public List<Appointment> findAll() {
 		// TODO Auto-generated method stub
@@ -71,5 +70,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		// TODO Auto-generated method stub
 		return appointmentRepository.findAppointment(start, end);
 	}
+
+	@Override
+	public Appointment find(Integer id) {
+		// TODO Auto-generated method stub
+		return appointmentRepository.find(id);
+	}
+
+	
 
 }

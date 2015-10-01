@@ -54,4 +54,34 @@ public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment
 		return appointments.get(0);
 	}
 
+
+	@Override
+	public Appointment find(Integer id) {
+		return (Appointment) getCurrentSession().get(Appointment.class, id);
+	}
+
+	@Override
+	public void create(Appointment e) {
+		// TODO Auto-generated method stub
+		super.create(e);
+	}
+
+	@Override
+	public void update(Appointment e) {
+		// TODO Auto-generated method stub
+		super.update(e);
+	}
+
+	@Override
+	public void delete(Appointment e) {
+		// TODO Auto-generated method stub
+		super.delete(e);
+	}
+
+	@Override
+	public void deleteById(Integer id) {
+		// TODO Auto-generated method stub
+		super.deleteById(id);
+	}
+	
 }
