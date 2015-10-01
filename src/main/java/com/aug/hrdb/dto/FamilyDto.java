@@ -21,13 +21,12 @@ import org.hibernate.annotations.NamedNativeQuery;
               		+ "join APPLICANT as app on app.ID = family.APPLICANT_ID "
               		+ "where family.APPLICANT_ID=:appId",
             resultClass = FamilyDto.class),
-	@NamedNativeQuery(name = "SEARCH_FAMILY_ID", query = "select family.ID as ID,family.NAME, "
-              		+ "family.GENDER as GENDER,family.AGE as AGE,family.TEL as TEL,family.ADDRESS as ADDRESS, "
-              		+ "family.OCCUPATION as OCCUPATION,family.POSITION as POSITION,family.APPLICANT_ID as APPLICANT_ID, "
+	@NamedNativeQuery(name = "SEARCH_FAMILY_ID", query = "select family.ID,family.NAME, "
+              		+ "family.GENDER,family.AGE,family.TELEPHONE as TEL,family.ADDRESS, "
+              		+ "family.OCCUPATION,family.POSITION,family.APPLICANT_ID, "
               		+ "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
-              		+ "from EMPLOYEEFAMILY as family join MAS_RELATIONTYPE as mas_relation "
-              		+ "on mas_relation.ID = family.MASRELATION_ID "
-              		+ " FROM FAMILY family WHERE family.ID = :ID", resultClass = FamilyDto.class)
+              		+ " FROM FAMILY as family join MAS_RELATIONTYPE as mas_relation "
+              		+ "on mas_relation.ID = family.MASRELATION_ID WHERE family.ID = :ID", resultClass = FamilyDto.class)
 		})
 
 
