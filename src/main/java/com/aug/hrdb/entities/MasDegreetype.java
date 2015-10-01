@@ -15,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Entity
 @Table(name = "MAS_DEGREETYPE")
@@ -34,6 +36,7 @@ public class MasDegreetype extends BaseEntity{
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isactive;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "masdegreetype")
 	private Set<Education> educations = new HashSet<Education>();
 
