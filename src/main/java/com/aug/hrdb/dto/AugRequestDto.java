@@ -18,20 +18,23 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedNativeQueries({
-		@NamedNativeQuery(name = "SEARCH_ALL_REQUEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID ORDER BY REQUEST_DATE DESC", resultClass = AugRequestDto.class), //REQUEST_ID ASC LIMIT 0,50
+		@NamedNativeQuery(name = "SEARCH_ALL_REQUEST", query = "SELECT a.ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+				+ " a.YEAR_EXPERIENCE,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID "
+				+ "FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID ORDER BY REQUEST_DATE DESC", resultClass = AugRequestDto.class), //REQUEST_ID ASC LIMIT 0,50
 		
-		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class),
+		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID", query = "SELECT a.ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+				+ " a.YEAR_EXPERIENCE,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID"
+				+ " FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class),
 		//TEST SQLGrammaException		
 		
-		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID_TEST", query = "SELECT a.REQUEST_ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-						+ " a.YEAR_EXPERIENCE, j.MAS_JOB_LEVEL_NAME, t.MAS_TECHNOLOGY_NAME, j.ID, t.ID FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class)})
+		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID_TEST", query = "SELECT a.ID, a.REQUEST_DATE, a.REQUESTER_NAME, a.STATUS, a.APPROVAL_NAME,a.APPROVE_DATE, a.REQUEST_MASTECHNOLOGY, a.REQUEST_MASJOBLEVEL, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
+						+ " a.YEAR_EXPERIENCE,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID"
+						+ " FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.REQUEST_MASJOBLEVEL = j.ID LEFT JOIN MAS_TECHNOLOGY t ON a.REQUEST_MASTECHNOLOGY = t.ID WHERE REQUEST_ID = :ID", resultClass = AugRequestDto.class)})
 public class AugRequestDto {
 
 	@Id
 	@Column(name = "ID")
-	private Integer id;
+	private Integer id;  
 
 	@Column(name = "MAS_JOB_LEVEL_NAME")
 	private String masJobLevelName;
@@ -70,6 +73,18 @@ public class AugRequestDto {
 
 	@Column(name = "YEAR_EXPERIENCE")
 	private Integer yearExperience;
+	
+	@Column(name = "MASJOBLEVEL_ID")
+	private Integer joblevelId;
+
+	@Column(name = "MASTECHNOLOGY_ID")
+	private Integer technologyId;
+	
+	@Transient
+	private MasJoblevel joblevel;
+
+	@Transient
+	private MasTechnology technology;
 
 	@Transient
 	private String jobLevelStr;
@@ -196,6 +211,40 @@ public class AugRequestDto {
 	public void setRequestJoblevel(Integer requestJoblevel) {
 		this.requestJoblevel = requestJoblevel;
 	}
+
+	public Integer getJoblevelId() {
+		return joblevelId;
+	}
+
+	public void setJoblevelId(Integer joblevelId) {
+		this.joblevelId = joblevelId;
+	}
+
+	public Integer getTechnologyId() {
+		return technologyId;
+	}
+
+	public void setTechnologyId(Integer technologyId) {
+		this.technologyId = technologyId;
+	}
+
+	public MasJoblevel getJoblevel() {
+		return joblevel;
+	}
+
+	public void setJoblevel(MasJoblevel joblevel) {
+		this.joblevel = joblevel;
+	}
+
+	public MasTechnology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(MasTechnology technology) {
+		this.technology = technology;
+	}
+	
+	
 
 
 }

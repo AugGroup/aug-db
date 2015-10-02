@@ -61,6 +61,14 @@ public class AugRequest extends BaseEntity{
 	@Column(name = "YEAR_EXPERIENCE")
 	private Integer yearExperience;
 	
+	@ManyToOne
+	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
+	private MasTechnology technology;
+
+	@ManyToOne
+	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
+	private MasJoblevel joblevel;
+	
 	@Transient
 	private String jobLevelStr;
 	
@@ -169,6 +177,22 @@ public class AugRequest extends BaseEntity{
 
 	public void setYearExperience(Integer yearExperience) {
 		this.yearExperience = yearExperience;
+	}
+
+	public MasTechnology getTechnology() {
+		return technology;
+	}
+
+	public void setTechnology(MasTechnology technology) {
+		this.technology = technology;
+	}
+
+	public MasJoblevel getJoblevel() {
+		return joblevel;
+	}
+
+	public void setJoblevel(MasJoblevel joblevel) {
+		this.joblevel = joblevel;
 	}
 	
 	
