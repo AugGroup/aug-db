@@ -59,12 +59,6 @@ public class AugRequestDto {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date approveDate;
 
-	@Column(name = "REQUEST_MASTECHNOLOGY")
-	private Integer requestTechnology;
-
-	@Column(name = "REQUEST_MASJOBLEVEL")
-	private Integer requestJoblevel;
-
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
 
@@ -195,23 +189,7 @@ public class AugRequestDto {
 	public void setTechnologyStr(String technologyStr) {
 		this.technologyStr = technologyStr;
 	}
-
-	public Integer getRequestTechnology() {
-		return requestTechnology;
-	}
-
-	public void setRequestTechnology(Integer requestTechnology) {
-		this.requestTechnology = requestTechnology;
-	}
-
-	public Integer getRequestJoblevel() {
-		return requestJoblevel;
-	}
-
-	public void setRequestJoblevel(Integer requestJoblevel) {
-		this.requestJoblevel = requestJoblevel;
-	}
-
+	
 	public Integer getJoblevelId() {
 		return joblevelId;
 	}
