@@ -25,7 +25,7 @@ import com.sun.mail.handlers.image_gif;
 @NamedNativeQueries({
 	
 	@NamedNativeQuery(name = "FIND_APPOINTMENT", 
-			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID  ," +
+			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID , null as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
 					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE ,"+
 					"null as LOGIN_NAME "+
@@ -37,7 +37,7 @@ import com.sun.mail.handlers.image_gif;
 					"WHERE DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d')", resultClass = AppointmentDto.class),
 	
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
-			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, " +
+			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
 					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION ,CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( '+CONCAT(mt.NAME,' ',mj.NAME)+' )') as TITLE, "+
 					"CONCAT(em.NAME_ENG,' ',em.SURNAME_ENG) as LOGIN_NAME "+
@@ -93,6 +93,9 @@ public class AppointmentDto {
 	
 	@Column(name = "LOGIN_NAME")
 	private String loginName;
+	
+	@Column(name = "APPLICANT_TRACKING_STATUS")
+	private String trackingStatus;
 	
 	public Integer getId() {
 		return id;
@@ -182,6 +185,14 @@ public class AppointmentDto {
 
 	public void setLoginName(String loginName) {
 		this.loginName = loginName;
+	}
+
+	public String getTrackingStatus() {
+		return trackingStatus;
+	}
+
+	public void setTrackingStatus(String trackingStatus) {
+		this.trackingStatus = trackingStatus;
 	}
 	
 	
