@@ -388,10 +388,10 @@ VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
 
 --Family
 insert INTO FAMILY (APPLICANT_ID,MASRELATION_ID,ADDRESS,NAME,AGE,GENDER,OCCUPATION,POSITION,TELEPHONE,auditFlag,createdBy,createdTimeStamp) VALUES 
-('1','2','House No.197, Charoenrat Road, Watgate sub-district, Mueang Chiang Mai district, Chiang Mai province, 50000, Thailand','Olivia','23','Female','Photographer','Manager','021234567','C',0,NOW()),
-('2','2','888 Ekachai Road, Soi Kamnanmaen 7, Sub-soi 1, Bangbon Sub-district, Bangbon District, Bangkok 10150','Michael','33','Male','Doctor','Manager','0890111111','C',0,NOW()),
-('3','1','No.115, Moo 2, San Klang Sub District, San Kam Peang District, Chiangmai','Daniel','30','Male','Scientist','Manager','0890111222','C',0,NOW()),
-('4','1','House No.39, Village No.3, Nhong Kwai sub-district, Chiang Mai','Emily','28','Female','Engineer','Manager','0890144321','C',0,NOW());
+('1','2','House No.197, Charoenrat Road, Watgate sub-district, Mueang Chiang Mai district, Chiang Mai province, 50000, Thailand','Olivia','23','Female','Photographer','Manager','021-234-5671','C',0,NOW()),
+('2','2','888 Ekachai Road, Soi Kamnanmaen 7, Sub-soi 1, Bangbon Sub-district, Bangbon District, Bangkok 10150','Michael','33','Male','Doctor','Manager','089-011-1111','C',0,NOW()),
+('3','1','No.115, Moo 2, San Klang Sub District, San Kam Peang District, Chiangmai','Daniel','30','Male','Scientist','Manager','089-011-1222','C',0,NOW()),
+('4','1','House No.39, Village No.3, Nhong Kwai sub-district, Chiang Mai','Emily','28','Female','Engineer','Manager','089-014-4321','C',0,NOW());
 
 -- Site
 INSERT INTO SITE (ID,PROJECTNAME,STARTDATE,ENDDATE,PROJECTOWNER,PROJECTOWNERCONTACT,EMPLOYEE_ID,auditFlag,createdBy,createdTimeStamp) VALUES
