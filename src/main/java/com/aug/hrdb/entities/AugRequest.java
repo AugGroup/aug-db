@@ -28,7 +28,7 @@ public class AugRequest extends BaseEntity{
 	private Integer id;
 
 	@Column(name = "REQUEST_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
 	private Date requestDate;
 
 	@Column(name = "REQUESTER_NAME")
@@ -41,7 +41,7 @@ public class AugRequest extends BaseEntity{
 	private String approvalName;
 
 	@Column(name = "APPROVE_DATE")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
 	private Date approveDate;
 	
 	@Column(name = "NUMBER_APPLICANT")
@@ -60,28 +60,6 @@ public class AugRequest extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
 	private MasJoblevel joblevel;
-	
-	@Transient
-	private String jobLevelStr;
-	
-	@Transient
-	private String technologyStr;
-
-	public String getJobLevelStr() {
-		return jobLevelStr;
-	}
-
-	public void setJobLevelStr(String jobLevelStr) {
-		this.jobLevelStr = jobLevelStr;
-	}
-
-	public String getTechnologyStr() {
-		return technologyStr;
-	}
-
-	public void setTechnologyStr(String technologyStr) {
-		this.technologyStr = technologyStr;
-	}
 
 	public Integer getId() {
 		return id;
