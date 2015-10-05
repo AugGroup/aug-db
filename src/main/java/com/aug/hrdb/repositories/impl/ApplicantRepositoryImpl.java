@@ -23,13 +23,13 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 		super(Applicant.class);
 	}
 
-	@Override
-	public List<ApplicantDto> findByTechnology(String technology) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_APPLICANT");
-		query.setParameter("TECHNOLOGY", "%" + technology + "%");
-		List<ApplicantDto> results = query.list();
-		return results;
-	}
+//	@Override
+//	public List<ApplicantDto> findByTechnology(String technology) {
+//		Query query = getCurrentSession().getNamedQuery("SEARCH_APPLICANT");
+//		query.setParameter("TECHNOLOGY", "%" + technology + "%");
+//		List<ApplicantDto> results = query.list();
+//		return results;
+//	}
 	
 	@Override
 	public List<ApplicantDto> findByJoblevel(String joblevel) {

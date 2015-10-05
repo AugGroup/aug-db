@@ -9,7 +9,7 @@ import com.aug.hrdb.entities.Applicant;
 
 public interface ApplicantRepository extends GenericRepository<Applicant, Serializable> {
 
-	public List<ApplicantDto> findByTechnology(String technology);
+//	public List<ApplicantDto> findByTechnology(String technology);
 	
 	public List<ApplicantDto> findByJoblevel(String joblevel);
 	
