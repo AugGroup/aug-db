@@ -6,20 +6,12 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Login;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.sun.mail.handlers.image_gif;
 
 @Entity
 @NamedNativeQueries({
@@ -39,7 +31,8 @@ import com.sun.mail.handlers.image_gif;
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
-					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION ,CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE, "+
+					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , "+
+					"CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ', CONCAT(mt.NAME,' ',mj.NAME), ' )') as TITLE, "+
 					"CONCAT(em.NAME_ENG,' ',em.SURNAME_ENG) as LOGIN_NAME "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
@@ -66,14 +59,11 @@ public class AppointmentDto {
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Column(name = "START")
 	@Temporal(TemporalType.TIMESTAMP)
-	//@JsonSerialize(using = CustomDateSerializer.class)
-  //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date start;
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Column(name = "END")
 	@Temporal(TemporalType.TIMESTAMP)
-  //  @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private Date end;
 	
 	@Column(name= "APPLICANT_ID")
@@ -121,7 +111,6 @@ public class AppointmentDto {
 		this.detail = detail;
 	}
 	
-	//@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getStart() {
 		System.out.println(start);
 		return start;
