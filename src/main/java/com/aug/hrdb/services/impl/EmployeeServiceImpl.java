@@ -199,6 +199,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDto.setEmergencyContactPhoneNumber(employee.getEmergencyContactPhoneNumber());
         employeeDto.setDateOfBirth(employee.getDateOfBirth());
         employeeDto.setPlaceOfBirth(employee.getPlaceOfBirth());
+        employeeDto.setDateToBeDrafted(employee.getDateToBeDrafted());
         employeeDto.setAge(employee.getAge());
         employeeDto.setReligion(employee.getReligion());
         employeeDto.setIdCard(employee.getIdCard());
@@ -572,6 +573,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		 Employee employee = employeeRepository.find(employeeDto.getId());
 		 Hibernate.initialize(employee.getOfficial());
+		 
 		
 		//update official if id is null but id not null it change to save
 		
