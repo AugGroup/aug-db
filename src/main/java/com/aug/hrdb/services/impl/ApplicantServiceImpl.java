@@ -76,10 +76,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Override
 	public List<ApplicantDto> findByJoblevel(String joblevel){
 		List<ApplicantDto> applicants = applicantRepository.findByJoblevel(joblevel);
-		for (ApplicantDto appl : applicants) {
-			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
-			appl.setJoblevelStr(job);
-		}
 		return applicants;
 	}
 	@Override
