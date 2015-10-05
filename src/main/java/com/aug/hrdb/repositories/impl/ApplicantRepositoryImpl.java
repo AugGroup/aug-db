@@ -71,21 +71,26 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 	}
 
 	@Override
-	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, String degree, String major, String schoolName, Double gpa) {
-		Query query = getCurrentSession().getNamedQuery(
-				"REPORT_SEARCH_BY_CRITERIA");
+	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, Integer masdegreetype, String major, String university, Double gpa) {
+		Query query = getCurrentSession().getNamedQuery("REPORT_SEARCH_BY_CRITERIA");
 		String queryStr = query.getQueryString();
 		if (technology > 0) {
 			queryStr = query.getQueryString();
-			queryStr += " AND (tech.ID = :TECHNOLOGY) ";
+			queryStr += " AND technology.ID = :TECHNOLOGY ";
 			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
 			query.setParameter("TECHNOLOGY", technology);
 		}
 		if (joblevel > 0) {
 			queryStr = query.getQueryString();
-			queryStr += " AND (job.ID = :JOBLEVEL) ";
+			queryStr += " AND joblevel.ID = :JOBLEVEL ";
 			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
 			query.setParameter("JOBLEVEL", joblevel);
+		}
+		if (masdegreetype > 0) {
+			queryStr = query.getQueryString();
+			queryStr += " AND degreeType.ID = :DEGREE";
+			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportApplicantDto.class);
+			query.setParameter("DEGREE", masdegreetype);
 		}
 		if (gpa != null) {
 			queryStr = query.getQueryString();
@@ -100,14 +105,16 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 		if (joblevel > 0) {
 			query.setParameter("JOBLEVEL", joblevel);
 		}
+		if (masdegreetype > 0) {
+			query.setParameter("DEGREE", masdegreetype);
+		}
 		if (gpa != null) {
 			query.setParameter("GPA", gpa);
 			System.out.println("TEST:::" + queryStr);
 		}
-
-		query.setParameter("DEGREE", "%" + degree + "%");
+		
 		query.setParameter("MAJOR", "%" + major + "%");
-		query.setParameter("SCHOOL_NAME", "%"+ schoolName +"%");
+		query.setParameter("UNIVERSITY", "%"+ university +"%");
 		
 		List<ReportApplicantDto> results = query.list();
 		//System.out.println("queryStr :"+ queryStr);

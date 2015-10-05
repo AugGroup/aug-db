@@ -53,7 +53,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "LEFT JOIN POSITION position3 ON applicant.POSITION3_ID = position3.ID ", resultClass = ReportApplicantDto.class),
 		
 		@NamedNativeQuery(name = "REPORT_SEARCH_BY_CRITERIA", query = "SELECT "
-		+ "applicant.APPLICANT_ID AS id, "
+		+ "applicant.ID AS id, "
 		+ "applicant.AGE AS age, "
 		+ "applicant.APPLICANT_STATUS AS applicantStatus, "
 		+ "applicant.APPLY_DATE AS applyDate,"
@@ -68,16 +68,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "applicant.TECH_SCORE AS techScore,"
 		+ "applicant.TEL AS tel,"
 		+ "applicant.TRACKING_STATUS AS trackingStatus,"
-		+ "applicant.POSITION1_ID AS position1,"
-		+ "applicant.POSITION2_ID AS position2,"
-		+ "applicant.POSITION3_ID AS position3,"
-		+ "education.DEGREE AS degree,"
+		+ "applicant.MASTECHNOLOGY_ID AS technologyId,"
+		+ "applicant.MASJOBLEVEL_ID AS joblevelId,"
+		+ "education.DEGREETYPE_ID AS degreeId,"
+		+ "degreeType.ID,"
+		+ "degreeType.NAME AS degreeName,"
+//		+ "education.DEGREE AS degree,"
 		+ "education.FACULTY AS faculty,"
 		+ "education.GPA AS gpa,"
 		+ "education.MAJOR AS major,"
-		+ "education.SCHOOL_NAME AS schoolName,"
-		+ "education.APPLICANT_ID AS applicantId,"
-		+ "position1.ID AS pos1Id,"
+		+ "education.UNIVERSITY AS university,"
+		+ "education.APPLICANT_ID AS ApplicantId,"
+		+ "joblevel.ID AS joblevelId,"
+		+ "joblevel.CODE AS joblevelCode,"
+		+ "joblevel.NAME AS joblevelName,"
+		+ "technology.ID AS technologyId,"
+		+ "technology.CODE AS technologyCode,"
+		+ "technology.NAME AS technologyName "
+/*		+ "position1.ID AS pos1Id,"
 		+ "position1.POSITION_CODE AS positionCode1,"
 		+ "position1.POSITION_NAME AS positionName1,"
 		+ "position2.ID AS pos2Id,"
@@ -85,14 +93,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "position2.POSITION_NAME AS positionName2,"
 		+ "position3.ID AS pos3Id,"
 		+ "position3.POSITION_CODE AS positionCode3,"
-		+ "position3.POSITION_NAME AS positionName3 "
+		+ "position3.POSITION_NAME AS positionName3 "*/
 		+ "FROM APPLICANT applicant "
-		+ "LEFT JOIN EDUCATION education ON applicant.APPLICANT_ID = education.APPLICANT_ID "
-		+ "LEFT JOIN POSITION position1 ON applicant.POSITION1_ID = position1.ID "
-		+ "LEFT JOIN POSITION position2 ON applicant.POSITION2_ID = position2.ID " //WHERE education.DEGREE= :DEGREE AND education.MAJOR =:MAJOR
-		+ "LEFT JOIN POSITION position3 ON applicant.POSITION3_ID = position3.ID "
-		+ "WHERE education.DEGREE like :DEGREE AND education.MAJOR like :MAJOR AND "
-		+ "education.SCHOOL_NAME like :SCHOOL_NAME", resultClass = ReportApplicantDto.class),
+		+ "LEFT JOIN EDUCATION education ON applicant.ID = education.APPLICANT_ID "
+		+ "LEFT JOIN MAS_DEGREETYPE degreeType ON degreeType.ID = education.DEGREETYPE_ID "
+		+ "LEFT JOIN MAS_JOBLEVEL joblevel ON applicant.MASJOBLEVEL_ID = joblevel.ID "
+		+ "LEFT JOIN MAS_TECHNOLOGY technology ON applicant.MASTECHNOLOGY_ID = technology.ID " //WHERE education.DEGREE= :DEGREE AND education.MAJOR =:MAJOR
+//		+ "LEFT JOIN POSITION position3 ON applicant.POSITION3_ID = position3.ID "
+		+ "WHERE "
+		+ "education.MAJOR like :MAJOR OR "
+		+ "education.UNIVERSITY like :UNIVERSITY ", resultClass = ReportApplicantDto.class),
 		
 		@NamedNativeQuery(name = "REPORT_SEARCH_BY_MONTH", query = "SELECT "
 		+ "applicant.APPLICANT_ID AS id, "
@@ -190,16 +200,16 @@ public class ReportApplicantDto {
 	@Column(name = "trackingStatus")
 	private String trackingStatus;
 
-	@Column(name = "position1")
-	private Integer position1;
+	@Column(name = "joblevelId")
+	private Integer joblevelId;
 	
-	@Column(name = "position2")
-	private Integer position2;
-	
-	@Column(name = "position3")
-	private Integer position3;
+	@Column(name = "technologyId")
+	private Integer technologyId;
 
-	@Column(name = "degree")
+	@Column(name = "degreeId")
+	private Integer degreeId;
+	
+	@Column(name = "degreeName")
 	private String degree;
 
 	@Column(name = "faculty")
@@ -211,7 +221,7 @@ public class ReportApplicantDto {
 	@Column(name = "major")
 	private String major;
 
-	@Column(name = "schoolName")
+	@Column(name = "university")
 	private String schoolName;
 
 	/*@Column(name = "yearOfGraduate")
@@ -219,27 +229,23 @@ public class ReportApplicantDto {
 	
 	@Column(name = "ApplicantId")
 	private String ApplicantId;
-		
-	@Column(name = "pos1Id")
-	private Integer pos1Id;
-	@Column(name = "pos2Id")
-	private Integer pos2Id;
-	@Column(name = "pos3Id")
-	private Integer pos3Id;
 	
-	@Column(name = "positionCode1")
-	private String positionCode1;
-	@Column(name = "positionCode2")
-	private String positionCode2;
-	@Column(name = "positionCode3")
-	private String positionCode3;
+	@Column(name = "joblevelCode")
+	private String joblevelCode;
+	@Column(name = "technologyCode")
+	private String technologyCode;
 	
-	@Column(name = "positionName1")
+	@Column(name = "joblevelName")
+	private String masJoblevelName;
+	@Column(name = "technologyName")
+	private String masTechnologyName;
+	
+/*	@Column(name = "positionName1")
 	private String positionName1;
 	@Column(name = "positionName2")
 	private String positionName2;
 	@Column(name = "positionName3")
-	private String positionName3;
+	private String positionName3;*/
 	
 	@Transient
 	private String reportType;
@@ -368,23 +374,17 @@ public class ReportApplicantDto {
 	public void setTrackingStatus(String trackingStatus) {
 		this.trackingStatus = trackingStatus;
 	}
-	public Integer getPosition1() {
-		return position1;
+	public Integer getJoblevelId() {
+		return joblevelId;
 	}
-	public void setPosition1(Integer position1) {
-		this.position1 = position1;
+	public void setJoblevelId(Integer joblevelId) {
+		this.joblevelId = joblevelId;
 	}
-	public Integer getPosition2() {
-		return position2;
+	public Integer getTechnologyId() {
+		return technologyId;
 	}
-	public void setPosition2(Integer position2) {
-		this.position2 = position2;
-	}
-	public Integer getPosition3() {
-		return position3;
-	}
-	public void setPosition3(Integer position3) {
-		this.position3 = position3;
+	public void setTechnologyId(Integer technologyId) {
+		this.technologyId = technologyId;
 	}
 	public String getDegree() {
 		return degree;
@@ -423,43 +423,7 @@ public class ReportApplicantDto {
 		ApplicantId = applicantId;
 	}
 	
-	public Integer getPos1Id() {
-		return pos1Id;
-	}
-	public void setPos1Id(Integer pos1Id) {
-		this.pos1Id = pos1Id;
-	}
-	public Integer getPos2Id() {
-		return pos2Id;
-	}
-	public void setPos2Id(Integer pos2Id) {
-		this.pos2Id = pos2Id;
-	}
-	public Integer getPos3Id() {
-		return pos3Id;
-	}
-	public void setPos3Id(Integer pos3Id) {
-		this.pos3Id = pos3Id;
-	}
-	public String getPositionCode1() {
-		return positionCode1;
-	}
-	public void setPositionCode1(String positionCode1) {
-		this.positionCode1 = positionCode1;
-	}
-	public String getPositionCode2() {
-		return positionCode2;
-	}
-	public void setPositionCode2(String positionCode2) {
-		this.positionCode2 = positionCode2;
-	}
-	public String getPositionCode3() {
-		return positionCode3;
-	}
-	public void setPositionCode3(String positionCode3) {
-		this.positionCode3 = positionCode3;
-	}
-	public String getPositionName1() {
+/*	public String getPositionName1() {
 		return positionName1;
 	}
 	public void setPositionName1(String positionName1) {
@@ -476,12 +440,42 @@ public class ReportApplicantDto {
 	}
 	public void setPositionName3(String positionName3) {
 		this.positionName3 = positionName3;
-	}
+	}*/
 	public String getReportType() {
 		return reportType;
 	}
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
+	}
+	public Integer getDegreeId() {
+		return degreeId;
+	}
+	public void setDegreeId(Integer degreeId) {
+		this.degreeId = degreeId;
+	}
+	public String getMasJoblevelName() {
+		return masJoblevelName;
+	}
+	public void setMasJoblevelName(String masJoblevelName) {
+		this.masJoblevelName = masJoblevelName;
+	}
+	public String getMasTechnologyName() {
+		return masTechnologyName;
+	}
+	public void setMasTechnologyName(String masTechnologyName) {
+		this.masTechnologyName = masTechnologyName;
+	}
+	public String getJoblevelCode() {
+		return joblevelCode;
+	}
+	public void setJoblevelCode(String joblevelCode) {
+		this.joblevelCode = joblevelCode;
+	}
+	public String getTechnologyCode() {
+		return technologyCode;
+	}
+	public void setTechnologyCode(String technologyCode) {
+		this.technologyCode = technologyCode;
 	}
 
 }

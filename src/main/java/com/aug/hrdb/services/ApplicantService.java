@@ -38,7 +38,7 @@ public interface ApplicantService {
 	/*-------------------- report search --------------------*/
 	public List<ReportApplicantDto> reportApplicant();
 	
-	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, String degree, String major, String schoolName, Double gpa);
+	public List<ReportApplicantDto> findReportByCriteria(Integer technology,Integer joblevel, Integer masdegreetype, String major, String university, Double gpa);
 
 	/*-------------------- Monthly report --------------------*/
 	public List<ReportApplicantDto> findReportByMonth(String startDate,String endDate);
