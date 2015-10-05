@@ -384,7 +384,10 @@ VALUES (STR_TO_DATE('26/05/2015','%d/%m/%Y'),'SamSmith','New Request','ChrisBrow
 
 --Address
 INSERT INTO ADDRESS(HOUSE_NO,ROAD,DISTRICT,SUB_DISTRICT,ZIPCODE,APPLICANT_ID,ADDRESSTYPE_ID,PROVINCE_ID,auditFlag,createdBy,createdTimeStamp)
-VALUES('528','Sukhumvit','Mung','Mung',10250,2,1,30,'C',0,NOW());
+VALUES('528','Sukhumvit','Mung','Mung',10250,1,1,30,'C',0,NOW()),
+('25','Sukhumvit','Mung','Mung',10280,2,1,45,'C',0,NOW()),
+('58bb','Sukhumvit','Mung','Mung',10270,3,1,35,'C',0,NOW());
+
 
 --Family
 insert INTO FAMILY (APPLICANT_ID,MASRELATION_ID,ADDRESS,NAME,AGE,GENDER,OCCUPATION,POSITION,TELEPHONE,auditFlag,createdBy,createdTimeStamp) VALUES 
