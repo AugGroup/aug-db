@@ -275,14 +275,14 @@ public class Applicant extends BaseEntity{
 	private List<Ability> abilities;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy ="applicant")
+	@OneToMany(mappedBy ="applicant",cascade=CascadeType.REMOVE)
 	private List<Appointment> appointments;
 	
 	@Transient
 	private String reportType;
 	
 	@JsonIgnore
-	@OneToOne(mappedBy="applicant")
+	@OneToOne(mappedBy="applicant",cascade=CascadeType.REMOVE)
 	private Employee employee;
 	
 	public String getReportType() {
