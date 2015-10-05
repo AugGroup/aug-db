@@ -39,7 +39,7 @@ import com.sun.mail.handlers.image_gif;
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
-					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION ,CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( '+CONCAT(mt.NAME,' ',mj.NAME)+' )') as TITLE, "+
+					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION ,CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE, "+
 					"CONCAT(em.NAME_ENG,' ',em.SURNAME_ENG) as LOGIN_NAME "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
