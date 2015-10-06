@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -164,6 +165,13 @@ public class ApplicantServiceImpl implements ApplicantService {
 		@Override
 		public ApplicantDto getMaxApplicantId() {
 			return applicantRepository.getMaxApplicantId();
+		}
+
+		@Override
+		public Applicant setApplicantToEmployee(String trackingStatus) {
+			List<ApplicantDto> applicantDto = applicantRepository.findByTrackingStatus(trackingStatus);
+			Employee employee = new Employee();
+			return null;
 		}
 
 		

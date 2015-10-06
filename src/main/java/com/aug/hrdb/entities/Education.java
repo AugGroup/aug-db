@@ -32,6 +32,7 @@ public class Education extends BaseEntity{
 	@Column(name = "MAJOR")
 	private String major;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
 	@Column(name = "GPA")
 	private Double gpa;
 	
