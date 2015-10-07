@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "EMPLOYEE",uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_CARD"})})
+@Table(name = "EMPLOYEE")
 public class Employee extends BaseEntity{
 	
 	@Id
@@ -292,9 +292,9 @@ public class Employee extends BaseEntity{
 	private List<Address> addresses = new ArrayList<Address>();*/
 
 	 
-	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+	/*@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
-	private Official official;
+	private Official official;*/
 	 
 	 
 	/*@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
@@ -984,14 +984,14 @@ public class Employee extends BaseEntity{
 		this.addresses = addresses;
 	}*/
 
-	public Official getOfficial() {
+/*	public Official getOfficial() {
 		return official;
 	}
 
 
 	public void setOfficial(Official official) {
 		this.official = official;
-	}
+	}*/
 
 
 

@@ -64,13 +64,13 @@ public class LeaveServiceTest {
 	@Before
 	public void setAbility() {
 		employee = new Employee();
-        employee.setIdCard("115310905001-9");
+        /*employee.setIdCard("115310905001-9");
         employee.setNameThai("อภิวาท์");
         employee.setNameEng("apiva");
         employee.setNicknameThai("va");
         employee.setNicknameEng("va");
         employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");
+        employee.setSurnameEng("kimkatanom");*/
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -82,14 +82,14 @@ public class LeaveServiceTest {
 			e.printStackTrace();
 		} 
         
-		employee.setDateOfBirth(date);
+		/*employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");
+        employee.setEmergencyContact("mom");*/
         employee.setEmployeeCode("EMP-18");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
-        employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");
+        /*employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -157,7 +157,7 @@ public class LeaveServiceTest {
 		employee.setMasDivision(masDivision);
 		
 	
-		employee.setMasJoblevel(mJob);
+		//employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
 		empId=employee.getId();
 		

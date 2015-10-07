@@ -87,10 +87,10 @@ public class Official extends BaseEntity{
 	    @Column(name = "ID")
 	    private Integer id;
 		
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
+		/*@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
 		@Column(name = "OFFICIAL_DATE")
 		//@Temporal(TemporalType.TIMESTAMP)
-		private Date officialDate;
+		private Date officialDate;*/
 		
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
 		@Column(name = "START_WORK_DATE")
@@ -102,11 +102,11 @@ public class Official extends BaseEntity{
 		//@Temporal(TemporalType.TIMESTAMP)
 		private Date endWorkDate;
 
-	 	@Column(name = "POSITION_APPLIED_FOR", nullable = false)
+	 	/*@Column(name = "POSITION_APPLIED_FOR", nullable = false)
 		private String positionAppliedFor;
 		
 		@Column(name = "SALARY_EXPECTED", nullable = false)
-		private String salaryExpected;
+		private String salaryExpected;*/
 		
 		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
 		@Column(name = "PROBATION_DATE")
@@ -114,7 +114,7 @@ public class Official extends BaseEntity{
 		private Date probationDate;
 	    
 		 @OneToOne(fetch=FetchType.LAZY,mappedBy="official")
-		 private Employee empOfficial;
+		 private Applicant applicant;
 
 
 //	------------------------------------------- getter setter ---------------------------------------------//
@@ -127,13 +127,13 @@ public class Official extends BaseEntity{
 			this.id = id;
 		}
 
-		public Date getOfficialDate() {
+		/*public Date getOfficialDate() {
 			return officialDate;
 		}
 
 		public void setOfficialDate(Date officialDate) {
 			this.officialDate = officialDate;
-		}
+		}*/
 
 		public Date getStartWorkDate() {
 			return startWorkDate;
@@ -151,7 +151,7 @@ public class Official extends BaseEntity{
 			this.endWorkDate = endWorkDate;
 		}
 
-		public String getPositionAppliedFor() {
+		/*public String getPositionAppliedFor() {
 			return positionAppliedFor;
 		}
 
@@ -165,18 +165,19 @@ public class Official extends BaseEntity{
 
 		public void setSalaryExpected(String salaryExpected) {
 			this.salaryExpected = salaryExpected;
-		}
+		}*/
 
-		public Employee getEmpOfficial() {
-			return empOfficial;
-		}
-
-		public void setEmpOfficial(Employee empOfficial) {
-			this.empOfficial = empOfficial;
-		}
 
 		public Date getProbationDate() {
 			return probationDate;
+		}
+
+		public Applicant getApplicant() {
+			return applicant;
+		}
+
+		public void setApplicant(Applicant applicant) {
+			this.applicant = applicant;
 		}
 
 		public void setProbationDate(Date probationDate) {

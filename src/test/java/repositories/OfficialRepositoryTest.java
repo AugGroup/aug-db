@@ -68,13 +68,13 @@ public class OfficialRepositoryTest {
 	public void setUp() {
 		
 		employee = new Employee();
-        employee.setIdCard("115310905001-9");
+        /*employee.setIdCard("115310905001-9");
         employee.setNameThai("อภิวาท์");
         employee.setNameEng("apiva");
         employee.setNicknameThai("va");
         employee.setNicknameEng("va");
         employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");
+        employee.setSurnameEng("kimkatanom");*/
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -86,14 +86,14 @@ public class OfficialRepositoryTest {
 			e.printStackTrace();
 		} 
         
-		employee.setDateOfBirth(date);
+		/*employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");
+        employee.setEmergencyContact("mom");*/
         employee.setEmployeeCode("EMP-018");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
-        employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");
+        /*employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -156,16 +156,16 @@ public class OfficialRepositoryTest {
 		employee.setMasDivision(masDivision);
 		
 
-		employee.setMasJoblevel(mJob);
+		//employee.setMasJoblevel(mJob);
 		employeeRepository.create(employee);
 		
 	
 		Official official = new Official();
-		official.setOfficialDate(cal.getTime());
+		//official.setOfficialDate(cal.getTime());
 		official.setStartWorkDate(cal.getTime());
 		official.setEndWorkDate(cal.getTime());
-		official.setPositionAppliedFor("Programmers");
-		official.setSalaryExpected("500000000");
+		//official.setPositionAppliedFor("Programmers");
+		//official.setSalaryExpected("500000000");
 		official.setProbationDate(cal.getTime());
 		official.setAuditFlag("C");
 		official.setCreatedBy(1);
@@ -183,11 +183,11 @@ public class OfficialRepositoryTest {
 		
 		Official official = new Official();
 	    Calendar cal = Calendar.getInstance();
-		official.setOfficialDate(cal.getTime());
+		//official.setOfficialDate(cal.getTime());
 		official.setStartWorkDate(cal.getTime());
 		official.setEndWorkDate(cal.getTime());
-		official.setPositionAppliedFor("Programmer");
-		official.setSalaryExpected("500000000");
+		//official.setPositionAppliedFor("Programmer");
+		//official.setSalaryExpected("500000000");
 		official.setProbationDate(cal.getTime());
 		official.setAuditFlag("C");
 		official.setCreatedBy(1);
@@ -205,7 +205,7 @@ public class OfficialRepositoryTest {
 	public void updateOfficial() {
 		
 		Official official = officialRepository.find(id);
-		official.setPositionAppliedFor("BBA");
+		//official.setPositionAppliedFor("BBA");
 		officialRepository.update(official);
 	}
 	
@@ -222,7 +222,7 @@ public class OfficialRepositoryTest {
 	public void findByIdOfficial(){
 		
 		Official official = (Official) officialRepository.getCurrentSession().get(Official.class, id);		
-		Assert.assertEquals("Programmers", official.getPositionAppliedFor());
+		//Assert.assertEquals("Programmers", official.getPositionAppliedFor());
 		
 	}
 	

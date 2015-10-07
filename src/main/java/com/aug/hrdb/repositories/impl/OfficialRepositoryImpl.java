@@ -15,6 +15,8 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.OfficialDto;
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.OfficialRepository;
 import com.mysql.jdbc.StringUtils;
@@ -29,11 +31,15 @@ public class OfficialRepositoryImpl extends GenericRepositoryImpl<Official, Inte
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<Official> findByCriteria(Official official){
+	public List<Official> findByCriteria(Applicant applicant){
 		
 		Criteria c = getCurrentSession().createCriteria(Official.class);
-		if (!StringUtils.isNullOrEmpty(official.getPositionAppliedFor())) {
-			c.add(Restrictions.like("name", "%" + official.getPositionAppliedFor() + "%"));
+		c.setFetchMode("empOfficial",FetchMode.JOIN);
+		c.createAlias("empOfficial", "empOfficial");
+		c.setFetchMode("applicant",FetchMode.JOIN);
+		c.createAlias("applicant", "applicant");
+		if (!StringUtils.isNullOrEmpty(applicant.getEmployedPosition())) {
+			c.add(Restrictions.like("employedPosition", "%" + applicant.getEmployedPosition() + "%"));
 		}
 		return c.list();
 		

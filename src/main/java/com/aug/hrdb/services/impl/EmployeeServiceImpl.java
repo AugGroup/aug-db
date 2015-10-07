@@ -157,10 +157,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id) {
 		
 		Employee employee = employeeRepository.find(id);	
-		Hibernate.initialize(employee.getOfficial());
+
+		
 		Hibernate.initialize(employee.getApplicant());
 		Applicant applicant = applicantService.findById(employee.getApplicant().getId());
-		
+		Hibernate.initialize(applicant.getOfficial());
+
 		
 		//System.out.println(employee.getOfficial().getId());
 		
@@ -169,14 +171,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDto.setStatusemp(employee.getStatusemp()); 
 		employeeDto.setIsManager(employee.getIsManager()); 
 		
-		if(employee.getOfficial()!=null){
+
+		if(applicant.getOfficial()!=null){
 	        employeeDto.setOfficialDate(applicant.getApplyDate()); 
-	        employeeDto.setStartWorkDate(employee.getOfficial().getStartWorkDate());
-	        employeeDto.setEndWorkDate(employee.getOfficial().getEndWorkDate());
+	        employeeDto.setStartWorkDate(applicant.getOfficial().getStartWorkDate());
+	        employeeDto.setEndWorkDate(applicant.getOfficial().getEndWorkDate());
 	    	employeeDto.setPositionAppliedFor(applicant.getEmployedPosition());
 			employeeDto.setSalaryExpected(applicant.getExpectedSalary());
-			employeeDto.setOfficialId(employee.getOfficial().getId());
-			employeeDto.setProbationDate(employee.getOfficial().getProbationDate()); 
+			employeeDto.setOfficialId(applicant.getOfficial().getId());
+			employeeDto.setProbationDate(applicant.getOfficial().getProbationDate()); 
+
 
 		}
 		
@@ -570,14 +574,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode,String img) throws DataIntegrityViolationException {
 		
 		Employee employee = employeeRepository.find(employeeDto.getId());	
-		Hibernate.initialize(employee.getOfficial());
+
 		Hibernate.initialize(employee.getApplicant());
 		Applicant applicant = applicantService.findById(employee.getApplicant().getId());
-		
+		Hibernate.initialize(applicant.getOfficial());
+
+
 		
 		//update official if id is null but id not null it change to save
 		
-		if(employee.getOfficial()==null){
+		if(applicant.getOfficial()==null){
 			Official official = new Official();
 			official.setStartWorkDate(employeeDto.getStartWorkDate());
 			official.setEndWorkDate(employeeDto.getEndWorkDate());
@@ -588,12 +594,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 			
 			afficialService.create(official);
 			
-			employee.setOfficial(official);
+			applicant.setOfficial(official);
 			
-		}else if(employee.getOfficial()!=null){
+		}else if(applicant.getOfficial()!=null){
 			
-			  if(employee.getOfficial().getId()!=null){
-				Official official1 = afficialService.findById(employee.getOfficial().getId());
+
+			  if(applicant.getOfficial().getId()!=null){
+				Official official1 = afficialService.findById(applicant.getOfficial().getId());
+
 				
 				official1.setStartWorkDate(employeeDto.getStartWorkDate());
 				official1.setEndWorkDate(employeeDto.getEndWorkDate());
@@ -874,8 +882,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee findAndinitializeOfficial(Integer id) {
 		// TODO Auto-generated method stub
 		Employee employee = employeeRepository.find(id);
-		Hibernate.initialize(employee.getOfficial());
-		//Hibernate.initialize(employee.getAddresses());
+		Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+		Hibernate.initialize(applicant.getOfficial());
 		Hibernate.initialize(employee.getLeaves());
 		return employee;
 	}

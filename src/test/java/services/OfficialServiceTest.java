@@ -68,13 +68,13 @@ public class OfficialServiceTest {
 	public void setUp() {
 		
 		employee = new Employee();
-        employee.setIdCard("115310905001-9");
+        /*employee.setIdCard("115310905001-9");
         employee.setNameThai("อภิวาท์");
         employee.setNameEng("apiva");
         employee.setNicknameThai("va");
         employee.setNicknameEng("va");
         employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");
+        employee.setSurnameEng("kimkatanom");*/
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -86,14 +86,14 @@ public class OfficialServiceTest {
 			e.printStackTrace();
 		} 
         
-		employee.setDateOfBirth(date);
+		/*employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");
+        employee.setEmergencyContact("mom");*/
         employee.setEmployeeCode("EMP-018");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
-        employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");
+       /* employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -156,15 +156,15 @@ public class OfficialServiceTest {
 		employee.setMasDivision(masDivision);
 		
 
-		employee.setMasJoblevel(mJob);
+		//employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
 		
 		Official official = new Official();
-		official.setOfficialDate(cal.getTime());
+		//official.setOfficialDate(cal.getTime());
 		official.setStartWorkDate(cal.getTime());
 		official.setEndWorkDate(cal.getTime());
-		official.setPositionAppliedFor("Develop");
-		official.setSalaryExpected("500000000");
+		//official.setPositionAppliedFor("Develop");
+		//official.setSalaryExpected("500000000");
 		official.setProbationDate(cal.getTime());
 		official.setAuditFlag("C");
 		official.setCreatedBy(1);
@@ -180,11 +180,11 @@ public class OfficialServiceTest {
 		
 		Official official = new Official();
 		Calendar cal = Calendar.getInstance();
-		official.setOfficialDate(cal.getTime());
+		//official.setOfficialDate(cal.getTime());
 		official.setStartWorkDate(cal.getTime());
 		official.setEndWorkDate(cal.getTime());
-		official.setPositionAppliedFor("Account");
-		official.setSalaryExpected("500000000");
+		//official.setPositionAppliedFor("Account");
+		//official.setSalaryExpected("500000000");
 		official.setProbationDate(cal.getTime());
 		official.setAuditFlag("C");
 		official.setCreatedBy(1);
@@ -199,7 +199,7 @@ public class OfficialServiceTest {
 	public void updateOfficial(){
 		
 		Official official = (Official)officialService.findById(id);
-		official.setPositionAppliedFor("Developper");
+		//official.setPositionAppliedFor("Developper");
 		officialService.update(official);
 		
 	}
@@ -229,7 +229,7 @@ public class OfficialServiceTest {
 
 		Official official =(Official) officialService.findById(id);
 		int id = official.getId();
-		Assert.assertEquals("Develop",official.getPositionAppliedFor());
+	//	Assert.assertEquals("Develop",official.getPositionAppliedFor());
 		
 		
 		

@@ -40,8 +40,11 @@ public class EmployeerepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 	public List<Employee> findByCriteria(Employee employee) {
 		
 		Criteria c = getCurrentSession().createCriteria(Employee.class);
-		if (!StringUtils.isNullOrEmpty(employee.getNameEng())) {
-			c.add(Restrictions.like("nameEng", "%" + employee.getNameEng() + "%"));
+		c.setFetchMode("applicant",FetchMode.JOIN);
+		c.createAlias("applicant", "applicant");
+		
+		if (!StringUtils.isNullOrEmpty(employee.getApplicant().getFirstNameEN())) {			
+			c.add(Restrictions.like("firstNameEN", "%" +employee.getApplicant().getFirstNameEN() + "%"));
 		}
 		return c.list();
 		
@@ -140,8 +143,11 @@ public Employee findOfficial(Integer id) {
 	public List<ReportEmployeeDto> findByName(Employee employee) {
 		
 		Criteria c = getCurrentSession().createCriteria(ReportEmployeeDto.class);
-		if (!StringUtils.isNullOrEmpty(employee.getNameEng())) {
-			c.add(Restrictions.like("name", "%" + employee.getNameEng() + "%"));
+		c.setFetchMode("applicant", FetchMode.JOIN);
+		c.createAlias("applicant", "applicant");
+		
+		if (!StringUtils.isNullOrEmpty(employee.getApplicant().getFirstNameEN())) {
+			c.add(Restrictions.like("firstNameEN", "%" +employee.getApplicant().getFirstNameEN() + "%"));
 		}
 		return c.list();
 		
@@ -153,8 +159,11 @@ public Employee findOfficial(Integer id) {
 	public List<ReportStatusEmployeeDto> findByNameStatus(Employee employee) {
 		
 		Criteria c = getCurrentSession().createCriteria(ReportEmployeeDto.class);
-		if (!StringUtils.isNullOrEmpty(employee.getNameEng())) {
-			c.add(Restrictions.like("name", "%" + employee.getNameEng() + "%"));
+		c.setFetchMode("applicant", FetchMode.JOIN);
+		c.createAlias("applicant", "applicant");
+		
+		if (!StringUtils.isNullOrEmpty(employee.getApplicant().getFirstNameEN())) {
+			c.add(Restrictions.like("firstNameEN", "%" +employee.getApplicant().getFirstNameEN() + "%"));
 		}
 		return c.list();
 		

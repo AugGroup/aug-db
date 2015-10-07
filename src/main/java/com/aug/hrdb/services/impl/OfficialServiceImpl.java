@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.OfficialDto;
+import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.OfficialRepository;
 import com.aug.hrdb.services.OfficialService;
@@ -50,8 +51,8 @@ public class OfficialServiceImpl implements OfficialService{
 	}
 
 	@Override
-	public List<Official> findByCriteria(Official official) {
-		return officialResp.findByCriteria(official);
+	public List<Official> findByCriteria(Applicant applicant) {
+		return officialResp.findByCriteria(applicant);
 	}
 
 	@Override

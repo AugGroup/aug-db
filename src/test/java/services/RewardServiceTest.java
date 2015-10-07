@@ -61,13 +61,13 @@ public class RewardServiceTest {
 	@Before
 	public void setReward() {
 		employee = new Employee();
-		employee.setIdCard("115310905001-9");
+		/*employee.setIdCard("115310905001-9");
         employee.setNameThai("ธัญลักษณ์์");
         employee.setNameEng("thanyalak");
         employee.setNicknameThai("กิ๊ก");
         employee.setNicknameEng("kik");
         employee.setSurnameThai("พิมสวรรค์");
-        employee.setSurnameEng("Pimsawan");
+        employee.setSurnameEng("Pimsawan");*/
         
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     	String dateInString = "31-08-1982";
@@ -79,14 +79,14 @@ public class RewardServiceTest {
 			e.printStackTrace();
 		} 
         
-		employee.setDateOfBirth(date);
+		/*employee.setDateOfBirth(date);
         employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");
+        employee.setEmergencyContact("mom");*/
         employee.setEmployeeCode("EMP-32");
         employee.setStatusemp("Employee");
         employee.setTelHome("089-0851022");
-        employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");
+       /* employee.setTelMobile("089-0851022");
+        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -149,7 +149,7 @@ public class RewardServiceTest {
 		masDivisionService.findById(1);
 		
 		employee.setMasDivision(masDivision);	
-		employee.setMasJoblevel(mJob);
+		//employee.setMasJoblevel(mJob);
 		employeeService.create(employee);
 		empId=employee.getId();
 		

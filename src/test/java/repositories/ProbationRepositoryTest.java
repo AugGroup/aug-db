@@ -49,7 +49,7 @@ public class ProbationRepositoryTest {
 	public void setProbation() throws ParseException{
 		
 		Employee employee = new Employee();
-		employee.setIdCard("1103600695991");
+		/*employee.setIdCard("1103600695991");
         employee.setNameThai("จุฑามาศ");
         employee.setNameEng("Jutamas");
         employee.setNicknameThai("ป่าน");
@@ -58,12 +58,12 @@ public class ProbationRepositoryTest {
         employee.setSurnameEng("Maneeinr");
         employee.setDateOfBirth(dateFmt.parse("24/01/1992"));
         employee.setEmail("parn@gmail.com");
-        employee.setEmergencyContact("Mom");
+        employee.setEmergencyContact("Mom");*/
         employee.setEmployeeCode("EMP-19");
         employee.setStatusemp("Employee");
         employee.setTelHome("029314352");
-        employee.setTelMobile("0817334542");
-        employee.setEmergencyContactPhoneNumber("0817750936");
+       /* employee.setTelMobile("0817334542");
+        employee.setEmergencyContactPhoneNumber("0817750936");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -90,7 +90,7 @@ public class ProbationRepositoryTest {
 		masJoblevelRepository.find(1);
 		
 		applicant.setJoblevel(masJoblevel);
-		employee.setMasJoblevel(masJoblevel);
+		//employee.setMasJoblevel(masJoblevel);
 		
 		MasTechnology masTech = new MasTechnology();
 		masTech.setName("Java");

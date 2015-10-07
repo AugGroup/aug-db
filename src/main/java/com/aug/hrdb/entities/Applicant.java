@@ -285,6 +285,10 @@ public class Applicant extends BaseEntity{
 	@OneToOne(mappedBy="applicant",cascade=CascadeType.REMOVE)
 	private Employee employee;
 	
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
+	private Official official;
+	
 	public String getReportType() {
 		return reportType;
 	}
@@ -934,6 +938,15 @@ public class Applicant extends BaseEntity{
 
 	public void setAbilities(List<Ability> abilities) {
 		this.abilities = abilities;
+	}
+	
+
+	public Official getOfficial() {
+		return official;
+	}
+
+	public void setOfficial(Official official) {
+		this.official = official;
 	}
 
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
