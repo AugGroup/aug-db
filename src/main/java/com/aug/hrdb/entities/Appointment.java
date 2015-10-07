@@ -42,6 +42,9 @@ public class Appointment {
 	@ManyToOne
 	@JoinColumn(name = "LOGIN_ID", referencedColumnName="ID")
 	private Login login;
+	
+	@Column(name="MAIL_STATUS")
+	private Integer mailStatus;
 
 	public Integer getId() {
 		return id;
@@ -97,6 +100,14 @@ public class Appointment {
 
 	public void setLogin(Login login) {
 		this.login = login;
+	}
+
+	public Integer getMailStatus() {
+		return mailStatus;
+	}
+
+	public void setMailStatus(Integer mailStatus) {
+		this.mailStatus = mailStatus;
 	}
 
 	@Override
