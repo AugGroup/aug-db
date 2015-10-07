@@ -965,62 +965,42 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public String generateEmployeeCodeFixData(String location){
 		
-		ApplicantDto applicantDto = new ApplicantDto();
+		Applicant applicant = new Applicant();
 		Employee employeeForCode = new Employee();
 		String empCode = null;
 		MasLocation masLocations = masLocationService.findByLocationCode(location);
-		System.out.println("LOCATION :: " + masLocations);
-		
-		   if(masLocationService.findByLocationCode(applicantDto.getMasLocation())==null){
-//			   System.out.println("NULL :: " + );
-			   System.out.println("----null location id-----");
-		   }
-		   else if(masLocationService.findByLocationCode(applicantDto.getMasLocation())!=null){
-			   MasLocation masLocation = masLocationService.findByLocationCode(applicantDto.getMasLocation());
-			   System.out.println("id: "+masLocation.getId());
-//			   employeeForCode = employeeRepository.findEmployeeCode(1);
+		System.out.println("LOCATIONNNN :: " + masLocations);
+		employeeForCode = employeeRepository.findEmployeeCode(1);
+		System.out.println("employeeForCode :: " + employeeForCode);
+
 			   
-    		   StringBuilder myNumbers = new StringBuilder();
-   		    	for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
-   		    		if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
-   		    			myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
-   		    			System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
-   		    		} else {
-   		    			System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
-   		    		}
-   		    	}
-   		    	System.out.println("Your numbers: " + myNumbers.toString());
-   		    	int employeeCodePlusOne = Integer.parseInt(myNumbers.toString())+1;
-   		    	empCode = applicantDto.getMasLocation()+Integer.toString(employeeCodePlusOne);
-   		    	System.out.println("empCode: "+empCode);
-			   
-//			   if(employeeForCode==null){
-//				   
-//				   empCode = applicantDto.getMasLocation()+"10"+"001";
-//				   System.out.println("empCode: "+empCode);
-//				   
-//				   
-//			   }
-//			   else if(employeeForCode!=null){
-//				   
-//				   			    		   
-//				    		   StringBuilder myNumbers = new StringBuilder();
-//				    		    for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
-//				    		        if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
-//				    		            myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
-//				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
-//				    		        } else {
-//				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
-//				    		        }
-//				    		    }
-//				    		    System.out.println("Your numbers: " + myNumbers.toString());
-//				    		    int employeeCodePlusOne = Integer.parseInt(myNumbers.toString())+1;
-//				    		    empCode = applicantDto.getMasLocation()+Integer.toString(employeeCodePlusOne);
-//				    		    System.out.println("empCode: "+empCode);
-//				    		   
-//			   }
+			   if(employeeForCode==null){
 				   
-		}
+				   empCode = applicant.getMasLocation()+"10"+"001";
+				   System.out.println("empCode: "+empCode);
+				   
+				   
+			   }
+			   else if(employeeForCode!=null){
+				   Applicant applicants = new Applicant();
+				   
+				   			
+				    		   StringBuilder myNumbers = new StringBuilder();
+				    		    for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
+				    		        if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
+				    		            myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
+				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
+				    		        } else {
+				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
+				    		        }
+				    		    }
+				    		    System.out.println("Your numbers: " + myNumbers.toString());
+				    		    int employeeCodePlusOne = Integer.parseInt(myNumbers.toString())+1;
+				    		    System.out.println("LOCATION :::: " + applicants.getMasLocation());
+				    		    empCode = applicants.getMasLocation()+Integer.toString(employeeCodePlusOne);
+				    		    System.out.println("empCode: "+empCode);
+				    		   
+			   }
 		   
 		return empCode;
 				
