@@ -12,6 +12,8 @@ import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="APPOINTMENT")
 public class Appointment {
@@ -35,10 +37,12 @@ public class Appointment {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	private Date end;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "APPLICANT_ID", referencedColumnName="ID")
 	private Applicant applicant;
 	
+	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "LOGIN_ID", referencedColumnName="ID")
 	private Login login;
