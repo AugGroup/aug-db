@@ -406,8 +406,8 @@ INSERT INTO APPOINTMENT(ID,DETAIL,END,MAIL_STATUS,START,TOPIC,APPLICANT_ID,LOGIN
 VALUES 
 (1,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('09/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('09/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Yam',1,1),
 (2,'นัดเซ็นสัญญา',STR_TO_DATE('12/09/2015 14:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('12/09/2015 13:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Piyawut',2,2),
-(3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
-(4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2);
+(3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),1,STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
+(4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),2,STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2);
 
 --MailTemplate
 INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA','<p>Dear K. $FIRST_NAME</p>
