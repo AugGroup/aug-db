@@ -20,26 +20,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID , null as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
 					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE ,"+
-					"null as LOGIN_NAME "+
+					"null as LOGIN_NAME, APPOINTMENT.MAIL_STATUS "+
 					"FROM APPOINTMENT " +
 					"LEFT JOIN APPLICANT appl on APPOINTMENT.APPLICANT_ID = appl.ID " + 
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
 					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
 					"LEFT JOIN  LOGIN  on APPOINTMENT.LOGIN_ID = LOGIN.ID " +
-					"WHERE DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d')", resultClass = AppointmentDto.class),
+					"WHERE APPOINTMENT.MAIL_STATUS =: MAILSTATUS AND ( DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d') )", resultClass = AppointmentDto.class),
 	
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
 					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , "+
 					"CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ', CONCAT(mt.NAME,' ',mj.NAME), ' )') as TITLE, "+
-					"CONCAT(em.NAME_ENG,' ',em.SURNAME_ENG) as LOGIN_NAME "+
+					"CONCAT(empApp.FIRSTNAME_EN,' ',empApp.LASTNAME_EN) as LOGIN_NAME, appo.MAIL_STATUS "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
 					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
 					"LEFT JOIN LOGIN lo on appo.LOGIN_ID = lo.ID " +
 					"LEFT JOIN EMPLOYEE em ON em.ID = lo.EMPLOYEE_ID "+
+					"LEFT JOIN APPLICANT empApp ON em.APPLICANT_ID = empApp.ID "+
 					"WHERE appo.ID = :ID", resultClass = AppointmentDto.class)
 })
 
@@ -86,6 +87,10 @@ public class AppointmentDto {
 	
 	@Column(name = "APPLICANT_TRACKING_STATUS")
 	private String trackingStatus;
+	
+	@Column(name = "MAIL_STATUS")
+	private Integer mailStatus;
+	
 	
 	public Integer getId() {
 		return id;
@@ -182,6 +187,14 @@ public class AppointmentDto {
 
 	public void setTrackingStatus(String trackingStatus) {
 		this.trackingStatus = trackingStatus;
+	}
+
+	public Integer getMailStatus() {
+		return mailStatus;
+	}
+
+	public void setMailStatus(Integer mailStatus) {
+		this.mailStatus = mailStatus;
 	}
 	
 	

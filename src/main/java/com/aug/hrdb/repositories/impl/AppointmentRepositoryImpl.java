@@ -35,11 +35,12 @@ public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment
 	}
 
 	@Override
-	public List<AppointmentDto> findAppointment(String start, String end) {
+	public List<AppointmentDto> findAppointment(String start, String end,Integer mailStatus) {
 		// TODO Auto-generated method stub
 		org.hibernate.Query query = getCurrentSession().getNamedQuery("FIND_APPOINTMENT");
 		query.setParameter("START", start);
 		query.setParameter("END", end);
+		query.setParameter("MAILSTATUS", mailStatus);
 		List<AppointmentDto> appointments = query.list();
 		
 		return appointments;
