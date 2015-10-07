@@ -53,7 +53,7 @@ public class EducationDto {
 	private String major;
 
 	@Column(name = "GPA")
-	private String gpa;
+	private Double gpa;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "START_DATE")
@@ -114,11 +114,11 @@ public class EducationDto {
 
 
 
-	public String getGpa() {
+	public Double getGpa() {
 		return gpa;
 	}
 
-	public void setGpa(String gpa) {
+	public void setGpa(Double gpa) {
 		this.gpa = gpa;
 	}
 
