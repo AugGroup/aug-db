@@ -16,7 +16,7 @@ import javax.persistence.NamedNativeQuery;
 	@NamedNativeQuery(name = "searchCertification",
 					  query = "SELECT c.id, c.CERTIFICATION_FORM, c.DESCRIPTION, c.NAME, c.YEAR, c.APPLICANT_ID "
 					  			+ "FROM CERTIFICATION c "	
-							    + "WHERE c.ID =:ID", resultClass = CertificationDto.class)	
+							    + "WHERE c.applicant_id =:ID", resultClass = CertificationDto.class)	
 	})
 
 
