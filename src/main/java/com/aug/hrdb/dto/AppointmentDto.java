@@ -26,7 +26,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
 					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
 					"LEFT JOIN  LOGIN  on APPOINTMENT.LOGIN_ID = LOGIN.ID " +
-					"WHERE APPOINTMENT.MAIL_STATUS =: MAILSTATUS AND ( DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d') )", resultClass = AppointmentDto.class),
+					"WHERE APPOINTMENT.MAIL_STATUS = :MAILSTATUS AND ( DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d') )", resultClass = AppointmentDto.class),
 	
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
