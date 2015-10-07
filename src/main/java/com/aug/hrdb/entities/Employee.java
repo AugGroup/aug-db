@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-@Table(name = "EMPLOYEE",uniqueConstraints = {@UniqueConstraint(columnNames = {"id"})})
+@Table(name = "EMPLOYEE",uniqueConstraints = {@UniqueConstraint(columnNames = {"ID_CARD"})})
 public class Employee extends BaseEntity{
 	
 	@Id
@@ -61,7 +61,7 @@ public class Employee extends BaseEntity{
 	@Column(name = "EMPLOYEE_CODE",nullable = false,unique=true)
 	private String employeeCode;
 	
-	@Column(name = "NAME_THAI",nullable = false)
+	/*@Column(name = "NAME_THAI",nullable = false)
 	private String nameThai;
 	
 	@Column(name = "SURNAME_THAI",nullable = true)
@@ -80,13 +80,13 @@ public class Employee extends BaseEntity{
 	private String nicknameEng;
 
 	@Column(name = "EMAIL",nullable = false)
-	private String email;
+	private String email;*/
 	
 	@Column(name = "TEL_HOME",nullable = false)
 	private String telHome;
 	
-	@Column(name = "TEL_MOBILE",nullable = false)
-	private String telMobile;
+	/*@Column(name = "TEL_MOBILE",nullable = false)
+	private String telMobile;*/
 	
 	@Column(name = "TEL_FAX",nullable = true)
 	private String telFax;
@@ -97,19 +97,19 @@ public class Employee extends BaseEntity{
 	@Column(name = "HOSPITAL",nullable = true)
 	private String hospital;
 	
-	@Column(name = "EMERGENCY_CONTACT",nullable = false)
-	private String emergencyContact;
+	/*@Column(name = "EMERGENCY_CONTACT",nullable = false)
+	private String emergencyContact;*/
 	
 	@Column(name = "RELATIONSHIP_WITH_EMERGENCY_CONTACT",nullable = true)
 	private String relationshipWithEmergencyContact;
 	
-	@Column(name = "EMERGENCY_CONTACT_ADDRESS",nullable = true)
+	/*@Column(name = "EMERGENCY_CONTACT_ADDRESS",nullable = true)
 	private String emergencyContactAddress;
 	
 	@Column(name = "EMERGENCY_CONTACT_PHONE_NUMBER",nullable = false)
-	private String emergencyContactPhoneNumber;
+	private String emergencyContactPhoneNumber;*/
 	
-    @DateTimeFormat(pattern = "dd-MM-yyyy")
+   /* @DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "DATEOFBIRTH",nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateOfBirth;
@@ -124,27 +124,27 @@ public class Employee extends BaseEntity{
 	private String religion;
 	
 	@Column(name = "ID_CARD",nullable = false)
-	private String idCard;
+	private String idCard;*/
 	
-	@Column(name = "ISSUED_OFFICE",nullable = true)
+	/*@Column(name = "ISSUED_OFFICE",nullable = true)
 	private String issuedOffice;
 	
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	@Column(name = "EXPIRY_DATE",nullable = true)
-	private Date expiryDate;
+	private Date expiryDate;*/
 	
-	@Column(name = "HEIGHT",nullable = true)
+	/*@Column(name = "HEIGHT",nullable = true)
 	private Integer height;
 	
 	@Column(name = "WEIGTH",nullable = true)
 	private Integer weigth;
 	
 	@Column(name = "SEX",nullable = true)
-	private String sex;
+	private String sex;*/
 
-	@Column(name = "MARITAL_STATUS",nullable = true)
+	/*@Column(name = "MARITAL_STATUS",nullable = true)
 	private String maritalStatus;
 	
 	@Column(name = "NUMBER_OF_CHILDREN",nullable = true)
@@ -157,15 +157,15 @@ public class Employee extends BaseEntity{
 	private String marriageCertificateNo;
 	
 	@Column(name = "ISSUED_OFFICE2",nullable = true)
-	private String issuedOffice2;
+	private String issuedOffice2;*/
 	
-	@Column(name = "ADDRESS",nullable = true)
+	/*@Column(name = "ADDRESS",nullable = true)
 	private String address;
 	
 	@Column(name = "OCCUPATION",nullable = true)
-	private String occupation;
+	private String occupation;*/
 	
-	@Column(name = "KNOW_AUG_NEWSPAPER",nullable = true)
+	/*@Column(name = "KNOW_AUG_NEWSPAPER",nullable = true)
 	private String knowAugNewspaper;
 	
 	@Column(name = "DESCRIPTION_NEWSPAPER",nullable = true)
@@ -193,18 +193,18 @@ public class Employee extends BaseEntity{
 	private String knowAugOther;
 	
 	@Column(name = "DESCRIPTION_OTHER",nullable = true)
-	private String descriptionOther;
+	private String descriptionOther;*/
 	
-	@Column(name = "KNOW_EMPLOYED",nullable = true)
+	/*@Column(name = "KNOW_EMPLOYED",nullable = true)
 	private String knowEmployed;
 	
 	@Column(name = "DESCRIPTION_YES",nullable = true)
-	private String descriptionYes;
+	private String descriptionYes;*/
 	
 	/*@Column(name = "KNOW_EMPLOYER_NO",nullable = true)
 	private String knowEmployerNo;*/
 	
-	@Column(name = "MILITARY_SERVICE",nullable = true)
+	/*@Column(name = "MILITARY_SERVICE",nullable = true)
 	private String militaryService;
 	
     @DateTimeFormat(pattern = "dd-MM-yyyy")
@@ -222,12 +222,12 @@ public class Employee extends BaseEntity{
 	private String branchOfService;
 	
 	@Column(name = "SERVICE_NO",nullable = true)
-	private String serviceNo;
+	private String serviceNo;*/
 	
 	/*@Column(name = "MILITARY_SERVICE_NO",nullable = true)
 	private String militaryServiceNo;*/
 	
-	@Column(name = "REASONS_NO",nullable = true)
+	/*@Column(name = "REASONS_NO",nullable = true)
 	private String reasonsNo;
 	
 
@@ -235,7 +235,7 @@ public class Employee extends BaseEntity{
 	@Column(name = "DATE_TO_BE_DRAFTED",nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateToBeDrafted;
-	
+	*/
 	@Column(name = "PREVIOUS_EMPLOYER",nullable = true)
 	private String previousEmployer;
 	
@@ -243,8 +243,8 @@ public class Employee extends BaseEntity{
 	@Column(name = "PREVIOUSEMP_REASONS_NO",nullable = true)
 	private String previousEmpreasonsNo;
 	
-	@Column(name = "IMAGE",nullable = true)
-	private String image;
+	/*@Column(name = "IMAGE",nullable = true)
+	private String image;*/
 	
 	@Column(name = "STATUSEMP",nullable = false)
 	@NotEmpty
@@ -336,18 +336,18 @@ public class Employee extends BaseEntity{
     @JoinColumn(name= "DIVISION_ID", referencedColumnName="id",nullable = false)
     private MasDivision masDivision;
     
-    @ManyToOne(fetch=FetchType.EAGER)
+   /* @ManyToOne(fetch=FetchType.EAGER)
     @JoinColumn(name= "JOBLEVEL_ID", referencedColumnName="id",nullable = false)
     private MasJoblevel masJoblevel;
     
-    /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
-    private Set<Experience> experiences = new HashSet<Experience>();*/
+    @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+    private Set<Experience> experiences = new HashSet<Experience>();
 	    
 
     @ManyToOne(fetch=FetchType.EAGER) 
     @JoinColumn(name= "TECHNOLOGY_ID", referencedColumnName="id",nullable = true)
     private MasTechnology technology;
-    
+    */
     
     /*@OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Family> families = new HashSet<Family>();*/ 
@@ -430,7 +430,7 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public String getNameThai() {
+	/*public String getNameThai() {
 		return nameThai;
 	}
 
@@ -496,7 +496,7 @@ public class Employee extends BaseEntity{
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
+	}*/
 
 	public String getCongenitalDisease() {
 		return congenitalDisease;
@@ -524,7 +524,7 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public String getTelMobile() {
+	/*public String getTelMobile() {
 		return telMobile;
 	}
 
@@ -532,7 +532,7 @@ public class Employee extends BaseEntity{
 	public void setTelMobile(String telMobile) {
 		this.telMobile = telMobile;
 	}
-
+*/
 
 	public String getTelFax() {
 		return telFax;
@@ -544,7 +544,7 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public String getEmergencyContact() {
+	/*public String getEmergencyContact() {
 		return emergencyContact;
 	}
 
@@ -552,7 +552,7 @@ public class Employee extends BaseEntity{
 	public void setEmergencyContact(String emergencyContact) {
 		this.emergencyContact = emergencyContact;
 	}
-
+*/
 
 	public String getRelationshipWithEmergencyContact() {
 		return relationshipWithEmergencyContact;
@@ -565,7 +565,7 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public String getEmergencyContactAddress() {
+	/*public String getEmergencyContactAddress() {
 		return emergencyContactAddress;
 	}
 
@@ -582,10 +582,10 @@ public class Employee extends BaseEntity{
 
 	public void setEmergencyContactPhoneNumber(String emergencyContactPhoneNumber) {
 		this.emergencyContactPhoneNumber = emergencyContactPhoneNumber;
-	}
+	}*/
 
 
-	public Date getDateOfBirth() {
+	/*public Date getDateOfBirth() {
 		return dateOfBirth;
 	}
 
@@ -874,7 +874,7 @@ public class Employee extends BaseEntity{
 	public void setDescriptionYes(String descriptionYes) {
 		this.descriptionYes = descriptionYes;
 	}
-
+*/
 
 	/*public String getKnowEmployerNo() {
 		return knowEmployerNo;
@@ -886,7 +886,7 @@ public class Employee extends BaseEntity{
 	}*/
 
 
-	public String getMilitaryService() {
+	/*public String getMilitaryService() {
 		return militaryService;
 	}
 
@@ -924,7 +924,7 @@ public class Employee extends BaseEntity{
 	public void setBranchOfService(String branchOfService) {
 		this.branchOfService = branchOfService;
 	}
-
+*/
 
 	/*public String getMilitaryServiceNo() {
 		return militaryServiceNo;
@@ -936,7 +936,7 @@ public class Employee extends BaseEntity{
 	}*/
 
 
-	public String getReasonsNo() {
+	/*public String getReasonsNo() {
 		return reasonsNo;
 	}
 
@@ -954,7 +954,7 @@ public class Employee extends BaseEntity{
 	public void setDateToBeDrafted(Date dateToBeDrafted) {
 		this.dateToBeDrafted = dateToBeDrafted;
 	}
-
+*/
 
 	public String getPreviousEmployer() {
 		return previousEmployer;
@@ -995,7 +995,7 @@ public class Employee extends BaseEntity{
 
 
 
-	public String getServiceNo() {
+	/*public String getServiceNo() {
 		return serviceNo;
 	}
 
@@ -1003,7 +1003,7 @@ public class Employee extends BaseEntity{
 
 	public void setServiceNo(String serviceNo) {
 		this.serviceNo = serviceNo;
-	}
+	}*/
 
 
 
@@ -1120,7 +1120,7 @@ public class Employee extends BaseEntity{
 		this.masEmployment = masEmployment;
 	}
 
-	public MasJoblevel getMasJoblevel() {
+	/*public MasJoblevel getMasJoblevel() {
 		return masJoblevel;
 	}
 
@@ -1136,7 +1136,7 @@ public class Employee extends BaseEntity{
 	public void setTechnology(MasTechnology technology) {
 		this.technology = technology;
 	}
-
+*/
 	public MasLocation getMasLocation() {
 		return masLocation;
 	}
@@ -1213,13 +1213,13 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public String getImage() {
+	/*public String getImage() {
 		return image;
 	}
 
 	public void setImage(String image) {
 		this.image = image;
-	}
+	}*/
 
 
 	
