@@ -156,10 +156,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id) {
 		
-		Employee employee = employeeRepository.find(id);
+		Employee employee = employeeRepository.find(id);	
 		Hibernate.initialize(employee.getOfficial());
 		Hibernate.initialize(employee.getApplicant());
-
+		Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+		
 		
 		//System.out.println(employee.getOfficial().getId());
 		
@@ -169,75 +170,73 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employeeDto.setIsManager(employee.getIsManager()); 
 		
 		if(employee.getOfficial()!=null){
-			System.out.println("Official: "+employee.getOfficial().getPositionAppliedFor());
-	        employeeDto.setOfficialDate(employee.getOfficial().getOfficialDate()); 
+	        employeeDto.setOfficialDate(applicant.getApplyDate()); 
 	        employeeDto.setStartWorkDate(employee.getOfficial().getStartWorkDate());
 	        employeeDto.setEndWorkDate(employee.getOfficial().getEndWorkDate());
-	    	employeeDto.setPositionAppliedFor(employee.getOfficial().getPositionAppliedFor());
-			employeeDto.setSalaryExpected(employee.getOfficial().getSalaryExpected());
+	    	employeeDto.setPositionAppliedFor(applicant.getEmployedPosition());
+			employeeDto.setSalaryExpected(applicant.getExpectedSalary());
 			employeeDto.setOfficialId(employee.getOfficial().getId());
 			employeeDto.setProbationDate(employee.getOfficial().getProbationDate()); 
 
 		}
 		
         employeeDto.setEmployeeCode(employee.getEmployeeCode());
-        employeeDto.setNameThai(employee.getNameThai());
-        employeeDto.setSurnameThai(employee.getSurnameThai());
-        employeeDto.setNicknameThai(employee.getNicknameThai());
-        employeeDto.setNameEng(employee.getNameEng());
-        employeeDto.setSurnameEng(employee.getSurnameEng());
-        employeeDto.setNicknameEng(employee.getNicknameEng());
-        employeeDto.setEmail(employee.getEmail());
+        employeeDto.setNameThai(applicant.getFirstNameTH());
+        employeeDto.setSurnameThai(applicant.getLastNameTH());
+        employeeDto.setNicknameThai(applicant.getNickNameTH());
+        employeeDto.setNameEng(applicant.getFirstNameEN());
+        employeeDto.setSurnameEng(applicant.getLastNameEN());
+        employeeDto.setNicknameEng(applicant.getNickNameEN());
+        employeeDto.setEmail(applicant.getEmail());
+        employeeDto.setTelMobile(applicant.getTel()); 
         employeeDto.setTelHome(employee.getTelHome());
-        employeeDto.setTelMobile(employee.getTelMobile()); 
         employeeDto.setTelFax(employee.getTelFax()); 
         employeeDto.setCongenitalDisease(employee.getCongenitalDisease());
         employeeDto.setHospital(employee.getHospital());
-        employeeDto.setEmergencyContact(employee.getEmergencyContact());
+        employeeDto.setEmergencyContact(applicant.getEmergencyName());
         employeeDto.setRelationshipWithEmergencyContact(employee.getRelationshipWithEmergencyContact());
-        employeeDto.setEmergencyContactAddress(employee.getEmergencyContactAddress());
-        employeeDto.setEmergencyContactPhoneNumber(employee.getEmergencyContactPhoneNumber());
-        employeeDto.setDateOfBirth(employee.getDateOfBirth());
-        employeeDto.setPlaceOfBirth(employee.getPlaceOfBirth());
-        employeeDto.setDateToBeDrafted(employee.getDateToBeDrafted());
-        employeeDto.setAge(employee.getAge());
-        employeeDto.setReligion(employee.getReligion());
-        employeeDto.setIdCard(employee.getIdCard());
-        employeeDto.setIssuedOffice(employee.getIssuedOffice());
-        employeeDto.setExpiryDate(employee.getExpiryDate());
-        employeeDto.setHeight(employee.getHeight());
-        employeeDto.setWeigth(employee.getWeigth());
-        employeeDto.setSex(employee.getSex());
-        employeeDto.setMaritalStatus(employee.getMaritalStatus());
-        employeeDto.setNumberOfChildren(employee.getNumberOfChildren());
-        employeeDto.setSpouseName(employee.getSpouseName());
-        employeeDto.setMarriageCertificateNo(employee.getMarriageCertificateNo());
-        employeeDto.setIssuedOffice2(employee.getIssuedOffice2());
-        employeeDto.setAddress(employee.getAddress());
-        employeeDto.setOccupation(employee.getOccupation());
-        employeeDto.setKnowAugNewspaper(employee.getKnowAugNewspaper());
-        employeeDto.setDescriptionNewspaper(employee.getDescriptionNewspaper());
-        employeeDto.setKnowAugMagazine(employee.getKnowAugMagazine()); 
-        employeeDto.setDescriptionMagazine(employee.getDescriptionMagazine());
-        employeeDto.setKnowAugWebsite(employee.getKnowAugWebsite());
-        employeeDto.setDescriptionWebsite(employee.getDescriptionWebsite());
-        employeeDto.setKnowAugFriend(employee.getKnowAugFriend()); 
-        employeeDto.setDescriptionFriend(employee.getDescriptionFriend());
-        employeeDto.setKnowAugOther(employee.getKnowAugOther());
-        employeeDto.setDescriptionOther(employee.getDescriptionOther());
-        employeeDto.setKnowEmployed(employee.getKnowEmployed());
-        employeeDto.setDescriptionYes(employee.getDescriptionYes());
+        employeeDto.setEmergencyContactAddress(applicant.getEmergencyAddress());
+        employeeDto.setEmergencyContactPhoneNumber(applicant.getEmergencyTel());
+        employeeDto.setDateOfBirth(applicant.getBirthDate());
+        employeeDto.setPlaceOfBirth(applicant.getPlaceBirth());
+        employeeDto.setDateToBeDrafted(applicant.getDateToBeDrafted());
+        employeeDto.setAge(applicant.getAge());
+        employeeDto.setReligion(applicant.getReligion());
+        employeeDto.setIdCard(applicant.getCardId());
+        employeeDto.setIssuedOffice(applicant.getCardIssuedOffice());
+        employeeDto.setExpiryDate(applicant.getCardExpiryDate());
+        employeeDto.setHeight(applicant.getHeight());
+        employeeDto.setWeigth(applicant.getWeight());
+        employeeDto.setSex(applicant.getSex());
+        employeeDto.setMaritalStatus(applicant.getApplicantStatus());
+        employeeDto.setNumberOfChildren(applicant.getNumberOfChildren());
+        employeeDto.setSpouseName(applicant.getSpouseName());
+        employeeDto.setMarriageCertificateNo(applicant.getMarriageCertificateNo());
+        employeeDto.setIssuedOffice2(applicant.getIssueOficeMarriage());
+        employeeDto.setAddress(applicant.getMarriageAddress());
+        employeeDto.setOccupation(applicant.getOccupationMarriage());
+        employeeDto.setKnowAugNewspaper(applicant.getNoticeNewspaper());
+        employeeDto.setDescriptionNewspaper(applicant.getNewspaperDescription());
+        employeeDto.setKnowAugMagazine(applicant.getNoticeMagazine()); 
+        employeeDto.setDescriptionMagazine(applicant.getMagazineDescription());
+        employeeDto.setKnowAugWebsite(applicant.getNoticeWebSite());
+        employeeDto.setDescriptionWebsite(applicant.getWebSiteDescription());
+        employeeDto.setKnowAugFriend(applicant.getNoticeFriend()); 
+        employeeDto.setDescriptionFriend(applicant.getFriendDescription());
+        employeeDto.setKnowAugOther(applicant.getNoticeOther());
+        employeeDto.setDescriptionOther(applicant.getOtherDescription());
+        employeeDto.setKnowEmployed(applicant.getNowEmployed());
         /*employeeDto.setKnowEmployerNo(employee.getKnowEmployerNo());*/
-        employeeDto.setMilitaryService(employee.getMilitaryService());
-        employeeDto.setFromYear(employee.getFromYear());
-        employeeDto.setToYear(employee.getToYear());
-        employeeDto.setBranchOfService(employee.getBranchOfService());
-        employeeDto.setServiceNo(employee.getServiceNo());
-        employeeDto.setReasonsNo(employee.getReasonsNo());
-        employeeDto.setDateToBeDrafted(employee.getDateToBeDrafted());
+        employeeDto.setMilitaryService(applicant.getMilitaryStatus());
+        //employeeDto.setFromYear(applicant.getMilitaryFromYear());
+        //employeeDto.setToYear(applicant.getMilitarytoYear());
+        employeeDto.setBranchOfService(applicant.getBranchService());
+        employeeDto.setServiceNo(applicant.getMilitaryServiceNo());
+        employeeDto.setReasonsNo(applicant.getMilitaryReason());
+        employeeDto.setDateToBeDrafted(applicant.getDateToBeDrafted());
         employeeDto.setPreviousEmployer(employee.getPreviousEmployer());
         employeeDto.setPreviousEmpreasonsNo(employee.getPreviousEmpreasonsNo());
-        employeeDto.setImage(employee.getImage());
+        employeeDto.setImage(applicant.getImage());
         
         if(employee.getAimempid()!=null){
         	employeeDto.setAimempid(employee.getAimempid().getId());
@@ -255,13 +254,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         	employeeDto.setMasDivision(employee.getMasDivision().getId());
         }
         
-        if(employee.getMasJoblevel()!=null){
+       /* if(employee.getMasJoblevel()!=null){
         	employeeDto.setMasJoblevel(employee.getMasJoblevel().getId());
         }
         
         if(employee.getTechnology()!=null){
         	employeeDto.setTechnology(employee.getTechnology().getId());
-        }
+        }*/
         
         if(employee.getMasStaffType()!=null){
         	employeeDto.setMasStaffType(employee.getMasStaffType().getId());
@@ -289,7 +288,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	
 	
-
+/*
 	@Override
 	@Transactional
 	public Employee createEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode) throws JDBCException{
@@ -563,17 +562,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		return employee;
 	}
-
+*/
 	
 	
 	@Override
 	@Transactional
 	public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto,String employeeCode,String img) throws DataIntegrityViolationException {
-		// TODO Auto-generated method stub
 		
-		 Employee employee = employeeRepository.find(employeeDto.getId());
-		 Hibernate.initialize(employee.getOfficial());
-		 
+		Employee employee = employeeRepository.find(employeeDto.getId());	
+		Hibernate.initialize(employee.getOfficial());
+		Hibernate.initialize(employee.getApplicant());
+		Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+		
 		
 		//update official if id is null but id not null it change to save
 		
@@ -581,10 +581,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 			Official official = new Official();
 			official.setStartWorkDate(employeeDto.getStartWorkDate());
 			official.setEndWorkDate(employeeDto.getEndWorkDate());
-			official.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
+			applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
 			official.setProbationDate(employeeDto.getProbationDate());
-			official.setOfficialDate(employeeDto.getOfficialDate());
-			official.setSalaryExpected(employeeDto.getSalaryExpected());
+			applicant.setApplyDate(employeeDto.getOfficialDate());
+			applicant.setExpectedSalary(employeeDto.getSalaryExpected());
 			
 			afficialService.create(official);
 			
@@ -594,14 +594,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 			
 			  if(employee.getOfficial().getId()!=null){
 				Official official1 = afficialService.findById(employee.getOfficial().getId());
-				System.out.println("official id: "+employee.getOfficial().getId());
 				
-				official1.setOfficialDate(employeeDto.getOfficialDate());
 				official1.setStartWorkDate(employeeDto.getStartWorkDate());
 				official1.setEndWorkDate(employeeDto.getEndWorkDate());
-				official1.setSalaryExpected(employeeDto.getSalaryExpected());
-				official1.setPositionAppliedFor(employeeDto.getPositionAppliedFor());
+				applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
 				official1.setProbationDate(employeeDto.getProbationDate());
+				applicant.setApplyDate(employeeDto.getOfficialDate());
+				applicant.setExpectedSalary(employeeDto.getSalaryExpected());
 				afficialService.update(official1);
 			  }
 			
@@ -613,60 +612,59 @@ public class EmployeeServiceImpl implements EmployeeService {
 		//update employee
 		
 		employee.setEmployeeCode(employeeCode); 
-		employee.setNameThai(employeeDto.getNameThai());
-		employee.setSurnameThai(employeeDto.getSurnameThai());
-		employee.setNicknameThai(employeeDto.getNicknameThai());
-		employee.setNameEng(employeeDto.getNameEng());
-		employee.setSurnameEng(employeeDto.getSurnameEng()); 
-		employee.setNicknameEng(employeeDto.getNicknameEng()); 
-		employee.setEmail(employeeDto.getEmail());
+		applicant.setFirstNameTH(employeeDto.getNameThai());
+		applicant.setLastNameTH(employeeDto.getSurnameThai());
+		applicant.setNickNameTH(employeeDto.getNicknameThai());
+		applicant.setFirstNameEN(employeeDto.getNameEng());
+		applicant.setLastNameEN(employeeDto.getSurnameEng()); 
+		applicant.setNickNameEN(employeeDto.getNicknameEng()); 
+		applicant.setEmail(employeeDto.getEmail());
 		employee.setCongenitalDisease(employeeDto.getCongenitalDisease());
 		employee.setHospital(employeeDto.getHospital());
 		employee.setTelHome(employeeDto.getTelHome());
-		employee.setTelMobile(employeeDto.getTelMobile());
+		applicant.setTel(employeeDto.getTelMobile());
 		employee.setTelFax(employeeDto.getTelFax());
-		employee.setEmergencyContact(employeeDto.getEmergencyContact());
+		applicant.setEmergencyName(employeeDto.getEmergencyContact());
 		employee.setRelationshipWithEmergencyContact(employeeDto.getRelationshipWithEmergencyContact());
-		employee.setEmergencyContactAddress(employeeDto.getEmergencyContactAddress());
-		employee.setEmergencyContactPhoneNumber(employeeDto.getEmergencyContactPhoneNumber());
-		employee.setDateOfBirth(employeeDto.getDateOfBirth());
-		employee.setPlaceOfBirth(employeeDto.getPlaceOfBirth());
-		employee.setAge(employeeDto.getAge());
-		employee.setReligion(employeeDto.getReligion());
-		employee.setIdCard(employeeDto.getIdCard());
-		employee.setIssuedOffice(employeeDto.getIssuedOffice());
-		employee.setIssuedOffice2(employeeDto.getIssuedOffice2()); 
-		employee.setExpiryDate(employeeDto.getExpiryDate());
-		employee.setHeight(employeeDto.getHeight());
-		employee.setWeigth(employeeDto.getWeigth());
-		employee.setSex(employeeDto.getSex());
-		employee.setMaritalStatus(employeeDto.getMaritalStatus());
-		employee.setNumberOfChildren(employeeDto.getNumberOfChildren()); 
-		employee.setSpouseName(employeeDto.getSpouseName()); 
-		employee.setMarriageCertificateNo(employeeDto.getMarriageCertificateNo());
-		employee.setAddress(employeeDto.getAddress()); 
-		employee.setOccupation(employeeDto.getOccupation());
-		employee.setKnowAugNewspaper(employeeDto.getKnowAugNewspaper());
-		employee.setDescriptionNewspaper(employeeDto.getDescriptionNewspaper());
-		employee.setKnowAugMagazine(employeeDto.getKnowAugMagazine());
-		employee.setDescriptionMagazine(employeeDto.getDescriptionMagazine());
-		employee.setKnowAugWebsite(employeeDto.getKnowAugWebsite());
-		employee.setDescriptionWebsite(employeeDto.getDescriptionWebsite());
-		employee.setKnowAugFriend(employeeDto.getKnowAugFriend()); 
-		employee.setDescriptionFriend(employeeDto.getDescriptionFriend());
-		employee.setKnowAugOther(employeeDto.getKnowAugOther()); 
-		employee.setDescriptionOther(employeeDto.getDescriptionOther()); 
-		employee.setKnowEmployed(employeeDto.getKnowEmployed());
-		employee.setDescriptionYes(employeeDto.getDescriptionYes());
-		employee.setMilitaryService(employeeDto.getMilitaryService());
-		employee.setFromYear(employeeDto.getFromYear());
-		employee.setToYear(employeeDto.getToYear());
-		employee.setBranchOfService(employeeDto.getBranchOfService());
-		employee.setReasonsNo(employeeDto.getReasonsNo());
-		employee.setDateToBeDrafted(employeeDto.getDateToBeDrafted()); 
+		applicant.setEmergencyAddress(employeeDto.getEmergencyContactAddress());
+		applicant.setEmergencyTel(employeeDto.getEmergencyContactPhoneNumber());
+		applicant.setBirthDate(employeeDto.getDateOfBirth());
+		applicant.setPlaceBirth(employeeDto.getPlaceOfBirth());
+		applicant.setAge(employeeDto.getAge());
+		applicant.setReligion(employeeDto.getReligion());
+		applicant.setCardId(employeeDto.getIdCard());
+		applicant.setCardIssuedOffice(employeeDto.getIssuedOffice());
+		applicant.setIssueOficeMarriage(employeeDto.getIssuedOffice2()); 
+		applicant.setCardExpiryDate(employeeDto.getExpiryDate());
+		applicant.setHeight(employeeDto.getHeight());
+		applicant.setWeight(employeeDto.getWeigth());
+		applicant.setSex(employeeDto.getSex());
+		applicant.setApplicantStatus(employeeDto.getMaritalStatus());
+		applicant.setNumberOfChildren(employeeDto.getNumberOfChildren()); 
+		applicant.setSpouseName(employeeDto.getSpouseName()); 
+		applicant.setMarriageCertificateNo(employeeDto.getMarriageCertificateNo());
+		applicant.setMarriageAddress(employeeDto.getAddress()); 
+		applicant.setOccupationMarriage(employeeDto.getOccupation());
+		applicant.setNoticeNewspaper(employeeDto.getKnowAugNewspaper());
+		applicant.setNewspaperDescription(employeeDto.getDescriptionNewspaper());
+		applicant.setNoticeMagazine(employeeDto.getKnowAugMagazine());
+		applicant.setMagazineDescription(employeeDto.getDescriptionMagazine());
+		applicant.setNoticeWebSite(employeeDto.getKnowAugWebsite());
+		applicant.setWebSiteDescription(employeeDto.getDescriptionWebsite());
+		applicant.setNoticeFriend(employeeDto.getKnowAugFriend()); 
+		applicant.setFriendDescription(employeeDto.getDescriptionFriend());
+		applicant.setNoticeOther(employeeDto.getKnowAugOther()); 
+		applicant.setOtherDescription(employeeDto.getDescriptionOther()); 
+		applicant.setNowEmployed(employeeDto.getKnowEmployed());
+		applicant.setMilitaryStatus(employeeDto.getMilitaryService());
+		/*applicant.setFromYear(employeeDto.getFromYear());
+		applicant.setToYear(employeeDto.getToYear());*/
+		applicant.setBranchService(employeeDto.getBranchOfService());
+		applicant.setMilitaryReason(employeeDto.getReasonsNo());
+		applicant.setDateToBeDrafted(employeeDto.getDateToBeDrafted()); 
 		employee.setPreviousEmployer(employeeDto.getPreviousEmployer());
 		employee.setPreviousEmpreasonsNo(employeeDto.getPreviousEmpreasonsNo());			
-		employee.setServiceNo(employeeDto.getServiceNo());		
+		applicant.setMilitaryServiceNo(employeeDto.getServiceNo());		
 		
 		if(employeeDto.getMasCoreSkill()!=null){
 			MasCoreSkill masCoreSkill =  masCoreSkillService.find(employeeDto.getMasCoreSkill());
@@ -690,7 +688,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 
-		if(employeeDto.getMasJoblevel()!=null){
+		/*if(employeeDto.getMasJoblevel()!=null){
 			MasJoblevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
 			if(masJoblevel.getId()!=null){			
 				employee.setMasJoblevel(masJoblevel);						
@@ -703,7 +701,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			if(masTechnology.getId()!=null){
 				employee.setTechnology(masTechnology);
 			}
-		}
+		}*/
 		
 		if(employeeDto.getMasLocation()!=null&&employeeDto.getMasLocation().isEmpty()==false){
 			MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
@@ -722,7 +720,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		}
 
 		
-		employee.setImage(img);
+		applicant.setImage(img);
 		employee.setIsManager(employeeDto.getIsManager());
 		
 		if(employeeDto.getAimempid()!=null){
@@ -795,10 +793,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									address.setZipcode(addressDto.getZipcode());
 									
-									Applicant applicant = applicantService.findById(addressDto.getApplicantId());
+									Applicant applicant1 = applicantService.findById(addressDto.getApplicantId());
 									
-									if(applicant!=null){
-										address.setApplicant(applicant);
+									if(applicant1!=null){
+										address.setApplicant(applicant1);
 									}
 								
 								
@@ -831,10 +829,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 									
 									address.setZipcode(addressDto.getZipcode());
 									
-									Applicant applicant = applicantService.findById(addressDto.getApplicantId());
+									Applicant applicant1 = applicantService.findById(addressDto.getApplicantId());
 									
-									if(applicant!=null){
-										address.setApplicant(applicant);
+									if(applicant1!=null){
+										address.setApplicant(applicant1);
 									}
 										
 									
@@ -953,4 +951,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 				
 	}
 
+	
 }
+

@@ -29,7 +29,7 @@ public interface EmployeeService {
 	public List<Employee> findByCriteria(Employee employee);
 	public Employee searhEmpIdtoAddress(); 	//find last id of employee
 	public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id); 
-	public Employee createEmployeeAndReturnId(EmployeeDto allEmployeeDto,String employeeCode) throws JDBCException;
+	//public Employee createEmployeeAndReturnId(EmployeeDto allEmployeeDto,String employeeCode) throws JDBCException;
 	public Employee updateEmployeeAndReturnId(EmployeeDto allEmployeeDto,String employeeCode,String img) throws DataIntegrityViolationException;
 	public void deleteEmployeeByHibernate(Employee employee);
 	public Employee findAndinitializeOfficial(Integer id);
