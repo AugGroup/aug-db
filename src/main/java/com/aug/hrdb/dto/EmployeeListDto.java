@@ -10,7 +10,7 @@ import org.hibernate.annotations.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchEmployee",
-              query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,emp.name_eng  as NAME_ENG,emp.surname_eng as SURNAME_ENG "
+              query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,app.FIRSTNAME_EN as NAME_ENG,app.LASTNAME_EN as SURNAME_ENG "
               		+ "from employee as emp",             		
             resultClass = EmployeeListDto.class)
   })
