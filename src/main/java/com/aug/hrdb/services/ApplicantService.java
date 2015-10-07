@@ -35,8 +35,6 @@ public interface ApplicantService {
 	
 	public List<ApplicantDto> findByTrackingStatus(String trackingStatus);
 	
-	public Applicant setApplicantToEmployee(String trackingStatus);
-
 	/*-------------------- report search --------------------*/
 	public List<ReportApplicantDto> reportApplicant();
 	

@@ -167,14 +167,4 @@ public class ApplicantServiceImpl implements ApplicantService {
 			return applicantRepository.getMaxApplicantId();
 		}
 
-		@Override
-		public Applicant setApplicantToEmployee(String trackingStatus) {
-			List<ApplicantDto> applicantDto = applicantRepository.findByTrackingStatus(trackingStatus);
-			Employee employee = new Employee();
-			return null;
-		}
-
-		
-
-		
 }

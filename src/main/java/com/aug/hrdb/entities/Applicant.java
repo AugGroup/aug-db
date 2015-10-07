@@ -237,6 +237,9 @@ public class Applicant extends BaseEntity{
 	
 	@Column(name = "IMAGE")
 	private String image;
+	
+	@Column(name = "LOCATION")
+	private String masLocation;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
@@ -857,7 +860,22 @@ public class Applicant extends BaseEntity{
 		this.militaryStatus = militaryStatus;
 	}
 	
-	
+	public String getMasLocation() {
+		return masLocation;
+	}
+
+	public void setMasLocation(String masLocation) {
+		this.masLocation = masLocation;
+	}
+
+	public List<Appointment> getAppointments() {
+		return appointments;
+	}
+
+	public void setAppointments(List<Appointment> appointments) {
+		this.appointments = appointments;
+	}
+
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -1022,6 +1040,7 @@ public class Applicant extends BaseEntity{
 		applicant.setTrackingStatus(applicantDto.getTrackingStatus());
 		applicant.setCreatedBy(applicantDto.getCreatedBy());
 		applicant.setCreatedTimeStamp(applicantDto.getCreatedTimeStamp());
+		applicant.setMasLocation(applicantDto.getMasLocation());
 		return applicant;
 
 	}
