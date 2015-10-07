@@ -37,4 +37,6 @@ public interface EmployeeService {
 	public Employee findOfficial(Integer id);
 	public Employee findEmployeeCode(Integer locationId);
 	public String generateEmployeeCode(EmployeeDto employeeDto);
+	
+	public String generateEmployeeCodeFixData(String location);
 }

@@ -310,7 +310,7 @@ public class ApplicantDto {
 	@Column(name = "IMAGE")
 	private String image;
 	
-	@Column(name = "LOCCATION")
+	@Column(name = "LOCATION")
 	private String masLocation;
 
 	@Column(name = "MASJOBLEVEL_ID")
