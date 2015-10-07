@@ -4,11 +4,19 @@ public class SearchReportDto {
 	private Integer joblevel;
 	private Integer technology;
 	private Integer position;
-	private String degree;
+	private Integer masdegreetype;
+	private String startDate;
+	private String endDate;
 	private String major;
 	private String schoolName;
 	private Double gpa;
 	private String applyDateStr;
+	public Integer getMasdegreetype() {
+		return masdegreetype;
+	}
+	public void setMasdegreetype(Integer masdegreetype) {
+		this.masdegreetype = masdegreetype;
+	}
 
 	public String getApplyDateStr() {
 		return applyDateStr;
@@ -16,8 +24,6 @@ public class SearchReportDto {
 	public void setApplyDateStr(String applyDateStr) {
 		this.applyDateStr = applyDateStr;
 	}
-	private String startDate;
-	private String endDate;
 
 	public String getStartDate() {
 		return startDate;
@@ -38,12 +44,6 @@ public class SearchReportDto {
 	}
 	public void setPosition(Integer position) {
 		this.position = position;
-	}
-	public String getDegree() {
-		return degree;
-	}
-	public void setDegree(String degree) {
-		this.degree = degree;
 	}
 	public String getMajor() {
 		return major;
@@ -82,6 +82,7 @@ public class SearchReportDto {
 	public void setTechnology(Integer technology) {
 		this.technology = technology;
 	}
+	
 	
 
 }
