@@ -83,5 +83,13 @@ public class AbilityServiceImpl implements AbilityService{
 		List<AbilityDto> abilitys = abilityRepository.searchAbility(id);
 		return abilitys;
 	}
+
+	@Override
+	public AbilityDto findBySpecialty(Integer id) {
+		AbilityDto abilityDto = abilityRepository.findBySpecialty(id);
+		return abilityDto;
+	}
+	
+	
 	
 }

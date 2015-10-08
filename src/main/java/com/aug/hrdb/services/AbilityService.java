@@ -24,6 +24,7 @@ public interface AbilityService {
 	public void deleteById(Integer id);
 	public AbilityDto findAbility(Integer Id);
 	public List<AbilityDto> findAbilityList(Integer Id);
+	public AbilityDto findBySpecialty(Integer id);
 
 	//public List<Employee> findByCriteria(Employee employee);
 	

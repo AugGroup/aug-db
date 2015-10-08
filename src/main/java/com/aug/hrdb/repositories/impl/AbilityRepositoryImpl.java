@@ -52,6 +52,23 @@ public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability,Integer
 		return app;
 	}
 
+
+
+	@Override
+	public Boolean findBySpecialty(Integer id) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_SPACIALTY_ID");
+		query.setParameter("ID", id);
+		List<AbilityDto> result = query.list();
+		
+		Boolean find = false;
+		
+		if (result.size() != 0) {
+			find = true;
+		}
+		
+		return find;
+	}
+
 }
 
 	
