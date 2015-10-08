@@ -180,9 +180,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 	    	employeeDto.setPositionAppliedFor(applicant.getEmployedPosition());
 			employeeDto.setSalaryExpected(applicant.getExpectedSalary());
 			employeeDto.setOfficialId(applicant.getOfficial().getId());
-			employeeDto.setProbationDate(applicant.getOfficial().getProbationDate()); 
-
-
+			employeeDto.setProbationDate(applicant.getOfficial().getProbationDate());
+			
+			System.out.println("official: "+applicant.getEmployedPosition());
 		}
 		
         employeeDto.setEmployeeCode(employee.getEmployeeCode());
@@ -259,13 +259,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         	employeeDto.setMasDivision(employee.getMasDivision().getId());
         }
         
-       /* if(employee.getMasJoblevel()!=null){
-        	employeeDto.setMasJoblevel(employee.getMasJoblevel().getId());
+        if(applicant.getJoblevel()!=null){
+        	employeeDto.setMasJoblevel(applicant.getJoblevel().getId());
         }
         
-        if(employee.getTechnology()!=null){
-        	employeeDto.setTechnology(employee.getTechnology().getId());
-        }*/
+        if(applicant.getTechnology()!=null){
+        	employeeDto.setTechnology(applicant.getTechnology().getId());
+        }
         
         if(employee.getMasStaffType()!=null){
         	employeeDto.setMasStaffType(employee.getMasStaffType().getId());

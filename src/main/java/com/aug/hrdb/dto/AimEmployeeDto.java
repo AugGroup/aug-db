@@ -15,11 +15,15 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			 name = "listEmployeeAim",
-	            query = "select emp.ID, emp.NAME_ENG, emp.AIM_EMP_ID from EMPLOYEE as emp where ISMANAGER IS NOT NULL", 
+	            query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG,emp.AIM_EMP_ID from EMPLOYEE as emp "
+	            		+ "join APPLICANT app on emp.APPLICANT_ID = app.ID "
+	            		+ "where emp.ISMANAGER IS NOT NULL", 
 	            resultClass = AimEmployeeDto.class),
 	@NamedNativeQuery(
 			 name = "listEmployeeAimUpdateEmployee",
-	            query = "select emp.ID, emp.NAME_ENG, emp.AIM_EMP_ID from EMPLOYEE as emp where ISMANAGER IS NOT NULL and emp.ID !=:empId", 
+	            query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG, emp.AIM_EMP_ID from EMPLOYEE as emp "
+	            		+ "join APPLICANT app on emp.APPLICANT_ID = app.ID "
+	            		+ "where emp.ISMANAGER IS NOT NULL and emp.ID !=:empId", 
 	            resultClass = AimEmployeeDto.class)
 	  })
 
