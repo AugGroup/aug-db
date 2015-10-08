@@ -920,42 +920,38 @@ public class EmployeeServiceImpl implements EmployeeService {
 		String empCode = null;
 		System.out.print("masloc# "+applicantDto.getMasLocation());
 		
-		   if(masLocationService.findByLocationCode(applicantDto.getMasLocation())==null){
+		if(masLocationService.findByLocationCode(applicantDto.getMasLocation())==null){
 			   
-			   System.out.println("----null location id-----");
-		   }
-		   else if(masLocationService.findByLocationCode(applicantDto.getMasLocation())!=null){
-			   MasLocation masLocation = masLocationService.findByLocationCode(applicantDto.getMasLocation());
-			   System.out.println("id: "+masLocation.getId());
-			   employeeForCode = employeeRepository.findEmployeeCode(masLocation.getId());
+			System.out.println("----null location id-----");
+		}else if(masLocationService.findByLocationCode(applicantDto.getMasLocation())!=null){
+			
+			MasLocation masLocation = masLocationService.findByLocationCode(applicantDto.getMasLocation());
+			System.out.println("id: "+masLocation.getId());
+			employeeForCode = employeeRepository.findEmployeeCode(masLocation.getId());
 			   		   
 			   
-			   if(employeeForCode==null){
-				   
-				   empCode = applicantDto.getMasLocation()+"10"+"001";
-				   System.out.println("empCode: "+empCode);
-				   
-				   
-			   }else if(employeeForCode!=null){
-				   
-				   			    		   
-				    		   StringBuilder myNumbers = new StringBuilder();
-				    		    for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
-				    		        if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
-				    		            myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
-				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
-				    		        } else {
-				    		            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
-				    		        }
-				    		    }
-				    		    System.out.println("Your numbers: " + myNumbers.toString());
-				    		    int employeeCodePlusOne = Integer.parseInt(myNumbers.toString())+1;
-				    		    empCode = employeeDto.getMasLocation()+Integer.toString(employeeCodePlusOne);
-				    		    System.out.println("empCode: "+empCode);
+			if(employeeForCode==null){
+				empCode = applicantDto.getMasLocation()+"10"+"001";
+				System.out.println("empCode: "+empCode);
+			}else if(employeeForCode!=null){	   
+				StringBuilder myNumbers = new StringBuilder();
+				for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
+					
+				    if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
+				    	myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
+				    	System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
+				    } else {
+				    	System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
+				    }
+				}
+				System.out.println("Your numbers: " + myNumbers.toString());
+				int employeeCodePlusOne = Integer.parseInt(myNumbers.toString())+1;
+				empCode = employeeDto.getMasLocation()+Integer.toString(employeeCodePlusOne);
+				System.out.println("empCode: "+empCode);
 				    		   
-				    	   }
+			}
 				   
-			   }
+		}
 		   
 		return empCode;
 				
@@ -971,7 +967,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 		MasLocation masLocations = masLocationService.findByLocationCode(location);
 		System.out.println("LOCATIONNNN :: " + masLocations);
 		employeeForCode = employeeRepository.findEmployeeCode(1);
-		System.out.println("employeeForCode :: " + employeeForCode);
+		
+		System.out.println("employeeForCodeCreatedTime :: " + employeeForCode.getCreatedTimeStamp());
+		System.out.println("employeeForCodeFirstName :: " + employeeForCode.getName());
 		
 		if(employeeForCode==null && ("TH").equals(location)){
 			
