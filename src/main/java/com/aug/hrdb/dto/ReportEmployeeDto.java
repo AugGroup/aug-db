@@ -15,13 +15,13 @@ import javax.persistence.NamedNativeQuery;
             		+ "emp.employee_code as employeeCode,"
             		+ "official.start_work_date as startWorkDate, "
             		+ "exp.salary as salary, "
-            		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
-            		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
-            		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
+            		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
+            		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
+            		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
             		+ "app.BIRTHDATE as dateOfBirth, "
-            		+ "YEAR(CURDATE()) - YEAR(BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(BIRTHDATE), '/', DAY(BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
-            		+ "MONTH(curdate()) - MONTH(BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(BIRTHDATE), '/', DAY(BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
-            		+ "DAY(curdate()) - DAY(BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(BIRTHDATE), '/', DAY(BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
+            		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
+            		+ "MONTH(curdate()) - MONTH(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
+            		+ "DAY(curdate()) - DAY(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
             		+ "app.FIRSTNAME_TH as nameThai, "
             		+ "app.FIRSTNAME_EN as nameEng, "
             		+ "app.NICKNAME_EN as nicknameEng, "
@@ -30,13 +30,13 @@ import javax.persistence.NamedNativeQuery;
             		+ "mas_employment.name as employmentName, "
             		+ "mas_division.name as divisionName, "
             		+ "mas_technology.name as technologyName "
-            		+ "from employee as emp "
-            		+ "left join applicant as app on emp.applicant_id = app.id "
-            		+ "left join official as official on emp.official_id = official.id "
+            		+ "from applicant as app "
+            		+ "left join employee as emp on emp.applicant_id = app.id "
+            		+ "left join official as official on app.official_id = official.id "
             		+ "left join mas_employment on emp.employment_id = mas_employment.id "
             		+ "left join mas_division on emp.division_id = mas_division.id "
-            		+ "left join mas_technology on emp.technology_id = mas_technology.id "
-            		+ "left join experience as exp on exp.applicant_id =emp.applicant_id "
+            		+ "left join mas_technology on app.mastechnology_id = mas_technology.id "
+            		+ "left join experience as exp on exp.applicant_id =app.id "
             		+ "where app.FIRSTNAME_EN like :name", 
             resultClass = ReportEmployeeDto.class),
             @NamedNativeQuery(
@@ -94,7 +94,7 @@ public class ReportEmployeeDto {
 	@Column(name = "nicknameEng")
 	private String nicknameEng;
 	@Column(name = "telMobile")
-	private Integer telMobile;
+	private String telMobile;
 	@Column(name = "year")
 	private Integer year;
 	@Column(name = "month")
@@ -171,10 +171,10 @@ public class ReportEmployeeDto {
 	public void setNicknameEng(String nicknameEng) {
 		this.nicknameEng = nicknameEng;
 	}
-	public Integer getTelMobile() {
+	public String getTelMobile() {
 		return telMobile;
 	}
-	public void setTelMobile(Integer telMobile) {
+	public void setTelMobile(String telMobile) {
 		this.telMobile = telMobile;
 	}
 	public String getEmail() {
