@@ -618,9 +618,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		
-		//update employee
 		
-		employee.setEmployeeCode(employeeCode); 
+		//update applicant
+		
+		
 		applicant.setFirstNameTH(employeeDto.getNameThai());
 		applicant.setLastNameTH(employeeDto.getSurnameThai());
 		applicant.setNickNameTH(employeeDto.getNicknameThai());
@@ -628,13 +629,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 		applicant.setLastNameEN(employeeDto.getSurnameEng()); 
 		applicant.setNickNameEN(employeeDto.getNicknameEng()); 
 		applicant.setEmail(employeeDto.getEmail());
-		employee.setCongenitalDisease(employeeDto.getCongenitalDisease());
-		employee.setHospital(employeeDto.getHospital());
-		employee.setTelHome(employeeDto.getTelHome());
 		applicant.setTel(employeeDto.getTelMobile());
-		employee.setTelFax(employeeDto.getTelFax());
 		applicant.setEmergencyName(employeeDto.getEmergencyContact());
-		employee.setRelationshipWithEmergencyContact(employeeDto.getRelationshipWithEmergencyContact());
 		applicant.setEmergencyAddress(employeeDto.getEmergencyContactAddress());
 		applicant.setEmergencyTel(employeeDto.getEmergencyContactPhoneNumber());
 		applicant.setBirthDate(employeeDto.getDateOfBirth());
@@ -670,10 +666,41 @@ public class EmployeeServiceImpl implements EmployeeService {
 		applicant.setToYear(employeeDto.getToYear());*/
 		applicant.setBranchService(employeeDto.getBranchOfService());
 		applicant.setMilitaryReason(employeeDto.getReasonsNo());
-		applicant.setDateToBeDrafted(employeeDto.getDateToBeDrafted()); 
+		applicant.setDateToBeDrafted(employeeDto.getDateToBeDrafted());
+		applicant.setMilitaryServiceNo(employeeDto.getServiceNo());		
+		
+		
+		if(employeeDto.getMasJoblevel()!=null){
+			MasJoblevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
+			if(masJoblevel.getId()!=null){			
+				applicant.setJoblevel(masJoblevel);						
+			}
+		}
+		
+		
+		if(employeeDto.getTechnology()!=null){
+			MasTechnology masTechnology = masTechnologyService.find(employeeDto.getTechnology());
+			if(masTechnology.getId()!=null){
+				applicant.setTechnology(masTechnology);
+			}
+		}
+		
+		
+		applicantService.update(applicant);
+
+		
+		
+	
+		//update employee
+		
+		employee.setEmployeeCode(employeeCode); 
+		employee.setCongenitalDisease(employeeDto.getCongenitalDisease());
+		employee.setHospital(employeeDto.getHospital());
+		employee.setTelHome(employeeDto.getTelHome());
+		employee.setTelFax(employeeDto.getTelFax());
+		employee.setRelationshipWithEmergencyContact(employeeDto.getRelationshipWithEmergencyContact());	 
 		employee.setPreviousEmployer(employeeDto.getPreviousEmployer());
 		employee.setPreviousEmpreasonsNo(employeeDto.getPreviousEmpreasonsNo());			
-		applicant.setMilitaryServiceNo(employeeDto.getServiceNo());		
 		
 		if(employeeDto.getMasCoreSkill()!=null){
 			MasCoreSkill masCoreSkill =  masCoreSkillService.find(employeeDto.getMasCoreSkill());
@@ -697,20 +724,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 
-		/*if(employeeDto.getMasJoblevel()!=null){
-			MasJoblevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
-			if(masJoblevel.getId()!=null){			
-				employee.setMasJoblevel(masJoblevel);						
-			}
-		}
 		
 		
-		if(employeeDto.getTechnology()!=null){
-			MasTechnology masTechnology = masTechnologyService.find(employeeDto.getTechnology());
-			if(masTechnology.getId()!=null){
-				employee.setTechnology(masTechnology);
-			}
-		}*/
 		
 		if(employeeDto.getMasLocation()!=null&&employeeDto.getMasLocation().isEmpty()==false){
 			MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
