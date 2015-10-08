@@ -74,7 +74,10 @@ public class EmployeeDto {
 	private String knowAugOther;
 	private String descriptionOther;	
 	private String knowEmployed;
-	private String descriptionYes;
+	private String descriptionYesName;
+	private String relationYes;
+	private String positionYes;
+	
 	private String knowEmployerNo;
 	private String militaryService;	
 
@@ -658,15 +661,29 @@ public class EmployeeDto {
 	}
 
 
-	public String getDescriptionYes() {
-		return descriptionYes;
+	public String getDescriptionYesName() {
+		return descriptionYesName;
 	}
 
-
-	public void setDescriptionYes(String descriptionYes) {
-		this.descriptionYes = descriptionYes;
+	public void setDescriptionYesName(String descriptionYesName) {
+		this.descriptionYesName = descriptionYesName;
 	}
 
+	public String getRelationYes() {
+		return relationYes;
+	}
+
+	public void setRelationYes(String relationYes) {
+		this.relationYes = relationYes;
+	}
+
+	public String getPositionYes() {
+		return positionYes;
+	}
+
+	public void setPositionYes(String positionYes) {
+		this.positionYes = positionYes;
+	}
 
 	public String getKnowEmployerNo() {
 		return knowEmployerNo;

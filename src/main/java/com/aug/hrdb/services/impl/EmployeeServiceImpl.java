@@ -231,6 +231,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDto.setKnowAugOther(applicant.getNoticeOther());
         employeeDto.setDescriptionOther(applicant.getOtherDescription());
         employeeDto.setKnowEmployed(applicant.getNowEmployed());
+        employeeDto.setDescriptionYesName(applicant.getEmployedName());
+        employeeDto.setRelationYes(applicant.getEmployedRelation());
+        employeeDto.setPositionYes(applicant.getEmployedPosition());
         //employeeDto.setKnowEmployerNo(employee.getKnowEmployerNo());
         employeeDto.setMilitaryService(applicant.getMilitaryStatus());
         //employeeDto.setFromYear(applicant.getMilitaryFromYear());
