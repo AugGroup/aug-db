@@ -38,8 +38,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @NamedNativeQueries({
 	
- 
-
            @NamedNativeQuery(
 		            name = "searchIdEmptoAddress",
 		            //query = "select * from EMP_EMPLOYEE  ORDER BY createdTimeStamp LIMIT 1;", 

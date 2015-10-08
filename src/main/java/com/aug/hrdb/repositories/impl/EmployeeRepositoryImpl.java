@@ -16,6 +16,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AimEmployeeDto;
+import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.EmployeeIdDto;
@@ -29,9 +30,9 @@ import com.mysql.jdbc.StringUtils;
 
 
 @Repository
-public class EmployeerepositoryImpl extends GenericRepositoryImpl<Employee, Integer> implements EmployeeRepository{
+public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Integer> implements EmployeeRepository{
 
-	public EmployeerepositoryImpl() {
+	public EmployeeRepositoryImpl() {
 		super(Employee.class);
 	}
 
@@ -211,7 +212,6 @@ public Employee findOfficial(Integer id) {
 	    c.setMaxResults(1);
 		return  (Employee) c.uniqueResult();
 	}
-
 
 	@Override
 	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id) {
