@@ -117,7 +117,6 @@ public class AppointmentDto {
 	}
 	
 	public Date getStart() {
-		System.out.println(start);
 		return start;
 	}
 
