@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -38,8 +40,9 @@ public class MasAddressType extends BaseEntity{
 	@Column(name="CODE",nullable = false)
 	private String code;
 	
-	 @OneToMany(mappedBy = "addressType")
-	 private Set<Address> addresses = new HashSet<Address>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "addressType")
+	private Set<Address> addresses = new HashSet<Address>();
 	  
 	
 	public Integer getId() {

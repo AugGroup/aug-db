@@ -32,7 +32,7 @@ public class MasSpecialty extends BaseEntity{
 	@Column(name = "ISACTIVE")
 	private Boolean isActive;
 	
-//	@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "masspecialty")
 
 	private Set<Ability> abilities;

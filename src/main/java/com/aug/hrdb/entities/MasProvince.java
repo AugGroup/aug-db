@@ -16,6 +16,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
@@ -33,7 +35,7 @@ public class MasProvince extends BaseEntity {
 	private Boolean isActive;
 	
 	
-
+	@JsonIgnore
 	@OneToMany(mappedBy = "province")
 	private Set<Address> addresss;
 	 

@@ -12,14 +12,6 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 
-
-
-
-
-
-
-
-
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAbility",
@@ -43,13 +35,11 @@ import javax.persistence.NamedNativeQuery;
 
 									
 					resultClass = AbilityDto.class)
-	,@NamedNativeQuery(name = "SEARCH_ABILITY_ID", query="select ability.id, "
-			+ "ability.rank, "
-			+ "mas_specialty.name, "
-			+ "ability.applicant_id,"
-			+ "mas_specialty.id as SPEC_ID "
-			+ "from ability, mas_specialty "
-			+ "WHERE ability.APPLICANT_ID=:ID and ability.specialty_id = mas_specialty.id", resultClass = AddressDto.class)
+	,@NamedNativeQuery(name = "SEARCH_ABILITY_ID", query="SELECT ab.ID, "
+			+ "ab.RANK, ms.NAME, ab.APPLICANT_ID, ms.ID as SPEC_ID "
+			+ "FROM ability ab "
+			+ "JOIN mas_specialty ms ON ab.SPECIALTY_ID = ms.ID "
+			+ "JOIN applicant a ON a.ID = ab.APPLICANT_ID WHERE ab.ID=:ID", resultClass = AbilityDto.class)
 })
 
 
