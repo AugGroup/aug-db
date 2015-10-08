@@ -13,12 +13,12 @@ import javax.persistence.NamedNativeQuery;
             name = "reportEmployee",
             query = "Select emp.id, "
             		+ "emp.employee_code as employeeCode,"
-            		+ "official.start_work_date as startWorkDate, "
+            		+ "CAST(official.start_work_date as DATE) as startWorkDate, "
             		+ "exp.salary as salary, "
             		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
             		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
             		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
-            		+ "app.BIRTHDATE as dateOfBirth, "
+            		+ "CAST(app.BIRTHDATE as DATE) as dateOfBirth, "
             		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
             		+ "MONTH(curdate()) - MONTH(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
             		+ "DAY(curdate()) - DAY(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
@@ -43,29 +43,30 @@ import javax.persistence.NamedNativeQuery;
                     name = "reportEmployeeCode",
                     query = "Select emp.id, "
                     		+ "emp.employee_code as employeeCode,"
-                    		+ "official.start_work_date as startWorkDate, "
+                    		+ "CAST(official.start_work_date as DATE) as startWorkDate, "
                     		+ "exp.salary as salary, "
-                    		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
-                    		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
-                    		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(official.start_work_date), '/', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
-                    		+ "emp.dateofbirth as dateOfBirth, "
-                    		+ "YEAR(CURDATE()) - YEAR(dateofbirth) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(dateofbirth), '/', DAY(dateofbirth)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
-                    		+ "MONTH(curdate()) - MONTH(dateofbirth) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(dateofbirth), '/', DAY(dateofbirth)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
-                    		+ "DAY(curdate()) - DAY(dateofbirth) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '/', MONTH(dateofbirth), '/', DAY(dateofbirth)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
-                    		+ "emp.name_thai as nameThai, "
-                    		+ "emp.name_eng as nameEng, "
-                    		+ "emp.nickname_eng as nicknameEng, "
-                    		+ "emp.tel_mobile as telMobile, "
-                    		+ "emp.email as email, "
+                    		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
+                    		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
+                    		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
+                    		+ "CAST(app.BIRTHDATE as DATE) as dateOfBirth, "
+                    		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
+                    		+ "MONTH(curdate()) - MONTH(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
+                    		+ "DAY(curdate()) - DAY(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
+                    		+ "app.FIRSTNAME_TH as nameThai, "
+                    		+ "app.FIRSTNAME_EN as nameEng, "
+                    		+ "app.NICKNAME_EN as nicknameEng, "
+                    		+ "app.tel as telMobile, "
+                    		+ "app.email as email, "
                     		+ "mas_employment.name as employmentName, "
                     		+ "mas_division.name as divisionName, "
                     		+ "mas_technology.name as technologyName "
-                    		+ "from employee as emp "
-                    		+ "join official as official on emp.official_id = official.id "
+                    		+ "from applicant as app "
+                    		+ "left join employee as emp on emp.applicant_id = app.id "
+                    		+ "join official as official on app.official_id = official.id "
                     		+ "join mas_employment on emp.employment_id = mas_employment.id "
                     		+ "join mas_division on emp.division_id = mas_division.id "
-                    		+ "join mas_technology on emp.technology_id = mas_technology.id "
-                    		+ "join experience as exp on exp.applicant_id =emp.applicant_id "
+                    		+ "join mas_technology on app.mastechnology_id = mas_technology.id "
+                    		+ "join experience as exp on exp.applicant_id =app.id "
                     		+ "where emp.employee_code like :code", 
                     resultClass = ReportEmployeeDto.class)
   })
@@ -78,7 +79,7 @@ public class ReportEmployeeDto {
 	@Column(name = "employeeCode")
 	private String employeeCode;
 	@Column(name = "startWorkDate")
-	private Date startWorkDate;
+	private String startWorkDate;
 	@Column(name = "yearStart")
 	private Integer yearStart;
 	@Column(name = "monthStart")
@@ -86,7 +87,7 @@ public class ReportEmployeeDto {
 	@Column(name = "dayStart")
 	private Integer dayStart;
 	@Column(name = "dateOfBirth")
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	@Column(name = "nameEng")
 	private String nameEng;
 	@Column(name = "nameThai")
@@ -123,10 +124,10 @@ public class ReportEmployeeDto {
 	public void setEmployeeCode(String employeeCode) {
 		this.employeeCode = employeeCode;
 	}
-	public Date getStartWorkDate() {
+	public String getStartWorkDate() {
 		return startWorkDate;
 	}
-	public void setStartWorkDate(Date startWorkDate) {
+	public void setStartWorkDate(String startWorkDate) {
 		this.startWorkDate = startWorkDate;
 	}
 	public Integer getYearStart() {
@@ -147,10 +148,10 @@ public class ReportEmployeeDto {
 	public void setDayStart(Integer dayStart) {
 		this.dayStart = dayStart;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getNameEng() {
