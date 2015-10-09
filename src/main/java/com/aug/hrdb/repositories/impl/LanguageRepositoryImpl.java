@@ -9,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.LanguageDto;
+import com.aug.hrdb.entities.Ability;
 import com.aug.hrdb.entities.Language;
 import com.aug.hrdb.repositories.LanguageRepository;
 
@@ -62,12 +63,21 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 	}
 
 	@Override
-	public List<LanguageDto> findLanguageName(String languageName) {
+	public Boolean chkLanguageName(Integer id,String languageName) {
 		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGE_UNIQUE");
+		query.setParameter("ID", id);
 		query.setParameter("LANGUAGENAME", "%" + languageName + "%");
-		List<LanguageDto> results = query.list();
-		return results;
+		List<Language> results = query.list();
+		Boolean find = false;
+
+		if(results.size() == 0 ){
+			find = true;
+		}
+
+		return find;
+
 	}
 	
+	}
+
 	
-}

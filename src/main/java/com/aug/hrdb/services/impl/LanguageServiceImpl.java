@@ -6,12 +6,13 @@ import java.util.List;
 
 
 
+
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Language;
@@ -154,9 +155,9 @@ public class LanguageServiceImpl implements LanguageService{
 	}
 
 	@Override
-	public List<LanguageDto> findLanguageName(String languageName) {
-		List<LanguageDto> languages = languageRepository.findLanguageName(languageName);
-		return languages;
+	public Boolean checkLanguageName(Integer id, String languageName) {
+		Boolean checking = languageRepository.chkLanguageName(id, languageName);
+		return checking;
 	}
 
 }

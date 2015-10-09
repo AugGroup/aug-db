@@ -15,5 +15,6 @@ public interface LanguageRepository extends GenericRepository<Language,Integer>{
 	public LanguageDto findByLanguagesId(Integer id);
 	public List<LanguageDto> listLanguageByEmployee(Integer id);
 	public Language findIdJoinEmployee(Integer id); 
-	public List<LanguageDto> findLanguageName(String languageName);
+	public Boolean chkLanguageName(Integer id,String languageName);
+
 }
