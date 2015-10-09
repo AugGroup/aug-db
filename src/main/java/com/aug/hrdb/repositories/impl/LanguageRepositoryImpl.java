@@ -60,6 +60,14 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 		Language language = (Language) c.uniqueResult();
 		return language;
 	}
+
+	@Override
+	public List<LanguageDto> findLanguageName(String languageName) {
+		Query query = getCurrentSession().getNamedQuery("SEARCH_LANGUAGE_UNIQUE");
+		query.setParameter("LANGUAGENAME", "%" + languageName + "%");
+		List<LanguageDto> results = query.list();
+		return results;
+	}
 	
 	
 }

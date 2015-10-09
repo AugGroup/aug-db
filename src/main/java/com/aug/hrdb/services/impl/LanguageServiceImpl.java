@@ -5,10 +5,13 @@ import java.util.Calendar;
 import java.util.List;
 
 
+
 import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Language;
@@ -148,6 +151,12 @@ public class LanguageServiceImpl implements LanguageService{
 		languageUpdate.setUnderstanding(languageDto.getUnderstanding());
 		languageUpdate.setWriting(languageDto.getWriting());
 		languageRepository.update(languageUpdate);
+	}
+
+	@Override
+	public List<LanguageDto> findLanguageName(String languageName) {
+		List<LanguageDto> languages = languageRepository.findLanguageName(languageName);
+		return languages;
 	}
 
 }

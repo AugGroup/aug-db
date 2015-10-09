@@ -3,6 +3,8 @@ package com.aug.hrdb.services;
 import java.util.List;
 
 
+
+import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Language;
 
@@ -25,5 +27,6 @@ public interface LanguageService {
 	
 	public List<LanguageDto> findLanguagesById(Integer id);
 	public LanguageDto findLanguages(Integer id);
+	public List<LanguageDto> findLanguageName(String languageName);
 	
 }
