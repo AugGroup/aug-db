@@ -85,9 +85,9 @@ public class AbilityServiceImpl implements AbilityService{
 	}
 
 	@Override
-	public AbilityDto findBySpecialty(Integer id) {
-		AbilityDto abilityDto = abilityRepository.findBySpecialty(id);
-		return abilityDto;
+	public Boolean checkSpecialty(Integer id,Integer sp_id) {
+		Boolean checking = abilityRepository.checkSpecialty(id,sp_id);
+		return checking;
 	}
 	
 	
