@@ -19,4 +19,5 @@ public interface AppointmentService {
 	public void create(Appointment appointment);
 	public  List<AppointmentDto> findAppointment(String start, String end, Integer mailStatus);
 	public Appointment find(Integer id);
+	public int countMailStatus(Integer status);
 }

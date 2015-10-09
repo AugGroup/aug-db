@@ -77,6 +77,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return appointmentRepository.find(id);
 	}
 
+	@Override
+	public int countMailStatus(Integer status) {
+		// TODO Auto-generated method stub
+		
+		return appointmentRepository.countMailStatus(status);
+	}
+
 	
 
 }

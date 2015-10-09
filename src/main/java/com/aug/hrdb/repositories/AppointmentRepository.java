@@ -22,4 +22,6 @@ public interface AppointmentRepository extends GenericRepository<Appointment, In
 	public AppointmentDto findById(Integer id);
 	
 	public Appointment find(Integer id);
+
+	int countMailStatus(Integer status);
 }

@@ -1,9 +1,12 @@
 package com.aug.hrdb.repositories.impl;
 
+import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 //import java.sql.Date;
 import java.util.List;
+
+
 
 
 
@@ -83,6 +86,15 @@ public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment
 	public void deleteById(Integer id) {
 		// TODO Auto-generated method stub
 		super.deleteById(id);
+	}
+
+	@Override
+	public int countMailStatus(Integer status) {
+		// TODO Auto-generated method stub
+		org.hibernate.Query query = getCurrentSession().createSQLQuery("SELECT COUNT(ID) FROM APPOINTMENT WHERE MAIL_STATUS=:STATUS");
+		query.setParameter("STATUS", status);
+		List<BigInteger> integers = query.list();
+		return integers.get(0).intValue();
 	}
 	
 }
