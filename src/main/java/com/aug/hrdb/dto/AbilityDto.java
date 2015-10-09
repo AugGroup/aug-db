@@ -42,8 +42,8 @@ import javax.persistence.NamedNativeQuery;
 			+ "JOIN applicant a ON a.ID = ab.APPLICANT_ID WHERE ab.ID=:ID", resultClass = AbilityDto.class),
 	
 	@NamedNativeQuery(name =  "SEARCH_SPACIALTY_ID", query="SELECT ab.ID, "
-			+ "ab.RANK, ab.APPLICANT_ID, ab.SPECIALTY_ID, null as NAME, null as SPEC_ID "
-			+ "FROM ability ab "
+			+ "ab.RANK, ab.APPLICANT_ID, ab.SPECIALTY_ID, ms.NAME, ms.ID as SPEC_ID "
+			+ "FROM ability ab JOIN mas_specialty ms ON ms.ID = ab.SPECIALTY_ID "
 			+ "WHERE ab.APPLICANT_ID =:ID AND ab.SPECIALTY_ID=:SP_ID", resultClass = AbilityDto.class)
 })
 

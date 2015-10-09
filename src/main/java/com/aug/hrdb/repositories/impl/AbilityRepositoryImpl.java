@@ -59,11 +59,10 @@ public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability,Integer
 		Query query = getCurrentSession().getNamedQuery("SEARCH_SPACIALTY_ID");
 		query.setParameter("SP_ID", sp_id);
 		query.setParameter("ID", id);
-		List<AbilityDto> result = query.list();
-		
+		List<Ability> result = query.list();
 		Boolean find = false;
 		
-		if (result.size() != 0) {
+		if(result.size() == 0 ){
 			find = true;
 		}
 		
