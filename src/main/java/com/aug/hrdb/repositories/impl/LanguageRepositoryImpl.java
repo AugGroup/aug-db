@@ -78,6 +78,6 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language,Integ
 
 	}
 	
-	}
+}
 
 	
