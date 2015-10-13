@@ -59,6 +59,11 @@ public class EmployeeDtoService {
 	public List<ReportStatusEmployeeDto> findByNameStatus(Employee employee) {
 		return employeeDaoRepository.findByNameStatus(employee);
 	}
+	
+	
+	public List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id,String idCard) {
+		return employeeDaoRepository.searchEmpForUniqueIdCard(id, idCard);
+	}
 
 	
 }

@@ -14,6 +14,15 @@ import org.hibernate.annotations.NamedNativeQuery;
               		+ "app.CARD_ID as CARD_ID  "
               		+ "from employee as emp, applicant as app "
               		+ "where emp.applicant_id = app.id",             		
+            resultClass = EmployeeListDto.class),
+	
+	
+	@NamedNativeQuery(
+            name = "searchEmpForUniqueIdCard",
+              query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,app.FIRSTNAME_EN as NAME_ENG,app.LASTNAME_EN as SURNAME_ENG, "
+              		+ "app.CARD_ID as CARD_ID  "
+              		+ "from employee as emp join applicant as app on emp.applicant_id = app.id "
+              		+ "where emp.id !=:empId and app.CARD_ID =:idcard",             		
             resultClass = EmployeeListDto.class)
   })
 

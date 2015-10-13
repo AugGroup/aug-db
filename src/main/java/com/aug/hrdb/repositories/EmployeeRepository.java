@@ -40,6 +40,7 @@ public interface EmployeeRepository extends GenericRepository<Employee, Integer>
 	public List<ReportEmployeeDto> reportEmployeeCode(String code);
 	public Employee findEmployeeCode(Integer locationId);
 	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id);
+	public List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id,String idCard);
 
 	
 }

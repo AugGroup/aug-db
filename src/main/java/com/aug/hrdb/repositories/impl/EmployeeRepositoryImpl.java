@@ -220,5 +220,15 @@ public Employee findOfficial(Integer id) {
 		return aimemp;
 	}
 
+
+	@Override
+	public List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id, String idCard) {
+		// TODO Auto-generated method stub
+		Query query  =  getCurrentSession().getNamedQuery("searchEmpForUniqueIdCard");
+		query.setInteger("empId", id);
+		query.setString("idcard", idCard);
+		return query.list();
+	}
+
 }
 	
