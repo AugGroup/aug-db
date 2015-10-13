@@ -230,8 +230,11 @@ INSERT INTO MAS_RELATIONTYPE(
  ISACTIVE,
  RELATIONTYPE
 ) values
-('C','01',0,NOW(),true,'SON'),
-('C','02',0,NOW(),true,'DAUGTHER');
+('C','01',0,NOW(),true,'Mother'),
+('C','02',0,NOW(),true,'Father'),
+('C','03',0,NOW(),true,'Son'),
+('C','04',0,NOW(),true,'Daugther'),
+('C','05',0,NOW(),true,'Friend');
 
 
 --MASLEAVETYPE
