@@ -10,7 +10,8 @@ import org.hibernate.annotations.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
             name = "searchEmployee",
-              query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,app.FIRSTNAME_EN as NAME_ENG,app.LASTNAME_EN as SURNAME_ENG "
+              query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,app.FIRSTNAME_EN as NAME_ENG,app.LASTNAME_EN as SURNAME_ENG, "
+              		+ "app.CARD_ID as CARD_ID  "
               		+ "from employee as emp, applicant as app "
               		+ "where emp.applicant_id = app.id",             		
             resultClass = EmployeeListDto.class)
@@ -26,6 +27,7 @@ public class EmployeeListDto {
 	private String employeeCode;
 	private String nameEng;
 	private String surnameEng;
+	private String cardId;
 	
 	@Id
 	@Column(name="ID")
@@ -69,6 +71,17 @@ public class EmployeeListDto {
 	
 	public void setSurnameEng(String surnameEng) {
 		this.surnameEng = surnameEng;
+	}
+
+	
+	@Column(name="CARD_ID")
+	public String getCardId() {
+		return cardId;
+	}
+
+
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
 	}
 	
 	
