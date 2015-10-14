@@ -21,7 +21,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				query = "Select emp.id, "
 						+"emp.EMPLOYEE_CODE as employeeCode, "
 						+"CAST(official.start_work_date as DATE) as startWorkDate, "
-						+"app.FIRSTNAME_TH  as nameThai, "
+						+"app.LASTNAME_EN  as lastEng, "
 						+"app.FIRSTNAME_EN  as nameEng, "
 //						+"app.BIRTHDATE as dateOfBirth, "
 						+"CAST(app.BIRTHDATE as DATE) as dateOfBirth, "
@@ -60,7 +60,7 @@ public class ReportStatusEmployeeDto {
 //		@Column(name = "employeeCode")
 		private String employeeCode;
 //		@Column(name = "nameThai")
-		private String nameThai;
+		private String lastEng;
 //		@Column(name = "nameEng")
 		private String nameEng;
 //		@Column(name = "dateOfBirth")
@@ -98,11 +98,12 @@ public class ReportStatusEmployeeDto {
 		public void setEmployeeCode(String employeeCode) {
 			this.employeeCode = employeeCode;
 		}
-		public String getNameThai() {
-			return nameThai;
+
+		public String getLastEng() {
+			return lastEng;
 		}
-		public void setNameThai(String nameThai) {
-			this.nameThai = nameThai;
+		public void setLastEng(String lastEng) {
+			this.lastEng = lastEng;
 		}
 		public String getNameEng() {
 			return nameEng;
