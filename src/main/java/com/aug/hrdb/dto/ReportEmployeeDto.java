@@ -31,7 +31,7 @@ import javax.persistence.NamedNativeQuery;
             		+ "mas_division.name as divisionName, "
             		+ "mas_technology.name as technologyName "
             		+ "from applicant as app "
-            		+ "left join employee as emp on emp.applicant_id = app.id "
+            		+ "right join employee as emp on emp.applicant_id = app.id "
             		+ "left join official as official on app.official_id = official.id "
             		+ "left join mas_employment on emp.employment_id = mas_employment.id "
             		+ "left join mas_division on emp.division_id = mas_division.id "
