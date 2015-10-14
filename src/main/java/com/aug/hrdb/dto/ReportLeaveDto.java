@@ -23,7 +23,7 @@ import javax.persistence.NamedNativeQuery;
             	        		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearAge , "
             	        		+ "MONTH(CURDATE()) - MONTH(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthAge, "
             	        		+ "DAY(CURDATE()) - DAY(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayAge, "
-            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,l.sumTime as sumTime,off.START_WORK_DATE as startWorkDate, "
+            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,app.LASTNAME_EN as lastEng,l.sumTime as sumTime,off.START_WORK_DATE as startWorkDate, "
 								+ "YEAR(CURDATE()) - YEAR(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayWork , "
 								+ "MONTH(CURDATE()) - MONTH(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthWork , "
 								+ "DAY(CURDATE()) - DAY(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearWork, "
@@ -57,6 +57,8 @@ public class ReportLeaveDto {
 	private Date dateOfBirth;
 	@Column(name = "nameEng")
 	private String nameEng;
+	@Column(name = "lastEng")
+	private String lastEng;
 	@Column(name = "nameThai")
 	private String nameThai;
 	@Column(name = "age")
@@ -207,6 +209,12 @@ public class ReportLeaveDto {
 	}
 	public void setSumTime(Float sumTime) {
 		this.sumTime = sumTime;
+	}
+	public String getLastEng() {
+		return lastEng;
+	}
+	public void setLastEng(String lastEng) {
+		this.lastEng = lastEng;
 	}
 	
 	
