@@ -288,6 +288,7 @@ public class Applicant extends BaseEntity{
 	@OneToOne(mappedBy="applicant",cascade=CascadeType.REMOVE)
 	private Employee employee;
 	
+	@JsonIgnore
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
 	private Official official;
