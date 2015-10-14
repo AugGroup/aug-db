@@ -208,7 +208,7 @@ public Employee findOfficial(Integer id) {
 		// TODO Auto-generated method stub
 		Criteria c = getCurrentSession().createCriteria(Employee.class,"employee");
 		c.add(Restrictions.eq("employee.masLocation.id",locationId));
-		c.addOrder(Order.desc("employee.createdTimeStamp"));
+		c.addOrder(Order.desc("employee.id"));
 	    c.setMaxResults(1);
 		return  (Employee) c.uniqueResult();
 	}

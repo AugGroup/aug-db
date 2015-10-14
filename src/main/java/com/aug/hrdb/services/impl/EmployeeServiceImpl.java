@@ -986,7 +986,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		System.out.println("LOCATIONNNN :: " + masLocations);
 		employeeForCode = employeeRepository.findEmployeeCode(1);
 		
-		System.out.println("employeeForCodeCreatedTime :: " + employeeForCode.getCreatedTimeStamp());
+		System.out.println("employeeForCodeCreatedTime :: " + employeeForCode.getId());
 		System.out.println("employeeForCodeFirstName :: " + employeeForCode.getName());
 		
 		if(employeeForCode==null && ("TH").equals(location)){

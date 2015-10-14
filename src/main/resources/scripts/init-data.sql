@@ -305,9 +305,9 @@ INSERT INTO EMPLOYEE (EMPLOYEE_CODE,TEL_HOME,TEL_FAX,CONGENITAL_DISEASE,HOSPITAL
 ('TH2015001','(02) 569-9858','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
  'Yes',1,2,3,1,1,'Employee','C',0,NOW(),1,1),
  ('TH2015002','(02) 569-9852','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
-  'Yes',2,3,1,2,1,'Employee','C',0,NOW(),2,2),
+  'Yes',2,3,1,1,1,'Employee','C',0,NOW(),2,2),
  ('TH2015003','(02) 569-9856','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
-  'Yes',1,2,1,3,1,'Employee','C',0,NOW(),3,3);
+  'Yes',1,2,1,1,1,'Employee','C',0,NOW(),3,3);
 
 
 
