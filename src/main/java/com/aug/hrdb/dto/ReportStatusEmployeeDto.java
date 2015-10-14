@@ -20,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				name = "reportStatusEmployee",
 				query = "Select emp.id, "
 						+"emp.EMPLOYEE_CODE as employeeCode, "
+						+"CAST(official.start_work_date as DATE) as startWorkDate, "
 						+"app.FIRSTNAME_TH  as nameThai, "
 						+"app.FIRSTNAME_EN  as nameEng, "
 						+"app.BIRTHDATE as dateOfBirth, "
@@ -60,17 +61,17 @@ public class ReportStatusEmployeeDto {
 //		@Column(name = "nameEng")
 		private String nameEng;
 //		@Column(name = "dateOfBirth")
-		private Date dateOfBirth;		
+		private String dateOfBirth;		
 //		@Column(name = "age")
 		private Integer age;
 //		@Column(name="projectOwner")
 		private String projectOwner;	
 //		@Column(name="startWorkDate")
-		private Date startWorkDate;	
+		private String startWorkDate;	
 //		@Column(name="startDate")
-		private Date startDate;	
+		private String startDate;	
 //		@Column(name="endDate")
-		private Date endDate;		
+		private String endDate;		
 //		@Column(name = "year")
 		private Integer year;
 //		@Column(name = "month")
@@ -87,9 +88,6 @@ public class ReportStatusEmployeeDto {
 		private String statusStaff;
 		public Integer getId() {
 			return id;
-		}
-		public void setId(Integer id) {
-			this.id = id;
 		}
 		public String getEmployeeCode() {
 			return employeeCode;
@@ -109,10 +107,10 @@ public class ReportStatusEmployeeDto {
 		public void setNameEng(String nameEng) {
 			this.nameEng = nameEng;
 		}
-		public Date getDateOfBirth() {
+		public String getDateOfBirth() {
 			return dateOfBirth;
 		}
-		public void setDateOfBirth(Date dateOfBirth) {
+		public void setDateOfBirth(String dateOfBirth) {
 			this.dateOfBirth = dateOfBirth;
 		}
 		public Integer getAge() {
@@ -127,22 +125,22 @@ public class ReportStatusEmployeeDto {
 		public void setProjectOwner(String projectOwner) {
 			this.projectOwner = projectOwner;
 		}
-		public Date getStartWorkDate() {
+		public String getStartWorkDate() {
 			return startWorkDate;
 		}
-		public void setStartWorkDate(Date startWorkDate) {
+		public void setStartWorkDate(String startWorkDate) {
 			this.startWorkDate = startWorkDate;
 		}
-		public Date getStartDate() {
+		public String getStartDate() {
 			return startDate;
 		}
-		public void setStartDate(Date startDate) {
+		public void setStartDate(String startDate) {
 			this.startDate = startDate;
 		}
-		public Date getEndDate() {
+		public String getEndDate() {
 			return endDate;
 		}
-		public void setEndDate(Date endDate) {
+		public void setEndDate(String endDate) {
 			this.endDate = endDate;
 		}
 		public Integer getYear() {
@@ -187,7 +185,10 @@ public class ReportStatusEmployeeDto {
 		public void setStatusStaff(String statusStaff) {
 			this.statusStaff = statusStaff;
 		}
-		
+		public void setId(Integer id) {
+			this.id = id;
+		}
+	
 		
 
 		
