@@ -122,7 +122,7 @@ public class EducationRepositoryTest {
 		education.setCertification("TOEIC 430");
 		education.setMasdegreetype(masDegreetype);
 		education.setFaculty("Technology and Science");
-		education.setGpa(3.00);
+		education.setGpa("3.00");
 		education.setGraduated_date(dateFmt.parse("07/09/2015"));
 		education.setAuditFlag("C");
 		education.setCreatedBy(0);
@@ -141,7 +141,7 @@ public class EducationRepositoryTest {
 		education.setId(1);
 		education.setCertification("TOEIC 430");
 		education.setFaculty("Technology and Science");
-		education.setGpa(3.00);
+		education.setGpa("3.00");
 		education.setGraduated_date(dateFmt.parse("07/09/2015"));
 
 		educationRepository.getCurrentSession().save(education);

@@ -34,7 +34,7 @@ public class Education extends BaseEntity{
 
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
 	@Column(name = "GPA")
-	private Double gpa;
+	private String gpa;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "START_DATE")
@@ -88,11 +88,12 @@ public class Education extends BaseEntity{
 		this.major = major;
 	}
 
-	public Double getGpa() {
+
+	public String getGpa() {
 		return gpa;
 	}
 
-	public void setGpa(Double gpa) {
+	public void setGpa(String gpa) {
 		this.gpa = gpa;
 	}
 
