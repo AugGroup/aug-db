@@ -20,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AddressDto;
+import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.entities.Applicant;
@@ -43,6 +44,7 @@ import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.OfficialRepository;
 import com.aug.hrdb.services.AddressService;
 import com.aug.hrdb.services.ApplicantService;
+import com.aug.hrdb.services.EmployeeCodeDtoService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
@@ -87,6 +89,8 @@ public class EmployeeServiceTest {
 	private MasAddressTypeService addressTypeService;
 	@Autowired
 	private MasProvinceService provinceService;
+	@Autowired
+	private EmployeeCodeDtoService employeeCodeDtoService;
 	
 	
 	
@@ -913,7 +917,7 @@ public class EmployeeServiceTest {
 		
 		
 		
-		Employee employee = employeeService.findEmployeeCode(idMasLocation);		
+		List<EmployeeCodeDto> employee = employeeCodeDtoService.findEmployeeCode(idMasLocation);		
 		//Assert.assertEquals("JP10020", emp.getEmployeeCode());
 		
 		

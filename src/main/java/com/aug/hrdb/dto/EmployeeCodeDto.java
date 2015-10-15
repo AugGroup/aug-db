@@ -9,12 +9,14 @@ import org.hibernate.annotations.NamedNativeQuery;
 
 
 @NamedNativeQueries({
+
 	@NamedNativeQuery(
-            name = "runningNo",
-              query = "select emp.LOCATION_ID,SUBSTRING(EMPLOYEE_CODE,5,3) as RUNNING_NO from EMPLOYEE emp join MAS_LOCATION location on emp.LOCATION_ID=location.ID "
-              		+ "where location.CODE=:location "
-              		+ "order by emp.ID desc "
-              		+ "LIMIT 1",
+            name = "findEmployeeCode",
+              query = "select  e.id,e.EMPLOYEE_CODE "
+              		+ "from employee emp join employee e on e.id = emp.id "
+              		+ "and e.id = (select max(emp.id) "
+              		+ "from employee emp join mas_location l on l.id=emp.location_id and l.id=:location_id "
+              		+ "order by emp.CREATEDTIMESTAMP desc ) ",
             resultClass = EmployeeCodeDto.class)
   })
 
@@ -25,10 +27,10 @@ import org.hibernate.annotations.NamedNativeQuery;
 public class EmployeeCodeDto {
 	
 	private Integer id;
-	private Integer rungingNumber;
+	private String employeeCode;
 	
 	@Id
-	@Column(name="LOCATION_ID")
+	@Column(name="ID")
 	public Integer getId() {
 		return id;
 	}
@@ -36,16 +38,16 @@ public class EmployeeCodeDto {
 		this.id = id;
 	}
 	
-	@Column(name="RUNNING_NO")
-	public Integer getRungingNumber() {
-		return rungingNumber;
+	
+	@Column(name="EMPLOYEE_CODE")
+	public String getEmployeeCode() {
+		return employeeCode;
 	}
 	
-	
-	public void setRungingNumber(Integer rungingNumber) {
-		this.rungingNumber = rungingNumber;
+		
+	public void setEmployeeCode(String employeeCode) {
+		this.employeeCode = employeeCode;
 	}
-	
 	
 
 }

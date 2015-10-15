@@ -29,7 +29,6 @@ public interface EmployeeRepository extends GenericRepository<Employee, Integer>
 	public Employee searhEmpIdtoAddress(); 	//find last id of employee
 	public List<ReportEmployeeDto> reportEmployee(String nameEng);
 	public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff);
-	public EmployeeCodeDto serchRunningNo(String code);
 	public List<ReportLeaveDto> reportLeave(String nameEng);
 	public EmployeeIdDto findCurrentId();
 	public Employee findEmployeeAndOfficial(Integer id);
@@ -38,9 +37,10 @@ public interface EmployeeRepository extends GenericRepository<Employee, Integer>
 	public List<ReportEmployeeDto> findByName(Employee employee);
 	public List<ReportStatusEmployeeDto> findByNameStatus(Employee employee);
 	public List<ReportEmployeeDto> reportEmployeeCode(String code);
-	public Employee findEmployeeCode(Integer locationId);
+	//public Employee findEmployeeCode(Integer locationId);
 	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id);
 	public List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id,String idCard);
+	public List<EmployeeCodeDto> findEmployeeCode(Integer location_id);
 
 	
 }

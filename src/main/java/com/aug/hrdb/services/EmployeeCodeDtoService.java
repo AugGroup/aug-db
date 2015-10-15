@@ -1,5 +1,7 @@
 package com.aug.hrdb.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +16,8 @@ public class EmployeeCodeDtoService {
 	@Autowired
 	private EmployeeRepository employeeRepository;
 	
-	
-	public EmployeeCodeDto serchRunningNo(String code){
-		return employeeRepository.serchRunningNo(code);		
+	public List<EmployeeCodeDto> findEmployeeCode(Integer location_id){
+		return employeeRepository.findEmployeeCode(location_id);		
 	}
 
 }

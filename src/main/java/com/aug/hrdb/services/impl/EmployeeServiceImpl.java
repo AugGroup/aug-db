@@ -35,6 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Address;
@@ -53,6 +54,7 @@ import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.services.AddressService;
 import com.aug.hrdb.services.ApplicantService;
+import com.aug.hrdb.services.EmployeeCodeDtoService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
@@ -97,9 +99,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	private MasStaffTypeService masStaffTypeService;
 	@Autowired
 	private ApplicantService applicantService;
+	@Autowired
+	private EmployeeCodeDtoService employeeCodeService;
 	
-	/*@Autowired
-	private UploadService uploadService;*/
+	
 	
 	
 	@Override
@@ -922,10 +925,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
-	public Employee findEmployeeCode(Integer locationId) {
+	/*public Employee findEmployeeCode(Integer locationId) {
 		// TODO Auto-generated method stub
 		return employeeRepository.findEmployeeCode(locationId);
-	}
+	}*/
 	
 	
 
@@ -933,23 +936,36 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Transactional
 	public String generateEmployeeCode(EmployeeDto employeeDto){
 		
-		ApplicantDto applicantDto = new ApplicantDto();
-		Employee employeeForCode = new Employee();
+		List<EmployeeCodeDto> employeeCodeDtoList = new ArrayList<EmployeeCodeDto>();
+		EmployeeCodeDto employeeForCode = new EmployeeCodeDto();
 		String empCode = null;
-		System.out.print("masloc# "+applicantDto.getMasLocation());
+		System.out.println("masloc# "+employeeDto.getMasLocation());
 		
-		if(masLocationService.findByLocationCode(applicantDto.getMasLocation())==null){
+		if(masLocationService.findByLocationCode(employeeDto.getMasLocation())==null){
 			   
 			System.out.println("----null location id-----");
-		}else if(masLocationService.findByLocationCode(applicantDto.getMasLocation())!=null){
+		}else if(masLocationService.findByLocationCode(employeeDto.getMasLocation())!=null){
 			
-			MasLocation masLocation = masLocationService.findByLocationCode(applicantDto.getMasLocation());
+			MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
 			System.out.println("id: "+masLocation.getId());
-			employeeForCode = employeeRepository.findEmployeeCode(masLocation.getId());
-			   		   
+			//employeeForCode = employeeRepository.findEmployeeCode(masLocation.getId());
+		
+			employeeCodeDtoList = employeeCodeService.findEmployeeCode(masLocation.getId());
+			
+			
+			if(employeeCodeDtoList.size()==0){
+				
+				employeeForCode=null;
+				
+			}else if(employeeCodeDtoList.size()>0){
+				
+				employeeForCode = employeeCodeService.findEmployeeCode(masLocation.getId()).get(0);
+			
+			}	 
+			
 			   
 			if(employeeForCode==null){
-				empCode = applicantDto.getMasLocation()+"10"+"001";
+				empCode = employeeDto.getMasLocation()+"10"+"001";
 				System.out.println("empCode: "+empCode);
 			}else if(employeeForCode!=null){	   
 				StringBuilder myNumbers = new StringBuilder();
@@ -980,14 +996,22 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String generateEmployeeCodeFixData(String location){
 		
 		Applicant applicant = new Applicant();
-		Employee employeeForCode = new Employee();
+		List<EmployeeCodeDto> employeeCodeDtoList = new ArrayList<EmployeeCodeDto>();
+		EmployeeCodeDto employeeForCode = new EmployeeCodeDto();
 		String empCode = null;
 		MasLocation masLocations = masLocationService.findByLocationCode(location);
 		System.out.println("LOCATIONNNN :: " + masLocations);
-		employeeForCode = employeeRepository.findEmployeeCode(1);
+		employeeCodeDtoList = employeeCodeService.findEmployeeCode(1);
 		
-		System.out.println("employeeForCodeCreatedTime :: " + employeeForCode.getId());
-		System.out.println("employeeForCodeFirstName :: " + employeeForCode.getName());
+		if(employeeCodeDtoList.size()==0){
+			employeeForCode = null;
+		}else if(employeeCodeDtoList.size()>0){			
+			employeeForCode = employeeCodeService.findEmployeeCode(1).get(0);			
+		}
+		
+
+		//System.out.println("employeeForCodeCreatedTime :: " + employeeForCode.getCreatedTimeStamp());
+		//System.out.println("employeeForCodeFirstName :: " + employeeForCode.getName());
 		
 		if(employeeForCode==null && ("TH").equals(location)){
 			

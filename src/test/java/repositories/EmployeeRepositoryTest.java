@@ -287,15 +287,6 @@ public class EmployeeRepositoryTest {
 	}
 	
 	
-	@Test
-	public void serchRunningNo(){
-		
-		
-		MasLocation masLocation = masLocationRepository.find(idMasLocation);
-		EmployeeCodeDto employeeCodeDto = employeeRepository.serchRunningNo(masLocation.getCode());
-		Assert.assertEquals(17, employeeCodeDto.getRungingNumber().intValue());
-		
-	}
 	
 	
 	
@@ -473,16 +464,6 @@ public class EmployeeRepositoryTest {
 		Employee emp = employeeRepository.findOfficial(id);		
 		//Assert.assertEquals(idOfficial, emp.getOfficial().getId());
 	
-		
-	}
-	
-	@Test 
-	public void findEmployeeCode(){
-		
-		Employee employee = employeeRepository.findEmployeeCode(1);
-		//Assert.assertEquals("JP10017", employee.getEmployeeCode());
-		System.out.println("id: "+employee.getEmployeeCode());
-		
 		
 	}
 	

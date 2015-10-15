@@ -101,13 +101,7 @@ public Employee findOfficial(Integer id) {
 	}
 
 
-	@Override
-	public EmployeeCodeDto serchRunningNo(String code) {
-		// TODO Auto-generated method stub
-		Query query = getCurrentSession().getNamedQuery("runningNo").setString("location",code);
-		List<EmployeeCodeDto> employeeCode = query.list();	
-		return employeeCode.get(0);
-	}
+	
 
 
 	@Override
@@ -203,7 +197,7 @@ public Employee findOfficial(Integer id) {
 	}
 
 
-	@Override
+	/*@Override
 	public Employee findEmployeeCode(Integer locationId) {
 		// TODO Auto-generated method stub
 		Criteria c = getCurrentSession().createCriteria(Employee.class,"employee");
@@ -211,8 +205,9 @@ public Employee findOfficial(Integer id) {
 		c.addOrder(Order.desc("employee.id"));
 	    c.setMaxResults(1);
 		return  (Employee) c.uniqueResult();
-	}
+	}*/
 
+	
 	@Override
 	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id) {
 		Query aimnamedQuery = getCurrentSession().getNamedQuery("listEmployeeAimUpdateEmployee").setInteger("empId", id);
@@ -227,6 +222,15 @@ public Employee findOfficial(Integer id) {
 		Query query  =  getCurrentSession().getNamedQuery("searchEmpForUniqueIdCard");
 		query.setInteger("empId", id);
 		query.setString("idcard", idCard);
+		return query.list();
+	}
+
+
+	@Override
+	public List<EmployeeCodeDto> findEmployeeCode(Integer location_id) {
+		// TODO Auto-generated method stub
+		Query query = getCurrentSession().getNamedQuery("findEmployeeCode");
+		query.setInteger("location_id", location_id);
 		return query.list();
 	}
 
