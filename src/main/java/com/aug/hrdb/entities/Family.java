@@ -55,7 +55,7 @@ public class Family extends BaseEntity implements Serializable {
 	private Integer age;
 	
 	
-	@Column(name="TELEPHONE",length=12)
+	@Column(name="TELEPHONE",length=14)
 	@NotNull
 	@NotEmpty
 	private String mobile;
