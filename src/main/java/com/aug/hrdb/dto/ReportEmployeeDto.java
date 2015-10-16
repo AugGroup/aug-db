@@ -13,12 +13,12 @@ import javax.persistence.NamedNativeQuery;
             name = "reportEmployee",
             query = "Select emp.id, "
             		+ "emp.employee_code as employeeCode,"
-            		+ "CAST(official.start_work_date as DATE) as startWorkDate, "
+            		+ "DATE_FORMAT(official.START_WORK_DATE,'%Y-%m-%d') as startWorkDate, "
             		+ "exp.salary as salary, "
             		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
             		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
             		+ "DAY(curdate()) - DAY(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayStart, "
-            		+ "CAST(app.BIRTHDATE as DATE) as dateOfBirth, "
+            		+ "DATE_FORMAT(app.BIRTHDATE,'%Y-%m-%d') as dateOfBirth, "
             		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as year, "
             		+ "MONTH(curdate()) - MONTH(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as month, "
             		+ "DAY(curdate()) - DAY(app.BIRTHDATE) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as day, "
@@ -29,7 +29,8 @@ import javax.persistence.NamedNativeQuery;
             		+ "app.email as email, "
             		+ "mas_employment.name as employmentName, "
             		+ "mas_division.name as divisionName, "
-            		+ "mas_technology.name as technologyName "
+            		+ "mas_technology.name as technologyName, "
+            		+ "app.LASTNAME_EN as lastNameEN "
             		+ "from applicant as app "
             		+ "right join employee as emp on emp.applicant_id = app.id "
             		+ "left join official as official on app.official_id = official.id "
@@ -43,7 +44,7 @@ import javax.persistence.NamedNativeQuery;
                     name = "reportEmployeeCode",
                     query = "Select emp.id, "
                     		+ "emp.employee_code as employeeCode,"
-                    		+ "CAST(official.start_work_date as DATE) as startWorkDate, "
+                    		+ "DATE_FORMAT(official.START_WORK_DATE,'%Y-%m-%d') as startWorkDate, "
                     		+ "exp.salary as salary, "
                     		+ "YEAR(CURDATE()) - YEAR(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearStart, "
                     		+ "MONTH(curdate()) - MONTH(official.start_work_date) - IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(official.start_work_date), '-', DAY(official.start_work_date)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthStart, "
@@ -59,7 +60,8 @@ import javax.persistence.NamedNativeQuery;
                     		+ "app.email as email, "
                     		+ "mas_employment.name as employmentName, "
                     		+ "mas_division.name as divisionName, "
-                    		+ "mas_technology.name as technologyName "
+                    		+ "mas_technology.name as technologyName, "
+                    		+ "app.LASTNAME_EN as lastNameEN "
                     		+ "from applicant as app "
                     		+ "left join employee as emp on emp.applicant_id = app.id "
                     		+ "join official as official on app.official_id = official.id "
@@ -112,6 +114,9 @@ public class ReportEmployeeDto {
 	private String technologyName;
 	@Column(name = "SALARY")
 	private Integer salary;
+	@Column(name="lastNameEN")
+	private String  lastNameEN;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -225,6 +230,12 @@ public class ReportEmployeeDto {
 	}
 	public void setSalary(Integer salary) {
 		this.salary = salary;
+	}
+	public String getLastNameEN() {
+		return lastNameEN;
+	}
+	public void setLastNameEN(String lastNameEN) {
+		this.lastNameEN = lastNameEN;
 	}
 	
 	
