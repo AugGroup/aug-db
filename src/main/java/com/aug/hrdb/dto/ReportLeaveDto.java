@@ -19,11 +19,11 @@ import javax.persistence.NamedNativeQuery;
 	@NamedNativeQuery(
             name = "reportLeave",
             
-            	         query="select emp.id, emp.employee_code as employeeCode,app.BIRTHDATE as dateOfBirth, "
+            	         query="select emp.id, emp.employee_code as employeeCode,DATE_FORMAT(app.BIRTHDATE,'%Y-%m-%d') as dateOfBirth, "
             	        		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearAge , "
             	        		+ "MONTH(CURDATE()) - MONTH(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthAge, "
             	        		+ "DAY(CURDATE()) - DAY(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayAge, "
-            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,app.LASTNAME_EN as lastEng,l.sumTime as sumTime,off.START_WORK_DATE as startWorkDate, "
+            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,app.LASTNAME_EN as lastEng,l.sumTime as sumTime,DATE_FORMAT(off.START_WORK_DATE,'%Y-%m-%d') as startWorkDate, "
 								+ "YEAR(CURDATE()) - YEAR(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayWork , "
 								+ "MONTH(CURDATE()) - MONTH(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthWork , "
 								+ "DAY(CURDATE()) - DAY(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearWork, "
@@ -54,7 +54,7 @@ public class ReportLeaveDto {
 	@Column(name = "employeeCode")
 	private String employeeCode;
 	@Column(name = "dateOfBirth")
-	private Date dateOfBirth;
+	private String dateOfBirth;
 	@Column(name = "nameEng")
 	private String nameEng;
 	@Column(name = "lastEng")
@@ -64,7 +64,7 @@ public class ReportLeaveDto {
 	@Column(name = "age")
 	private Integer age;
 	@Column(name = "startWorkDate")
-	private Date startWorkDate;
+	private String startWorkDate;
 	@Column(name = "dayWork")
 	private Integer dayWork;
 	@Column(name = "monthWork")
@@ -111,10 +111,10 @@ public class ReportLeaveDto {
 	public void setEmployeeCode(String employeeCode) {
 		this.employeeCode = employeeCode;
 	}
-	public Date getDateOfBirth() {
+	public String getDateOfBirth() {
 		return dateOfBirth;
 	}
-	public void setDateOfBirth(Date dateOfBirth) {
+	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
 	public String getNameEng() {
@@ -173,10 +173,10 @@ public class ReportLeaveDto {
 		this.yearAge = yearAge;
 	}
 	
-	public Date getStartWorkDate() {
+	public String getStartWorkDate() {
 		return startWorkDate;
 	}
-	public void setStartWorkDate(Date startWorkDate) {
+	public void setStartWorkDate(String startWorkDate) {
 		this.startWorkDate = startWorkDate;
 	}
 	
