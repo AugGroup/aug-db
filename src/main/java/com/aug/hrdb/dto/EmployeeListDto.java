@@ -13,7 +13,8 @@ import org.hibernate.annotations.NamedNativeQuery;
               query = "select emp.ID as ID,emp.employee_code as EMPLOYEE_CODE,app.FIRSTNAME_EN as NAME_ENG,app.LASTNAME_EN as SURNAME_ENG, "
               		+ "app.CARD_ID as CARD_ID  "
               		+ "from employee as emp, applicant as app "
-              		+ "where emp.applicant_id = app.id",             		
+              		+ "where emp.applicant_id = app.id "
+              		+ "order by emp.id asc",             		
             resultClass = EmployeeListDto.class),
 	
 	
