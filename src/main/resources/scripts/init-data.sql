@@ -12,6 +12,8 @@ INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,C
 INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('Java','C',NOW(),0,true,1);
 INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('PHP','C',NOW(),0,true,1);
 INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('SAP','C',NOW(),0,true,1);
+INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('-','C',NOW(),0,true,1);
+
 
 
 --MASSPECIALTY
