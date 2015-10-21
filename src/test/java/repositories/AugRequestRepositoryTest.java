@@ -31,7 +31,6 @@ public class AugRequestRepositoryTest {
 	public void setupAugRequest() throws ParseException {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		AugRequest augRequest = new AugRequest();
-		augRequest.setApprovalName("Manager");
 		augRequest.setApproveDate(dateFmt.parse("04/09/2015"));
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
@@ -45,7 +44,6 @@ public class AugRequestRepositoryTest {
 	public void createAugRequestRepositoryTest() throws ParseException {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
 		AugRequest augRequest = new AugRequest();
-		augRequest.setApprovalName("Manager");
 		augRequest.setApproveDate(dateFmt.parse("04/09/2015"));
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
@@ -64,15 +62,12 @@ public class AugRequestRepositoryTest {
 	public void updateAugRequestRepositoryTest() throws ParseException {
 		AugRequest augRequest = augRequestRepository.find(1);
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		augRequest.setApprovalName("Admin");
 		augRequest.setApproveDate(dateFmt.parse("07/09/2015"));
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
 		augRequest.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		augRequestRepository.update(augRequest);
-		
-		System.out.println("Aug-Request : " + augRequest.getApprovalName());
-		System.out.println("Aug-Request : " + augRequest.getApproveDate());
+
 	}
 	
 	@Test
