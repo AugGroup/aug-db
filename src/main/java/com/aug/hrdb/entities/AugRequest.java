@@ -31,14 +31,8 @@ public class AugRequest extends BaseEntity{
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
 	private Date requestDate;
 
-	@Column(name = "REQUESTER_NAME")
-	private String requesterName;
-
 	@Column(name = "STATUS")
 	private String status;
-
-	@Column(name = "APPROVAL_NAME")
-	private String approvalName;
 
 	@Column(name = "APPROVE_DATE")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
@@ -52,6 +46,14 @@ public class AugRequest extends BaseEntity{
 
 	@Column(name = "YEAR_EXPERIENCE")
 	private Integer yearExperience;
+	
+	@ManyToOne
+	@JoinColumn(name = "REQUEST_ID", referencedColumnName = "id", nullable = false)
+	private Employee requester;
+	
+	@ManyToOne
+	@JoinColumn(name = "APPROVE_ID", referencedColumnName = "id")	
+	private Employee approver;
 	
 	@ManyToOne
 	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
@@ -75,22 +77,6 @@ public class AugRequest extends BaseEntity{
 
 	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
-	}
-
-	public String getRequesterName() {
-		return requesterName;
-	}
-
-	public void setRequesterName(String requesterName) {
-		this.requesterName = requesterName;
-	}
-
-	public String getApprovalName() {
-		return approvalName;
-	}
-
-	public void setApprovalName(String approvalName) {
-		this.approvalName = approvalName;
 	}
 
 	public Date getApproveDate() {
@@ -147,6 +133,22 @@ public class AugRequest extends BaseEntity{
 
 	public void setJoblevel(MasJoblevel joblevel) {
 		this.joblevel = joblevel;
+	}
+
+	public Employee getRequester() {
+		return requester;
+	}
+
+	public void setRequester(Employee requester) {
+		this.requester = requester;
+	}
+
+	public Employee getApprover() {
+		return approver;
+	}
+
+	public void setApprover(Employee approver) {
+		this.approver = approver;
 	}
 	
 	

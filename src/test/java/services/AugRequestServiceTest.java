@@ -32,7 +32,6 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = new AugRequest();
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		augRequest.setApprovalName("Staff");
 		augRequest.setApproveDate(dateFmt.parse("16/09/2015"));
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
@@ -48,7 +47,6 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = new AugRequest();
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		augRequest.setApprovalName("Staff");
 		augRequest.setApproveDate(dateFmt.parse("16/09/2015"));
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
@@ -71,13 +69,9 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = augRequestService.findById(1);
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-		augRequest.setApprovalName("AdminDay");
 		augRequest.setApproveDate(dateFmt.parse("10/09/2015"));
 		
 		augRequestService.update(augRequest);
-		
-		System.out.println("Aug-Request : " + augRequest.getApprovalName());
-		System.out.println("Aug-Request : " + augRequest.getApproveDate());
 	}
 	
 	@Test
