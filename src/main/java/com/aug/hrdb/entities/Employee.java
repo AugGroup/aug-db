@@ -298,9 +298,11 @@ public class Employee extends BaseEntity{
 	/*@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
 	private Set<Education> educations = new HashSet<Education>();*/
 	 
+//	@JsonIgnore
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
 	private Set<Allowances> allowances = new HashSet<Allowances>();
 	 
+//	@JsonIgnore
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
 	private Set<History> histories = new HashSet<History>();
 	 
@@ -324,9 +326,11 @@ public class Employee extends BaseEntity{
     /*@OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Certification> certifications  = new HashSet<Certification>();*/
     
+//    @JsonIgnore
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Leave> leaves  = new HashSet<Leave>();
     
+//    @JsonIgnore
     @OneToMany(mappedBy = "employee", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
     private Set<Punish> punishs  = new HashSet<Punish>();
     
@@ -404,6 +408,14 @@ public class Employee extends BaseEntity{
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="APPLICANT_ID",nullable=false)
 	private Applicant applicant;
+	
+    @OneToMany(mappedBy = "requester", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<AugRequest> requester = new HashSet<AugRequest>();
+    
+    @OneToMany(mappedBy = "approver", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<AugRequest> approver = new HashSet<AugRequest>();
 	
 	
 	
@@ -1311,11 +1323,25 @@ public class Employee extends BaseEntity{
 		this.applicant = applicant;
 	}
 
-	
-	
-	
-	
-	
+	public Set<AugRequest> getRequester() {
+		return requester;
+	}
+
+	public void setRequester(Set<AugRequest> requester) {
+		this.requester = requester;
+	}
+
+	public Set<AugRequest> getApprover() {
+		return approver;
+	}
+
+	public void setApprover(Set<AugRequest> approver) {
+		this.approver = approver;
+	}
+
+
+
+
 	/*@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
