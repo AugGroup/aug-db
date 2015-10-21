@@ -135,7 +135,7 @@ public class Applicant extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
 	private MasTechnology technology;
-
+	
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
 	private MasJoblevel joblevel;
