@@ -19,14 +19,14 @@ import javax.persistence.NamedNativeQuery;
 	@NamedNativeQuery(
             name = "reportLeave",
             
-            	         query="select emp.id, emp.employee_code as employeeCode,DATE_FORMAT(app.BIRTHDATE,'%Y-%m-%d') as dateOfBirth, "
-            	        		+ "YEAR(CURDATE()) - YEAR(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearAge , "
-            	        		+ "MONTH(CURDATE()) - MONTH(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthAge, "
-            	        		+ "DAY(CURDATE()) - DAY(app.BIRTHDATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(app.BIRTHDATE), '-', DAY(app.BIRTHDATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayAge, "
-            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,app.LASTNAME_EN as lastEng,l.sumTime as sumTime,DATE_FORMAT(off.START_WORK_DATE,'%Y-%m-%d') as startWorkDate, "
-								+ "YEAR(CURDATE()) - YEAR(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as dayWork , "
-								+ "MONTH(CURDATE()) - MONTH(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as monthWork , "
-								+ "DAY(CURDATE()) - DAY(off.START_WORK_DATE) -IF(STR_TO_DATE(CONCAT(YEAR(CURDATE()), '-', MONTH(off.START_WORK_DATE), '-', DAY(off.START_WORK_DATE)) ,'%Y-%c-%e') > CURDATE(), 1, 0) as yearWork, "
+            	         query="select emp.id, emp.employee_code as employeeCode,DATE_FORMAT(app.BIRTHDATE,'%d-%m-%Y') as dateOfBirth, "
+            	        		+ "TIMESTAMPDIFF(YEAR, app.BIRTHDATE, now() ) as yearAge, "
+                        		+ "TIMESTAMPDIFF(MONTH, app.BIRTHDATE, now() ) % 12 as monthAge, "
+                        		+ "FLOOR(TIMESTAMPDIFF( DAY, app.BIRTHDATE, now() ) % 30.4375 ) as dayAge, "
+            	        		+ "app.age as age,app.FIRSTNAME_TH as nameThai,app.FIRSTNAME_EN as nameEng,app.LASTNAME_EN as lastEng,l.sumTime as sumTime,DATE_FORMAT(off.START_WORK_DATE,'%d-%m-%Y') as startWorkDate, "           		           	        	
+								+ "FLOOR(TIMESTAMPDIFF( DAY,off.start_work_date, now() ) % 30.4375 ) as dayWork, "								
+			            		+ "TIMESTAMPDIFF(MONTH, off.start_work_date, now() ) % 12 as monthWork, "
+			            		+ "TIMESTAMPDIFF(YEAR, off.start_work_date, now() ) as yearWork, "
 								+ "SUM( CASE when l.leavetype_id= 1 then (l.sumTime/8) else 0 end) as 'dayAnnual', "
 								+ "SUM( CASE when l.leavetype_id= 3 then (l.sumTime/8) else 0 end) as 'dayPersonal', "
 								+ "SUM( CASE when l.leavetype_id= 4 then (l.sumTime/8) else 0 end) as 'daySick', "
