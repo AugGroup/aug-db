@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasJoblevel;
 
 public interface ApplicantRepository extends GenericRepository<Applicant, Serializable> {
 
@@ -20,6 +22,8 @@ public interface ApplicantRepository extends GenericRepository<Applicant, Serial
 	public ApplicantDto findApplicationById(Integer id);
 	
 	public List<ApplicantDto> findByTrackingStatus(String trackingStatus);
+	
+	public List<JoblevelDto> checkTag(String tag);
 
 	/*-------------------- report --------------------*/
 	public List<ReportApplicantDto> reportApplicant();

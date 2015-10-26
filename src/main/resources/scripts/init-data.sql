@@ -64,21 +64,21 @@ VALUES
 
 
 --MASJOBLEVEL
-insert into MAS_JOBLEVEL(name,code,isactive,auditFlag,createdTimeStamp,createdBy) 
-values('Account Execute','AE',1,'C',NOW(),0),
-('Account Manager','AM',1,'C',NOW(),0),
-('Business Division Director','BDD',1,'C',NOW(),0),
-('Consultant','C',1,'C',NOW(),0),
-('Manager','M',1,'C',NOW(),0),
-('Managing Consultant','MC',1,'C',NOW(),0),
-('Partner','P',1,'C',NOW(),0),
-('Principal Consultant','PC',1,'C',NOW(),0),
-('Professional','PF',1,'C',NOW(),0),
-('Senior Account Manager','SAM',1,'C',NOW(),0),
-('Senior Consultant','SC',1,'C',NOW(),0),
-('Senior Manager','SM',1,'C',NOW(),0),
-('Senior Professional','SP',1,'C',NOW(),0),
-('Support Division Director','SDD',1,'C',NOW(),0);
+insert into MAS_JOBLEVEL(name,code,isactive,auditFlag,createdTimeStamp,createdBy,tag) 
+values('Account Execute','AE',1,'C',NOW(),0,'f'),
+('Account Manager','AM',1,'C',NOW(),0,'f'),
+('Business Division Director','BDD',1,'C',NOW(),0,'f'),
+('Consultant','C',1,'C',NOW(),0,'t'),
+('Manager','M',1,'C',NOW(),0,'f'),
+('Managing Consultant','MC',1,'C',NOW(),0,'f'),
+('Partner','P',1,'C',NOW(),0,'f'),
+('Principal Consultant','PC',1,'C',NOW(),0,'f'),
+('Professional','PF',1,'C',NOW(),0,'f'),
+('Senior Account Manager','SAM',1,'C',NOW(),0,'f'),
+('Senior Consultant','SC',1,'C',NOW(),0,'t'),
+('Senior Manager','SM',1,'C',NOW(),0,'f'),
+('Senior Professional','SP',1,'C',NOW(),0,'f'),
+('Support Division Director','SDD',1,'C',NOW(),0,'f');
 
 
 --MASADDRESSTYPE
@@ -234,6 +234,8 @@ INSERT INTO MAS_RELATIONTYPE(
 ) values
 ('C','01',0,NOW(),true,'Mother'),
 ('C','02',0,NOW(),true,'Father'),
+('C','05',0,NOW(),true,'Brother'),
+('C','05',0,NOW(),true,'Sister'),
 ('C','03',0,NOW(),true,'Son'),
 ('C','04',0,NOW(),true,'Daugther'),
 ('C','05',0,NOW(),true,'Friend');

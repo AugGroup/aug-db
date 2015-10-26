@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.repositories.ApplicantRepository;
 
 @Repository(value = "applicantRepository")
@@ -60,6 +62,14 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
 		query.setParameter("TRACKING_STATUS",trackingStatus);
 		List<ApplicantDto> applicants = query.list();
 		return applicants;
+	}
+	
+	@Override
+	public List<JoblevelDto> checkTag(String tag){
+		Query query = getCurrentSession().getNamedQuery("CHECK_TAG");
+		query.setParameter("TAG", tag);
+		List<JoblevelDto> result = query.list();
+		return result;
 	}
 	
 /*-------------------- report --------------------*/

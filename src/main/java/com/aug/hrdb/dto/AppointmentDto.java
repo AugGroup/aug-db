@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	@NamedNativeQuery(name = "FIND_APPOINTMENT", 
 			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID , null as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
-					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT(mt.NAME,' ',mj.NAME),' )') as TITLE ,"+
+					"CONCAT((CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT( (CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME),' )') as TITLE ,"+
 					"null as LOGIN_NAME, APPOINTMENT.MAIL_STATUS "+
 					"FROM APPOINTMENT " +
 					"LEFT JOIN APPLICANT appl on APPOINTMENT.APPLICANT_ID = appl.ID " + 
@@ -31,8 +31,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
-					"CONCAT(mt.NAME,' ',mj.NAME) as APPLICANT_POSITION , "+
-					"CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ', CONCAT(mt.NAME,' ',mj.NAME), ' )') as TITLE, "+
+					"CONCAT((CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME) as APPLICANT_POSITION , "+
+					"CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ', CONCAT( (CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME), ' )') as TITLE, " +
 					"CONCAT(empApp.FIRSTNAME_EN,' ',empApp.LASTNAME_EN) as LOGIN_NAME, appo.MAIL_STATUS "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
@@ -43,6 +43,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					"LEFT JOIN APPLICANT empApp ON em.APPLICANT_ID = empApp.ID "+
 					"WHERE appo.ID = :ID", resultClass = AppointmentDto.class)
 })
+
 
 public class AppointmentDto {
 	@Id

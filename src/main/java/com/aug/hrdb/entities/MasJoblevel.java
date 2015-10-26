@@ -30,6 +30,9 @@ public class MasJoblevel extends BaseEntity {
 	
 	@Column(name = "ISACTIVE" ,nullable = false)
 	private Boolean isActive;
+	
+	@Column(name = "TAG")
+	private String tag;
 
 	@JsonIgnore
 	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
@@ -75,4 +78,13 @@ public class MasJoblevel extends BaseEntity {
 		this.applicants = applicants;
 	}
 
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+
+	
 }
