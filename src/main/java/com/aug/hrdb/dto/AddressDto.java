@@ -15,6 +15,8 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
+import com.aug.hrdb.entities.MasProvince;
+
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAddress",
@@ -28,6 +30,7 @@ import org.springframework.stereotype.Component;
 					+ "address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE"
 					+ " FROM ADDRESS address join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
 					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID WHERE address.ID = :ID", resultClass = AddressDto.class)
+
 })
 
 @Component
