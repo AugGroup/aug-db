@@ -234,6 +234,8 @@ INSERT INTO MAS_RELATIONTYPE(
 ) values
 ('C','01',0,NOW(),true,'Mother'),
 ('C','02',0,NOW(),true,'Father'),
+('C','05',0,NOW(),true,'Brother'),
+('C','05',0,NOW(),true,'Sister'),
 ('C','03',0,NOW(),true,'Son'),
 ('C','04',0,NOW(),true,'Daugther'),
 ('C','05',0,NOW(),true,'Friend');
