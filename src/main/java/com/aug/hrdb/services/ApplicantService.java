@@ -3,8 +3,10 @@ package com.aug.hrdb.services;
 import java.util.List;
 
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasJoblevel;
 
 public interface ApplicantService {
 	public void create(Applicant applicant);
@@ -34,6 +36,8 @@ public interface ApplicantService {
 	public ApplicantDto findApplicationById(Integer id);
 	
 	public List<ApplicantDto> findByTrackingStatus(String trackingStatus);
+	
+	public List<JoblevelDto> checkTag(String tag);
 	
 	/*-------------------- report search --------------------*/
 	public List<ReportApplicantDto> reportApplicant();

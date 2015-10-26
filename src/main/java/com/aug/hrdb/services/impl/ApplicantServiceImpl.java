@@ -7,9 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasJoblevel;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -165,6 +167,11 @@ public class ApplicantServiceImpl implements ApplicantService {
 		@Override
 		public ApplicantDto getMaxApplicantId() {
 			return applicantRepository.getMaxApplicantId();
+		}
+
+		@Override
+		public List<JoblevelDto> checkTag(String tag) {
+			return applicantRepository.checkTag(tag);
 		}
 
 }
