@@ -64,5 +64,9 @@
 		<mapping class="com.aug.hrdb.entities.AugRequest"/>
 		
 		<mapping class="com.aug.hrdb.entities.MailTemplate"/>
+		
+		<mapping class="com.aug.hrdb.entities.Room"/>
+		<mapping class="com.aug.hrdb.entities.Reservation"/>
+		
 	</session-factory>
 </hibernate-configuration>
