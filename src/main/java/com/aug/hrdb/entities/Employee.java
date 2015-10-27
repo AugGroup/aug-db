@@ -418,7 +418,11 @@ public class Employee extends BaseEntity{
     private Set<AugRequest> approver = new HashSet<AugRequest>();
 	
 	
+	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
+    @JsonIgnore
+    private Set<Reservation> reservations = new HashSet<Reservation>();
 	
+
  //-------------------------------------- getter setter --------------------------------------------------//
 
 	public Integer getId() {
@@ -1323,6 +1327,7 @@ public class Employee extends BaseEntity{
 		this.applicant = applicant;
 	}
 
+
 	public Set<AugRequest> getRequester() {
 		return requester;
 	}
@@ -1340,7 +1345,21 @@ public class Employee extends BaseEntity{
 	}
 
 
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
 
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
+	}
+
+	
+
+	
+	
+	
+	
+	
 
 	/*@Override
 	public String toString() {
