@@ -8,13 +8,14 @@ package com.aug.hrdb.entities;
 import java.util.Date;
 
 import javax.persistence.*;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="RESERVATION")
-public class Reservation {
+public class Reservation extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")

@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="ROOM")
-public class Room {
+public class Room extends BaseEntity{
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue
