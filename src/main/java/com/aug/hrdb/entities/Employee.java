@@ -420,7 +420,7 @@ public class Employee extends BaseEntity{
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
     @JsonIgnore
-    private Set<Reservation> reservations = new HashSet<Reservation>();
+    private Set<Reservation> reservation = new HashSet<Reservation>();
 	
 
  //-------------------------------------- getter setter --------------------------------------------------//
@@ -1345,12 +1345,12 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public Set<Reservation> getReservations() {
-		return reservations;
+	public Set<Reservation> getReservation() {
+		return reservation;
 	}
 
-	public void setReservations(Set<Reservation> reservations) {
-		this.reservations = reservations;
+	public void setReservation(Set<Reservation> reservation) {
+		this.reservation = reservation;
 	}
 
 	

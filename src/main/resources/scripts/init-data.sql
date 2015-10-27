@@ -492,3 +492,16 @@ INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA','<p>Dear K. $FIRST_NAME</p>
 
 <p>&lt;<a href="http://www.augmentis.biz/">http://www.augmentis.biz/</a>&gt;</p>
 ');
+
+--Room
+INSERT INTO ROOM (NAME,CAPACITY,DESCRIPTION) VALUES 
+('Interview room 1',3,'Candidate Interview and Small group meeting'),
+('Interview room 2',4,'Candidate Interview and Small group meeting'),
+('Augmentis room',20,'Board room meeting and Group training');
+
+--Reservation
+INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,EMPLOYEE_ID) VALUES
+(STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015','%d/%m/%Y'),'Interview',1,1),
+(STR_TO_DATE('22/10/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015','%d/%m/%Y'),'Admin Meeting',2,2),
+(STR_TO_DATE('30/10/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015','%d/%m/%Y'),'Board Meeting',3,2),
+(STR_TO_DATE('05/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015','%d/%m/%Y'),'Interview',1,3);

@@ -33,7 +33,7 @@ public class Room extends BaseEntity{
 	
 	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
     @JsonIgnore
-    private Set<Reservation> reservations = new HashSet<Reservation>();
+    private Set<Reservation> reservation = new HashSet<Reservation>();
 	
 	public Integer getId() {
 		return id;
@@ -67,12 +67,12 @@ public class Room extends BaseEntity{
 		this.description = description;
 	}
 
-	public Set<Reservation> getReservations() {
-		return reservations;
+	public Set<Reservation> getReservation() {
+		return reservation;
 	}
 
-	public void setReservations(Set<Reservation> reservations) {
-		this.reservations = reservations;
+	public void setReservation(Set<Reservation> reservation) {
+		this.reservation = reservation;
 	}
 	
 }
