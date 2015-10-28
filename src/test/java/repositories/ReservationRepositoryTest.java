@@ -50,8 +50,8 @@ public class ReservationRepositoryTest {
 	reservation.setDescription("meeting");
 	reservation.setEmployee(employee);
 	reservation.setDateReservation(new Date());
-	reservation.setStartTime(new Date());
-	reservation.setEndTime(new Date());
+	reservation.setStart(new Date());
+	reservation.setEnd(new Date());
 	reservation.setAuditFlag("C");
 	reservation.setCreatedBy(1);
 	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());

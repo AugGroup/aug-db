@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.Reservation;
 import com.aug.hrdb.repositories.ReservationRepository;
 import com.aug.hrdb.services.ReservationService;
@@ -52,5 +54,11 @@ public class ReservationServiceImpl implements ReservationService {
 	public void create(Reservation reservation) {
 		// TODO Auto-generated method stub
 		reservationRepository.create(reservation);
+	}
+
+	@Override
+	public List<ReservationDto> findByDateRange(String start, String end) {
+		// TODO Auto-generated method stub
+		return reservationRepository.findByDateRange(start, end);
 	}
 }
