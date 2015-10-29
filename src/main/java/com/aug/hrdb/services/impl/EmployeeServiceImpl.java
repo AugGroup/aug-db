@@ -1057,5 +1057,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeRepository.checkTagDivision(tag);
 	}
 	
+	@Override
+	public String findByIdDivision(Integer id) {
+		return employeeRepository.findByIdDivision(id);
+	}
+	
 }
 

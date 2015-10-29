@@ -44,5 +44,5 @@ public interface EmployeeService {
 	
 	public List<DivisionDto> checkTag(String tag);
 	public List<JoblevelDto> checkTagDivision(String tag);
-	
+	public String findByIdDivision(Integer id);
 }

@@ -256,6 +256,16 @@ public Employee findOfficial(Integer id) {
 		List<JoblevelDto> result = query.list();
 		return result;
 	}
+	
+	@Override
+	public String findByIdDivision(Integer id) {
+		
+		Query query = getCurrentSession().getNamedQuery("FIND_BY_ID_DIVISION");
+		query.setParameter("ID", id);
+		List<DivisionDto> result = query.list();
+		DivisionDto divi = result.get(0);
+		return divi.getTag();
+	}
 
 }
 	
