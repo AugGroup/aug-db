@@ -1,10 +1,12 @@
 --MASDIVISION
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('CEO Office of CEO','01',0,'C',NOW(),0);
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('F&A Finance & Administration','02',0,'C',NOW(),0);
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('MKT Marketing','04',0,'C',NOW(),0);
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('MoH Ministry of Happiness','05',0,'C',NOW(),0);
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('SAP SAP Services','06',0,'C',NOW(),0);
-INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('TXM Transformation','07',0,'C',NOW(),0);
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('CEO Office of CEO','01',0,'C',NOW(),0,'C');
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('F&A Finance & Administration','02',0,'C',NOW(),0,'S');
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('ITS Integrate Technology Servives','03',0,'C',NOW(),0,'B');
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('MKT Marketing','04',0,'C',NOW(),0,'S');
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('MoH Ministry of Happiness','05',0,'C',NOW(),0,'S');
+INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('TXM Transformation','07',0,'C',NOW(),0,'S');
+
+
 
 --MASTECHNOLOGY
 INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('.Net','C',NOW(),0,true,1);
@@ -70,21 +72,22 @@ VALUES
 
 
 --MASJOBLEVEL
-insert into MAS_JOBLEVEL(name,code,isactive,auditFlag,createdTimeStamp,createdBy,tag) 
-values('Account Execute','AE',1,'C',NOW(),0,'f'),
-('Account Manager','AM',1,'C',NOW(),0,'f'),
-('Business Division Director','BDD',1,'C',NOW(),0,'f'),
-('Consultant','C',1,'C',NOW(),0,'t'),
-('Manager','M',1,'C',NOW(),0,'f'),
-('Managing Consultant','MC',1,'C',NOW(),0,'f'),
-('Partner','P',1,'C',NOW(),0,'f'),
-('Principal Consultant','PC',1,'C',NOW(),0,'f'),
-('Professional','PF',1,'C',NOW(),0,'f'),
-('Senior Account Manager','SAM',1,'C',NOW(),0,'f'),
-('Senior Consultant','SC',1,'C',NOW(),0,'t'),
-('Senior Manager','SM',1,'C',NOW(),0,'f'),
-('Senior Professional','SP',1,'C',NOW(),0,'f'),
-('Support Division Director','SDD',1,'C',NOW(),0,'f');
+insert into MAS_JOBLEVEL(name,code,isactive,auditFlag,createdTimeStamp,createdBy,tag,tag_division) 
+values('Account Execute','AE',1,'C',NOW(),0,'f','B'),
+('Account Manager','AM',1,'C',NOW(),0,'f','B'),
+('Business Division Director','BDD',1,'C',NOW(),0,'f','B'),
+('Consultant','C',1,'C',NOW(),0,'t','B'),
+('Manager','M',1,'C',NOW(),0,'f','S'),
+('Managing Consultant','MC',1,'C',NOW(),0,'f','B'),
+('Partner','P',1,'C',NOW(),0,'f','-'),
+('Principal Consultant','PC',1,'C',NOW(),0,'f','B'),
+('Professional','PF',1,'C',NOW(),0,'f','S'),
+('Senior Account Manager','SAM',1,'C',NOW(),0,'f','B'),
+('Senior Consultant','SC',1,'C',NOW(),0,'t','B'),
+('Senior Manager','SM',1,'C',NOW(),0,'f','S'),
+('Senior Professional','SP',1,'C',NOW(),0,'f','S'),
+('Support Division Director','SDD',1,'C',NOW(),0,'f','S'),
+('-','-',1,'C',NOW(),0,'f','-');
 
 
 --MASADDRESSTYPE
@@ -304,7 +307,7 @@ INSERT INTO OFFICIAL(START_WORK_DATE,END_WORK_DATE,PROBATION_DATE,AUDITFLAG,CREA
 
 --APPLICANT
 insert INTO APPLICANT (APPLICANT_CODE,FIRSTNAME_TH,FIRSTNAME_EN,LASTNAME_TH,LASTNAME_EN,NICKNAME_TH,NICKNAME_EN,BIRTHDATE,AGE,HEIGHT,WEIGHT,SEX,RELIGION,NATIONALITY,TEL,EMAIL,APPLICANT_STATUS,APPLY_DATE,EMERGENCY_NAME,EMERGENCY_TEL,EMERGENCY_ADDRESS,NOTICE_NEWSPAPER,NOTICE_MAGAZINE,NOTICE_FRIEND,NOTICE_WEBSITE,NOTICE_OTHER,NEWSPAPER_DESCRIPTION,MAGAZINE_DESCRIPTION,FRIEND_DESCRIPTION,WEBSITE_DESCRIPTION,OTHER_DESCRIPTION,MASJOBLEVEL_ID,MASTECHNOLOGY_ID,TRACKING_STATUS,EXPECTED_SALARY,CARD_ID,CARD_ISSUED_OFFICE,CARD_EXPIRY_DATE,MILITARY_FROM_YEAR,MILITARY_TO_YEAR,MILITARY_PLACE,MILITARY_SERVICE_NO,MILITARY_REASON,NUMBER_OF_CHILDREN,SPOUSE_NAME,MARRIAGE_CERTIFICATE_NO,ISSUE_OFFICE_MARRIAGE,OCCUPATION_MARRIAGE,PLACE_BIRTH,SCORE,TECH_SCORE,ATTITUDE_HOME,ATTITUDE_OFFICE,NOW_EMPLOYED,EMPLOYED_NAME,EMPLOYED_POSITION,EMPLOYED_RELATION,BRANCH_SERVICE,PREVIOUS_EMPLOYERS,PREVIOUS_EMPLOYERS_REASON,DATE_TO_BE_DRAFTED,MARRIAGE_ADDRESS,RESUME,TRANSCRIPT,IMAGE,MILITARY_STATUS,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,OFFICIAL_ID)
-VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(021) 234-5678','yam@gmail.com','Married',STR_TO_DATE('26/05/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(091) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','4','1','Pending Test/Interview','25000','1-1116-12232-34-4','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','C#26','S#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW(),1),
+VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แย้ม','Yam',STR_TO_DATE('26/01/1940','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(021) 234-5678','yam@gmail.com','Married',STR_TO_DATE('26/05/2015','%d/%m/%Y'),'ประเทือง หมั่นกิจ','(091) 234-5678','บ้านหนองนมวัว','No','No','No','Yes','No','No','No','No','WEBSITE','No','5','2','Pending Test/Interview','25000','1-1116-12232-34-4','บ้านหนองนมวัว',STR_TO_DATE('27/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'ประเทือง หมั่นกิจ','1234','บ้านหนองนมวัว','ชาวนา','Nakon Sawan','40/50','Pass','C#26','S#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW(),1),
 ('C201502','กาย','Guy','พับ','Pab','กาย','Guy',STR_TO_DATE('26/01/1943','%d/%m/%Y'),75,165,45,'Male','Buddha','Thai','(022) 234-5678','guy@live.com','Married',STR_TO_DATE('27/05/2015','%d/%m/%Y'),'จิตใจ แกร่งกล้า','(092) 234-3241','แบริ่ง','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','2','Pending Test/Interview','25000','1-1111-11222-34-5','แบริ่ง',STR_TO_DATE('28/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'จิตใจ กล้าแกร่ง','1234','แบริ่ง','พนักงานบริษัท','Bangkok','40/50','Pass','C#26','S#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW(),2),
 ('C201503','นิว','New','โวคอล','Vocal','นิว','New',STR_TO_DATE('26/01/1956','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(023) 234-5678','new@hotmail.com','Married',STR_TO_DATE('29/06/2015','%d/%m/%Y'),'อากู๋ แกรมมี่','(093) 432-5678','อโศก','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','3','Pending Test/Interview','25000','1-1151-12622-34-6','อโศก',STR_TO_DATE('29/05/2017','%d/%m/%Y'),'No','No','No','No','No',3,'อากู๋ แกรมมี่','1234','อโศก','นักร้อง','Bangkok','40/50','Not','I#24','C#22','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW(),3),
 ('C201504','จิ๋ว','Jiew','โวคอล','Vocal','จิ๋ว','Jiew',STR_TO_DATE('26/01/1955','%d/%m/%Y'),75,165,45,'Female','Buddha','Thai','(024) 234-5678','jiew@windowslive.com','Married',STR_TO_DATE('28/06/2015','%d/%m/%Y'),'อากู๋ แกรมมี่','(094) 234-8765','อโศก','No','No','No','Yes','No','No','No','No','WEBSITE','No','1','4','Pending Test/Interview','25000','1-1121-12822-34-7','อโศก',STR_TO_DATE('30/05/2017','%d/%m/%Y'),'No','No','No','No','No',2,'อากู๋ แกรมมี่','1234','อโศก','นักร้อง','Bangkok','40/50','Pass','D#26','I#24','Yes','Ashley','Consultant','friend','No','No','Recently graduated',STR_TO_DATE('27/05/2030','%d/%m/%Y'),'72/2 Moo 5 Behind Somchai Estate,Soi 3,Bangkruay Sai Noi Road, Bangkruay Sub District, Bangkruay District, Nonthaburi Province 11130','resume.pdf','transcript.pdf','image.png','No','C',0,NOW(),4);
@@ -313,11 +316,11 @@ VALUES ('C201501','แย้ม','Yam','หมั่นกิจ','Mankit','แ�
 INSERT INTO EMPLOYEE (EMPLOYEE_CODE,TEL_HOME,TEL_FAX,CONGENITAL_DISEASE,HOSPITAL,RELATIONSHIP_WITH_EMERGENCY_CONTACT,
 		    PREVIOUS_EMPLOYER,STAFFTYPE_ID,MAS_CORE_SKILL_ID,DIVISION_ID,LOCATION_ID,EMPLOYMENT_ID,STATUSEMP,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,APPLICANT_ID,ISMANAGER) VALUES
 ('TH2015001','(02) 569-9858','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
- 'Yes',1,2,3,1,1,'Employee','C',0,NOW(),1,1),
+ 'Yes',1,2,4,1,1,'Employee','C',0,NOW(),1,1),
  ('TH2015002','(02) 569-9852','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
-  'Yes',2,3,1,1,1,'Employee','C',0,NOW(),2,2),
+  'Yes',2,3,3,1,1,'Employee','C',0,NOW(),2,2),
  ('TH2015003','(02) 569-9856','(02) 570-9852','allergy','Sukhumvit Hospital','Mom',
-  'Yes',1,2,1,1,1,'Employee','C',0,NOW(),3,3);
+  'Yes',1,2,3,1,1,'Employee','C',0,NOW(),3,3);
 
 
 

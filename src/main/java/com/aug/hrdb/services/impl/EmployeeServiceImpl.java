@@ -35,8 +35,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.DivisionDto;
 import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.OfficialDto;
 import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.entities.Applicant;
@@ -1042,6 +1044,17 @@ public class EmployeeServiceImpl implements EmployeeService {
 		   
 		return empCode;
 				
+	}
+
+	@Override
+	public List<DivisionDto> checkTag(String tag) {
+		
+		return employeeRepository.checkTag(tag);
+	}
+
+	@Override
+	public List<JoblevelDto> checkTagDivision(String tag) {
+		return employeeRepository.checkTagDivision(tag);
 	}
 	
 }

@@ -16,16 +16,19 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AimEmployeeDto;
+import com.aug.hrdb.dto.DivisionDto;
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.dto.EmployeeCodeDto;
 import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.EmployeeIdDto;
 import com.aug.hrdb.dto.EmployeeListDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportEmployeeDto;
 import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.dto.ReportStatusEmployeeDto;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.EmployeeRepository;
+import com.aug.hrdb.services.EmployeeService;
 import com.mysql.jdbc.StringUtils;
 
 
@@ -232,6 +235,26 @@ public Employee findOfficial(Integer id) {
 		Query query = getCurrentSession().getNamedQuery("findEmployeeCode");
 		query.setInteger("location_id", location_id);
 		return query.list();
+	}
+
+
+	@Override
+	public List<DivisionDto> checkTag(String tag) {
+		Query query = getCurrentSession().getNamedQuery("CHECK_DIVISION");
+		query.setParameter("TAG", tag);
+		List<DivisionDto> result = query.list();
+		System.out.println(">>>>>>>>"+result.size());
+		return result;
+	}
+
+	
+
+	@Override
+	public List<JoblevelDto> checkTagDivision(String tag) {
+		Query query = getCurrentSession().getNamedQuery("CHECK_TAG_DIVISION");
+		query.setParameter("TAG_DIVISION", tag);
+		List<JoblevelDto> result = query.list();
+		return result;
 	}
 
 }

@@ -35,6 +35,10 @@ public class MasDivision extends BaseEntity{
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isActive;
 	
+	@Column(name = "TAG")
+	private String tag;
+	
+	
 	@OneToMany(mappedBy = "masDivision")
 	private Set<Employee> employees;
 	
@@ -84,6 +88,7 @@ public class MasDivision extends BaseEntity{
 		this.employees = employees;
 	}
 
+
 	public Set<Reservation> getReservations() {
 		return reservations;
 	}
@@ -91,5 +96,15 @@ public class MasDivision extends BaseEntity{
 	public void setReservations(Set<Reservation> reservations) {
 		this.reservations = reservations;
 	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
+
 	
 }

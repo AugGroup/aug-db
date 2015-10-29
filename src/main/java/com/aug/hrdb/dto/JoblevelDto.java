@@ -9,11 +9,13 @@ import javax.persistence.NamedNativeQuery;
 @Entity
 @NamedNativeQueries({
 
-	@NamedNativeQuery(name = "CHECK_TAG", query = "SELECT job.ID, job.NAME, job.CODE, job.TAG "
+	@NamedNativeQuery(name = "CHECK_TAG", query = "SELECT job.ID, job.NAME, job.CODE, job.TAG ,job.TAG_DIVISION "
 			+ "FROM MAS_JOBLEVEL job "
 			+ "WHERE job.TAG =:TAG", resultClass = JoblevelDto.class),
 
-
+	@NamedNativeQuery(name = "CHECK_TAG_DIVISION", query = "SELECT job.ID, job.NAME, job.CODE, job.TAG_DIVISION, job.TAG "
+					+ "FROM MAS_JOBLEVEL job "
+					+ "WHERE job.TAG_DIVISION =:TAG_DIVISION", resultClass = JoblevelDto.class)
 	})
 public class JoblevelDto {
 
@@ -30,6 +32,9 @@ public class JoblevelDto {
 	@Column(name = "CODE")
 	private String code;
 
+	@Column(name = "TAG_DIVISION")
+	private String tagDivision;
+	
 	public Integer getJobId() {
 		return jobId;
 	}
@@ -60,6 +65,14 @@ public class JoblevelDto {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getTagDivision() {
+		return tagDivision;
+	}
+
+	public void setTagDivision(String tagDivision) {
+		this.tagDivision = tagDivision;
 	}
 	
 	

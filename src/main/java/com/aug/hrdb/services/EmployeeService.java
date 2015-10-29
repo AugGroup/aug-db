@@ -13,7 +13,9 @@ import java.util.List;
 import org.hibernate.JDBCException;
 import org.springframework.dao.DataIntegrityViolationException;
 
+import com.aug.hrdb.dto.DivisionDto;
 import com.aug.hrdb.dto.EmployeeDto;
+import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.entities.Employee;
 
 
@@ -39,4 +41,8 @@ public interface EmployeeService {
 	public String generateEmployeeCode(EmployeeDto employeeDto);
 	
 	public String generateEmployeeCodeFixData(String location);
+	
+	public List<DivisionDto> checkTag(String tag);
+	public List<JoblevelDto> checkTagDivision(String tag);
+	
 }

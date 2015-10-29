@@ -33,6 +33,11 @@ public class MasJoblevel extends BaseEntity {
 	
 	@Column(name = "TAG")
 	private String tag;
+	
+	@Column(name = "TAG_DIVISION")
+	private String tagDivision;
+	
+	
 
 	@JsonIgnore
 	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
@@ -84,6 +89,14 @@ public class MasJoblevel extends BaseEntity {
 
 	public void setTag(String tag) {
 		this.tag = tag;
+	}
+
+	public String getTagDivision() {
+		return tagDivision;
+	}
+
+	public void setTagDivision(String tagDivision) {
+		this.tagDivision = tagDivision;
 	}
 
 	
