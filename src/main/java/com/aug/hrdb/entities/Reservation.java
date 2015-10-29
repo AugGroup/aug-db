@@ -26,13 +26,11 @@ public class Reservation extends BaseEntity {
 	
 	@Column(name = "START_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	
 	@Column(name = "END_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
 	
