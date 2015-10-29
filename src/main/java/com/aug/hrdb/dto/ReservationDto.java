@@ -23,8 +23,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name="GET_RESERVATIONS",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, null as DESCRIPTION, "+
-				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, "+
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME FROM RESERVATION "+
 	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
 				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
@@ -80,6 +80,7 @@ public class ReservationDto {
 	
 	@Column(name="DESCRIPTION")
 	private String description;
+	
 	
 
 	public Integer getId() {
