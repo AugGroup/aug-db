@@ -9,6 +9,8 @@ public interface ReservationRepository  extends GenericRepository<Reservation, I
 
 	List<ReservationDto> findByDateRange(String start, String end);
 
+    ReservationDto findReservationById(Integer id);
+
 	
 }
  

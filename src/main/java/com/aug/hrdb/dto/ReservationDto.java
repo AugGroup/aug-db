@@ -16,15 +16,33 @@ import javax.persistence.NamedNativeQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+@Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name="GET_RESERVATIONS",
-			query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE FROM RESERVATION r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
-					resultClass = ReservationDto.class)
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, null as DESCRIPTION, null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as ROOM_NAME FROM RESERVATION "+
+	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
+				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
+		resultClass = ReservationDto.class),
+			
+	@NamedNativeQuery(name="GET_RESERVATION_ID",
+		query = "SELECT ro.NAME as ROOM_NAME, mr.NAME as RELATION_NAME, r.DESCRIPTION, r.START_TIME, r.END_TIME, "+
+	            "r.DATE_RESERVATION, md.NAME as DIVISION_NAME, null as ID, null as TITLE FROM RESERVATION r "+
+				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.`ID` "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.`ID` "+
+				"LEFT JOIN EMPLOYEE e ON r.EMPLOYEE_ID = e.ID "+
+				"LEFT JOIN MAS_DIVISION md ON e.`DIVISION_ID` = md.ID "+
+				"LEFT JOIN APPLICANT app ON e.APPLICANT_ID = app.`ID` "+
+				"WHERE r.ID = :SEARCH_ID ",
+		resultClass = ReservationDto.class)			
+					
+					
+					
 	
 })
-@Entity
 public class ReservationDto {
 
 	@Id
@@ -33,16 +51,36 @@ public class ReservationDto {
 	
 	@Column(name = "START_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	
 	@Column(name = "END_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
 	
+	@Column(name="DATE_RESERVATION")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")	
+	private Date dateReservation;
+	
 	@Column(name="TITLE")
 	private String title;
+	
+	
+	@Column(name="ROOM_NAME")
+	private String roomName;
+	
+	@Column(name="RELATION_NAME")
+	private String relationName;
+	
+	@Column(name="DIVISION_NAME")
+	private String divisionName;
+	
+	@Column(name="DESCRIPTION")
+	private String description;
+	
 
 	public Integer getId() {
 		return id;
@@ -74,6 +112,46 @@ public class ReservationDto {
 
 	public void setTitle(String description) {
 		this.title = description;
+	}
+
+	public Date getDateReservation() {
+		return dateReservation;
+	}
+
+	public void setDateReservation(Date dateReservation) {
+		this.dateReservation = dateReservation;
+	}
+
+	public String getRoomName() {
+		return roomName;
+	}
+
+	public void setRoomName(String roomName) {
+		this.roomName = roomName;
+	}
+
+	public String getRelationName() {
+		return relationName;
+	}
+
+	public void setRelationName(String relationName) {
+		this.relationName = relationName;
+	}
+
+	public String getDivisionName() {
+		return divisionName;
+	}
+
+	public void setDivisionName(String divisionName) {
+		this.divisionName = divisionName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	

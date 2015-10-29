@@ -61,4 +61,10 @@ public class ReservationServiceImpl implements ReservationService {
 		// TODO Auto-generated method stub
 		return reservationRepository.findByDateRange(start, end);
 	}
+
+	@Override
+	public ReservationDto findReservationById(Integer id) {
+		// TODO Auto-generated method stub
+		return reservationRepository.findReservationById(id);
+	}
 }
