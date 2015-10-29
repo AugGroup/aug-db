@@ -23,19 +23,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name="GET_RESERVATIONS",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, null as DESCRIPTION, null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as ROOM_NAME FROM RESERVATION "+
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, null as DESCRIPTION, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, "+
+				"null as ROOM_NAME FROM RESERVATION "+
 	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
 				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
 		resultClass = ReservationDto.class),
 			
 	@NamedNativeQuery(name="GET_RESERVATION_ID",
-		query = "SELECT ro.NAME as ROOM_NAME, mr.NAME as RELATION_NAME, r.DESCRIPTION, r.START_TIME, r.END_TIME, "+
-	            "r.DATE_RESERVATION, md.NAME as DIVISION_NAME, null as ID, null as TITLE FROM RESERVATION r "+
-				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.`ID` "+
-				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.`ID` "+
+		query = "SELECT r.ID, START_TIME, END_TIME, DATE_RESERVATION, r.DESCRIPTION as TITLE, "+
+				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, r.DESCRIPTION FROM RESERVATION r "+
+				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN EMPLOYEE e ON r.EMPLOYEE_ID = e.ID "+
-				"LEFT JOIN MAS_DIVISION md ON e.`DIVISION_ID` = md.ID "+
-				"LEFT JOIN APPLICANT app ON e.APPLICANT_ID = app.`ID` "+
+				"LEFT JOIN MAS_DIVISION md ON e.DIVISION_ID = md.ID "+
+				"LEFT JOIN APPLICANT app ON e.APPLICANT_ID = app.ID "+
 				"WHERE r.ID = :SEARCH_ID ",
 		resultClass = ReservationDto.class)			
 					
@@ -51,13 +53,11 @@ public class ReservationDto {
 	
 	@Column(name = "START_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date start;
 	
 	@Column(name = "END_TIME")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date end;
 	
@@ -72,8 +72,8 @@ public class ReservationDto {
 	@Column(name="ROOM_NAME")
 	private String roomName;
 	
-	@Column(name="RELATION_NAME")
-	private String relationName;
+	@Column(name="RESERVATION_TYPE")
+	private String reservationType;
 	
 	@Column(name="DIVISION_NAME")
 	private String divisionName;
@@ -130,12 +130,14 @@ public class ReservationDto {
 		this.roomName = roomName;
 	}
 
-	public String getRelationName() {
-		return relationName;
+	
+
+	public String getReservationType() {
+		return reservationType;
 	}
 
-	public void setRelationName(String relationName) {
-		this.relationName = relationName;
+	public void setReservationType(String reservationType) {
+		this.reservationType = reservationType;
 	}
 
 	public String getDivisionName() {
