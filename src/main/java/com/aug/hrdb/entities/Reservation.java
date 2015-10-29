@@ -52,6 +52,10 @@ public class Reservation extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = false)
 	private Employee employee;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "RESERVATION_TYPE_ID", referencedColumnName = "id", nullable = false)
+	private MasReservationType masreservationtype;
 
 	public Integer getId() {
 		return id;
@@ -108,5 +112,14 @@ public class Reservation extends BaseEntity {
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
 	}
+
+	public MasReservationType getMasreservationtype() {
+		return masreservationtype;
+	}
+
+	public void setMasreservationtype(MasReservationType masreservationtype) {
+		this.masreservationtype = masreservationtype;
+	}
+
 	
 }

@@ -38,6 +38,7 @@ public class RoomRepositoryTest {
 	
 	private Room room;
 	
+	int id;
 	
 	@Before
 	public void setUp(){
@@ -49,24 +50,18 @@ public class RoomRepositoryTest {
 		room.setCreatedBy(1);
 		room.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		roomRepository.create(room);
+		id = room.getId();
 	}
 	
 	@Test
 	public void testInsertRoomRepository() throws Exception { 
-		
-		roomRepository.create(room);
-		Integer id = room.getId();
 		Room result = roomRepository.find(id);
 		assertThat(result.getName(), is("room1"));
 				
-		
 	}
 	
 	@Test
 	public void testUpdateRoomRepository() throws Exception {
-		roomRepository.create(room);
-		Integer id = room.getId();
-		
 		Room updateRoom = roomRepository.find(id);
 		updateRoom.setName("room2");
 		roomRepository.update(updateRoom);
@@ -78,9 +73,6 @@ public class RoomRepositoryTest {
 	
 	@Test
 	public void testDeleteByIdRoomRepository() throws Exception {
-		roomRepository.create(room);
-		Integer id = room.getId();
-		
 		roomRepository.deleteById(id);
 		Room result = roomRepository.find(id);
 		assertNull(result);
@@ -89,17 +81,12 @@ public class RoomRepositoryTest {
 	@Test
 	
 	public void testDeleteRoomRepository() throws Exception {
-		roomRepository.create(room);
-		Integer id = room.getId();
-		
 		roomRepository.delete(room);
 		Room result = roomRepository.find(id);
 		assertNull(result);
 	}
 	@Test
 	public void testFindByIdRoomRepository() throws Exception {
-		roomRepository.create(room);
-		Integer id = room.getId();
 		Room result = roomRepository.find(id);
 		assertThat(result.getName(),is("room1"));
 
@@ -107,8 +94,7 @@ public class RoomRepositoryTest {
 	}
 	@Test
 	public void testfindAllReservationRepository(){	
-		roomRepository.create(room);
 		List<Room> rooms = roomRepository.findAll();
-		Assert.assertEquals(1, rooms.size());
+		Assert.assertEquals(4, rooms.size());
 	}
 }

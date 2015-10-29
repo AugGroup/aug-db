@@ -19,9 +19,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasReservationType;
 import com.aug.hrdb.entities.Reservation;
 import com.aug.hrdb.entities.Room;
 import com.aug.hrdb.services.EmployeeService;
+import com.aug.hrdb.services.MasReservationTypeService;
 import com.aug.hrdb.services.ReservationService;
 import com.aug.hrdb.services.RoomService;
 
@@ -37,10 +39,14 @@ public class ReservationServiceTest {
 	private RoomService roomService ;
 	
 	@Autowired 
+	private MasReservationTypeService masReservationTypeService ;
+	
+	@Autowired 
 	private EmployeeService employeeService ;
 	
 	private Reservation reservation;
 	
+	int id;
 	
 	@Before
 	public void setUp(){
@@ -55,6 +61,16 @@ public class ReservationServiceTest {
 	reservation.setCreatedBy(1);
 	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	
+	MasReservationType masReservationType = new MasReservationType();
+	 masReservationType.setName("meeting");
+	 masReservationType.setIsactive(true);
+	 masReservationType.setCode("01");
+	 masReservationType.setAuditFlag("C");
+	 masReservationType.setCreatedBy(1);
+	 masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	 masReservationTypeService.create(masReservationType);
+	 MasReservationType masReservType = masReservationTypeService.findById(1);
+	
 	Room room = new Room();
 	room.setName("room1");
 	room.setCapacity(3);
@@ -64,25 +80,21 @@ public class ReservationServiceTest {
 	room.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	roomService.create(room);
 	reservation.setRoom(room);
-	
+	reservation.setMasreservationtype(masReservType);
+	reservationService.create(reservation);
+	id = reservation.getId();
 	}
 	
 	@Test
 	public void testInsertReservationService() throws Exception { 
 		
-		reservationService.create(reservation);
-		Integer id = reservation.getId();
 		Reservation result = reservationService.findById(id);
 		assertThat(result.getRoom().getName(), is("room1"));
-				
 		
 	}
 	
 	@Test
 	public void testUpdateReservationService() throws Exception {
-		reservationService.create(reservation);
-		Integer id = reservation.getId();
-		
 		Reservation updateReservation = reservationService.findById(id);
 		updateReservation.getRoom().setName("room2");
 		reservationService.update(updateReservation);
@@ -94,9 +106,6 @@ public class ReservationServiceTest {
 	
 	@Test
 	public void testDeleteByIdReservationService() throws Exception {
-		reservationService.create(reservation);
-		Integer id = reservation.getId();
-		
 		reservationService.deleteById(id);
 		Reservation result = reservationService.findById(id);
 		assertNull(result);
@@ -105,27 +114,21 @@ public class ReservationServiceTest {
 	@Test
 	
 	public void testDeleteReservationService() throws Exception {
-		reservationService.create(reservation);
-		Integer id = reservation.getId();
-		
 		reservationService.delete(reservation);
 		Reservation result = reservationService.findById(id);
 		assertNull(result);
 	}
+	
 	@Test
 	public void testFindByIdReservationService() throws Exception {
-		reservationService.create(reservation);
-		Integer id = reservation.getId();
 		Reservation result = reservationService.findById(id);
 		assertThat(result.getRoom().getName(),is("room1"));
-
-		
 	}
+	
 	@Test
 	public void testfindAllReservationService(){	
-		reservationService.create(reservation);
 		List<Reservation> reservations = reservationService.findAll();
-		Assert.assertEquals(1, reservations.size());
+		Assert.assertEquals(5, reservations.size());
 	}
 }
 

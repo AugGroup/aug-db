@@ -34,6 +34,7 @@ public class RoomServiceTest {
 	
 	private Room room;
 	
+	int id;
 	
 	@Before
 	public void setUp(){
@@ -45,13 +46,11 @@ public class RoomServiceTest {
 		room.setCreatedBy(1);
 		room.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		roomService.create(room);
+		id = room.getId();
 	}
 	
 	@Test
 	public void testInsertRoomService() throws Exception { 
-		
-		roomService.create(room);
-		Integer id = room.getId();
 		Room result = roomService.findById(id);
 		assertThat(result.getName(), is("room1"));
 				
@@ -60,9 +59,6 @@ public class RoomServiceTest {
 	
 	@Test
 	public void testUpdateRoomService() throws Exception {
-		roomService.create(room);
-		Integer id = room.getId();
-		
 		Room updateRoom = roomService.findById(id);
 		updateRoom.setName("room2");
 		roomService.update(updateRoom);
@@ -74,9 +70,6 @@ public class RoomServiceTest {
 	
 	@Test
 	public void testDeleteByIdRoomService() throws Exception {
-		roomService.create(room);
-		Integer id = room.getId();
-		
 		roomService.deleteById(id);
 		Room result = roomService.findById(id);
 		assertNull(result);
@@ -85,17 +78,12 @@ public class RoomServiceTest {
 	@Test
 	
 	public void testDeleteRoomService() throws Exception {
-		roomService.create(room);
-		Integer id = room.getId();
-		
 		roomService.delete(room);
 		Room result = roomService.findById(id);
 		assertNull(result);
 	}
 	@Test
 	public void testFindByIdRoomService() throws Exception {
-		roomService.create(room);
-		Integer id = room.getId();
 		Room result = roomService.findById(id);
 		assertThat(result.getName(),is("room1"));
 
@@ -103,8 +91,7 @@ public class RoomServiceTest {
 	}
 	@Test
 	public void testfindAllReservationService(){	
-		roomService.create(room);
 		List<Room> rooms = roomService.findAll();
-		Assert.assertEquals(1, rooms.size());
+		Assert.assertEquals(4, rooms.size());
 	}
 }

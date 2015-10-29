@@ -67,6 +67,7 @@
 		
 		<mapping class="com.aug.hrdb.entities.Room"/>
 		<mapping class="com.aug.hrdb.entities.Reservation"/>
+		<mapping class="com.aug.hrdb.entities.MasReservationType"/>
 		
 	</session-factory>
 </hibernate-configuration>

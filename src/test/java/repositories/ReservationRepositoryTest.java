@@ -2,7 +2,7 @@ package repositories;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNull;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -19,9 +19,11 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Employee;
+import com.aug.hrdb.entities.MasReservationType;
 import com.aug.hrdb.entities.Reservation;
 import com.aug.hrdb.entities.Room;
 import com.aug.hrdb.repositories.EmployeeRepository;
+import com.aug.hrdb.repositories.MasReservationTypeRepository;
 import com.aug.hrdb.repositories.ReservationRepository;
 import com.aug.hrdb.repositories.RoomRepository;
 
@@ -38,10 +40,14 @@ public class ReservationRepositoryTest {
 	private RoomRepository roomRepository ;
 	
 	@Autowired 
+	private MasReservationTypeRepository masReservationTypeRepository ;
+	
+	@Autowired 
 	private EmployeeRepository employeeRepository ;
 	
 	private Reservation reservation;
 	
+	int id;
 	
 	@Before
 	public void setUp(){
@@ -56,6 +62,16 @@ public class ReservationRepositoryTest {
 	reservation.setCreatedBy(1);
 	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	
+	 MasReservationType masReservationType = new MasReservationType();
+	 masReservationType.setName("meeting");
+	 masReservationType.setIsactive(true);
+	 masReservationType.setCode("01");
+	 masReservationType.setAuditFlag("C");
+	 masReservationType.setCreatedBy(1);
+	 masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	 masReservationTypeRepository.create(masReservationType);
+	 MasReservationType masReservType = masReservationTypeRepository.find(1);
+
 	Room room = new Room();
 	room.setName("room1");
 	room.setCapacity(3);
@@ -65,25 +81,21 @@ public class ReservationRepositoryTest {
 	room.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	roomRepository.create(room);
 	reservation.setRoom(room);
-	
+	reservation.setMasreservationtype(masReservType);
+	reservationRepository.create(reservation);
+	id = reservation.getId();
 	}
 	
 	@Test
 	public void testInsertReservationRepository() throws Exception { 
 		
-		reservationRepository.create(reservation);
-		Integer id = reservation.getId();
 		Reservation result = reservationRepository.find(id);
 		assertThat(result.getRoom().getName(), is("room1"));
-				
-		
+			
 	}
 	
 	@Test
 	public void testUpdateReservationRepository() throws Exception {
-		reservationRepository.create(reservation);
-		Integer id = reservation.getId();
-		
 		Reservation updateReservation = reservationRepository.find(id);
 		updateReservation.getRoom().setName("room2");
 		reservationRepository.update(updateReservation);
@@ -95,9 +107,6 @@ public class ReservationRepositoryTest {
 	
 	@Test
 	public void testDeleteByIdReservationRepository() throws Exception {
-		reservationRepository.create(reservation);
-		Integer id = reservation.getId();
-		
 		reservationRepository.deleteById(id);
 		Reservation result = reservationRepository.find(id);
 		assertNull(result);
@@ -106,26 +115,20 @@ public class ReservationRepositoryTest {
 	@Test
 	
 	public void testDeleteReservationRepository() throws Exception {
-		reservationRepository.create(reservation);
-		Integer id = reservation.getId();
-		
 		reservationRepository.delete(reservation);
 		Reservation result = reservationRepository.find(id);
 		assertNull(result);
 	}
 	@Test
 	public void testFindByIdReservationRepository() throws Exception {
-		reservationRepository.create(reservation);
 		Integer id = reservation.getId();
 		Reservation result = reservationRepository.find(id);
 		assertThat(result.getRoom().getName(),is("room1"));
 
-		
 	}
 	@Test
 	public void testfindAllReservationRepository(){	
-		reservationRepository.create(reservation);
 		List<Reservation> reservations = reservationRepository.findAll();
-		Assert.assertEquals(1, reservations.size());
+		Assert.assertEquals(5, reservations.size());
 	}
 }

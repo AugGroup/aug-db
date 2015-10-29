@@ -15,6 +15,12 @@ INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,C
 INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('-','C',NOW(),0,true,1);
 
 
+--MASRESERVATION_TYPE
+INSERT INTO MAS_RESERVATION_TYPE (NAME,ISACTIVE,CODE,auditFlag,createdTimeStamp,createdBy) VALUES 
+('Interview',true,'01','C',NOW(),0),
+('Meeting',true,'02','C',NOW(),0),
+('Training',true,'03','C',NOW(),0);
+
 
 --MASSPECIALTY
 insert into MAS_SPECIALTY (name,code,isactive,auditFlag,createdTimeStamp,createdBy)
@@ -500,8 +506,9 @@ INSERT INTO ROOM (NAME,CAPACITY,DESCRIPTION,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP
 ('Augmentis room',20,'Board room meeting and Group training','C',0,NOW());
 
 --Reservation
-INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,EMPLOYEE_ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES
-(STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015','%d/%m/%Y'),'Interview',1,1,'C',0,NOW()),
-(STR_TO_DATE('22/10/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015','%d/%m/%Y'),'Admin Meeting',2,2,'C',0,NOW()),
-(STR_TO_DATE('30/10/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015','%d/%m/%Y'),'Board Meeting',3,2,'C',0,NOW()),
-(STR_TO_DATE('05/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015','%d/%m/%Y'),'Interview',1,3,'C',0,NOW());
+INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,EMPLOYEE_ID,RESERVATION_TYPE_ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES
+(STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015','%d/%m/%Y'),'Interview',1,1,1,'C',0,NOW()),
+(STR_TO_DATE('22/10/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015','%d/%m/%Y'),'Admin Meeting',2,2,2,'C',0,NOW()),
+(STR_TO_DATE('30/10/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015','%d/%m/%Y'),'Board Meeting',3,2,3,'C',0,NOW()),
+(STR_TO_DATE('05/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015','%d/%m/%Y'),'Interview',1,3,2,'C',0,NOW());
+
