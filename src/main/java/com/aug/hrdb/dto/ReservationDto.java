@@ -25,14 +25,15 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	@NamedNativeQuery(name="GET_RESERVATIONS",
 		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME FROM RESERVATION "+
+				"null as ROOM_NAME ,null as RESERVED_BY FROM RESERVATION "+
 	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
 				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
 		resultClass = ReservationDto.class),
 			
 	@NamedNativeQuery(name="GET_RESERVATION_ID",
 		query = "SELECT r.ID, START_TIME, END_TIME, DATE_RESERVATION, r.DESCRIPTION as TITLE, "+
-				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, r.DESCRIPTION FROM RESERVATION r "+
+				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, "+
+				"r.DESCRIPTION,CONCAT(app.FIRSTNAME_EN,' ',app.LASTNAME_EN) as RESERVED_BY FROM RESERVATION r "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN EMPLOYEE e ON r.EMPLOYEE_ID = e.ID "+
@@ -81,7 +82,8 @@ public class ReservationDto {
 	@Column(name="DESCRIPTION")
 	private String description;
 	
-	
+	@Column(name="RESERVED_BY")
+	private String reservedBy;
 
 	public Integer getId() {
 		return id;
@@ -131,8 +133,6 @@ public class ReservationDto {
 		this.roomName = roomName;
 	}
 
-	
-
 	public String getReservationType() {
 		return reservationType;
 	}
@@ -155,6 +155,14 @@ public class ReservationDto {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getReservedBy() {
+		return reservedBy;
+	}
+
+	public void setReservedBy(String reservedBy) {
+		this.reservedBy = reservedBy;
 	}
 	
 	
