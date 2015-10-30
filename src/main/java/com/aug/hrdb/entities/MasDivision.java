@@ -5,6 +5,7 @@
  */
 package com.aug.hrdb.entities;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "MAS_DIVISION")
@@ -34,6 +37,10 @@ public class MasDivision extends BaseEntity{
 	
 	@OneToMany(mappedBy = "masDivision")
 	private Set<Employee> employees;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "masDivision")
+	private Set<Reservation> reservations ;
 	
 	/*---------------------- getter / setter ----------------------*/
 
@@ -75,6 +82,14 @@ public class MasDivision extends BaseEntity{
 
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
+	}
+
+	public Set<Reservation> getReservations() {
+		return reservations;
+	}
+
+	public void setReservations(Set<Reservation> reservations) {
+		this.reservations = reservations;
 	}
 	
 }

@@ -63,7 +63,8 @@ public class ReservationDto {
 	private Date end;
 	
 	@Column(name="DATE_RESERVATION")
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
+	@Temporal(TemporalType.DATE)
 	private Date dateReservation;
 	
 	@Column(name="TITLE")

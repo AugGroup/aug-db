@@ -38,11 +38,14 @@ public class Reservation extends BaseEntity {
 	
 	@Column(name="DATE_RESERVATION")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")	
+	@Temporal(TemporalType.DATE)
 	private Date dateReservation;
 	
 	@Column(name="DESCRIPTION",nullable = false)
 	private String description;
 	
+	@Column(name="RESERVATION_BY",nullable = false)
+	private String reservationBy;
 	
 	@ManyToOne
 	@JoinColumn(name = "ROOM_ID", referencedColumnName = "id", nullable = false)
@@ -50,12 +53,16 @@ public class Reservation extends BaseEntity {
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = false)
+	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = true)
 	private Employee employee;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "RESERVATION_TYPE_ID", referencedColumnName = "id", nullable = false)
 	private MasReservationType masreservationtype;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name = "DIVISION_ID", referencedColumnName = "id", nullable = false)
+	private MasDivision masDivision;
 
 	public Integer getId() {
 		return id;
@@ -119,6 +126,22 @@ public class Reservation extends BaseEntity {
 
 	public void setMasreservationtype(MasReservationType masreservationtype) {
 		this.masreservationtype = masreservationtype;
+	}
+
+	public String getReservationBy() {
+		return reservationBy;
+	}
+
+	public void setReservationBy(String reservationBy) {
+		this.reservationBy = reservationBy;
+	}
+
+	public MasDivision getMasDivision() {
+		return masDivision;
+	}
+
+	public void setMasDivision(MasDivision masDivision) {
+		this.masDivision = masDivision;
 	}
 
 	
