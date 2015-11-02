@@ -23,7 +23,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name="GET_RESERVATIONS",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION, "+
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,null as ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
 	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
@@ -31,7 +31,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		resultClass = ReservationDto.class),
 			
 	@NamedNativeQuery(name="GET_RESERVATION_ID",
-		query = "SELECT r.ID, START_TIME, END_TIME, DATE_RESERVATION, r.DESCRIPTION as TITLE, "+
+		query = "SELECT r.ID, START_TIME, END_TIME, DATE_RESERVATION, r.DESCRIPTION as TITLE,null as ROOM_ID, "+
 				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, "+
 				"r.DESCRIPTION, RESERVATION_BY FROM RESERVATION r "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
@@ -40,6 +40,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN APPLICANT app ON e.APPLICANT_ID = app.ID "+
 				"WHERE r.ID = :SEARCH_ID ",
+
 		resultClass = ReservationDto.class),			
 					
 	@NamedNativeQuery(name="SEARCH_RESERVATION",
@@ -50,9 +51,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
 				"WHERE (RESERVATION_TYPE_ID = :RESERVATION_TYPE AND DIVISION_ID = :DIVISION_ID ) OR RESERVATION_BY = :RESERVED_BY",
+
+		resultClass = ReservationDto.class),
+		
+		@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
+				"null as ROOM_NAME ,null as RESERVED_BY FROM RESERVATION r "+
+				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') BETWEEN r.START_TIME AND r.END_TIME",
+
 		resultClass = ReservationDto.class)
 					
-	
 })
 public class ReservationDto {
 
@@ -78,6 +87,8 @@ public class ReservationDto {
 	@Column(name="TITLE")
 	private String title;
 	
+	@Column(name="ROOM_ID")
+	private String roomId;
 	
 	@Column(name="ROOM_NAME")
 	private String roomName;
