@@ -38,12 +38,20 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		@Override
 		public ReservationDto findReservationById(Integer id) {
 			// TODO Auto-generated method stub
-			System.out.println("in repo");
 			Query query = getCurrentSession().getNamedQuery("GET_RESERVATION_ID");
 			query.setParameter("SEARCH_ID", id);
 			List<ReservationDto> reserv = query.list();
-			System.out.println("repo : "+reserv.get(0).toString());
-			System.out.println("after query");
 			return reserv.get(0);
+		}
+
+		@Override
+		public List<ReservationDto> searchReservation(Reservation reservation) {
+			// TODO Auto-generated method stub
+			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");
+			query.setParameter("RESERVATION_TYPE", reservation.getMasreservationtype().getId());
+			query.setParameter("DIVISION_ID", reservation.getMasDivision().getId());
+			query.setParameter("RESERVED_BY", reservation.getReservationBy());
+			List<ReservationDto> reservationDtos = query.list();
+			return reservationDtos;
 		}
 }

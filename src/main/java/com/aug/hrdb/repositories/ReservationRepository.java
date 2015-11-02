@@ -11,6 +11,8 @@ public interface ReservationRepository  extends GenericRepository<Reservation, I
 
     ReservationDto findReservationById(Integer id);
 
+	List<ReservationDto> searchReservation(Reservation reservation);
+
 	
 }
  

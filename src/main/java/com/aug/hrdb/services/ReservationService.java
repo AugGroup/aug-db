@@ -14,4 +14,5 @@ public interface ReservationService {
 	public void create(Reservation reservation);
 	public List<ReservationDto> findByDateRange(String start, String end);
 	public ReservationDto findReservationById(Integer id);
+	public List<ReservationDto> searchReservation(Reservation reservation);
 }

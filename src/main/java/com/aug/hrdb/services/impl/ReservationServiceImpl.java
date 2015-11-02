@@ -67,4 +67,10 @@ public class ReservationServiceImpl implements ReservationService {
 		// TODO Auto-generated method stub
 		return reservationRepository.findReservationById(id);
 	}
+
+	@Override
+	public List<ReservationDto> searchReservation(Reservation reservation) {
+		// TODO Auto-generated method stub
+		return reservationRepository.searchReservation(reservation);
+	}
 }

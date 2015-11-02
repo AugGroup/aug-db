@@ -40,9 +40,17 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN APPLICANT app ON e.APPLICANT_ID = app.ID "+
 				"WHERE r.ID = :SEARCH_ID ",
-		resultClass = ReservationDto.class)			
+		resultClass = ReservationDto.class),			
 					
-					
+	@NamedNativeQuery(name="SEARCH_RESERVATION",
+		query="SELECT r.ID, r.START_TIME, r.END_TIME, r.DATE_RESERVATION, null as TITLE, "+
+				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, "+
+				"null as DESCRIPTION, r.RESERVATION_BY FROM RESERVATION r "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
+				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
+				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
+				"WHERE (RESERVATION_TYPE_ID = :RESERVATION_TYPE AND DIVISION_ID = :DIVISION_ID ) OR RESERVATION_BY = :RESERVED_BY",
+		resultClass = ReservationDto.class)
 					
 	
 })
