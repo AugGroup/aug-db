@@ -86,6 +86,7 @@ public class ReservationServiceImpl implements ReservationService {
 		return reservationRepository.findReservation(roomId, reservationTypeId, divisionId, reservationBy);
 
 	}
+
 	@Override
 	public List<ReservationDto> findByBetween(String start, String end, Integer roomId) {
 		// TODO Auto-generated method stub
@@ -93,6 +94,10 @@ public class ReservationServiceImpl implements ReservationService {
 
 	}
 
-	
-	
+	@Override
+	public List<ReservationDto> filterReservation(String start, String end, Integer roomId, Integer reservationTypeId,
+			Integer divisionId, String reserveBy) {
+		// TODO Auto-generated method stub
+		return reservationRepository.filterReservation(start,end,roomId,reservationTypeId,divisionId,reserveBy);
+	}
 }

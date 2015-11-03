@@ -21,6 +21,8 @@ public interface ReservationRepository  extends GenericRepository<Reservation, I
     
     
 	List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId,Integer divisionId,String reservationBy);
+	
+	List<ReservationDto> filterReservation(String start, String end, Integer roomId, Integer reservationTypeId, Integer divisionId, String reserveBy);
 
 }
  
