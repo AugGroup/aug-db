@@ -56,16 +56,18 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			List<ReservationDto> reservationDtos = query.list();
 			return reservationDtos;
 		}
-		public List<ReservationDto> findByTimestamp(String newTime) {
+		public List<ReservationDto> findByTimestamp(String newTime, Integer roomId) {
 			// TODO Auto-generated method stub
 			Query query = getCurrentSession()
 					.getNamedQuery("GET_RESERVATION_BY_TIMESTAMP")
-					.setParameter("NEW", newTime);
+					.setParameter("NEW", newTime)
+					.setParameter("ROOM", roomId);
 			List<ReservationDto> list = query.list();
 			System.out.println(list.toString());
 			return list;
 
 		}
+
 		public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy) {
 			Query query = getCurrentSession().getNamedQuery("REPORT_RESERVATION");	
 			String queryStr = query.getQueryString();
@@ -104,4 +106,18 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 	
 			return results;
 		}
+
+
+		@Override
+		public List<ReservationDto> findByBetween(String start, String end, Integer roomId) {
+			Query query = getCurrentSession()
+					.getNamedQuery("GET_BETWEEN_RESERVATION")
+					.setParameter("START", start)
+					.setParameter("END", end)
+					.setParameter("ROOM", roomId);
+			List<ReservationDto> list = query.list();
+			//System.out.println(list.toString());
+			return list;
+		}
+
 }

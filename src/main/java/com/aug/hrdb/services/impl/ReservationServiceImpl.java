@@ -76,12 +76,23 @@ public class ReservationServiceImpl implements ReservationService {
 		
 	}
 
-	public List<ReservationDto> findByTimestamp(String newTime) {
+	public List<ReservationDto> findByTimestamp(String newTime, Integer roomId) {
 		// TODO Auto-generated method stub
-		return reservationRepository.findByTimestamp(newTime);
+		return reservationRepository.findByTimestamp(newTime,roomId);
 
 	}
+
 	public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId, String reservationBy) {
 		return reservationRepository.findReservation(roomId, reservationTypeId, divisionId, reservationBy);
+
+
+	@Override
+	public List<ReservationDto> findByBetween(String start, String end, Integer roomId) {
+		// TODO Auto-generated method stub
+		return reservationRepository.findByBetween(start, end,roomId);
+
 	}
+
+	
+	
 }

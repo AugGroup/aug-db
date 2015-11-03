@@ -14,7 +14,11 @@ public interface ReservationRepository  extends GenericRepository<Reservation, I
 
 	List<ReservationDto> searchReservation(Reservation reservation);
 
-    List<ReservationDto> findByTimestamp(String newTime);
+    List<ReservationDto> findByTimestamp(String newTime, Integer roomId);
+    
+    
+    List<ReservationDto> findByBetween(String start, String end, Integer roomId);
+    
     
 	List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId,Integer divisionId,String reservationBy);
 

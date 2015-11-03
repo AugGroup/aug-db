@@ -16,7 +16,14 @@ public interface ReservationService {
 	public List<ReservationDto> findByDateRange(String start, String end);
 	public ReservationDto findReservationById(Integer id);
 	public List<ReservationDto> searchReservation(Reservation reservation);
-	public List<ReservationDto> findByTimestamp(String newTime);
+
+	
 	public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy);
+
+
+	public List<ReservationDto> findByTimestamp(String newTime, Integer roomId);
+	
+	
+	public List<ReservationDto> findByBetween(String start, String end, Integer roomId);
 
 }

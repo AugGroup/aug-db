@@ -57,8 +57,16 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
 		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME ,null as RESERVED_BY FROM RESERVATION r "+
-				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') BETWEEN r.START_TIME AND r.END_TIME",
+				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
+				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') > r.START_TIME AND STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') < r.END_TIME AND r.ROOM_ID = :ROOM",
+
+		resultClass = ReservationDto.class),
+		
+		@NamedNativeQuery(name="GET_BETWEEN_RESERVATION",
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
+				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
+				"WHERE STR_TO_DATE(:START,'%Y-%m-%d %H:%i:%s') <= r.START_TIME AND STR_TO_DATE(:END,'%Y-%m-%d %H:%i:%s') >= r.END_TIME AND r.ROOM_ID = :ROOM",
 
 		resultClass = ReservationDto.class)
 					
