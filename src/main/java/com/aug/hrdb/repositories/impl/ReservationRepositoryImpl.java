@@ -54,7 +54,7 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			query.setParameter("RESERVED_BY", reservation.getReservationBy());
 			List<ReservationDto> reservationDtos = query.list();
 			return reservationDtos;
-
+		}
 		public List<ReservationDto> findByTimestamp(String newTime) {
 			// TODO Auto-generated method stub
 			Query query = getCurrentSession()
