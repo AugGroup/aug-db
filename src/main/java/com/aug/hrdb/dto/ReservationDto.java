@@ -25,7 +25,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
 	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
-				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')",
+				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')"+
+				"AND r.ROOM_ID = :ROOMID",
 		resultClass = ReservationDto.class),
 			
 	@NamedNativeQuery(name="GET_RESERVATION_ID",

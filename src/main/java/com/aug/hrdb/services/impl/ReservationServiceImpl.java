@@ -58,9 +58,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ReservationDto> findByDateRange(String start, String end) {
+	public List<ReservationDto> findByDateRange(String start, String end, Integer roomId) {
 		// TODO Auto-generated method stub
-		return reservationRepository.findByDateRange(start, end);
+		return reservationRepository.findByDateRange(start, end, roomId);
 	}
 
 	@Override

@@ -21,13 +21,14 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		}
 
 		@Override
-		public List<ReservationDto> findByDateRange(String start, String end) {
+		public List<ReservationDto> findByDateRange(String start, String end,Integer roomId) {
 			// TODO Auto-generated method stub
 			
 			Query query = getCurrentSession()
 					.getNamedQuery("GET_RESERVATIONS")
 					.setParameter("START", start)
-					.setParameter("END", end);
+					.setParameter("END", end)
+					.setParameter("ROOMID", roomId);
 			List<ReservationDto> list = query.list();
 			System.out.println(list.toString());
 			return list;

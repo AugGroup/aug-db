@@ -13,7 +13,7 @@ public interface ReservationService {
 	public void update(Reservation reservation);
 	public void delete(Reservation reservation);
 	public void create(Reservation reservation);
-	public List<ReservationDto> findByDateRange(String start, String end);
+	public List<ReservationDto> findByDateRange(String start, String end,Integer roomId);
 	public ReservationDto findReservationById(Integer id);
 	public List<ReservationDto> searchReservation(Reservation reservation);
 
