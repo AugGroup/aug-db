@@ -25,8 +25,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "FROM RESERVATION reservation "
 		+ "LEFT JOIN ROOM room ON reservation.ROOM_ID = room.ID "
 		+ "LEFT JOIN MAS_RESERVATION_TYPE masreservationtype ON reservation.RESERVATION_TYPE_ID = masreservationtype.ID "
-		+ "LEFT JOIN MAS_DIVISION masdivision ON reservation.DIVISION_ID = masdivision.ID "
-		+ "WHERE reservation.RESERVATION_BY like :RESERVATION_BY ", resultClass = ReportReservationDto.class)
+		+ "LEFT JOIN MAS_DIVISION masdivision ON reservation.DIVISION_ID = masdivision.ID ", resultClass = ReportReservationDto.class)
 })
 @Entity
 public class ReportReservationDto {

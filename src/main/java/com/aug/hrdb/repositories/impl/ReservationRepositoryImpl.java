@@ -71,39 +71,10 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy) {
 			Query query = getCurrentSession().getNamedQuery("REPORT_RESERVATION");	
 			String queryStr = query.getQueryString();
-			
-			if (roomId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND room.ID = :ROOMID ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-				
-			}
-			if (reservationTypeId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND reservation.ID = :RESERVATIONTYPEID ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			}
-			if (divisionId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND division.ID = :DIVISIONID";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			}
-			
-			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			if (roomId > 0) {
-				query.setParameter("ROOM_ID", roomId);
-			}
-			if (reservationTypeId > 0) {
-				query.setParameter("RESERVATION_TYPE_ID", reservationTypeId);
-			}
-			if (divisionId > 0) {
-				query.setParameter("DIVISION_ID", divisionId);
-			}
-			
-			query.setParameter("RESERVATION_BY", "%" + reservationBy + "%");
+			System.out.println(">>>>>>>"+queryStr);
 			
 			List<ReportReservationDto> results = query.list();
-	
+			System.out.println(">>>>>>>"+results);
 			return results;
 		}
 
