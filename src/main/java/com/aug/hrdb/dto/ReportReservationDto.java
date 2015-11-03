@@ -17,41 +17,50 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({ @NamedNativeQuery(name = "REPORT_RESERVATION", query = "SELECT "
-		+ "reservation.ID AS id,reservation.START_TIME AS start,reservation.END_TIME AS end,reservation.DATE_RESERVATION AS date,"
-		+ "reservation.DESCRIPTION AS description,reservation.RESERVATION_BY AS reservationBy,reservation.ROOM_ID AS room,room.ID AS roomId,"
-		+ "room.Name AS roomName,room.CAPACITY AS roomcapacity,room.DESCRIPTION AS roomdescription,reservation.RESERVATION_TYPE_ID AS masreservationtype,"
-		+ "masreservationtype.ID AS masreservationtypeId,masreservationtype.NAME AS masreservationtypeName,reservation.DIVISION_ID AS masDivision,"
-		+ "masdivision.ID AS masdivisionId,masdivision.NAME AS masdivisionName "
+
+		+ "reservation.ID AS id, "
+		+ "reservation.START_TIME AS startTime, "
+		+ "reservation.END_TIME AS endTime, "
+		+ "reservation.DATE_RESERVATION AS dateReservation, "
+		+ "reservation.DESCRIPTION AS description, "
+		+ "reservation.RESERVATION_BY AS reservationBy, "
+		+ "room.ID AS roomId, "	
+		+ "room.Name AS roomName, "	
+		+ "masreservationtype.ID AS reservationTypeId, "
+		+ "masreservationtype.NAME AS reservationTypeName, "
+		+ "masdivision.ID AS divisionId, "
+		+ "masdivision.NAME AS divisionName "
 		+ "FROM RESERVATION reservation "
 		+ "LEFT JOIN ROOM room ON reservation.ROOM_ID = room.ID "
 		+ "LEFT JOIN MAS_RESERVATION_TYPE masreservationtype ON reservation.RESERVATION_TYPE_ID = masreservationtype.ID "
-		+ "LEFT JOIN MAS_DIVISION masdivision ON reservation.DIVISION_ID = masdivision.ID ", resultClass = ReportReservationDto.class)
+		+ "LEFT JOIN MAS_DIVISION masdivision ON reservation.DIVISION_ID = masdivision.ID", resultClass = ReportReservationDto.class)
+
 })
 @Entity
 public class ReportReservationDto {
 	@Id
-	@Column(name = "ID")
+	@Column(name = "id")
 	private Integer id;
 	
-	@Column(name = "START_TIME")
+	@Column(name = "startTime")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date start;
+	private Date startTime;
 	
-	@Column(name = "END_TIME")
+	@Column(name = "endTime")
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Temporal(TemporalType.TIMESTAMP)
-	private Date end;
+	private Date endTime;
 	
-	@Column(name="DATE_RESERVATION")
+	@Column(name="dateReservation")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")	
 	@Temporal(TemporalType.DATE)
 	private Date dateReservation;
 	
-	@Column(name="DESCRIPTION",nullable = false)
+	@Column(name="description",nullable = false)
 	private String description;
 	
-	@Column(name="RESERVATION_BY",nullable = false)
+	@Column(name="reservationBy",nullable = false)
 	private String reservationBy;
 	
 	@Column(name = "reservationTypeId")
@@ -81,20 +90,20 @@ public class ReportReservationDto {
 		this.id = id;
 	}
 
-	public Date getStart() {
-		return start;
+	public Date getStartTime() {
+		return startTime;
 	}
 
-	public void setStart(Date start) {
-		this.start = start;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 
-	public Date getEnd() {
-		return end;
+	public Date getEndTime() {
+		return endTime;
 	}
 
-	public void setEnd(Date end) {
-		this.end = end;
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public Date getDateReservation() {
@@ -129,20 +138,20 @@ public class ReportReservationDto {
 		this.reservationTypeId = reservationTypeId;
 	}
 
-	public Integer getDivisionId() {
-		return divisionId;
-	}
-
-	public void setDivisionId(Integer divisionId) {
-		this.divisionId = divisionId;
-	}
-
 	public String getReservationTypeName() {
 		return reservationTypeName;
 	}
 
 	public void setReservationTypeName(String reservationTypeName) {
 		this.reservationTypeName = reservationTypeName;
+	}
+
+	public Integer getDivisionId() {
+		return divisionId;
+	}
+
+	public void setDivisionId(Integer divisionId) {
+		this.divisionId = divisionId;
 	}
 
 	public String getDivisionName() {
@@ -168,7 +177,5 @@ public class ReportReservationDto {
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
 	}
-	
-
 
 }
