@@ -1,3 +1,4 @@
+
 package com.aug.hrdb.repositories.impl;
 
 import java.util.List;
@@ -6,7 +7,6 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.dto.ReportReservationDto;
 import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.Reservation;
@@ -167,4 +167,5 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			System.out.println(list.toString());
 			return list;
 		}
+
 }
