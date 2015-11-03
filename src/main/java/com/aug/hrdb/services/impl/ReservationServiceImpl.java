@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.ReportReservationDto;
 import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.Reservation;
 import com.aug.hrdb.repositories.ReservationRepository;
@@ -69,7 +70,6 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-
 	public List<ReservationDto> searchReservation(Reservation reservation) {
 		// TODO Auto-generated method stub
 		return reservationRepository.searchReservation(reservation);
@@ -80,5 +80,8 @@ public class ReservationServiceImpl implements ReservationService {
 		// TODO Auto-generated method stub
 		return reservationRepository.findByTimestamp(newTime);
 
+	}
+	public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId, String reservationBy) {
+		return reservationRepository.findReservation(roomId, reservationTypeId, divisionId, reservationBy);
 	}
 }

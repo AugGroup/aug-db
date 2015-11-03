@@ -2,6 +2,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.ReportReservationDto;
 import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.Reservation;
 
@@ -14,9 +15,8 @@ public interface ReservationService {
 	public void create(Reservation reservation);
 	public List<ReservationDto> findByDateRange(String start, String end);
 	public ReservationDto findReservationById(Integer id);
-
 	public List<ReservationDto> searchReservation(Reservation reservation);
-
 	public List<ReservationDto> findByTimestamp(String newTime);
+	public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy);
 
 }
