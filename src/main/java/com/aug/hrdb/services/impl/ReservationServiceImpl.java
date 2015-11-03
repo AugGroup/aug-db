@@ -69,14 +69,14 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public List<ReservationDto> searchReservation(Reservation reservation) {
 		// TODO Auto-generated method stub
 		return reservationRepository.searchReservation(reservation);
-=======
+
 	public List<ReservationDto> findByTimestamp(String newTime) {
 		// TODO Auto-generated method stub
 		return reservationRepository.findByTimestamp(newTime);
->>>>>>> query GET_RESERVATION_BY_TIMESTAMP service and repo
+
 	}
 }
