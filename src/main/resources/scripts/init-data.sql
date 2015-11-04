@@ -503,10 +503,10 @@ INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA','<p>Dear K. $FIRST_NAME</p>
 ');
 
 --Room
-INSERT INTO ROOM (NAME,CAPACITY,DESCRIPTION,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES 
-('Interview room 1',3,'Candidate Interview and Small group meeting','C',0,NOW()),
-('Interview room 2',4,'Candidate Interview and Small group meeting','C',0,NOW()),
-('Augmentis room',20,'Board room meeting and Group training','C',0,NOW());
+INSERT INTO ROOM (NAME,CAPACITY,DESCRIPTION,COLOR,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES 
+('Interview room 1',3,'Candidate Interview and Small group meeting','#79CDCD','C',0,NOW()),
+('Interview room 2',4,'Candidate Interview and Small group meeting','#FF9999','C',0,NOW()),
+('Augmentis room',20,'Board room meeting and Group training','#33CC66','C',0,NOW());
 
 --Reservation
 INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,RESERVATION_TYPE_ID,DIVISION_ID,RESERVATION_BY) VALUES

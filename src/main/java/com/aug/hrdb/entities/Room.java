@@ -31,6 +31,9 @@ public class Room extends BaseEntity{
 	@Column(name="DESCRIPTION",nullable = false)
 	private String description;
 	
+	@Column(name="COLOR",nullable = false)
+	private String color;
+	
 	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
     @JsonIgnore
     private Set<Reservation> reservation = new HashSet<Reservation>();
@@ -74,5 +77,14 @@ public class Room extends BaseEntity{
 	public void setReservation(Set<Reservation> reservation) {
 		this.reservation = reservation;
 	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
 	
 }
