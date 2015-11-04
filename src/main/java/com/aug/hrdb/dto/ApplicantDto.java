@@ -13,6 +13,7 @@ import javax.persistence.Transient;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aug.hrdb.entities.Address;
+import com.aug.hrdb.entities.AugRequest;
 import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.entities.Experience;
@@ -389,6 +390,25 @@ public class ApplicantDto {
 //	@Transient
 	@Column(name = "TECHNOLOGY_NAME")
 	private String technologyStr;
+	
+	
+	/*@Transient
+	private List<AugRequest> augRequests ;
+	*/
+	
+	@Transient
+	private AugRequest augRequest;
+
+	
+	
+	
+	public AugRequest getAugRequest() {
+		return augRequest;
+	}
+
+	public void setAugRequest(AugRequest augRequest) {
+		this.augRequest = augRequest;
+	}
 
 	public String getResume() {
 		return resume;
@@ -1101,6 +1121,14 @@ public class ApplicantDto {
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+
+	/*public List<AugRequest> getAugRequests() {
+		return augRequests;
+	}
+
+	public void setAugRequests(List<AugRequest> augRequests) {
+		this.augRequests = augRequests;
+	}*/
 
 
 }

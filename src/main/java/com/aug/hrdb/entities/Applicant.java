@@ -2,25 +2,11 @@ package com.aug.hrdb.entities;
 
 import java.text.ParseException;
 import java.util.Date;
-import java.util.HashSet;
+
 import java.util.List;
 import java.util.Set;
+import javax.persistence.*;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.apache.commons.codec.language.bm.Languages;
-import org.hibernate.annotations.Index;
 
 import com.aug.hrdb.dto.ApplicantDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -293,6 +279,21 @@ public class Applicant extends BaseEntity{
 	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
 	private Official official;
 	
+
+	@ManyToOne
+	@JoinColumn(name = "AUGREQUEST_ID", referencedColumnName="id",nullable = false)
+	private AugRequest augRequest;
+	
+	
+	
+	public AugRequest getAugRequest() {
+		return augRequest;
+	}
+
+	public void setAugRequest(AugRequest augRequest) {
+		this.augRequest = augRequest;
+	}
+
 	public String getReportType() {
 		return reportType;
 	}
@@ -968,6 +969,15 @@ public class Applicant extends BaseEntity{
 		this.official = official;
 	}
 
+	/*public List<AugRequest> getAugRequests() {
+		return augRequests;
+	}
+
+	public void setAugRequests(List<AugRequest> augRequests) {
+		this.augRequests = augRequests;
+	}
+	*/
+
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());
 		applicant.setFirstNameTH(applicantDto.getFirstNameTH());
@@ -1042,6 +1052,7 @@ public class Applicant extends BaseEntity{
 		applicant.setCreatedBy(applicantDto.getCreatedBy());
 		applicant.setCreatedTimeStamp(applicantDto.getCreatedTimeStamp());
 		applicant.setMasLocation(applicantDto.getMasLocation());
+		applicant.setAugRequest(applicantDto.getAugRequest());;
 		return applicant;
 
 	}

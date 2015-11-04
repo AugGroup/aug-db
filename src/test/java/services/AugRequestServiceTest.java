@@ -32,7 +32,7 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = new AugRequest();
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		augRequest.setApproveDate(dateFmt.parse("16/09/2015"));
+		/*augRequest.setApproveDate(dateFmt.parse("16/09/2015"));*/
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
 		augRequest.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -47,7 +47,7 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = new AugRequest();
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		augRequest.setApproveDate(dateFmt.parse("16/09/2015"));
+		/*augRequest.setApproveDate(dateFmt.parse("16/09/2015"));*/
 		augRequest.setAuditFlag("C");
 		augRequest.setCreatedBy(1);
 		augRequest.setCreatedTimeStamp(Calendar.getInstance().getTime());
@@ -69,7 +69,7 @@ public class AugRequestServiceTest {
 		AugRequest augRequest = augRequestService.findById(1);
 		
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-		augRequest.setApproveDate(dateFmt.parse("10/09/2015"));
+	/*	augRequest.setApproveDate(dateFmt.parse("10/09/2015"));*/
 		
 		augRequestService.update(augRequest);
 	}

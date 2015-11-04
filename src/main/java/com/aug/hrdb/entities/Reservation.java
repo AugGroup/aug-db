@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @Table(name="RESERVATION")
 
-public class Reservation  {
+public class Reservation extends BaseEntity {
 
 	@Id
 	@Column(name = "ID")

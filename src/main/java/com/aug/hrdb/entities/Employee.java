@@ -409,13 +409,8 @@ public class Employee extends BaseEntity{
 	@JoinColumn(name="APPLICANT_ID",nullable=false)
 	private Applicant applicant;
 	
-    @OneToMany(mappedBy = "requester", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<AugRequest> requester = new HashSet<AugRequest>();
-    
-    @OneToMany(mappedBy = "approver", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<AugRequest> approver = new HashSet<AugRequest>();
+   
+   
 	
 	
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
@@ -1328,21 +1323,9 @@ public class Employee extends BaseEntity{
 	}
 
 
-	public Set<AugRequest> getRequester() {
-		return requester;
-	}
+	
 
-	public void setRequester(Set<AugRequest> requester) {
-		this.requester = requester;
-	}
-
-	public Set<AugRequest> getApprover() {
-		return approver;
-	}
-
-	public void setApprover(Set<AugRequest> approver) {
-		this.approver = approver;
-	}
+	
 
 
 	public Set<Reservation> getReservation() {
