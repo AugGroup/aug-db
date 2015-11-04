@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.dto.ReportReservationDto;
 import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.Reservation;
@@ -68,10 +69,36 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy) {
 			Query query = getCurrentSession().getNamedQuery("REPORT_RESERVATION");	
 			String queryStr = query.getQueryString();
-			System.out.println(">>>>>>>"+queryStr);
+
+			if (roomId > 0) {
+				queryStr = query.getQueryString();
+				queryStr += " AND room.ID = :ROOM_ID ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
+			if (reservationTypeId > 0) {
+				queryStr = query.getQueryString();
+				queryStr += " AND masreservationtype.ID = :RESERVATION_TYPE_ID ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
+			if (divisionId > 0) {
+				queryStr = query.getQueryString();
+				queryStr += " AND masdivision.ID = :DIVISION_ID";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
 			
+			if (roomId > 0) {
+				query.setParameter("ROOM_ID", roomId);
+			}
+			if (reservationTypeId > 0) {
+				query.setParameter("RESERVATION_TYPE_ID", reservationTypeId);
+			}
+			if (divisionId > 0) {
+				query.setParameter("DIVISION_ID", divisionId);
+			}
+			
+			query.setParameter("RESERVATION_BY", "%" + reservationBy + "%");
 			List<ReportReservationDto> results = query.list();
-			System.out.println(">>>>>>>"+results);
+			
 			return results;
 		}
 
