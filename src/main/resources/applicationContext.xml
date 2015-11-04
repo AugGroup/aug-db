@@ -23,9 +23,7 @@
     <context:annotation-config/>
     <tx:annotation-driven/>
     <jpa:repositories base-package="com.aug.hrdb"/>
-    <context:component-scan base-package="com.aug.hr.*"/>
     <context:component-scan base-package="com.aug.hrdb.*"/>
-    <context:component-scan base-package="com.aug.hrdb.interceptor"/>
     
 
     <util:properties id="appProps" location="classpath:ApplicationResources.properties" />

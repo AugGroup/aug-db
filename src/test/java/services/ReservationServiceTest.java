@@ -57,9 +57,9 @@ public class ReservationServiceTest {
 	reservation.setDateReservation(new Date());
 	reservation.setStart(new Date());
 	reservation.setEnd(new Date());
-	reservation.setAuditFlag("C");
+/*	reservation.setAuditFlag("C");
 	reservation.setCreatedBy(1);
-	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());*/
 	
 	MasReservationType masReservationType = new MasReservationType();
 	 masReservationType.setName("meeting");

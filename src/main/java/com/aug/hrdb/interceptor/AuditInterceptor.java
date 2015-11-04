@@ -23,9 +23,9 @@ import com.aug.hrdb.entities.Login;
 import com.aug.hrdb.repositories.LoginRepository;
 
 @Component
-public class AuditInterceptor extends EmptyInterceptor{
+public class AuditInterceptor extends EmptyInterceptor {
 
-	private static final long serialVersionUID = 1L;
+	/*private static final long serialVersionUID = 1L;
 	private static SessionFactory factory = new Configuration().configure().buildSessionFactory();
 
 
@@ -98,7 +98,7 @@ public class AuditInterceptor extends EmptyInterceptor{
 		
 		System.out.println("onDelete");
 		return theReturn;
-    }
-	
-	
+    }*/
 }
+	
+
