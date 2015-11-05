@@ -42,16 +42,13 @@ public class Reservation extends BaseEntity {
 	@Column(name="DESCRIPTION",nullable = false)
 	private String description;
 	
-	@Column(name="RESERVATION_BY",nullable = false)
-	private String reservationBy;
-	
 	@ManyToOne
 	@JoinColumn(name = "ROOM_ID", referencedColumnName = "id", nullable = false)
 	private Room room;
 	
 	
 	@ManyToOne
-	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = true)
+	@JoinColumn(name = "EMPLOYEE_ID", referencedColumnName = "id", nullable = false)
 	private Employee employee;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
@@ -126,13 +123,6 @@ public class Reservation extends BaseEntity {
 		this.masreservationtype = masreservationtype;
 	}
 
-	public String getReservationBy() {
-		return reservationBy;
-	}
-
-	public void setReservationBy(String reservationBy) {
-		this.reservationBy = reservationBy;
-	}
 
 	public MasDivision getMasDivision() {
 		return masDivision;

@@ -420,10 +420,12 @@ INSERT INTO SITE (ID,PROJECTNAME,STARTDATE,ENDDATE,PROJECTOWNER,PROJECTOWNERCONT
 --Appointment
 INSERT INTO APPOINTMENT(ID,DETAIL,END,MAIL_STATUS,START,TOPIC,APPLICANT_ID,LOGIN_ID)
 VALUES 
-(1,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('09/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('09/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Yam',1,1),
-(2,'นัดเซ็นสัญญา',STR_TO_DATE('12/09/2015 14:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('12/09/2015 13:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Piyawut',2,2),
-(3,'นัดเซ็นสัญญา',STR_TO_DATE('14/09/2015 11:00:00','%d/%m/%Y %H:%i:%s'),1,STR_TO_DATE('14/09/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
-(4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/09/2015 12:00:00','%d/%m/%Y %H:%i:%s'),2,STR_TO_DATE('17/09/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2);
+(1,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('09/10/2015 12:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('09/10/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Yam',1,1),
+(2,'นัดเซ็นสัญญา',STR_TO_DATE('12/10/2015 14:00:00','%d/%m/%Y %H:%i:%s'),0,STR_TO_DATE('12/10/2015 13:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Piyawut',2,2),
+(3,'นัดเซ็นสัญญา',STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),1,STR_TO_DATE('14/11/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Anut',3,2),
+(4,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('17/12/2015 12:00:00','%d/%m/%Y %H:%i:%s'),2,STR_TO_DATE('17/12/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Thanatchapong',4,2),
+(5,'นัดเซ็นสัญญา',STR_TO_DATE('19/12/2015 11:00:00','%d/%m/%Y %H:%i:%s'),1,STR_TO_DATE('19/12/2015 10:00:00','%d/%m/%Y %H:%i:%s'),'นัดเซ็นสัญญาคุณ Bill',3,2),
+(6,'นัดทำข้อสอบและสอบสัมภาษณ์',STR_TO_DATE('18/12/2015 12:00:00','%d/%m/%Y %H:%i:%s'),2,STR_TO_DATE('18/12/2015 09:00:00','%d/%m/%Y %H:%i:%s'),'นัดทำข้อสอบคุณ Jub',4,2);
 
 --MailTemplate
 INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA','<p>Dear K. $FIRST_NAME</p>
@@ -509,8 +511,12 @@ INSERT INTO ROOM (NAME,CAPACITY,DESCRIPTION,COLOR,AUDITFLAG,CREATEDBY,CREATEDTIM
 ('Interview room 2',4,'Candidate Interview and Small group meeting','#FF9999','C',0,NOW()),
 ('Augmentis room',20,'Board room meeting and Group training','#33CC66','C',0,NOW());
 
-INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,RESERVATION_TYPE_ID,DIVISION_ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,RESERVATION_BY) VALUES
-(STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015','%d/%m/%Y'),'Interview',1,1,1,'C',0,NOW(),"Bill Natechanok"),
-(STR_TO_DATE('22/10/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015','%d/%m/%Y'),'Admin Meeting',2,2,2,'C',0,NOW(),"Bank Thanutchapong"),
-(STR_TO_DATE('30/10/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015','%d/%m/%Y'),'Board Meeting',3,2,3,'C',0,NOW(),"Ae Piyawut"),
-(STR_TO_DATE('05/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015','%d/%m/%Y'),'Interview',1,2,2,'C',0,NOW(),"Jub Pranrajit");
+INSERT INTO RESERVATION (START_TIME,END_TIME,DATE_RESERVATION,DESCRIPTION,ROOM_ID,RESERVATION_TYPE_ID,DIVISION_ID,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,EMPLOYEE_ID) VALUES
+(STR_TO_DATE('14/11/2015 11:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('14/11/2015','%d/%m/%Y'),'Interview',1,1,1,'C',0,NOW(),1),
+(STR_TO_DATE('22/10/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/10/2015','%d/%m/%Y'),'Admin Meeting',2,2,2,'C',0,NOW(),2),
+(STR_TO_DATE('30/10/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/10/2015','%d/%m/%Y'),'Board Meeting',3,2,3,'C',0,NOW(),3),
+(STR_TO_DATE('05/11/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/11/2015','%d/%m/%Y'),'Interview and Test',1,2,2,'C',0,NOW(),1),
+(STR_TO_DATE('22/11/2015 10:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/11/2015 17:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('22/11/2015','%d/%m/%Y'),'Monthly Meeting',2,2,2,'C',0,NOW(),2),
+(STR_TO_DATE('30/12/2015 09:30:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/12/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('30/12/2015','%d/%m/%Y'),'Happiness Meeting',3,2,3,'C',0,NOW(),3),
+(STR_TO_DATE('05/12/2015 15:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/12/2015 18:00:00','%d/%m/%Y %H:%i:%s'),STR_TO_DATE('05/12/2015','%d/%m/%Y'),'Trainning',1,2,2,'C',0,NOW(),1);
+
