@@ -278,14 +278,11 @@ public class Applicant extends BaseEntity{
 	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
 	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
 	private Official official;
-	
 
 	@ManyToOne
-	@JoinColumn(name = "AUGREQUEST_ID", referencedColumnName="id",nullable = false)
+	@JoinColumn(name = "AUGREQUEST_ID", referencedColumnName="id")
 	private AugRequest augRequest;
-	
-	
-	
+
 	public AugRequest getAugRequest() {
 		return augRequest;
 	}

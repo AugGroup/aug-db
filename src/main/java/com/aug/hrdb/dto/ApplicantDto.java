@@ -399,9 +399,6 @@ public class ApplicantDto {
 	@Transient
 	private AugRequest augRequest;
 
-	
-	
-	
 	public AugRequest getAugRequest() {
 		return augRequest;
 	}

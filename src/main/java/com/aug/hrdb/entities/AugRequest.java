@@ -3,14 +3,10 @@ package com.aug.hrdb.entities;
 import java.util.Date;
 import java.util.List;
 
-
-
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 /**
 *
@@ -19,21 +15,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "AUG_REQUEST")
-public class AugRequest extends BaseEntity{
+public class AugRequest extends BaseEntity {
 
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
 	private Integer id;
 
-	@Column(name = "C")
+	@Column(name = "REQUEST_DATE")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
 	private Date requestDate;
+	
+	@Column(name = "APPROVE_DATE")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy",  locale = "en", timezone = "GMT")
+	private Date approveDate;
 
 	@Column(name = "STATUS")
 	private String status;
-
-	
 	
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
@@ -43,14 +41,18 @@ public class AugRequest extends BaseEntity{
 
 	@Column(name = "YEAR_EXPERIENCE")
 	private Integer yearExperience;
-	
-	
 
-	@Column(name = "CODE_REQUEST")
-	private String codeRequest ;
+	@Column(name = "JOBCASE_CODE")
+	private String jobcaseCode;
 	
+	@ManyToOne
+	@JoinColumn(name = "REQUEST_ID", referencedColumnName = "id", nullable = false)
+	private Employee requester;
 	
-	
+	@ManyToOne
+	@JoinColumn(name = "APPROVE_ID", referencedColumnName = "id")	
+	private Employee approver;
+
 	@ManyToOne
 	@JoinColumn(name = "MASTECHNOLOGY_ID", referencedColumnName = "id", nullable = false)
 	private MasTechnology technology;
@@ -58,22 +60,10 @@ public class AugRequest extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
 	private MasJoblevel joblevel;
-	
-	
 
-	
 	@JsonIgnore
-	@OneToMany(mappedBy = "augRequest",cascade=CascadeType.REMOVE)
-	private List<Applicant> applicants;
-	
-	
-	public List<Applicant> getApplicants() {
-		return applicants;
-	}
-
-	public void setApplicants(List<Applicant> applicants) {
-		this.applicants = applicants;
-	}
+	@OneToMany(mappedBy ="augRequest",cascade=CascadeType.REMOVE)
+	private List<Applicant> applicant;
 
 	public Integer getId() {
 		return id;
@@ -90,8 +80,6 @@ public class AugRequest extends BaseEntity{
 	public void setRequestDate(Date requestDate) {
 		this.requestDate = requestDate;
 	}
-
-	
 
 	public String getStatus() {
 		return status;
@@ -142,16 +130,58 @@ public class AugRequest extends BaseEntity{
 	}
 
 	public String getCodeRequest() {
-		return codeRequest;
+		return jobcaseCode;
 	}
 
-	public void setCodeRequest(String codeRequest) {
-		this.codeRequest = codeRequest;
+	public void setCodeRequest(String jobcaseCode) {
+		this.jobcaseCode = jobcaseCode;
 	}
 
-	
+	public Date getApproveDate() {
+		return approveDate;
+	}
 
+	public void setApproveDate(Date approveDate) {
+		this.approveDate = approveDate;
+	}
 
-	
+	public String getJobcaseCode() {
+		return jobcaseCode;
+	}
 
+	public void setJobcaseCode(String jobcaseCode) {
+		this.jobcaseCode = jobcaseCode;
+	}
+
+	public Employee getRequester() {
+		return requester;
+	}
+
+	public void setRequester(Employee requester) {
+		this.requester = requester;
+	}
+
+	public Employee getApprover() {
+		return approver;
+	}
+
+	public void setApprover(Employee approver) {
+		this.approver = approver;
+	}
+
+	public List<Applicant> getApplicants() {
+		return applicant;
+	}
+
+	public void setApplicants(List<Applicant> applicant) {
+		this.applicant = applicant;
+	}
+
+	public List<Applicant> getApplicant() {
+		return applicant;
+	}
+
+	public void setApplicant(List<Applicant> applicant) {
+		this.applicant = applicant;
+	}
 }

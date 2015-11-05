@@ -259,6 +259,14 @@ public class Employee extends BaseEntity{
 	@OneToMany(mappedBy="aimempid", fetch=FetchType.EAGER,cascade=CascadeType.REMOVE)
 	private Set<Employee> staffs = new HashSet<Employee>();
 	
+	@OneToMany(mappedBy = "requester", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
+	@JsonIgnore
+	private Set<AugRequest> requester = new HashSet<AugRequest>();
+	  
+	@OneToMany(mappedBy = "approver", fetch = FetchType.LAZY,cascade=CascadeType.REMOVE)
+	@JsonIgnore
+	private Set<AugRequest> approver = new HashSet<AugRequest>();
+	
 	
 	public Employee getAimempid() {
 		return aimempid;
@@ -1322,11 +1330,21 @@ public class Employee extends BaseEntity{
 		this.applicant = applicant;
 	}
 
+	public Set<AugRequest> getRequester() {
+		return requester;
+	}
 
-	
+	public void setRequester(Set<AugRequest> requester) {
+		this.requester = requester;
+	}
 
-	
+	public Set<AugRequest> getApprover() {
+		return approver;
+	}
 
+	public void setApprover(Set<AugRequest> approver) {
+		this.approver = approver;
+	}
 
 	public Set<Reservation> getReservation() {
 		return reservation;
@@ -1336,13 +1354,6 @@ public class Employee extends BaseEntity{
 		this.reservation = reservation;
 	}
 
-	
-
-	
-	
-	
-	
-	
 
 	/*@Override
 	public String toString() {
