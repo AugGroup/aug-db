@@ -46,14 +46,43 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 
 		@Override
 		public List<ReservationDto> searchReservation(Reservation reservation) {
-			// TODO Auto-generated method stub
+			// TODO Auto-generated method stubre
+			 //(RESERVATION_TYPE_ID = :RESERVATION_TYPE AND DIVISION_ID = :DIVISION_ID ) OR RESERVATION_BY = :RESERVED_BY
 			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");
-			query.setParameter("RESERVATION_TYPE", reservation.getMasreservationtype().getId());
-			query.setParameter("DIVISION_ID", reservation.getMasDivision().getId());
-			query.setParameter("RESERVED_BY", reservation.getReservationBy());
+			String queryStr = query.getQueryString();
+			if (reservation.getMasreservationtype() != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND RESERVATION_TYPE_ID =:RESERVETYPE ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
+				query.setParameter("RESERVETYPE", reservation.getMasreservationtype().getId());
+			}
+			if (reservation.getMasDivision() != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND DIVISION_ID = :DIVISIONID ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
+				query.setParameter("DIVISIONID", reservation.getMasDivision().getId());
+			}
+			if (reservation.getReservationBy() != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND RESERVATION_BY = :RESERVEBY";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
+				query.setParameter("RESERVEBY", reservation.getReservationBy());
+			}
+			
+			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
+			if (reservation.getMasreservationtype() != null) {
+				query.setParameter("RESERVETYPE", reservation.getMasreservationtype().getId());
+				}
+			if (reservation.getMasDivision() != null) {
+				query.setParameter("DIVISIONID", reservation.getMasDivision().getId());
+			}
+			if (reservation.getReservationBy() != null) {
+				query.setParameter("RESERVEBY", reservation.getReservationBy());
+			}
 			List<ReservationDto> reservationDtos = query.list();
 			return reservationDtos;
 		}
+		
 		public List<ReservationDto> findByTimestamp(String newTime, Integer roomId) {
 			// TODO Auto-generated method stub
 			Query query = getCurrentSession()
@@ -69,36 +98,10 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy) {
 			Query query = getCurrentSession().getNamedQuery("REPORT_RESERVATION");	
 			String queryStr = query.getQueryString();
-
-			if (roomId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND room.ID = :ROOM_ID ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			}
-			if (reservationTypeId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND masreservationtype.ID = :RESERVATION_TYPE_ID ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			}
-			if (divisionId > 0) {
-				queryStr = query.getQueryString();
-				queryStr += " AND masdivision.ID = :DIVISION_ID";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
-			}
+			System.out.println(">>>>>>>"+queryStr);
 			
-			if (roomId > 0) {
-				query.setParameter("ROOM_ID", roomId);
-			}
-			if (reservationTypeId > 0) {
-				query.setParameter("RESERVATION_TYPE_ID", reservationTypeId);
-			}
-			if (divisionId > 0) {
-				query.setParameter("DIVISION_ID", divisionId);
-			}
-			
-			query.setParameter("RESERVATION_BY", "%" + reservationBy + "%");
 			List<ReportReservationDto> results = query.list();
-			
+			System.out.println(">>>>>>>"+results);
 			return results;
 		}
 
@@ -167,5 +170,4 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			System.out.println(list.toString());
 			return list;
 		}
-
 }

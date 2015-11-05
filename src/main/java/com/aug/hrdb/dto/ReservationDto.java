@@ -49,32 +49,29 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
-				"WHERE (RESERVATION_TYPE_ID = :RESERVATION_TYPE AND DIVISION_ID = :DIVISION_ID ) OR RESERVATION_BY = :RESERVED_BY",
-
+				"WHERE 1 ",
 		resultClass = ReservationDto.class),
 	
 	@NamedNativeQuery(name="FILTER_RESERVATIONS",
-	query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,null as ROOM_ID, "+
-			"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-			"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
-            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
-			"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d') ",
-	resultClass = ReservationDto.class),
+		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,null as ROOM_ID, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
+				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
+	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
+				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d') ",
+		resultClass = ReservationDto.class),
 		
-		@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
+	@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
 		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
 				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') > r.START_TIME AND STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') < r.END_TIME AND r.ROOM_ID = :ROOM",
-
 		resultClass = ReservationDto.class),
-		
-		@NamedNativeQuery(name="GET_BETWEEN_RESERVATION",
+	
+	@NamedNativeQuery(name="GET_BETWEEN_RESERVATION",
 		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
 				"WHERE STR_TO_DATE(:START,'%Y-%m-%d %H:%i:%s') <= r.START_TIME AND STR_TO_DATE(:END,'%Y-%m-%d %H:%i:%s') >= r.END_TIME AND r.ROOM_ID = :ROOM",
-
 		resultClass = ReservationDto.class)
 					
 })
