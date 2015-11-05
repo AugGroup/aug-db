@@ -22,14 +22,14 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		}
 
 		@Override
-		public List<ReservationDto> findByDateRange(String start, String end,Integer roomId) {
+		public List<ReservationDto> findByDateRange(String start, String end) {
 			// TODO Auto-generated method stub
 			
 			Query query = getCurrentSession()
 					.getNamedQuery("GET_RESERVATIONS")
 					.setParameter("START", start)
-					.setParameter("END", end)
-					.setParameter("ROOMID", roomId);
+					.setParameter("END", end);
+					//.setParameter("ROOMID", roomId);
 			List<ReservationDto> list = query.list();
 			System.out.println(list.toString());
 			return list;
@@ -45,39 +45,35 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		}
 
 		@Override
-		public List<ReservationDto> searchReservation(Reservation reservation) {
-			// TODO Auto-generated method stubre
-			 //(RESERVATION_TYPE_ID = :RESERVATION_TYPE AND DIVISION_ID = :DIVISION_ID ) OR RESERVATION_BY = :RESERVED_BY
-			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");
+		public List<ReservationDto> searchReservation(String reservationBy, Integer masDivision, Integer masReservationType) {
+			// TODO Auto-generated method stub
+			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");	
 			String queryStr = query.getQueryString();
-			if (reservation.getMasreservationtype() != null) {
+
+			if (reservationBy != null) {
 				queryStr = query.getQueryString();
-				queryStr += " AND RESERVATION_TYPE_ID =:RESERVETYPE ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
-				query.setParameter("RESERVETYPE", reservation.getMasreservationtype().getId());
+				queryStr += " AND r.RESERVATION_BY = :RESERVATION_BY ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
 			}
-			if (reservation.getMasDivision() != null) {
+			if (masReservationType != null) {
 				queryStr = query.getQueryString();
-				queryStr += " AND DIVISION_ID = :DIVISIONID ";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
-				query.setParameter("DIVISIONID", reservation.getMasDivision().getId());
+				queryStr += " AND r.RESERVATION_TYPE_ID = :RESERVATION_TYPE_ID ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
 			}
-			if (reservation.getReservationBy() != null) {
+			if (masDivision != null) {
 				queryStr = query.getQueryString();
-				queryStr += " AND RESERVATION_BY = :RESERVEBY";
-				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
-				query.setParameter("RESERVEBY", reservation.getReservationBy());
+				queryStr += " AND r.DIVISION_ID = :DIVISION_ID";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
 			}
 			
-			query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
-			if (reservation.getMasreservationtype() != null) {
-				query.setParameter("RESERVETYPE", reservation.getMasreservationtype().getId());
-				}
-			if (reservation.getMasDivision() != null) {
-				query.setParameter("DIVISIONID", reservation.getMasDivision().getId());
+			if (reservationBy != null) {
+				query.setParameter("RESERVATION_BY", "%" + reservationBy + "%");
 			}
-			if (reservation.getReservationBy() != null) {
-				query.setParameter("RESERVEBY", reservation.getReservationBy());
+			if (masReservationType != null) {
+				query.setParameter("RESERVATION_TYPE_ID", masReservationType);
+			}
+			if (masDivision != null) {
+				query.setParameter("DIVISION_ID", masDivision);
 			}
 			List<ReservationDto> reservationDtos = query.list();
 			return reservationDtos;

@@ -21,18 +21,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedNativeQueries({
 	@NamedNativeQuery(name="GET_RESERVATIONS",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,null as ROOM_ID, "+
+		query = "SELECT r.ID, r.START_TIME, r.END_TIME, r.DESCRIPTION as TITLE, r.DESCRIPTION, null as ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
-	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
-				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')"+
-				"AND r.ROOM_ID = :ROOMID",
+				"null as ROOM_NAME ,ro.COLOR as COLOR ,null as RESERVATION_BY FROM RESERVATION r "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
+	            "WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
+				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d')" 
+				/*"AND r.ROOM_ID = :ROOMID"*/,
 		resultClass = ReservationDto.class),
 			
 	@NamedNativeQuery(name="GET_RESERVATION_ID",
-		query = "SELECT r.ID, START_TIME, END_TIME, DATE_RESERVATION, r.DESCRIPTION as TITLE,null as ROOM_ID, "+
+		query = "SELECT r.ID, r.START_TIME, r.END_TIME, r.DATE_RESERVATION, r.DESCRIPTION as TITLE,null as ROOM_ID, "+
 				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, "+
-				"r.DESCRIPTION, RESERVATION_BY FROM RESERVATION r "+
+				"r.DESCRIPTION, RESERVATION_BY ,ro.COLOR as COLOR FROM RESERVATION r "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN EMPLOYEE e ON r.EMPLOYEE_ID = e.ID "+
@@ -45,7 +46,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	@NamedNativeQuery(name="SEARCH_RESERVATION",
 		query="SELECT r.ID, r.START_TIME, r.END_TIME, r.DATE_RESERVATION, null as TITLE, "+
 				"ro.NAME as ROOM_NAME, mr.NAME as RESERVATION_TYPE, md.NAME as DIVISION_NAME, "+
-				"null as DESCRIPTION, r.RESERVATION_BY ,null as ROOM_ID FROM RESERVATION r "+
+				"null as DESCRIPTION, r.RESERVATION_BY ,null as ROOM_ID ,ro.COLOR as COLOR FROM RESERVATION r "+
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
@@ -53,24 +54,27 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		resultClass = ReservationDto.class),
 	
 	@NamedNativeQuery(name="FILTER_RESERVATIONS",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,null as ROOM_ID, "+
-				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION "+
-	            "r WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
-				"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d') ",
-		resultClass = ReservationDto.class),
+	query = "SELECT r.ID,r.START_TIME,r.END_TIME,r.DESCRIPTION as TITLE, r.DESCRIPTION,null as ROOM_ID, "+
+			"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
+			"null as ROOM_NAME ,null as RESERVATION_BY ,ro.COLOR as COLOR FROM RESERVATION r "+
+			"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
+            "WHERE DATE(r.`START_TIME`) >= STR_TO_DATE(:START,'%Y-%m-%d') "+
+			"AND  DATE(r.`END_TIME`) <= STR_TO_DATE(:END,'%Y-%m-%d') ",
+	resultClass = ReservationDto.class),
 		
-	@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
+		@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
+		query = "SELECT r.ID, r.START_TIME, r.END_TIME, r.DESCRIPTION as TITLE, r.DESCRIPTION, r.ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
+				"null as ROOM_NAME ,null as RESERVATION_BY ,ro.COLOR as COLOR FROM RESERVATION r "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') > r.START_TIME AND STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') < r.END_TIME AND r.ROOM_ID = :ROOM",
 		resultClass = ReservationDto.class),
-	
-	@NamedNativeQuery(name="GET_BETWEEN_RESERVATION",
-		query = "SELECT ID,START_TIME,END_TIME,DESCRIPTION as TITLE, DESCRIPTION,ROOM_ID, "+
+		
+		@NamedNativeQuery(name="GET_BETWEEN_RESERVATION",
+		query = "SELECT r.ID,r.START_TIME,r.END_TIME,r.DESCRIPTION as TITLE, r.DESCRIPTION, r.ROOM_ID, "+
 				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
-				"null as ROOM_NAME ,null as RESERVATION_BY FROM RESERVATION r "+
+				"null as ROOM_NAME ,null as RESERVATION_BY ,ro.COLOR as COLOR FROM RESERVATION r "+
+				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"WHERE STR_TO_DATE(:START,'%Y-%m-%d %H:%i:%s') <= r.START_TIME AND STR_TO_DATE(:END,'%Y-%m-%d %H:%i:%s') >= r.END_TIME AND r.ROOM_ID = :ROOM",
 		resultClass = ReservationDto.class)
 					
@@ -116,6 +120,9 @@ public class ReservationDto {
 	
 	@Column(name="RESERVATION_BY")
 	private String reservedBy;
+	
+	@Column(name="COLOR")
+	private String color;
 
 	public Integer getId() {
 		return id;
@@ -195,6 +202,22 @@ public class ReservationDto {
 
 	public void setReservedBy(String reservedBy) {
 		this.reservedBy = reservedBy;
+	}
+
+	public String getRoomId() {
+		return roomId;
+	}
+
+	public void setRoomId(String roomId) {
+		this.roomId = roomId;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	

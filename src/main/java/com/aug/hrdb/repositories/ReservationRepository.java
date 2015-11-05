@@ -8,11 +8,11 @@ import com.aug.hrdb.entities.Reservation;
 
 public interface ReservationRepository  extends GenericRepository<Reservation, Integer>{
 
-	List<ReservationDto> findByDateRange(String start, String end, Integer roomId);
+	List<ReservationDto> findByDateRange(String start, String end);
 
     ReservationDto findReservationById(Integer id);
 
-	List<ReservationDto> searchReservation(Reservation reservation);
+	List<ReservationDto> searchReservation(String reservation,Integer masDivision,Integer masReservationType);
 
     List<ReservationDto> findByTimestamp(String newTime, Integer roomId);
     

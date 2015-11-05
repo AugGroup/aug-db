@@ -13,9 +13,9 @@ public interface ReservationService {
 	public void update(Reservation reservation);
 	public void delete(Reservation reservation);
 	public void create(Reservation reservation);
-	public List<ReservationDto> findByDateRange(String start, String end,Integer roomId);
+	public List<ReservationDto> findByDateRange(String start, String end);
 	public ReservationDto findReservationById(Integer id);
-	public List<ReservationDto> searchReservation(Reservation reservation);
+	public List<ReservationDto> searchReservation(String reservationBy, Integer masDivision, Integer masReservationType);
 
 	public List<ReportReservationDto> findReservation(Integer roomId,Integer reservationTypeId, Integer divisionId,String reservationBy);
 
