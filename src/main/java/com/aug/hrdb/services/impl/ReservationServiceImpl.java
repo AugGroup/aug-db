@@ -58,9 +58,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ReservationDto> findByDateRange(String start, String end, Integer roomId) {
+	public List<ReservationDto> findByDateRange(String start, String end) {
 		// TODO Auto-generated method stub
-		return reservationRepository.findByDateRange(start, end, roomId);
+		return reservationRepository.findByDateRange(start, end);
 	}
 
 	@Override
@@ -70,9 +70,9 @@ public class ReservationServiceImpl implements ReservationService {
 	}
 
 	@Override
-	public List<ReservationDto> searchReservation(Reservation reservation) {
+	public List<ReservationDto> searchReservation(String reservationBy,Integer masDivision, Integer masReservationType) {
 		// TODO Auto-generated method stub
-		return reservationRepository.searchReservation(reservation);
+		return reservationRepository.searchReservation(reservationBy,masDivision,masReservationType);
 		
 	}
 

@@ -22,14 +22,14 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		}
 
 		@Override
-		public List<ReservationDto> findByDateRange(String start, String end,Integer roomId) {
+		public List<ReservationDto> findByDateRange(String start, String end) {
 			// TODO Auto-generated method stub
 			
 			Query query = getCurrentSession()
 					.getNamedQuery("GET_RESERVATIONS")
 					.setParameter("START", start)
-					.setParameter("END", end)
-					.setParameter("ROOMID", roomId);
+					.setParameter("END", end);
+					//.setParameter("ROOMID", roomId);
 			List<ReservationDto> list = query.list();
 			System.out.println(list.toString());
 			return list;
@@ -45,12 +45,39 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 		}
 
 		@Override
-		public List<ReservationDto> searchReservation(Reservation reservation) {
+		public List<ReservationDto> searchReservation(String reservationBy, Integer masDivision, Integer masReservationType) {
 			// TODO Auto-generated method stub
-			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");
-			query.setParameter("RESERVATION_TYPE", reservation.getMasreservationtype().getId());
-			query.setParameter("DIVISION_ID", reservation.getMasDivision().getId());
-			query.setParameter("RESERVED_BY", reservation.getReservationBy());
+			Query query = getCurrentSession().getNamedQuery("SEARCH_RESERVATION");	
+			String queryStr = query.getQueryString();
+
+			if (reservationBy != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND r.RESERVATION_BY = :RESERVATION_BY ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
+			if (masReservationType != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND r.RESERVATION_TYPE_ID = :RESERVATION_TYPE_ID ";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
+			if (masDivision != null) {
+				queryStr = query.getQueryString();
+				queryStr += " AND r.DIVISION_ID = :DIVISION_ID";
+				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReportReservationDto.class);
+			}
+			
+			if (reservationBy != null) {
+				query.setParameter("RESERVATION_BY", "%" + reservationBy + "%");
+			}
+			if (masReservationType != null) {
+				query.setParameter("RESERVATION_TYPE_ID", masReservationType);
+			}
+			if (masDivision != null) {
+				query.setParameter("DIVISION_ID", masDivision);
+			}
+			
+			
+			
 			List<ReservationDto> reservationDtos = query.list();
 			return reservationDtos;
 		}
