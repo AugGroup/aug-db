@@ -72,6 +72,7 @@ public class ReservationServiceImpl implements ReservationService {
 	@Override
 	public List<ReservationDto> searchReservation(String reservationBy,Integer masDivision, Integer masReservationType) {
 		// TODO Auto-generated method stub
+		System.out.println( "do search");
 		return reservationRepository.searchReservation(reservationBy,masDivision,masReservationType);
 		
 	}

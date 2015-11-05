@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"LEFT JOIN MAS_DIVISION md ON r.DIVISION_ID = md.ID "+
 				"LEFT JOIN MAS_RESERVATION_TYPE mr ON r.RESERVATION_TYPE_ID = mr.ID "+
-				"WHERE 1 ",
+				"WHERE 1=1 ",
 		resultClass = ReservationDto.class),
 	
 	@NamedNativeQuery(name="FILTER_RESERVATIONS",
