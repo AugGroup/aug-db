@@ -33,6 +33,9 @@ public class AugRequest extends BaseEntity {
 	@Column(name = "STATUS")
 	private String status;
 	
+	@Column(name = "JOBCASE_STATUS")
+	private String jobCaseStatus;
+	
 	@Column(name = "NUMBER_APPLICANT")
 	private Integer numberApplicant;
 
@@ -184,4 +187,13 @@ public class AugRequest extends BaseEntity {
 	public void setApplicant(List<Applicant> applicant) {
 		this.applicant = applicant;
 	}
+
+	public String getJobCaseStatus() {
+		return jobCaseStatus;
+	}
+
+	public void setJobCaseStatus(String jobCaseStatus) {
+		this.jobCaseStatus = jobCaseStatus;
+	}
+	
 }
