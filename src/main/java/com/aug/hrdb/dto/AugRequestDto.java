@@ -20,7 +20,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Entity
 @NamedNativeQueries({
 		@NamedNativeQuery(name = "SEARCH_ALL_REQUEST", query = "SELECT a.ID, a.REQUEST_DATE, a.STATUS,a.APPROVE_DATE, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL, "
-				+ " a.YEAR_EXPERIENCE,j.NAME as MAS_JOB_LEVEL_NAME,t.NAME as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, a.REQUEST_ID, a.APPROVE_ID, "
+				+ " a.YEAR_EXPERIENCE,j.NAME as MAS_JOB_LEVEL_NAME,t.NAME as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, "
+				+ " a.REQUEST_ID, a.APPROVE_ID, a.JOBCASE_CODE, a.JOBCASE_STATUS "
 				+ " appR.FIRSTNAME_EN AS REQUESTER_NAME, appA.FIRSTNAME_EN AS APPROVAL_NAME "
 				+ "FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.MASJOBLEVEL_ID = j.ID "
 				+ "LEFT JOIN MAS_TECHNOLOGY t ON a.MASTECHNOLOGY_ID = t.ID "
@@ -31,7 +32,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "ORDER BY ID DESC", resultClass = AugRequestDto.class), //REQUEST_ID ASC LIMIT 0,50
 		
 		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID", query = "SELECT a.ID, a.REQUEST_DATE, a.STATUS,a.APPROVE_DATE, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE,j.NAME as MAS_JOB_LEVEL_NAME,t.NAME as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID, a.REQUEST_ID, a.APPROVE_ID,"
+				+ " a.YEAR_EXPERIENCE,j.NAME as MAS_JOB_LEVEL_NAME,t.NAME as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID, "
+				+ " a.REQUEST_ID, a.APPROVE_ID, a.JOBCASE_CODE, a.JOBCASE_STATUS "
 				+ " appR.FIRSTNAME_EN AS REQUESTER_NAME, appA.FIRSTNAME_EN AS APPROVAL_NAME "
 				+ " FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.MASJOBLEVEL_ID = j.ID "
 				+ "LEFT JOIN EMPLOYEE er ON a.REQUEST_ID = er.ID "
@@ -42,7 +44,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		//TEST SQLGrammaException		
 		
 		@NamedNativeQuery(name = "SEARCH_REQUEST_BY_ID_TEST", query = "SELECT a.ID, a.REQUEST_DATE, a.STATUS,a.APPROVE_DATE, a.NUMBER_APPLICANT, a.SPECIFIC_SKILL,"
-				+ " a.YEAR_EXPERIENCE,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID, a.REQUEST_ID, a.APPROVE_ID,"
+				+ " a.YEAR_EXPERIENCE,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID, j.ID, t.ID, "
+				+ " a.REQUEST_ID, a.APPROVE_ID, a.JOBCASE_CODE, a.JOBCASE_STATUS "
 				+ " appR.FIRSTNAME_EN AS REQUESTER_NAME, appA.FIRSTNAME_EN AS APPROVAL_NAME "
 				+ " FROM AUG_REQUEST a LEFT JOIN MAS_JOBLEVEL j ON a.MASJOBLEVEL_ID = j.ID "
 				+ "LEFT JOIN MAS_TECHNOLOGY t ON a.MASTECHNOLOGY_ID = t.ID "
@@ -56,7 +59,10 @@ public class AugRequestDto {
 
 	@Id
 	@Column(name = "ID")
-	private Integer id;  
+	private Integer id;
+	
+	@Column(name = "JOBCASE_CODE")
+	private String jobcaseCode;
 
 	@Column(name = "MAS_JOB_LEVEL_NAME")
 	private String masJobLevelName;
@@ -73,6 +79,9 @@ public class AugRequestDto {
 
 	@Column(name = "STATUS")
 	private String status;
+	
+	@Column(name = "JOBCASE_STATUS")
+	private String jobcaseStatus;
 
 	@Column(name = "APPROVAL_NAME")
 	private String approvalName;
@@ -290,6 +299,22 @@ public class AugRequestDto {
 
 	public void setRequester(Employee requester) {
 		this.requester = requester;
+	}
+
+	public String getJobcaseCode() {
+		return jobcaseCode;
+	}
+
+	public void setJobcaseCode(String jobcaseCode) {
+		this.jobcaseCode = jobcaseCode;
+	}
+
+	public String getJobcaseStatus() {
+		return jobcaseStatus;
+	}
+
+	public void setJobcaseStatus(String jobcaseStatus) {
+		this.jobcaseStatus = jobcaseStatus;
 	}
 	
 }
