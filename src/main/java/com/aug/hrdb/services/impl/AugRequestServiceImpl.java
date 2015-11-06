@@ -23,9 +23,6 @@ public class AugRequestServiceImpl implements AugRequestService {
 	@Autowired
 	AugRequestRepository augRequestRepository;
 
-//	@Autowired
-//	private PositionRepository positionRepository;
-
 	@Override
 	public AugRequest findById(Integer augRequestId) {
 		return augRequestRepository.find(augRequestId);
@@ -60,34 +57,19 @@ public class AugRequestServiceImpl implements AugRequestService {
 
 	@Override
 	public List<AugRequestDto> findAllAugRequest() {
-		List<AugRequestDto> augRequests = augRequestRepository
-				.findAllAugRequest();
-/*		for (AugRequestDto augRequest : augRequests) {
-			String positionStr = positionRepository.findById(
-					augRequest.getPositionRequest()).getPositionName();
-			augRequest.setPositionStr(positionStr);
-		}*/
-		return augRequests;
+		return augRequestRepository.findAllAugRequest();
 	}
 
 	@Override
 	public AugRequestDto findAugRequestById(Integer id) {
-		AugRequestDto augRequest = augRequestRepository.findAugRequestById(id);
-/*		String positionStr = positionRepository.findById(id).getPositionName();
-		augRequest.setPositionStr(positionStr);*/
-
-		return augRequest;
+		return augRequestRepository.findAugRequestById(id);
 	}
 
 	
 	/*--------------------For test SQLGrammaEception----------------------*/
 	@Override
 	public AugRequestDto findAugRequestByIdTest(Integer id) {
-		AugRequestDto augRequest = augRequestRepository.findAugRequestByIdTest(id);
-/*		String positionStr = positionRepository.findById(id).getPositionName();
-		augRequest.setPositionStr(positionStr);*/
-
-		return augRequest;
+		return augRequestRepository.findAugRequestByIdTest(id);
 	}
 
 }

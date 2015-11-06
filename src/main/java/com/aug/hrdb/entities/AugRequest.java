@@ -188,11 +188,11 @@ public class AugRequest extends BaseEntity {
 		this.applicant = applicant;
 	}
 
-	public String getJobCaseStatus() {
+	public String getJobcaseStatus() {
 		return jobcaseStatus;
 	}
 
-	public void setJobCaseStatus(String jobcaseStatus) {
+	public void setJobcaseStatus(String jobcaseStatus) {
 		this.jobcaseStatus = jobcaseStatus;
 	}
 	
