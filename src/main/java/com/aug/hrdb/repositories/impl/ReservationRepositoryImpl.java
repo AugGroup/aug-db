@@ -53,7 +53,7 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 
 			if (reservationBy != null && !reservationBy.isEmpty() ) {
 				queryStr = query.getQueryString();
-				queryStr += " AND r.RESERVATION_BY LIKE :RESERVATIONBY ";
+				queryStr += " AND CONCAT(FIRSTNAME_EN,' ',LASTNAME_EN) LIKE :RESERVATIONBY ";
 				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
 				query.setParameter("RESERVATIONBY", "'%" + reservationBy + "%'");
 			}
@@ -149,7 +149,7 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			}
 			if (reserveBy != null && !reserveBy.isEmpty()) {
 				queryStr = query.getQueryString();
-				queryStr += " AND RESERVATION_BY LIKE :RESERVED_BY ";
+				queryStr += " AND CONCAT(FIRSTNAME_EN,' ',LASTNAME_EN) LIKE :RESERVED_BY ";
 				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
 				query.setParameter("RESERVED_BY", "%"+reserveBy+"%");
 			}
