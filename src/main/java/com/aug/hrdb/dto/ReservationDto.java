@@ -70,7 +70,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		
 		@NamedNativeQuery(name="GET_RESERVATION_BY_TIMESTAMP",
 		query = "SELECT r.ID, r.START_TIME, r.END_TIME, r.DESCRIPTION as TITLE, r.DESCRIPTION, r.ROOM_ID, "+
-				"null as RELATION_NAME, nulql as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
+				"null as RELATION_NAME, null as DIVISION_NAME, null as DATE_RESERVATION, null as RESERVATION_TYPE, "+
 				"null as ROOM_NAME ,null as EMPLOYEE_ID, null as FIRSTNAME, null as LASTNAME ,ro.COLOR as COLOR FROM RESERVATION r "+
 				"LEFT JOIN ROOM ro ON r.ROOM_ID = ro.ID "+
 				"WHERE STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') > r.START_TIME AND STR_TO_DATE(:NEW,'%Y-%m-%d %H:%i:%s') < r.END_TIME AND r.ROOM_ID = :ROOM",
