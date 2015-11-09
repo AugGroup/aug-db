@@ -40,6 +40,9 @@ public class Appointment {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss",iso = DateTimeFormat.ISO.NONE,style="MM")
 	private Date end;
 	
+	@Column(name="COLOR",nullable = false)
+	private String color;
+	
 	@JsonIgnore
 	@ManyToOne
 	@JoinColumn(name = "APPLICANT_ID", referencedColumnName="ID")
@@ -115,6 +118,14 @@ public class Appointment {
 
 	public void setMailStatus(Integer mailStatus) {
 		this.mailStatus = mailStatus;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package com.aug.hrdb.services;
 
-import java.io.Serializable;
 //import java.sql.Date;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface AppointmentService {
 	public void update(Appointment appointment);
 	public void delete(Appointment appointment);
 	public void create(Appointment appointment);
-	public  List<AppointmentDto> findAppointment(String start, String end, Integer mailStatus);
+	public  List<AppointmentDto> findAppointment(String start, String end);
 	public Appointment find(Integer id);
 	public int countMailStatus(Integer status);
 }

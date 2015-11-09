@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 	
 	@NamedNativeQuery(name = "FIND_APPOINTMENT", 
 			query = "SELECT APPOINTMENT.ID , APPOINTMENT.DETAIL , APPOINTMENT.END , APPOINTMENT.START ,APPOINTMENT.TOPIC ,APPOINTMENT.APPLICANT_ID ,APPOINTMENT.LOGIN_ID , null as APPLICANT_TRACKING_STATUS, " +
-					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
+					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, APPOINTMENT.COLOR, "+
 					"CONCAT((CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME) as APPLICANT_POSITION , CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ',CONCAT( (CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME),' )') as TITLE ,"+
 					"null as LOGIN_NAME, APPOINTMENT.MAIL_STATUS "+
 					"FROM APPOINTMENT " +
@@ -26,14 +26,14 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
 					"LEFT JOIN MAS_JOBLEVEL mj ON appl.MASJOBLEVEL_ID = mj.ID "+
 					"LEFT JOIN  LOGIN  on APPOINTMENT.LOGIN_ID = LOGIN.ID " +
-					"WHERE APPOINTMENT.MAIL_STATUS = :MAILSTATUS AND ( DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d') )", resultClass = AppointmentDto.class),
+					"WHERE ( DATE(APPOINTMENT.START) >=STR_TO_DATE(:START,'%Y-%m-%d') AND  DATE(APPOINTMENT.END) <= STR_TO_DATE(:END,'%Y-%m-%d') )", resultClass = AppointmentDto.class),
 	
 	@NamedNativeQuery(name = "GET_APPOINTMENT_BY_ID", 
 			query = "SELECT appo.ID , appo.DETAIL , appo.END , appo.START ,appo.TOPIC ,appo.APPLICANT_ID ,appo.LOGIN_ID, appl.TRACKING_STATUS as APPLICANT_TRACKING_STATUS, " +
 					"CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN) as APPLICANT_NAME, "+
 					"CONCAT((CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME) as APPLICANT_POSITION , "+
 					"CONCAT(CONCAT(appl.FIRSTNAME_EN,' ',appl.LASTNAME_EN),' ( ', CONCAT( (CASE WHEN mt.NAME = '-' THEN ''ELSE mt.NAME END),' ',mj.NAME), ' )') as TITLE, " +
-					"CONCAT(empApp.FIRSTNAME_EN,' ',empApp.LASTNAME_EN) as LOGIN_NAME, appo.MAIL_STATUS "+
+					"CONCAT(empApp.FIRSTNAME_EN,' ',empApp.LASTNAME_EN) as LOGIN_NAME, appo.MAIL_STATUS, appo.COLOR "+
 					"FROM APPOINTMENT appo " +
 					"LEFT JOIN APPLICANT appl on appo.APPLICANT_ID = appl.ID " + 
 					"LEFT JOIN MAS_TECHNOLOGY mt ON appl.MASTECHNOLOGY_ID = mt.ID "+
@@ -57,6 +57,8 @@ public class AppointmentDto {
 	@Column(name = "DETAIL")
 	private String detail;
 	
+	@Column(name = "COLOR")
+	private String color;
 
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd HH:mm:ss", timezone="Asia/Bangkok")
 	@Column(name = "START")
@@ -195,6 +197,14 @@ public class AppointmentDto {
 
 	public void setMailStatus(Integer mailStatus) {
 		this.mailStatus = mailStatus;
+	}
+
+	public String getColor() {
+		return color;
+	}
+
+	public void setColor(String color) {
+		this.color = color;
 	}
 	
 	

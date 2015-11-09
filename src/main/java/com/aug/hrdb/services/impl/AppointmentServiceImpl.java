@@ -66,9 +66,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public List<AppointmentDto> findAppointment(String start, String end, Integer mailStatus) {
+	public List<AppointmentDto> findAppointment(String start, String end) {
 		// TODO Auto-generated method stub
-		return appointmentRepository.findAppointment(start, end, mailStatus);
+		return appointmentRepository.findAppointment(start, end);
 	}
 
 	@Override
@@ -83,7 +83,4 @@ public class AppointmentServiceImpl implements AppointmentService {
 		
 		return appointmentRepository.countMailStatus(status);
 	}
-
-	
-
 }

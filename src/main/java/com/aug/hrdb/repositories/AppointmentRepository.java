@@ -17,7 +17,7 @@ public interface AppointmentRepository extends GenericRepository<Appointment, In
 
 	void delete(Appointment appointment);
 
-	List<AppointmentDto> findAppointment(String start, String end, Integer mailStatus);
+	List<AppointmentDto> findAppointment(String start, String end);
 	
 	public AppointmentDto findById(Integer id);
 	

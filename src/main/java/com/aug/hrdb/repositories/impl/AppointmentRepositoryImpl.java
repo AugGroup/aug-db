@@ -1,7 +1,6 @@
 package com.aug.hrdb.repositories.impl;
 
 import java.math.BigInteger;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 //import java.sql.Date;
 import java.util.List;
@@ -38,12 +37,11 @@ public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment
 	}
 
 	@Override
-	public List<AppointmentDto> findAppointment(String start, String end,Integer mailStatus) {
+	public List<AppointmentDto> findAppointment(String start, String end) {
 		// TODO Auto-generated method stub
 		org.hibernate.Query query = getCurrentSession().getNamedQuery("FIND_APPOINTMENT");
 		query.setParameter("START", start);
 		query.setParameter("END", end);
-		query.setParameter("MAILSTATUS", mailStatus);
 		List<AppointmentDto> appointments = query.list();
 		
 		return appointments;
