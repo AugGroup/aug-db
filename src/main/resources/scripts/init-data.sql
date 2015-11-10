@@ -503,6 +503,22 @@ INSERT INTO MAIL_TEMPLATE VALUES(1,'JAVA','<p>Dear K. $FIRST_NAME</p>
 <p>Bangkok | Singapore | Melbourne | Sydney | Jakarta</p>
 
 <p>&lt;<a href="http://www.augmentis.biz/">http://www.augmentis.biz/</a>&gt;</p>
+'),
+(2,'New Job Case','<p>New Job Case Code &nbsp;: $CODE</p>
+
+<p>Request by : $REQUESTER</p>
+
+<p>Request Date :&nbsp;$REQUESTE_DATE</p>
+
+<p>JobLevel : $JOB_LEVEL</p>
+
+<p>Technology : $TECHNOLOGY</p>
+
+<p>Quantity of Applicant : $QUANTITY</p>
+
+<p>Specific Skill : $SKILL</p>
+
+<p>Year Experience : $EXPERIENCE</p>
 ');
 
 --Room
