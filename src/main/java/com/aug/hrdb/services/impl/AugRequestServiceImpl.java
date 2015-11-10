@@ -72,5 +72,10 @@ public class AugRequestServiceImpl implements AugRequestService {
 		return augRequestRepository.findAugRequestByIdTest(id);
 	}
 
+	@Override
+	public List<AugRequestDto> getJobcaseCode() {
+		return augRequestRepository.getJobcaseCode();
+	}
+
 }
 

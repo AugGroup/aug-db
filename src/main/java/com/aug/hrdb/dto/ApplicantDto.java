@@ -33,7 +33,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "a.APPLICANT_STATUS, a.APPLY_DATE, a.EMERGENCY_NAME, a.EMERGENCY_TEL, a.EMERGENCY_ADDRESS, a.NOTICE_NEWSPAPER, a.NOTICE_MAGAZINE, a.NOTICE_FRIEND, a.NOTICE_WEBSITE, a.NOTICE_OTHER, a.TRACKING_STATUS,"
 		+ "a.EXPECTED_SALARY, a.CARD_ID, a.CARD_ISSUED_OFFICE, a.CARD_EXPIRY_DATE, a.MILITARY_FROM_YEAR, a.MILITARY_TO_YEAR, a.MILITARY_PLACE, a.MILITARY_SERVICE_NO, a.MILITARY_REASON, a.MILITARY_STATUS, a.NEWSPAPER_DESCRIPTION, a.MAGAZINE_DESCRIPTION, a.FRIEND_DESCRIPTION, a.WEBSITE_DESCRIPTION, a.OTHER_DESCRIPTION,"
 		+ "a.NUMBER_OF_CHILDREN, a.SPOUSE_NAME, a.MARRIAGE_CERTIFICATE_NO, a.ISSUE_OFFICE_MARRIAGE, a.OCCUPATION_MARRIAGE, a.SCORE, a.TECH_SCORE, a.ATTITUDE_HOME, a.ATTITUDE_OFFICE, a.NOW_EMPLOYED, a.EMPLOYED_NAME, a.EMPLOYED_POSITION, a.LOCATION,"
-		+ "a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS, a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, a.EMERGENCY_NAME,a.EMERGENCY_TEL,a.EMERGENCY_ADDRESS,a.RESUME,a.TRANSCRIPT,a.IMAGE,a.SEX, a.CREATEDTIMESTAMP, a.CREATEDBY,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID,job.ID,tech.ID, job.NAME,tech.NAME, job.TAG, request.JOBCASE_CODE  "
+		+ "a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS, a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, a.EMERGENCY_NAME,a.EMERGENCY_TEL,a.EMERGENCY_ADDRESS,a.RESUME,a.TRANSCRIPT,a.IMAGE,a.SEX, a.CREATEDTIMESTAMP, a.CREATEDBY,a.MASJOBLEVEL_ID,a.MASTECHNOLOGY_ID,job.ID,tech.ID, job.NAME,tech.NAME, job.TAG, request.JOBCASE_CODE, request.ID as JOBCASE_ID  "
 		+ " FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 		+ " LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
 		+ " LEFT JOIN AUG_REQUEST request ON request.ID = a.AUGREQUEST_ID "
@@ -45,7 +45,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ " null as EXPECTED_SALARY, null as CARD_ID, null as CARD_ISSUED_OFFICE, null as CARD_EXPIRY_DATE, null as MILITARY_FROM_YEAR, null as MILITARY_TO_YEAR, null as MILITARY_PLACE, null as MILITARY_SERVICE_NO, a.MILITARY_REASON, null as MILITARY_STATUS, null as NEWSPAPER_DESCRIPTION, null as MAGAZINE_DESCRIPTION, null as FRIEND_DESCRIPTION, null as WEBSITE_DESCRIPTION, null as OTHER_DESCRIPTION,"
 			+ " null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME, null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as TECH_SCORE, null as MAS_JOB_LEVEL, null as MAS_TECHNOLOGY, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as LOCATION,"
 			+ " null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as EMERGENCY_NAME, null as EMERGENCY_TEL, null as EMERGENCY_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, null as SEX, null as MASJOBLEVEL_ID, null as MASTECHNOLOGY_ID, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE, null as TRACKING_STATUS, null as MAS_JOB_LEVEL_NAME, null as MAS_TECHNOLOGY_NAME,"
-			+ " null as TAG, MAX(a.ID) AS ID, null as JOBCASE_CODE "
+			+ " null as TAG, MAX(a.ID) AS ID, null as JOBCASE_CODE, null as JOBCASE_ID "
 			+ " FROM APPLICANT a ", resultClass = ApplicantDto.class),
 	
 	@NamedNativeQuery(name = "SEARCH_APPLICANT", query = " SELECT null as FIRSTNAME_TH, null as LASTNAME_TH, null as NICKNAME_TH, null as NICKNAME_EN, "
@@ -55,7 +55,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "null as MILITARY_SERVICE_NO, null as MILITARY_REASON, null as MILITARY_STATUS, null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME,"
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE, null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME, "
 			+ "null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, null as MASTECHNOLOGY_ID, "
-			+ "a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, a.CREATEDTIMESTAMP, a.CREATEDBY, job.NAME, job.ID, tech.NAME, tech.ID ,a.LOCATION, job.TAG, request.JOBCASE_CODE  "
+			+ "a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, a.CREATEDTIMESTAMP, a.CREATEDBY, job.NAME, job.ID, tech.NAME, tech.ID ,a.LOCATION, job.TAG, request.JOBCASE_CODE, request.ID as JOBCASE_ID  "
 			+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
 			+ " LEFT JOIN AUG_REQUEST request ON request.ID = a.AUGREQUEST_ID "
@@ -69,7 +69,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE,"
 			+ "null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS, null as PREVIOUS_EMPLOYERS_REASON,"
 			+ "null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, null as MASTECHNOLOGY_ID, "
-			+ " a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID ,a.LOCATION, job.TAG, request.JOBCASE_CODE "
+			+ " a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID ,a.LOCATION, job.TAG, request.JOBCASE_CODE, request.ID as JOBCASE_ID "
 			+ " FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 			+ " LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID"
 			+ " LEFT JOIN AUG_REQUEST request ON request.ID = a.AUGREQUEST_ID "
@@ -83,7 +83,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					+ "a.MARRIAGE_CERTIFICATE_NO, a.ISSUE_OFFICE_MARRIAGE, a.OCCUPATION_MARRIAGE, a.SCORE, a.TECH_SCORE, a.ATTITUDE_HOME, a.ATTITUDE_OFFICE,"
 					+ "a.PLACE_BIRTH, a.NOW_EMPLOYED, a.EMPLOYED_NAME, a.EMPLOYED_POSITION, a.EMPLOYED_RELATION, a.BRANCH_SERVICE, a.PREVIOUS_EMPLOYERS,"
 					+ "a.PREVIOUS_EMPLOYERS_REASON, a.DATE_TO_BE_DRAFTED, a.MARRIAGE_ADDRESS, a.RESUME, a.TRANSCRIPT, a.IMAGE, null as MASTECHNOLOGY_ID, a.LOCATION,"
-					+ " a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, a.CREATEDTIMESTAMP, a.CREATEDBY, job.NAME, job.ID, tech.NAME, tech.ID, job.TAG, request.JOBCASE_CODE  "
+					+ " a.ID, a.APPLICANT_CODE, a.FIRSTNAME_EN, a.LASTNAME_EN, a.TEL, a.EMAIL, a.APPLY_DATE, a.MASJOBLEVEL_ID, a.TRACKING_STATUS, a.CREATEDTIMESTAMP, a.CREATEDBY, job.NAME, job.ID, tech.NAME, tech.ID, job.TAG, request.JOBCASE_CODE, request.ID as JOBCASE_ID  "
 					+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 					+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
 					+ " LEFT JOIN AUG_REQUEST request ON request.ID = a.AUGREQUEST_ID "
@@ -97,40 +97,24 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE,"
 			+ "null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS,"
 			+ "null as PREVIOUS_EMPLOYERS_REASON, null as CREATEDBY, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE,"
-			+ " a.ID, null as APPLICANT_CODE,null as CREATEDTIMESTAMP, a.FIRSTNAME_EN, a.LASTNAME_EN, null as TEL, null as EMAIL, null as APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID,a.LOCATION, job.TAG, request.JOBCASE_CODE "
+			+ " a.ID, null as APPLICANT_CODE,null as CREATEDTIMESTAMP, a.FIRSTNAME_EN, a.LASTNAME_EN, null as TEL, null as EMAIL, null as APPLY_DATE, a.MASJOBLEVEL_ID, a.MASTECHNOLOGY_ID, a.TRACKING_STATUS, job.NAME, job.ID, tech.NAME, tech.ID,a.LOCATION, job.TAG, request.JOBCASE_CODE, request.ID as JOBCASE_ID "
 			+ "FROM APPLICANT a LEFT JOIN MAS_JOBLEVEL job ON a.MASJOBLEVEL_ID = job.ID "
 			+ "LEFT JOIN MAS_TECHNOLOGY tech ON a.MASTECHNOLOGY_ID = tech.ID "
 			+ " LEFT JOIN AUG_REQUEST request ON request.ID = a.AUGREQUEST_ID "
-			+ "WHERE a.TRACKING_STATUS = :TRACKING_STATUS", resultClass = ApplicantDto.class),
-	
-
-//	@NamedNativeQuery(name = "CHECK_TAG", query = "SELECT null as FIRSTNAME_TH, null as LASTNAME_TH, null as NICKNAME_TH, null as NICKNAME_EN, "
-//			+ "null as JOB_LEVEL_NAME,null as TECHNOLOGY_NAME,null as MAS_JOB_LEVEL_NAME,null as MAS_TECHNOLOGY_NAME, null as BIRTHDATE, null as AGE, null as HEIGHT, null as WEIGHT, null as SEX, null as RELIGION, null as NATIONALITY, null as APPLICANT_STATUS, null as EMERGENCY_NAME, null as EMERGENCY_TEL,"
-//			+ "null as EMERGENCY_ADDRESS, null as NOTICE_NEWSPAPER, null as NOTICE_MAGAZINE, null as NOTICE_FRIEND, null as NOTICE_WEBSITE, null as NOTICE_OTHER, null as NEWSPAPER_DESCRIPTION, null as MAGAZINE_DESCRIPTION, null as FRIEND_DESCRIPTION, null as WEBSITE_DESCRIPTION, null as OTHER_DESCRIPTION,"
-//			+ "null as EXPECTED_SALARY, null as CARD_ID, null as CARD_ISSUED_OFFICE, null as CARD_EXPIRY_DATE, null as MILITARY_FROM_YEAR, null as MILITARY_TO_YEAR, null as MILITARY_PLACE,"
-//			+ "null as MILITARY_SERVICE_NO, null as MILITARY_REASON, null as MILITARY_STATUS, null as NUMBER_OF_CHILDREN, null as SPOUSE_NAME,"
-//			+ "null as MARRIAGE_CERTIFICATE_NO, null as ISSUE_OFFICE_MARRIAGE, null as OCCUPATION_MARRIAGE, null as SCORE, null as TECH_SCORE, null as ATTITUDE_HOME, null as ATTITUDE_OFFICE,"
-//			+ "null as PLACE_BIRTH, null as NOW_EMPLOYED, null as EMPLOYED_NAME, null as EMPLOYED_POSITION, null as EMPLOYED_RELATION, null as BRANCH_SERVICE, null as PREVIOUS_EMPLOYERS,"
-//			+ "null as PREVIOUS_EMPLOYERS_REASON, null as CREATEDBY, null as DATE_TO_BE_DRAFTED, null as MARRIAGE_ADDRESS, null as RESUME, null as TRANSCRIPT, null as IMAGE, "
-//			+ "null as ID, null as APPLICANT_CODE,null as CREATEDTIMESTAMP, null as FIRSTNAME_EN, null as LASTNAME_EN, null as TEL, null as EMAIL, null as APPLY_DATE, "
-//			+ "null as MASJOBLEVEL_ID, null as MASTECHNOLOGY_ID, null as TRACKING_STATUS, job.NAME, job.ID, null as LOCATION, job.TAG "
-//			+ "FROM MAS_JOBLEVEL job "
-//			+ "WHERE job.TAG =:TAG", resultClass = ApplicantDto.class),
+			+ "WHERE a.TRACKING_STATUS = :TRACKING_STATUS", resultClass = ApplicantDto.class)
 
 	})
 public class ApplicantDto {
-//	@Column(name = "POSITION_NAME")
-//	private String positionName;
 	
+	@Id
+	@Column(name = "ID")
+	private Integer id;
+
 	@Column(name = "MAS_JOB_LEVEL_NAME")
 	private String masJobLevelName;
 	
 	@Column(name = "MAS_TECHNOLOGY_NAME")
 	private String masTechnologyName;
-	
-	@Id
-	@Column(name = "ID")
-	private Integer id;
 
 	@Column(name = "APPLICANT_CODE")
 	private String code;
@@ -187,9 +171,6 @@ public class ApplicantDto {
 	@Column(name = "APPLY_DATE")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	private Date applyDate;
-
-	@Transient
-	private String applyDateStr;
 
 	@Column(name = "EMERGENCY_NAME")
 	private String emergencyName;
@@ -340,6 +321,12 @@ public class ApplicantDto {
 	@Column(name = "MASTECHNOLOGY_ID")
 	private Integer technologyId;
 	
+	@Column(name = "JOB_LEVEL_NAME")
+	private String joblevelStr;
+
+	@Column(name = "TECHNOLOGY_NAME")
+	private String technologyStr;
+	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
 	@Column(name = "CREATEDTIMESTAMP")
 	private Date createdTimeStamp;
@@ -351,7 +338,13 @@ public class ApplicantDto {
 	private String tag;
 	
 	@Column(name = "JOBCASE_CODE")
-	private String jobcase_code;
+	private String jobcaseCode;
+	
+	@Column(name = "JOBCASE_ID")
+	private Integer jobcaseCodeId;
+	
+	@Transient
+	private String applyDateStr;
 
 	@Transient
 	private MultipartFile resumeMultipartFile;
@@ -391,19 +384,6 @@ public class ApplicantDto {
 
 	@Transient
 	private MasTechnology technology;
-	
-//	@Transient
-	@Column(name = "JOB_LEVEL_NAME")
-	private String joblevelStr;
-
-//	@Transient
-	@Column(name = "TECHNOLOGY_NAME")
-	private String technologyStr;
-	
-	
-	/*@Transient
-	private List<AugRequest> augRequests ;
-	*/
 	
 	@Transient
 	private AugRequest augRequest;
@@ -1128,12 +1108,20 @@ public class ApplicantDto {
 		this.tag = tag;
 	}
 
-	public String getJobcase_code() {
-		return jobcase_code;
+	public String getJobcaseCode() {
+		return jobcaseCode;
 	}
 
-	public void setJobcase_code(String jobcase_code) {
-		this.jobcase_code = jobcase_code;
+	public void setJobcaseCode(String jobcaseCode) {
+		this.jobcaseCode = jobcaseCode;
+	}
+
+	public Integer getJobcaseCodeId() {
+		return jobcaseCodeId;
+	}
+
+	public void setJobcaseCodeId(Integer jobcaseCodeId) {
+		this.jobcaseCodeId = jobcaseCodeId;
 	}
 
 }

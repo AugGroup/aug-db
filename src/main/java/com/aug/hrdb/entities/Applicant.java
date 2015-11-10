@@ -226,6 +226,10 @@ public class Applicant extends BaseEntity{
 	
 	@Column(name = "LOCATION")
 	private String masLocation;
+	
+	@ManyToOne
+	@JoinColumn(name = "AUGREQUEST_ID", referencedColumnName="id")
+	private AugRequest augRequest;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
@@ -267,9 +271,6 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy ="applicant",cascade=CascadeType.REMOVE)
 	private List<Appointment> appointments;
 	
-	@Transient
-	private String reportType;
-	
 	@JsonIgnore
 	@OneToOne(mappedBy="applicant",cascade=CascadeType.REMOVE)
 	private Employee employee;
@@ -279,17 +280,8 @@ public class Applicant extends BaseEntity{
 	@JoinColumn(name = "OFFICIAL_ID",nullable = true)
 	private Official official;
 
-	@ManyToOne
-	@JoinColumn(name = "AUGREQUEST_ID", referencedColumnName="id")
-	private AugRequest augRequest;
-
-	public AugRequest getAugRequest() {
-		return augRequest;
-	}
-
-	public void setAugRequest(AugRequest augRequest) {
-		this.augRequest = augRequest;
-	}
+	@Transient
+	private String reportType;
 
 	public String getReportType() {
 		return reportType;
@@ -554,30 +546,6 @@ public class Applicant extends BaseEntity{
 	public void setOtherDescription(String otherDescription) {
 		this.otherDescription = otherDescription;
 	}
-
-//	public Position getPosition1() {
-//		return position1;
-//	}
-//
-//	public void setPosition1(Position position1) {
-//		this.position1 = position1;
-//	}
-//
-//	public Position getPosition2() {
-//		return position2;
-//	}
-//
-//	public void setPosition2(Position position2) {
-//		this.position2 = position2;
-//	}
-//
-//	public Position getPosition3() {
-//		return position3;
-//	}
-//
-//	public void setPosition3(Position position3) {
-//		this.position3 = position3;
-//	}
 
 	public String getTrackingStatus() {
 		return trackingStatus;
@@ -966,14 +934,13 @@ public class Applicant extends BaseEntity{
 		this.official = official;
 	}
 
-	/*public List<AugRequest> getAugRequests() {
-		return augRequests;
+	public AugRequest getAugRequest() {
+		return augRequest;
 	}
 
-	public void setAugRequests(List<AugRequest> augRequests) {
-		this.augRequests = augRequests;
+	public void setAugRequest(AugRequest augRequest) {
+		this.augRequest = augRequest;
 	}
-	*/
 
 	public Applicant fromApplicantDTO(Applicant applicant,ApplicantDto applicantDto) throws ParseException {
 		applicant.setId(applicantDto.getId());
@@ -1049,7 +1016,7 @@ public class Applicant extends BaseEntity{
 		applicant.setCreatedBy(applicantDto.getCreatedBy());
 		applicant.setCreatedTimeStamp(applicantDto.getCreatedTimeStamp());
 		applicant.setMasLocation(applicantDto.getMasLocation());
-		applicant.setAugRequest(applicantDto.getAugRequest());;
+		applicant.setAugRequest(applicantDto.getAugRequest());
 		return applicant;
 
 	}

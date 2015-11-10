@@ -19,5 +19,7 @@ public interface AugRequestRepository extends GenericRepository<AugRequest, Seri
 
 	/*--------------------For test SQLGrammaEception----------------------*/
 	public AugRequestDto findAugRequestByIdTest(Integer id);
+	
+	public List<AugRequestDto> getJobcaseCode();
 
 }

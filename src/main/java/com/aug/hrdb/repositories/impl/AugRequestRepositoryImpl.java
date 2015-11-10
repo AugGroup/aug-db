@@ -48,4 +48,11 @@ public class AugRequestRepositoryImpl extends GenericRepositoryImpl<AugRequest, 
 		return app;
 	}
 
+	@Override
+	public List<AugRequestDto> getJobcaseCode() {
+		Query query = getCurrentSession().getNamedQuery("GET_JOBCASE_CODE");
+		List<AugRequestDto> results = query.list();
+		return results;
+	}
+
 }

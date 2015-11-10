@@ -30,5 +30,7 @@ public interface AugRequestService {
    /*---------------For Test SQLGrammaException---------------*/
    public AugRequestDto findAugRequestByIdTest(Integer id);
    
+   public List<AugRequestDto> getJobcaseCode();
+   
 }
 

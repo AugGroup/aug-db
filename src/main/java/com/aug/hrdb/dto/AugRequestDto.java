@@ -54,6 +54,12 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 				+ "LEFT JOIN APPLICANT appR ON er.APPLICANT_ID = appR.ID "
 				+ "LEFT JOIN APPLICANT appA ON ea.APPLICANT_ID = appA.ID "
 				+ "WHERE a.ID = :ID", resultClass = AugRequestDto.class),
+		
+		@NamedNativeQuery(name = "GET_JOBCASE_CODE", query = "SELECT a.ID, a.JOBCASE_CODE, "
+				+ "null as REQUEST_DATE, null as STATUS, null as APPROVE_DATE, null as NUMBER_APPLICANT, null as SPECIFIC_SKILL, "
+				+ "null as YEAR_EXPERIENCE, null as MAS_JOB_LEVEL_NAME, null as MAS_TECHNOLOGY_NAME, null as MASJOBLEVEL_ID, null as MASTECHNOLOGY_ID, "
+				+ "null as REQUEST_ID, null as APPROVE_ID, null as JOBCASE_STATUS, null as APPROVAL_NAME, null as REQUESTER_NAME "
+				+ "FROM AUG_REQUEST a", resultClass = AugRequestDto.class)
 })
 public class AugRequestDto {
 
