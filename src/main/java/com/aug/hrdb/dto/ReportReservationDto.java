@@ -22,18 +22,21 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 		+ "reservation.END_TIME AS endTime, "
 		+ "reservation.DATE_RESERVATION AS dateReservation, "
 		+ "reservation.DESCRIPTION AS description, "
-		+ "reservation.RESERVATION_BY AS reservationBy, "
 		+ "room.ID AS roomId, "	
 		+ "room.Name AS roomName, "	
 		+ "masreservationtype.ID AS reservationTypeId, "
 		+ "masreservationtype.NAME AS reservationTypeName, "
 		+ "masdivision.ID AS divisionId, "
-		+ "masdivision.NAME AS divisionName "
+		+ "masdivision.NAME AS divisionName, "
+		+ "app.FIRSTNAME_EN AS firstName, "
+		+ "app.LASTNAME_EN AS lastName "
 		+ "FROM RESERVATION reservation "
 		+ "LEFT JOIN ROOM room ON reservation.ROOM_ID = room.ID "
 		+ "LEFT JOIN MAS_RESERVATION_TYPE masreservationtype ON reservation.RESERVATION_TYPE_ID = masreservationtype.ID "
 		+ "LEFT JOIN MAS_DIVISION masdivision ON reservation.DIVISION_ID = masdivision.ID "
-		+ "WHERE reservation.RESERVATION_BY like :RESERVATION_BY", resultClass = ReportReservationDto.class)
+		+ "LEFT JOIN EMPLOYEE emp ON  reservation.EMPLOYEE_ID = emp.ID "
+		+ "LEFT JOIN APPLICANT app ON emp.APPLICANT_ID = app.ID "  
+		+ "WHERE app.FIRSTNAME_EN like :FIRST_NAME", resultClass = ReportReservationDto.class)
 
 })
 @Entity
@@ -60,9 +63,6 @@ public class ReportReservationDto {
 	@Column(name="description",nullable = false)
 	private String description;
 	
-	@Column(name="reservationBy",nullable = false)
-	private String reservationBy;
-	
 	@Column(name = "reservationTypeId")
 	private Integer reservationTypeId;
 	
@@ -81,7 +81,13 @@ public class ReportReservationDto {
 	
 	@Column(name = "roomName")
 	private String roomName;
-
+	
+	@Column(name = "firstName")
+	private String firstName;
+	
+	@Column(name = "lastName")
+	private String lastName;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -120,14 +126,6 @@ public class ReportReservationDto {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getReservationBy() {
-		return reservationBy;
-	}
-
-	public void setReservationBy(String reservationBy) {
-		this.reservationBy = reservationBy;
 	}
 
 	public Integer getReservationTypeId() {
@@ -176,6 +174,22 @@ public class ReportReservationDto {
 
 	public void setRoomName(String roomName) {
 		this.roomName = roomName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 }
