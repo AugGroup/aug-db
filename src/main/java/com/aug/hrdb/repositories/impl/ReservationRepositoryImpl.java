@@ -169,9 +169,9 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 			}
 			if (divisionId != null) {
 				queryStr = query.getQueryString();
-				queryStr += " AND DIVISION_ID = :DIVISION_ID";
+				queryStr += " AND DIVISION_ID = :DIVISIONID";
 				query = getCurrentSession().createSQLQuery(queryStr).addEntity(ReservationDto.class);
-				query.setParameter("DIVISION_ID", divisionId);
+				query.setParameter("DIVISIONID", divisionId);
 			}
 			if (reserveBy != null && !reserveBy.isEmpty()) {
 				queryStr = query.getQueryString();
@@ -190,7 +190,7 @@ public class ReservationRepositoryImpl extends GenericRepositoryImpl<Reservation
 				query.setParameter("RESERVATION_TYPE", reservationTypeId);
 			}
 			if (divisionId != null) {
-				query.setParameter("DIVISION_ID", divisionId);
+				query.setParameter("DIVISIONID", divisionId);
 			}
 			if (reserveBy != null && !reserveBy.isEmpty()) {
 				query.setParameter("RESERVED_BY", "%"+reserveBy+"%");
