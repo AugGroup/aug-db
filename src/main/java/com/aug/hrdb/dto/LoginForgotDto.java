@@ -11,10 +11,10 @@ import javax.persistence.NamedNativeQuery;
     @NamedNativeQuery(
             name = "searchPasswordByEmail",
             query =   "SELECT emp.id,"
-            		+ "email ,password "
+            		+ "email , password , username "
             		+ "FROM login as log,applicant as app,employee as emp "
             		+ "WHERE emp.id = log.id AND app.id=emp.id AND app.email =:EMAIL",
-            resultClass = CardDto.class),
+            resultClass = LoginForgotDto.class),
 })
 
 @Entity
@@ -28,6 +28,9 @@ public class LoginForgotDto {
 	
 	@Column(name = "password")
 	private String password;
+	
+	@Column(name = "username")
+	private String username;
 
 	public Integer getId() {
 		return id;
@@ -51,6 +54,14 @@ public class LoginForgotDto {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 	

@@ -47,9 +47,11 @@ public class LoginRepositoryImpl extends GenericRepositoryImpl<Login, Integer> i
 		return login.get(0);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public LoginForgotDto findPasswordByEmail(String email) {
 		Query query = getCurrentSession().getNamedQuery("searchPasswordByEmail");
+		query.setParameter("EMAIL", email);
 		List<LoginForgotDto> loginDto = query.list();
 		return loginDto.get(0);
 	}
