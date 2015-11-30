@@ -7,6 +7,8 @@ import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.aug.hrdb.dto.LoginForgotDto;
+import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Login;
 import com.aug.hrdb.repositories.LoginRepository;
 
@@ -43,6 +45,13 @@ public class LoginRepositoryImpl extends GenericRepositoryImpl<Login, Integer> i
 		Query query = getCurrentSession().getNamedQuery("searchIdEmptoLogin");
 		List<Login> login = query.list();
 		return login.get(0);
+	}
+
+	@Override
+	public LoginForgotDto findPasswordByEmail(String email) {
+		Query query = getCurrentSession().getNamedQuery("searchPasswordByEmail");
+		List<LoginForgotDto> loginDto = query.list();
+		return loginDto.get(0);
 	}
 
 }

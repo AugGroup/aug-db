@@ -2,6 +2,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.LoginForgotDto;
 import com.aug.hrdb.entities.Login;
 
 public interface LoginService {
@@ -21,5 +22,7 @@ public interface LoginService {
 //	public void deleteById(Integer id);
 
 	public Login searhEmpIdtoLogin();
+	
+	public LoginForgotDto findPasswordByEmail(String email);
 
 }
