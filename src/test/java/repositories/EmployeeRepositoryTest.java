@@ -31,7 +31,7 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasCoreSkill;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasEmployment;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasLocation;
 import com.aug.hrdb.entities.MasStaffType;
 import com.aug.hrdb.entities.MasTechnology;
@@ -126,7 +126,7 @@ public class EmployeeRepositoryTest {
        // employee.setAddress("1/1");
         
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -137,7 +137,7 @@ public class EmployeeRepositoryTest {
 
 		masJoblevelRepository.create(masJoblevel);
 		idMasJoblevel = masJoblevel.getId();
-		MasJoblevel masJobLevel1 = masJoblevelRepository.find(idMasJoblevel);
+		MasJobLevel masJobLevel1 = masJoblevelRepository.find(idMasJoblevel);
 		
         
         MasTechnology masTechnology = new MasTechnology();
@@ -354,7 +354,7 @@ public class EmployeeRepositoryTest {
 	   // employee.setAddress("1/1");
 	     
 	
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -365,7 +365,7 @@ public class EmployeeRepositoryTest {
 	
 		masJoblevelRepository.create(masJoblevel);
 		idMasJoblevel = masJoblevel.getId();
-		MasJoblevel masJobLevel1 = masJoblevelRepository.find(idMasJoblevel);
+		MasJobLevel masJobLevel1 = masJoblevelRepository.find(idMasJoblevel);
 			
 	     
 	    MasTechnology masTechnology = new MasTechnology();

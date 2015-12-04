@@ -21,7 +21,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Punish;
 import com.aug.hrdb.services.ApplicantService;
@@ -102,7 +102,7 @@ public class CardServiceTest {
 		mastecId = masTechnology.getId();
 		MasTechnology mTechnology = masTechnologyService.find(mastecId);
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -113,7 +113,7 @@ public class CardServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId = masJoblevel.getId();
-		MasJoblevel mJob = masJoblevelService.find(masjobId);
+		MasJobLevel mJob = masJoblevelService.find(masjobId);
          			
         
         

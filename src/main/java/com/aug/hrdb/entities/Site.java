@@ -23,25 +23,29 @@ public class Site extends BaseEntity{
 	@GeneratedValue
 	@Column(name="ID")
 	private Integer id;
+	
 	@Column(name="PROJECTNAME",nullable=false)
 	@NotEmpty
 	private String projectName;
+	
 	@Column(name="STARTDATE",nullable=false)
 	private Date startDate;
+	
 	@Column(name="ENDDATE",nullable=false)
 	private Date endDate;
+	
 	@Column(name="PROJECTOWNER",nullable=false)
 	@NotEmpty
 	private String projectOwner;
+	
 	@Column(name="PROJECTOWNERCONTACT",nullable=false)
 	@NotEmpty
-	private String  projectOwnerContact; 
+	private String  projectOwnerContact;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "EMPLOYEE_ID", nullable = false)
     private Employee employee;
 	
-	
-
 	public Integer getId() {
 		return id;
 	}

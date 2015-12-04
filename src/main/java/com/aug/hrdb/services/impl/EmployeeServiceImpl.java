@@ -47,7 +47,7 @@ import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.entities.MasCoreSkill;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasEmployment;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasLocation;
 import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.entities.MasStaffType;
@@ -679,7 +679,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		if(employeeDto.getMasJoblevel()!=null){
-			MasJoblevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
+			MasJobLevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
 			if(masJoblevel.getId()!=null){			
 				applicant.setJoblevel(masJoblevel);						
 			}

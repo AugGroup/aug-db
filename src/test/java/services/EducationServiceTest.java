@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.entities.MasDegreetype;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EducationService;
@@ -72,7 +72,7 @@ public class EducationServiceTest {
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
 		
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -82,7 +82,7 @@ public class EducationServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		MasJoblevel mJoblevel= masJoblevelService.find(1);
+		MasJobLevel mJoblevel= masJoblevelService.find(1);
 
 		MasTechnology masTechnology = new MasTechnology();
 		masTechnology.setName("java");

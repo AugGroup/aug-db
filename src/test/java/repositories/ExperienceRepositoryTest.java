@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Experience;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
@@ -71,7 +71,7 @@ public class ExperienceRepositoryTest {
 		applicant.setAuditFlag("C");
 		applicant.setCardId("115310905001-9");
 		
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -81,7 +81,7 @@ public class ExperienceRepositoryTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelRepository.create(masJoblevel);
-		MasJoblevel mJoblevel= masJoblevelRepository.find(1);
+		MasJobLevel mJoblevel= masJoblevelRepository.find(1);
 
 		MasTechnology masTechnology = new MasTechnology();
 		masTechnology.setName("java");

@@ -2,15 +2,15 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 
 public interface MasJoblevelService {
 	
-	public void create(MasJoblevel masJoblevel);
-	public void update(MasJoblevel masJoblevel);
-	public void delete(MasJoblevel masJoblevel);
-	public MasJoblevel find(Integer id);
-	public List<MasJoblevel> findAll();
-	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel);
+	public void create(MasJobLevel masJoblevel);
+	public void update(MasJobLevel masJoblevel);
+	public void delete(MasJobLevel masJoblevel);
+	public MasJobLevel find(Integer id);
+	public List<MasJobLevel> findAll();
+	public List<MasJobLevel> findByCriteria(MasJobLevel masJoblevel);
 
 }

@@ -17,6 +17,9 @@
 		<!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
 		<!-- <property name="hbm2ddl.auto">create-drop</property> -->  
 		<!-- <property name="hbm2ddl.auto">update</property> -->
+		<mapping class="com.aug.hrdb.entities.CareerCase"/>
+		<mapping class="com.aug.hrdb.entities.MasCareerCaseStatus"/>
+		<mapping class="com.aug.hrdb.entities.Client"/>
 		
 		<mapping class="com.aug.hrdb.entities.Appointment"/>
         <!--<mapping class="com.aug.db.entities"/>-->
@@ -24,7 +27,7 @@
         <mapping class="com.aug.hrdb.entities.MasRelationType"/>
         <mapping class="com.aug.hrdb.entities.History"/>
         <mapping class="com.aug.hrdb.entities.MasDivision" />
-		<mapping class="com.aug.hrdb.entities.MasJoblevel" />
+		<mapping class="com.aug.hrdb.entities.MasJobLevel" />
 		<mapping class="com.aug.hrdb.entities.MasTechnology" />
 		<mapping class="com.aug.hrdb.entities.MasRole" />
 		<mapping class="com.aug.hrdb.entities.Allowances" />

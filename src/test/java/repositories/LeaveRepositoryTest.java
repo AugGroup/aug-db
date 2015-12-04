@@ -27,7 +27,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.Leave;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasLeaveType;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
@@ -109,7 +109,7 @@ public class LeaveRepositoryTest {
 		MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
  		
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -120,7 +120,7 @@ public class LeaveRepositoryTest {
 
 		masJoblevelRepository.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+		MasJobLevel mJob= masJoblevelRepository.find(masjobId);
  		
         
         Applicant applicant = new Applicant();

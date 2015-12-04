@@ -19,7 +19,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -32,7 +32,7 @@ public class MasJoblevelRepositoryTest {
 	int id;
 	@Before
 	public void setJob(){
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("PHP");
 		masJoblevel.setCode("004A");
 		masJoblevel.setIsActive(true);
@@ -53,7 +53,7 @@ public class MasJoblevelRepositoryTest {
 	@Rollback(true)
 	public void create() {
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -70,8 +70,8 @@ public class MasJoblevelRepositoryTest {
 	@Rollback(true)
 	public void update() {
 
-		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-				MasJoblevel.class, id);
+		MasJobLevel masJoblevel = (MasJobLevel) masJoblevelRepository.getCurrentSession().get(
+				MasJobLevel.class, id);
 		masJoblevel.setName("IT");
 
 		masJoblevelRepository.getCurrentSession().update(masJoblevel);
@@ -81,8 +81,8 @@ public class MasJoblevelRepositoryTest {
 	@Rollback(true)
 	public void Delete() {
 
-		MasJoblevel masJoblevel = (MasJoblevel) masJoblevelRepository.getCurrentSession().get(
-				MasJoblevel.class, id);
+		MasJobLevel masJoblevel = (MasJobLevel) masJoblevelRepository.getCurrentSession().get(
+				MasJobLevel.class, id);
 
 		masJoblevelRepository.delete(masJoblevel);
 	}
@@ -93,8 +93,8 @@ public class MasJoblevelRepositoryTest {
 	public void list() {
 
 		Criteria c = masJoblevelRepository.getCurrentSession().createCriteria(
-				MasJoblevel.class);
-		List<MasJoblevel> masJoblevels = c.list();
+				MasJobLevel.class);
+		List<MasJobLevel> masJoblevels = c.list();
 		
 	}
 }

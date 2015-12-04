@@ -27,7 +27,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasLocation;
 import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.entities.MasTechnology;
@@ -152,7 +152,7 @@ public class EmployeeServiceTest {
         //employee.setAddress("1/1");
         
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -163,7 +163,7 @@ public class EmployeeServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		idMasJoblevel = masJoblevel.getId();
-		MasJoblevel masJobLevel1 = masJoblevelService.find(idMasJoblevel);
+		MasJobLevel masJobLevel1 = masJoblevelService.find(idMasJoblevel);
 		
         
         MasTechnology masTechnology = new MasTechnology();
@@ -484,7 +484,7 @@ public class EmployeeServiceTest {
 	@Rollback(true)
 	public void createEmployeeAndReturnId(){
 		
-		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		
@@ -629,7 +629,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		
@@ -802,7 +802,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		 MasLocation masLocation = masLocationService.find(idMasLocation);
@@ -957,7 +957,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJoblevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		 MasLocation masLocation = masLocationService.find(idMasLocation);

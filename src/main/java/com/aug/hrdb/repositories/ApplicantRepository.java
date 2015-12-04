@@ -7,7 +7,7 @@ import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 
 public interface ApplicantRepository extends GenericRepository<Applicant, Serializable> {
 

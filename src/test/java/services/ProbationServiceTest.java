@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Probation;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -79,7 +79,7 @@ public class ProbationServiceTest {
 		Applicant app = applicantService.findById(1);
 	    Hibernate.initialize(app);
 	    
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");

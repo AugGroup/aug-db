@@ -27,7 +27,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasAllowances;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.AllowancesService;
 import com.aug.hrdb.services.ApplicantService;
@@ -102,7 +102,7 @@ public class AllowancesServiceTest {
 		Applicant applicant1 = applicantService.findById(1);
 		Hibernate.initialize(applicant1);
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");

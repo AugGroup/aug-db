@@ -20,7 +20,7 @@ import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.entities.Family;
 import com.aug.hrdb.entities.Language;
 import com.aug.hrdb.entities.MasCoreSkill;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Reference;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -380,7 +380,7 @@ public class ApplicantDto {
 	private List<Certification> certifications;
 	
 	@Transient
-	private MasJoblevel joblevel;
+	private MasJobLevel joblevel;
 
 	@Transient
 	private MasTechnology technology;
@@ -1052,11 +1052,11 @@ public class ApplicantDto {
 		this.technologyId = technologyId;
 	}
 
-	public MasJoblevel getJoblevel() {
+	public MasJobLevel getJoblevel() {
 		return joblevel;
 	}
 
-	public void setJoblevel(MasJoblevel joblevel) {
+	public void setJoblevel(MasJobLevel joblevel) {
 		this.joblevel = joblevel;
 	}
 

@@ -2,10 +2,10 @@ package com.aug.hrdb.repositories;
 
 import java.util.List;
 
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 
-public interface MasJoblevelRepository extends GenericRepository<MasJoblevel,Integer> {
+public interface MasJoblevelRepository extends GenericRepository<MasJobLevel,Integer> {
 
-	public List<MasJoblevel> findByCriteria(MasJoblevel masJoblevel);
+	public List<MasJobLevel> findByCriteria(MasJobLevel masJoblevel);
 
 }

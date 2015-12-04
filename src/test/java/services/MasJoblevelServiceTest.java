@@ -18,7 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.services.MasJoblevelService;
 
 
@@ -33,7 +33,7 @@ public class MasJoblevelServiceTest {
 	int id;
 	@Before
 	public void setJob(){
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("PHP");
 		masJoblevel.setCode("004A");
 		masJoblevel.setIsActive(true);
@@ -53,7 +53,7 @@ public class MasJoblevelServiceTest {
 	@Rollback(true)
 	public void create(){
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("PHP");
 		masJoblevel.setCode("004A");
 		masJoblevel.setIsActive(true);
@@ -70,7 +70,7 @@ public class MasJoblevelServiceTest {
 	@Rollback(true)
 	public void update(){
 
-		MasJoblevel masJoblevel = masJoblevelServices.find(id);
+		MasJobLevel masJoblevel = masJoblevelServices.find(id);
 		masJoblevel.setName("JAVA");
 		masJoblevelServices.update(masJoblevel);
 		
@@ -80,7 +80,7 @@ public class MasJoblevelServiceTest {
 	@Rollback(true)
 	public void delete(){
 
-		MasJoblevel masJoblevel = masJoblevelServices.find(id);
+		MasJobLevel masJoblevel = masJoblevelServices.find(id);
 		masJoblevelServices.delete(masJoblevel);
 		
 	}
@@ -90,7 +90,7 @@ public class MasJoblevelServiceTest {
 	@Rollback(true)
 	public void findAll(){
 
-		List<MasJoblevel> masJoblevel = masJoblevelServices.findAll();
+		List<MasJobLevel> masJoblevel = masJoblevelServices.findAll();
 		
 	}
 	
@@ -99,7 +99,7 @@ public class MasJoblevelServiceTest {
 	@Rollback(true)
 	public void findbyId(){
 
-		MasJoblevel  masJoblevel = masJoblevelServices.find(id);
+		MasJobLevel  masJoblevel = masJoblevelServices.find(id);
 		int id = masJoblevel.getId();
 		Assert.assertEquals(id,id);
 	}

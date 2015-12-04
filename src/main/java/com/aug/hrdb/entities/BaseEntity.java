@@ -29,16 +29,20 @@ public abstract class BaseEntity {
 	
 	@Column(name = "AUDITFLAG", nullable = false, length = 1)
 	private String auditFlag;
+	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "CREATEDTIMESTAMP", nullable = false)
 	private Date createdTimeStamp;
+	
 	@Column(name = "CREATEDBY", nullable = false, length = 10)
 	private Integer createdBy;
+	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Column(name="UPDATEDTIMESTAMP")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date updatedTimeStamp;
+	
 	@Column(name = "UPDATEDBY", nullable = true, length = 10)
 	private Integer updatedBy;
 

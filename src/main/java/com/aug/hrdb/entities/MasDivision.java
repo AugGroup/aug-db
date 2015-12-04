@@ -1,13 +1,9 @@
-/**
- *
- * @author Preeyaporn
- * @date 21 เม.ย. 2558
- */
 package com.aug.hrdb.entities;
 
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,7 +34,7 @@ public class MasDivision extends BaseEntity{
 	@Column(name = "TAG")
 	private String tag;
 	
-	
+	@JsonIgnore
 	@OneToMany(mappedBy = "masDivision")
 	private Set<Employee> employees;
 	
@@ -46,7 +42,9 @@ public class MasDivision extends BaseEntity{
 	@OneToMany(mappedBy = "masDivision")
 	private Set<Reservation> reservations ;
 	
-	/*---------------------- getter / setter ----------------------*/
+	@JsonIgnore
+	@OneToMany(mappedBy="masDivision", cascade=CascadeType.REMOVE)
+	private List<CareerCase> careerCases;
 
 	public Integer getId() {
 		return id;
@@ -71,13 +69,21 @@ public class MasDivision extends BaseEntity{
 	public void setCode(String code) {
 		this.code = code;
 	}
-	
+
 	public Boolean getIsActive() {
 		return isActive;
 	}
 
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
+	}
+
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 
 	public Set<Employee> getEmployees() {
@@ -88,7 +94,6 @@ public class MasDivision extends BaseEntity{
 		this.employees = employees;
 	}
 
-
 	public Set<Reservation> getReservations() {
 		return reservations;
 	}
@@ -97,14 +102,12 @@ public class MasDivision extends BaseEntity{
 		this.reservations = reservations;
 	}
 
-	public String getTag() {
-		return tag;
+	public List<CareerCase> getCareerCases() {
+		return careerCases;
 	}
 
-	public void setTag(String tag) {
-		this.tag = tag;
+	public void setCareerCases(List<CareerCase> careerCases) {
+		this.careerCases = careerCases;
 	}
-	
 
-	
 }

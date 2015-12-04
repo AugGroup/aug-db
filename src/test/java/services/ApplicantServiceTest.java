@@ -20,7 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
@@ -70,7 +70,7 @@ public class ApplicantServiceTest {
         applicant.setCreatedBy(1);
         applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
         
-        MasJoblevel masJoblevel = new MasJoblevel();
+        MasJobLevel masJoblevel = new MasJobLevel();
     	masJoblevel.setName("CEO");
     	masJoblevel.setIsActive(true);
     	masJoblevel.setCode("01");
@@ -80,7 +80,7 @@ public class ApplicantServiceTest {
     	masJoblevel.setCode("Division-01");
 
     	masJoblevelService.create(masJoblevel);
-    	MasJoblevel mJoblevel= masJoblevelService.find(1);
+    	MasJobLevel mJoblevel= masJoblevelService.find(1);
 
     	MasTechnology masTechnology = new MasTechnology();
     	masTechnology.setName("java");
@@ -108,7 +108,7 @@ public class ApplicantServiceTest {
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		 
-        MasJoblevel masJoblevel = new MasJoblevel();
+        MasJobLevel masJoblevel = new MasJobLevel();
     	masJoblevel.setName("CEO");
     	masJoblevel.setIsActive(true);
     	masJoblevel.setCode("01");
@@ -118,7 +118,7 @@ public class ApplicantServiceTest {
     	masJoblevel.setCode("Division-01");
 
     	masJoblevelService.create(masJoblevel);
-    	MasJoblevel mJoblevel= masJoblevelService.find(1);
+    	MasJobLevel mJoblevel= masJoblevelService.find(1);
 
     	MasTechnology masTechnology = new MasTechnology();
     	masTechnology.setName("java");

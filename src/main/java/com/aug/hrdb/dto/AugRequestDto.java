@@ -13,7 +13,7 @@ import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.AugRequestDto;
 import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -124,7 +124,7 @@ public class AugRequestDto {
 	private Employee approver;
 	
 	@Transient
-	private MasJoblevel joblevel;
+	private MasJobLevel joblevel;
 
 	@Transient
 	private MasTechnology technology;
@@ -255,11 +255,11 @@ public class AugRequestDto {
 		this.technologyId = technologyId;
 	}
 
-	public MasJoblevel getJoblevel() {
+	public MasJobLevel getJoblevel() {
 		return joblevel;
 	}
 
-	public void setJoblevel(MasJoblevel joblevel) {
+	public void setJoblevel(MasJobLevel joblevel) {
 		this.joblevel = joblevel;
 	}
 

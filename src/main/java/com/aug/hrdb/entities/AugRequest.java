@@ -62,7 +62,7 @@ public class AugRequest extends BaseEntity {
 
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
-	private MasJoblevel joblevel;
+	private MasJobLevel joblevel;
 
 	@JsonIgnore
 	@OneToMany(mappedBy ="augRequest",cascade=CascadeType.REMOVE)
@@ -124,11 +124,11 @@ public class AugRequest extends BaseEntity {
 		this.technology = technology;
 	}
 
-	public MasJoblevel getJoblevel() {
+	public MasJobLevel getJoblevel() {
 		return joblevel;
 	}
 
-	public void setJoblevel(MasJoblevel joblevel) {
+	public void setJoblevel(MasJobLevel joblevel) {
 		this.joblevel = joblevel;
 	}
 

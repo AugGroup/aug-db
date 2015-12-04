@@ -27,7 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJoblevel;
+import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.ApplicantRepository;
@@ -112,7 +112,7 @@ public class OfficialRepositoryTest {
 		MasTechnology mTechnology= masTechnologyRepository.find(mastec);
  		
 
-		MasJoblevel masJoblevel = new MasJoblevel();
+		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");
 		masJoblevel.setIsActive(true);
 		masJoblevel.setCode("01");
@@ -123,7 +123,7 @@ public class OfficialRepositoryTest {
 
 		masJoblevelRepository.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJoblevel mJob= masJoblevelRepository.find(masjobId);
+		MasJobLevel mJob= masJoblevelRepository.find(masjobId);
         
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);

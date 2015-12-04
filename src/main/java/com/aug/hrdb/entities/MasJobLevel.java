@@ -1,6 +1,7 @@
 package com.aug.hrdb.entities;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MAS_JOBLEVEL")
-public class MasJoblevel extends BaseEntity {
+public class MasJobLevel extends BaseEntity {
 	
 	@Id
 	@Column(name="ID")
@@ -36,12 +37,14 @@ public class MasJoblevel extends BaseEntity {
 	
 	@Column(name = "TAG_DIVISION")
 	private String tagDivision;
-	
-	
 
 	@JsonIgnore
 	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
 	private Set<Applicant> applicants = new HashSet<Applicant>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy="masJobLevel",fetch=FetchType.LAZY)
+	private List<CareerCase> careerCases;
 
 	public Integer getId() {
 		return id;
@@ -75,14 +78,6 @@ public class MasJoblevel extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	public Set<Applicant> getApplicants() {
-		return applicants;
-	}
-
-	public void setApplicants(Set<Applicant> applicants) {
-		this.applicants = applicants;
-	}
-
 	public String getTag() {
 		return tag;
 	}
@@ -99,5 +94,20 @@ public class MasJoblevel extends BaseEntity {
 		this.tagDivision = tagDivision;
 	}
 
-	
+	public Set<Applicant> getApplicants() {
+		return applicants;
+	}
+
+	public void setApplicants(Set<Applicant> applicants) {
+		this.applicants = applicants;
+	}
+
+	public List<CareerCase> getCareerCases() {
+		return careerCases;
+	}
+
+	public void setCareerCases(List<CareerCase> careerCases) {
+		this.careerCases = careerCases;
+	}
+
 }

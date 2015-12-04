@@ -124,7 +124,11 @@ public class Applicant extends BaseEntity{
 	
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
-	private MasJoblevel joblevel;
+	private MasJobLevel joblevel;
+	
+	@ManyToOne
+	@JoinColumn(name = "MASCORESKILL_ID", referencedColumnName = "id", nullable = false)
+	private MasCoreSkill coreSkill;
 
 	@Column(name = "TRACKING_STATUS")
 	private String trackingStatus;
@@ -251,9 +255,9 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<Education> educations;
 
-	@JsonIgnore
-	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-	private List<MasCoreSkill> masCoreSkills;
+//	@JsonIgnore
+//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
+//	private List<MasCoreSkill> masCoreSkills;
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
@@ -883,13 +887,13 @@ public class Applicant extends BaseEntity{
 		this.educations = educations;
 	}
 
-	public List<MasCoreSkill> getMasCoreSkills() {
-		return masCoreSkills;
-	}
-
-	public void setMasCoreSkills(List<MasCoreSkill> masCoreSkills) {
-		this.masCoreSkills = masCoreSkills;
-	}
+//	public List<MasCoreSkill> getMasCoreSkills() {
+//		return masCoreSkills;
+//	}
+//
+//	public void setMasCoreSkills(List<MasCoreSkill> masCoreSkills) {
+//		this.masCoreSkills = masCoreSkills;
+//	}
 
 	public List<Experience> getExperiences() {
 		return experiences;
@@ -908,15 +912,22 @@ public class Applicant extends BaseEntity{
 		this.technology = technology;
 	}
 
-	public MasJoblevel getJoblevel() {
+	public MasJobLevel getJoblevel() {
 		return joblevel;
 	}
 
-	public void setJoblevel(MasJoblevel joblevel) {
+	public void setJoblevel(MasJobLevel joblevel) {
 		this.joblevel = joblevel;
 	}
 	
-	
+	public MasCoreSkill getCoreSkill() {
+		return coreSkill;
+	}
+
+	public void setCoreSkill(MasCoreSkill coreSkill) {
+		this.coreSkill = coreSkill;
+	}
+
 	public List<Ability> getAbilities() {
 		return abilities;
 	}
@@ -924,7 +935,6 @@ public class Applicant extends BaseEntity{
 	public void setAbilities(List<Ability> abilities) {
 		this.abilities = abilities;
 	}
-	
 
 	public Official getOfficial() {
 		return official;
