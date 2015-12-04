@@ -11,7 +11,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -19,12 +18,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
-
 @Entity
 @Table(name="MAS_ADDRESSTYPE")
 public class MasAddressType extends BaseEntity{
-	
 	
 	@Id
 	@GeneratedValue
@@ -43,7 +39,6 @@ public class MasAddressType extends BaseEntity{
 	@JsonIgnore
 	@OneToMany(mappedBy = "addressType")
 	private Set<Address> addresses = new HashSet<Address>();
-	  
 	
 	public Integer getId() {
 		return id;
@@ -61,7 +56,6 @@ public class MasAddressType extends BaseEntity{
 		this.name = name;
 	}
 
-
 	public String getCode() {
 		return code;
 	}
@@ -77,8 +71,6 @@ public class MasAddressType extends BaseEntity{
 	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
-
-	
 
 	public Set<Address> getAddresses() {
 		return addresses;

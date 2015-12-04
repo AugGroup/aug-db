@@ -21,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Ability;
@@ -43,15 +44,29 @@ import com.aug.hrdb.services.MasJoblevelService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @Transactional
+@TransactionConfiguration
 public class AbilityRepositoryTest {
 
-	@Autowired private AbilityRepository abilityRepository;
-	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasSpecialtyRepository MasSpecialtyRepository;
-	@Autowired private MasJoblevelRepository masJoblevelRepository;
-	@Autowired private ApplicantRepository applicantRepository;
-	@Autowired private MasDivisionRepository masDivisionRepository;
-	@Autowired private MasTechnologyRepository masTechnologyRepository;
+	@Autowired 
+	private AbilityRepository abilityRepository;
+	
+	@Autowired 
+	private EmployeeRepository employeeRepository;
+	
+	@Autowired 
+	private MasSpecialtyRepository MasSpecialtyRepository;
+	
+	@Autowired 
+	private MasJoblevelRepository masJoblevelRepository;
+	
+	@Autowired 
+	private ApplicantRepository applicantRepository;
+	
+	@Autowired 
+	private MasDivisionRepository masDivisionRepository;
+	
+	@Autowired 
+	private MasTechnologyRepository masTechnologyRepository;
 	
 	private	 Employee employee;
 	int id;

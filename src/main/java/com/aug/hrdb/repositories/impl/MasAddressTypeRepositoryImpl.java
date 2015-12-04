@@ -16,7 +16,7 @@ import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.repositories.MasAddressTypeRepository;
 import com.mysql.jdbc.StringUtils;
 
-@Repository
+@Repository(value="masAddressTypeRepository")
 public class MasAddressTypeRepositoryImpl extends GenericRepositoryImpl<MasAddressType, Integer> implements MasAddressTypeRepository{
 
 	public MasAddressTypeRepositoryImpl() {
@@ -28,13 +28,13 @@ public class MasAddressTypeRepositoryImpl extends GenericRepositoryImpl<MasAddre
 	public List<MasAddressType> findByCriteria(MasAddressType masAddressType) {
 		
 		Criteria c = getCurrentSession().createCriteria(MasAddressType.class);
+		
 		if (!StringUtils.isNullOrEmpty(masAddressType.getName())) {
 			c.add(Restrictions.like("name", "%" + masAddressType.getName() + "%"));
 		}
+		
 		return c.list();
 		
 	}
-
-	
 
 }

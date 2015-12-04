@@ -484,7 +484,7 @@
                     </sqlCommand>
                     <srcFiles>
                         <srcFile>${project.build.outputDirectory}/scripts/create-schema.sql</srcFile>
-                        <srcFile>${project.build.outputDirectory}/scripts/init-data.sql</srcFile>
+                        <!-- <srcFile>${project.build.outputDirectory}/scripts/init-data.sql</srcFile> -->
                     </srcFiles>
                 </configuration>
             </plugin>
