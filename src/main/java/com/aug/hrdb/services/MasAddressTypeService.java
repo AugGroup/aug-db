@@ -10,8 +10,6 @@ import java.util.List;
 
 import com.aug.hrdb.entities.MasAddressType;
 
-
-
 public interface MasAddressTypeService {
 
 	public void create(MasAddressType masAddressType );

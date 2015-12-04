@@ -3,11 +3,13 @@
  * @author Preeyaporn
  * @date 7 ก.ย. 2558
  */
-package services;
+package repositories;
 
 import java.util.Calendar;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,26 +18,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasAllowances;
-import com.aug.hrdb.services.MasAllowancesService;
+import com.aug.hrdb.entities.MasAllowance;
+import com.aug.hrdb.repositories.MasAllowanceRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @Transactional
-public class MasAllowancesServiceTest {
+@TransactionConfiguration
+public class MasAllowanceRepositoryTest {
 
 	@Autowired
-	private MasAllowancesService masAllowancesService;
+	private SessionFactory sessionFactory;
 	
+	@Autowired
+	private MasAllowanceRepository masAllowancesRepository;
 	
+	int id;
 	
-int id;
+	MasAllowance masAllowances;
 	
 	@Before
 	public void setAllowan(){
-MasAllowances masAllowances = new MasAllowances();
+		MasAllowance masAllowances = new MasAllowance();
 		
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
@@ -46,7 +53,7 @@ MasAllowances masAllowances = new MasAllowances();
 		masAllowances.setCreatedBy(1);
 		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
 
-		masAllowancesService.create(masAllowances);
+		masAllowancesRepository.create(masAllowances);
 		id = masAllowances.getId();
 		
 	}
@@ -54,58 +61,53 @@ MasAllowances masAllowances = new MasAllowances();
 	
 	@Test
 	@Rollback(true)
-	public void create(){
+	public void create() {
 
-		MasAllowances masAllowances = new MasAllowances();
+		MasAllowance masAllowances = new MasAllowance();
+		
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
 		masAllowances.setIsactive(true);
 		
 		masAllowances.setAuditFlag("C");
-		masAllowances.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masAllowances.setCreatedTimeStamp(cal.getTime());
+		masAllowances.setCreatedBy(1);
+		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
+
+		masAllowancesRepository.create(masAllowances);
 		
-		masAllowancesService.create(masAllowances);
 	}
-	
+
 	@Test
 	@Rollback(true)
-	public void update(){
+	public void update() {
 
-		MasAllowances masAllowances = masAllowancesService.find(2);
+		MasAllowance masAllowances = (MasAllowance) masAllowancesRepository.getCurrentSession().get(
+				MasAllowance.class, id);
 		masAllowances.setAllowances_type("Father");
-		masAllowancesService.update(masAllowances);
-		
+
+		masAllowancesRepository.update(masAllowances);
 	}
-	
+
 	@Test
 	@Rollback(true)
-	public void delete(){
+	public void Delete() {
 
-		MasAllowances masAllowances = masAllowancesService.find(2);
-		masAllowancesService.delete(masAllowances);
-		
+		MasAllowance masAllowances = (MasAllowance) masAllowancesRepository.getCurrentSession().get(
+				MasAllowance.class, id);
+
+		masAllowancesRepository.delete(masAllowances);
 	}
-	
+
 	
 	@Test
-	@Rollback(true)
-	public void findAll(){
-
-		List<MasAllowances> masAllowances = masAllowancesService.findAll();
-		
-	}
 	
-	
-	@Test
-	@Rollback(true)
-	public void findbyId(){
+	public void list() {
 
-		MasAllowances  masAllowances = masAllowancesService.find(id);
-		int id = masAllowances.getId();
-		Assert.assertEquals(id,id);
+		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
+				MasAllowance.class);
+		List<MasAllowance> masAllowances = c.list();
 		
+
 	}
 }

@@ -18,7 +18,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
@@ -26,7 +25,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasAddressType;
 import com.aug.hrdb.repositories.MasAddressTypeRepository;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -45,7 +43,7 @@ public class MasAddressTypeRepositoryTest {
 	
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		
 		masAddressType = new MasAddressType();
 		masAddressType.setName("Present Address");
@@ -68,19 +66,25 @@ public class MasAddressTypeRepositoryTest {
 	}
 	
 	@Test
-	public void testCreateMasAddressTypeShouldPass() throws Exception {
+	public void testLoadMasAddressRepositoryShouldPass() throws Exception {
+		assertNotNull(masAddressType);
+	}
+	
+	@Test
+	public void testCreateWithMasAddressTypeRepositoryShouldPass() throws Exception {
 		
+		masAddressType.setName("test create");
 		masAddressTypeRepository.create(masAddressType);
 		Integer insertId = masAddressType.getId();
 		
 		MasAddressType result = masAddressTypeRepository.find(insertId);
 		
-		assertThat(result.getId(), is(insertId));
+		assertThat(result.getName(), is("test create"));
 		
 	}
 	
 	@Test
-	public void testFindMasAddressTypeShouldPass() throws Exception {
+	public void testFindWithMasAddressTypeRepositoryShouldPass() throws Exception {
 		
 		masAddressType.setName("test find");
 		masAddressTypeRepository.create(masAddressType);
@@ -93,7 +97,7 @@ public class MasAddressTypeRepositoryTest {
 	}
 	
 	@Test
-	public void testFindAllMasAddresstypeShouldPass() throws Exception {
+	public void testFindAllWithMasAddresstypeRepositoryShouldPass() throws Exception {
 		
 		List<MasAddressType> findAll = masAddressTypeRepository.findAll();
 		
@@ -101,12 +105,24 @@ public class MasAddressTypeRepositoryTest {
 				
 		List<MasAddressType> result = masAddressTypeRepository.findAll();
 		
-		assertThat(result.size(), is(findAll.size()+1));
+		assertThat(result.size(), is(findAll.size() + 1));
 		
 	}
 	
 	@Test
-	public void testUpdateMasAddressTypeShouldPass() throws Exception {
+	public void testFindByCriteriaWithMasAddressTypeRepositoryShouldPass() throws Exception {
+		
+		masAddressType.setName("find criteria");
+		masAddressTypeRepository.create(masAddressType);
+		
+		List<MasAddressType> result = masAddressTypeRepository.findByCriteria(masAddressType);
+
+		assertThat(result.size(), is(1));
+		
+	}
+	
+	@Test
+	public void testUpdateWithMasAddressTypeRepositoryShouldPass() throws Exception {
 		
 		masAddressTypeRepository.create(masAddressType);
 		Integer insertId = masAddressType.getId();
@@ -122,7 +138,7 @@ public class MasAddressTypeRepositoryTest {
 	}
 	
 	@Test
-	public void testDeleteMasAddressTypeShouldPass() throws Exception {
+	public void testDeleteWithMasAddressTypeRepositoryShouldPass() throws Exception {
 		
 		masAddressTypeRepository.create(masAddressType);
 		Integer insertId = masAddressType.getId();
@@ -132,10 +148,11 @@ public class MasAddressTypeRepositoryTest {
 		MasAddressType result = masAddressTypeRepository.find(insertId);
 
 		assertNull(result);
+		
 	}
 	
 	@Test
-	public void testDeleteByIdMasAddressTypeShouldPass() throws Exception {
+	public void testDeleteByIdWithMasAddressTypeRepositoryShouldPass() throws Exception {
 		
 		masAddressTypeRepository.create(masAddressType);
 		Integer insertId = masAddressType.getId();
@@ -145,17 +162,7 @@ public class MasAddressTypeRepositoryTest {
 		MasAddressType result = masAddressTypeRepository.find(insertId);
 
 		assertNull(result);
-	}
-	
-	@Test
-	public void testFindByCriteriaShouldPass() throws Exception {
 		
-		masAddressType.setName("find criteria");
-		masAddressTypeRepository.create(masAddressType);
-		
-		List<MasAddressType> result = masAddressTypeRepository.findByCriteria(masAddressType);
-
-		assertThat(result.size(), is(1));
 	}
 	
 }

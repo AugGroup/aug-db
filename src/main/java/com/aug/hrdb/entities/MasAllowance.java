@@ -20,7 +20,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "MAS_ALLOWANCES")
-public class MasAllowances extends BaseEntity{
+public class MasAllowance extends BaseEntity{
 
 	@Id
 	@Column(name = "ID")
@@ -41,7 +41,7 @@ public class MasAllowances extends BaseEntity{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "masallowances")
-	private Set<Allowances> allowances = new HashSet<Allowances>();
+	private Set<Allowance> allowances = new HashSet<Allowance>();
 
 	/*---------------------- getter / setter ----------------------*/
 	
@@ -85,11 +85,11 @@ public class MasAllowances extends BaseEntity{
 		this.isactive = isactive;
 	}
 
-	public Set<Allowances> getAllowances() {
+	public Set<Allowance> getAllowances() {
 		return allowances;
 	}
 
-	public void setAllowances(Set<Allowances> allowances) {
+	public void setAllowances(Set<Allowance> allowances) {
 		this.allowances = allowances;
 	}
 	

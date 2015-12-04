@@ -11,44 +11,44 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasAllowances;
-import com.aug.hrdb.repositories.MasAllowancesRepository;
-import com.aug.hrdb.services.MasAllowancesService;
+import com.aug.hrdb.entities.MasAllowance;
+import com.aug.hrdb.repositories.MasAllowanceRepository;
+import com.aug.hrdb.services.MasAllowanceService;
 
 @Service("masAllowancesService")
 @Transactional
-public class MasAllowancesServiceImpl implements MasAllowancesService{
+public class MasAllowanceServiceImpl implements MasAllowanceService{
 
 	@Autowired
-	private MasAllowancesRepository masAllowancesRepository;
+	private MasAllowanceRepository masAllowancesRepository;
 	
 	@Override
-	public void create(MasAllowances masAllowances) {
+	public void create(MasAllowance masAllowances) {
 		masAllowancesRepository.create(masAllowances);
 	}
 
 	@Override
-	public void update(MasAllowances masAllowances) {
+	public void update(MasAllowance masAllowances) {
 		masAllowancesRepository.update(masAllowances);
 	}
 
 	@Override
-	public void delete(MasAllowances masAllowances) {
+	public void delete(MasAllowance masAllowances) {
 		masAllowancesRepository.delete(masAllowances);
 	}
 
 	@Override
-	public MasAllowances find(Integer id) {
+	public MasAllowance find(Integer id) {
 		return masAllowancesRepository.find(id);
 	}
 
 	@Override
-	public List<MasAllowances> findAll() {
+	public List<MasAllowance> findAll() {
 		return masAllowancesRepository.findAll();
 	}
 
 	@Override
-	public List<MasAllowances> findByCriteria(MasAllowances masAllowances) {
+	public List<MasAllowance> findByCriteria(MasAllowance masAllowances) {
 		return masAllowancesRepository.findByCriteria(masAllowances);
 	}
 

@@ -11,21 +11,21 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-import com.aug.hrdb.entities.MasAllowances;
-import com.aug.hrdb.repositories.MasAllowancesRepository;
+import com.aug.hrdb.entities.MasAllowance;
+import com.aug.hrdb.repositories.MasAllowanceRepository;
 import com.mysql.jdbc.StringUtils;
 
 @Repository
-public class MasAllowancesRepositoryImpl extends GenericRepositoryImpl<MasAllowances, Integer> implements MasAllowancesRepository{
+public class MasAllowanceRepositoryImpl extends GenericRepositoryImpl<MasAllowance, Integer> implements MasAllowanceRepository{
 
-	public MasAllowancesRepositoryImpl() {
-		super(MasAllowances.class);
+	public MasAllowanceRepositoryImpl() {
+		super(MasAllowance.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<MasAllowances> findByCriteria(MasAllowances masAllowances) {
-		Criteria c = getCurrentSession().createCriteria(MasAllowances.class);
+	public List<MasAllowance> findByCriteria(MasAllowance masAllowances) {
+		Criteria c = getCurrentSession().createCriteria(MasAllowance.class);
 		if (!StringUtils.isNullOrEmpty(masAllowances.getName())) {
 			c.add(Restrictions.like("Name", "%" + masAllowances.getName() + "%"));
 		}

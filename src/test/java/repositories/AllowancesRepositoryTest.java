@@ -24,21 +24,21 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Allowance;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasAllowances;
+import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.AllowancesRepository;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasAllowancesRepository;
+import com.aug.hrdb.repositories.MasAllowanceRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.services.MasAllowancesService;
+import com.aug.hrdb.services.MasAllowanceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
@@ -46,7 +46,7 @@ import com.aug.hrdb.services.MasAllowancesService;
 public class AllowancesRepositoryTest {
 
 	@Autowired private AllowancesRepository allowancesRepository;
-	@Autowired private MasAllowancesRepository  masAllowancesRepository;
+	@Autowired private MasAllowanceRepository  masAllowancesRepository;
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private MasJoblevelRepository masJoblevelRepository;
 	@Autowired private ApplicantRepository applicantRepository;
@@ -142,7 +142,7 @@ public class AllowancesRepositoryTest {
 	
 		employeeRepository.create(employee);
 	
-		MasAllowances masAllowances = new MasAllowances();	
+		MasAllowance masAllowances = new MasAllowance();	
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
@@ -153,12 +153,12 @@ public class AllowancesRepositoryTest {
 		masAllowancesRepository.create(masAllowances);
 		
 		
-		Allowances allowances = new Allowances();	
+		Allowance allowances = new Allowance();	
 		allowances.setAmount(6000d);	
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(1);
 		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		MasAllowances masallowances = masAllowancesRepository.find(1);
+		MasAllowance masallowances = masAllowancesRepository.find(1);
 		allowances.setMasallowances(masallowances);
 		allowances.setEmployee(employee);
 		
@@ -172,12 +172,12 @@ public class AllowancesRepositoryTest {
 	@Rollback(true)
 	public void create()  {
 
-		Allowances allowances = new Allowances();		
+		Allowance allowances = new Allowance();		
 		allowances.setAmount(6000d);		
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(1);
 		allowances.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		MasAllowances masallowances = masAllowancesRepository.find(1);
+		MasAllowance masallowances = masAllowancesRepository.find(1);
 		allowances.setMasallowances(masallowances);
 		allowances.setEmployee(employee);
 		
@@ -189,8 +189,8 @@ public class AllowancesRepositoryTest {
 	@Rollback(true)
 	public void update() {
 
-		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, id);
+		Allowance allowances = (Allowance) allowancesRepository.getCurrentSession().get(
+				Allowance.class, id);
 		allowances.setAmount(1000d);
 
 		allowancesRepository.update(allowances);
@@ -200,8 +200,8 @@ public class AllowancesRepositoryTest {
 	@Rollback(true)
 	public void delete() {
 
-		Allowances allowances = (Allowances) allowancesRepository.getCurrentSession().get(
-				Allowances.class, id);
+		Allowance allowances = (Allowance) allowancesRepository.getCurrentSession().get(
+				Allowance.class, id);
 
 		allowancesRepository.delete(allowances);
 	}
@@ -212,8 +212,8 @@ public class AllowancesRepositoryTest {
 	public void list() {
 
 		Criteria c = allowancesRepository.getCurrentSession().createCriteria(
-				Allowances.class);
-		List<Allowances> allowances = c.list();
+				Allowance.class);
+		List<Allowance> allowances = c.list();
 		Assert.assertEquals(3, allowances.size());
 
 	}

@@ -7,14 +7,14 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Allowance;
 
 public interface AllowancesService {
 
-	public List<Allowances> findAll();
-	public void create(Allowances allowances);
-	public void update(Allowances allowances);
-	public void delete(Allowances allowances);
-	public Allowances findById(Integer id);
+	public List<Allowance> findAll();
+	public void create(Allowance allowances);
+	public void update(Allowance allowances);
+	public void delete(Allowance allowances);
+	public Allowance findById(Integer id);
 	public void deleteById(Integer id);
 }

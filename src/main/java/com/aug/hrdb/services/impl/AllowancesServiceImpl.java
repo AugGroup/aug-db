@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Allowance;
 import com.aug.hrdb.repositories.AllowancesRepository;
 import com.aug.hrdb.services.AllowancesService;
 
@@ -23,27 +23,27 @@ public class AllowancesServiceImpl implements AllowancesService {
 	private AllowancesRepository allowancesRepository;
 	
 	@Override
-	public List<Allowances> findAll() {
+	public List<Allowance> findAll() {
 		return allowancesRepository.findAll();
 	}
 
 	@Override
-	public void create(Allowances allowances) {
+	public void create(Allowance allowances) {
 		allowancesRepository.create(allowances);
 	}
 
 	@Override
-	public void update(Allowances allowances) {
+	public void update(Allowance allowances) {
 		allowancesRepository.update(allowances);
 	}
 
 	@Override
-	public void delete(Allowances allowances) {
+	public void delete(Allowance allowances) {
 		allowancesRepository.delete(allowances);
 	}
 
 	@Override
-	public Allowances findById(Integer id) {
+	public Allowance findById(Integer id) {
 		return allowancesRepository.find(id);
 	}
 

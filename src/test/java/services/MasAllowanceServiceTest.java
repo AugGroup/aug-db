@@ -3,12 +3,11 @@
  * @author Preeyaporn
  * @date 7 ก.ย. 2558
  */
-package repositories;
+package services;
 
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.Criteria;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,24 +18,24 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasAllowances;
-import com.aug.hrdb.repositories.MasAllowancesRepository;
+import com.aug.hrdb.entities.MasAllowance;
+import com.aug.hrdb.services.MasAllowanceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @Transactional
-public class MasAllowancesRepositoryTest {
+public class MasAllowanceServiceTest {
 
 	@Autowired
-	private MasAllowancesRepository masAllowancesRepository;
-
+	private MasAllowanceService masAllowancesService;
 	
 	
-	int id;
+	
+int id;
 	
 	@Before
 	public void setAllowan(){
-MasAllowances masAllowances = new MasAllowances();
+MasAllowance masAllowances = new MasAllowance();
 		
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
@@ -47,7 +46,7 @@ MasAllowances masAllowances = new MasAllowances();
 		masAllowances.setCreatedBy(1);
 		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
 
-		masAllowancesRepository.create(masAllowances);
+		masAllowancesService.create(masAllowances);
 		id = masAllowances.getId();
 		
 	}
@@ -55,53 +54,58 @@ MasAllowances masAllowances = new MasAllowances();
 	
 	@Test
 	@Rollback(true)
-	public void create() {
+	public void create(){
 
-		MasAllowances masAllowances = new MasAllowances();
-		
+		MasAllowance masAllowances = new MasAllowance();
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
 		masAllowances.setIsactive(true);
 		
 		masAllowances.setAuditFlag("C");
-		masAllowances.setCreatedBy(1);
-		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
-
-		masAllowancesRepository.create(masAllowances);
+		masAllowances.setCreatedBy(0);
+		Calendar cal = Calendar.getInstance();
+		masAllowances.setCreatedTimeStamp(cal.getTime());
 		
+		masAllowancesService.create(masAllowances);
 	}
-
+	
 	@Test
 	@Rollback(true)
-	public void update() {
+	public void update(){
 
-		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-				MasAllowances.class, id);
+		MasAllowance masAllowances = masAllowancesService.find(2);
 		masAllowances.setAllowances_type("Father");
-
-		masAllowancesRepository.update(masAllowances);
+		masAllowancesService.update(masAllowances);
+		
 	}
-
+	
 	@Test
 	@Rollback(true)
-	public void Delete() {
+	public void delete(){
 
-		MasAllowances masAllowances = (MasAllowances) masAllowancesRepository.getCurrentSession().get(
-				MasAllowances.class, id);
-
-		masAllowancesRepository.delete(masAllowances);
+		MasAllowance masAllowances = masAllowancesService.find(2);
+		masAllowancesService.delete(masAllowances);
+		
 	}
-
+	
 	
 	@Test
-	
-	public void list() {
+	@Rollback(true)
+	public void findAll(){
 
-		Criteria c = masAllowancesRepository.getCurrentSession().createCriteria(
-				MasAllowances.class);
-		List<MasAllowances> masAllowances = c.list();
+		List<MasAllowance> masAllowances = masAllowancesService.findAll();
 		
+	}
+	
+	
+	@Test
+	@Rollback(true)
+	public void findbyId(){
 
+		MasAllowance  masAllowances = masAllowancesService.find(id);
+		int id = masAllowances.getId();
+		Assert.assertEquals(id,id);
+		
 	}
 }

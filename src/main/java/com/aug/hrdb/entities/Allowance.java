@@ -17,7 +17,7 @@ import com.aug.hrdb.dto.AllowancesDto;
 
 @Entity
 @Table(name = "ALLOWANCES")
-public class Allowances extends BaseEntity{
+public class Allowance extends BaseEntity{
 
 	@Id
 	@Column(name = "ID")
@@ -33,7 +33,7 @@ public class Allowances extends BaseEntity{
 	
 	@ManyToOne()
 	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ID", nullable = false)
-	private MasAllowances masallowances;
+	private MasAllowance masallowances;
 	
 	/*---------------------- getter / setter ----------------------*/
 	
@@ -53,11 +53,11 @@ public class Allowances extends BaseEntity{
 		this.amount = amount;
 	}
 
-	public MasAllowances getMasallowances() {
+	public MasAllowance getMasallowances() {
 		return masallowances;
 	}
 
-	public void setMasallowances(MasAllowances masallowances) {
+	public void setMasallowances(MasAllowance masallowances) {
 		this.masallowances = masallowances;
 	}
 	
@@ -69,7 +69,7 @@ public class Allowances extends BaseEntity{
 		this.employee = employee;
 	}
 
-	public Allowances fromAllowancesDto(Allowances allowances, AllowancesDto allowancesDto) {
+	public Allowance fromAllowancesDto(Allowance allowances, AllowancesDto allowancesDto) {
 		
 		allowances.setAmount(allowancesDto.getAmount());
 		
@@ -77,7 +77,7 @@ public class Allowances extends BaseEntity{
 		employee.setId(allowancesDto.getEmployeeId());
 		allowances.setEmployee(employee);
 		
-		MasAllowances masAllowances = new MasAllowances();
+		MasAllowance masAllowances = new MasAllowance();
 		masAllowances.setId(allowancesDto.getMasAllowancesId());
 		masAllowances.setAllowances_type(allowancesDto.getMasallowances());
 		allowances.setMasallowances(masAllowances);

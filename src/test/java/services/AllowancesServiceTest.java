@@ -22,17 +22,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Allowance;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasAllowances;
+import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.AllowancesService;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasAllowancesService;
+import com.aug.hrdb.services.MasAllowanceService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasTechnologyService;
@@ -45,7 +45,7 @@ public class AllowancesServiceTest {
 	@Autowired
 	private AllowancesService allowancesService;
 	@Autowired
-	private MasAllowancesService masAllowancesService;
+	private MasAllowanceService masAllowancesService;
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
@@ -143,7 +143,7 @@ public class AllowancesServiceTest {
 		
 		employeeService.create(employee);
 
-		MasAllowances masAllowances = new MasAllowances();	
+		MasAllowance masAllowances = new MasAllowance();	
 		masAllowances.setAllowances_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
@@ -153,14 +153,14 @@ public class AllowancesServiceTest {
 		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masAllowancesService.create(masAllowances);
 		
-		Allowances allowances = new Allowances();
+		Allowance allowances = new Allowance();
 		allowances.setAmount(6000d);
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(0);
 		Calendar cals = Calendar.getInstance();
 		allowances.setCreatedTimeStamp(cals.getTime());
 		
-		MasAllowances masAllowance = new MasAllowances();
+		MasAllowance masAllowance = new MasAllowance();
 		masAllowance = masAllowancesService.find(1);
 		allowances.setMasallowances(masAllowance);
 		allowances.setEmployee(employee);
@@ -174,13 +174,13 @@ public class AllowancesServiceTest {
 	@Rollback(true)
 	public void create() {
 
-		Allowances allowances = new Allowances();
+		Allowance allowances = new Allowance();
 		allowances.setAmount(6000d);
 		allowances.setAuditFlag("C");
 		allowances.setCreatedBy(0);
 		Calendar cal = Calendar.getInstance();
 		allowances.setCreatedTimeStamp(cal.getTime());
-		MasAllowances masAllowances = new MasAllowances();
+		MasAllowance masAllowances = new MasAllowance();
 		masAllowances = masAllowancesService.find(1);
 		allowances.setMasallowances(masAllowances);
 		allowances.setEmployee(employee);
@@ -191,7 +191,7 @@ public class AllowancesServiceTest {
 	@Rollback(true)
 	public void update() {
 
-		Allowances allowances = allowancesService.findById(id);
+		Allowance allowances = allowancesService.findById(id);
 		allowances.setAmount(600077d);
 		allowancesService.update(allowances);
 
@@ -201,7 +201,7 @@ public class AllowancesServiceTest {
 	@Rollback(true)
 	public void delete() {
 
-		Allowances allowances = allowancesService.findById(id);
+		Allowance allowances = allowancesService.findById(id);
 		allowancesService.delete(allowances);
 
 	}
@@ -210,7 +210,7 @@ public class AllowancesServiceTest {
 	@Rollback(true)
 	public void findAllData() {
 
-		List<Allowances> allowances = allowancesService.findAll();
+		List<Allowance> allowances = allowancesService.findAll();
 		Assert.assertEquals(3, allowances.size());
 	}
 
@@ -218,7 +218,7 @@ public class AllowancesServiceTest {
 	@Rollback(true)
 	public void findDatabyId() {
 
-		Allowances allowances = (Allowances) allowancesService.findById(id);
+		Allowance allowances = (Allowance) allowancesService.findById(id);
 		int idAl = allowances.getId();
 		Assert.assertEquals(id, idAl);
 

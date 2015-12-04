@@ -308,7 +308,7 @@ public class Employee extends BaseEntity{
 	 
 //	@JsonIgnore
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
-	private Set<Allowances> allowances = new HashSet<Allowances>();
+	private Set<Allowance> allowances = new HashSet<Allowance>();
 	 
 //	@JsonIgnore
 	@OneToMany(mappedBy = "employee", cascade=CascadeType.REMOVE)
@@ -1314,11 +1314,11 @@ public class Employee extends BaseEntity{
 		this.cards = cards;
 	}
 
-	public Set<Allowances> getAllowances() {
+	public Set<Allowance> getAllowances() {
 		return allowances;
 	}
 
-	public void setAllowances(Set<Allowances> allowances) {
+	public void setAllowances(Set<Allowance> allowances) {
 		this.allowances = allowances;
 	}
 

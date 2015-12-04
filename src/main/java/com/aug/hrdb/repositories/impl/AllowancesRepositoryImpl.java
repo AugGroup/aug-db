@@ -11,14 +11,14 @@ import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AllowancesDto;
-import com.aug.hrdb.entities.Allowances;
+import com.aug.hrdb.entities.Allowance;
 import com.aug.hrdb.repositories.AllowancesRepository;
 
 @Repository
-public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowances, Integer> implements AllowancesRepository{
+public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowance, Integer> implements AllowancesRepository{
 
 	public AllowancesRepositoryImpl() {
-		super(Allowances.class);
+		super(Allowance.class);
 	}
 
 	@SuppressWarnings("unchecked")
