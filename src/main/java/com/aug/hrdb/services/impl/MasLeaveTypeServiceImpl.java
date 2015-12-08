@@ -15,17 +15,16 @@ import com.aug.hrdb.entities.MasLeaveType;
 import com.aug.hrdb.repositories.MasLeaveTypeRepository;
 import com.aug.hrdb.services.MasLeaveTypeService;
 
-@Service("masLeaveTypeService")
+@Service(value="masLeaveTypeService")
 @Transactional
 public class MasLeaveTypeServiceImpl implements MasLeaveTypeService{
-
 	
-	@Autowired private MasLeaveTypeRepository masLeaveTypeRepository;
+	@Autowired 
+	private MasLeaveTypeRepository masLeaveTypeRepository;
 	
 	@Override
 	public void create(MasLeaveType masLeaveType) {
 		masLeaveTypeRepository.create(masLeaveType);
-		
 	}
 
 	@Override
@@ -36,32 +35,26 @@ public class MasLeaveTypeServiceImpl implements MasLeaveTypeService{
 	@Override
 	public void delete(MasLeaveType masLeaveType) {
 		masLeaveTypeRepository.delete(masLeaveType);
-		
 	}
 
 	@Override
-	public MasLeaveType find(Integer id) {
-		
+	public MasLeaveType findById(Integer id) {
 		return masLeaveTypeRepository.find(id);
 	}
 
 	@Override
 	public List<MasLeaveType> findAll() {
-		
 		return masLeaveTypeRepository.findAll();
 	}
 
 	@Override
 	public List<MasLeaveType> findByCriteria(MasLeaveType masLeaveType) {
-		
 		return masLeaveTypeRepository.findByCriteria(masLeaveType);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		
 		 masLeaveTypeRepository.deleteById(id);
 	}
-
 	
 }

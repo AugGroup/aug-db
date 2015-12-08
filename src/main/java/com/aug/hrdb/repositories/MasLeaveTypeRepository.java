@@ -12,6 +12,5 @@ import com.aug.hrdb.entities.MasLeaveType;
 public interface MasLeaveTypeRepository extends GenericRepository<MasLeaveType, Integer> {
 
 	public List<MasLeaveType> findByCriteria(MasLeaveType masLeaveType);
-
 	
 }

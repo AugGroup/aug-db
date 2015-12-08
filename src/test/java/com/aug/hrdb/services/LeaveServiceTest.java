@@ -176,7 +176,7 @@ public class LeaveServiceTest {
 		masLeaveTypeService.create(masLeaveType1);
 		
 		int idMasLeaveType = masLeaveType1.getId();
-		MasLeaveType masLeaveType =masLeaveTypeService.find(idMasLeaveType);
+		MasLeaveType masLeaveType =masLeaveTypeService.findById(idMasLeaveType);
 		
 	
 		Leave leave=new Leave();
@@ -215,7 +215,7 @@ public class LeaveServiceTest {
 		masLeaveTypeService.create(masLeaveType1);
 		
 		int idMasLeaveType = masLeaveType1.getId();
-		MasLeaveType masLeaveType =masLeaveTypeService.find(idMasLeaveType);
+		MasLeaveType masLeaveType =masLeaveTypeService.findById(idMasLeaveType);
 		
 		/*MasLeaveType masLeaveType=masLeaveTypeService.find(1);*/
 		

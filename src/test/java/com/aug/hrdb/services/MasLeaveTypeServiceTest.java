@@ -5,106 +5,152 @@
  */
 package com.aug.hrdb.services;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
-
-
-
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import com.aug.hrdb.entities.MasLeaveType;
 import com.aug.hrdb.services.MasLeaveTypeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
-@Transactional
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 public class MasLeaveTypeServiceTest {
-	@Autowired MasLeaveTypeService masLeaveTypeService;
-
-	int id;
 	
+	@Autowired 
+	private MasLeaveTypeService masLeaveTypeService;
+	
+	private MasLeaveType masLeaveType;
 	
 	@Before
-	public void setValue(){
-		MasLeaveType masLeaveType=new MasLeaveType();
-		masLeaveType.setName("Holiday1");
+	public void setUp() throws Exception {
+		
+		masLeaveType = new MasLeaveType();
+		masLeaveType.setName("test");
 		masLeaveType.setCode("MD-01");
 		masLeaveType.setIsactive(true);
 		masLeaveType.setAuditFlag("C");
 		masLeaveType.setCreatedBy(1);
 		masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadMasLeaveTypeServiceShouldPass() throws Exception {
+		assertNotNull(masLeaveTypeService);
+	}
+	
+	@Test
+	public void testCreateWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveType.setName("test create");
+		masLeaveTypeService.create(masLeaveType);
+		Integer insertedId = masLeaveType.getId();
+		
+		MasLeaveType result = masLeaveTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveType.setName("test findByIdById");
+		masLeaveTypeService.create(masLeaveType);
+		Integer insertedId = masLeaveType.getId();
+		
+		MasLeaveType result = masLeaveTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test findByIdById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		List<MasLeaveType> masLeaveTypes = masLeaveTypeService.findAll();
+		
 		masLeaveTypeService.create(masLeaveType);
 		
+		List<MasLeaveType> result = masLeaveTypeService.findAll();
 		
+		assertThat(result.size(), is(masLeaveTypes.size() + 1));
 		
-		MasLeaveType masLeaveType1=new MasLeaveType();
-		masLeaveType1.setName("Holiday1");
-		masLeaveType1.setCode("MD-01");
-		masLeaveType1.setIsactive(true);
-		masLeaveType1.setAuditFlag("C");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		masLeaveTypeService.create(masLeaveType1);
-		id = masLeaveType1.getId();
 	}
 	
 	@Test
-	@Rollback(true)
-	public void create(){
-		MasLeaveType masLeaveType=new MasLeaveType();
-		masLeaveType.setName("DR");
-		masLeaveType.setCode("DE-02");
-		masLeaveType.setIsactive(true);
-		masLeaveType.setAuditFlag("C");
-		masLeaveType.setCreatedBy(1);
-		masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+	public void testFindByCriteriaWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveType.setName("test findByCriteria");
 		masLeaveTypeService.create(masLeaveType);
 		
-	}
-	
-	@Test
-	@Rollback(true)
-	public void update(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
-		masLeaveType.setName("Annual");
+		List<MasLeaveType> result = masLeaveTypeService.findByCriteria(masLeaveType);
 		
-		masLeaveTypeService.update(masLeaveType);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void delete(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
-		masLeaveTypeService.delete(masLeaveType);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findAll(){
-		List<MasLeaveType>masLeaveTypes=masLeaveTypeService.findAll();
-		
+		assertThat(result.size(), is(1));
 		
 	}
 	
-
 	@Test
-	@Rollback(true)
-	public void findById(){
-		MasLeaveType masLeaveType=(MasLeaveType)masLeaveTypeService.find(id);
-		int id = masLeaveType.getId();
-		Assert.assertEquals(id,id);
+	public void testUpdateWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveTypeService.create(masLeaveType);
+		Integer insertedId = masLeaveType.getId();
+		
+		MasLeaveType update = masLeaveTypeService.findById(insertedId);
+		update.setName("test update");
+		masLeaveTypeService.update(update);
+		
+		MasLeaveType result = masLeaveTypeService.findById(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
 		
 	}
+	
+	@Test
+	public void testDeleteWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveTypeService.create(masLeaveType);
+		Integer insertedId = masLeaveType.getId();
+		
+		MasLeaveType delete = masLeaveTypeService.findById(insertedId);
+		masLeaveTypeService.delete(delete);
+		
+		MasLeaveType result = masLeaveTypeService.findById(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasLeaveTypeServiceShouldPass() throws Exception {
+		
+		masLeaveTypeService.create(masLeaveType);
+		Integer insertedId = masLeaveType.getId();
+		
+		MasLeaveType delete = masLeaveTypeService.findById(insertedId);
+		masLeaveTypeService.deleteById(delete.getId());
+		
+		MasLeaveType result = masLeaveTypeService.findById(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
 }

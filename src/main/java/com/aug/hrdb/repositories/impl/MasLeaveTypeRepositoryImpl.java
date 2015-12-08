@@ -11,33 +11,28 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
-
-
-
 import com.aug.hrdb.entities.MasLeaveType;
 import com.aug.hrdb.repositories.MasLeaveTypeRepository;
 import com.mysql.jdbc.StringUtils;
 
-
-@Repository
-public class MasLeaveTypeRepositoryImpl extends GenericRepositoryImpl<MasLeaveType,Integer> implements MasLeaveTypeRepository{
+@Repository(value="masLeaveTypeRepository")
+public class MasLeaveTypeRepositoryImpl extends GenericRepositoryImpl<MasLeaveType,Integer> implements MasLeaveTypeRepository {
 
 	public MasLeaveTypeRepositoryImpl() {
 		super(MasLeaveType.class);
-		// TODO Auto-generated constructor stub
 	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<MasLeaveType> findByCriteria(MasLeaveType masLeaveType) {
+		
 		Criteria c = getCurrentSession().createCriteria(MasLeaveType.class);
+		
 		if (!StringUtils.isNullOrEmpty(masLeaveType.getName())) {
-			c.add(Restrictions.like("Name", "%" + masLeaveType.getName() + "%"));
+			c.add(Restrictions.like("name", "%" + masLeaveType.getName() + "%"));
 		}
+		
 		return c.list();
 	}
-
-	
-	
-
-		
 
 }
