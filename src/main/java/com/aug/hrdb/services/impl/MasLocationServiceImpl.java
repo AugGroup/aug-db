@@ -15,9 +15,7 @@ import com.aug.hrdb.entities.MasLocation;
 import com.aug.hrdb.repositories.MasLocationRepository;
 import com.aug.hrdb.services.MasLocationService;
 
-
-
-@Service("masLocationService")
+@Service(value="masLocationService")
 @Transactional
 public class MasLocationServiceImpl implements MasLocationService{
 
@@ -27,48 +25,40 @@ public class MasLocationServiceImpl implements MasLocationService{
 	@Override
 	public void create(MasLocation masLocation) {
 		masLocationRepository.create(masLocation);
-		
 	}
 
 	@Override
 	public void update(MasLocation masLocation) {
 		masLocationRepository.update(masLocation);
-		
 	}
 
 	@Override
 	public void delete(MasLocation masLocation) {
 		masLocationRepository.delete(masLocation);
-		
 	}
 
 	@Override
-	public MasLocation find(Integer id) {
-		
+	public MasLocation findById(Integer id) {
 		return masLocationRepository.find(id);
 	}
 
 	@Override
 	public List<MasLocation> findAll() {
-		
 		return masLocationRepository.findAll();
 	}
 
 	@Override
 	public List<MasLocation> findByCriteria(MasLocation masLocation) {
-		
 		return masLocationRepository.findByCriteria(masLocation);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		
 		 masLocationRepository.deleteById(id);
 	}
 
 	@Override
 	public MasLocation findByLocationCode(String locationCode) {
-		
 		return masLocationRepository.findByLocationCode(locationCode);
 	}
 

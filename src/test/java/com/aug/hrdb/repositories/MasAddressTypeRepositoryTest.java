@@ -15,7 +15,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +28,8 @@ import com.aug.hrdb.repositories.MasAddressTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
-@Transactional
 @TransactionConfiguration
+@Transactional
 public class MasAddressTypeRepositoryTest {
 	
 	@Autowired

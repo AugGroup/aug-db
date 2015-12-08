@@ -15,35 +15,36 @@ import com.aug.hrdb.entities.MasLocation;
 import com.aug.hrdb.repositories.MasLocationRepository;
 import com.mysql.jdbc.StringUtils;
 
-
-
-@Repository
+@Repository(value="masLocationRepository")
 public class MasLocationRepositoryImpl  extends GenericRepositoryImpl<MasLocation,Integer> implements MasLocationRepository{
 
 	public MasLocationRepositoryImpl() {
 		super(MasLocation.class);
-		// TODO Auto-generated constructor stub
 	}
 	
-	
 	@SuppressWarnings("unchecked")
+	@Override
 	public List<MasLocation> findByCriteria(MasLocation masLocation) {
+		
 		Criteria c = getCurrentSession().createCriteria(MasLocation.class);
+		
 		if (!StringUtils.isNullOrEmpty(masLocation.getName())) {
-			c.add(Restrictions.like("Name", "%" + masLocation.getName() + "%"));
+			c.add(Restrictions.like("name", "%" + masLocation.getName() + "%"));
 		}
+		
 		return c.list();
+		
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
 	public MasLocation findByLocationCode(String locationCode) {
+		
 		Criteria c = getCurrentSession().createCriteria(MasLocation.class);
 	    c.add(Restrictions.eq("code", locationCode));
 	    MasLocation location = (MasLocation) c.uniqueResult();
-		return location;
+		
+	    return location;
+	    
 	}
-
-	
-	
 
 }

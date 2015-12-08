@@ -27,8 +27,8 @@ import com.aug.hrdb.repositories.MasAllowanceRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
-@Transactional
 @TransactionConfiguration
+@Transactional
 public class MasAllowanceRepositoryTest {
 
 	@Autowired

@@ -27,8 +27,8 @@ import com.aug.hrdb.services.MasAddressTypeService;
 
 @RunWith(value=SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
-@Transactional
 @TransactionConfiguration
+@Transactional
 public class MasAddressTypeServiceTest {
 	
 	@Autowired

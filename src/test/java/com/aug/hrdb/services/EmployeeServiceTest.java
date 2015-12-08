@@ -316,7 +316,7 @@ public class EmployeeServiceTest {
 	    masLocation.setCode("JP");
 	    masLocationService.create(masLocation);
 	    idMasLocation = masLocation.getId();	
-	    MasLocation masLocation2 = masLocationService.find(idMasLocation);
+	    MasLocation masLocation2 = masLocationService.findById(idMasLocation);
 	    
 	    employee.setMasLocation(masLocation2);
 	    
@@ -805,7 +805,7 @@ public class EmployeeServiceTest {
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
-		 MasLocation masLocation = masLocationService.find(idMasLocation);
+		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
 		
 		 Applicant applicant = new Applicant();
@@ -960,7 +960,7 @@ public class EmployeeServiceTest {
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
-		 MasLocation masLocation = masLocationService.find(idMasLocation);
+		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
 		
 		 Applicant applicant = new Applicant();

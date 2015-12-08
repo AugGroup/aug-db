@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.services.MasAllowanceService;
@@ -26,6 +27,7 @@ import com.aug.hrdb.services.MasAllowanceService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
 @TransactionConfiguration
+@Transactional
 public class MasAllowanceServiceTest {
 
 	@Autowired
