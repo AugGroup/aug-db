@@ -15,27 +15,21 @@ import com.aug.hrdb.entities.MasCoreSkill;
 import com.aug.hrdb.repositories.MasCoreSkillRepository;
 import com.aug.hrdb.services.MasCoreSkillService;
 
-
-
 @Service("masCoreSkillService")
 @Transactional
-public class MasCoreSkillServiceImpl implements MasCoreSkillService{
+public class MasCoreSkillServiceImpl implements MasCoreSkillService {
 
-	
-	
 	@Autowired
 	private MasCoreSkillRepository masCoreSkillRepository;
 	
 	@Override
 	public void create(MasCoreSkill masCoreSkill) {
 		masCoreSkillRepository.create(masCoreSkill);
-		
 	}
 	
 	@Override
 	public void update(MasCoreSkill masCoreSkill) {
 		masCoreSkillRepository.update(masCoreSkill);
-		
 	}
 
 	@Override
@@ -44,20 +38,23 @@ public class MasCoreSkillServiceImpl implements MasCoreSkillService{
 	}
 
 	@Override
-	public MasCoreSkill find(Integer id) {
-		// TODO Auto-generated method stub
+	public void deleteById(Integer id) {
+		masCoreSkillRepository.deleteById(id);
+	}
+
+	@Override
+	public MasCoreSkill findById(Integer id) {
 		return masCoreSkillRepository.find(id);
 	}
 
 	@Override
 	public List<MasCoreSkill> findAll() {
-		// TODO Auto-generated method stub
 		return masCoreSkillRepository.findAll();
 	}
 
 	@Override
 	public List<MasCoreSkill> findByCriteria(MasCoreSkill masCoreSkill) {
-		// TODO Auto-generated method stub
 		return masCoreSkillRepository.findByCriteria(masCoreSkill);
 	}
+	
 }

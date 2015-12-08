@@ -39,6 +39,28 @@ INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) V
 INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES ("Started",'C',0,NOW());
 INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES ("Cancelled",'C',0,NOW());
 
+--MAS_CORESKILL
+INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES 
+('Administration','AD',b'1','C',NOW(),0),
+('Application Analyst','AA',b'1','C',NOW(),0),
+('Business Analyst','BA',b'1','C',NOW(),0),
+('Business Development','BD',b'1','C',NOW(),0),
+('Data Base Administrator','DBA',b'1','C',NOW(),0),
+('Finance','FI',b'1','C',NOW(),0),
+('Happiness','HP',b'1','C',NOW(),0),
+('ITS','ITS',b'1','C',NOW(),0),
+('Marketing','MK',b'1','C',NOW(),0),
+('Ministry of Happiness','MHP',b'1','C',NOW(),0),
+('Programmer','PG',b'1','C',NOW(),0),
+('Project Coordinator','PC',b'1','C',NOW(),0),
+('Project Manager','PM',b'1','C',NOW(),0),
+('Recruitment','RC',b'1','C',NOW(),0),
+('SAP','SAP',b'1','C',NOW(),0),
+('Software Tester','ST',b'1','C',NOW(),0),
+('Solution Architect','SR',b'1','C',NOW(),0),
+('System Analyst','SA',b'1','C',NOW(),0),
+('Transformation','TR',b'1','C',NOW(),0);
+
 --MASDIVISION
 --INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('Office of CEO','CEO',0,'C',NOW(),0,'C');
 --INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('Finance & Administration','F&A',0,'C',NOW(),0,'S');
@@ -223,30 +245,6 @@ INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) V
 --('Songkhla','a',1,'C',NOW(),0),
 --('Satun','a',1,'C',NOW(),0),
 --('Surat Thani','a',1,'C',NOW(),0);
-
-
---MasCoreSkill
---INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES 
---('Administration','AD',b'1','C',NOW(),0),
---('Application Analyst','AA',b'1','C',NOW(),0),
---('Business Analyst','BA',b'1','C',NOW(),0),
---('Business Development','BD',b'1','C',NOW(),0),
---('Data Base Administrator','DBA',b'1','C',NOW(),0),
---('Finance','FI',b'1','C',NOW(),0),
---('Happiness','HP',b'1','C',NOW(),0),
---('ITS','ITS',b'1','C',NOW(),0),
---('Marketing','MK',b'1','C',NOW(),0),
---('Ministry of Happiness','MHP',b'1','C',NOW(),0),
---('Programmer','PG',b'1','C',NOW(),0),
---('Project Coordinator','PC',b'1','C',NOW(),0),
---('Project Manager','PM',b'1','C',NOW(),0),
---('Recruitment','RC',b'1','C',NOW(),0),
---('SAP','SAP',b'1','C',NOW(),0),
---('Software Tester','ST',b'1','C',NOW(),0),
---('Solution Architect','SR',b'1','C',NOW(),0),
---('System Analyst','SA',b'1','C',NOW(),0),
---('Transformation','TR',b'1','C',NOW(),0);
-
 
 --MASLOCATION
 --INSERT INTO MAS_LOCATION(NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES ('Thailand','TH',1,'C',NOW(),0),

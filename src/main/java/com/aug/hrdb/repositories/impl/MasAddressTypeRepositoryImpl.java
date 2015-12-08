@@ -21,7 +21,6 @@ public class MasAddressTypeRepositoryImpl extends GenericRepositoryImpl<MasAddre
 
 	public MasAddressTypeRepositoryImpl() {
 		super(MasAddressType.class);
-		
 	}
 
 	@SuppressWarnings("unchecked")

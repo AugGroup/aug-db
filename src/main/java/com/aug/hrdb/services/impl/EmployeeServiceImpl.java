@@ -711,7 +711,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setPreviousEmpreasonsNo(employeeDto.getPreviousEmpreasonsNo());			
 		
 		if(employeeDto.getMasCoreSkill()!=null){
-			MasCoreSkill masCoreSkill =  masCoreSkillService.find(employeeDto.getMasCoreSkill());
+			MasCoreSkill masCoreSkill =  masCoreSkillService.findById(employeeDto.getMasCoreSkill());
 			if(masCoreSkill.getId()!=null){
 				employee.setMasCoreSkill(masCoreSkill);
 			}

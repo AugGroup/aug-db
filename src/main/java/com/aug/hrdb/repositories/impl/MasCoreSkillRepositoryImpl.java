@@ -10,26 +10,25 @@ import com.aug.hrdb.entities.MasCoreSkill;
 import com.aug.hrdb.repositories.MasCoreSkillRepository;
 import com.mysql.jdbc.StringUtils;
 
-
-@Repository
-public class MasCoreSkillRepositoryImpl extends GenericRepositoryImpl<MasCoreSkill, Integer> implements MasCoreSkillRepository{
+@Repository(value="masCoreSkillRepository")
+public class MasCoreSkillRepositoryImpl extends GenericRepositoryImpl<MasCoreSkill, Integer> implements MasCoreSkillRepository {
 
 	public MasCoreSkillRepositoryImpl() {
 		super(MasCoreSkill.class);
 	}
-
+	
 	@Override
+	@SuppressWarnings(value="unchecked")
 	public List<MasCoreSkill> findByCriteria(MasCoreSkill masCoreSkill) {
+		
 		Criteria c = getCurrentSession().createCriteria(MasCoreSkill.class);
+		
 		if (!StringUtils.isNullOrEmpty(masCoreSkill.getName())) {
 			c.add(Restrictions.like("name", "%" + masCoreSkill.getName() + "%"));
 		}
+		
 		return c.list();
+		
 	}
-
-	@Override
-	public void deleteById(Integer id) {
-		MasCoreSkill masCoreSkill =(MasCoreSkill)getCurrentSession().load(MasCoreSkill.class, id);
-		getCurrentSession().delete(masCoreSkill);
-		}
+	
 }

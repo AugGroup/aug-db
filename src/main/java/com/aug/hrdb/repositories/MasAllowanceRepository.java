@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.aug.hrdb.entities.MasAllowance;
 
-public interface MasAllowanceRepository extends GenericRepository<MasAllowance, Integer>{
+public interface MasAllowanceRepository extends GenericRepository<MasAllowance, Integer> {
 
 	public List<MasAllowance> findByCriteria(MasAllowance masAllowances);
 

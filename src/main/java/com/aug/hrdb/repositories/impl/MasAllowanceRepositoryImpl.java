@@ -25,12 +25,15 @@ public class MasAllowanceRepositoryImpl extends GenericRepositoryImpl<MasAllowan
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MasAllowance> findByCriteria(MasAllowance masAllowances) {
+		
 		Criteria c = getCurrentSession().createCriteria(MasAllowance.class);
+		
 		if (!StringUtils.isNullOrEmpty(masAllowances.getName())) {
 			c.add(Restrictions.like("name", "%" + masAllowances.getName() + "%"));
 		}
+		
 		return c.list();
+		
 	}
-
 
 }

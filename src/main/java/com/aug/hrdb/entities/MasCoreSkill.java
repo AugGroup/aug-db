@@ -1,8 +1,6 @@
 package com.aug.hrdb.entities;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +12,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 @Entity
 @Table(name = "MAS_CORESKILL")
@@ -34,12 +31,13 @@ public class MasCoreSkill extends BaseEntity {
 	@Column(name = "ISACTIVE",nullable=true)
 	private Boolean isActive;
 	
+	@JsonIgnore
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "masCoreSkill", cascade=CascadeType.ALL, orphanRemoval=true)
-	private Set<Employee> employees = new HashSet<Employee>();
+	private List<Employee> employees;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="coreSkill",fetch=FetchType.LAZY)
-	private Set<Applicant> applicants = new HashSet<Applicant>();
+	private List<Applicant> applicants;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="masCoreSkill")
@@ -77,19 +75,19 @@ public class MasCoreSkill extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	public Set<Employee> getEmployees() {
+	public List<Employee> getEmployees() {
 		return employees;
 	}
 
-	public void setEmployees(Set<Employee> employees) {
+	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
 
-	public Set<Applicant> getApplicants() {
+	public List<Applicant> getApplicants() {
 		return applicants;
 	}
 
-	public void setApplicants(Set<Applicant> applicants) {
+	public void setApplicants(List<Applicant> applicants) {
 		this.applicants = applicants;
 	}
 
@@ -100,5 +98,5 @@ public class MasCoreSkill extends BaseEntity {
 	public void setCareerCases(List<CareerCase> careerCases) {
 		this.careerCases = careerCases;
 	}
-
+	
 }
