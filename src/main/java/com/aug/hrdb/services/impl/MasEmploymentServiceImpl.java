@@ -3,7 +3,6 @@
  * @author natechanok
  * @date Apr 29, 2015
  */
-
 package com.aug.hrdb.services.impl;
 
 import java.util.List;
@@ -16,10 +15,9 @@ import com.aug.hrdb.entities.MasEmployment;
 import com.aug.hrdb.repositories.MasEmploymentRepository;
 import com.aug.hrdb.services.MasEmploymentService;
 
-
-@Service("masEmploymentService")
+@Service(value="masEmploymentService")
 @Transactional
-public class MasEmploymentServiceImpl implements MasEmploymentService{
+public class MasEmploymentServiceImpl implements MasEmploymentService {
 
 	@Autowired
 	private MasEmploymentRepository masEmploymentResp;
@@ -27,19 +25,16 @@ public class MasEmploymentServiceImpl implements MasEmploymentService{
 	@Override
 	public void create(MasEmployment masEmployment) {
 		masEmploymentResp.create(masEmployment);
-		
 	}
 
 	@Override
 	public void update(MasEmployment masEmployment) {
 		masEmploymentResp.update(masEmployment);
-		
 	}
 
 	@Override
 	public void delete(MasEmployment masEmployment) {
 		masEmploymentResp.delete(masEmployment);
-		
 	}
 
 	@Override
@@ -61,7 +56,5 @@ public class MasEmploymentServiceImpl implements MasEmploymentService{
 	public void deleteById(Integer id) {
 		 masEmploymentResp.deleteById(id);
 	}
-	
-	
 
 }
