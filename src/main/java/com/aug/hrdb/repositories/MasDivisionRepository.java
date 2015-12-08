@@ -7,6 +7,6 @@ package com.aug.hrdb.repositories;
 
 import com.aug.hrdb.entities.MasDivision;
 
-public interface MasDivisionRepository extends GenericRepository<MasDivision, Integer>{
+public interface MasDivisionRepository extends GenericRepository<MasDivision, Integer> {
 
 }

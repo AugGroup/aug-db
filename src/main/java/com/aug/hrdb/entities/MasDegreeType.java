@@ -35,7 +35,7 @@ public class MasDegreeType extends BaseEntity{
 	private Boolean isactive;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "masdegreetype")
+	@OneToMany(mappedBy = "masDegreeType")
 	private List<Education> educations;
 
 	public Integer getId() {

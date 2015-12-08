@@ -53,8 +53,8 @@ public class Education extends BaseEntity{
 	
 	
 	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "DEGREETYPE_ID",nullable = false ,referencedColumnName="ID")
-	private MasDegreeType masdegreetype;
+	@JoinColumn(name = "MAS_DEGREETYPE_ID",nullable = false ,referencedColumnName="ID")
+	private MasDegreeType masDegreeType;
 	
 	public Integer getId() {
 		return id;
@@ -121,12 +121,12 @@ public class Education extends BaseEntity{
 		this.certification = certification;
 	}
 
-	public MasDegreeType getMasdegreetype() {
-		return masdegreetype;
+	public MasDegreeType getMasDegreeType() {
+		return masDegreeType;
 	}
 
-	public void setMasdegreetype(MasDegreeType masdegreetype) {
-		this.masdegreetype = masdegreetype;
+	public void setMasdegreetype(MasDegreeType masDegreeType) {
+		this.masDegreeType = masDegreeType;
 	}
 
 	public Applicant getApplicant() {
@@ -151,8 +151,8 @@ public EducationDto toEducationDto() {
 		educationDto.setGraduated_date(this.graduated_date);
 		educationDto.setApplicantId(this.applicant.getId());
 		//educationDto.setEmployeeId(this.employee.getId());
-		educationDto.setMasdegreetypeId(this.masdegreetype.getId() );
-		educationDto.setMasdegreetype(this.masdegreetype.getName() );
+		educationDto.setMasdegreetypeId(this.masDegreeType.getId() );
+		educationDto.setMasdegreetype(this.masDegreeType.getName() );
 		
 		return educationDto;
 		

@@ -17,4 +17,5 @@ public interface MasDivisionService {
 	public void delete(MasDivision masDivision);
 	public MasDivision findById(Integer id);
 	public void deleteById(Integer id);
+	
 }

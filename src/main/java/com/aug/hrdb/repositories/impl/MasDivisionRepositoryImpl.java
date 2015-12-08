@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 
-@Repository("masDivisionRepository")
+@Repository(value="masDivisionRepository")
 public class MasDivisionRepositoryImpl extends GenericRepositoryImpl<MasDivision, Integer> implements MasDivisionRepository{
 
 	public MasDivisionRepositoryImpl() {

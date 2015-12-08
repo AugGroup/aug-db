@@ -15,7 +15,7 @@ import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.services.MasDivisionService;
 
-@Service("masDivisionService")
+@Service(value="masDivisionService")
 @Transactional
 public class MasDivisionServiceImpl implements MasDivisionService {
 
@@ -51,6 +51,5 @@ public class MasDivisionServiceImpl implements MasDivisionService {
 	public void deleteById(Integer id) {
 		masDivisionRepository.deleteById(id);
 	}
-
 	
 }
