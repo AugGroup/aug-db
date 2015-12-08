@@ -10,22 +10,23 @@ import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @MappedSuperclass
 public abstract class BaseEntity {
 
-
 	@Transient	
 	private String sortingBy;
+	
 	@Transient
 	private String cmd;
+	
 	@Transient
 	private String name;
+	
 	@Transient
 	private String tmpImage;
+	
 	@Transient
 	private String reportType;
-	
 	
 	@Column(name = "AUDITFLAG", nullable = false, length = 1)
 	private String auditFlag;
@@ -46,7 +47,6 @@ public abstract class BaseEntity {
 	@Column(name = "UPDATEDBY", nullable = true, length = 10)
 	private Integer updatedBy;
 
-	
 	public String getAuditFlag() {
 		return auditFlag;
 	}
@@ -54,7 +54,6 @@ public abstract class BaseEntity {
 	public void setAuditFlag(String auditFlag) {
 		this.auditFlag = auditFlag;
 	}
-
 
 	public Date getCreatedTimeStamp() {
 		return createdTimeStamp;
@@ -72,7 +71,6 @@ public abstract class BaseEntity {
 		this.createdBy = createdBy;
 	}
 	
-
 	public Date getUpdatedTimeStamp() {
 		return updatedTimeStamp;
 	}
@@ -88,12 +86,10 @@ public abstract class BaseEntity {
 	public void setUpdatedBy(Integer updatedBy) {
 		this.updatedBy = updatedBy;
 	}
-
 	
 	public BaseEntity() {
 
 	}
-	
 	
 	@Transient
 	public String getSortingBy() {
@@ -104,7 +100,6 @@ public abstract class BaseEntity {
 		this.sortingBy = sortingBy;
 	}
 	
-	
 	@Transient
 	public String getCmd() {
 		return cmd;
@@ -114,7 +109,6 @@ public abstract class BaseEntity {
 		this.cmd = cmd;
 	}
 
-	
 	@Transient
 	public String getName() {
 		return name;
@@ -124,7 +118,6 @@ public abstract class BaseEntity {
 		this.name = name;
 	}
 	
-	
 	@Transient
 	public String getTmpImage() {
 		return tmpImage;
@@ -133,7 +126,6 @@ public abstract class BaseEntity {
 	public void setTmpImage(String tmpImage) {
 		this.tmpImage = tmpImage;
 	}
-
 	
 	@Transient
 	public String getReportType() {
@@ -143,8 +135,5 @@ public abstract class BaseEntity {
 	public void setReportType(String reportType) {
 		this.reportType = reportType;
 	}
-
-	
-
   
 }

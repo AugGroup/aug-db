@@ -277,7 +277,7 @@
 
     drop table if exists MAS_ADDRESSTYPE;
 
-    drop table if exists MAS_ALLOWANCES;
+    drop table if exists MAS_ALLOWANCE;
 
     drop table if exists MAS_CAREER_CASE_STATUS;
 
@@ -758,15 +758,15 @@
         primary key (ID)
     );
 
-    create table MAS_ALLOWANCES (
+    create table MAS_ALLOWANCE (
         ID integer not null auto_increment,
         AUDITFLAG varchar(1) not null,
         CREATEDBY integer not null,
         CREATEDTIMESTAMP datetime not null,
         UPDATEDBY integer,
         UPDATEDTIMESTAMP datetime,
-        ALLOWANCES_TYPE varchar(255) not null,
-        AMOUNT_ALLOWANCES double precision,
+        ALLOWANCE_TYPE varchar(255) not null,
+        AMOUNT_ALLOWANCE double precision,
         CODE varchar(255) not null,
         ISACTIVE bit not null,
         primary key (ID)
@@ -1128,7 +1128,7 @@
         add index FKCD0A575B218FFC07 (MAS_ALLOWANCES_ID), 
         add constraint FKCD0A575B218FFC07 
         foreign key (MAS_ALLOWANCES_ID) 
-        references MAS_ALLOWANCES (ID);
+        references MAS_ALLOWANCE (ID);
 
     alter table APPLICANT 
         add index FK29852EE2EC8A3989 (MASCORESKILL_ID), 

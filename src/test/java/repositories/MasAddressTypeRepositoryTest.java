@@ -15,6 +15,7 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -129,7 +130,7 @@ public class MasAddressTypeRepositoryTest {
 		
 		MasAddressType update = masAddressTypeRepository.find(insertId);
 		update.setName("update address");
-		masAddressTypeRepository.create(update);
+		masAddressTypeRepository.update(update);
 		
 		MasAddressType result = masAddressTypeRepository.find(update.getId());
 		

@@ -143,7 +143,7 @@ public class AllowancesRepositoryTest {
 		employeeRepository.create(employee);
 	
 		MasAllowance masAllowances = new MasAllowance();	
-		masAllowances.setAllowances_type("Mother");
+		masAllowances.setAllowance_type("Mother");
 		masAllowances.setAmount_allowances(40000d);
 		masAllowances.setCode("004A");
 		masAllowances.setIsactive(true);	

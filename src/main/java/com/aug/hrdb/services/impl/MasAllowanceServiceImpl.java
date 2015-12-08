@@ -15,7 +15,7 @@ import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.repositories.MasAllowanceRepository;
 import com.aug.hrdb.services.MasAllowanceService;
 
-@Service("masAllowancesService")
+@Service("masAllowanceService")
 @Transactional
 public class MasAllowanceServiceImpl implements MasAllowanceService{
 

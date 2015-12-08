@@ -33,7 +33,7 @@ public class Allowance extends BaseEntity{
 	
 	@ManyToOne()
 	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ID", nullable = false)
-	private MasAllowance masallowances;
+	private MasAllowance masallowance;
 	
 	/*---------------------- getter / setter ----------------------*/
 	
@@ -53,12 +53,12 @@ public class Allowance extends BaseEntity{
 		this.amount = amount;
 	}
 
-	public MasAllowance getMasallowances() {
-		return masallowances;
+	public MasAllowance getMasallowance() {
+		return masallowance;
 	}
 
 	public void setMasallowances(MasAllowance masallowances) {
-		this.masallowances = masallowances;
+		this.masallowance = masallowances;
 	}
 	
 	public Employee getEmployee() {
@@ -79,7 +79,7 @@ public class Allowance extends BaseEntity{
 		
 		MasAllowance masAllowances = new MasAllowance();
 		masAllowances.setId(allowancesDto.getMasAllowancesId());
-		masAllowances.setAllowances_type(allowancesDto.getMasallowances());
+		masAllowances.setAllowance_type(allowancesDto.getMasallowances());
 		allowances.setMasallowances(masAllowances);
 		
 		return allowances;
@@ -93,8 +93,8 @@ public class Allowance extends BaseEntity{
 		allowancesDto.setId(this.id);
 		allowancesDto.setAmount(this.amount);
 		allowancesDto.setEmployeeId(this.employee.getId());
-		allowancesDto.setMasAllowancesId(this.masallowances.getId());
-		allowancesDto.setMasallowances(this.masallowances.getAllowances_type());
+		allowancesDto.setMasAllowancesId(this.masallowance.getId());
+		allowancesDto.setMasallowances(this.masallowance.getAllowance_type());
 		
 		return allowancesDto;
 	}

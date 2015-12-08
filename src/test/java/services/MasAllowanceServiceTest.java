@@ -5,17 +5,21 @@
  */
 package services;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasAllowance;
@@ -23,89 +27,133 @@ import com.aug.hrdb.services.MasAllowanceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@TransactionConfiguration
 @Transactional
 public class MasAllowanceServiceTest {
 
 	@Autowired
-	private MasAllowanceService masAllowancesService;
-	
-	
-	
-int id;
+	private MasAllowanceService masAllowanceService;
+
+	private MasAllowance masAllowance;
+	int id;
 	
 	@Before
-	public void setAllowan(){
-MasAllowance masAllowances = new MasAllowance();
+	public void setUp() throws Exception {
 		
-		masAllowances.setAllowances_type("Mother");
-		masAllowances.setAmount_allowances(40000d);
-		masAllowances.setCode("004A");
-		masAllowances.setIsactive(true);
-		
-		masAllowances.setAuditFlag("C");
-		masAllowances.setCreatedBy(1);
-		masAllowances.setCreatedTimeStamp(Calendar.getInstance().getTime());
-
-		masAllowancesService.create(masAllowances);
-		id = masAllowances.getId();
-		
+		masAllowance = new MasAllowance();
+		masAllowance.setAllowance_type("test");
+		masAllowance.setAmount_allowances(40000d);
+		masAllowance.setCode("004A");
+		masAllowance.setIsactive(true);
+		masAllowance.setAuditFlag("C");
+		masAllowance.setCreatedBy(1);
+		masAllowance.setCreatedTimeStamp(Calendar.getInstance().getTime());
 	}
 	
-	
-	@Test
-	@Rollback(true)
-	public void create(){
-
-		MasAllowance masAllowances = new MasAllowance();
-		masAllowances.setAllowances_type("Mother");
-		masAllowances.setAmount_allowances(40000d);
-		masAllowances.setCode("004A");
-		masAllowances.setIsactive(true);
-		
-		masAllowances.setAuditFlag("C");
-		masAllowances.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masAllowances.setCreatedTimeStamp(cal.getTime());
-		
-		masAllowancesService.create(masAllowances);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void update(){
-
-		MasAllowance masAllowances = masAllowancesService.find(2);
-		masAllowances.setAllowances_type("Father");
-		masAllowancesService.update(masAllowances);
+	@After
+	public void tearDown() throws Exception {
 		
 	}
 	
 	@Test
-	@Rollback(true)
-	public void delete(){
-
-		MasAllowance masAllowances = masAllowancesService.find(2);
-		masAllowancesService.delete(masAllowances);
+	public void testLoadmasAllowanceServiceShouldPass() throws Exception {
+		assertNotNull(masAllowanceService);
+	}
+	
+	@Test
+	public void testCreateWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowance.setAllowance_type("test create");
+		masAllowanceService.create(masAllowance);
+		Integer insertedId = masAllowance.getId();
+		
+		MasAllowance result = masAllowanceService.find(insertedId);
+		
+		assertThat(result.getAllowance_type(), is("test create"));
 		
 	}
 	
-	
 	@Test
-	@Rollback(true)
-	public void findAll(){
-
-		List<MasAllowance> masAllowances = masAllowancesService.findAll();
+	public void testFindByIdWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowance.setAllowance_type("test findById");
+		masAllowanceService.create(masAllowance);
+		Integer insertedId = masAllowance.getId();
+		
+		MasAllowance result = masAllowanceService.find(insertedId);
+		
+		assertThat(result.getAllowance_type(), is("test findById"));
 		
 	}
 	
+	@Test
+	public void testFindAllWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		List<MasAllowance> masAllowances = masAllowanceService.findAll();
+		
+		masAllowanceService.create(masAllowance);
+		
+		List<MasAllowance> result = masAllowanceService.findAll();
+		
+		assertThat(result.size(), is(masAllowances.size() + 1));
+		
+	}
+
+	@Ignore
+	@Test
+	public void testFindByCriteriaWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowance.setAllowance_type("test findByCriteria");
+		masAllowanceService.create(masAllowance);
+		
+		List<MasAllowance> result = masAllowanceService.findByCriteria(masAllowance);
+		
+		assertThat(result.size(), is(1));
+		
+	}
 	
 	@Test
-	@Rollback(true)
-	public void findbyId(){
-
-		MasAllowance  masAllowances = masAllowancesService.find(id);
-		int id = masAllowances.getId();
-		Assert.assertEquals(id,id);
+	public void testUpdateWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowanceService.create(masAllowance);
+		Integer insertedId = masAllowance.getId();
+		
+		MasAllowance update = masAllowanceService.find(insertedId);
+		update.setAllowance_type("test update");
+		masAllowanceService.update(update);
+		
+		MasAllowance result = masAllowanceService.find(update.getId());
+				
+		assertThat(result.getAllowance_type(), is("test update"));
+		
+	}
+	
+	@Test
+	public void testDeleteWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowanceService.create(masAllowance);
+		Integer insertedId = masAllowance.getId();
+		
+		MasAllowance delete = masAllowanceService.find(insertedId);
+		masAllowanceService.delete(delete);
+		
+		MasAllowance result = masAllowanceService.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasAllowanceServiceShouldPass() throws Exception {
+		
+		masAllowanceService.create(masAllowance);
+		Integer insertedId = masAllowance.getId();
+		
+		masAllowanceService.deleteById(insertedId);
+		
+		MasAllowance result = masAllowanceService.find(insertedId);
+		
+		assertNull(result);
 		
 	}
 }

@@ -15,7 +15,7 @@ import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.repositories.MasAllowanceRepository;
 import com.mysql.jdbc.StringUtils;
 
-@Repository
+@Repository(value="masAllowanceRepository")
 public class MasAllowanceRepositoryImpl extends GenericRepositoryImpl<MasAllowance, Integer> implements MasAllowanceRepository{
 
 	public MasAllowanceRepositoryImpl() {
@@ -27,7 +27,7 @@ public class MasAllowanceRepositoryImpl extends GenericRepositoryImpl<MasAllowan
 	public List<MasAllowance> findByCriteria(MasAllowance masAllowances) {
 		Criteria c = getCurrentSession().createCriteria(MasAllowance.class);
 		if (!StringUtils.isNullOrEmpty(masAllowances.getName())) {
-			c.add(Restrictions.like("Name", "%" + masAllowances.getName() + "%"));
+			c.add(Restrictions.like("name", "%" + masAllowances.getName() + "%"));
 		}
 		return c.list();
 	}

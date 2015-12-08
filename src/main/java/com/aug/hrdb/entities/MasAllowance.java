@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "MAS_ALLOWANCES")
+@Table(name = "MAS_ALLOWANCE")
 public class MasAllowance extends BaseEntity{
 
 	@Id
@@ -27,10 +27,10 @@ public class MasAllowance extends BaseEntity{
 	@GeneratedValue
 	private Integer id;
 	
-	@Column(name = "ALLOWANCES_TYPE" ,nullable = false)
-	private String allowances_type;
+	@Column(name = "ALLOWANCE_TYPE" ,nullable = false)
+	private String allowance_type;
 	
-	@Column(name = "AMOUNT_ALLOWANCES")
+	@Column(name = "AMOUNT_ALLOWANCE")
 	private Double amount_allowances;
 
 	@Column(name = "CODE",nullable =false)
@@ -43,8 +43,6 @@ public class MasAllowance extends BaseEntity{
 	@OneToMany(mappedBy = "masallowances")
 	private Set<Allowance> allowances = new HashSet<Allowance>();
 
-	/*---------------------- getter / setter ----------------------*/
-	
 	public Integer getId() {
 		return id;
 	}
@@ -53,12 +51,12 @@ public class MasAllowance extends BaseEntity{
 		this.id = id;
 	}
 
-	public String getAllowances_type() {
-		return allowances_type;
+	public String getAllowance_type() {
+		return allowance_type;
 	}
 
-	public void setAllowances_type(String allowances_type) {
-		this.allowances_type = allowances_type;
+	public void setAllowance_type(String allowance_type) {
+		this.allowance_type = allowance_type;
 	}
 
 	public Double getAmount_allowances() {
