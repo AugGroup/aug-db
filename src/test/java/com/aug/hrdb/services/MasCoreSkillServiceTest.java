@@ -49,7 +49,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testCreateWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testCreateWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkill.setName("test create");
 		masCoreSkillService.create(masCoreSkill);
@@ -62,7 +62,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testfindByIdByIdWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testfindByIdByIdWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkill.setName("test findByIdById");
 		masCoreSkillService.create(masCoreSkill);
@@ -75,7 +75,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testfindAllWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testfindAllWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		List<MasCoreSkill> masCoreSkills = masCoreSkillService.findAll();
 		
@@ -88,7 +88,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testfindByIdByCriteriaWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testfindByIdByCriteriaWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkill.setName("test findByIdByCriteria");
 		masCoreSkillService.create(masCoreSkill);
@@ -100,7 +100,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testUpdateWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testUpdateWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkillService.create(masCoreSkill);
 		Integer insertedId = masCoreSkill.getId();
@@ -116,7 +116,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testDeleteWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testDeleteWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkillService.create(masCoreSkill);
 		Integer insertedId = masCoreSkill.getId();
@@ -131,7 +131,7 @@ public class MasCoreSkillServiceTest {
 	}
 	
 	@Test
-	public void testDeleteByIdWithmasCoreSkillServiceShouldPass() throws Exception {
+	public void testDeleteByIdWithMasCoreSkillServiceShouldPass() throws Exception {
 		
 		masCoreSkillService.create(masCoreSkill);
 		Integer insertedId = masCoreSkill.getId();

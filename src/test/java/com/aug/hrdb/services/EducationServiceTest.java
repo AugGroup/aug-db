@@ -20,13 +20,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
-import com.aug.hrdb.entities.MasDegreetype;
+import com.aug.hrdb.entities.MasDegreeType;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EducationService;
 import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasDegreetypeService;
+import com.aug.hrdb.services.MasDegreeTypeService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasJoblevelService;
 import com.aug.hrdb.services.MasTechnologyService;
@@ -51,7 +51,7 @@ public class EducationServiceTest {
 	private MasDivisionService masDivisionService;
 	
 	@Autowired
-	private MasDegreetypeService masDegreetypeService;
+	private MasDegreeTypeService masDegreetypeService;
 
 	@Autowired
 	private MasTechnologyService masTechnologyService;
@@ -102,7 +102,7 @@ public class EducationServiceTest {
 		
 	    Applicant applicant1 =  applicantService.findById(1);
 		
-		MasDegreetype masDegreetype = new MasDegreetype();
+		MasDegreeType masDegreetype = new MasDegreeType();
 		masDegreetype.setName("CEO");
 		masDegreetype.setIsactive(true);
 		masDegreetype.setCode("01");
@@ -111,7 +111,7 @@ public class EducationServiceTest {
 		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 		masDegreetypeService.create(masDegreetype);
-		masDegreetype = masDegreetypeService.find(1);
+		masDegreetype = masDegreetypeService.findById(1);
 		
 		Education education = new Education();
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
@@ -133,7 +133,7 @@ public class EducationServiceTest {
 	@Rollback(value = true)
 	public void testInsertEducationService() throws Exception {
 		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		MasDegreetype masDegreetype = masDegreetypeService.find(1);
+		MasDegreeType masDegreetype = masDegreetypeService.findById(1);
 		Education education = new Education();
 		education.setId(1);
 		education.setCertification("TOEIC 430");

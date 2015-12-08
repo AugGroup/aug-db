@@ -5,8 +5,7 @@
  */
 package com.aug.hrdb.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,10 +16,9 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name = "MAS_DEGREETYPE")
-public class MasDegreetype extends BaseEntity{
+public class MasDegreeType extends BaseEntity{
 
 	@Id
 	@Column(name = "ID")
@@ -38,9 +36,8 @@ public class MasDegreetype extends BaseEntity{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "masdegreetype")
-	private Set<Education> educations = new HashSet<Education>();
+	private List<Education> educations;
 
-	
 	public Integer getId() {
 		return id;
 	}
@@ -65,7 +62,6 @@ public class MasDegreetype extends BaseEntity{
 		this.code = code;
 	}
 
-	
 	public Boolean getIsactive() {
 		return isactive;
 	}
@@ -74,12 +70,12 @@ public class MasDegreetype extends BaseEntity{
 		this.isactive = isactive;
 	}
 
-	public Set<Education> getEducations() {
+	public List<Education> getEducations() {
 		return educations;
 	}
 
-	public void setEducations(Set<Education> educations) {
+	public void setEducations(List<Education> educations) {
 		this.educations = educations;
 	}
-
+	
 }

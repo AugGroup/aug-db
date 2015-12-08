@@ -5,89 +5,162 @@
  */
 package com.aug.hrdb.repositories;
 
-import java.util.Calendar;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
+import java.util.Calendar;
+import java.util.List;
+
+import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.transaction.BeforeTransaction;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.MasDegreetype;
-import com.aug.hrdb.repositories.MasDegreetypeRepository;
-
+import com.aug.hrdb.entities.MasDegreeType;
+import com.aug.hrdb.repositories.MasDegreeTypeRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class MasDegreeTypeRepositoryTest {
 
-	@Autowired MasDegreetypeRepository masDegreetypeRepository;
+	@Autowired
+	SessionFactory sessionFactory;
 	
-	int id;
+	@Autowired 
+	MasDegreeTypeRepository masDegreeTypeRepository;
+	
+	private MasDegreeType masDegreeType;
+	
 	@Before
-	public void setValue(){
-		MasDegreetype masDegreetype=new MasDegreetype();
-		masDegreetype.setName("DR");
-		masDegreetype.setCode("DE-02");
-		masDegreetype.setIsactive(true);
-		masDegreetype.setAuditFlag("C");
-		masDegreetype.setCreatedBy(1);
-		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeRepository.create(masDegreetype);
+	public void setUp() throws Exception {
 		
-		
-		MasDegreetype masDegreetype1=new MasDegreetype();
-		masDegreetype1.setName("DR");
-		masDegreetype1.setCode("DE-02");
-		masDegreetype1.setIsactive(true);
-		masDegreetype1.setAuditFlag("C");
-		masDegreetype1.setCreatedBy(1);
-		masDegreetype1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeRepository.create(masDegreetype1);
-		
-		id = masDegreetype1.getId();
+		masDegreeType = new MasDegreeType();
+		masDegreeType.setName("test");
+		masDegreeType.setCode("DE-02");
+		masDegreeType.setIsactive(true);
+		masDegreeType.setAuditFlag("C");
+		masDegreeType.setCreatedBy(1);
+		masDegreeType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
 	}
 	
-
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void createMasDegreeType(){
-		MasDegreetype masDegreetype=new MasDegreetype();
-		masDegreetype.setName("DR");
-		masDegreetype.setCode("DE-02");
-		masDegreetype.setIsactive(true);
-		masDegreetype.setAuditFlag("C");
-		masDegreetype.setCreatedBy(1);
-		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDegreetypeRepository.create(masDegreetype);
-	}
-
-	@Test
-	@Rollback(true)
-	public void updateMasDegreeType(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,id);
-		masDegreetype.setName("DR");
-		masDegreetype.setCode("DE-01");
-		masDegreetype.setIsactive(true);
-		masDegreetypeRepository.update(masDegreetype);
+	@After
+	public void tearDown() throws Exception {
+		
 	}
 	
-
 	@Test
-	@Rollback(true)
-	public void deleteMasDegreeType(){
-		MasDegreetype masDegreetype=(MasDegreetype)masDegreetypeRepository.getCurrentSession().get(MasDegreetype.class,id);
-		masDegreetypeRepository.getCurrentSession().delete(masDegreetype);
+	public void testLoadSessionFactoryShouldPass() throws Exception {
+		assertNotNull(sessionFactory);
+	}
+	
+	@Test
+	public void testLoadMasDegreeTypeRepositoryShouldPass() throws Exception {
+		assertNotNull(masDegreeTypeRepository);
+	}
+	
+	@Test
+	public void testCreateWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeType.setName("test create");
+		masDegreeTypeRepository.create(masDegreeType);
+		Integer insertedId = masDegreeType.getId();
+		
+		MasDegreeType result = masDegreeTypeRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeType.setName("test findById");
+		masDegreeTypeRepository.create(masDegreeType);
+		Integer insertedId = masDegreeType.getId();
+		
+		MasDegreeType result = masDegreeTypeRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		List<MasDegreeType> masDegreeTypes = masDegreeTypeRepository.findAll();
+		
+		masDegreeTypeRepository.create(masDegreeType);
+		
+		List<MasDegreeType> result = masDegreeTypeRepository.findAll();
+		
+		assertThat(result.size(), is(masDegreeTypes.size() + 1));
+		
+	}
+	
+	@Test
+	public void testFindByCriteriaWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeType.setName("test findByCriteria");
+		masDegreeTypeRepository.create(masDegreeType);
+		
+		List<MasDegreeType> result = masDegreeTypeRepository.findByCriteria(masDegreeType);
+		
+		assertThat(result.size(), is(1));
+		
+	}
+	
+	@Test
+	public void testUpdateWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeTypeRepository.create(masDegreeType);
+		Integer insertedId = masDegreeType.getId();
+		
+		MasDegreeType update = masDegreeTypeRepository.find(insertedId);
+		update.setName("test update");
+		masDegreeTypeRepository.update(update);
+		
+		MasDegreeType result = masDegreeTypeRepository.find(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
+	}
+	
+	@Test
+	public void testDeleteWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeTypeRepository.create(masDegreeType);
+		Integer insertedId = masDegreeType.getId();
+		
+		MasDegreeType delete = masDegreeTypeRepository.find(insertedId);
+		masDegreeTypeRepository.delete(delete);
+		
+		MasDegreeType result = masDegreeTypeRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasDegreeTypeRepositoryShouldPass() throws Exception {
+		
+		masDegreeTypeRepository.create(masDegreeType);
+		Integer insertedId = masDegreeType.getId();
+		
+		MasDegreeType delete = masDegreeTypeRepository.find(insertedId);
+		masDegreeTypeRepository.deleteById(delete.getId());
+		
+		MasDegreeType result = masDegreeTypeRepository.find(delete.getId());
+		
+		assertNull(result);
 		
 	}
 	

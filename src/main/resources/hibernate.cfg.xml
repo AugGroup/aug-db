@@ -37,7 +37,7 @@
 		<mapping class="com.aug.hrdb.entities.Ability"/>
 		<mapping class="com.aug.hrdb.entities.Leave"/>
 		<mapping class="com.aug.hrdb.entities.Language"/>
-		<mapping class="com.aug.hrdb.entities.MasDegreetype"/>
+		<mapping class="com.aug.hrdb.entities.MasDegreeType"/>
 		<mapping class="com.aug.hrdb.entities.Address"/>
 		<mapping class="com.aug.hrdb.entities.MasAddressType"/>
 		<mapping class="com.aug.hrdb.entities.MasProvince"/>

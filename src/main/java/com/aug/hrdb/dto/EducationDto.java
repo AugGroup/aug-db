@@ -13,7 +13,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 import com.aug.hrdb.dto.EducationDto;
-import com.aug.hrdb.entities.MasDegreetype;
+import com.aug.hrdb.entities.MasDegreeType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity

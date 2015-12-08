@@ -1,8 +1,8 @@
 --MASADDRESSTYPE
-INSERT INTO MAS_ADDRESSTYPE(ADDRESSTYPENAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES ('Present address','P01',1,'C',NOW(),0),('Permanent address','M02',1,'C',NOW(),0);
+INSERT INTO MAS_ADDRESSTYPE(ADDRESSTYPENAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('Present address','P01',1,'C',NOW(),0),('Permanent address','M02',1,'C',NOW(),0);
 
 --MAS_ALLOWANCE
-INSERT INTO MAS_ALLOWANCE (ALLOWANCE_TYPE,AMOUNT_ALLOWANCE,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES 
+INSERT INTO MAS_ALLOWANCE (ALLOWANCE_TYPE,AMOUNT_ALLOWANCE,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES 
 ('ลดหย่อนส่วนบุคคล-ผู้มีเงินได้',30000,'A1',1,'C',NOW(),0),
 ('ลดหย่อนส่วนบุคคล-คู่สมรส ที่ไม่มีเงินได้',30000,'A2',1,'C',NOW(),0),
 ('ลดหย่อนส่วนบุคคล-บุตรที่ศึกษาในประเทศ',17000,'A3',1,'C',NOW(),0),
@@ -40,7 +40,7 @@ INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) V
 INSERT INTO MAS_CAREER_CASE_STATUS (NAME,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES ("Cancelled",'C',0,NOW());
 
 --MAS_CORESKILL
-INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES 
+INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES 
 ('Administration','AD',b'1','C',NOW(),0),
 ('Application Analyst','AA',b'1','C',NOW(),0),
 ('Business Analyst','BA',b'1','C',NOW(),0),
@@ -60,6 +60,12 @@ INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,created
 ('Solution Architect','SR',b'1','C',NOW(),0),
 ('System Analyst','SA',b'1','C',NOW(),0),
 ('Transformation','TR',b'1','C',NOW(),0);
+
+--MASDEGREETYPE
+INSERT INTO MAS_DEGREETYPE (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES
+('Bachelor','a',1,'C',NOW(),0),
+('Masters','a',1,'C',NOW(),0),
+('Ph.D.','a',1,'C',NOW(),0);
 
 --MASDIVISION
 --INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG) VALUES ('Office of CEO','CEO',0,'C',NOW(),0,'C');
@@ -151,14 +157,6 @@ INSERT INTO MAS_CORESKILL (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,created
 --('Senior Professional','SP',1,'C',NOW(),0,'f','S'),
 --('Support Division Director','SDD',1,'C',NOW(),0,'f','S'),
 --('-','-',1,'C',NOW(),0,'f','-');
-
---MASDEGREETYPE
---insert into MAS_DEGREETYPE (name,code,isactive,auditFlag,createdTimeStamp,createdBy)
---VALUES
---('Bachelor','a',1,'C',NOW(),0),
---('Masters','a',1,'C',NOW(),0),
---('Ph.D.','a',1,'C',NOW(),0);
-
 
 --MASEMPLOYMENT
 --INSERT INTO MAS_EMPLOYMENT(NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES ('Permanent','A01',1,'C',NOW(),0);

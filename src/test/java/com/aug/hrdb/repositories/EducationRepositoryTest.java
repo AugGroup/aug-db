@@ -19,13 +19,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Education;
-import com.aug.hrdb.entities.MasDegreetype;
+import com.aug.hrdb.entities.MasDegreeType;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EducationRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasDegreetypeRepository;
+import com.aug.hrdb.repositories.MasDegreeTypeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasJoblevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -51,7 +51,7 @@ public class EducationRepositoryTest {
 	private MasDivisionRepository masDivisionRepository;
 	
 	@Autowired
-	private MasDegreetypeRepository masDegreetypeRepository;
+	private MasDegreeTypeRepository masDegreetypeRepository;
 	
 	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
@@ -103,7 +103,7 @@ public class EducationRepositoryTest {
 		
 	    Applicant applicant1 =  applicantRepository.find(1);
 
-		MasDegreetype masDegreetype = new MasDegreetype();
+		MasDegreeType masDegreetype = new MasDegreeType();
 		masDegreetype.setName("CEO");
 		masDegreetype.setIsactive(true);
 		masDegreetype.setCode("01");
