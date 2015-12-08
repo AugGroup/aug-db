@@ -80,6 +80,24 @@ INSERT INTO MAS_DIVISION (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDB
 INSERT INTO MAS_EMPLOYMENT(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('Permanent','A01',1,'C',NOW(),0);
 INSERT INTO MAS_EMPLOYMENT(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES ('Contract','A01',1,'C',NOW(),0);
 
+--MAS_JOBLEVEL
+INSERT INTO MAS_JOBLEVEL(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY,TAG,TAG_DIVISION) VALUES
+('Account Execute','AE',1,'C',NOW(),0,'f','B'),
+('Account Manager','AM',1,'C',NOW(),0,'f','B'),
+('Business Division Director','BDD',1,'C',NOW(),0,'f','B'),
+('Consultant','C',1,'C',NOW(),0,'t','B'),
+('Manager','M',1,'C',NOW(),0,'f','S'),
+('Managing Consultant','MC',1,'C',NOW(),0,'f','B'),
+('Partner','P',1,'C',NOW(),0,'f','-'),
+('Principal Consultant','PC',1,'C',NOW(),0,'f','B'),
+('Professional','PF',1,'C',NOW(),0,'f','S'),
+('Senior Account Manager','SAM',1,'C',NOW(),0,'f','B'),
+('Senior Consultant','SC',1,'C',NOW(),0,'t','B'),
+('Senior Manager','SM',1,'C',NOW(),0,'f','S'),
+('Senior Professional','SP',1,'C',NOW(),0,'f','S'),
+('Support Division Director','SDD',1,'C',NOW(),0,'f','S'),
+('-','-',1,'C',NOW(),0,'f','-');
+
 --MASTECHNOLOGY
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('.Net','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('COBOL','C',NOW(),0,true,1);
@@ -141,25 +159,6 @@ INSERT INTO MAS_EMPLOYMENT(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATED
 --('Web Logic','40',1,'C',NOW(),0),
 --('WPF','41',1,'C',NOW(),0),
 --('Zend','42',1,'C',NOW(),0);
-
-
---MASJOBLEVEL
---insert into MAS_JOBLEVEL(name,code,isactive,auditFlag,createdTimeStamp,createdBy,tag,tag_division) 
---values('Account Execute','AE',1,'C',NOW(),0,'f','B'),
---('Account Manager','AM',1,'C',NOW(),0,'f','B'),
---('Business Division Director','BDD',1,'C',NOW(),0,'f','B'),
---('Consultant','C',1,'C',NOW(),0,'t','B'),
---('Manager','M',1,'C',NOW(),0,'f','S'),
---('Managing Consultant','MC',1,'C',NOW(),0,'f','B'),
---('Partner','P',1,'C',NOW(),0,'f','-'),
---('Principal Consultant','PC',1,'C',NOW(),0,'f','B'),
---('Professional','PF',1,'C',NOW(),0,'f','S'),
---('Senior Account Manager','SAM',1,'C',NOW(),0,'f','B'),
---('Senior Consultant','SC',1,'C',NOW(),0,'t','B'),
---('Senior Manager','SM',1,'C',NOW(),0,'f','S'),
---('Senior Professional','SP',1,'C',NOW(),0,'f','S'),
---('Support Division Director','SDD',1,'C',NOW(),0,'f','S'),
---('-','-',1,'C',NOW(),0,'f','-');
 
 --MASPROVINCE
 --insert into MAS_PROVINCE (PROVINCENAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy)

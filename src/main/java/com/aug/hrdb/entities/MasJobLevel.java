@@ -1,8 +1,6 @@
 package com.aug.hrdb.entities;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,8 +37,8 @@ public class MasJobLevel extends BaseEntity {
 	private String tagDivision;
 
 	@JsonIgnore
-	@OneToMany(mappedBy="joblevel",fetch=FetchType.LAZY)
-	private Set<Applicant> applicants = new HashSet<Applicant>();
+	@OneToMany(mappedBy="jobLevel",fetch=FetchType.LAZY)
+	private List<Applicant> applicants;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="masJobLevel",fetch=FetchType.LAZY)
@@ -94,11 +92,11 @@ public class MasJobLevel extends BaseEntity {
 		this.tagDivision = tagDivision;
 	}
 
-	public Set<Applicant> getApplicants() {
+	public List<Applicant> getApplicants() {
 		return applicants;
 	}
 
-	public void setApplicants(Set<Applicant> applicants) {
+	public void setApplicants(List<Applicant> applicants) {
 		this.applicants = applicants;
 	}
 

@@ -124,7 +124,7 @@ public class Applicant extends BaseEntity{
 	
 	@ManyToOne
 	@JoinColumn(name = "MASJOBLEVEL_ID", referencedColumnName = "id", nullable = false)
-	private MasJobLevel joblevel;
+	private MasJobLevel jobLevel;
 	
 	@ManyToOne
 	@JoinColumn(name = "MASCORESKILL_ID", referencedColumnName = "id", nullable = false)
@@ -912,12 +912,12 @@ public class Applicant extends BaseEntity{
 		this.technology = technology;
 	}
 
-	public MasJobLevel getJoblevel() {
-		return joblevel;
+	public MasJobLevel getJobLevel() {
+		return jobLevel;
 	}
 
-	public void setJoblevel(MasJobLevel joblevel) {
-		this.joblevel = joblevel;
+	public void setJoblevel(MasJobLevel jobLevel) {
+		this.jobLevel = jobLevel;
 	}
 	
 	public MasCoreSkill getCoreSkill() {
