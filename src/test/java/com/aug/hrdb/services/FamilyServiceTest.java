@@ -25,7 +25,7 @@ import com.aug.hrdb.repositories.MasRelationTypeRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.FamilyService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasRelationTypeService;
 import com.aug.hrdb.services.MasTechnologyService;
 
@@ -46,7 +46,7 @@ public class FamilyServiceTest {
 	@Autowired
 	private MasTechnologyService masTechnologyService;
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	
 	private Employee employee;
 	
@@ -85,7 +85,7 @@ public class FamilyServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelService.find(masjobId);
+		MasJobLevel mJob= masJoblevelService.findById(masjobId);
 		
 		 Applicant applicant = new Applicant();
 		 applicant.setCreatedBy(1);

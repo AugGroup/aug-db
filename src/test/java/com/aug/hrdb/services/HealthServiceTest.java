@@ -27,7 +27,7 @@ import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.HealthService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 import junit.framework.Assert;
@@ -39,7 +39,7 @@ public class HealthServiceTest {
 	
 	@Autowired HealthService healthService;
 	@Autowired EmployeeService employeeService;
-	@Autowired MasJoblevelService masJoblevelService;
+	@Autowired MasJobLevelService masJoblevelService;
 	@Autowired ApplicantService applicantService;
 	@Autowired MasDivisionService masDivisionService;
 	@Autowired MasTechnologyService masTechnologyService;
@@ -111,7 +111,7 @@ public class HealthServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelService.find(masjobId);
+		MasJobLevel mJob= masJoblevelService.findById(masjobId);
         
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);

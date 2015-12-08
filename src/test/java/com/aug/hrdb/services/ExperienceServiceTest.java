@@ -23,7 +23,7 @@ import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.ExperienceService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -37,7 +37,7 @@ public class ExperienceServiceTest {
 	private EmployeeService employeeService;
 	
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	
 	@Autowired
 	private ApplicantService applicantService;
@@ -74,7 +74,7 @@ public class ExperienceServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelService.find(1);
+		MasJobLevel mJoblevel= masJoblevelService.findById(1);
 
 		MasTechnology masTechnology = new MasTechnology();
 		masTechnology.setName("java");

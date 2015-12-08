@@ -34,7 +34,7 @@ import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasAllowanceService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -49,7 +49,7 @@ public class AllowancesServiceTest {
 	@Autowired
 	private EmployeeService employeeService;
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired
 	private ApplicantService applicantService;
 	@Autowired
@@ -111,7 +111,7 @@ public class AllowancesServiceTest {
 		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masJoblevel.setCode("Division-01");
 		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
+		masJoblevelService.findById(1);
 		applicant.setJoblevel(masJoblevel);
 		//employee.setMasJoblevel(masJoblevel);
 

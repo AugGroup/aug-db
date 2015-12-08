@@ -98,6 +98,15 @@ INSERT INTO MAS_JOBLEVEL(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY
 ('Support Division Director','SDD',1,'C',NOW(),0,'f','S'),
 ('-','-',1,'C',NOW(),0,'f','-');
 
+--MASLEAVETYPE
+INSERT INTO MAS_LEAVETYPE (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES
+('Annual Holiday Leave','L01',true,'C',NOW(),0),
+('Maternity Leave','L02',true,'C',NOW(),0),
+('Personal Leave','L03',true,'C',NOW(),0),
+('Sick Leave','L04',true,'C',NOW(),0),
+('Urgent Leave','L05',true,'C',NOW(),0),
+('Other','L06',true,'C',NOW(),0);
+
 --MASTECHNOLOGY
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('.Net','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('COBOL','C',NOW(),0,true,1);
@@ -277,16 +286,6 @@ INSERT INTO MAS_JOBLEVEL(NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY
 --('C','03',0,NOW(),true,'Son'),
 --('C','04',0,NOW(),true,'Daugther'),
 --('C','05',0,NOW(),true,'Friend');
-
-
---MASLEAVETYPE
---INSERT INTO MAS_LEAVETYPE (NAME,CODE,ISACTIVE,auditFlag,createdTimeStamp,createdBy) VALUES
---('Annual Holiday Leave','L01',true,'C',NOW(),0),
---('Maternity Leave','L02',true,'C',NOW(),0),
---('Personal Leave','L03',true,'C',NOW(),0),
---('Sick Leave','L04',true,'C',NOW(),0),
---('Urgent Leave','L05',true,'C',NOW(),0),
---('Other','L06',true,'C',NOW(),0);
 
 
 --MASROLE

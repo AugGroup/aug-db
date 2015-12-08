@@ -35,7 +35,7 @@ import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.LanguageRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -45,7 +45,7 @@ public class LanguageRepositoryTest {
 	
 	 @Autowired private LanguageRepository languageRepository;
 	 @Autowired private EmployeeRepository employeeRepository;
-	 @Autowired private MasJoblevelRepository masJoblevelRepository;
+	 @Autowired private MasJobLevelRepository masJoblevelRepository;
 	 @Autowired private ApplicantRepository applicantRepository;
 	 @Autowired private MasDivisionRepository masDivisionRepository;
 	 @Autowired private MasTechnologyRepository masTechnologyRepository;

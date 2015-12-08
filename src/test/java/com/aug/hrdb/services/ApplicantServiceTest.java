@@ -24,7 +24,7 @@ import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 
@@ -39,7 +39,7 @@ public class ApplicantServiceTest {
 	private EmployeeService employeeService;
 	
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	
 	@Autowired
 	private MasTechnologyService masTechnologyService;
@@ -80,7 +80,7 @@ public class ApplicantServiceTest {
     	masJoblevel.setCode("Division-01");
 
     	masJoblevelService.create(masJoblevel);
-    	MasJobLevel mJoblevel= masJoblevelService.find(1);
+    	MasJobLevel mJoblevel= masJoblevelService.findById(1);
 
     	MasTechnology masTechnology = new MasTechnology();
     	masTechnology.setName("java");
@@ -118,7 +118,7 @@ public class ApplicantServiceTest {
     	masJoblevel.setCode("Division-01");
 
     	masJoblevelService.create(masJoblevel);
-    	MasJobLevel mJoblevel= masJoblevelService.find(1);
+    	MasJobLevel mJoblevel= masJoblevelService.findById(1);
 
     	MasTechnology masTechnology = new MasTechnology();
     	masTechnology.setName("java");

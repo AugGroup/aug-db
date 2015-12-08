@@ -41,7 +41,7 @@ import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasCoreSkillRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasEmploymentRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasLocationRepository;
 import com.aug.hrdb.repositories.MasStaffTypeRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -61,7 +61,7 @@ public class EmployeeRepositoryTest {
 	@Autowired
 	private MasDivisionRepository masDivisionRepository;
 	@Autowired
-	private MasJoblevelRepository masJoblevelRepository;
+	private MasJobLevelRepository masJoblevelRepository;
 	@Autowired
 	private MasEmploymentRepository masEmploymentRepository;
 	@Autowired

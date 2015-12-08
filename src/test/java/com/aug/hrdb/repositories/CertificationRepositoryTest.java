@@ -26,7 +26,7 @@ import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.CertificationRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -40,7 +40,7 @@ public class CertificationRepositoryTest {
 		@Autowired
 		private ApplicantRepository applicantRepository;
 		@Autowired
-		private MasJoblevelRepository masJoblevelRepository;
+		private MasJobLevelRepository masJoblevelRepository;
 		@Autowired
 		private MasTechnologyRepository masTechnologyRepository;
 		

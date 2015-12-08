@@ -14,7 +14,6 @@ import java.util.List;
 import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class MasAllowanceRepositoryTest {
 	@Autowired
 	private MasAllowanceRepository masAllowanceRepository;
 	
-	MasAllowance masAllowance;
+	private MasAllowance masAllowance;
 	
 	@Before
 	public void setUp() throws Exception {
@@ -104,19 +103,6 @@ public class MasAllowanceRepositoryTest {
 		List<MasAllowance> result = masAllowanceRepository.findAll();
 
 		assertThat(result.size(), is(masAllowances.size() + 1));
-		
-	}
-	
-	@Ignore
-	@Test
-	public void testFindByCriteriaWithMasAllowanceRepositoryShouldPass() throws Exception {
-		
-		masAllowance.setAllowance_type("test findByCriteria");
-		masAllowanceRepository.create(masAllowance);
-		
-		List<MasAllowance> result = masAllowanceRepository.findByCriteria(masAllowance);
-
-		assertThat(result.size(), is(1));
 		
 	}
 	

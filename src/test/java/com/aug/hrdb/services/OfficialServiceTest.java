@@ -33,7 +33,7 @@ import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 import com.aug.hrdb.services.OfficialService;
 
@@ -51,7 +51,7 @@ public class OfficialServiceTest {
 	@Autowired
 	private MasDivisionService masDivisionService;
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired
 	private MasTechnologyService masTechnologyService;
 	
@@ -123,7 +123,7 @@ public class OfficialServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelService.find(masjobId);
+		MasJobLevel mJob= masJoblevelService.findById(masjobId);
         
         Applicant applicant = new Applicant();
 		applicant.setCreatedBy(1);

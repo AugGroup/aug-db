@@ -30,7 +30,7 @@ import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.CardRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 
@@ -44,7 +44,7 @@ public class CardRepositoryTest {
 	@Autowired 
 	private EmployeeRepository employeeRepository;
 	@Autowired
-	private MasJoblevelRepository masJoblevelRepository;
+	private MasJobLevelRepository masJoblevelRepository;
 	@Autowired 
 	private ApplicantRepository applicantRepository;
 	@Autowired 

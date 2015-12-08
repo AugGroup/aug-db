@@ -27,7 +27,7 @@ import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasSpecialtyService;
 import com.aug.hrdb.services.ProbationService;
 
@@ -39,7 +39,7 @@ public class ProbationServiceTest {
 	@Autowired private ProbationService probationService;
 	@Autowired private EmployeeService employeeService;
 	@Autowired private MasSpecialtyService masSpecialtyService;	
-	@Autowired private MasJoblevelService masJoblevelService;
+	@Autowired private MasJobLevelService masJoblevelService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private MasDivisionService masDivisionService;
 	@Autowired private MasTechnologyRepository masTechnologyRepository;
@@ -89,7 +89,7 @@ public class ProbationServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
+		masJoblevelService.findById(1);
 		
 		//employee.setMasJoblevel(masJoblevel);
 	    

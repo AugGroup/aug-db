@@ -34,7 +34,7 @@ import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.LeaveService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasLeaveTypeService;
 import com.aug.hrdb.services.MasTechnologyService;
 
@@ -46,7 +46,7 @@ public class LeaveServiceTest {
 	@Autowired private LeaveService leaveService;
 	@Autowired private EmployeeService employeeService;
 	@Autowired private MasLeaveTypeService masLeaveTypeService;
-	@Autowired private MasJoblevelService masJoblevelService;
+	@Autowired private MasJobLevelService masJoblevelService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private MasDivisionService masDivisionService;
 	@Autowired private MasTechnologyService masTechnologyService;
@@ -121,7 +121,7 @@ public class LeaveServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelService.find(masjobId);
+		MasJobLevel mJob= masJoblevelService.findById(masjobId);
  			
         
         Applicant applicant = new Applicant();

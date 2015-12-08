@@ -34,7 +34,7 @@ import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.LeaveRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasLeaveTypeRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.MasTechnologyService;
@@ -48,7 +48,7 @@ public class LeaveRepositoryTest {
 	@Autowired private LeaveRepository leaveRepository;
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private MasLeaveTypeRepository masLeaveTypeRepository;
-	@Autowired private MasJoblevelRepository masJoblevelRepository;
+	@Autowired private MasJobLevelRepository masJoblevelRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
 	@Autowired private MasTechnologyRepository masTechnologyRepository;

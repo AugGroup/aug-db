@@ -26,7 +26,7 @@ import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.HealthRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 import junit.framework.Assert;
@@ -38,7 +38,7 @@ public class HealthRepositoryTest {
 	
 	@Autowired HealthRepository healthRepository;
 	@Autowired EmployeeRepository employeeRepository;
-	@Autowired MasJoblevelRepository masJoblevelRepository;
+	@Autowired MasJobLevelRepository masJoblevelRepository;
 	@Autowired ApplicantRepository applicantRepository;
 	@Autowired MasDivisionRepository masDivisionRepository;
 	@Autowired MasTechnologyRepository masTechnologyRepository;

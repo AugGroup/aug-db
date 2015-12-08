@@ -27,7 +27,7 @@ import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.PunishRepository;
 
@@ -43,7 +43,7 @@ public class PunishRepositoryTest {
 	@Autowired 
 	private EmployeeRepository employeeRepository;
 	@Autowired
-	private MasJoblevelRepository masJoblevelRepository;
+	private MasJobLevelRepository masJoblevelRepository;
 	@Autowired 
 	private ApplicantRepository applicantRepository;
 	@Autowired 

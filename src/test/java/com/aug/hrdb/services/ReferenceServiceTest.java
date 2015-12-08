@@ -23,7 +23,7 @@ import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.entities.Reference;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 import com.aug.hrdb.services.ReferenceService;
 
@@ -36,7 +36,7 @@ public class ReferenceServiceTest {
 	@Autowired private ReferenceService referenceService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private EmployeeService employeeService;
-	@Autowired private MasJoblevelService masJoblevelService;
+	@Autowired private MasJobLevelService masJoblevelService;
 	@Autowired private MasTechnologyService masTechnologyService;
 	
 	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
@@ -61,7 +61,7 @@ public class ReferenceServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		masJoblevelService.find(1);
+		masJoblevelService.findById(1);
 		applicant.setJoblevel(masJoblevel);
 
 		MasTechnology masTech = new MasTechnology();

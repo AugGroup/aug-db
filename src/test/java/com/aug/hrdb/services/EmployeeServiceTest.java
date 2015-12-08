@@ -37,7 +37,7 @@ import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasCoreSkillRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
 import com.aug.hrdb.repositories.MasEmploymentRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasLocationRepository;
 import com.aug.hrdb.repositories.MasStaffTypeRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
@@ -50,7 +50,7 @@ import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasEmploymentService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasLocationService;
 import com.aug.hrdb.services.MasProvinceService;
 import com.aug.hrdb.services.MasStaffTypeService;
@@ -70,7 +70,7 @@ public class EmployeeServiceTest {
 	@Autowired
 	private MasDivisionService masDivisionService;
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired
 	private MasEmploymentService masEmploymentService;
 	@Autowired
@@ -163,7 +163,7 @@ public class EmployeeServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		idMasJoblevel = masJoblevel.getId();
-		MasJobLevel masJobLevel1 = masJoblevelService.find(idMasJoblevel);
+		MasJobLevel masJobLevel1 = masJoblevelService.findById(idMasJoblevel);
 		
         
         MasTechnology masTechnology = new MasTechnology();
@@ -484,7 +484,7 @@ public class EmployeeServiceTest {
 	@Rollback(true)
 	public void createEmployeeAndReturnId(){
 		
-		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		
@@ -629,7 +629,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		
@@ -802,7 +802,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		 MasLocation masLocation = masLocationService.find(idMasLocation);
@@ -957,7 +957,7 @@ public class EmployeeServiceTest {
 		
 		/*********************************************** create employee  **********************************************************/
 		
-		 MasJobLevel masJobLevel = masJoblevelService.find(idMasJoblevel);
+		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
 		 MasProvince masProvince = provinceService.find(idMasProvice);
 		 MasLocation masLocation = masLocationService.find(idMasLocation);

@@ -26,7 +26,7 @@ import com.aug.hrdb.entities.MasRelationType;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.FamilyRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 
@@ -46,7 +46,7 @@ public class FamilyRepositoryTest {
 	@Autowired 
 	private MasTechnologyRepository masTechnologyRepository;
 	@Autowired
-	private MasJoblevelRepository masJoblevelRepository;
+	private MasJobLevelRepository masJoblevelRepository;
 	
 	private Employee employee;
 	int id;

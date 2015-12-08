@@ -27,7 +27,7 @@ import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.LoginService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 
@@ -41,7 +41,7 @@ public class LoginServiceTest {
 	@Autowired 
 	private EmployeeService employeeService;
 	@Autowired 
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired 
 	private ApplicantService applicantService;
 	@Autowired 
@@ -114,7 +114,7 @@ public class LoginServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.find(masjobId);
+		MasJobLevel mJob = masJoblevelService.findById(masjobId);
          			
         
         

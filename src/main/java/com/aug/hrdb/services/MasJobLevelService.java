@@ -4,13 +4,14 @@ import java.util.List;
 
 import com.aug.hrdb.entities.MasJobLevel;
 
-public interface MasJoblevelService {
+public interface MasJobLevelService {
 	
 	public void create(MasJobLevel masJoblevel);
 	public void update(MasJobLevel masJoblevel);
 	public void delete(MasJobLevel masJoblevel);
-	public MasJobLevel find(Integer id);
+	public MasJobLevel findById(Integer id);
 	public List<MasJobLevel> findAll();
 	public List<MasJobLevel> findByCriteria(MasJobLevel masJoblevel);
+	public void deleteById(Integer id);
 
 }

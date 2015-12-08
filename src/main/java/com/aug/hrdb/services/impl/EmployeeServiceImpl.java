@@ -62,7 +62,7 @@ import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasCoreSkillService;
 import com.aug.hrdb.services.MasDivisionService;
 import com.aug.hrdb.services.MasEmploymentService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasLocationService;
 import com.aug.hrdb.services.MasProvinceService;
 import com.aug.hrdb.services.MasStaffTypeService;
@@ -94,7 +94,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Autowired
 	private MasDivisionService masDevisionService;
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired
 	private MasTechnologyService masTechnologyService;
 	@Autowired
@@ -267,8 +267,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         	employeeDto.setMasDivision(employee.getMasDivision().getId());
         }
         
-        if(applicant.getJoblevel()!=null){
-        	employeeDto.setMasJoblevel(applicant.getJoblevel().getId());
+        if(applicant.getJobLevel()!=null){
+        	employeeDto.setMasJoblevel(applicant.getJobLevel().getId());
         }
         
         if(applicant.getTechnology()!=null){
@@ -679,7 +679,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		if(employeeDto.getMasJoblevel()!=null){
-			MasJobLevel masJoblevel = masJoblevelService.find(employeeDto.getMasJoblevel());
+			MasJobLevel masJoblevel = masJoblevelService.findById(employeeDto.getMasJoblevel());
 			if(masJoblevel.getId()!=null){			
 				applicant.setJoblevel(masJoblevel);						
 			}

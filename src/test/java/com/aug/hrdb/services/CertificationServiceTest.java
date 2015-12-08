@@ -21,11 +21,11 @@ import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.CertificationService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -39,7 +39,7 @@ public class CertificationServiceTest {
 	private ApplicantService applicantService;
 	
 	@Autowired
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	
 	@Autowired
 	private MasTechnologyService masTechnologyService;
@@ -70,7 +70,7 @@ public class CertificationServiceTest {
 		masJoblevel.setCode("Division-01");
 
 		masJoblevelService.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelService.find(1);
+		MasJobLevel mJoblevel= masJoblevelService.findById(1);
 
 		MasTechnology masTechnology = new MasTechnology();
 		masTechnology.setName("java");

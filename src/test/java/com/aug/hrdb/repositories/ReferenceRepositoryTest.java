@@ -28,7 +28,7 @@ import com.aug.hrdb.entities.Reference;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.ReferenceRepository;
 
@@ -39,7 +39,7 @@ public class ReferenceRepositoryTest {
 	@Autowired private ReferenceRepository referenceRepository;
 	@Autowired private ApplicantRepository applicantRepository;
 	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasJoblevelRepository masJoblevelRepository;
+	@Autowired private MasJobLevelRepository masJoblevelRepository;
 	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	
 	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);

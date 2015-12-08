@@ -13,7 +13,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.ApplicantService;
 
@@ -29,7 +29,7 @@ public class ApplicantServiceImpl implements ApplicantService {
 	private MasTechnologyRepository masTechnologyRepository;
 	
 	@Autowired
-	private MasJoblevelRepository masJoblevelRepository;
+	private MasJobLevelRepository masJoblevelRepository;
 	
 	@Override
 	public Applicant findById(Integer id) {

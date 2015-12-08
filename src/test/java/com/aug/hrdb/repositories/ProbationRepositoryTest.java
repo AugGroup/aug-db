@@ -26,7 +26,7 @@ import com.aug.hrdb.entities.Probation;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.ProbationRepository;
 
@@ -38,7 +38,7 @@ public class ProbationRepositoryTest {
 	@Autowired private ProbationRepository probationRepository;
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private ApplicantRepository applicantRepository;
-	@Autowired private MasJoblevelRepository masJoblevelRepository;
+	@Autowired private MasJobLevelRepository masJoblevelRepository;
 	@Autowired private MasDivisionRepository masDivisionRepository;
 	@Autowired private MasTechnologyRepository masTechnologyRepository;
 	

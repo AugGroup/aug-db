@@ -31,12 +31,12 @@ import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.services.AbilityService;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasSpecialtyService;
 import com.aug.hrdb.services.MasTechnologyService;
 
@@ -48,7 +48,7 @@ public class AbilityServiceTest {
 	@Autowired private AbilityService abilityService;
 	@Autowired private EmployeeService employeeService;
 	@Autowired private MasSpecialtyService masSpecialtyService;
-	@Autowired private MasJoblevelService masJoblevelService;
+	@Autowired private MasJobLevelService masJoblevelService;
 	@Autowired private ApplicantService applicantService;
 	@Autowired private MasDivisionService masDivisionService;
 	@Autowired private MasTechnologyService masTechnologyService;
@@ -120,7 +120,7 @@ public class AbilityServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.find(masjobId);
+		MasJobLevel mJob = masJoblevelService.findById(masjobId);
          			
         
         

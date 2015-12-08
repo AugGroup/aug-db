@@ -5,8 +5,7 @@
  */
 package com.aug.hrdb.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,13 +14,13 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="MAS_LEAVETYPE")
 public class MasLeaveType extends BaseEntity{
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue
+	
+	@Id @Column(name = "ID") @GeneratedValue
 	private Integer id;
 
 	@Column(name = "NAME", nullable = false)
@@ -33,9 +32,9 @@ public class MasLeaveType extends BaseEntity{
 	@Column(name = "ISACTIVE" ,nullable =false)
 	private Boolean isactive;
 
+	@JsonIgnore
 	@OneToMany(mappedBy = "masleavetype")
-	//@JsonManagedReference
-	private Set<Leave> leaves = new HashSet<Leave>();
+	private List<Leave> leaves;
 
 	public Integer getId() {
 		return id;
@@ -69,12 +68,12 @@ public class MasLeaveType extends BaseEntity{
 		this.isactive = isactive;
 	}
 
-	public Set<Leave> getLeaves() {
+	public List<Leave> getLeaves() {
 		return leaves;
 	}
 
-	public void setLeaves(Set<Leave> leaves) {
+	public void setLeaves(List<Leave> leaves) {
 		this.leaves = leaves;
 	}
-
+	
 }

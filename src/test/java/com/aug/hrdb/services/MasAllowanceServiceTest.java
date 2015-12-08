@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,19 +92,6 @@ public class MasAllowanceServiceTest {
 		List<MasAllowance> result = masAllowanceService.findAll();
 		
 		assertThat(result.size(), is(masAllowances.size() + 1));
-		
-	}
-
-	@Ignore
-	@Test
-	public void testFindByCriteriaWithMasAllowanceServiceShouldPass() throws Exception {
-		
-		masAllowance.setAllowance_type("test findByCriteria");
-		masAllowanceService.create(masAllowance);
-		
-		List<MasAllowance> result = masAllowanceService.findByCriteria(masAllowance);
-		
-		assertThat(result.size(), is(1));
 		
 	}
 	

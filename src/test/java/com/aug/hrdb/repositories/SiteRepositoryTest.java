@@ -27,7 +27,7 @@ import com.aug.hrdb.entities.Site;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJoblevelRepository;
+import com.aug.hrdb.repositories.MasJobLevelRepository;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.repositories.SiteRepository;
 
@@ -42,7 +42,7 @@ public class SiteRepositoryTest {
 	
 	@Autowired SiteRepository siteRepository;
 	@Autowired EmployeeRepository employeeRepository;
-	@Autowired MasJoblevelRepository masJoblevelRepository;
+	@Autowired MasJobLevelRepository masJoblevelRepository;
 	@Autowired ApplicantRepository applicantRepository;
 	@Autowired MasDivisionRepository masDivisionRepository;
 	@Autowired MasTechnologyRepository masTechnologyRepository;

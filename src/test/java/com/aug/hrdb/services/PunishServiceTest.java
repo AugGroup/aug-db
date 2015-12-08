@@ -26,7 +26,7 @@ import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJoblevelService;
+import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 import com.aug.hrdb.services.PunishService;
 
@@ -41,7 +41,7 @@ public class PunishServiceTest {
 	@Autowired 
 	private EmployeeService employeeService;
 	@Autowired 
-	private MasJoblevelService masJoblevelService;
+	private MasJobLevelService masJoblevelService;
 	@Autowired 
 	private ApplicantService applicantService;
 	@Autowired 
@@ -116,7 +116,7 @@ public class PunishServiceTest {
 
 		masJoblevelService.create(masJoblevel);
 		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.find(masjobId);
+		MasJobLevel mJob = masJoblevelService.findById(masjobId);
          			
         
         
