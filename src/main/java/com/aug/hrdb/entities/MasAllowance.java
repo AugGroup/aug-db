@@ -40,7 +40,7 @@ public class MasAllowance extends BaseEntity{
 	private Boolean isactive;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "masallowances")
+	@OneToMany(mappedBy = "masallowance")
 	private Set<Allowance> allowances = new HashSet<Allowance>();
 
 	public Integer getId() {
