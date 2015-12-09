@@ -10,7 +10,7 @@ import com.aug.hrdb.entities.MasRole;
 import com.aug.hrdb.repositories.MasRoleRepository;
 import com.aug.hrdb.services.MasRoleService;
 
-@Service("masRoleService")
+@Service(value="masRoleService")
 @Transactional
 public class MasRoleServiceImpl implements MasRoleService{
 
@@ -36,7 +36,7 @@ public class MasRoleServiceImpl implements MasRoleService{
 	}
 
 	@Override
-	public MasRole find(Integer id) {
+	public MasRole findById(Integer id) {
 		return masRoleRepository.find(id);
 	}
 

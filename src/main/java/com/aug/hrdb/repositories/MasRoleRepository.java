@@ -2,6 +2,6 @@ package com.aug.hrdb.repositories;
 
 import com.aug.hrdb.entities.MasRole;
 
-public interface MasRoleRepository extends GenericRepository<MasRole, Integer>{
+public interface MasRoleRepository extends GenericRepository<MasRole, Integer> {
 	
 }

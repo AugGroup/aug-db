@@ -5,91 +5,141 @@
  */
 package com.aug.hrdb.services;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasRole;
 import com.aug.hrdb.services.MasRoleService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class MasRoleServiceTest {
 
-	@Autowired private MasRoleService masRoleService;
-	int id;
+	@Autowired 
+	private MasRoleService masRoleService;
+	
+	private MasRole masRole;
 	
 	@Before
-	public void setMasRole(){
-		MasRole masRole = new MasRole();
+	public void setUp() throws Exception {
+		
+		masRole = new MasRole();
 		masRole.setType("Admin");
 		masRole.setIsActive(true);
 		masRole.setAuditFlag("C");
 		masRole.setCreatedBy(1);
 		masRole.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadMasRoleServiceShouldPass() throws Exception {
+		assertNotNull(masRoleService);
+	}
+	
+	@Test
+	public void testCreateWithMasRoleServiceShouldPass() throws Exception {
+		
+		masRole.setName("test create");
+		masRoleService.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole result = masRoleService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasRoleServiceShouldPass() throws Exception {
+		
+		masRole.setName("test findById");
+		masRoleService.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole result = masRoleService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasRoleServiceShouldPass() throws Exception {
+		
+		List<MasRole> masRoles = masRoleService.findAll();
+		
 		masRoleService.create(masRole);
 		
-		id=masRole.getId();
+		List<MasRole> result = masRoleService.findAll();
+		
+		assertThat(result.size(), is(masRoles.size() + 1));
+		
 	}
 	
 	@Test
-	@Rollback(true)
-	public void create(){
-
-		MasRole masRole = new MasRole();
-		masRole.setType("User");
-		masRole.setIsActive(true);	
-		masRole.setAuditFlag("C");
-		masRole.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masRole.setCreatedTimeStamp(cal.getTime());
+	public void testUpdateWithMasRoleServiceShouldPass() throws Exception {
 		
 		masRoleService.create(masRole);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void update(){
-
-		MasRole masRole = masRoleService.find(id);
-		masRole.setType("Admin");
-		masRoleService.update(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole update = masRoleService.findById(insertedId);
+		update.setName("test update");
+		masRoleService.update(update);
+		
+		MasRole result = masRoleService.findById(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
 		
 	}
 	
 	@Test
-	@Rollback(true)
-	public void delete(){
-
-		MasRole masRole = masRoleService.find(id);
-		masRoleService.delete(masRole);
+	public void testDeleteWithMasRoleServiceShouldPass() throws Exception {
+		
+		masRoleService.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole delete = masRoleService.findById(insertedId);
+		masRoleService.delete(delete);
+		
+		MasRole result = masRoleService.findById(delete.getId());
+		
+		assertNull(result);
 		
 	}
 	
-	
 	@Test
-	@Rollback(true)
-	public void findAll(){
-
-		List<MasRole> masRole = masRoleService.findAll();
-		Assert.assertEquals(4, masRole.size());
+	public void testDeleteByIdWithMasRoleServiceShouldPass() throws Exception {
+		
+		masRoleService.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole delete = masRoleService.findById(insertedId);
+		masRoleService.deleteById(delete.getId());
+		
+		MasRole result = masRoleService.findById(delete.getId());
+		
+		assertNull(result);
+		
 	}
 	
-	@Test
-	@Rollback(true)
-	public void findById(){
-		MasRole masRole = masRoleService.find(id);
-		int idMasRole = masRole.getId();
-		Assert.assertEquals(idMasRole, id);
-	}
 }

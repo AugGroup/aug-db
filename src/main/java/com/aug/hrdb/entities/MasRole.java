@@ -1,7 +1,6 @@
 package com.aug.hrdb.entities;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +26,7 @@ public class MasRole extends BaseEntity {
 	private Boolean isActive;
 
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masRoles")
-	private Set<Login> logins = new HashSet<Login>();
+	private List<Login> logins;
 
 	public Integer getId() {
 		return id;
@@ -53,12 +52,12 @@ public class MasRole extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	public Set<Login> getLogins() {
+	public List<Login> getLogins() {
 		return logins;
 	}
 
-	public void setLogins(Set<Login> logins) {
+	public void setLogins(List<Login> logins) {
 		this.logins = logins;
 	}
-
+	
 }

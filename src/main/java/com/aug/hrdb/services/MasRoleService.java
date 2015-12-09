@@ -9,7 +9,8 @@ public interface MasRoleService {
 	public void create(MasRole masRole);
 	public void update(MasRole masRole);
 	public void delete(MasRole masRole);
-	public MasRole find(Integer id);
+	public MasRole findById(Integer id);
 	public List<MasRole> findAll();
 	public void deleteById(Integer id);
+	
 }

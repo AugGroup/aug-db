@@ -5,99 +5,151 @@
  */
 package com.aug.hrdb.repositories;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.junit.Assert;
+import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasRole;
 import com.aug.hrdb.repositories.MasRoleRepository;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class MasRoleRepositoryTest {
 
-	@Autowired MasRoleRepository masRoleRepository;
-	int id;
+	@Autowired
+	private SessionFactory sessionFactory;
 	
+	@Autowired 
+	private MasRoleRepository masRoleRepository;
+	
+	private MasRole masRole;
+	
+
 	@Before
-	public void setMasRole(){
-		MasRole masRole = new MasRole();
+	public void setUp() throws Exception {
+		
+		masRole = new MasRole();
 		masRole.setType("Admin");
 		masRole.setIsActive(true);
 		masRole.setAuditFlag("C");
 		masRole.setCreatedBy(1);
 		masRole.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadSessionFactoryShouldPass() throws Exception {
+		assertNotNull(sessionFactory);
+	}
+	
+	@Test
+	public void testLoadMasRoleRepositoryShouldPass() throws Exception {
+		assertNotNull(masRoleRepository);
+	}
+	
+	@Test
+	public void testCreateWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		masRole.setType("test create");
+		masRoleRepository.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole result = masRoleRepository.find(insertedId);
+		
+		assertThat(result.getType(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		masRole.setType("test findById");
+		masRoleRepository.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole result = masRoleRepository.find(insertedId);
+		
+		assertThat(result.getType(), is("test findById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		List<MasRole> masRoles = masRoleRepository.findAll();
+		
 		masRoleRepository.create(masRole);
 		
-		id=masRole.getId();
-	}
-	
-	@Test
-	@Rollback(true)
-	public void create() {
-
-		MasRole masRole = new MasRole();
-		masRole.setType("User");
-		masRole.setIsActive(true);
-		masRole.setAuditFlag("C");
-		masRole.setCreatedBy(1);
-		masRole.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		List<MasRole> result = masRoleRepository.findAll();
 		
-		masRoleRepository.getCurrentSession().save(masRole);
-
-	}
-
-	@Test
-	@Rollback(true)
-	public void update() {
-
-		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-				MasRole.class, id);
-		masRole.setName("HR");
-
-		masRoleRepository.getCurrentSession().update(masRole);
-	}
-
-	@Test
-	@Rollback(true)
-	public void delete() {
-
-		MasRole masRole = (MasRole) masRoleRepository.getCurrentSession().get(
-				MasRole.class, id);
-
-		masRoleRepository.getCurrentSession().delete(masRole);
-	}
-
-	@SuppressWarnings("unchecked")
-	@Test
-	@Rollback(true)
-	public void list() {
-
-		Criteria c = masRoleRepository.getCurrentSession().createCriteria(
-				MasRole.class);
-		List<MasRole> masRoles = c.list();
-		Assert.assertEquals(4, masRoles.size());
-
+		assertThat(result.size(), is(masRoles.size() + 1));
+		
 	}
 	
 	@Test
-	@Rollback(true)
-	public void findById(){
-		MasRole masRole = masRoleRepository.find(id);
-		int idMasRole = masRole.getId();
-		Assert.assertEquals(idMasRole, id);
+	public void testUpdateWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		masRoleRepository.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole update = masRoleRepository.find(insertedId);
+		update.setType("test update");
+		masRoleRepository.update(update);
+		
+		MasRole result = masRoleRepository.find(update.getId());
+		
+		assertThat(result.getType(), is("test update"));
+		
+	}
+	
+	@Test
+	public void testDeleteWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		masRoleRepository.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole delete = masRoleRepository.find(insertedId);
+		masRoleRepository.delete(delete);
+		
+		MasRole result = masRoleRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasRoleRepositoryShouldPass() throws Exception {
+		
+		masRoleRepository.create(masRole);
+		Integer insertedId = masRole.getId();
+		
+		MasRole delete = masRoleRepository.find(insertedId);
+		masRoleRepository.deleteById(delete.getId());
+		
+		MasRole result = masRoleRepository.find(delete.getId());
+		
+		assertNull(result);
+		
 	}
 	
 }
