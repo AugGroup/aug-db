@@ -813,7 +813,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									address.setRoad(addressDto.getRoad());
 									
 									
-									MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
+									MasProvince masProvince = masProvinceService.findById(addressDto.getMasprovinceId());
 									if(masProvince!=null){
 										address.setProvince(masProvince);
 									}
@@ -849,7 +849,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 									address.setDistrict(addressDto.getSubDistrict());
 									address.setRoad(addressDto.getRoad());
 									
-									MasProvince masProvince = masProvinceService.find(addressDto.getMasprovinceId());
+									MasProvince masProvince = masProvinceService.findById(addressDto.getMasprovinceId());
 									if(masProvince!=null){
 										address.setProvince(masProvince);
 									}

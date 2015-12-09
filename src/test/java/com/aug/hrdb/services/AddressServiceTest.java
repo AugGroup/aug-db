@@ -28,7 +28,7 @@ import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasProvinceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
 @Transactional
 public class AddressServiceTest {
 	
@@ -70,7 +70,7 @@ public class AddressServiceTest {
 		province.setAuditFlag("C");
 		provinceService.create(province);
 		idMasProvice = province.getId();
-		MasProvince masProvince = provinceService.find(idMasProvice);
+		MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
 

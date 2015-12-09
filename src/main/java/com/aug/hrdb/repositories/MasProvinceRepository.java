@@ -7,8 +7,6 @@ package com.aug.hrdb.repositories;
 
 import com.aug.hrdb.entities.MasProvince;
 
-
-
-public interface MasProvinceRepository extends GenericRepository<MasProvince, Integer>{
+public interface MasProvinceRepository extends GenericRepository<MasProvince, Integer> {
 
 }

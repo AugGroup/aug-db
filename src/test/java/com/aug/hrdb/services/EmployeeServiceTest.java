@@ -215,7 +215,7 @@ public class EmployeeServiceTest {
 		province.setAuditFlag("C");
 		provinceService.create(province);
 		idMasProvice = province.getId();
-		MasProvince masProvince = provinceService.find(idMasProvice);
+		MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
 
@@ -260,7 +260,7 @@ public class EmployeeServiceTest {
 		province.setAuditFlag("C");
 		provinceService.create(province);
 		int idMasProvice1 = province.getId();
-		MasProvince masProvince1 = provinceService.find(idMasProvice1);
+		MasProvince masProvince1 = provinceService.findById(idMasProvice1);
 		
 		
 
@@ -486,7 +486,7 @@ public class EmployeeServiceTest {
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
-		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
 		 Applicant applicant = new Applicant();
@@ -631,7 +631,7 @@ public class EmployeeServiceTest {
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
-		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
 		 Applicant applicant = new Applicant();
@@ -804,7 +804,7 @@ public class EmployeeServiceTest {
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
-		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
 		
@@ -959,7 +959,7 @@ public class EmployeeServiceTest {
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
 		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
-		 MasProvince masProvince = provinceService.find(idMasProvice);
+		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
 		

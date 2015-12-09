@@ -15,53 +15,41 @@ import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.repositories.MasProvinceRepository;
 import com.aug.hrdb.services.MasProvinceService;
 
-@Service("masProvinceService")
+@Service(value="masProvinceService")
 @Transactional
 public class MasProvinceImpl implements MasProvinceService {
 
 	@Autowired
-	private MasProvinceRepository masProvinceResp;
+	private MasProvinceRepository masProvinceRepository;
 	
 	@Override
 	public void create(MasProvince masProvince) {
-		masProvinceResp.create(masProvince);
+		masProvinceRepository.create(masProvince);
 	}
 
 	@Override
 	public void update(MasProvince masProvince) {
-		
-		masProvinceResp.update(masProvince);
-		
+		masProvinceRepository.update(masProvince);
 	}
 
 	@Override
 	public void delete(MasProvince masProvince) {
-		
-		masProvinceResp.delete(masProvince);
+		masProvinceRepository.delete(masProvince);
 	}
 
 	@Override
-	public MasProvince find(Integer Id) {
-		
-		return masProvinceResp.find(Id);
+	public MasProvince findById(Integer Id) {
+		return masProvinceRepository.find(Id);
 	}
 
 	@Override
 	public List<MasProvince> findAll() {
-		
-		return masProvinceResp.findAll();
-	}
-
-	@Override
-	public List<MasProvince> findByCriteria(MasProvince masProvince) {
-		
-		return null;
+		return masProvinceRepository.findAll();
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		
+		masProvinceRepository.deleteById(id);
 	}
 
 }
