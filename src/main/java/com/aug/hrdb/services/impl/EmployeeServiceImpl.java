@@ -745,7 +745,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setStatusemp(employeeDto.getStatusemp());
 		
 		if(employeeDto.getMasStaffType()!=null){
-			MasStaffType masStaffType = masStaffTypeService.find(employeeDto.getMasStaffType());
+			MasStaffType masStaffType = masStaffTypeService.findById(employeeDto.getMasStaffType());
 			if(masStaffType.getId()!=null){
 				employee.setMasStaffType(masStaffType);
 			}

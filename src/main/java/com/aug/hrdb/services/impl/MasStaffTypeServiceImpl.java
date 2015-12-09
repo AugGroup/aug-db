@@ -10,11 +10,9 @@ import com.aug.hrdb.entities.MasStaffType;
 import com.aug.hrdb.repositories.MasStaffTypeRepository;
 import com.aug.hrdb.services.MasStaffTypeService;
 
-
-
-@Service("masStaffTypeService")
+@Service(value="masStaffTypeService")
 @Transactional
-public class MasStaffTypeServiceImpl implements MasStaffTypeService{
+public class MasStaffTypeServiceImpl implements MasStaffTypeService {
 	
 	@Autowired
 	private MasStaffTypeRepository masStaffTypeRepository;
@@ -22,24 +20,21 @@ public class MasStaffTypeServiceImpl implements MasStaffTypeService{
 	@Override
 	public void create(MasStaffType masStaffType) {
 		masStaffTypeRepository.create(masStaffType);
-		
 	}
 
 	@Override
 	public void update(MasStaffType masStaffType) {
 		masStaffTypeRepository.update(masStaffType);
-		
 	}
 
 	@Override
 	public void delete(MasStaffType masStaffType) {
 		masStaffTypeRepository.delete(masStaffType);
-		
 	}
 
 	@Override
-	public MasStaffType find(Integer Id) {
-			return masStaffTypeRepository.find(Id);
+	public MasStaffType findById(Integer id) {
+			return masStaffTypeRepository.find(id);
 	}
 
 	@Override
@@ -47,6 +42,9 @@ public class MasStaffTypeServiceImpl implements MasStaffTypeService{
 		return masStaffTypeRepository.findAll();
 	}
 
-	
+	@Override
+	public void deleteById(Integer id) {
+		masStaffTypeRepository.deleteById(id);
+	}
 
 }

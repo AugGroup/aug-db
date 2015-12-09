@@ -44,7 +44,7 @@ public class MasRoleRepositoryTest {
 	public void setUp() throws Exception {
 		
 		masRole = new MasRole();
-		masRole.setType("Admin");
+		masRole.setType("test");
 		masRole.setIsActive(true);
 		masRole.setAuditFlag("C");
 		masRole.setCreatedBy(1);

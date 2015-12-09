@@ -39,7 +39,7 @@ public class MasRoleServiceTest {
 	public void setUp() throws Exception {
 		
 		masRole = new MasRole();
-		masRole.setType("Admin");
+		masRole.setType("test");
 		masRole.setIsActive(true);
 		masRole.setAuditFlag("C");
 		masRole.setCreatedBy(1);
@@ -60,26 +60,26 @@ public class MasRoleServiceTest {
 	@Test
 	public void testCreateWithMasRoleServiceShouldPass() throws Exception {
 		
-		masRole.setName("test create");
+		masRole.setType("test create");
 		masRoleService.create(masRole);
 		Integer insertedId = masRole.getId();
 		
 		MasRole result = masRoleService.findById(insertedId);
 		
-		assertThat(result.getName(), is("test create"));
+		assertThat(result.getType(), is("test create"));
 		
 	}
 	
 	@Test
 	public void testFindByIdWithMasRoleServiceShouldPass() throws Exception {
 		
-		masRole.setName("test findById");
+		masRole.setType("test findById");
 		masRoleService.create(masRole);
 		Integer insertedId = masRole.getId();
 		
 		MasRole result = masRoleService.findById(insertedId);
 		
-		assertThat(result.getName(), is("test findById"));
+		assertThat(result.getType(), is("test findById"));
 		
 	}
 	
@@ -103,12 +103,12 @@ public class MasRoleServiceTest {
 		Integer insertedId = masRole.getId();
 		
 		MasRole update = masRoleService.findById(insertedId);
-		update.setName("test update");
+		update.setType("test update");
 		masRoleService.update(update);
 		
 		MasRole result = masRoleService.findById(update.getId());
 		
-		assertThat(result.getName(), is("test update"));
+		assertThat(result.getType(), is("test update"));
 		
 	}
 	

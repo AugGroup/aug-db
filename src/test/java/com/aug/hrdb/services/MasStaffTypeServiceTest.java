@@ -1,112 +1,141 @@
 package com.aug.hrdb.services;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasStaffType;
 import com.aug.hrdb.services.MasStaffTypeService;
 
-import junit.framework.Assert;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class MasStaffTypeServiceTest {
 	
 	@Autowired 
 	private MasStaffTypeService masStaffTypeService;
 	
-	int id;
-	
+	private MasStaffType masStaffType;
+
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
 		
-		MasStaffType masStaffType = new MasStaffType();
-		masStaffType.setName("Augmentis");
+		masStaffType = new MasStaffType();
+		masStaffType.setName("test");
 		masStaffType.setAuditFlag("C");
 		masStaffType.setCode("STAFF-02");
 		masStaffType.setCreatedBy(1);
 		masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masStaffType.setIsActive(true);
 		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadMasStaffTypeServiceShouldPass() throws Exception {
+		assertNotNull(masStaffTypeService);
+	}
+	
+	@Test
+	public void testCreateWithMasStaffTypeServiceShouldPass() throws Exception {
+		
+		masStaffType.setName("test create");
+		masStaffTypeService.create(masStaffType);
+		Integer insertedId = masStaffType.getId();
+		
+		MasStaffType result = masStaffTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasStaffTypeServiceShouldPass() throws Exception {
+		
+		masStaffType.setName("test findById");
+		masStaffTypeService.create(masStaffType);
+		Integer insertedId = masStaffType.getId();
+		
+		MasStaffType result = masStaffTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasStaffTypeServiceShouldPass() throws Exception {
+		
+		List<MasStaffType> masStaffTypes = masStaffTypeService.findAll();
 		
 		masStaffTypeService.create(masStaffType);
-		id = masStaffType.getId();
+		
+		List<MasStaffType> result = masStaffTypeService.findAll();
+		
+		assertThat(result.size(), is(masStaffTypes.size() + 1));
 		
 	}
 	
-	
 	@Test
-	@Rollback(true)
-	public void create() {
-
-		MasStaffType masStaffType = new MasStaffType();
-		masStaffType.setName("Augmentis");
-		masStaffType.setAuditFlag("C");
-		masStaffType.setCode("STAFF-02");
-		masStaffType.setCreatedBy(1);
-		masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masStaffType.setIsActive(true);
-		
+	public void testUpdateWithMasStaffTypeServiceShouldPass() throws Exception {
 		
 		masStaffTypeService.create(masStaffType);
-
+		Integer insertedId = masStaffType.getId();
+		
+		MasStaffType update = masStaffTypeService.findById(insertedId);
+		update.setName("test update");
+		masStaffTypeService.update(update);
+		
+		MasStaffType result = masStaffTypeService.findById(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
 	}
-	
 	
 	@Test
-	@Rollback(true)
-	public void updateMasStaffType(){
-
-		MasStaffType masStaffType = (MasStaffType) masStaffTypeService.find(id);
-		masStaffType.setCode("STAFF-05");
-		masStaffType.setAuditFlag("U");
-		masStaffType.setUpdatedBy(1);
-		masStaffType.setUpdatedTimeStamp(Calendar.getInstance().getTime());
-		masStaffTypeService.update(masStaffType);
+	public void testDeleteWithMasStaffTypeServiceShouldPass() throws Exception {
+		
+		masStaffTypeService.create(masStaffType);
+		Integer insertedId = masStaffType.getId();
+		
+		MasStaffType delete = masStaffTypeService.findById(insertedId);
+		masStaffTypeService.delete(delete);
+		
+		MasStaffType result = masStaffTypeService.findById(delete.getId());
+		
+		assertNull(result);
 		
 	}
-	
-	
 	
 	@Test
-	@Rollback(true)
-	public void deleteMasStaffType(){
+	public void testDeleteByIdWithMasStaffTypeServiceShouldPass() throws Exception {
 		
-		MasStaffType masStaffType = masStaffTypeService.find(id);
-		masStaffTypeService.delete(masStaffType);
+		masStaffTypeService.create(masStaffType);
+		Integer insertedId = masStaffType.getId();
 		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void listMasStaffType(){
+		MasStaffType delete = masStaffTypeService.findById(insertedId);
+		masStaffTypeService.deleteById(delete.getId());
 		
-		List<MasStaffType> masStaffTypeList = masStaffTypeService.findAll();
+		MasStaffType result = masStaffTypeService.findById(delete.getId());
 		
+		assertNull(result);
 		
 	}
 	
-	
-	@Test
-	@Rollback(true)
-	public void findByIdMasTechnology(){
-		
-		MasStaffType masStaffType = masStaffTypeService.find(id);	
-		Assert.assertEquals(id, id);
-		
-	}
-	
-	
-
 }
