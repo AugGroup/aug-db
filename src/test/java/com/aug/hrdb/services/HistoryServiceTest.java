@@ -102,7 +102,7 @@ public class HistoryServiceTest {
 			masTechnologyService.create(masTechnology);
 			mastecId=masTechnology.getId();
 	 		
-			MasTechnology mTechnology= masTechnologyService.find(mastecId);
+			MasTechnology mTechnology= masTechnologyService.findById(mastecId);
 	 		
 
 			MasJobLevel masJoblevel = new MasJobLevel();

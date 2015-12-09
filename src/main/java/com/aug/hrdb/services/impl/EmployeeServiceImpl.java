@@ -687,7 +687,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		
 		if(employeeDto.getTechnology()!=null){
-			MasTechnology masTechnology = masTechnologyService.find(employeeDto.getTechnology());
+			MasTechnology masTechnology = masTechnologyService.findById(employeeDto.getTechnology());
 			if(masTechnology.getId()!=null){
 				applicant.setTechnology(masTechnology);
 			}

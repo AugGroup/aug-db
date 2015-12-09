@@ -82,7 +82,7 @@ public class CertificationServiceTest {
 		masTechnology.setCreatedTimeStamp(cal.getTime());
 		masTechnologyService.create(masTechnology);
 		
-		MasTechnology mTechnology= masTechnologyService.find(1);
+		MasTechnology mTechnology= masTechnologyService.findById(1);
 		
 		applicant.setJoblevel(mJoblevel);
 		applicant.setTechnology(mTechnology);

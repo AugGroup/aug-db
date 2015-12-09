@@ -10,19 +10,16 @@ import com.aug.hrdb.entities.MasTechnology;
 import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.MasTechnologyService;
 
-@Service("masTechnologyService")
+@Service(value="masTechnologyService")
 @Transactional
-public class MasTechnologyServiceImpl implements MasTechnologyService{
+public class MasTechnologyServiceImpl implements MasTechnologyService {
 
 	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
 	
-	
-	
 	@Override
 	public void create(MasTechnology masTechnology) {
 		masTechnologyRepository.create(masTechnology);
-		
 	}
 
 	@Override
@@ -31,7 +28,7 @@ public class MasTechnologyServiceImpl implements MasTechnologyService{
 	}
 
 	@Override
-	public MasTechnology find(Integer id) {
+	public MasTechnology findById(Integer id) {
 		return masTechnologyRepository.find(id);
 	}
 	

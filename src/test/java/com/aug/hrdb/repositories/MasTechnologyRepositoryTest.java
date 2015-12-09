@@ -1,17 +1,20 @@
 package com.aug.hrdb.repositories;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.junit.Assert;
+import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasTechnology;
@@ -19,87 +22,129 @@ import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class MasTechnologyRepositoryTest {
 	
 	@Autowired
+	private SessionFactory sessionFactory;
+	
+	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
 	
-	
-	int id;
+	private MasTechnology masTechnology;
 	
 	@Before
-	public void setValue(){
-		MasTechnology masTech = new MasTechnology();
-		masTech.setName("PHP");
-		masTech.setCode("004A");
-		masTech.setIsActive(true);
+	public void setUp() throws Exception {
 		
-		masTech.setAuditFlag("C");
-		masTech.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTech.setCreatedTimeStamp(cal.getTime());
+		masTechnology = new MasTechnology();
+		masTechnology.setName("test");
+		masTechnology.setCode("004A");
+		masTechnology.setIsActive(true);
+		masTechnology.setAuditFlag("C");
+		masTechnology.setCreatedBy(0);
+		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
-		masTechnologyRepository.create(masTech);
-		id = masTech.getId();
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
 	}
 	
 	@Test
-	public void createMasTechnology(){
-		
-		
-		MasTechnology masTech = new MasTechnology();
-		masTech.setName("java");
-		masTech.setCode("001A");
-		masTech.setIsActive(true);
-		masTech.setAuditFlag("C");
-		masTech.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTech.setCreatedTimeStamp(cal.getTime());
-		masTechnologyRepository.create(masTech);
-		
+	public void testLoadSessionFactoryShouldPass() throws Exception {
+		assertNotNull(sessionFactory);
 	}
-	
 	
 	@Test
-	@Rollback(true)
-	public void updateMasTechnology(){
-		
-		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, id);
-		masTech.setName("SAP");
-		masTechnologyRepository.update(masTech);
-		
+	public void testLoadMasTechnologyRepositoryShouldPass() throws Exception {
+		assertNotNull(masTechnologyRepository);
 	}
-	
 	
 	@Test
-	@Rollback(true)
-	public void deleteMasTechnology(){
+	public void testCreateWithMasTechnologyRepositoryShouldPass() throws Exception {
 		
-		MasTechnology masTech = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, id);
-		masTechnologyRepository.delete(masTech);;
+		masTechnology.setName("test create");
+		masTechnologyRepository.create(masTechnology);
+		Integer insertedId = masTechnology.getId();
+		
+		MasTechnology result = masTechnologyRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
 		
 	}
-	
 	
 	@Test
-	@Rollback(true)
-	public void findByIdMasTechnology(){
+	public void testFindByIdWithMasTechnologyRepositoryShouldPass() throws Exception {
 		
-		MasTechnology masTechnology = (MasTechnology) masTechnologyRepository.getCurrentSession().get(MasTechnology.class, id);		
-		int id = masTechnology.getId();
-		Assert.assertEquals(id, id);
+		masTechnology.setName("test findById");
+		masTechnologyRepository.create(masTechnology);
+		Integer insertedId = masTechnology.getId();
+		
+		MasTechnology result = masTechnologyRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
 		
 	}
 	
+	@Test
+	public void testFindAllWithMasTechnologyRepositoryShouldPass() throws Exception {
+		
+		List<MasTechnology> masTechnologys = masTechnologyRepository.findAll();
+		
+		masTechnologyRepository.create(masTechnology);
+		
+		List<MasTechnology> result = masTechnologyRepository.findAll();
+		
+		assertThat(result.size(), is(masTechnologys.size() + 1));
+		
+	}
+	
+	@Test
+	public void testUpdateWithMasTechnologyRepositoryShouldPass() throws Exception {
+		
+		masTechnologyRepository.create(masTechnology);
+		Integer insertedId = masTechnology.getId();
+		
+		MasTechnology update = masTechnologyRepository.find(insertedId);
+		update.setName("test update");
+		masTechnologyRepository.update(update);
+		
+		MasTechnology result = masTechnologyRepository.find(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
+	}
+	
+	@Test
+	public void testDeleteWithMasTechnologyRepositoryShouldPass() throws Exception {
+		
+		masTechnologyRepository.create(masTechnology);
+		Integer insertedId = masTechnology.getId();
+		
+		MasTechnology delete = masTechnologyRepository.find(insertedId);
+		masTechnologyRepository.delete(delete);
+		
+		MasTechnology result = masTechnologyRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasTechnologyRepositoryShouldPass() throws Exception {
+		
+		masTechnologyRepository.create(masTechnology);
+		Integer insertedId = masTechnology.getId();
+		
+		MasTechnology delete = masTechnologyRepository.find(insertedId);
+		masTechnologyRepository.deleteById(delete.getId());
+		
+		MasTechnology result = masTechnologyRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
 
-	@Test
-	@Rollback(true)
-	public void list() {
-
-		Criteria c = masTechnologyRepository.getCurrentSession().createCriteria(
-				MasTechnology.class);
-		List<MasTechnology> masTechnologies = c.list();
-		
-	}
 }

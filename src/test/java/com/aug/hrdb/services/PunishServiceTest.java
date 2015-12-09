@@ -103,7 +103,7 @@ public class PunishServiceTest {
 		masTechnology.setCreatedTimeStamp(cal.getTime());
 		masTechnologyService.create(masTechnology);
 		mastecId = masTechnology.getId();
-		MasTechnology mTechnology = masTechnologyService.find(mastecId);
+		MasTechnology mTechnology = masTechnologyService.findById(mastecId);
 
 		MasJobLevel masJoblevel = new MasJobLevel();
 		masJoblevel.setName("CEO");

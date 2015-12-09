@@ -109,7 +109,7 @@ public class OfficialServiceTest {
 		masTechnologyService.create(masTechnology);
 		mastec=masTechnology.getId();
  		
-		MasTechnology mTechnology= masTechnologyService.find(mastec);
+		MasTechnology mTechnology= masTechnologyService.findById(mastec);
  		
 
 		MasJobLevel masJoblevel = new MasJobLevel();

@@ -175,7 +175,7 @@ public class EmployeeServiceTest {
         masTechnology.setName("MASTECH-01");
         masTechnologyService.create(masTechnology);
         masTechId = masTechnology.getId();
-        MasTechnology masTechnology2 = masTechnologyService.find(masTechId);
+        MasTechnology masTechnology2 = masTechnologyService.findById(masTechId);
         
         
         Applicant applicant = new Applicant();
@@ -485,7 +485,7 @@ public class EmployeeServiceTest {
 	public void createEmployeeAndReturnId(){
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
 		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
@@ -630,7 +630,7 @@ public class EmployeeServiceTest {
 		/*********************************************** create employee  **********************************************************/
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
 		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		
 		
@@ -803,7 +803,7 @@ public class EmployeeServiceTest {
 		/*********************************************** create employee  **********************************************************/
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
 		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
@@ -958,7 +958,7 @@ public class EmployeeServiceTest {
 		/*********************************************** create employee  **********************************************************/
 		
 		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.find(masTechId);
+		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
 		 MasProvince masProvince = provinceService.findById(idMasProvice);
 		 MasLocation masLocation = masLocationService.findById(idMasLocation);
 		
