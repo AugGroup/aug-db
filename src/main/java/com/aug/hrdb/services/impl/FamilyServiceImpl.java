@@ -98,7 +98,7 @@ public class FamilyServiceImpl implements FamilyService{
 		MasRelationType masRelationType = new MasRelationType();
 				
 		if(familyDto.getMasRelationTypeId()!=null){
-			masRelationType = masRelationService.find(familyDto.getMasRelationTypeId());
+			masRelationType = masRelationService.findById(familyDto.getMasRelationTypeId());
 			family.setMasRelationType(masRelationType);		
 		}
 		
@@ -159,7 +159,7 @@ public class FamilyServiceImpl implements FamilyService{
 		// TODO Auto-generated method stub
 		
 		MasRelationType masRelationType = new MasRelationType();
-		masRelationType = masRelationService.find(familyDto.getMasRelationTypeId());
+		masRelationType = masRelationService.findById(familyDto.getMasRelationTypeId());
 		
 		
 		Family familyObj = new Family();

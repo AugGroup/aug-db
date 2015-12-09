@@ -1,154 +1,162 @@
 package com.aug.hrdb.repositories;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
+import org.hibernate.SessionFactory;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.MasRelationType;
 import com.aug.hrdb.repositories.MasRelationTypeRepository;
 
-import junit.framework.Assert;
-
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@TransactionConfiguration
 @Transactional
 public class MasRelationTypeRepositoryTest {
 	
-@Autowired
-private MasRelationTypeRepository masRelationTypeRepository;
-
-
-int id;
-
-@Before
-public void setUp() {
+	@Autowired
+	private SessionFactory sessionFactory;
 	
-	MasRelationType masRelationType = new MasRelationType();
-	masRelationType.setRelationType("Parent");
-	masRelationType.setAuditFlag("C");
-	masRelationType.setCode("REL-03");
-	masRelationType.setCreatedBy(1);
-	masRelationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	masRelationType.setIsActive(true);
+	@Autowired
+	private MasRelationTypeRepository masRelationTypeRepository;
 
-	masRelationTypeRepository.create(masRelationType);
-	id = masRelationType.getId();
+	private MasRelationType masRelationType;
 	
-}
-
-	@Test
-	@Rollback(true)
-	public void create() {
-	
-		MasRelationType masRelationType = new MasRelationType();
-		masRelationType.setRelationType("Father");
+	@Before
+	public void setUp() throws Exception {
+		
+		masRelationType = new MasRelationType();
+		masRelationType.setRelationType("test");
 		masRelationType.setAuditFlag("C");
 		masRelationType.setCode("REL-03");
 		masRelationType.setCreatedBy(1);
 		masRelationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		masRelationType.setIsActive(true);
+		
+	}
 	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadSessionFactoryShouldPass() throws Exception {
+		assertNotNull(sessionFactory);
+	}
+	
+	@Test
+	public void testLoadMasRelationTypeShouldPass() throws Exception {
+		assertNotNull(masRelationTypeRepository);
+	}
+	
+	@Test
+	public void testCreateWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		masRelationType.setName("test create");
+		masRelationTypeRepository.create(masRelationType);
+		Integer insertedId = masRelationType.getId();
+		
+		MasRelationType result = masRelationTypeRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		masRelationType.setName("test findById");
+		masRelationTypeRepository.create(masRelationType);
+		Integer insertedId = masRelationType.getId();
+		
+		MasRelationType result = masRelationTypeRepository.find(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		List<MasRelationType> masRelationTypes = masRelationTypeRepository.findAll();
+		
 		masRelationTypeRepository.create(masRelationType);
 		
+		List<MasRelationType> result = masRelationTypeRepository.findAll();
 		
+		assertThat(result.size(), is(masRelationTypes.size() + 1));
 		
-		MasRelationType masRelationType2 = new MasRelationType();
-		masRelationType2.setRelationType("Mother");
-		masRelationType2.setAuditFlag("C");
-		masRelationType2.setCode("REL-04");
-		masRelationType2.setCreatedBy(1);
-		masRelationType2.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masRelationType2.setIsActive(true);
-	
-		masRelationTypeRepository.create(masRelationType2);
-		
-		
-		
-		
-		MasRelationType masRelationType3 = new MasRelationType();
-		masRelationType3.setRelationType("Son");
-		masRelationType3.setAuditFlag("C");
-		masRelationType3.setCode("REL-05");
-		masRelationType3.setCreatedBy(1);
-		masRelationType3.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masRelationType3.setIsActive(true);
-	
-		masRelationTypeRepository.create(masRelationType3);
-	
-	
-	
 	}
-	
-	
-	
 	
 	@Test
-	@Rollback(true)
-	public void update() {
-	
-	
-		MasRelationType masRelationType = masRelationTypeRepository.find(id);
-		masRelationType.setRelationType("Daughter");
-		masRelationType.setAuditFlag("U");
-		masRelationType.setUpdatedBy(1);
-		masRelationType.setUpdatedTimeStamp(Calendar.getInstance().getTime());
-	
-		masRelationTypeRepository.update(masRelationType);
-	
-	}
-	
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void delete() {
-	
-		MasRelationType masRelationType = masRelationTypeRepository.find(id);
-		masRelationTypeRepository.delete(masRelationType);
-	
-	}
-	
-	
-	
-	
-	@Test
-	public void find() {
-	
-		MasRelationType masRelationType = masRelationTypeRepository.find(id);
-		Assert.assertEquals(id, id);
-	
-	
-	}
-	
-	
-	@Test
-	public void findAll() {
-	
-		List<MasRelationType> masRelationTypeList = masRelationTypeRepository.findAll();
+	public void testFindByNameWithMasRelationTypeRepositoryShouldPass() throws Exception {
 		
-	
-	
+		masRelationType.setRelationType("test findByName");
+		masRelationTypeRepository.create(masRelationType);
+		
+		MasRelationType result = masRelationTypeRepository.findByName(masRelationType.getRelationType());
+		
+		assertThat(result.getRelationType(), is("test findByName"));
+		
 	}
-	
-	
-	
 	
 	@Test
-	public void findByName() {
-	
-		MasRelationType masRelationType = masRelationTypeRepository.findByName("Parent");
-		Assert.assertEquals("Parent", masRelationType.getRelationType());
-	
+	public void testUpdateWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		masRelationTypeRepository.create(masRelationType);
+		Integer insertedId = masRelationType.getId();
+		
+		MasRelationType update = masRelationTypeRepository.find(insertedId);
+		update.setName("test update");
+		masRelationTypeRepository.update(update);
+		
+		MasRelationType result = masRelationTypeRepository.find(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
 	}
-
+	
+	@Test
+	public void testDeleteWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		masRelationTypeRepository.create(masRelationType);
+		Integer insertedId = masRelationType.getId();
+		
+		MasRelationType delete = masRelationTypeRepository.find(insertedId);
+		masRelationTypeRepository.delete(delete);
+		
+		MasRelationType result = masRelationTypeRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasRelationTypeRepositoryShouldPass() throws Exception {
+		
+		masRelationTypeRepository.create(masRelationType);
+		Integer insertedId = masRelationType.getId();
+		
+		MasRelationType delete = masRelationTypeRepository.find(insertedId);
+		masRelationTypeRepository.deleteById(delete.getId());
+		
+		MasRelationType result = masRelationTypeRepository.find(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
 }

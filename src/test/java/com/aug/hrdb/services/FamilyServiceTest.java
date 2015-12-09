@@ -111,7 +111,7 @@ public class FamilyServiceTest {
 	    	masRelationTypeService.create(masRelationType1);
 	    	
 	        idMasRelationType = masRelationType1.getId();
-	    	MasRelationType masRelationType = masRelationTypeService.find(idMasRelationType);
+	    	MasRelationType masRelationType = masRelationTypeService.findById(idMasRelationType);
 	    	
 	    	
 	    	Family family = new Family();

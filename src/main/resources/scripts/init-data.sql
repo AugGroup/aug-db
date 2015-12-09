@@ -194,6 +194,16 @@ insert into MAS_PROVINCE (PROVINCENAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,
 ('Satun','a',1,'C',NOW(),0),
 ('Surat Thani','a',1,'C',NOW(),0);
 
+--MAS_RELATIONTYPE
+INSERT INTO MAS_RELATIONTYPE (AUDITFLAG,CODE,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE,RELATIONTYPE) VALUES
+('C','01',0,NOW(),true,'Mother'),
+('C','02',0,NOW(),true,'Father'),
+('C','05',0,NOW(),true,'Brother'),
+('C','05',0,NOW(),true,'Sister'),
+('C','03',0,NOW(),true,'Son'),
+('C','04',0,NOW(),true,'Daugther'),
+('C','05',0,NOW(),true,'Friend');
+
 --MASTECHNOLOGY
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('.Net','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('COBOL','C',NOW(),0,true,1);
@@ -271,22 +281,7 @@ insert into MAS_PROVINCE (PROVINCENAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,
 --('C',0,NOW(),'02A',true,'Back office');
 
 
---MASRELATIONTYPE
---INSERT INTO MAS_RELATIONTYPE(
--- AUDITFLAG,
--- CODE,
--- CREATEDBY,
--- CREATEDTIMESTAMP,
--- ISACTIVE,
--- RELATIONTYPE
---) values
---('C','01',0,NOW(),true,'Mother'),
---('C','02',0,NOW(),true,'Father'),
---('C','05',0,NOW(),true,'Brother'),
---('C','05',0,NOW(),true,'Sister'),
---('C','03',0,NOW(),true,'Son'),
---('C','04',0,NOW(),true,'Daugther'),
---('C','05',0,NOW(),true,'Friend');
+
 
 
 --MASROLE
