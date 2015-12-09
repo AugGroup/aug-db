@@ -1,232 +1,153 @@
 package com.aug.hrdb.services;
 
-import org.junit.Test;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasSpecialty;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Punish;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasSpecialtyService;
-import com.aug.hrdb.services.MasTechnologyService;
+import com.aug.hrdb.services.MasSpecialtyService;;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@TransactionConfiguration
 @Transactional
 public class MasSpecialtyServiceTest {
 
 	@Autowired
 	private MasSpecialtyService masSpecialtyService;
-	@Autowired 
-	private EmployeeService employeeService;
-	@Autowired 
-	private MasJobLevelService masJoblevelService;
-	@Autowired 
-	private ApplicantService applicantService;
-	@Autowired 
-	private MasDivisionService masDivisionService;
-	@Autowired 
-	private MasTechnologyService masTechnologyService;
 	
-	private	 Employee employee;
-	int id;
-	int empId;
-	int masjobId;
-	int appId; 
-	int mastecId;
-	
-	
+	private MasSpecialty masSpecialty;
+
 	@Before
-	public void setMasSpecialty() {
-		employee = new Employee();
-		/*employee.setIdCard("115310905001-9");
-        employee.setNameThai("ธัญลักษณ์์");
-        employee.setNameEng("thanyalak");
-        employee.setNicknameThai("กิ๊ก");
-        employee.setNicknameEng("kik");
-        employee.setSurnameThai("พิมสวรรค์");
-        employee.setSurnameEng("Pimsawan");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-31");
-        employee.setStatusemp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		mastecId = masTechnology.getId();
-		MasTechnology mTechnology = masTechnologyService.find(mastecId);
-
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.findById(masjobId);
-         			
-        
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
-		applicantService.create(applicant);
-		appId=applicant.getId();
+	public void setUp() throws Exception {
 		
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
-
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		
-		employee.setMasDivision(masDivision);	
-		//employee.setMasJoblevel(mJob);
-		employeeService.create(employee);
-		empId=employee.getId();
-		
-	
-		Employee employee =employeeService.findById(1);
-		   
-		MasSpecialty masSpecialty=new MasSpecialty();
-		masSpecialty.setName("Java");
+		masSpecialty = new MasSpecialty();
+		masSpecialty.setName("test");
 		masSpecialty.setCode("01");
 		masSpecialty.setIsActive(true);
 		masSpecialty.setAuditFlag("C");
 		masSpecialty.setCreatedBy(1);	
 		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadMasSpecialtyServiceShouldPass() throws Exception {
+		assertNotNull(masSpecialtyService);
+	}
+	
+	@Test
+	public void testCreateWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		masSpecialty.setName("test create");
+		masSpecialtyService.create(masSpecialty);
+		Integer insertedId = masSpecialty.getId();
+		
+		MasSpecialty result = masSpecialtyService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
+	}
+	
+	@Test
+	public void testFindByIdWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		masSpecialty.setName("test findByIdById");
+		masSpecialtyService.create(masSpecialty);
+		Integer insertedId = masSpecialty.getId();
+		
+		MasSpecialty result = masSpecialtyService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test findByIdById"));
+		
+	}
+	
+	@Test
+	public void testFindAllWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		List<MasSpecialty> masSpecialtys = masSpecialtyService.findAll();
+		
 		masSpecialtyService.create(masSpecialty);
 		
+		List<MasSpecialty> result = masSpecialtyService.findAll();
 		
-	    id = masSpecialty.getId();
-	    System.out.println("id: "+id);
-	
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void createDataMasSpecialty(){
+		assertThat(result.size(), is(masSpecialtys.size() + 1));
 		
-		MasSpecialty masSpecialty=new MasSpecialty();
-		masSpecialty.setName("Java");
-		masSpecialty.setCode("01");
-		masSpecialty.setIsActive(true);
-		masSpecialty.setAuditFlag("C");
-		masSpecialty.setCreatedBy(1);	
-		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	    masSpecialtyService.create(masSpecialty);
 	}
 	
-	
 	@Test
-	@Rollback(true)
-	public void updateDataMasSpecialty(){
+	public void testFindByCriteriaWithMasSpecialtyServiceShouldPass() throws Exception {
 		
-		MasSpecialty masSpecialty = (MasSpecialty)masSpecialtyService.findById(id);
-		masSpecialty.setName(".net");
-		masSpecialty.setCode("02");
-		masSpecialty.setIsActive(true);
-		masSpecialty.setAuditFlag("C");
-		masSpecialty.setCreatedBy(1);	
-		masSpecialty.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masSpecialtyService.update(masSpecialty);
+		masSpecialty.setName("test findByCriteria");
+		masSpecialtyService.create(masSpecialty);
+		
+		List<MasSpecialty> result = masSpecialtyService.findByCriteria(masSpecialty);
+		
+		assertThat(result.size(), is(1));
+		
 	}
 	
-	
 	@Test
-	@Rollback(true)
-	public void deleteDataMasSpecialty(){
-		MasSpecialty masSpecialty=masSpecialtyService.findById(id);
-		masSpecialtyService.delete(masSpecialty);
+	public void testUpdateWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		masSpecialtyService.create(masSpecialty);
+		Integer insertedId = masSpecialty.getId();
+		
+		MasSpecialty update = masSpecialtyService.findById(insertedId);
+		update.setName("test update");
+		masSpecialtyService.update(update);
+		
+		MasSpecialty result = masSpecialtyService.findById(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
 	}
 	
-	
-	
 	@Test
-	public void findAllDataMasSpecialty(){
-
-		List<MasSpecialty> masSpecialties = masSpecialtyService.findAll();
-//		Assert.assertEquals(3, ability.size());
+	public void testDeleteWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		masSpecialtyService.create(masSpecialty);
+		Integer insertedId = masSpecialty.getId();
+		
+		MasSpecialty delete = masSpecialtyService.findById(insertedId);
+		masSpecialtyService.delete(delete);
+		
+		MasSpecialty result = masSpecialtyService.findById(delete.getId());
+		
+		assertNull(result);
+		
 	}
 	
-	
 	@Test
-	public void findDatabyIdMasSpecialty(){
-
-		MasSpecialty masSpecialty =(MasSpecialty) masSpecialtyService.findById(id);
-		int id = masSpecialty.getId();
-		Assert.assertEquals(id,id);
-
+	public void testDeleteByIdWithMasSpecialtyServiceShouldPass() throws Exception {
+		
+		masSpecialtyService.create(masSpecialty);
+		Integer insertedId = masSpecialty.getId();
+		
+		MasSpecialty delete = masSpecialtyService.findById(insertedId);
+		masSpecialtyService.deleteById(delete.getId());
+		
+		MasSpecialty result = masSpecialtyService.findById(delete.getId());
+		
+		assertNull(result);
+		
 	}
 	
 }

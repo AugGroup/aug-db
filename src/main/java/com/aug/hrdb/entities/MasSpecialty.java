@@ -1,7 +1,6 @@
 package com.aug.hrdb.entities;
 
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +17,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "MAS_SPECIALTY")
 public class MasSpecialty extends BaseEntity{
 	
-	@Id
-	@Column(name="ID")
-	@GeneratedValue
+	@Id @GeneratedValue @Column(name="ID")
 	private Integer id;
 
 	@Column(name = "NAME" ,nullable = false)
@@ -34,7 +31,7 @@ public class MasSpecialty extends BaseEntity{
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "masspecialty")
-	private Set<Ability> abilities;
+	private List<Ability> abilities;
 	
 	@JsonIgnore
 	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "masSpecialties")
@@ -72,11 +69,11 @@ public class MasSpecialty extends BaseEntity{
 		this.isActive = isActive;
 	}
 
-	public Set<Ability> getAbilities() {
+	public List<Ability> getAbilities() {
 		return abilities;
 	}
 
-	public void setAbilities(Set<Ability> abilities) {
+	public void setAbilities(List<Ability> abilities) {
 		this.abilities = abilities;
 	}
 

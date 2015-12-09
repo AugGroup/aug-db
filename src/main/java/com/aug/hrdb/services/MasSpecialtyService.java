@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.aug.hrdb.entities.MasSpecialty;
 
-
 public interface MasSpecialtyService {
 	
 	public List<MasSpecialty> findAll();

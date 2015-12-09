@@ -10,29 +10,24 @@ import com.aug.hrdb.entities.MasSpecialty;
 import com.aug.hrdb.repositories.MasSpecialtyRepository;
 import com.mysql.jdbc.StringUtils;
 
+@Repository(value="masSpecialtyRepository")
+public class MasSpecialtyRepositoryImpl extends GenericRepositoryImpl<MasSpecialty, Integer> implements MasSpecialtyRepository {
 
-@Repository("specialtyRepository")
-public class MasSpecialtyRepositoryImpl extends GenericRepositoryImpl<MasSpecialty, Integer> implements MasSpecialtyRepository{
+	public MasSpecialtyRepositoryImpl(){
+		super(MasSpecialty.class);
+	}
 
-			public MasSpecialtyRepositoryImpl(){
-				super(MasSpecialty.class);
-			}
-
-			
-
-			@Override
-			public List<MasSpecialty> findByCriteria(MasSpecialty specialty) {
-				Criteria c = getCurrentSession().createCriteria(MasSpecialty.class);
-				if (!StringUtils.isNullOrEmpty(specialty.getName())) {
-					c.add(Restrictions.like("name", "%" + specialty.getName() + "%"));
-				}
-				return c.list();
-			}
-
-//			@Override
-//			public MasSpecialty deleteById(Integer id) {
-//				MasSpecialty specialty =(MasSpecialty)getCurrentSession().load(MasSpecialty.class, id);
-//				getCurrentSession().delete(specialty);
-//				return specialty;
-//			}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<MasSpecialty> findByCriteria(MasSpecialty specialty) {
+		
+		Criteria c = getCurrentSession().createCriteria(MasSpecialty.class);
+		
+		if (!StringUtils.isNullOrEmpty(specialty.getName())) {
+			c.add(Restrictions.like("name", "%" + specialty.getName() + "%"));
+		}
+		
+		return c.list();
+	}
+		
 }

@@ -216,6 +216,51 @@ INSERT INTO MAS_ROLE (TYPE,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE) VALUES
 ('ROLE_STAFF','C',0,NOW(),1),
 ('ROLE_HR','C',0,NOW(),1);
 
+--MAS_SPECIALTY
+INSERT INTO MAS_SPECIALTY (NAME,CODE,ISACTIVE,AUDITFLAG,CREATEDTIMESTAMP,CREATEDBY) VALUES
+('ABAP','01',1,'C',NOW(),0),
+('ASP.Net','02',1,'C',NOW(),0),
+('Basis','03',1,'C',NOW(),0),
+('BI','04',1,'C',NOW(),0),
+('BPC - B','05',1,'C',NOW(),0),
+('BPC - C','06',1,'C',NOW(),0),
+('BW','07',1,'C',NOW(),0),
+('C#','08',1,'C',NOW(),0),
+('C++.Netframework','09',1,'C',NOW(),0),
+('CO','10',1,'C',NOW(),0),
+('CRM','11',1,'C',NOW(),0),
+('CSS','12',1,'C',NOW(),0),
+('Eclipse','13',1,'C',NOW(),0),
+('FI','14',1,'C',NOW(),0),
+('Hibernate','15',1,'C',NOW(),0),
+('HTML','16',1,'C',NOW(),0),
+('J2EE','17',1,'C',NOW(),0),
+('Java Script','18',1,'C',NOW(),0),
+('JBOSS','19',1,'C',NOW(),0),
+('JQUERY SVN Respsoitry','20',1,'C',NOW(),0),
+('JSF','21',1,'C',NOW(),0),
+('MM','22',1,'C',NOW(),0),
+('Mobility','23',1,'C',NOW(),0),
+('MVC','24',1,'C',NOW(),0),
+('Oracle','25',1,'C',NOW(),0),
+('Oracle10g','26',1,'C',NOW(),0),
+('Oracle9i','27',1,'C',NOW(),0),
+('PI','28',1,'C',NOW(),0),
+('PL/SQL','29',1,'C',NOW(),0),
+('PM','30',1,'C',NOW(),0),
+('PP','31',1,'C',NOW(),0),
+('SD','32',1,'C',NOW(),0),
+('Security','33',1,'C',NOW(),0),
+('Spring','34',1,'C',NOW(),0),
+('SRM','35',1,'C',NOW(),0),
+('Symfony1,2','36',1,'C',NOW(),0),
+('TR','37',1,'C',NOW(),0),
+('VB.Net','38',1,'C',NOW(),0),
+('Web App','39',1,'C',NOW(),0),
+('Web Logic','40',1,'C',NOW(),0),
+('WPF','41',1,'C',NOW(),0),
+('Zend','42',1,'C',NOW(),0);
+
 --MASTECHNOLOGY
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('.Net','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('COBOL','C',NOW(),0,true,1);
@@ -223,58 +268,6 @@ INSERT INTO MAS_ROLE (TYPE,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE) VALUES
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('PHP','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('SAP','C',NOW(),0,true,1);
 --INSERT INTO MAS_TECHNOLOGY (NAME,auditFlag,createdTimeStamp,createdBy,ISACTIVE,CODE) VALUES ('-','C',NOW(),0,true,1);
-
-
-
-
-
---MASSPECIALTY
---insert into MAS_SPECIALTY (name,code,isactive,auditFlag,createdTimeStamp,createdBy)
---VALUES 
---('ABAP','01',1,'C',NOW(),0),
---('ASP.Net','02',1,'C',NOW(),0),
---('Basis','03',1,'C',NOW(),0),
---('BI','04',1,'C',NOW(),0),
---('BPC - B','05',1,'C',NOW(),0),
---('BPC - C','06',1,'C',NOW(),0),
---('BW','07',1,'C',NOW(),0),
---('C#','08',1,'C',NOW(),0),
---('C++.Netframework','09',1,'C',NOW(),0),
---('CO','10',1,'C',NOW(),0),
---('CRM','11',1,'C',NOW(),0),
---('CSS','12',1,'C',NOW(),0),
---('Eclipse','13',1,'C',NOW(),0),
---('FI','14',1,'C',NOW(),0),
---('Hibernate','15',1,'C',NOW(),0),
---('HTML','16',1,'C',NOW(),0),
---('J2EE','17',1,'C',NOW(),0),
---('Java Script','18',1,'C',NOW(),0),
---('JBOSS','19',1,'C',NOW(),0),
---('JQUERY SVN Respsoitry','20',1,'C',NOW(),0),
---('JSF','21',1,'C',NOW(),0),
---('MM','22',1,'C',NOW(),0),
---('Mobility','23',1,'C',NOW(),0),
---('MVC','24',1,'C',NOW(),0),
---('Oracle','25',1,'C',NOW(),0),
---('Oracle10g','26',1,'C',NOW(),0),
---('Oracle9i','27',1,'C',NOW(),0),
---('PI','28',1,'C',NOW(),0),
---('PL/SQL','29',1,'C',NOW(),0),
---('PM','30',1,'C',NOW(),0),
---('PP','31',1,'C',NOW(),0),
---('SD','32',1,'C',NOW(),0),
---('Security','33',1,'C',NOW(),0),
---('Spring','34',1,'C',NOW(),0),
---('SRM','35',1,'C',NOW(),0),
---('Symfony1,2','36',1,'C',NOW(),0),
---('TR','37',1,'C',NOW(),0),
---('VB.Net','38',1,'C',NOW(),0),
---('Web App','39',1,'C',NOW(),0),
---('Web Logic','40',1,'C',NOW(),0),
---('WPF','41',1,'C',NOW(),0),
---('Zend','42',1,'C',NOW(),0);
-
-
  
  --MASSTAFFTYPE
 --INSERT INTO MAS_STAFFTYPE(
@@ -287,12 +280,6 @@ INSERT INTO MAS_ROLE (TYPE,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP,ISACTIVE) VALUES
 --values
 --('C',0,NOW(),'01A',true,'Billable'), 
 --('C',0,NOW(),'02A',true,'Back office');
-
-
-
-
-
-
 
 --OFFICIAL
 --INSERT INTO OFFICIAL(START_WORK_DATE,END_WORK_DATE,PROBATION_DATE,AUDITFLAG,CREATEDBY,CREATEDTIMESTAMP) VALUES ('2010-03-04',NOW(),NOW(),'C',0,NOW());

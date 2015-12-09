@@ -10,42 +10,39 @@ import com.aug.hrdb.entities.MasSpecialty;
 import com.aug.hrdb.repositories.MasSpecialtyRepository;
 import com.aug.hrdb.services.MasSpecialtyService;
 
-
-
-@Service("masSpecialty")
+@Service(value="masSpecialtyService")
 @Transactional
 public class MasSpecialtyServiceImpl implements MasSpecialtyService{
 	
 	@Autowired
-	private MasSpecialtyRepository specialtyRepository;
-	
+	private MasSpecialtyRepository masSpecialtyRepository;
 	
 	public List<MasSpecialty> findAll(){
-		return specialtyRepository.findAll();
+		return masSpecialtyRepository.findAll();
 	}
 	
     public void create(MasSpecialty specialty){
-    	specialtyRepository.create(specialty);
+    	masSpecialtyRepository.create(specialty);
     }
     
     public void update(MasSpecialty specialty){
-    	specialtyRepository.update(specialty);
+    	masSpecialtyRepository.update(specialty);
     }
     
     public void delete(MasSpecialty specialty){
-    	specialtyRepository.delete(specialty);
+    	masSpecialtyRepository.delete(specialty);
     }
 
 	public MasSpecialty findById(Integer id) {
-		return specialtyRepository.find(id);
+		return masSpecialtyRepository.find(id);
 	}
 
 	public List<MasSpecialty> findByCriteria(MasSpecialty  specialty){
-		return specialtyRepository.findByCriteria(specialty);
+		return masSpecialtyRepository.findByCriteria(specialty);
 	}
 
 	public void deleteById(Integer id){
-		 specialtyRepository.deleteById(id);
+		 masSpecialtyRepository.deleteById(id);
 	}
 
 }
