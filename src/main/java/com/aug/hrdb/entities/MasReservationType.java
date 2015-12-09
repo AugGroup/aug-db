@@ -11,14 +11,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
 @Table(name="MAS_RESERVATION_TYPE")
 public class MasReservationType extends BaseEntity {
 	
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue
+	@Id @GeneratedValue @Column(name = "ID") 
 	private Integer id;
 
 	@Column(name = "NAME", nullable = false, length = 200)
@@ -73,6 +70,5 @@ public class MasReservationType extends BaseEntity {
 	public void setReservations(List<Reservation> reservations) {
 		this.reservations = reservations;
 	}
-	
-	
+
 }

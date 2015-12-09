@@ -12,4 +12,5 @@ public interface MasReservationTypeService {
 	public MasReservationType findById(Integer Id);
 	public List<MasReservationType> findAll();
 	public void deleteById(Integer id);
+	
 }

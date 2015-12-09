@@ -10,9 +10,9 @@ import com.aug.hrdb.entities.MasReservationType;
 import com.aug.hrdb.repositories.MasReservationTypeRepository;
 import com.aug.hrdb.services.MasReservationTypeService;
 
-@Service("masReservationTypeService")
+@Service(value="masReservationTypeService")
 @Transactional
-public class MasReservationTypeServiceImpl implements MasReservationTypeService{
+public class MasReservationTypeServiceImpl implements MasReservationTypeService {
 	
 	@Autowired
 	private MasReservationTypeRepository masReservationTypeRepository;
@@ -20,7 +20,6 @@ public class MasReservationTypeServiceImpl implements MasReservationTypeService{
 	@Override
 	public void create(MasReservationType masReservationType) {
 		masReservationTypeRepository.create(masReservationType);
-		
 	}
 
 	@Override
@@ -31,7 +30,6 @@ public class MasReservationTypeServiceImpl implements MasReservationTypeService{
 	@Override
 	public void delete(MasReservationType masReservationType) {
 		masReservationTypeRepository.delete(masReservationType);
-		
 	}
 
 
@@ -49,6 +47,5 @@ public class MasReservationTypeServiceImpl implements MasReservationTypeService{
 	public void deleteById(Integer id) {
 		masReservationTypeRepository.deleteById(id);
 	}
-	
 
 }

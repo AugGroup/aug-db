@@ -1,13 +1,12 @@
 package com.aug.hrdb.services;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,82 +20,122 @@ import com.aug.hrdb.entities.MasReservationType;
 import com.aug.hrdb.services.MasReservationTypeService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
 public class MasReservationTypeServiceTest {
+	
 	@Autowired
 	private MasReservationTypeService masReservationTypeService;
-	
-	int id;
 	
 	private MasReservationType masReservationType;
 	
 	@Before
-	public void setUp() {
+	public void setUp() throws Exception {
+		
 		masReservationType = new MasReservationType();
-		masReservationType.setName("meeting");
+		masReservationType.setName("test");
 		masReservationType.setCode("01");
 		masReservationType.setIsactive(true);
 		masReservationType.setAuditFlag("C");
 		masReservationType.setCreatedBy(1);
 		masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		
+	}
+	
+	@Test
+	public void testLoadMasReservationTypeServiceShouldPass() throws Exception {
+		assertNotNull(masReservationTypeService);
+	}
+	
+	@Test
+	public void testCreateWithMasReservationTypeServiceShouldPass() throws Exception {
+		
+		masReservationType.setName("test create");
 		masReservationTypeService.create(masReservationType);
-		id = masReservationType.getId();
-	}
-	
-
-	@Test
-	public void testInsertMasReservationTypeService() throws Exception { 
+		Integer insertedId = masReservationType.getId();
 		
-		MasReservationType result = masReservationTypeService.findById(id);
-		assertThat(result.getName(), is("meeting"));
-		assertThat(result.getCode(), is("01"));
-		assertThat(result.getAuditFlag(), is("C"));
-				
+		MasReservationType result = masReservationTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test create"));
+		
 	}
 	
 	@Test
-	public void testUpdateMasReservationTypeService() throws Exception {
-		MasReservationType updateMasReservationType = masReservationTypeService.findById(id);
-		updateMasReservationType.setName("update");
-		masReservationTypeService.update(updateMasReservationType);
+	public void testFindByIdWithMasReservationTypeServiceShouldPass() throws Exception {
 		
-		MasReservationType result = masReservationTypeService.findById(id);
-		assertThat(result.getName(), is("update"));
-				
+		masReservationType.setName("test findById");
+		masReservationTypeService.create(masReservationType);
+		Integer insertedId = masReservationType.getId();
+		
+		MasReservationType result = masReservationTypeService.findById(insertedId);
+		
+		assertThat(result.getName(), is("test findById"));
+		
 	}
 	
 	@Test
-	public void testDeleteByIdMasReservationTypeService() throws Exception {
-		
-		masReservationTypeService.deleteById(id);
-		MasReservationType result = masReservationTypeService.findById(id);
-		assertNull(result);
-	}
-	
-	@Test
-	
-	public void testDeleteMasReservationTypeService() throws Exception {
-
-		masReservationTypeService.delete(masReservationType);
-		MasReservationType result = masReservationTypeService.findById(id);
-
-		assertNull(result);
-	}
-	@Test
-	public void testFindByIdMasReservationTypeService() throws Exception {
-		
-		MasReservationType result = masReservationTypeService.findById(id);
-		assertThat(result.getName(),is("meeting"));
-
-		
-	}
-	@Test
-	public void testfindAllMasReservationTypeService(){	
+	public void testFindAllWithMasReservationTypeServiceShouldPass() throws Exception {
 		
 		List<MasReservationType> masReservationTypes = masReservationTypeService.findAll();
-		Assert.assertEquals(4, masReservationTypes.size());
+		
+		masReservationTypeService.create(masReservationType);
+		
+		List<MasReservationType> result = masReservationTypeService.findAll();
+		
+		assertThat(result.size(), is(masReservationTypes.size() + 1));
+		
 	}
+	
+	@Test
+	public void testUpdateWithMasReservationTypeServiceShouldPass() throws Exception {
+		
+		masReservationTypeService.create(masReservationType);
+		Integer insertedId = masReservationType.getId();
+		
+		MasReservationType update = masReservationTypeService.findById(insertedId);
+		update.setName("test update");
+		masReservationTypeService.update(update);
+		
+		MasReservationType result = masReservationTypeService.findById(update.getId());
+		
+		assertThat(result.getName(), is("test update"));
+		
+	}
+	
+	@Test
+	public void testDeleteWithMasReservationTypeServiceShouldPass() throws Exception {
+		
+		masReservationTypeService.create(masReservationType);
+		Integer insertedId = masReservationType.getId();
+		
+		MasReservationType delete = masReservationTypeService.findById(insertedId);
+		masReservationTypeService.delete(delete);
+		
+		MasReservationType result = masReservationTypeService.findById(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
+	@Test
+	public void testDeleteByIdWithMasReservationTypeServiceShouldPass() throws Exception {
+		
+		masReservationTypeService.create(masReservationType);
+		Integer insertedId = masReservationType.getId();
+		
+		MasReservationType delete = masReservationTypeService.findById(insertedId);
+		masReservationTypeService.deleteById(delete.getId());
+		
+		MasReservationType result = masReservationTypeService.findById(delete.getId());
+		
+		assertNull(result);
+		
+	}
+	
 }
