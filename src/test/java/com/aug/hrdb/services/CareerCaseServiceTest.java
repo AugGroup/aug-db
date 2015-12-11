@@ -1,4 +1,4 @@
-package com.aug.hrdb.repositories;
+package com.aug.hrdb.services;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -6,7 +6,6 @@ import static org.junit.Assert.*;
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,31 +28,28 @@ import com.aug.hrdb.entities.MasTechnology;
 @ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
-public class CareerCaseRepositoryTest {
+public class CareerCaseServiceTest {
 
 	@Autowired
-	private SessionFactory sessionFactory;
+	private CareerCaseService careerCaseService;
 	
 	@Autowired
-	private CareerCaseRepository careerCaseRepository;
+	private MasCareerCaseStatusService masCareerCaseStatusService;
 	
 	@Autowired
-	private MasCareerCaseStatusRepository masCareerCaseStatusRepository;
-	
-	@Autowired
-	private MasCoreSkillRepository masCoreSkillRepository;
+	private MasCoreSkillService masCoreSkillService;
 	
 	@Autowired 
-	private MasDivisionRepository masDivisionRepository;
+	private MasDivisionService masDivisionService;
 	
 	@Autowired
-	private MasJobLevelRepository masJobLevelRepository;
+	private MasJobLevelService masJobLevelService;
 	
 	@Autowired
-	private MasTechnologyRepository masTechnologyRepository;
+	private MasTechnologyService masTechnologyService;
 	
 	@Autowired
-	private ClientRepository clientRepository;
+	private ClientService clientService;
 	
 	private CareerCase careerCase;
 	
@@ -66,7 +62,7 @@ public class CareerCaseRepositoryTest {
 		masCareerCaseStatus.setAuditFlag("C");
 		masCareerCaseStatus.setCreatedBy(0);
 		masCareerCaseStatus.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masCareerCaseStatusRepository.create(masCareerCaseStatus);
+		masCareerCaseStatusService.create(masCareerCaseStatus);
 		
 		MasCoreSkill masCoreSkill = new MasCoreSkill();
 		masCoreSkill = new MasCoreSkill();
@@ -74,7 +70,7 @@ public class CareerCaseRepositoryTest {
 		masCoreSkill.setAuditFlag("C");
 		masCoreSkill.setCreatedBy(0);
 		masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masCoreSkillRepository.create(masCoreSkill);
+		masCoreSkillService.create(masCoreSkill);
 		
 		MasDivision masDivision = new MasDivision();
 		masDivision = new MasDivision();
@@ -84,7 +80,7 @@ public class CareerCaseRepositoryTest {
 		masDivision.setAuditFlag("C");
 		masDivision.setCreatedBy(0);
 		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivisionRepository.create(masDivision);
+		masDivisionService.create(masDivision);
 		
 		MasJobLevel masJobLevel = new MasJobLevel();
 		masJobLevel = new MasJobLevel();
@@ -94,7 +90,7 @@ public class CareerCaseRepositoryTest {
 		masJobLevel.setAuditFlag("C");
 		masJobLevel.setCreatedBy(0);
 		masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJobLevelRepository.create(masJobLevel);
+		masJobLevelService.create(masJobLevel);
 		
 		MasTechnology masTechnology = new MasTechnology();
 		masTechnology = new MasTechnology();
@@ -104,14 +100,14 @@ public class CareerCaseRepositoryTest {
 		masTechnology.setAuditFlag("C");
 		masTechnology.setCreatedBy(0);
 		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masTechnologyRepository.create(masTechnology);
+		masTechnologyService.create(masTechnology);
 		
 		Client client = new Client();
 		client.setAuditFlag("C");
 		client.setCreatedBy(0);
 		client.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		client.setName("test client");
-		clientRepository.create(client);
+		clientService.create(client);
 		
 		careerCase = new CareerCase();
 		careerCase.setCareerCaseStatus(masCareerCaseStatus);
@@ -134,22 +130,17 @@ public class CareerCaseRepositoryTest {
 	}
 	
 	@Test
-	public void testLoadSessionFactoryShouldPass() throws Exception {
-		assertNotNull(sessionFactory);
+	public void testLoadCareerCaseServiceShouldPass() throws Exception {
+		assertNotNull(careerCaseService);
 	}
 	
 	@Test
-	public void testLoadCareerCaseRepositoryShouldPass() throws Exception {
-		assertNotNull(careerCaseRepository);
-	}
-	
-	@Test
-	public void testCreateWithCareerCaseStatusRepositoryShouldPass() throws Exception {
+	public void testCreateWithCareerCaseStatusServiceShouldPass() throws Exception {
 		
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		Integer insertedId = careerCase.getId();
 		
-		CareerCase result = careerCaseRepository.find(insertedId);
+		CareerCase result = careerCaseService.findById(insertedId);
 		
 		assertThat(result.getCode(), is("TEST0001"));
 		
@@ -158,75 +149,75 @@ public class CareerCaseRepositoryTest {
 	}
 	
 	@Test
-	public void testFindByIdWithCareerCaseRepositoryShouldPass() throws Exception {
+	public void testFindByIdWithCareerCaseServiceShouldPass() throws Exception {
 		
 		careerCase.setCode("TESTCODE");
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		Integer insertedId = careerCase.getId();
 		
-		CareerCase result = careerCaseRepository.find(insertedId);
+		CareerCase result = careerCaseService.findById(insertedId);
 		
 		assertThat(result.getCode(), is("TESTCODE"));
 		
 	}
 	
 	@Test
-	public void testFindAllWithCareerCaseRepositoryShouldPass() throws Exception {
+	public void testFindAllWithCareerCaseServiceShouldPass() throws Exception {
 		
-		List<CareerCase> careerCases = careerCaseRepository.findAll();
+		List<CareerCase> careerCases = careerCaseService.findAll();
 		
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		
-		List<CareerCase> result = careerCaseRepository.findAll();
+		List<CareerCase> result = careerCaseService.findAll();
 		
 		assertThat(result.size(), is(careerCases.size() + 1));
 		
 	}
 	
 	@Test
-	public void testUpdateWithCareerCaseRepositoryShouldPass() throws Exception {
+	public void testUpdateWithCareerCaseServiceShouldPass() throws Exception {
 		
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		Integer insertedId = careerCase.getId();
 		
-		CareerCase update = careerCaseRepository.find(insertedId);
+		CareerCase update = careerCaseService.findById(insertedId);
 		update.setCode("TEST0002");
-		careerCaseRepository.update(update);
+		careerCaseService.update(update);
 		
-		CareerCase result = careerCaseRepository.find(update.getId());
+		CareerCase result = careerCaseService.findById(update.getId());
 		
 		assertThat(result.getCode(), is("TEST0002"));
 		
 	}
 	
 	@Test
-	public void testDeleteWithCareerCaseRepositoryShouldPass() throws Exception {
+	public void testDeleteWithCareerCaseServiceShouldPass() throws Exception {
 		
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		Integer insertedId = careerCase.getId();
 		
-		CareerCase delete = careerCaseRepository.find(insertedId);
-		careerCaseRepository.delete(delete);
+		CareerCase delete = careerCaseService.findById(insertedId);
+		careerCaseService.delete(delete);
 		
-		CareerCase result = careerCaseRepository.find(delete.getId());
+		CareerCase result = careerCaseService.findById(delete.getId());
 		
 		assertNull(result);
 		
 	}
 	
 	@Test
-	public void testDeleteByIdWithCareerCaseRepositoryShouldPass() throws Exception {
+	public void testDeleteByIdWithCareerCaseServiceShouldPass() throws Exception {
 		
-		careerCaseRepository.create(careerCase);
+		careerCaseService.create(careerCase);
 		Integer insertedId = careerCase.getId();
 		
-		CareerCase delete = careerCaseRepository.find(insertedId);
-		careerCaseRepository.deleteById(delete.getId());
+		CareerCase delete = careerCaseService.findById(insertedId);
+		careerCaseService.deleteById(delete.getId());
 		
-		CareerCase result = careerCaseRepository.find(delete.getId());
+		CareerCase result = careerCaseService.findById(delete.getId());
 		
 		assertNull(result);
 		
 	}
-	
+
 }
