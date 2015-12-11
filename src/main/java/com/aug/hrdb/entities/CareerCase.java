@@ -26,7 +26,7 @@ public class CareerCase extends BaseEntity {
 	@Id @GeneratedValue @Column(name="ID")
 	private Integer id;
 	
-	@Column(name="CODE")
+	@Column(name="CODE", nullable=false)
 	private String code;
 	
 	@ManyToOne
@@ -35,23 +35,23 @@ public class CareerCase extends BaseEntity {
 	
 	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
 	@Temporal(TemporalType.DATE)
-	@Column(name = "DATE_REQUEST")
+	@Column(name = "DATE_REQUEST", nullable=false)
 	private Date dateRequest;
 	
 	@ManyToOne
-	@JoinColumn(name="CLIENT_ID")
+	@JoinColumn(name="CLIENT_ID", nullable=false)
 	private Client client;
 	
 	@ManyToOne
-	@JoinColumn(name="MAS_DIVISION_ID")
+	@JoinColumn(name="MAS_DIVISION_ID", nullable=false)
 	private MasDivision masDivision;
 	
 	@ManyToOne
-	@JoinColumn(name="MAS_JOBLEVEL_ID")
+	@JoinColumn(name="MAS_JOBLEVEL_ID", nullable=false)
 	private MasJobLevel masJobLevel;
 	
 	@ManyToOne
-	@JoinColumn(name="MAS_CORESKILL_ID")
+	@JoinColumn(name="MAS_CORESKILL_ID", nullable=false)
 	private MasCoreSkill masCoreSkill;
 	
 	@ManyToOne
