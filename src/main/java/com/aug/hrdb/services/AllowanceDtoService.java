@@ -16,7 +16,7 @@ import com.aug.hrdb.repositories.AllowanceRepository;
 
 @Service("allowancesDtoService")
 @Transactional
-public class AllowancesDtoService {
+public class AllowanceDtoService {
 
 @Autowired private AllowanceRepository allowancesRepository;
 	
