@@ -10,23 +10,23 @@ import java.util.List;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
-import com.aug.hrdb.dto.AllowancesDto;
+import com.aug.hrdb.dto.AllowanceDto;
 import com.aug.hrdb.entities.Allowance;
-import com.aug.hrdb.repositories.AllowancesRepository;
+import com.aug.hrdb.repositories.AllowanceRepository;
 
-@Repository
-public class AllowancesRepositoryImpl extends GenericRepositoryImpl<Allowance, Integer> implements AllowancesRepository{
+@Repository(value="allowanceRepository")
+public class AllowanceRepositoryImpl extends GenericRepositoryImpl<Allowance, Integer> implements AllowanceRepository{
 
-	public AllowancesRepositoryImpl() {
+	public AllowanceRepositoryImpl() {
 		super(Allowance.class);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AllowancesDto> searchAllowances(Integer id) {
+	public List<AllowanceDto> searchAllowances(Integer id) {
 		Query namedQuery = getCurrentSession().getNamedQuery("searchAllowances").setInteger("empId" ,id);
 		//namedQuery.executeUpdate();
-		List<AllowancesDto> allowancesDtos = namedQuery.list();
+		List<AllowanceDto> allowancesDtos = namedQuery.list();
 	     return allowancesDtos;
 	}
 

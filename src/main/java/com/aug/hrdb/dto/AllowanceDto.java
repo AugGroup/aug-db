@@ -28,12 +28,12 @@ import javax.persistence.NamedNativeQuery;
 					+ "allowances.employee_id=:empId "
 					+ "and allowances.employee_id = emp.id "
 					+ "and allowances.MAS_ALLOWANCES_ID = mas_allowances.ID",																																																																					
-			resultClass = AllowancesDto.class)
+			resultClass = AllowanceDto.class)
 			
 })
 
 @Entity
-public class AllowancesDto {
+public class AllowanceDto {
 
 	@Column(name ="ID")
 	@Id

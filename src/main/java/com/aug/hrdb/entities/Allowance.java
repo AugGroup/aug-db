@@ -13,7 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.aug.hrdb.dto.AllowancesDto;
+import com.aug.hrdb.dto.AllowanceDto;
 
 @Entity
 @Table(name = "ALLOWANCES")
@@ -69,7 +69,7 @@ public class Allowance extends BaseEntity{
 		this.employee = employee;
 	}
 
-	public Allowance fromAllowancesDto(Allowance allowances, AllowancesDto allowancesDto) {
+	public Allowance fromAllowancesDto(Allowance allowances, AllowanceDto allowancesDto) {
 		
 		allowances.setAmount(allowancesDto.getAmount());
 		
@@ -86,9 +86,9 @@ public class Allowance extends BaseEntity{
 	}
 
 	
-	public AllowancesDto toAllowancesDto() {
+	public AllowanceDto toAllowancesDto() {
 		
-		AllowancesDto allowancesDto = new AllowancesDto();
+		AllowanceDto allowancesDto = new AllowanceDto();
 		
 		allowancesDto.setId(this.id);
 		allowancesDto.setAmount(this.amount);

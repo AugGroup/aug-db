@@ -29,7 +29,7 @@ import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.services.AllowancesService;
+import com.aug.hrdb.services.AllowanceService;
 import com.aug.hrdb.services.ApplicantService;
 import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasAllowanceService;
@@ -43,7 +43,7 @@ import com.aug.hrdb.services.MasTechnologyService;
 public class AllowancesServiceTest {
 
 	@Autowired
-	private AllowancesService allowancesService;
+	private AllowanceService allowancesService;
 	@Autowired
 	private MasAllowanceService masAllowancesService;
 	@Autowired

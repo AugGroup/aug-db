@@ -12,15 +12,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Allowance;
-import com.aug.hrdb.repositories.AllowancesRepository;
-import com.aug.hrdb.services.AllowancesService;
+import com.aug.hrdb.repositories.AllowanceRepository;
+import com.aug.hrdb.services.AllowanceService;
 
-@Service("allowancesService")
+@Service(value="allowanceService")
 @Transactional
-public class AllowancesServiceImpl implements AllowancesService {
+public class AllowancesServiceImpl implements AllowanceService {
 
 	@Autowired
-	private AllowancesRepository allowancesRepository;
+	private AllowanceRepository allowancesRepository;
 	
 	@Override
 	public List<Allowance> findAll() {

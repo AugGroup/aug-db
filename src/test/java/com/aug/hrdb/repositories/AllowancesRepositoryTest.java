@@ -31,7 +31,7 @@ import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.AllowancesRepository;
+import com.aug.hrdb.repositories.AllowanceRepository;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.aug.hrdb.repositories.MasAllowanceRepository;
@@ -45,7 +45,7 @@ import com.aug.hrdb.services.MasAllowanceService;
 @Transactional
 public class AllowancesRepositoryTest {
 
-	@Autowired private AllowancesRepository allowancesRepository;
+	@Autowired private AllowanceRepository allowancesRepository;
 	@Autowired private MasAllowanceRepository  masAllowancesRepository;
 	@Autowired private EmployeeRepository employeeRepository;
 	@Autowired private MasJobLevelRepository masJoblevelRepository;

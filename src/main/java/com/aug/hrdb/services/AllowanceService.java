@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.aug.hrdb.entities.Allowance;
 
-public interface AllowancesService {
+public interface AllowanceService {
 
 	public List<Allowance> findAll();
 	public void create(Allowance allowances);

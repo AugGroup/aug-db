@@ -11,16 +11,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.AllowancesDto;
-import com.aug.hrdb.repositories.AllowancesRepository;
+import com.aug.hrdb.dto.AllowanceDto;
+import com.aug.hrdb.repositories.AllowanceRepository;
 
 @Service("allowancesDtoService")
 @Transactional
 public class AllowancesDtoService {
 
-@Autowired private AllowancesRepository allowancesRepository;
+@Autowired private AllowanceRepository allowancesRepository;
 	
-	public List<AllowancesDto> searchAllowances(Integer id){
+	public List<AllowanceDto> searchAllowances(Integer id){
 		return allowancesRepository.searchAllowances(id);
 	}
 }
