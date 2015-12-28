@@ -76,6 +76,7 @@ public class Ability extends BaseEntity  {
 		abilityDto.setApplicantId(this.applicant.getId());
 		abilityDto.setMasspecialtyId(this.masspecialty.getId());
 		abilityDto.setMasspecialty(this.masspecialty.getName());;
+
 		return abilityDto;
 		
 	}

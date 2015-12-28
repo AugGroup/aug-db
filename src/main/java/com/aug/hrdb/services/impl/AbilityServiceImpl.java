@@ -12,76 +12,57 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.AbilityDto;
-import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Ability;
 import com.aug.hrdb.repositories.AbilityRepository;
 import com.aug.hrdb.services.AbilityService;
 
-
-@Service("abilityService")
+@Service(value = "abilityService")
 @Transactional
 public class AbilityServiceImpl implements AbilityService{
 
 	@Autowired
 	private AbilityRepository abilityRepository;
+
 	@Override
 	public void create(Ability Ability) {
 		abilityRepository.create(Ability);
-		
 	}
 
 	@Override
 	public void update(Ability Ability) {
 		abilityRepository.update(Ability);
-		
 	}
 
 	@Override
 	public void delete(Ability Ability) {
 		abilityRepository.delete(Ability);
-		
 	}
 
 	@Override
 	public Ability find(Integer id) {
-		
 		return abilityRepository.find(id);
 	}
 
 	@Override
 	public List<Ability> findAll() {
-		
 		return abilityRepository.findAll();
 	}
-
-	/*@Override
-	public List<Employee> findByCriteria(Employee employee) {
-		// TODO Auto-generated method stub
-		return abilityRepository.findByCriteria(employee);
-	}*/
 
 	@Override
 	public void deleteById(Integer id) {
 		 abilityRepository.deleteById(id);
-		
 	}
 
 	@Override
-	public List<Ability> findByCriteria(Ability ability) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public AbilityDto findAbility(Integer id) {
+	public AbilityDto findByAbilityId(Integer id) {
 		AbilityDto ability = abilityRepository.findByAbilityId(id);
 		return ability;
 	}
 
 	@Override
-	public List<AbilityDto> findAbilityList(Integer id) {
-		List<AbilityDto> abilitys = abilityRepository.searchAbility(id);
-		return abilitys;
+	public List<AbilityDto> searchAbility(Integer id) {
+		List<AbilityDto> abilities = abilityRepository.searchAbility(id);
+		return abilities;
 	}
 
 	@Override
@@ -89,7 +70,5 @@ public class AbilityServiceImpl implements AbilityService{
 		Boolean checking = abilityRepository.checkSpecialty(id,sp_id);
 		return checking;
 	}
-	
-	
-	
+
 }

@@ -12,12 +12,8 @@ import com.aug.hrdb.entities.Ability;
 
 public interface AbilityRepository extends GenericRepository<Ability, Integer> {
 
-//	public List<Employee> findByCriteria(Employee employee);
-	
-	
-
-	public List<AbilityDto> searchAbility(Integer id);
-	public AbilityDto findByAbilityId(Integer id);
-	public Boolean checkSpecialty(Integer id,Integer sp_id);
+	List<AbilityDto> searchAbility(Integer id);
+	AbilityDto findByAbilityId(Integer id);
+	Boolean checkSpecialty(Integer id,Integer sp_id);
 	
 }
