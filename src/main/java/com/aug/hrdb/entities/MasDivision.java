@@ -3,13 +3,7 @@ package com.aug.hrdb.entities;
 import java.util.List;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -43,7 +37,7 @@ public class MasDivision extends BaseEntity{
 	private Set<Reservation> reservations ;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="masDivision", cascade=CascadeType.REMOVE)
+	@OneToMany(mappedBy="masDivision", cascade=CascadeType.REMOVE, fetch = FetchType.LAZY)
 	private List<CareerCase> careerCases;
 
 	public Integer getId() {

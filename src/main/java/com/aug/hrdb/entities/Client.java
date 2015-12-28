@@ -2,12 +2,7 @@ package com.aug.hrdb.entities;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +17,7 @@ public class Client extends BaseEntity {
 	private String name;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="client")
+	@OneToMany(mappedBy="client", fetch = FetchType.LAZY)
 	private List<CareerCase> careerCases;
 
 	public Integer getId() {

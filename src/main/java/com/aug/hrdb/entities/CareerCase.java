@@ -58,7 +58,7 @@ public class CareerCase extends BaseEntity {
 	@JoinColumn(name="MAS_TECHNOLOGY_ID")
 	private MasTechnology masTechnology;
 	
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "CAREER_CASE_SPECIALTY", 
 		joinColumns = { 
 			@JoinColumn(name = "CAREER_CASE_ID", nullable = false, updatable = false) 

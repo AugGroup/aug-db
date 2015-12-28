@@ -1,76 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+  "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+  "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-	<session-factory>
-		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
-		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/aug_hr_db</property>
-		<property name="hibernate.connection.username">root</property>
-		<property name="hibernate.connection.password">root</property>
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
-		<property name="show_sql">true</property>
-		
-		
+  <session-factory>
+    <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/aug_hr_db</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">root</property>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="show_sql">false</property>
 
-		<!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
-		<!-- <property name="hbm2ddl.auto">create-drop</property> -->  
-		<!-- <property name="hbm2ddl.auto">update</property> -->
-		<mapping class="com.aug.hrdb.entities.CareerCase"/>
-		<mapping class="com.aug.hrdb.entities.MasCareerCaseStatus"/>
-		<mapping class="com.aug.hrdb.entities.Client"/>
-		
-		<mapping class="com.aug.hrdb.entities.Appointment"/>
-        <!--<mapping class="com.aug.db.entities"/>-->
-        <mapping class="com.aug.hrdb.entities.Family"/>
-        <mapping class="com.aug.hrdb.entities.MasRelationType"/>
-        <mapping class="com.aug.hrdb.entities.History"/>
-        <mapping class="com.aug.hrdb.entities.MasDivision" />
-		<mapping class="com.aug.hrdb.entities.MasJobLevel" />
-		<mapping class="com.aug.hrdb.entities.MasTechnology" />
-		<mapping class="com.aug.hrdb.entities.MasRole" />
-		<mapping class="com.aug.hrdb.entities.Allowance" />
-		<mapping class="com.aug.hrdb.entities.MasEmployment" />
 
-		<mapping class="com.aug.hrdb.entities.MasAllowance" />
-		<mapping class="com.aug.hrdb.entities.Ability"/>
-		<mapping class="com.aug.hrdb.entities.Leave"/>
-		<mapping class="com.aug.hrdb.entities.Language"/>
-		<mapping class="com.aug.hrdb.entities.MasDegreeType"/>
-		<mapping class="com.aug.hrdb.entities.Address"/>
-		<mapping class="com.aug.hrdb.entities.MasAddressType"/>
-		<mapping class="com.aug.hrdb.entities.MasProvince"/>
-		<mapping class="com.aug.hrdb.entities.Official"/>
-		
-		<mapping class="com.aug.hrdb.entities.Login" />
-		<mapping class="com.aug.hrdb.entities.MasSpecialty" />
-		<mapping class="com.aug.hrdb.entities.Reward" />
-		<mapping class="com.aug.hrdb.entities.Punish" />
-		<mapping class="com.aug.hrdb.entities.Card" />
-		<mapping class="com.aug.hrdb.entities.MasLocation" />
-		<mapping class="com.aug.hrdb.entities.MasStaffType" />
-		<mapping class="com.aug.hrdb.entities.Site" />
-		<mapping class="com.aug.hrdb.entities.Health" />
-		<mapping class="com.aug.hrdb.entities.MasCoreSkill" />
-		
+    <!-- <property name="hibernate.hbm2ddl.auto">create-drop</property> -->
+    <!-- <property name="hbm2ddl.auto">create-drop</property> -->
+    <!-- <property name="hbm2ddl.auto">update</property> -->
+    <mapping class="com.aug.hrdb.entities.CareerCase"/>
+    <mapping class="com.aug.hrdb.entities.MasCareerCaseStatus"/>
+    <mapping class="com.aug.hrdb.entities.Client"/>
 
-		<mapping class="com.aug.hrdb.entities.Experience"/>
-		<mapping class="com.aug.hrdb.entities.Education" />
-		<mapping class="com.aug.hrdb.entities.Certification" />
-		<mapping class="com.aug.hrdb.entities.Reference" />
-		<mapping class="com.aug.hrdb.entities.Probation" />
-		<mapping class="com.aug.hrdb.entities.MasLeaveType" />
-		<mapping class="com.aug.hrdb.entities.Applicant" />
-		
-		<mapping class="com.aug.hrdb.entities.Employee" />
-		<mapping class="com.aug.hrdb.entities.AugRequest"/>
-		
-		<mapping class="com.aug.hrdb.entities.MailTemplate"/>
-		
-		<mapping class="com.aug.hrdb.entities.Room"/>
-		<mapping class="com.aug.hrdb.entities.Reservation"/>
-		<mapping class="com.aug.hrdb.entities.MasReservationType"/>
-		
-	</session-factory>
+    <mapping class="com.aug.hrdb.entities.Appointment"/>
+    <!--<mapping class="com.aug.db.entities"/>-->
+    <mapping class="com.aug.hrdb.entities.Family"/>
+    <mapping class="com.aug.hrdb.entities.MasRelationType"/>
+    <mapping class="com.aug.hrdb.entities.History"/>
+    <mapping class="com.aug.hrdb.entities.MasDivision"/>
+    <mapping class="com.aug.hrdb.entities.MasJobLevel"/>
+    <mapping class="com.aug.hrdb.entities.MasTechnology"/>
+    <mapping class="com.aug.hrdb.entities.MasRole"/>
+    <mapping class="com.aug.hrdb.entities.Allowance"/>
+    <mapping class="com.aug.hrdb.entities.MasEmployment"/>
+
+    <mapping class="com.aug.hrdb.entities.MasAllowance"/>
+    <mapping class="com.aug.hrdb.entities.Ability"/>
+    <mapping class="com.aug.hrdb.entities.Leave"/>
+    <mapping class="com.aug.hrdb.entities.Language"/>
+    <mapping class="com.aug.hrdb.entities.MasDegreeType"/>
+    <mapping class="com.aug.hrdb.entities.Address"/>
+    <mapping class="com.aug.hrdb.entities.MasAddressType"/>
+    <mapping class="com.aug.hrdb.entities.MasProvince"/>
+    <mapping class="com.aug.hrdb.entities.Official"/>
+
+    <mapping class="com.aug.hrdb.entities.Login"/>
+    <mapping class="com.aug.hrdb.entities.MasSpecialty"/>
+    <mapping class="com.aug.hrdb.entities.Reward"/>
+    <mapping class="com.aug.hrdb.entities.Punish"/>
+    <mapping class="com.aug.hrdb.entities.Card"/>
+    <mapping class="com.aug.hrdb.entities.MasLocation"/>
+    <mapping class="com.aug.hrdb.entities.MasStaffType"/>
+    <mapping class="com.aug.hrdb.entities.Site"/>
+    <mapping class="com.aug.hrdb.entities.Health"/>
+    <mapping class="com.aug.hrdb.entities.MasCoreSkill"/>
+
+
+    <mapping class="com.aug.hrdb.entities.Experience"/>
+    <mapping class="com.aug.hrdb.entities.Education"/>
+    <mapping class="com.aug.hrdb.entities.Certification"/>
+    <mapping class="com.aug.hrdb.entities.Reference"/>
+    <mapping class="com.aug.hrdb.entities.Probation"/>
+    <mapping class="com.aug.hrdb.entities.MasLeaveType"/>
+    <mapping class="com.aug.hrdb.entities.Applicant"/>
+
+    <mapping class="com.aug.hrdb.entities.Employee"/>
+    <mapping class="com.aug.hrdb.entities.AugRequest"/>
+
+    <mapping class="com.aug.hrdb.entities.MailTemplate"/>
+
+    <mapping class="com.aug.hrdb.entities.Room"/>
+    <mapping class="com.aug.hrdb.entities.Reservation"/>
+    <mapping class="com.aug.hrdb.entities.MasReservationType"/>
+
+  </session-factory>
 </hibernate-configuration>
