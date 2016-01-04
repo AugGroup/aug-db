@@ -6,162 +6,241 @@
 
 package com.aug.hrdb.services;
 
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
 
+import com.aug.hrdb.dto.AddressDto;
+import com.aug.hrdb.entities.*;
+import com.aug.hrdb.repositories.*;
 import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Address;
-import com.aug.hrdb.entities.MasAddressType;
-import com.aug.hrdb.entities.MasProvince;
 import com.aug.hrdb.services.AddressService;
 import com.aug.hrdb.services.MasAddressTypeService;
 import com.aug.hrdb.services.MasProvinceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:spring-bean-db-test.xml"})
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class AddressServiceTest {
-	
+
 	@Autowired
 	private AddressService addressService;
+
 	@Autowired
-	private MasAddressTypeService addressTypeService;
+	private MasAddressTypeService masAddressTypeService;
+
 	@Autowired
-	private MasProvinceService provinceService;
-	
-	MasAddressType addressType;
-	MasProvince province;
-	
-	int idMasAddressType;
-	int idMasProvice;
-	int id;
-	
+	private MasProvinceService masProvinceService;
+
+	@Autowired
+	private ApplicantService applicantService;
+
+	@Autowired
+	private MasJobLevelService masJoblevelService;
+
+	@Autowired
+	private MasTechnologyService masTechnologyService;
+
+	@Autowired
+	private MasCoreSkillService masCoreSkillService;
+
+	private Address address;
+
+	private AddressDto addressDto;
+
+	private Applicant applicant;
+
+	private MasProvince nonthaburi, bangkok;
+
 	@Before
-	public void setUp() {
-		
-		addressType = new MasAddressType();
-		addressType.setName("Permanent");
-		addressType.setIsActive(true);
-		addressType.setCreatedBy(1);
-		addressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		addressType.setAuditFlag("C");
-		addressType.setCode("MAS-ADDTYPE01");
-		addressTypeService.create(addressType);
-		idMasAddressType = addressType.getId();
-		MasAddressType masAddressType = addressTypeService.findById(idMasAddressType);
-		
-		
-		province = new MasProvince();
-		province.setName("Bangkok");
-		province.setCode("B001");
-		province.setIsActive(true);
-		province.setCreatedBy(1);
-		province.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		province.setAuditFlag("C");
-		provinceService.create(province);
-		idMasProvice = province.getId();
-		MasProvince masProvince = provinceService.findById(idMasProvice);
-		
-		
+	public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
 
-		Address address = new Address();
-		address.setHouseNo("1855");
-		address.setRoad("Sukhumvit");
-		address.setDistrict("Mung");
-		address.setSubDistrict("AmphurMung");
-		address.setZipcode(10252);
-		address.setAddressType(masAddressType);
-		address.setProvince(masProvince);
-		address.setAuditFlag("C");
-		address.setCreatedBy(1);
-		address.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		
-		addressService.create(address);
-		
-		Address address1 = new Address();
-		address1.setHouseNo("89555hh");
-		address1.setRoad("Sukhumvit");
-		address1.setDistrict("Mung");
-		address1.setSubDistrict("AmphurMung");
-		address1.setZipcode(10252);
-		address1.setAddressType(masAddressType);
-		address1.setProvince(masProvince);
-		address1.setAuditFlag("C");
-		address1.setCreatedBy(1);
-		address1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		
-		addressService.create(address);
-		id = address.getId();
-		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void create() {
-		
-		Address address = new Address();
-		address.setHouseNo("19M");
-		address.setRoad("PPP");
-		address.setDistrict("aaaa");
-		address.setSubDistrict("bbbbb");
-		address.setZipcode(2588);
-		address.setAddressType(addressType);
-		address.setProvince(province);
-		address.setAuditFlag("C");
-		address.setCreatedBy(1);
-		address.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		addressService.create(address);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void updateDataAddress(){
-		
-		Address address = (Address)addressService.find(id);
-		address.setHouseNo("35699nnn");
-		addressService.update(address);
-		
-	}
-	
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJoblevelService.create(masJobLevel);
 
-	@Test
-	@Rollback(true)
-	public void deleteDataAddress(){
-		
-		Address address = (Address)addressService.find(id);
-		addressService.delete(address);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void findAllAddress(){
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
 
-		List<Address> addresses = addressService.findAll();
-		
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void findbyIdAddress(){
+    applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJoblevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
 
-		Address address =(Address) addressService.findById(id);
-		Assert.assertEquals("1855", address.getHouseNo());
-		
+    // create address type
+    MasAddressType masAddressType = new MasAddressType();
+    masAddressType.setAuditFlag("C");
+    masAddressType.setCreatedBy(1);
+    masAddressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masAddressType.setIsActive(true);
+    masAddressType.setCode("P01");
+    masAddressType.setName("Present address");
+    masAddressTypeService.create(masAddressType);
+
+    // create province
+    nonthaburi = new MasProvince();
+    nonthaburi.setAuditFlag("C");
+    nonthaburi.setCreatedBy(1);
+    nonthaburi.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    nonthaburi.setIsActive(true);
+    nonthaburi.setCode("NON");
+    nonthaburi.setName("Nonthaburi");
+    masProvinceService.create(nonthaburi);
+
+    bangkok = new MasProvince();
+    bangkok.setAuditFlag("C");
+    bangkok.setCreatedBy(1);
+    bangkok.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    bangkok.setIsActive(true);
+    bangkok.setCode("BKK");
+    bangkok.setName("Bangkok");
+    masProvinceService.create(bangkok);
+
+    // create address
+    address = new Address();
+    address.setAuditFlag("C");
+    address.setCreatedBy(1);
+    address.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    address.setHouseNo("199/199");
+    address.setApplicant(applicant);
+    address.setProvince(nonthaburi);
+    address.setAddressType(masAddressType);
+    addressService.create(address);
+
+    // create address dto
+    addressDto = new AddressDto();
+    addressDto.setHouseNo("123/123");
+    addressDto.setRoad("Silom");
+    addressDto.setDistrict("Muang");
+    addressDto.setSubDistrict("Yanawa");
+    addressDto.setZipcode(11123);
+    addressDto.setApplicantId(applicant.getId());
+    addressDto.setAddressTypeId(masAddressType.getId());
+    addressDto.setMasprovinceId(bangkok.getId());
+
 	}
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(masJoblevelService);
+    assertNotNull(masProvinceService);
+    assertNotNull(masAddressTypeService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(applicantService);
+    assertNotNull(addressService);
+
+  }
+
+  @Test
+  public void testFindAddressByIdWithAddressServiceShouldReturnSetupAddress() throws Exception {
+    Address result = addressService.findById(address.getId());
+    assertThat(result.getApplicant(), is(applicant));
+    assertThat(result.getProvince(), is(nonthaburi));
+
+  }
+
+  @Test
+  public void testFindAllAddressByWithAddressServiceShouldReturnListOfAllAddress() throws Exception {
+    List<Address> addresses = addressService.findAll();
+    assertNotNull(addresses);
+
+  }
+
+  @Test
+  public void testUpdateAddressWithAddressServiceShouldChangeNonthaburiToBangkok() throws Exception {
+    Address update = addressService.find(address.getId());
+    update.setProvince(bangkok);
+    addressService.update(update);
+
+    Address result = addressService.find(update.getId());
+    assertThat(result.getProvince(), is(bangkok));
+
+  }
+
+  @Test
+  public void testDeleteAddressWithAddressServiceShouldNotFindThatAddress() throws Exception {
+    Address delete = addressService.find(address.getId());
+    addressService.delete(delete);
+
+    Address result = addressService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteAddressByIdWithAddressServiceShouldNotFindThatAddress() throws Exception {
+    Address delete = addressService.find(address.getId());
+    addressService.deleteById(delete.getId());
+
+    Address result = addressService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindAddressByCriteriaWithAddressServiceShouldReturnListOfAddressThatHaveHouseNoSameInput() throws Exception {
+    List<Address> addresses = addressService.findByCriteria(address);
+    assertNotNull(addresses);
+
+  }
+
+  @Test
+  public void testSearchAddressByAddressServiceShouldReturnListOfAddressDto() throws Exception {
+    List<AddressDto> addressDtos = addressService.searchAddress(applicant.getId());
+    assertNotNull(addressDtos);
+    assertThat(addressDtos.size(), is(1));
+    assertThat(addressDtos.get(0).getMasprovinceName(), is("Nonthaburi"));
+
+  }
+
+  @Test
+  public void testSaveAddressByNameQueryWithAddressServiceShouldPass() throws Exception {
+    addressService.saveAddressByNameQuery(addressDto);
+
+    List<AddressDto> result = addressService.searchAddress(addressDto.getApplicantId());
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
 }
