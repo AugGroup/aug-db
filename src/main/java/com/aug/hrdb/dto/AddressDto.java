@@ -1,9 +1,7 @@
 /**
- *
  * @author natechanok
  * @date May 24, 2015
  */
-
 package com.aug.hrdb.dto;
 
 import javax.persistence.Column;
@@ -15,212 +13,173 @@ import javax.persistence.Transient;
 
 import org.springframework.stereotype.Component;
 
-import com.aug.hrdb.entities.MasProvince;
-
 @NamedNativeQueries({
-	@NamedNativeQuery(
-			name="searchAddress",
-			query="select address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE,address.APPLICANT_ID,address.ADDRESSTYPE_ID "
-					+ "from ADDRESS as address join APPLICANT as applicant on address.APPLICANT_ID = applicant.ID "
-					+ "join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
-					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID "
-					+ "where address.APPLICANT_ID=:appId",
-			resultClass = AddressDto.class),
-	@NamedNativeQuery(name = "SEARCH_ADDRESS_ID", query = "select null as APPLICANT_ID,address.ID,address.ADDRESSTYPE_ID,mas_addresstype.ADDRESSTYPENAME,"
-					+ "address.HOUSE_NO,address.ROAD,address.DISTRICT,address.SUB_DISTRICT,address.PROVINCE_ID,mas_province.PROVINCENAME,address.ZIPCODE"
-					+ " FROM ADDRESS address join MAS_ADDRESSTYPE as mas_addresstype on mas_addresstype.ID = address.ADDRESSTYPE_ID "
-					+ "join MAS_PROVINCE  as mas_province on mas_province.ID = address.PROVINCE_ID WHERE address.ID = :ID", resultClass = AddressDto.class)
-
+  @NamedNativeQuery(
+    name = "searchAddress",
+    query = "SELECT address.ID, address.ADDRESSTYPE_ID, mas_addresstype.ADDRESSTYPENAME, address.HOUSE_NO, "
+      + "address.ROAD, address.DISTRICT, address.SUB_DISTRICT, address.PROVINCE_ID, mas_province.PROVINCENAME, "
+      + "address.ZIPCODE, address.APPLICANT_ID, address.ADDRESSTYPE_ID "
+      + "FROM ADDRESS AS address JOIN APPLICANT AS applicant ON address.APPLICANT_ID = applicant.ID "
+      + "JOIN MAS_ADDRESSTYPE AS mas_addresstype ON mas_addresstype.ID = address.ADDRESSTYPE_ID "
+      + "JOIN MAS_PROVINCE  AS mas_province ON mas_province.ID = address.PROVINCE_ID "
+      + "WHERE address.APPLICANT_ID=:appId",
+    resultClass = AddressDto.class),
+  @NamedNativeQuery(
+    name = "SEARCH_ADDRESS_ID",
+    query = "SELECT NULL AS APPLICANT_ID, address.ID, address.ADDRESSTYPE_ID, mas_addresstype.ADDRESSTYPENAME, "
+      + "address.HOUSE_NO, address.ROAD, address.DISTRICT, address.SUB_DISTRICT, address.PROVINCE_ID, "
+      + "mas_province.PROVINCENAME,address.ZIPCODE"
+      + "FROM ADDRESS address JOIN MAS_ADDRESSTYPE AS mas_addresstype ON mas_addresstype.ID = address.ADDRESSTYPE_ID "
+      + "JOIN MAS_PROVINCE  AS mas_province ON mas_province.ID = address.PROVINCE_ID WHERE address.ID = :ID "
+    , resultClass = AddressDto.class)
 })
 
 @Component
 @Entity
 public class AddressDto {
-	
-	@Id
-	@Column(name="ID")
-	private Integer id;
-	
-	@Column(name="ADDRESSTYPE_ID")
-	private Integer addressTypeId;
-	
-	@Column(name = "ADDRESSTYPENAME")
-	private String masaddresstypeName;
-	
-	@Column(name="HOUSE_NO")
-	private String houseNo;
-	
-	@Column(name="ROAD")
-	private String road;
-	
-	@Column(name="DISTRICT")
-	private String district;
-	
-	@Column(name="SUB_DISTRICT")
-	private String subDistrict;;
-	
-	@Column(name = "PROVINCE_ID")
-	private Integer masprovinceId;
-	
-	@Column(name = "PROVINCENAME")
-	private String masprovinceName;
-	
-	@Column(name="ZIPCODE")
-	private Integer zipcode;
-	
-	@Column(name ="APPLICANT_ID")
-	private Integer applicantId;
-	
-	@Transient
-	private Integer employeeId;	
-	
-	
-	@Transient
-	private String status;
-    
 
-	public Integer getId() {
-		return id;
-	}
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
+  @Column(name = "ADDRESSTYPE_ID")
+  private Integer addressTypeId;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "ADDRESSTYPENAME")
+  private String masaddresstypeName;
 
+  @Column(name = "HOUSE_NO")
+  private String houseNo;
 
-	public Integer getAddressTypeId() {
-		return addressTypeId;
-	}
+  @Column(name = "ROAD")
+  private String road;
 
+  @Column(name = "DISTRICT")
+  private String district;
 
-	public void setAddressTypeId(Integer addressTypeId) {
-		this.addressTypeId = addressTypeId;
-	}
+  @Column(name = "SUB_DISTRICT")
+  private String subDistrict;
 
+  @Column(name = "PROVINCE_ID")
+  private Integer masprovinceId;
 
-	public String getMasaddresstypeName() {
-		return masaddresstypeName;
-	}
+  @Column(name = "PROVINCENAME")
+  private String masprovinceName;
 
+  @Column(name = "ZIPCODE")
+  private Integer zipcode;
 
-	public void setMasaddresstypeName(String masaddresstypeName) {
-		this.masaddresstypeName = masaddresstypeName;
-	}
+  @Column(name = "APPLICANT_ID")
+  private Integer applicantId;
 
+  @Transient
+  private Integer employeeId;
 
-	
-	public Integer getMasprovinceId() {
-		return masprovinceId;
-	}
+  @Transient
+  private String status;
 
+  public Integer getId() {
+    return id;
+  }
 
-	public void setMasprovinceId(Integer masprovinceId) {
-		this.masprovinceId = masprovinceId;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	/*public Integer getEmployeeId() {
-		return employeeId;
-	}
+  public Integer getAddressTypeId() {
+    return addressTypeId;
+  }
 
+  public void setAddressTypeId(Integer addressTypeId) {
+    this.addressTypeId = addressTypeId;
+  }
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}*/
-	
+  public String getMasaddresstypeName() {
+    return masaddresstypeName;
+  }
 
-	public String getMasprovinceName() {
-		return masprovinceName;
-	}
+  public void setMasaddresstypeName(String masaddresstypeName) {
+    this.masaddresstypeName = masaddresstypeName;
+  }
 
+  public Integer getMasprovinceId() {
+    return masprovinceId;
+  }
 
-	public Integer getApplicantId() {
-		return applicantId;
-	}
+  public void setMasprovinceId(Integer masprovinceId) {
+    this.masprovinceId = masprovinceId;
+  }
 
+  public String getMasprovinceName() {
+    return masprovinceName;
+  }
 
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
-	}
+  public Integer getApplicantId() {
+    return applicantId;
+  }
 
+  public void setApplicantId(Integer applicantId) {
+    this.applicantId = applicantId;
+  }
 
-	public void setMasprovinceName(String masprovinceName) {
-		this.masprovinceName = masprovinceName;
-	}
+  public void setMasprovinceName(String masprovinceName) {
+    this.masprovinceName = masprovinceName;
+  }
 
+  public Integer getZipcode() {
+    return zipcode;
+  }
 
-	public Integer getZipcode() {
-		return zipcode;
-	}
+  public void setZipcode(Integer zipcode) {
+    this.zipcode = zipcode;
+  }
 
+  public String getStatus() {
+    return status;
+  }
 
-	public void setZipcode(Integer zipcode) {
-		this.zipcode = zipcode;
-	}
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
+  public String getHouseNo() {
+    return houseNo;
+  }
 
-	public String getStatus() {
-		return status;
-	}
+  public void setHouseNo(String houseNo) {
+    this.houseNo = houseNo;
+  }
 
+  public String getRoad() {
+    return road;
+  }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+  public void setRoad(String road) {
+    this.road = road;
+  }
 
+  public String getDistrict() {
+    return district;
+  }
 
-	public String getHouseNo() {
-		return houseNo;
-	}
+  public void setDistrict(String district) {
+    this.district = district;
+  }
 
+  public String getSubDistrict() {
+    return subDistrict;
+  }
 
-	public void setHouseNo(String houseNo) {
-		this.houseNo = houseNo;
-	}
+  public void setSubDistrict(String subDistrict) {
+    this.subDistrict = subDistrict;
+  }
 
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
 
-	public String getRoad() {
-		return road;
-	}
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
 
-
-	public void setRoad(String road) {
-		this.road = road;
-	}
-
-
-	public String getDistrict() {
-		return district;
-	}
-
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-
-	public String getSubDistrict() {
-		return subDistrict;
-	}
-
-
-	public void setSubDistrict(String subDistrict) {
-		this.subDistrict = subDistrict;
-	}
-
-
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
-	
-	
-	
-	
-	
 }

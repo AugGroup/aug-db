@@ -7,12 +7,7 @@ package com.aug.hrdb.entities;
 
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -33,8 +28,8 @@ public class MasProvince extends BaseEntity {
 	private Boolean isActive;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "province")
-	private List<Address> addresss;
+	@OneToMany(mappedBy = "province", fetch = FetchType.LAZY)
+	private List<Address> addresses;
 
 	public Integer getId() {
 		return id;
@@ -68,12 +63,12 @@ public class MasProvince extends BaseEntity {
 		this.isActive = isActive;
 	}
 
-	public List<Address> getAddresss() {
-		return addresss;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-	public void setAddresss(List<Address> addresss) {
-		this.addresss = addresss;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
 	 
 }

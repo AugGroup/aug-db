@@ -138,6 +138,14 @@ public class AbilityServiceTest {
 		Ability result = abilityService.find(ability.getId());
 		assertThat(result.getApplicant(), is(applicant));
 		assertThat(result.getMasspecialty(), is(spring));
+
+	}
+
+	@Test
+	public void testFindAllAbilityWithAbilityRepositoryShouldReturnListOfAllAbility() throws Exception {
+		List<Ability> abilities = abilityService.findAll();
+		assertNotNull(abilities);
+
 	}
 
 	@Test

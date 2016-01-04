@@ -9,12 +9,7 @@ package com.aug.hrdb.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -37,7 +32,7 @@ public class MasAddressType extends BaseEntity{
 	private String code;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "addressType")
+	@OneToMany(mappedBy = "addressType", fetch = FetchType.LAZY)
 	private Set<Address> addresses = new HashSet<Address>();
 	
 	public Integer getId() {

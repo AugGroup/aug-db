@@ -11,15 +11,9 @@ import java.util.List;
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.Address;
 
-
-
-
-
 public interface AddressRepository extends GenericRepository<Address, Integer>{
 	
 	public List<Address> findByCriteria(Address address);
-
-	
 	public List<AddressDto> searchAddress(Integer id);
 	public void saveAddressByNameQuery(AddressDto addressDto);
 	public List<Address> findAddressByApplicantId(Integer id);

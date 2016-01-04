@@ -139,6 +139,13 @@ public class AbilityRepositoryTest {
   }
 
   @Test
+  public void testFindAllAbilityWithAbilityRepositorySholdReturnListOfAllAbility() throws Exception {
+    List<Ability> abilities = abilityRepository.findAll();
+    assertNotNull(abilities);
+
+  }
+
+  @Test
   public void testUpdateAbilityWithAbilityRepositoryShouldChangeSpringToHibernate() throws Exception {
     Ability update = abilityRepository.find(ability.getId());
     update.setMasspecialty(hibernate);

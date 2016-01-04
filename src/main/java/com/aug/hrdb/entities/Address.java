@@ -1,5 +1,4 @@
 /**
- *
  * @author natechanok
  * @date Apr 22, 2015
  */
@@ -20,212 +19,156 @@ import javax.persistence.UniqueConstraint;
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
-
-
-
 @NamedNativeQueries({
-	@NamedNativeQuery(
-            name = "insertAddress",
-            query = "insert into ADDRESS("
-            		+ "HOUSE_NO,"
-            		+ "ROAD,"
-            		+ "DISTRICT,"
-            		+ "SUB_DISTRICT,"
-            		+ "ZIPCODE,"
-            		+ "APPLICANT_ID,"
-            		+ "ADDRESSTYPE_ID,"
-            		+ "PROVINCE_ID,"
-            		+ "createdTimeStamp,"
-            	    + "createdBy,"
-            	    + "auditFlag "
-            		+ ") "
-            		+ " values("
-            		+ ":HOUSE_NO,"
-            		+ ":ROAD,"
-            		+ ":DISTRICT,"
-            		+ ":SUB_DISTRICT,"
-            		+ ":ZIPCODE,"
-            		+ ":APPLICANT_ID,"
-            		+ ":ADDRESSTYPE_ID,"
-            		+ ":PROVINCE_ID,"
-            		+ "NOW(),"
-            	    + "0,"
-            	    + "'C'" 
-            		+ ")"
-            	
-            		,resultClass= Address.class),
-            		
-        @NamedNativeQuery(
-            name = "updateAddress",
-            query = "update ADDRESS set HOUSE_NO =:HOUSE_NO,"
-            	     + "ROAD =:ROAD,"
-            		 + "DISTRICT =:DISTRICT,"
-            	     + "SUB_DISTRICT =:SUB_DISTRICT,"
-            	     + "ZIPCODE =:ZIPCODE,"
-            	     + "APPLICANT_ID =:APPLICANT_ID,"
-            	     + "ADDRESSTYPE_ID =:ADDRESSTYPE_ID,"
-            	     + "PROVINCE_ID =:PROVINCE_ID, "
-            	     + "updatedTimeStamp = NOW(), "
-                	 + "updatedBy =:updatedBy,"
-                	 + "auditFlag ='U'"
-            	     + "where ID =:ID",
-            	     resultClass = Address.class),
-            	     
-         @NamedNativeQuery(
-             name = "deleteAddress",
-            	 query = "delete from ADDRESS where ID=:id",
-            	 resultClass = Address.class),    	     
-  })
+  @NamedNativeQuery(
+    name = "insertAddress",
+    query = "INSERT INTO ADDRESS (HOUSE_NO, ROAD, DISTRICT, SUB_DISTRICT, ZIPCODE, APPLICANT_ID, ADDRESSTYPE_ID,"
+      + "PROVINCE_ID, CREATEDTIMESTAMP, CREATEDBY, AUDITFLAG ) VALUES ("
+      + ":HOUSE_NO, :ROAD, :DISTRICT, :SUB_DISTRICT, :ZIPCODE, :APPLICANT_ID, :ADDRESSTYPE_ID, :PROVINCE_ID, NOW(),"
+      + "0, 'C')",
+    resultClass = Address.class),
+  @NamedNativeQuery(
+    name = "updateAddress",
+    query = "UPDATE ADDRESS SET HOUSE_NO =:HOUSE_NO, ROAD =:ROAD, DISTRICT =:DISTRICT, SUB_DISTRICT =:SUB_DISTRICT,"
+      + "ZIPCODE =:ZIPCODE, APPLICANT_ID =:APPLICANT_ID, ADDRESSTYPE_ID =:ADDRESSTYPE_ID, PROVINCE_ID =:PROVINCE_ID,"
+      + "UPDATEDTIMESTAMP = NOW(), UPDATEDBY =:updatedBy, AUDITFLAG ='U' WHERE ID =:ID",
+    resultClass = Address.class),
+  @NamedNativeQuery(
+    name = "deleteAddress",
+    query = "DELETE FROM ADDRESS WHERE ID=:id",
+    resultClass = Address.class),
+})
 
 @Entity
-@Table(name = "ADDRESS",uniqueConstraints = {@UniqueConstraint(columnNames = {"HOUSE_NO","DISTRICT"})})
-public class Address extends BaseEntity{
-	
-	@Id
-	@GeneratedValue
-	@Column(name="ID")
-	private Integer id;
-	
-	@Column(name="HOUSE_NO")
-	private String houseNo;
-	
-	@Column(name="ROAD")
-	private String road;
-	
-	@Column(name="DISTRICT")
-	private String district;
-	
-	@Column(name="SUB_DISTRICT")
-	private String subDistrict;
-	
-	@Column(name="ZIPCODE")
-	private Integer zipcode;
-	
-	@Transient
-    private Integer addressTypeId;
-	@Transient
-	private Integer provinceId;
-   
-	
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name= "APPLICANT_ID")
-    private Applicant applicant;
-	
+@Table(name = "ADDRESS", uniqueConstraints = {@UniqueConstraint(columnNames = {"HOUSE_NO", "DISTRICT"})})
+public class Address extends BaseEntity {
 
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name= "ADDRESSTYPE_ID")
-    private MasAddressType addressType;
+  @Id
+  @GeneratedValue
+  @Column(name = "ID")
+  private Integer id;
 
-	@ManyToOne(fetch=FetchType.EAGER)
-    @JoinColumn(name= "PROVINCE_ID")
-    private MasProvince province;
-	
-	
+  @Column(name = "HOUSE_NO")
+  private String houseNo;
 
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "ROAD")
+  private String road;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "DISTRICT")
+  private String district;
 
-	
-	public Integer getZipcode() {
-		return zipcode;
-	}
+  @Column(name = "SUB_DISTRICT")
+  private String subDistrict;
 
-	public void setZipcode(Integer zipcode) {
-		this.zipcode = zipcode;
-	}
-	
+  @Column(name = "ZIPCODE")
+  private Integer zipcode;
 
-	public String getHouseNo() {
-		return houseNo;
-	}
+  @Transient
+  private Integer addressTypeId;
 
-	public void setHouseNo(String houseNo) {
-		this.houseNo = houseNo;
-	}
+  @Transient
+  private Integer provinceId;
 
-	public String getRoad() {
-		return road;
-	}
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "APPLICANT_ID")
+  private Applicant applicant;
 
-	public void setRoad(String road) {
-		this.road = road;
-	}
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "ADDRESSTYPE_ID")
+  private MasAddressType addressType;
 
-	public String getDistrict() {
-		return district;
-	}
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "PROVINCE_ID")
+  private MasProvince province;
 
-	public void setDistrict(String district) {
-		this.district = district;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getSubDistrict() {
-		return subDistrict;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setSubDistrict(String subDistrict) {
-		this.subDistrict = subDistrict;
-	}
+  public Integer getZipcode() {
+    return zipcode;
+  }
 
-	public Integer getAddressTypeId() {
-		return addressTypeId;
-	}
+  public void setZipcode(Integer zipcode) {
+    this.zipcode = zipcode;
+  }
 
-	public void setAddressTypeId(Integer addressTypeId) {
-		this.addressTypeId = addressTypeId;
-	}
+  public String getHouseNo() {
+    return houseNo;
+  }
 
-	public Integer getProvinceId() {
-		return provinceId;
-	}
+  public void setHouseNo(String houseNo) {
+    this.houseNo = houseNo;
+  }
 
-	public void setProvinceId(Integer provinceId) {
-		this.provinceId = provinceId;
-	}
+  public String getRoad() {
+    return road;
+  }
 
+  public void setRoad(String road) {
+    this.road = road;
+  }
 
-	/*public Employee getEmployee() {
-		return employee;
-	}
+  public String getDistrict() {
+    return district;
+  }
 
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
-	}*/
+  public void setDistrict(String district) {
+    this.district = district;
+  }
 
-	public MasAddressType getAddressType() {
-		return addressType;
-	}
+  public String getSubDistrict() {
+    return subDistrict;
+  }
 
-	public Applicant getApplicant() {
-		return applicant;
-	}
+  public void setSubDistrict(String subDistrict) {
+    this.subDistrict = subDistrict;
+  }
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
-	}
+  public Integer getAddressTypeId() {
+    return addressTypeId;
+  }
 
-	public void setAddressType(MasAddressType addressType) {
-		this.addressType = addressType;
-	}
-	 
-	
-	
-	public MasProvince getProvince() {
-		return province;
-	}
+  public void setAddressTypeId(Integer addressTypeId) {
+    this.addressTypeId = addressTypeId;
+  }
 
-	public void setProvince(MasProvince province) {
-		this.province = province;
-	}
+  public Integer getProvinceId() {
+    return provinceId;
+  }
 
-	
-	
+  public void setProvinceId(Integer provinceId) {
+    this.provinceId = provinceId;
+  }
+
+  public MasAddressType getAddressType() {
+    return addressType;
+  }
+
+  public Applicant getApplicant() {
+    return applicant;
+  }
+
+  public void setApplicant(Applicant applicant) {
+    this.applicant = applicant;
+  }
+
+  public void setAddressType(MasAddressType addressType) {
+    this.addressType = addressType;
+  }
+
+  public MasProvince getProvince() {
+    return province;
+  }
+
+  public void setProvince(MasProvince province) {
+    this.province = province;
+  }
+
 }
 
 
