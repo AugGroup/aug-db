@@ -1,154 +1,175 @@
 package com.aug.hrdb.repositories;
 
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-
-import org.hibernate.Hibernate;
+import com.aug.hrdb.dto.CertificationDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Certification;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.CertificationRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
+@Transactional
 public class CertificationRepositoryTest {
-		
-		@Autowired
-		private CertificationRepository certificationRepository;
-		@Autowired
-		private EmployeeRepository employeeRepository;
-		@Autowired
-		private ApplicantRepository applicantRepository;
-		@Autowired
-		private MasJobLevelRepository masJoblevelRepository;
-		@Autowired
-		private MasTechnologyRepository masTechnologyRepository;
-		
-		@Before
-		public void setCertificationRepository() throws ParseException {
-	        
-			Applicant applicant = new Applicant();
-	        applicant.setCardId("115310905001-9");
-	        applicant.setFirstNameTH("อรอนงค์");
-	        applicant.setFirstNameEN("Ornanong");
-	        applicant.setNickNameEN("nong");
-	        applicant.setNickNameTH("นงค์");
-	        applicant.setLastNameEN("Namlongnamken");
-	        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			
-			MasJobLevel masJoblevel = new MasJobLevel();
-			masJoblevel.setName("CEO");
-			masJoblevel.setIsActive(true);
-			masJoblevel.setCode("01");
-			masJoblevel.setAuditFlag("C");
-			masJoblevel.setCreatedBy(1);
-			masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masJoblevel.setCode("Division-01");
 
-			masJoblevelRepository.create(masJoblevel);
-			MasJobLevel mJoblevel= masJoblevelRepository.find(1);
+  @Autowired
+  private MasCoreSkillRepository masCoreSkillRepository;
 
-			MasTechnology masTechnology = new MasTechnology();
-			masTechnology.setName("java");
-			masTechnology.setCode("001A");
-			masTechnology.setIsActive(true);
-			masTechnology.setAuditFlag("C");
-			masTechnology.setCreatedBy(0);
-			Calendar cal = Calendar.getInstance();
-			masTechnology.setCreatedTimeStamp(cal.getTime());
-			masTechnologyRepository.create(masTechnology);
-			
-			MasTechnology mTechnology= masTechnologyRepository.find(1);
-			
-			applicant.setJoblevel(mJoblevel);
-			applicant.setTechnology(mTechnology);
-			applicantRepository.create(applicant);
-			
-		    Applicant applicant1 =  applicantRepository.find(1);
-		    Certification certification = new Certification();
-			certification.setName("SAP");
-			certification.setAuditFlag("C");
-			certification.setCreatedBy(1);
-			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			certificationRepository.create(certification);
-		}
-		
-		@Test
-		@Transactional
-		@Rollback(value = true)
-		public void testInsertCertificationRepository() throws Exception {
-			Certification certification = new Certification();
-			certification.setName("Java");
-			certification.setAuditFlag("C");
-			certification.setCreatedBy(1);
-			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			certificationRepository.create(certification);
-		}
-		
-		@Test
-		@Transactional
-		@Rollback(value = true)
-		public void testUpdateCertificationRepository() throws Exception {
-			Certification certification = certificationRepository.find(1);
-			certification.setName(".Net");
-			certification.setAuditFlag("U");
-			certification.setCreatedBy(2);
-			certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			certificationRepository.update(certification);
-		}
-		
-		@Test
-		@Transactional
-		@Rollback(value = true)
-		public void testDeleteByIdCertificationRepository() throws Exception {
-			certificationRepository.deleteById(2);
-		}
+  @Autowired
+  private MasJobLevelRepository masJobLevelRepository;
 
-		@Test
-		@Transactional
-		@Rollback(value = true)
-		public void testDeleteCertificateRepository() throws Exception {
-			Certification certification = certificationRepository.find(3);
-			certificationRepository.delete(certification);			
-		}
-		@Test
-		@Transactional
-		public void testFindByIdCertificateRepository() throws Exception {
-			Certification certification = certificationRepository.find(3);
-			assertNotNull(certification.getName());
-			
-		}
+  @Autowired
+  private MasTechnologyRepository masTechnologyRepository;
 
-		@Test
-		@Transactional
-		public void testFindAllCertificateRepository() throws Exception {
-			List<Certification> certifications = certificationRepository.findAll();
-			for (Certification certification : certifications)
-				System.out.println("certification : "
-						+ certification.getName());
-		}
+  @Autowired
+  private ApplicantRepository applicantRepository;
+
+  @Autowired
+  private CertificationRepository certificationRepository;
+
+  private Certification certification;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillRepository.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelRepository.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyRepository.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+    applicantRepository.create(applicant);
+
+    // create certification
+    certification = new Certification();
+    certification.setAuditFlag("C");
+    certification.setCreatedBy(1);
+    certification.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    certification.setApplicant(applicant);
+    certification.setName("J2EE");
+    certificationRepository.create(certification);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(masCoreSkillRepository);
+    assertNotNull(masJobLevelRepository);
+    assertNotNull(masTechnologyRepository);
+    assertNotNull(applicantRepository);
+    assertNotNull(certificationRepository);
+
+  }
+
+  @Test
+  public void testFindWithCertificationRepositoryShouldReturnCertificationThatSetup() throws Exception {
+    Certification result = certificationRepository.find(certification.getId());
+    assertNotNull(result);
+    assertThat(result.getName(), is("J2EE"));
+
+  }
+
+  @Test
+  public void testFindAllWithCertificationRepositoryShouldReturnListOfAllCertification() throws Exception {
+    List<Certification> result = certificationRepository.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithCertificationRepositoryShouldReturnCertificationThatUpdate() throws Exception {
+    Certification update = certificationRepository.find(certification.getId());
+    assertThat(update.getName(), is("J2EE"));
+    update.setName("Master J2EE");
+    certificationRepository.update(update);
+
+    Certification result = certificationRepository.find(update.getId());
+    assertThat(result.getName(), is("Master J2EE"));
+
+  }
+
+  @Test
+  public void testDeleteWithCertificationRepositoryShouldNotFindCertificationThatDelete() throws Exception {
+    Certification delete = certificationRepository.find(certification.getId());
+    certificationRepository.delete(delete);
+
+    Certification result = certificationRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithCertificationRepositoryShouldNotFindCertificationThatDelete() throws Exception {
+    Certification delete = certificationRepository.find(certification.getId());
+    certificationRepository.deleteById(delete.getId());
+
+    Certification result = certificationRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindCertificateByIdWithCertificationRepositoryShouldReturnListOfCertificationThatHaveSetupApplicantId() throws Exception {
+    List<CertificationDto> result = certificationRepository.findCertificateById(certification.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("J2EE"));
+
+  }
+
+  @Test
+  public void testFindCertificateWithCertificationRepositoryShouldReturnThatCertification() throws Exception {
+    CertificationDto result = certificationRepository.findCertificate(certification.getId());
+    assertNotNull(result);
+    assertThat(result.getName(), is("J2EE"));
+
+  }
+
+  @Test
+  public void testSearchCertificationWithCertificationRepositoryShouldReturnListOfCertificationThatHaveSetupApplicantId() throws Exception {
+    List<CertificationDto> result = certificationRepository.searchCertification(certification.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("J2EE"));
+  }
+
 }

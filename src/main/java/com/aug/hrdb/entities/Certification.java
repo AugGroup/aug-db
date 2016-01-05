@@ -8,111 +8,106 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.dto.CertificationDto;
 
 @Entity
 @Table(name = "CERTIFICATION")
 public class Certification extends BaseEntity {
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private Integer id;
-	
-	@Column(name = "CERTIFICATION_FORM")
-	private String certificationForm;
-	
-	@Column(name = "DESCRIPTION")
-	private String description;
-	
-	@Column(name = "NAME")
-	private String name;
-	
-	@Column(name = "YEAR")
-	private String year;
+  @Id
+  @GeneratedValue
+  @Column(name = "ID")
+  private Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "APPLICANT_ID")
-	private Applicant applicant;
-	
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "CERTIFICATION_FORM")
+  private String certificationForm;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "DESCRIPTION")
+  private String description;
 
-	public String getCertificationForm() {
-		return certificationForm;
-	}
+  @Column(name = "NAME")
+  private String name;
 
-	public void setCertificationForm(String certificationForm) {
-		this.certificationForm = certificationForm;
-	}
+  @Column(name = "YEAR")
+  private String year;
 
-	public String getDescription() {
-		return description;
-	}
+  @ManyToOne
+  @JoinColumn(name = "APPLICANT_ID")
+  private Applicant applicant;
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getName() {
-		return name;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public String getCertificationForm() {
+    return certificationForm;
+  }
 
-	public String getYear() {
-		return year;
-	}
+  public void setCertificationForm(String certificationForm) {
+    this.certificationForm = certificationForm;
+  }
 
-	public void setYear(String year) {
-		this.year = year;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public Applicant getApplicant() {
-		return applicant;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
-	}
-	
-public Certification fromCertificationDto(Certification certification, CertificationDto certificationDto) {
-		
-	//	Certification certification = new Certification();
-		
-		certification.setId(certificationDto.getId());
-		certification.setYear(certificationDto.getYear());
-		certification.setName(certificationDto.getName());
-		certification.setCertificationForm(certificationDto.getCertificationForm());
-		certification.setDescription(certificationDto.getDescription());
+  public String getName() {
+    return name;
+  }
 
-		Applicant applicant = new Applicant();
-		applicant.setId(certificationDto.getId());
-		certification.setApplicant(applicant);
-		
-		return certification;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public CertificationDto toCertificationDto() {
+  public String getYear() {
+    return year;
+  }
 
-		CertificationDto certificationDto = new CertificationDto();
-		
-		certificationDto.setId(this.id);
-		certificationDto.setYear(this.year);
-		certificationDto.setName(this.name);
-		certificationDto.setCertificationForm(this.certificationForm);
-		certificationDto.setDescription(this.description);
-		certificationDto.setApplicantId(this.applicant.getId());
-		
-		return certificationDto;
-	}
+  public void setYear(String year) {
+    this.year = year;
+  }
 
+  public Applicant getApplicant() {
+    return applicant;
+  }
+
+  public void setApplicant(Applicant applicant) {
+    this.applicant = applicant;
+  }
+
+  public Certification fromCertificationDto(Certification certification, CertificationDto certificationDto) {
+    certification.setId(certificationDto.getId());
+    certification.setYear(certificationDto.getYear());
+    certification.setName(certificationDto.getName());
+    certification.setCertificationForm(certificationDto.getCertificationForm());
+    certification.setDescription(certificationDto.getDescription());
+
+    Applicant applicant = new Applicant();
+    applicant.setId(certificationDto.getId());
+    certification.setApplicant(applicant);
+
+    return certification;
+
+  }
+
+  public CertificationDto toCertificationDto() {
+    CertificationDto certificationDto = new CertificationDto();
+    certificationDto.setId(this.id);
+    certificationDto.setYear(this.year);
+    certificationDto.setName(this.name);
+    certificationDto.setCertificationForm(this.certificationForm);
+    certificationDto.setDescription(this.description);
+    certificationDto.setApplicantId(this.applicant.getId());
+
+    return certificationDto;
+
+  }
 
 }

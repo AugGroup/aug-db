@@ -14,8 +14,10 @@ import com.aug.hrdb.services.CertificationService;
 @Service(value = "certificationService")
 @Transactional
 public class CertificationServiceImpl implements CertificationService {
+
 	@Autowired
 	private CertificationRepository certificationRepository;
+
 	@Override
 	public void create(Certification certification) {
 		certificationRepository.create(certification);		
@@ -34,13 +36,11 @@ public class CertificationServiceImpl implements CertificationService {
 	@Override
 	public void deleteById(Integer id) {
 		certificationRepository.deleteById(id);
-		
 	}
 
 	@Override
 	public void delete(Certification certification) {
 		certificationRepository.delete(certification);
-		
 	}
 
 	@Override
@@ -58,5 +58,10 @@ public class CertificationServiceImpl implements CertificationService {
 	public CertificationDto findCertificate(Integer id) {
 		CertificationDto certificate = certificationRepository.findCertificate(id);
 		return certificate;
+	}
+
+	@Override
+	public List<CertificationDto> searchCertification(Integer id) {
+		return certificationRepository.searchCertification(id);
 	}
 }
