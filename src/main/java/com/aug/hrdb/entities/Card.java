@@ -18,12 +18,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.aug.hrdb.dto.CardDto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 @Entity
 @Table(name = "CARD")
 public class Card extends BaseEntity{
-	
-		
+
 	@Id
 	@GeneratedValue
 	@Column(name = "ID")
@@ -50,12 +48,9 @@ public class Card extends BaseEntity{
 	@Column(name = "REMARK")	
 	private String remark;
 
-	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name = "EMPLOYEE_ID" ,referencedColumnName="id", nullable=false)
-//	@JsonIgnore
 	private Employee employee;
-
 
 	public Integer getId() {
 		return id;
@@ -123,7 +118,9 @@ public class Card extends BaseEntity{
 		cardDto.setStatus(this.status);
 		cardDto.setRemark(this.remark);
 		cardDto.setEmployeeId(this.employee.getId());
+
 		return cardDto;
+
 	}
 	
 	public Card fromCardDto(Card card,CardDto cardDto){
@@ -137,6 +134,7 @@ public class Card extends BaseEntity{
 		Employee employee = new Employee();
 		employee.setId(cardDto.getEmployeeId());
 		card.setEmployee(employee);
+
 		return card;
 		
 	}

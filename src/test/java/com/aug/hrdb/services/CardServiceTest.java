@@ -1,247 +1,207 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.CardDto;
+import com.aug.hrdb.entities.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Card;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Punish;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.CardService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasTechnologyService;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class CardServiceTest {
-	
+
+	@Autowired
+	private MasCoreSkillService masCoreSkillService;
+
+	@Autowired
+	private MasJobLevelService masJobLevelService;
+
+	@Autowired
+	private MasTechnologyService masTechnologyService;
+
+	@Autowired
+	private MasDivisionService masDivisionService;
+
+	@Autowired
+	private ApplicantService applicantService;
+
+	@Autowired
+	private EmployeeService employeeService;
+
 	@Autowired
 	private CardService cardService;
-	@Autowired 
-	private EmployeeService employeeService;
-	@Autowired 
-	private MasJobLevelService masJoblevelService;
-	@Autowired 
-	private ApplicantService applicantService;
-	@Autowired 
-	private MasDivisionService masDivisionService;
-	@Autowired 
-	private MasTechnologyService masTechnologyService;
-	
-	private	 Employee employee;
-	int id;
-	int empId;
-	int masjobId;
-	int appId; 
-	int mastecId;
-	
-	
+
+	private Card card;
+
 	@Before
-	public void setCard() {
-		employee = new Employee();
-		/*employee.setIdCard("115310905001-9");
-        employee.setNameThai("ธัญลักษณ์์");
-        employee.setNameEng("thanyalak");
-        employee.setNicknameThai("กิ๊ก");
-        employee.setNicknameEng("kik");
-        employee.setSurnameThai("พิมสวรรค์");
-        employee.setSurnameEng("Pimsawan");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-31");
-        employee.setStatusemp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
+	public void setUp() throws Exception {
+		// create applicant
+		MasCoreSkill masCoreSkill = new MasCoreSkill();
+		masCoreSkill.setAuditFlag("C");
+		masCoreSkill.setCreatedBy(1);
+		masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masCoreSkill.setIsActive(true);
+		masCoreSkill.setCode("ITS");
+		masCoreSkill.setName("ITS");
+		masCoreSkillService.create(masCoreSkill);
+
+		MasJobLevel masJobLevel = new MasJobLevel();
+		masJobLevel.setAuditFlag("C");
+		masJobLevel.setCreatedBy(1);
+		masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJobLevel.setIsActive(true);
+		masJobLevel.setCode("C");
+		masJobLevel.setName("Consultant");
+		masJobLevelService.create(masJobLevel);
+
+		MasTechnology masTechnology = new MasTechnology();
 		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnology.setCreatedBy(1);
+		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masTechnology.setIsActive(true);
+		masTechnology.setCode("1");
+		masTechnology.setName("Java");
 		masTechnologyService.create(masTechnology);
-		mastecId = masTechnology.getId();
-		MasTechnology mTechnology = masTechnologyService.findById(mastecId);
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.findById(masjobId);
-         			
-        
-        
-        Applicant applicant = new Applicant();
+		Applicant applicant = new Applicant();
+		applicant.setAuditFlag("C");
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
+		applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+		applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+		applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
 		applicantService.create(applicant);
-		appId=applicant.getId();
-		
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
 
-	
+		// create mas division
 		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
 		masDivision.setAuditFlag("C");
 		masDivision.setCreatedBy(1);
 		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
+		masDivision.setIsActive(true);
+		masDivision.setCode("ITS");
+		masDivision.setName("Integrate Technology Services");
 		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		
-		employee.setMasDivision(masDivision);	
-		//employee.setMasJoblevel(mJob);
+
+		// create employee
+		Employee employee = new Employee();
+		employee.setAuditFlag("C");
+		employee.setCreatedBy(1);
+		employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		employee.setEmployeeCode("TEST0001");
+		employee.setStatusemp("Employee");
+		employee.setTelHome("02-9998877");
+		employee.setApplicant(applicant);
+		employee.setMasDivision(masDivision);
 		employeeService.create(employee);
-		empId=employee.getId();
-		
-		
-	
-		Employee employee =employeeService.findById(1);	   
-		Card card=new Card();
-		employee.setId(1);		
-		card.setEmployee(employee);	
-//		Calendar cal = Calendar.getInstance();
-		card.setCard_no("111");
-		card.setStartdate(cal.getTime());
-		card.setEnddate(cal.getTime());
-		card.setStatus("yes");
-		card.setRemark("aaa");
+
+		// create card
+		card = new Card();
 		card.setAuditFlag("C");
-		card.setCreatedBy(0);
-		card.setCreatedTimeStamp(cal.getTime());
+		card.setCreatedBy(1);
+		card.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		card.setCard_no("CC0001");
+		card.setStartdate(new Date());
+		card.setStatus("Test");
+		card.setEmployee(employee);
 		cardService.create(card);
-		
-		
-	    id = card.getId();
-	    System.out.println("id: "+id);
-	
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void createDataCard(){
-		
-		Employee employee= employeeService.findById(1);	
-		Card card = new Card();
-		employee.setId(1);		
-		card.setEmployee(employee);		
-		card.setCard_no("111");
-		Calendar cal = Calendar.getInstance();
-		card.setStartdate(cal.getTime());
-		card.setEnddate(cal.getTime());
-		card.setStatus("yes");
-		card.setRemark("aaa");
-		card.setAuditFlag("C");
-		card.setCreatedBy(0);
-		card.setCreatedTimeStamp(cal.getTime());
-		cardService.create(card);
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void updateCard(){
-		
-		Card card = (Card)cardService.findById(id);
-		card.setStatus("no");
-		card.setRemark("bbbb");
-		cardService.update(card);
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void deleteDataCard(){
-		Card card=cardService.findById(id);
-		cardService.delete(card);
+
 	}
 
-	
-	
 	@Test
-	public void findAllDataCard(){
+	public void testLoadServicesShouldPass() throws Exception {
+		assertNotNull(cardService);
+		assertNotNull(masCoreSkillService);
+		assertNotNull(masJobLevelService);
+		assertNotNull(masDivisionService);
+		assertNotNull(masTechnologyService);
+		assertNotNull(employeeService);
+		assertNotNull(applicantService);
 
-		List<Card> card = cardService.findAll();
-//		Assert.assertEquals(3, card.size());
 	}
-	
-	
-	
-	
+
 	@Test
-	public void findDatabyIdCard(){
+	public void testFindWithCardServiceShouldReturnCardThatSetup() throws Exception {
+		Card result = cardService.findById(card.getId());
+		assertNotNull(result);
+		assertThat(result.getCard_no(), is("CC0001"));
 
-		Card card =(Card) cardService.findById(id);
-		int id = card.getId();
-		Assert.assertEquals(id,id);
-		
-			
 	}
-	
+
+	@Test
+	public void testFindAllWithCardServiceShouldReturnListOfAllCard() throws Exception {
+		List<Card> result = cardService.findAll();
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+	@Test
+	public void testUpdateWithCardServiceShouldReturnCardThatUpdate() throws Exception {
+		Card update = cardService.findById(card.getId());
+		assertThat(update.getCard_no(), is("CC0001"));
+		update.setCard_no("CC9999");
+		cardService.update(update);
+
+		Card result = cardService.findById(update.getId());
+		assertThat(result.getCard_no(), is("CC9999"));
+
+	}
+
+	@Test
+	public void testDeleteWithCardServiceShouldNotFindThatCard() throws Exception {
+		Card delete = cardService.findById(card.getId());
+		cardService.delete(delete);
+
+		Card result = cardService.findById(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testDeleteByIdWithCardServiceShouldNotFindThatCard() throws Exception {
+		Card delete = cardService.findById(card.getId());
+		cardService.deleteById(delete.getId());
+
+		Card result = cardService.findById(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testFindByCriteriaWithCardServiceShouldReturnListOfCardThatHaveCardNumberSameSetup() throws Exception {
+		List<Card> result = cardService.findByCriteria(card);
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+	@Test
+	public void testSearchCardWithCardServiceShouldReturnListOfCardThatHaveEmployeeIdSameSetup() throws Exception {
+		List<CardDto> result = cardService.searchCard(card.getEmployee().getId());
+		assertNotNull(result);
+		assertThat(result.get(0).getCard_no(), is("CC0001"));
+
+	}
 
 }
-
-
-

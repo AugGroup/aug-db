@@ -2,6 +2,7 @@ package com.aug.hrdb.services.impl;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.CardDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +11,7 @@ import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.repositories.CardRepository;
 import com.aug.hrdb.services.CardService;
 
-
-
-@Service("attendanceService")
+@Service("cardService")
 @Transactional
 public class CardServiceImpl implements CardService {
 
@@ -24,24 +23,19 @@ public class CardServiceImpl implements CardService {
 		return cardRepository.findAll();
 	}
 
-	
-	
 	@Override
 	public void create(Card card) {
 		cardRepository.create(card);
-		
 	}
 
 	@Override
 	public void update(Card card) {
 		cardRepository.update(card);
-		
 	}
 
 	@Override
 	public void delete(Card card) {
 		cardRepository.delete(card);
-		
 	}
 
 	@Override
@@ -49,7 +43,6 @@ public class CardServiceImpl implements CardService {
 		return cardRepository.find(id);
 	}
 
-	
 	@Override
 	public List<Card> findByCriteria(Card card) {
 		return cardRepository.findByCriteria(card);
@@ -58,6 +51,11 @@ public class CardServiceImpl implements CardService {
 	@Override
 	public void deleteById(Integer id) {
 		 cardRepository.deleteById(id);
+	}
+
+	@Override
+	public List<CardDto> searchCard(Integer id) {
+		return cardRepository.searchCard(id);
 	}
 
 }

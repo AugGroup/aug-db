@@ -12,13 +12,11 @@ import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.repositories.CardRepository;
 import com.mysql.jdbc.StringUtils;
 
-
-@Repository("AttendanceDao")
+@Repository(value = "cardRepository")
 public class CardRepositoryImpl extends GenericRepositoryImpl<Card, Integer> implements CardRepository{
 
 	public CardRepositoryImpl() {
 		super(Card.class);
-
 	}
 
 	@Override
@@ -27,24 +25,19 @@ public class CardRepositoryImpl extends GenericRepositoryImpl<Card, Integer> imp
 		if (!StringUtils.isNullOrEmpty(card.getCard_no())) {
 			c.add(Restrictions.like("card_no", "%" + card.getCard_no() + "%"));
 		}
-		return c.list();
-	}
-	
-	
 
-//	@Override
-//	public Card deleteById(Integer id) {
-//		Card card = (Card)getCurrentSession().load(Card.class, id);
-//		getCurrentSession().delete(card);
-//		return card;
-//	}
+		return c.list();
+
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CardDto> searchCard(Integer id){
 		Query nameQuery = getCurrentSession().getNamedQuery("searchCard").setInteger("empId" ,id);
 		List<CardDto> cardDto = nameQuery.list();
+
 		return cardDto;
+
 	}
 
 }
