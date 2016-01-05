@@ -44,7 +44,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 					"WHERE appo.ID = :ID", resultClass = AppointmentDto.class)
 })
 
-
 public class AppointmentDto {
 	@Id
 	@GeneratedValue
@@ -206,7 +205,5 @@ public class AppointmentDto {
 	public void setColor(String color) {
 		this.color = color;
 	}
-	
-	
-	
+
 }

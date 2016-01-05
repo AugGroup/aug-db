@@ -1,7 +1,5 @@
 package com.aug.hrdb.services.impl;
 
-import java.io.Serializable;
-import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,63 +22,53 @@ public class AppointmentServiceImpl implements AppointmentService {
 	
 	@Override
 	public List<Appointment> findAll() {
-		// TODO Auto-generated method stub
 		return appointmentRepository.findAll();
 	}
 
 	@Override
 	public AppointmentDto findById(Integer id) {
-		// TODO Auto-generated method stub
 		return appointmentRepository.findById(id);
 	}
 
 	@Override
 	public List<Appointment> findByApplicant(Applicant applicant) {
-		// TODO Auto-generated method stub
 		return appointmentRepository.findByApplicant(applicant);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
 		appointmentRepository.deleteById(id);
 
 	}
 
 	@Override
 	public void update(Appointment appointment) {
-		// TODO Auto-generated method stub
 		appointmentRepository.update(appointment);
 	}
 
 	@Override
 	public void delete(Appointment appointment) {
-		// TODO Auto-generated method stub
 		appointmentRepository.delete(appointment);
 	}
 
 	@Override
 	public void create(Appointment appointment) {
-		// TODO Auto-generated method stub
 		appointmentRepository.create(appointment);
 	}
 
 	@Override
 	public List<AppointmentDto> findAppointment(String start, String end) {
-		// TODO Auto-generated method stub
 		return appointmentRepository.findAppointment(start, end);
 	}
 
 	@Override
 	public Appointment find(Integer id) {
-		// TODO Auto-generated method stub
 		return appointmentRepository.find(id);
 	}
 
 	@Override
 	public int countMailStatus(Integer status) {
-		// TODO Auto-generated method stub
-		
 		return appointmentRepository.countMailStatus(status);
 	}
+
 }

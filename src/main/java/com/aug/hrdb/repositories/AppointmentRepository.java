@@ -1,6 +1,5 @@
 package com.aug.hrdb.repositories;
 
-//import java.sql.Date;
 import java.util.List;
 
 import com.aug.hrdb.dto.AppointmentDto;
@@ -11,17 +10,10 @@ public interface AppointmentRepository extends GenericRepository<Appointment, In
 
 	List<Appointment> findByApplicant(Applicant applicant);
 
-	void create(Appointment appointment);
-	
-	void update(Appointment appointment);
-
-	void delete(Appointment appointment);
-
 	List<AppointmentDto> findAppointment(String start, String end);
 	
-	public AppointmentDto findById(Integer id);
-	
-	public Appointment find(Integer id);
+	AppointmentDto findById(Integer id);
 
 	int countMailStatus(Integer status);
+
 }

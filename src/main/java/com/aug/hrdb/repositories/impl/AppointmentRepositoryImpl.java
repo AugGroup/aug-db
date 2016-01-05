@@ -1,14 +1,9 @@
 package com.aug.hrdb.repositories.impl;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-//import java.sql.Date;
 import java.util.List;
 
-
-
-
-
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.aug.hrdb.dto.AppointmentDto;
@@ -16,83 +11,52 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Appointment;
 import com.aug.hrdb.repositories.AppointmentRepository;
 
-@Repository
-public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment, Integer> implements
-		AppointmentRepository {
+@Repository(value = "appointmentRepository")
+public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment, Integer> implements AppointmentRepository {
 
-	public AppointmentRepositoryImpl() {
-		super(Appointment.class);
-		// TODO Auto-generated constructor stub
-	}
+  public AppointmentRepositoryImpl() {
+    super(Appointment.class);
+  }
 
-	@Override
-	public List<Appointment> findByApplicant(Applicant applicant) {
-		// TODO Auto-generated method stub
-		List<Appointment> appointments = new ArrayList<Appointment>();
-		org.hibernate.Query query = getCurrentSession().createQuery(
-				"From Appointment Where APPLICANT_ID=:applicant_id");
-		query.setParameter("applicant_id", applicant.getId());
-		appointments = query.list();
-		return appointments;
-	}
+  @Override
+  public List<Appointment> findByApplicant(Applicant applicant) {
+    Query query = getCurrentSession().createQuery("From Appointment Where APPLICANT_ID = :applicant_id");
+    query.setParameter("applicant_id", applicant.getId());
+    List<Appointment> appointments = query.list();
 
-	@Override
-	public List<AppointmentDto> findAppointment(String start, String end) {
-		// TODO Auto-generated method stub
-		org.hibernate.Query query = getCurrentSession().getNamedQuery("FIND_APPOINTMENT");
-		query.setParameter("START", start);
-		query.setParameter("END", end);
-		List<AppointmentDto> appointments = query.list();
-		
-		return appointments;
-	}
+    return appointments;
 
-	@Override
-	public AppointmentDto findById(Integer id) {
-		// TODO Auto-generated method stub
-		org.hibernate.Query query = getCurrentSession().getNamedQuery("GET_APPOINTMENT_BY_ID");
-		query.setParameter("ID", id);
-		List<AppointmentDto> appointments = query.list();
-		return appointments.get(0);
-	}
+  }
 
+  @Override
+  public List<AppointmentDto> findAppointment(String start, String end) {
+    Query query = getCurrentSession().getNamedQuery("FIND_APPOINTMENT");
+    query.setParameter("START", start);
+    query.setParameter("END", end);
+    List<AppointmentDto> appointments = query.list();
 
-	@Override
-	public Appointment find(Integer id) {
-		return (Appointment) getCurrentSession().get(Appointment.class, id);
-	}
+    return appointments;
 
-	@Override
-	public void create(Appointment e) {
-		// TODO Auto-generated method stub
-		super.create(e);
-	}
+  }
 
-	@Override
-	public void update(Appointment e) {
-		// TODO Auto-generated method stub
-		super.update(e);
-	}
+  @Override
+  public AppointmentDto findById(Integer id) {
+    org.hibernate.Query query = getCurrentSession().getNamedQuery("GET_APPOINTMENT_BY_ID");
+    query.setParameter("ID", id);
+    List<AppointmentDto> appointments = query.list();
 
-	@Override
-	public void delete(Appointment e) {
-		// TODO Auto-generated method stub
-		super.delete(e);
-	}
+    return appointments.get(0);
 
-	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		super.deleteById(id);
-	}
+  }
 
-	@Override
-	public int countMailStatus(Integer status) {
-		// TODO Auto-generated method stub
-		org.hibernate.Query query = getCurrentSession().createSQLQuery("SELECT COUNT(ID) FROM APPOINTMENT WHERE MAIL_STATUS=:STATUS");
-		query.setParameter("STATUS", status);
-		List<BigInteger> integers = query.list();
-		return integers.get(0).intValue();
-	}
-	
+  @Override
+  public int countMailStatus(Integer status) {
+    Query query = getCurrentSession().createSQLQuery("SELECT COUNT(ID) FROM APPOINTMENT WHERE MAIL_STATUS=:STATUS");
+    query.setParameter("STATUS", status);
+    List<BigInteger> integers = query.list();
+
+    return integers.get(0).intValue();
+
+  }
+
 }

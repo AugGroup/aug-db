@@ -9,6 +9,7 @@ import com.aug.hrdb.entities.Appointment;
 
 
 public interface AppointmentService {
+
 	public List<Appointment> findAll();
 	public AppointmentDto findById(Integer id);
 	public List<Appointment> findByApplicant(Applicant applicant);
@@ -19,4 +20,5 @@ public interface AppointmentService {
 	public  List<AppointmentDto> findAppointment(String start, String end);
 	public Appointment find(Integer id);
 	public int countMailStatus(Integer status);
+
 }

@@ -134,7 +134,5 @@ public class Appointment {
 				+ detail + ", start=" + start + ", end=" + end + ", applicant="
 				+ applicant + ", login=" + login + "]";
 	}
-	
-	
-	
+
 }
