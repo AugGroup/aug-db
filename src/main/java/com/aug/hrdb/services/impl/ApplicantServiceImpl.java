@@ -66,16 +66,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 		return applicants;
 	}
 
-//	@Override
-//	public List<ApplicantDto> findByTechnology(String technology){
-//		List<ApplicantDto> applicants = applicantRepository.findByTechnology(technology);
-//		for (ApplicantDto appl : applicants) {
-//			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
-//			appl.setTechnologyStr(tech);
-//		}
-//		return applicants;
-//	}
-
 	@Override
 	public List<ApplicantDto> findByJoblevel(String joblevel){
 		List<ApplicantDto> applicants = applicantRepository.findByJoblevel(joblevel);
@@ -85,25 +75,22 @@ public class ApplicantServiceImpl implements ApplicantService {
 	public List<ApplicantDto> findAllApplicant() {
 		List<ApplicantDto> applicants = applicantRepository.findAllApplicant();
 		for (ApplicantDto appl : applicants) {
-//			String tech = masTechnologyRepository.find(appl.getTechnologyId()).getName();
 			String job = masJoblevelRepository.find(appl.getJoblevelId()).getName();
-//			appl.setTechnologyStr(tech);
 			appl.setJoblevelStr(job);
 		}
 
 		return applicants;
+
 	}
 
 	@Override
 	public ApplicantDto findApplicantById(Integer id) {
 		ApplicantDto applicants = applicantRepository.findApplicantById(id);
-//		String tech = masTechnologyRepository.find(applicants.getTechnologyId()).getName();
 		String job = masJoblevelRepository.find(applicants.getJoblevelId()).getName();
-//		applicants.setTechnologyStr(tech);
 		applicants.setJoblevelStr(job);
 
-
 		return applicants;
+
 	}
 
 	

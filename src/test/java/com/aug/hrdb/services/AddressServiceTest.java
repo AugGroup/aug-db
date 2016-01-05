@@ -14,23 +14,16 @@ import java.util.List;
 
 import com.aug.hrdb.dto.AddressDto;
 import com.aug.hrdb.entities.*;
-import com.aug.hrdb.repositories.*;
-import junit.framework.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.aug.hrdb.services.AddressService;
-import com.aug.hrdb.services.MasAddressTypeService;
-import com.aug.hrdb.services.MasProvinceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})

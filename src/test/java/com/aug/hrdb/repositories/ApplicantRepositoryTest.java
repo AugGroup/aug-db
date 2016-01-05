@@ -1,187 +1,271 @@
 package com.aug.hrdb.repositories;
 
-import static org.junit.Assert.assertNotNull;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import java.text.ParseException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import com.aug.hrdb.dto.ApplicantDto;
+import com.aug.hrdb.dto.JoblevelDto;
+import com.aug.hrdb.dto.ReportApplicantDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
+@Transactional
 public class ApplicantRepositoryTest {
+
 	@Autowired
-	ApplicantRepository applicantRepository;
+	private ApplicantRepository applicantRepository;
+
 	@Autowired
-	EmployeeRepository employeeRepository;
-	private Applicant applicant;
-	@Autowired
-	private MasJobLevelRepository masJoblevelRepository;
+	private MasCoreSkillRepository masCoreSkillRepository;
+
 	@Autowired
 	private MasTechnologyRepository masTechnologyRepository;
-	
-	@Before
-    public void setUp() {
-		
-		
-        applicant = new Applicant();
-        applicant.setFirstNameEN("Uthaiwan");
-        applicant.setLastNameEN("Siloodjai");
-        applicant.setNickNameEN("wan");
-        applicant.setNickNameTH("วรรณ");
-        applicant.setEmployee(employeeRepository.find(1));
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		applicant.setBirthDate(date);
-		applicant.setEmail("test@gmail.com");
-        applicant.setAuditFlag("C");
-        applicant.setCreatedBy(1);
-        applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
 
-		masJoblevelRepository.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelRepository.find(1);
+	@Autowired
+	private MasJobLevelRepository masJobLevelRepository;
+
+	@Autowired
+	private MasDegreeTypeRepository masDegreeTypeRepository;
+
+	private Applicant applicant;
+
+	private MasDegreeType masDegreeType;
+
+	private String startDate, endDate;
+
+	@Before
+	public void setUp() throws Exception {
+		// create applicant
+		MasCoreSkill masCoreSkill = new MasCoreSkill();
+		masCoreSkill.setAuditFlag("C");
+		masCoreSkill.setCreatedBy(1);
+		masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masCoreSkill.setIsActive(true);
+		masCoreSkill.setCode("ITS");
+		masCoreSkill.setName("ITS");
+		masCoreSkillRepository.create(masCoreSkill);
+
+		MasJobLevel masJobLevel = new MasJobLevel();
+		masJobLevel.setAuditFlag("C");
+		masJobLevel.setCreatedBy(1);
+		masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJobLevel.setIsActive(true);
+		masJobLevel.setCode("C");
+		masJobLevel.setName("Consultant");
+		masJobLevel.setTag("t");
+		masJobLevelRepository.create(masJobLevel);
 
 		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
 		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnology.setCreatedBy(1);
+		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masTechnology.setIsActive(true);
+		masTechnology.setCode("1");
+		masTechnology.setName("Java");
 		masTechnologyRepository.create(masTechnology);
-		
-		MasTechnology mTechnology= masTechnologyRepository.find(1);
-		
-		applicant.setJoblevel(mJoblevel);
-		applicant.setTechnology(mTechnology);
-		applicantRepository.create(applicant);
-		
-    }
-	
-	
-	
-	@Test
-	@Transactional
-	@Rollback(value = true)
-	public void testInsertApplicantRepository() throws Exception {
-		Applicant applicant = new Applicant();
-		applicant.setFirstNameEN("yam");
+
+		applicant = new Applicant();
 		applicant.setAuditFlag("C");
 		applicant.setCreatedBy(1);
 		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelRepository.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelRepository.find(1);
-
-		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName(".NET");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyRepository.create(masTechnology);
-		
-		MasTechnology mTechnology= masTechnologyRepository.find(1);
-		applicant.setJoblevel(mJoblevel);
-		applicant.setTechnology(mTechnology);
+		applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+		applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+		applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+		applicant.setFirstNameEN("Anat");
+		applicant.setTrackingStatus("Interview");
+		applicant.setApplyDate(Calendar.getInstance().getTime());
 		applicantRepository.create(applicant);
-	}
-	
-	@Test
-	@Transactional
-	@Rollback(value = true)
-	public void testUpdateApplicantRepository() throws Exception {
-		Applicant applicant =applicantRepository.find(3);
-		applicant.setFirstNameEN("net");
-		applicant.setAuditFlag("U");
-		applicant.setCreatedBy(2);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicantRepository.update(applicant);
-	}
-	
-	@Test
-	@Transactional
-	@Rollback(value = true)
-	public void testDeleteByIdApplicantRepository() throws Exception {
-		applicantRepository.deleteById(1);
-	}
-	
-	@Test
-	@Transactional
-	@Rollback(value = true)
-	public void testDeleteApplicantRepository() throws Exception {
-		Applicant applicant = applicantRepository.find(3);
-		applicantRepository.delete(applicant);			
-	}
-	
-	@Test
-	@Transactional
-	public void testFindByIdApplicantRepository() throws Exception {
-		Applicant applicant = applicantRepository.find(2);
-		assertNotNull(applicant.getFirstNameEN());
-		
+
+		//create mas degree
+		masDegreeType = new MasDegreeType();
+		masDegreeType.setName("Bachelor");
+		masDegreeType.setCode("B");
+		masDegreeType.setIsactive(true);
+		masDegreeType.setAuditFlag("C");
+		masDegreeType.setCreatedBy(1);
+		masDegreeType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDegreeTypeRepository.create(masDegreeType);
+
+		//first date
+		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+
+		Calendar first = Calendar.getInstance();
+		first.set(Calendar.DAY_OF_MONTH, 1);
+		Date today = first.getTime();
+		startDate = df.format(today);
+
+		//last date
+		Calendar last = Calendar.getInstance();
+		last.set(Calendar.DAY_OF_MONTH, last.getActualMaximum(Calendar.DAY_OF_MONTH));
+		Date lastDay = last.getTime();
+		endDate = df.format(lastDay);
+
 	}
 
 	@Test
-	@Transactional
-	public void testFindAllApplicantRepository() throws Exception {
-		List<Applicant> applicants = applicantRepository.findAll();
-		for (Applicant applicant : applicants)
-			System.out.println("applicant : "
-					+ applicant.getFirstNameEN());
+	public void testLoadRepositoryShouldPass() throws Exception {
+		assertNotNull(applicantRepository);
+		assertNotNull(masCoreSkillRepository);
+		assertNotNull(masJobLevelRepository);
+		assertNotNull(masTechnologyRepository);
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	@Test
+	public void testFindWithApplicantRepositoryShouldReturnSetupApplicant() throws Exception {
+		Applicant result = applicantRepository.find(applicant.getId());
+		assertNotNull(result);
+		assertThat(result.getFirstNameEN(), is("Anat"));
+
+	}
+
+	@Test
+	public void testFindAllWithApplicantRepositoryShouldReturnListOfApplicant() throws Exception {
+		List<Applicant> result = applicantRepository.findAll();
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+	@Test
+	public void testUpdateWithApplicantRepositoryShouldReturnApplicantThatUpdated() throws Exception {
+		Applicant update = applicantRepository.find(applicant.getId());
+		update.setFirstNameEN("AnatUpdate");
+		applicantRepository.update(update);
+
+		Applicant result = applicantRepository.find(update.getId());
+		assertNotNull(result);
+		assertThat(result.getId(), is(update.getId()));
+		assertThat(result.getFirstNameEN(), is("AnatUpdate"));
+
+	}
+
+	@Test
+	public void testDeleteWithApplicantRepositoryShouldNotFindApplicantThatDelete() throws Exception {
+		Applicant delete = applicantRepository.find(applicant.getId());
+		applicantRepository.delete(delete);
+
+		Applicant result = applicantRepository.find(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testDeleteByIdWithApplicantRepositoryShouldNotFindApplicantThatDelete() throws Exception {
+		Applicant delete = applicantRepository.find(applicant.getId());
+		applicantRepository.deleteById(delete.getId());
+
+		Applicant result = applicantRepository.find(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testFindApplicantByIdWithApplicantRepositoryShouldReturnSetupApplicant() throws Exception {
+		ApplicantDto result = applicantRepository.findApplicantById(applicant.getId());
+		assertNotNull(result);
+		assertThat(result.getFirstNameEN(), is("Anat"));
+
+	}
+
+	@Test
+	public void testFindAllApplicantWithApplicantRepositoryShouldReturnListOfAllApplicant() throws Exception {
+		List<ApplicantDto> result = applicantRepository.findAllApplicant();
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+	@Test
+	public void testFindByJobLevelWithApplicantRepositoryShouldReturnListOfApplicantThatHaveSetupJobLevel() throws Exception {
+		List<ApplicantDto> result = applicantRepository.findByJoblevel(applicant.getJobLevel().getName());
+		assertNotNull(result);
+		assertThat(result.get(0).getJoblevelStr(), is("Consultant"));
+
+	}
+
+	@Test
+	public void testFindByTrackingStatusWithApplicantRepositoryShouldReturnListOfApplicantThatHaveTrackingStatusSameSetup() throws Exception {
+		List<ApplicantDto> result = applicantRepository.findByTrackingStatus(applicant.getTrackingStatus());
+		assertNotNull(result);
+		assertThat(result.get(0).getTrackingStatus(), is("Interview"));
+
+	}
+
+	@Test
+	public void testCheckTagWithApplicantRepositoryShouldReturnListOfJobLevelThatHaveTagSameSetup() throws Exception {
+		List<JoblevelDto> result = applicantRepository.checkTag(applicant.getJobLevel().getTag());
+		assertNotNull(result);
+		assertThat(result.get(0).getTag(), is("t"));
+
+	}
+
+	@Test
+	public void testReportApplicantWithApplicantRepositoryShouldReturnListOfReportApplicant() throws Exception {
+		List<ReportApplicantDto> result = applicantRepository.reportApplicant();
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+//	wait education
+//	@Test
+//	public void testFindReportByCriteriaWithApplicantRepositoryShouldReturnListOfReportApplicant() throws Exception {
+//		List<ReportApplicantDto> result = applicantRepository.findReportByCriteria(applicant.getTechnology().getId(),
+//																				applicant.getJobLevel().getId(), 0, "", "", 0.0);
+//		assertNotNull(result);
+//		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+//
+//	}
+
+	@Test
+	public void testFindReportByMonthWithApplicantRepositoryShouldReturnListOfReportApplicant() throws Exception {
+		List<ReportApplicantDto> result = applicantRepository.findReportByMonth(startDate, endDate);
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+	}
+
+//	@Test
+//	public void testUpdateByDtoWithApplicantRepositoryShouldReturnUpdatedApplicant() throws Exception {
+//		ApplicantDto update = applicantRepository.findApplicantById(applicant.getId());
+//		assertNotNull(update);
+//		assertThat(update.getFirstNameEN(), is("Anat"));
+//
+//		Applicant result = new Applicant();
+//		result = result.fromApplicantDTO(result, update);
+//		result.setFirstNameEN("AnatUpdate");
+//		System.out.println(">>>" + result.getFirstNameEN());
+//		applicantRepository.update(result);
+//
+//		ApplicantDto result2 = applicantRepository.findApplicantById(update.getId());
+//		assertNotNull(result2);
+//		assertThat(result2.getFirstNameEN(), is("AnatUpdate"));
+//
+//	}
+
+	@Test
+	public void testGetMaxApplicantIdWithApplicantRepositoryShouldReturnSetupId() throws Exception {
+		ApplicantDto result = applicantRepository.getMaxApplicantId();
+		assertThat(result.getId(), is(applicant.getId()));
+
+	}
+
 }

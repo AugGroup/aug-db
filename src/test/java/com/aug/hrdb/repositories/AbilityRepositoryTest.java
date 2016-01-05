@@ -31,7 +31,7 @@ public class AbilityRepositoryTest {
   private AbilityRepository abilityRepository;
 
   @Autowired
-  private MasJobLevelRepository masJoblevelRepository;
+  private MasJobLevelRepository masJobLevelRepository;
 
   @Autowired
   private MasTechnologyRepository masTechnologyRepository;
@@ -70,7 +70,7 @@ public class AbilityRepositoryTest {
     masJobLevel.setIsActive(true);
     masJobLevel.setCode("C");
     masJobLevel.setName("Consultant");
-    masJoblevelRepository.create(masJobLevel);
+    masJobLevelRepository.create(masJobLevel);
 
     MasTechnology masTechnology = new MasTechnology();
     masTechnology.setAuditFlag("C");
@@ -86,7 +86,7 @@ public class AbilityRepositoryTest {
     applicant.setCreatedBy(1);
     applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
     applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
-    applicant.setJoblevel(masJoblevelRepository.find(masJobLevel.getId()));
+    applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
     applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
     applicantRepository.create(applicant);
 
@@ -126,7 +126,7 @@ public class AbilityRepositoryTest {
     assertNotNull(applicantRepository);
     assertNotNull(abilityRepository);
     assertNotNull(masSpecialtyRepository);
-    assertNotNull(masJoblevelRepository);
+    assertNotNull(masJobLevelRepository);
     assertNotNull(masTechnologyRepository);
 
   }

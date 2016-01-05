@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.hibernate.Criteria;
 import org.hibernate.Hibernate;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Allowance;
@@ -31,27 +31,33 @@ import com.aug.hrdb.entities.MasAllowance;
 import com.aug.hrdb.entities.MasDivision;
 import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.AllowanceRepository;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasAllowanceRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.services.MasAllowanceService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class AllowancesRepositoryTest {
 
-	@Autowired private AllowanceRepository allowancesRepository;
-	@Autowired private MasAllowanceRepository  masAllowancesRepository;
-	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasJobLevelRepository masJoblevelRepository;
-	@Autowired private ApplicantRepository applicantRepository;
-	@Autowired private MasDivisionRepository masDivisionRepository;
-	@Autowired private MasTechnologyRepository masTechnologyRepository;	
+	@Autowired
+	private AllowanceRepository allowancesRepository;
+
+	@Autowired
+	private MasAllowanceRepository  masAllowancesRepository;
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private MasJobLevelRepository masJoblevelRepository;
+
+	@Autowired
+	private ApplicantRepository applicantRepository;
+
+	@Autowired
+	private MasDivisionRepository masDivisionRepository;
+
+	@Autowired
+	private MasTechnologyRepository masTechnologyRepository;
 	
 	
 	private	 Employee employee;

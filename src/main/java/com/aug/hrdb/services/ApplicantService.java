@@ -15,8 +15,6 @@ public interface ApplicantService {
 
 	public List<Applicant> findAll();
 	
-//	public List<ApplicantDto> findByTechnology(String technology);
-	
 	public List<ApplicantDto> findByJoblevel(String joblevel);
 	
 	public ApplicantDto findApplicantById(Integer id);
