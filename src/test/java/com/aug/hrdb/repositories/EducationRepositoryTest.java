@@ -1,184 +1,198 @@
 package com.aug.hrdb.repositories;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
-import org.hibernate.Hibernate;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.transaction.annotation.Transactional;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import com.aug.hrdb.dto.EducationDto;
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Education;
-import com.aug.hrdb.entities.MasDegreeType;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EducationRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasDegreeTypeRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
+import com.aug.hrdb.entities.*;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class EducationRepositoryTest {
-	
+
+	@Autowired
+	private MasCoreSkillRepository masCoreSkillRepository;
+
+	@Autowired
+	private MasTechnologyRepository masTechnologyRepository;
+
+	@Autowired
+	private MasJobLevelRepository masJobLevelRepository;
+
+	@Autowired
+	private ApplicantRepository applicantRepository;
+
+	@Autowired
+	private MasDegreeTypeRepository masDegreeTypeRepository;
+
 	@Autowired
 	private EducationRepository educationRepository;
 
-	@Autowired
-	private EmployeeRepository employeeRepository;
-	
-	@Autowired
-	private MasJobLevelRepository masJoblevelRepository;
-	
-	@Autowired
-	private ApplicantRepository applicantRepository;
-	
-	@Autowired
-	private MasDivisionRepository masDivisionRepository;
-	
-	@Autowired
-	private MasDegreeTypeRepository masDegreetypeRepository;
-	
-	@Autowired
-	private MasTechnologyRepository masTechnologyRepository;
-	
+	private Education education;
+
 	@Before
-	public void setEducation() throws ParseException {
-        
-		Applicant applicant = new Applicant();
-        applicant.setCardId("115310905001-9");
-        applicant.setFirstNameTH("อรอนงค์");
-        applicant.setFirstNameEN("Ornanong");
-        applicant.setNickNameEN("nong");
-        applicant.setNickNameTH("นงค์");
-        applicant.setLastNameEN("Namlongnamken");
-        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
+	public void setUp() throws Exception {
+		// create applicant
+		MasCoreSkill masCoreSkill = new MasCoreSkill();
+		masCoreSkill.setAuditFlag("C");
+		masCoreSkill.setCreatedBy(1);
+		masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masCoreSkill.setIsActive(true);
+		masCoreSkill.setCode("ITS");
+		masCoreSkill.setName("ITS");
+		masCoreSkillRepository.create(masCoreSkill);
 
-		applicant.setCardId("115310905001-9");
-		
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelRepository.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelRepository.find(1);
+		MasJobLevel masJobLevel = new MasJobLevel();
+		masJobLevel.setAuditFlag("C");
+		masJobLevel.setCreatedBy(1);
+		masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masJobLevel.setIsActive(true);
+		masJobLevel.setCode("C");
+		masJobLevel.setName("Consultant");
+		masJobLevelRepository.create(masJobLevel);
 
 		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
 		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
+		masTechnology.setCreatedBy(1);
+		masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masTechnology.setIsActive(true);
+		masTechnology.setCode("1");
+		masTechnology.setName("Java");
 		masTechnologyRepository.create(masTechnology);
-		
-		MasTechnology mTechnology= masTechnologyRepository.find(1);
-		
-		applicant.setJoblevel(mJoblevel);
-		applicant.setTechnology(mTechnology);
-		applicantRepository.create(applicant);
-		
-	    Applicant applicant1 =  applicantRepository.find(1);
 
-		MasDegreeType masDegreetype = new MasDegreeType();
-		masDegreetype.setName("CEO");
-		masDegreetype.setIsactive(true);
-		masDegreetype.setCode("01");
-		masDegreetype.setAuditFlag("C");
-		masDegreetype.setCreatedBy(1);
-		masDegreetype.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-		masDegreetypeRepository.create(masDegreetype);
-		masDegreetypeRepository.find(1);
-
+		Applicant applicant = new Applicant();
+		applicant.setAuditFlag("C");
+		applicant.setCreatedBy(1);
+		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+		applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+		applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
 		applicantRepository.create(applicant);
 
-		Education education = new Education();
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		education.setApplicant(applicant);
-		education.setCertification("TOEIC 430");
-		education.setMasdegreetype(masDegreetype);
-		education.setFaculty("Technology and Science");
-		education.setGpa("3.00");
-		education.setGraduated_date(dateFmt.parse("07/09/2015"));
+		// create mas degree
+		MasDegreeType masDegreeType = new MasDegreeType();
+		masDegreeType.setAuditFlag("C");
+		masDegreeType.setCreatedBy(1);
+		masDegreeType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		masDegreeType.setIsactive(true);
+		masDegreeType.setName("Bachelor");
+		masDegreeType.setCode("B");
+		masDegreeTypeRepository.create(masDegreeType);
+
+		// create education
+		education = new Education();
 		education.setAuditFlag("C");
-		education.setCreatedBy(0);
+		education.setCreatedBy(1);
 		education.setCreatedTimeStamp(Calendar.getInstance().getTime());
+		education.setUniversity("Kasetsart University");
+		education.setMajor("Computer Engineering");
+		education.setMasdegreetype(masDegreeType);
+		education.setApplicant(applicant);
 		educationRepository.create(education);
-		
-	}
-	
-	@Test
-	@Ignore
-	@Rollback(true)
-	public void insertEducationRepositoryTest() throws ParseException {
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		Education education = new Education();
 
-		education.setId(1);
-		education.setCertification("TOEIC 430");
-		education.setFaculty("Technology and Science");
-		education.setGpa("3.00");
-		education.setGraduated_date(dateFmt.parse("07/09/2015"));
-
-		educationRepository.getCurrentSession().save(education);
-		System.out.println("University : " + education.getUniversity());
 	}
 
 	@Test
-	@Rollback(true)
-	public void findByIdEducationRepositoryTest() {
-		Education education = educationRepository.find(1);
-		System.out.println("University : "+education.getUniversity());
+	public void testLoadRepositoriesShouldPass() throws Exception {
+		assertNotNull(masDegreeTypeRepository);
+		assertNotNull(educationRepository);
+		assertNotNull(masTechnologyRepository);
+		assertNotNull(masJobLevelRepository);
+		assertNotNull(masCoreSkillRepository);
+		assertNotNull(applicantRepository);
 
 	}
-	
+
 	@Test
-	@Rollback(true)
-	public void updateEducationRepositoryTest() {
-		Education education = educationRepository.find(3);
-		education.setMajor("Computer");
-		educationRepository.update(education);
-		System.out.println("University : " + education.getUniversity());
+	public void testFindWithEducationRepositoryShouldReturnEducationThatSetUp() throws Exception {
+		Education result = educationRepository.find(education.getId());
+		assertNotNull(result);
+		assertThat(result.getUniversity(), is("Kasetsart University"));
+		assertThat(result.getMajor(), is("Computer Engineering"));
 
 	}
-	
+
 	@Test
-	@Rollback(true)
-	public void deleteEducationRepositoryTest() {
-		Education experience = educationRepository.find(3);
-		educationRepository.delete(experience);
-		System.out.println("Delete Experience : " + educationRepository.find(1));
-	}
-	
-	@Test
-	@Rollback(true)
-	public void deleteByIdEducationRepositoryTest() {
-		educationRepository.deleteById(3);
+	public void testFindAllWithEducationRepositoryShouldReturnListOfAllEducation() throws Exception {
+		List<Education> result = educationRepository.findAll();
+		assertNotNull(result);
+		assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
 	}
 
+	@Test
+	public void testUpdateWithEducationRepositoryShouldReturnEducationThatUpdate() throws Exception {
+		Education update = educationRepository.find(education.getId());
+		assertThat(update.getUniversity(), is("Kasetsart University"));
+		assertThat(update.getMajor(), is("Computer Engineering"));
+
+		update.setMajor("Computer Science");
+		educationRepository.update(update);
+
+		Education result = educationRepository.find(update.getId());
+		assertThat(result.getMajor(), is("Computer Science"));
+
+	}
+
+	@Test
+	public void testDeleteWithEducationRepositoryShouldNotFindEducationThatDelete() throws Exception {
+		Education delete = educationRepository.find(education.getId());
+		educationRepository.delete(delete);
+
+		Education result = educationRepository.find(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testDeleteByIdWithEducationRepositoryShouldNotFindEducationThatDelete() throws Exception {
+		Education delete = educationRepository.find(education.getId());
+		educationRepository.deleteById(delete.getId());
+
+		Education result = educationRepository.find(delete.getId());
+		assertNull(result);
+
+	}
+
+	@Test
+	public void testFindEducationByIdWithEducationRepositoryShouldListOfEducationOfThatApplicant() throws Exception {
+		List<EducationDto> result = educationRepository.findEducationById(education.getApplicant().getId());
+		assertNotNull(result);
+		assertThat(result.get(0).getUniversity(), is("Kasetsart University"));
+		assertThat(result.get(0).getMajor(), is("Computer Engineering"));
+
+	}
+
+	@Test
+	public void testFindByEducationIdWithEducationRepositoryShouldReturnEducationThatSetUp() throws Exception {
+		EducationDto result = educationRepository.findByEducationId(education.getId());
+		assertNotNull(result);
+		assertThat(result.getUniversity(), is("Kasetsart University"));
+		assertThat(result.getMajor(), is("Computer Engineering"));
+
+	}
+
+	@Test
+	public void testSearchEducationWithEducationRepositoryShouldListOfEducationOfThatApplicant() throws Exception {
+		List<EducationDto> result = educationRepository.searchEducation(education.getApplicant().getId());
+		assertNotNull(result);
+		assertThat(result.get(0).getUniversity(), is("Kasetsart University"));
+		assertThat(result.get(0).getMajor(), is("Computer Engineering"));
+
+	}
 
 }

@@ -16,172 +16,164 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "EDUCATION")
-public class Education extends BaseEntity{
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private Integer id;
+public class Education extends BaseEntity {
 
-	@Column(name = "UNIVERSITY")
-	private String university;
+  @Id
+  @GeneratedValue
+  @Column(name = "ID")
+  private Integer id;
 
-	@Column(name = "FACULTY")
-	private String faculty;
+  @Column(name = "UNIVERSITY")
+  private String university;
 
-	@Column(name = "MAJOR")
-	private String major;
+  @Column(name = "FACULTY")
+  private String faculty;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
-	@Column(name = "GPA")
-	private String gpa;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
-	@Column(name = "START_DATE")
-	private Date start_date;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
-	@Column(name = "GRADUATED_DATE")
-	private Date graduated_date;
-	
-	@Column(name = "CERTIFICATION")
-	private String certification;
-	
-	@ManyToOne
-	@JoinColumn(name="APPLICANT_ID")
-	private Applicant applicant;
-	
-	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "MAS_DEGREETYPE_ID",nullable = false ,referencedColumnName="ID")
-	private MasDegreeType masDegreeType;
-	
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "MAJOR")
+  private String major;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "0.00")
+  @Column(name = "GPA")
+  private String gpa;
 
-	public String getUniversity() {
-		return university;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
+  @Column(name = "START_DATE")
+  private Date start_date;
 
-	public void setUniversity(String university) {
-		this.university = university;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
+  @Column(name = "GRADUATED_DATE")
+  private Date graduated_date;
 
-	public String getFaculty() {
-		return faculty;
-	}
+  @Column(name = "CERTIFICATION")
+  private String certification;
 
-	public void setFaculty(String faculty) {
-		this.faculty = faculty;
-	}
+  @ManyToOne
+  @JoinColumn(name = "APPLICANT_ID")
+  private Applicant applicant;
 
-	public String getMajor() {
-		return major;
-	}
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "MAS_DEGREETYPE_ID", nullable = false, referencedColumnName = "ID")
+  private MasDegreeType masDegreeType;
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+  public Integer getId() {
+    return id;
+  }
 
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getGpa() {
-		return gpa;
-	}
+  public String getUniversity() {
+    return university;
+  }
 
-	public void setGpa(String gpa) {
-		this.gpa = gpa;
-	}
+  public void setUniversity(String university) {
+    this.university = university;
+  }
 
-	public Date getStart_date() {
-		return start_date;
-	}
+  public String getFaculty() {
+    return faculty;
+  }
 
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
 
-	public Date getGraduated_date() {
-		return graduated_date;
-	}
+  public String getMajor() {
+    return major;
+  }
 
-	public void setGraduated_date(Date graduated_date) {
-		this.graduated_date = graduated_date;
-	}
+  public void setMajor(String major) {
+    this.major = major;
+  }
 
-	public String getCertification() {
-		return certification;
-	}
+  public String getGpa() {
+    return gpa;
+  }
 
-	public void setCertification(String certification) {
-		this.certification = certification;
-	}
+  public void setGpa(String gpa) {
+    this.gpa = gpa;
+  }
 
-	public MasDegreeType getMasDegreeType() {
-		return masDegreeType;
-	}
+  public Date getStart_date() {
+    return start_date;
+  }
 
-	public void setMasdegreetype(MasDegreeType masDegreeType) {
-		this.masDegreeType = masDegreeType;
-	}
+  public void setStart_date(Date start_date) {
+    this.start_date = start_date;
+  }
 
-	public Applicant getApplicant() {
-		return applicant;
-	}
+  public Date getGraduated_date() {
+    return graduated_date;
+  }
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
-	}
+  public void setGraduated_date(Date graduated_date) {
+    this.graduated_date = graduated_date;
+  }
 
-public EducationDto toEducationDto() {
-		
-		EducationDto educationDto = new EducationDto();
-		
-		educationDto.setId(this.id);
-		educationDto.setUniversity(this.university);
-		educationDto.setGpa(this.gpa);
-		educationDto.setFaculty(this.faculty);
-		educationDto.setMajor(this.major);
-		educationDto.setCertification(this.certification);
-		educationDto.setStart_date(this.start_date);
-		educationDto.setGraduated_date(this.graduated_date);
-		educationDto.setApplicantId(this.applicant.getId());
-		//educationDto.setEmployeeId(this.employee.getId());
-		educationDto.setMasdegreetypeId(this.masDegreeType.getId() );
-		educationDto.setMasdegreetype(this.masDegreeType.getName() );
-		
-		return educationDto;
-		
-	}
-	
-	public Education fromEducationDto(Education education, EducationDto educationDto) {
-		
-		education.setId(educationDto.getId());
-		education.setUniversity(educationDto.getUniversity());
-		education.setGpa(educationDto.getGpa());
-		education.setFaculty(educationDto.getFaculty());
-		education.setMajor(educationDto.getMajor());
-		education.setCertification(educationDto.getCertification());
-		education.setStart_date(educationDto.getStart_date());
-		education.setGraduated_date(educationDto.getGraduated_date());
-		
-		Applicant applicant = new Applicant();
-		applicant.setId(educationDto.getId());
-		education.setApplicant(applicant);
-		
-		MasDegreeType masDegreetype = new MasDegreeType();
-		masDegreetype.setId(educationDto.getMasdegreetypeId());
-		masDegreetype.setName(educationDto.getMasdegreetype());
-		education.setMasdegreetype(masDegreetype);
-		
-		return education;
-		
-	}
-	
+  public String getCertification() {
+    return certification;
+  }
 
-	
+  public void setCertification(String certification) {
+    this.certification = certification;
+  }
+
+  public MasDegreeType getMasDegreeType() {
+    return masDegreeType;
+  }
+
+  public void setMasdegreetype(MasDegreeType masDegreeType) {
+    this.masDegreeType = masDegreeType;
+  }
+
+  public Applicant getApplicant() {
+    return applicant;
+  }
+
+  public void setApplicant(Applicant applicant) {
+    this.applicant = applicant;
+  }
+
+  public EducationDto toEducationDto() {
+    EducationDto educationDto = new EducationDto();
+    educationDto.setId(this.id);
+    educationDto.setUniversity(this.university);
+    educationDto.setGpa(this.gpa);
+    educationDto.setFaculty(this.faculty);
+    educationDto.setMajor(this.major);
+    educationDto.setCertification(this.certification);
+    educationDto.setStart_date(this.start_date);
+    educationDto.setGraduated_date(this.graduated_date);
+    educationDto.setApplicantId(this.applicant.getId());
+    educationDto.setMasDegreeTypeId(this.masDegreeType.getId());
+    educationDto.setMasDegreeType(this.masDegreeType.getName());
+
+    return educationDto;
+
+  }
+
+  public Education fromEducationDto(Education education, EducationDto educationDto) {
+    education.setId(educationDto.getId());
+    education.setUniversity(educationDto.getUniversity());
+    education.setGpa(educationDto.getGpa());
+    education.setFaculty(educationDto.getFaculty());
+    education.setMajor(educationDto.getMajor());
+    education.setCertification(educationDto.getCertification());
+    education.setStart_date(educationDto.getStart_date());
+    education.setGraduated_date(educationDto.getGraduated_date());
+
+    Applicant applicant = new Applicant();
+    applicant.setId(educationDto.getId());
+    education.setApplicant(applicant);
+
+    MasDegreeType masDegreetype = new MasDegreeType();
+    masDegreetype.setId(educationDto.getMasDegreeTypeId());
+    masDegreetype.setName(educationDto.getMasDegreeType());
+    education.setMasdegreetype(masDegreetype);
+
+    return education;
+
+  }
+
 }

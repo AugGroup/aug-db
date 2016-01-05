@@ -7,20 +7,14 @@ import com.aug.hrdb.entities.Education;
 
 public interface EducationService {
 
-	public void create(Education education);
-
-	public Education findById(Integer id);
-
-	public void update(Education education);
-
-	public void delete(Education education);
-	
-	public void deleteById(Integer id);
-
-	public List<Education> findAll();
-	
-	public List<EducationDto> findEducationById(Integer id);
-
-	public EducationDto findEducation(Integer id);
+	void create(Education education);
+	Education findById(Integer id);
+	void update(Education education);
+	void delete(Education education);
+	void deleteById(Integer id);
+	List<Education> findAll();
+	List<EducationDto> findEducationById(Integer id);
+	EducationDto findByEducationId(Integer id);
+	List<EducationDto> searchEducation(Integer id);
 
 }

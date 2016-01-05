@@ -8,11 +8,9 @@ import com.aug.hrdb.entities.Education;
 
 public interface EducationRepository extends GenericRepository<Education, Serializable> {
 	
-	public List<EducationDto> findEducationById(Integer id);
-	
-	public EducationDto findByEducationId(Integer id);
-
-	public List<EducationDto> searchEducation(Integer id);
+	List<EducationDto> findEducationById(Integer id);
+	EducationDto findByEducationId(Integer id);
+	List<EducationDto> searchEducation(Integer id);
 
 }
 

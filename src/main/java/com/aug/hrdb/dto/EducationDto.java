@@ -4,172 +4,153 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
-import com.aug.hrdb.dto.EducationDto;
-import com.aug.hrdb.entities.MasDegreeType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @NamedNativeQueries({
-	@NamedNativeQuery(name = "SEARCH_EDUCATION", query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.NAME, ed.FACULTY, ed.MAJOR, "
-		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID,ed.DEGREETYPE_ID "
-		+ "FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID "
-		+ "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.ID WHERE ed.APPLICANT_ID =:ID", resultClass = EducationDto.class),
-		
-	@NamedNativeQuery(name = "SEARCH_EDUCATION_ID", query = "SELECT ed.ID, ed.UNIVERSITY, ed.DEGREETYPE_ID, ed.FACULTY, ed.MAJOR, "
-		+ "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID , mas_degreetype.NAME"
-		+ " FROM EDUCATION ed JOIN MAS_DEGREETYPE mas_degreetype on mas_degreetype.ID = ed.DEGREETYPE_ID WHERE ed.ID =:ID",
-		resultClass = EducationDto.class)
-	})
+  @NamedNativeQuery(
+    name = "SEARCH_EDUCATION",
+    query = "SELECT ed.ID, ed.UNIVERSITY, mas_degreetype.NAME, ed.FACULTY, ed.MAJOR, "
+      + "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID,ed.MAS_DEGREETYPE_ID "
+      + "FROM EDUCATION ed LEFT JOIN MAS_DEGREETYPE as mas_degreetype on mas_degreetype.ID = ed.MAS_DEGREETYPE_ID "
+      + "LEFT JOIN APPLICANT a on ed.APPLICANT_ID = a.ID WHERE ed.APPLICANT_ID =:ID",
+    resultClass = EducationDto.class),
+
+  @NamedNativeQuery(
+    name = "SEARCH_EDUCATION_ID",
+    query = "SELECT ed.ID, ed.UNIVERSITY, ed.MAS_DEGREETYPE_ID, ed.FACULTY, ed.MAJOR, "
+      + "ed.START_DATE, ed.GPA, ed.GRADUATED_DATE,ed.CERTIFICATION, ed.APPLICANT_ID , mas_degreetype.NAME"
+      + " FROM EDUCATION ed JOIN MAS_DEGREETYPE mas_degreetype on mas_degreetype.ID = ed.MAS_DEGREETYPE_ID WHERE ed.ID =:ID",
+    resultClass = EducationDto.class)
+})
 public class EducationDto {
-	
-	@Id
-	@GeneratedValue
-	@Column(name = "ID")
-	private Integer id;
 
-	@Column(name = "UNIVERSITY")
-	private String university;
-	
-	
-	@Column(name = "DEGREETYPE_ID")
-	private Integer masdegreetypeId;
-	
-	//@Column(name = "DEGREETYPE_ID")
-	@Column(name = "NAME")
-	private String masdegreetype;
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-	@Column(name = "FACULTY")
-	private String faculty;
+  @Column(name = "UNIVERSITY")
+  private String university;
 
-	@Column(name = "MAJOR")
-	private String major;
+  @Column(name = "MAS_DEGREETYPE_ID")
+  private Integer masDegreeTypeId;
 
-	@Column(name = "GPA")
-	private String gpa;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
-	@Column(name = "START_DATE")
-	private Date start_date;
-	
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
-	@Column(name = "GRADUATED_DATE")
-	private Date graduated_date;
-	
-	@Column(name = "CERTIFICATION")
-	private String certification;
-	
-	@Column(name="APPLICANT_ID")
-	private Integer applicantId;
-	
-	
-	
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "NAME")
+  private String masDegreeType;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "FACULTY")
+  private String faculty;
 
-	public String getUniversity() {
-		return university;
-	}
+  @Column(name = "MAJOR")
+  private String major;
 
-	public void setUniversity(String university) {
-		this.university = university;
-	}
+  @Column(name = "GPA")
+  private String gpa;
 
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
+  @Column(name = "START_DATE")
+  private Date start_date;
 
-	public Integer getApplicantId() {
-		return applicantId;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", locale = "en", timezone = "GMT")
+  @Column(name = "GRADUATED_DATE")
+  private Date graduated_date;
 
-	public void setApplicantId(Integer applicantId) {
-		this.applicantId = applicantId;
-	}
+  @Column(name = "CERTIFICATION")
+  private String certification;
 
-	public String getFaculty() {
-		return faculty;
-	}
+  @Column(name = "APPLICANT_ID")
+  private Integer applicantId;
 
-	public void setFaculty(String faculty) {
-		this.faculty = faculty;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getMajor() {
-		return major;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setMajor(String major) {
-		this.major = major;
-	}
+  public String getUniversity() {
+    return university;
+  }
 
+  public void setUniversity(String university) {
+    this.university = university;
+  }
 
-	public String getGpa() {
-		return gpa;
-	}
+  public Integer getMasDegreeTypeId() {
+    return masDegreeTypeId;
+  }
 
-	public void setGpa(String gpa) {
-		this.gpa = gpa;
-	}
+  public void setMasDegreeTypeId(Integer masDegreeTypeId) {
+    this.masDegreeTypeId = masDegreeTypeId;
+  }
 
-	public Date getStart_date() {
-		return start_date;
-	}
+  public String getMasDegreeType() {
+    return masDegreeType;
+  }
 
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
+  public void setMasDegreeType(String masDegreeType) {
+    this.masDegreeType = masDegreeType;
+  }
 
-	public Date getGraduated_date() {
-		return graduated_date;
-	}
+  public String getFaculty() {
+    return faculty;
+  }
 
-	public void setGraduated_date(Date graduated_date) {
-		this.graduated_date = graduated_date;
-	}
+  public void setFaculty(String faculty) {
+    this.faculty = faculty;
+  }
 
-	public String getCertification() {
-		return certification;
-	}
+  public String getMajor() {
+    return major;
+  }
 
-	public void setCertification(String certification) {
-		this.certification = certification;
-	}
+  public void setMajor(String major) {
+    this.major = major;
+  }
 
-	public Integer getApplicant() {
-		return applicantId;
-	}
+  public String getGpa() {
+    return gpa;
+  }
 
-	public void setApplicant( Integer applicantId) {
-		this.applicantId = applicantId;
-	}
+  public void setGpa(String gpa) {
+    this.gpa = gpa;
+  }
 
+  public Date getStart_date() {
+    return start_date;
+  }
 
-	public Integer getMasdegreetypeId() {
-		return masdegreetypeId;
-	}
+  public void setStart_date(Date start_date) {
+    this.start_date = start_date;
+  }
 
-	public void setMasdegreetypeId(Integer masdegreetypeId) {
-		this.masdegreetypeId = masdegreetypeId;
-	}
+  public Date getGraduated_date() {
+    return graduated_date;
+  }
 
-	public String getMasdegreetype() {
-		return masdegreetype;
-	}
+  public void setGraduated_date(Date graduated_date) {
+    this.graduated_date = graduated_date;
+  }
 
-	public void setMasdegreetype(String masdegreetype) {
-		this.masdegreetype = masdegreetype;
-	}
+  public String getCertification() {
+    return certification;
+  }
 
-	
+  public void setCertification(String certification) {
+    this.certification = certification;
+  }
+
+  public Integer getApplicantId() {
+    return applicantId;
+  }
+
+  public void setApplicantId(Integer applicantId) {
+    this.applicantId = applicantId;
+  }
+
 }
-
