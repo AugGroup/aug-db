@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import com.aug.hrdb.dto.AllowanceDto;
 
 @Entity
-@Table(name = "ALLOWANCES")
+@Table(name = "ALLOWANCE")
 public class Allowance extends BaseEntity{
 
 	@Id
@@ -32,11 +32,11 @@ public class Allowance extends BaseEntity{
 	private Employee employee;
 	
 	@ManyToOne()
-	@JoinColumn(name = "MAS_ALLOWANCES_ID", referencedColumnName="ID", nullable = false)
-	private MasAllowance masallowance;
-	
+	@JoinColumn(name = "MAS_ALLOWANCE_ID", referencedColumnName="ID", nullable = false)
+	private MasAllowance masAllowance;
+
 	/*---------------------- getter / setter ----------------------*/
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -53,14 +53,6 @@ public class Allowance extends BaseEntity{
 		this.amount = amount;
 	}
 
-	public MasAllowance getMasallowance() {
-		return masallowance;
-	}
-
-	public void setMasallowances(MasAllowance masallowances) {
-		this.masallowance = masallowances;
-	}
-	
 	public Employee getEmployee() {
 		return employee;
 	}
@@ -69,34 +61,38 @@ public class Allowance extends BaseEntity{
 		this.employee = employee;
 	}
 
-	public Allowance fromAllowancesDto(Allowance allowances, AllowanceDto allowancesDto) {
-		
-		allowances.setAmount(allowancesDto.getAmount());
-		
-		Employee employee = new Employee();
-		employee.setId(allowancesDto.getEmployeeId());
-		allowances.setEmployee(employee);
-		
-		MasAllowance masAllowances = new MasAllowance();
-		masAllowances.setId(allowancesDto.getMasAllowancesId());
-		masAllowances.setAllowance_type(allowancesDto.getMasallowances());
-		allowances.setMasallowances(masAllowances);
-		
-		return allowances;
+	public MasAllowance getMasAllowance() {
+		return masAllowance;
 	}
 
-	
-	public AllowanceDto toAllowancesDto() {
-		
+	public void setMasAllowance(MasAllowance masAllowance) {
+		this.masAllowance = masAllowance;
+	}
+
+	public Allowance fromAllowanceDto(Allowance allowance, AllowanceDto allowanceDto) {
+		allowance.setAmount(allowanceDto.getAmount());
+		Employee employee = new Employee();
+		employee.setId(allowanceDto.getEmployeeId());
+		allowance.setEmployee(employee);
+		MasAllowance masAllowances = new MasAllowance();
+		masAllowances.setId(allowanceDto.getMasAllowanceId());
+		masAllowances.setAllowance_type(allowanceDto.getMasAllowance());
+		allowance.setMasAllowance(masAllowances);
+
+		return allowance;
+
+	}
+
+	public AllowanceDto toAllowanceDto() {
 		AllowanceDto allowancesDto = new AllowanceDto();
-		
 		allowancesDto.setId(this.id);
 		allowancesDto.setAmount(this.amount);
 		allowancesDto.setEmployeeId(this.employee.getId());
-		allowancesDto.setMasAllowancesId(this.masallowance.getId());
-		allowancesDto.setMasallowances(this.masallowance.getAllowance_type());
-		
+		allowancesDto.setMasAllowanceId(this.masAllowance.getId());
+		allowancesDto.setMasAllowance(this.masAllowance.getAllowance_type());
+
 		return allowancesDto;
+
 	}
 	
 }

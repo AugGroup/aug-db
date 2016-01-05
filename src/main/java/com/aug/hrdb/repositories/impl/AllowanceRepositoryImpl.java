@@ -1,5 +1,4 @@
 /**
- *
  * @author Preeyaporn
  * @date 3 มิ.ย. 2558
  */
@@ -14,20 +13,21 @@ import com.aug.hrdb.dto.AllowanceDto;
 import com.aug.hrdb.entities.Allowance;
 import com.aug.hrdb.repositories.AllowanceRepository;
 
-@Repository(value="allowanceRepository")
-public class AllowanceRepositoryImpl extends GenericRepositoryImpl<Allowance, Integer> implements AllowanceRepository{
+@Repository(value = "allowanceRepository")
+public class AllowanceRepositoryImpl extends GenericRepositoryImpl<Allowance, Integer> implements AllowanceRepository {
 
-	public AllowanceRepositoryImpl() {
-		super(Allowance.class);
-	}
+  public AllowanceRepositoryImpl() {
+    super(Allowance.class);
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<AllowanceDto> searchAllowances(Integer id) {
-		Query namedQuery = getCurrentSession().getNamedQuery("searchAllowances").setInteger("empId" ,id);
-		//namedQuery.executeUpdate();
-		List<AllowanceDto> allowancesDtos = namedQuery.list();
-	     return allowancesDtos;
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<AllowanceDto> searchAllowances(Integer id) {
+    Query namedQuery = getCurrentSession().getNamedQuery("searchAllowances").setInteger("empId", id);
+    List<AllowanceDto> allowancesDtos = namedQuery.list();
+
+    return allowancesDtos;
+
+  }
 
 }

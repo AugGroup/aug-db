@@ -7,6 +7,7 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.AllowanceDto;
 import com.aug.hrdb.entities.Allowance;
 
 public interface AllowanceService {
@@ -17,4 +18,6 @@ public interface AllowanceService {
 	public void delete(Allowance allowances);
 	public Allowance findById(Integer id);
 	public void deleteById(Integer id);
+	public List<AllowanceDto> searchAllowances(Integer id);
+
 }

@@ -31,7 +31,7 @@ public class MasAllowance extends BaseEntity{
 	private String allowance_type;
 	
 	@Column(name = "AMOUNT_ALLOWANCE")
-	private Double amount_allowances;
+	private Double amount_allowance;
 
 	@Column(name = "CODE",nullable =false)
 	private String code;
@@ -40,7 +40,7 @@ public class MasAllowance extends BaseEntity{
 	private Boolean isactive;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "masallowance")
+	@OneToMany(mappedBy = "masAllowance")
 	private Set<Allowance> allowances = new HashSet<Allowance>();
 
 	public Integer getId() {
@@ -59,12 +59,12 @@ public class MasAllowance extends BaseEntity{
 		this.allowance_type = allowance_type;
 	}
 
-	public Double getAmount_allowances() {
-		return amount_allowances;
+	public Double getAmount_allowance() {
+		return amount_allowance;
 	}
 
-	public void setAmount_allowances(Double amount_allowances) {
-		this.amount_allowances = amount_allowances;
+	public void setAmount_allowance(Double amount_allowance) {
+		this.amount_allowance = amount_allowance;
 	}
 
 	public String getCode() {
@@ -90,5 +90,5 @@ public class MasAllowance extends BaseEntity{
 	public void setAllowances(Set<Allowance> allowances) {
 		this.allowances = allowances;
 	}
-	
+
 }

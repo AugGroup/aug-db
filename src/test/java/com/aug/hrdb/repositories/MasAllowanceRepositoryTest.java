@@ -44,7 +44,7 @@ public class MasAllowanceRepositoryTest {
 		
 		masAllowance = new MasAllowance();
 		masAllowance.setAllowance_type("test");
-		masAllowance.setAmount_allowances(40000d);
+		masAllowance.setAmount_allowance(40000d);
 		masAllowance.setCode("004A");
 		masAllowance.setIsactive(true);
 		masAllowance.setAuditFlag("C");

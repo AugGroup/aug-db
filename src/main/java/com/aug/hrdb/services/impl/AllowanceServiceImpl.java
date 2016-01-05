@@ -7,6 +7,7 @@ package com.aug.hrdb.services.impl;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.AllowanceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,39 +18,44 @@ import com.aug.hrdb.services.AllowanceService;
 
 @Service(value="allowanceService")
 @Transactional
-public class AllowancesServiceImpl implements AllowanceService {
+public class AllowanceServiceImpl implements AllowanceService {
 
 	@Autowired
-	private AllowanceRepository allowancesRepository;
+	private AllowanceRepository allowanceRepository;
 	
 	@Override
 	public List<Allowance> findAll() {
-		return allowancesRepository.findAll();
+		return allowanceRepository.findAll();
 	}
 
 	@Override
 	public void create(Allowance allowances) {
-		allowancesRepository.create(allowances);
+		allowanceRepository.create(allowances);
 	}
 
 	@Override
 	public void update(Allowance allowances) {
-		allowancesRepository.update(allowances);
+		allowanceRepository.update(allowances);
 	}
 
 	@Override
 	public void delete(Allowance allowances) {
-		allowancesRepository.delete(allowances);
+		allowanceRepository.delete(allowances);
 	}
 
 	@Override
 	public Allowance findById(Integer id) {
-		return allowancesRepository.find(id);
+		return allowanceRepository.find(id);
 	}
 
 	@Override
 	public void deleteById(Integer id) {
-		allowancesRepository.deleteById(id);
+		allowanceRepository.deleteById(id);
+	}
+
+	@Override
+	public List<AllowanceDto> searchAllowances(Integer id) {
+		return allowanceRepository.searchAllowances(id);
 	}
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 import com.aug.hrdb.dto.AllowanceDto;
 import com.aug.hrdb.entities.Allowance;
 
-public interface AllowanceRepository extends GenericRepository<Allowance, Integer>{
+public interface AllowanceRepository extends GenericRepository<Allowance, Integer> {
 
 	public List<AllowanceDto> searchAllowances(Integer id);
 

@@ -14,20 +14,20 @@ import javax.persistence.NamedNativeQuery;
 @NamedNativeQueries({
 	@NamedNativeQuery(
 			name="searchAllowances",
-			query="select allowances.id,"
-					+ "allowances.amount,"
-					+ "allowances.EMPLOYEE_ID,"
-					+ "mas_allowances.ALLOWANCES_TYPE,"
-					+ "allowances.EMPLOYEE_ID,"
-					+ "mas_allowances.ID as ALLO_ID, "
-					+ "mas_allowances.AMOUNT_ALLOWANCES "
-					+ "from allowances,"
-					+ "employee as emp ,"
-					+ "mas_allowances "
+			query="SELECT ALLOWANCE.ID,"
+					+ "ALLOWANCE.AMOUNT,"
+					+ "ALLOWANCE.EMPLOYEE_ID,"
+					+ "MAS_ALLOWANCE.ALLOWANCE_TYPE,"
+					+ "ALLOWANCE.EMPLOYEE_ID,"
+					+ "MAS_ALLOWANCE.ID as ALLO_ID, "
+					+ "MAS_ALLOWANCE.AMOUNT_ALLOWANCE "
+					+ "from ALLOWANCE,"
+					+ "EMPLOYEE as emp ,"
+					+ "MAS_ALLOWANCE "
 					+ "where "
-					+ "allowances.employee_id=:empId "
-					+ "and allowances.employee_id = emp.id "
-					+ "and allowances.MAS_ALLOWANCES_ID = mas_allowances.ID",																																																																					
+					+ "ALLOWANCE.EMPLOYEE_ID = :empId "
+					+ "and ALLOWANCE.EMPLOYEE_ID = :empId "
+					+ "and ALLOWANCE.MAS_ALLOWANCE_ID = MAS_ALLOWANCE.ID",
 			resultClass = AllowanceDto.class)
 			
 })
@@ -35,54 +35,71 @@ import javax.persistence.NamedNativeQuery;
 @Entity
 public class AllowanceDto {
 
-	@Column(name ="ID")
 	@Id
+	@Column(name ="ID")
 	private Integer id;
+
 	@Column(name = "AMOUNT")
 	private Double amount;
-	@Column(name = "ALLOWANCES_TYPE" )
-	private String masallowances;
+
+	@Column(name = "ALLOWANCE_TYPE" )
+	private String masAllowance;
+
 	@Column(name ="EMPLOYEE_ID")
 	private Integer employeeId;
+
 	@Column(name ="ALLO_ID")
-	private Integer masAllowancesId;
-	@Column(name ="AMOUNT_ALLOWANCES")
-	private Double masAllowancesAmount;
+	private Integer masAllowanceId;
+
+	@Column(name ="AMOUNT_ALLOWANCE")
+	private Double masAllowanceAmount;
+
 	public Integer getId() {
 		return id;
 	}
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getMasallowances() {
-		return masallowances;
-	}
+
 	public Double getAmount() {
 		return amount;
 	}
+
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
-	public void setMasallowances(String masallowances) {
-		this.masallowances = masallowances;
+
+	public String getMasAllowance() {
+		return masAllowance;
 	}
+
+	public void setMasAllowance(String masAllowance) {
+		this.masAllowance = masAllowance;
+	}
+
 	public Integer getEmployeeId() {
 		return employeeId;
 	}
+
 	public void setEmployeeId(Integer employeeId) {
 		this.employeeId = employeeId;
 	}
-	public Integer getMasAllowancesId() {
-		return masAllowancesId;
+
+	public Integer getMasAllowanceId() {
+		return masAllowanceId;
 	}
-	public void setMasAllowancesId(Integer masAllowancesId) {
-		this.masAllowancesId = masAllowancesId;
+
+	public void setMasAllowanceId(Integer masAllowanceId) {
+		this.masAllowanceId = masAllowanceId;
 	}
-	public Double getMasAllowancesAmount() {
-		return masAllowancesAmount;
+
+	public Double getMasAllowanceAmount() {
+		return masAllowanceAmount;
 	}
-	public void setMasAllowancesAmount(Double masAllowancesAmount) {
-		this.masAllowancesAmount = masAllowancesAmount;
+
+	public void setMasAllowanceAmount(Double masAllowanceAmount) {
+		this.masAllowanceAmount = masAllowanceAmount;
 	}
-	
+
 }
