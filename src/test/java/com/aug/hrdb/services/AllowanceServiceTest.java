@@ -110,7 +110,7 @@ public class AllowanceServiceTest {
 		employee.setCreatedBy(1);
 		employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
 		employee.setEmployeeCode("TEST0001");
-		employee.setStatusemp("Employee");
+		employee.setStatusEmp("Employee");
 		employee.setTelHome("02-9998877");
 		employee.setApplicant(applicant);
 		employee.setMasDivision(masDivision);

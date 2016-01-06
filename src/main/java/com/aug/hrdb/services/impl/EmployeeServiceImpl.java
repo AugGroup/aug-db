@@ -152,7 +152,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	
 	@Override
 	public Employee searhEmpIdtoAddress() {		
-		return employeeRepository.searhEmpIdtoAddress();
+		return employeeRepository.searchEmpIdToAddress();
 	}
 
 	
@@ -174,7 +174,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		
 		EmployeeDto employeeDto = new EmployeeDto();
 		employeeDto.setId(employee.getId());
-		employeeDto.setStatusemp(employee.getStatusemp()); 
+		employeeDto.setStatusemp(employee.getStatusEmp());
 		employeeDto.setIsManager(employee.getIsManager()); 
 		
 
@@ -248,11 +248,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeDto.setReasonsNo(applicant.getMilitaryReason());
         employeeDto.setDateToBeDrafted(applicant.getDateToBeDrafted());
         employeeDto.setPreviousEmployer(employee.getPreviousEmployer());
-        employeeDto.setPreviousEmpreasonsNo(employee.getPreviousEmpreasonsNo());
+        employeeDto.setPreviousEmpreasonsNo(employee.getPreviousEmpReasonsNo());
         employeeDto.setImage(applicant.getImage());
         
-        if(employee.getAimempid()!=null){
-        	employeeDto.setAimempid(employee.getAimempid().getId());
+        if(employee.getAimEmpId()!=null){
+        	employeeDto.setAimempid(employee.getAimEmpId().getId());
         }
         
         if(employee.getMasCoreSkill()!=null){
@@ -708,7 +708,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 		employee.setTelFax(employeeDto.getTelFax());
 		employee.setRelationshipWithEmergencyContact(employeeDto.getRelationshipWithEmergencyContact());	 
 		employee.setPreviousEmployer(employeeDto.getPreviousEmployer());
-		employee.setPreviousEmpreasonsNo(employeeDto.getPreviousEmpreasonsNo());			
+		employee.setPreviousEmpReasonsNo(employeeDto.getPreviousEmpreasonsNo());
 		
 		if(employeeDto.getMasCoreSkill()!=null){
 			MasCoreSkill masCoreSkill =  masCoreSkillService.findById(employeeDto.getMasCoreSkill());
@@ -742,7 +742,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 			}
 		}
 		
-		employee.setStatusemp(employeeDto.getStatusemp());
+		employee.setStatusEmp(employeeDto.getStatusemp());
 		
 		if(employeeDto.getMasStaffType()!=null){
 			MasStaffType masStaffType = masStaffTypeService.findById(employeeDto.getMasStaffType());
@@ -758,13 +758,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 		if(employeeDto.getAimempid()!=null){
 			Employee aim = employeeRepository.find(employeeDto.getAimempid());
 			if(aim.getId()!=null){
-				employee.setAimempid(aim);
+				employee.setAimEmpId(aim);
 			}
 		}
 		
 		
 		if(employeeDto.getAimempid()==null){
-			employee.setAimempid(null);
+			employee.setAimEmpId(null);
 		}
 		
 		
@@ -920,11 +920,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 	
-	@Override	
-	public Employee findOfficial(Integer id) {
-		// TODO Auto-generated method stub
-		return employeeRepository.findOfficial(id);
-	}
+//	@Override
+//	public Employee findOfficial(Integer id) {
+//		// TODO Auto-generated method stub
+//		return employeeRepository.findOfficial(id);
+//	}
 
 
 	/*public Employee findEmployeeCode(Integer locationId) {

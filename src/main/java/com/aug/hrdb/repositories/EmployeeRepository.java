@@ -1,5 +1,4 @@
 /**
- *
  * @author natechanok
  * @date Apr 27, 2015
  */
@@ -11,7 +10,6 @@ import java.util.List;
 import com.aug.hrdb.dto.AimEmployeeDto;
 import com.aug.hrdb.dto.DivisionDto;
 import com.aug.hrdb.dto.EmployeeCodeDto;
-import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.EmployeeIdDto;
 import com.aug.hrdb.dto.EmployeeListDto;
 import com.aug.hrdb.dto.JoblevelDto;
@@ -20,31 +18,44 @@ import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.dto.ReportStatusEmployeeDto;
 import com.aug.hrdb.entities.Employee;
 
+public interface EmployeeRepository extends GenericRepository<Employee, Integer> {
 
+  List<Employee> findByCriteria(Employee employee);
 
-public interface EmployeeRepository extends GenericRepository<Employee, Integer>{
-	
-	public List<Employee> findByCriteria(Employee employee);
-	public void deleteById(Integer id);
-	public List<EmployeeListDto> searchEmployee();	
-	public List<AimEmployeeDto> listEmployeeAim();
-	public Employee searhEmpIdtoAddress(); 	//find last id of employee
-	public List<ReportEmployeeDto> reportEmployee(String nameEng);
-	public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff);
-	public List<ReportLeaveDto> reportLeave(String nameEng);
-	public EmployeeIdDto findCurrentId();
-	public Employee findEmployeeAndOfficial(Integer id);
-	public List<Employee> findAimRelateWithEmployee(Integer id);
-	public Employee findOfficial(Integer id);
-	public List<ReportEmployeeDto> findByName(Employee employee);
-	public List<ReportStatusEmployeeDto> findByNameStatus(Employee employee);
-	public List<ReportEmployeeDto> reportEmployeeCode(String code);
-	//public Employee findEmployeeCode(Integer locationId);
-	public List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id);
-	public List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id,String idCard);
-	public List<EmployeeCodeDto> findEmployeeCode(Integer location_id);
-	public List<DivisionDto> checkTag(String tag);
-	public List<JoblevelDto> checkTagDivision(String tag);
-	public String findByIdDivision(Integer id);
-	
+  List<EmployeeListDto> searchEmployee();
+
+  List<AimEmployeeDto> listEmployeeAim();
+
+  Employee searchEmpIdToAddress();  //find last id of employee
+
+  List<ReportEmployeeDto> reportEmployee(String nameEng);
+
+  List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff);
+
+  List<ReportLeaveDto> reportLeave(String nameEng);
+
+  EmployeeIdDto findCurrentId();
+
+  Employee findEmployeeAndOfficial(Integer id);
+
+  List<Employee> findAimRelateWithEmployee(Integer id);
+
+  List<ReportEmployeeDto> findByName(Employee employee);
+
+  List<ReportStatusEmployeeDto> findByNameStatus(Employee employee);
+
+  List<ReportEmployeeDto> reportEmployeeCode(String code);
+
+  List<AimEmployeeDto> listEmployeeAimForUpdate(Integer id);
+
+  List<EmployeeListDto> searchEmpForUniqueIdCard(Integer id, String idCard);
+
+  List<EmployeeCodeDto> findEmployeeCode(Integer location_id);
+
+  List<DivisionDto> checkTag(String tag);
+
+  List<JoblevelDto> checkTagDivision(String tag);
+
+  String findByIdDivision(Integer id);
+
 }

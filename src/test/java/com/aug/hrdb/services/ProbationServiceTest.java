@@ -62,7 +62,7 @@ public class ProbationServiceTest {
         employee.setEmail("parn@gmail.com");
         employee.setEmergencyContact("Mom");*/
         employee.setEmployeeCode("EMP-19");
-        employee.setStatusemp("Employee");
+        employee.setStatusEmp("Employee");
         employee.setTelHome("029314352");
         /*employee.setTelMobile("0817334542");
         employee.setEmergencyContactPhoneNumber("0817750936");*/

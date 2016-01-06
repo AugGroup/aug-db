@@ -36,7 +36,7 @@ public interface EmployeeService {
 	public void deleteEmployeeByHibernate(Employee employee);
 	public Employee findAndinitializeOfficial(Integer id);
 	public List<Employee> findAimRelateWithEmployee(Integer id);
-	public Employee findOfficial(Integer id);
+//	public Employee findOfficial(Integer id);
 	//public Employee findEmployeeCode(Integer locationId);
 	public String generateEmployeeCode(EmployeeDto employeeDto);
 	

@@ -48,9 +48,9 @@ public class EmployeeDtoService {
 		return employeeDaoRepository.reportLeave(nameEng);
 	}
 	
-	public Employee findOfficial(Integer id){
-		return employeeDaoRepository.findOfficial(id);
-	}
+//	public Employee findOfficial(Integer id){
+//		return employeeDaoRepository.findOfficial(id);
+//	}
 	
 	public List<ReportEmployeeDto> findByName(Employee employee) {
 		return employeeDaoRepository.findByName(employee);

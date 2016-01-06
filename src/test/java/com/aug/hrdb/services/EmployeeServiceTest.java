@@ -141,14 +141,14 @@ public class EmployeeServiceTest {
         employee.setEmail("test@gmail.com");
         employee.setEmergencyContact("mom");*/
         employee.setEmployeeCode("JP10019");
-        employee.setStatusemp("Employee");
+        employee.setStatusEmp("Employee");
         employee.setTelHome("089-0851022");
         /*employee.setTelMobile("089-0851022");
         employee.setEmergencyContactPhoneNumber("089-085-1022");*/
         employee.setAuditFlag("C");
         employee.setCreatedBy(1);
         employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        employee.setStatusemp("Employee");
+        employee.setStatusEmp("Employee");
         //employee.setAddress("1/1");
         
 
@@ -944,7 +944,7 @@ public class EmployeeServiceTest {
 	@Test
 	public void findOfficial(){
 		
-		Employee employee = employeeService.findOfficial(id);		
+//		Employee employee = employeeService.findOfficial(id);
 	//	Assert.assertEquals(idOfficial, employee.getOfficial().getId());
 		
 	}

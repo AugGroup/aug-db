@@ -1,5 +1,4 @@
 /**
- *
  * @author natechanok
  * @date May 20, 2015
  */
@@ -13,58 +12,55 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 
 @NamedNativeQueries({
-	@NamedNativeQuery(
-			 name = "listEmployeeAim",
-	            query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG,emp.AIM_EMP_ID from EMPLOYEE as emp "
-	            		+ "join APPLICANT app on emp.APPLICANT_ID = app.ID "
-	            		+ "where emp.ISMANAGER IS NOT NULL", 
-	            resultClass = AimEmployeeDto.class),
-	@NamedNativeQuery(
-			 name = "listEmployeeAimUpdateEmployee",
-	            query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG, emp.AIM_EMP_ID from EMPLOYEE as emp "
-	            		+ "join APPLICANT app on emp.APPLICANT_ID = app.ID "
-	            		+ "where emp.ISMANAGER IS NOT NULL and emp.ID !=:empId", 
-	            resultClass = AimEmployeeDto.class)
-	  })
+  @NamedNativeQuery(
+    name = "listEmployeeAim",
+    query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG,emp.AIM_EMP_ID from EMPLOYEE as emp "
+      + "join APPLICANT app on emp.APPLICANT_ID = app.ID "
+      + "where emp.ISMANAGER IS NOT NULL",
+    resultClass = AimEmployeeDto.class),
+  @NamedNativeQuery(
+    name = "listEmployeeAimUpdateEmployee",
+    query = "select emp.ID, app.FIRSTNAME_EN as NAME_ENG, emp.AIM_EMP_ID from EMPLOYEE as emp "
+      + "join APPLICANT app on emp.APPLICANT_ID = app.ID "
+      + "where emp.ISMANAGER IS NOT NULL and emp.ID !=:empId",
+    resultClass = AimEmployeeDto.class)
+})
 
 @Entity
 public class AimEmployeeDto {
-	
-	@Id
-	@Column(name ="ID")
-	private Integer id;
-	
-	@Column(name ="NAME_ENG")
-	private String name_eng;
-	
-	@Column(name ="AIM_EMP_ID")
-	private String aimempid;
 
-	public Integer getId() {
-		return id;
-	}
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "NAME_ENG")
+  private String name_eng;
 
-	public String getName_eng() {
-		return name_eng;
-	}
+  @Column(name = "AIM_EMP_ID")
+  private String aimEmpId;
 
-	public void setName_eng(String name_eng) {
-		this.name_eng = name_eng;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getAimempid() {
-		return aimempid;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setAimempid(String aimempid) {
-		this.aimempid = aimempid;
-	}
+  public String getName_eng() {
+    return name_eng;
+  }
 
-	
-	
+  public void setName_eng(String name_eng) {
+    this.name_eng = name_eng;
+  }
+
+  public String getAimEmpId() {
+    return aimEmpId;
+  }
+
+  public void setAimEmpId(String aimEmpId) {
+    this.aimEmpId = aimEmpId;
+  }
 
 }
