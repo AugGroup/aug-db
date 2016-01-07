@@ -88,6 +88,7 @@ public class EmployeeServiceTest {
     applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
     applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
     applicant.setFirstNameEN("Anat");
+    applicant.setImage("image.png");
     applicantService.create(applicant);
 
     Applicant applicant2 = new Applicant();
@@ -98,6 +99,7 @@ public class EmployeeServiceTest {
     applicant2.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
     applicant2.setTechnology(masTechnologyService.findById(masTechnology.getId()));
     applicant2.setFirstNameEN("Aim");
+    applicant2.setImage("image.png");
     applicantService.create(applicant2);
 
     // create mas division
@@ -367,5 +369,44 @@ public class EmployeeServiceTest {
     assertThat(result, is("B"));
 
   }
+
+  @Test
+  public void testFindEmployeeByEmployeeIdWithSetToDtoWithEmployeeServiceShouldReturnEmployeeDtoOfThatId() throws Exception {
+    EmployeeDto result = employeeService.findEmployeeByEmployeeIdWithSetToDto(employee.getId());
+    assertNotNull(result);
+    assertThat(result.getNameEng(), is("Anat"));
+
+  }
+
+//  wait official
+//  @Test
+//  public void testUpdateEmployeeAndReturnIdShouldReturnEmployeeOfThatEmployeeDto() throws Exception {
+//    EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(employee.getId());
+//    Employee result = employeeService.updateEmployeeAndReturnId(employeeDto);
+//    assertNotNull(result);
+//    assertThat(result.getApplicant().getFirstNameEN(), is("Anat"));
+//
+//  }
+
+//  wait official and leaves
+//  @Test
+//  public void testFindAndInitializeOfficialWithEmployeeServiceShouldReturnEmployeeOfThatId() throws Exception {
+//
+//  }
+
+//  wait fix
+//  @Test
+//  public void testGenerateEmployeeCodeWithEmployeeServiceShouldReturnNewEmployeeCode() throws Exception {
+//    EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(employee.getId());
+//    String result = employeeService.generateEmployeeCode(employeeDto);
+//    assertThat(Integer.parseInt(result), is(Integer.parseInt(employeeDto.getEmployeeCode()) + 1));
+//
+//  }
+
+//  wait fix
+//  @Test
+//  public void testGenerateEmployeeCodeFixDataWithEmployeeServiceShouldReturnNewEmployeeCode() throws Exception {
+//
+//  }
 
 }

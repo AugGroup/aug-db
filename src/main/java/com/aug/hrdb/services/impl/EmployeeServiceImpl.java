@@ -142,14 +142,118 @@ public class EmployeeServiceImpl implements EmployeeService {
     return employeeRepository.listEmployeeAim();
   }
 
+
+
+  @Override
+  public List<Employee> findAimRelateWithEmployee(Integer id) {
+    // TODO Auto-generated method stub
+    return employeeRepository.findAimRelateWithEmployee(id);
+  }
+
+
+
+  @Override
+  @Transactional
+  public String generateEmployeeCodeFixData(String location) {
+
+    Applicant applicant = new Applicant();
+    List<EmployeeCodeDto> employeeCodeDtoList = new ArrayList<EmployeeCodeDto>();
+    EmployeeCodeDto employeeForCode = new EmployeeCodeDto();
+    String empCode = null;
+    MasLocation masLocations = masLocationService.findByLocationCode(location);
+    System.out.println("LOCATIONNNN :: " + masLocations);
+    employeeCodeDtoList = employeeCodeService.findEmployeeCode(1);
+
+    if (employeeCodeDtoList.size() == 0) {
+      employeeForCode = null;
+    } else if (employeeCodeDtoList.size() > 0) {
+      employeeForCode = employeeCodeService.findEmployeeCode(1).get(0);
+    }
+
+
+    if (employeeForCode == null && ("TH").equals(location)) {
+
+
+      empCode = applicant.getMasLocation() + "10" + "001";
+      System.out.println("empCode: " + empCode);
+
+
+    } else if (employeeForCode != null && ("TH").equals(location)) {
+
+      StringBuilder myNumbers = new StringBuilder();
+      for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
+
+        if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
+          myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
+          System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
+        } else {
+          System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
+        }
+      }
+
+      System.out.println("Your numbers: " + myNumbers.toString());
+      int employeeCodePlusOne = Integer.parseInt(myNumbers.toString()) + 1;
+      System.out.println("LOCATIONTOSTRING :: " + location);
+      empCode = location + Integer.toString(employeeCodePlusOne);
+      System.out.println("empCode: " + empCode);
+    }
+
+    return empCode;
+
+  }
+
+  @Override
+  public List<ReportEmployeeDto> reportEmployee(String nameEng) {
+    return employeeRepository.reportEmployee(nameEng);
+  }
+
+  @Override
+  public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff) {
+    return employeeRepository.reportStatusEmployee(statusStaff);
+  }
+
+  @Override
+  public EmployeeIdDto findCurrentId() {
+    return employeeRepository.findCurrentId();
+  }
+
+  @Override
+  public List<ReportEmployeeDto> findByName(Employee employee) {
+    return employeeRepository.findByName(employee);
+  }
+
+  @Override
+  public List<EmployeeCodeDto> findEmployeeCode(Integer location_id) {
+    return employeeRepository.findEmployeeCode(location_id);
+  }
+
+  @Override
+  public List<DivisionDto> checkTag(String tag) {
+
+    return employeeRepository.checkTag(tag);
+  }
+
+  @Override
+  public List<JoblevelDto> checkTagDivision(String tag) {
+    return employeeRepository.checkTagDivision(tag);
+  }
+
+  @Override
+  public String findByIdDivision(Integer id) {
+    return employeeRepository.findByIdDivision(id);
+  }
+
   @Override
   public EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id) {
     Employee employee = employeeRepository.find(id);
 
-    Hibernate.initialize(employee.getApplicant());
-    Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+    //Hibernate.initialize(employee.getApplicant());
 
-    Hibernate.initialize(applicant.getOfficial());
+    //Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+    Applicant applicant = employee.getApplicant();
+
+    //Hibernate.initialize(applicant.getOfficial());
+
     EmployeeDto employeeDto = new EmployeeDto();
     employeeDto.setId(employee.getId());
     employeeDto.setStatusemp(employee.getStatusEmp());
@@ -271,36 +375,39 @@ public class EmployeeServiceImpl implements EmployeeService {
 
   @Override
   @Transactional
-  public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto, String employeeCode, String img) throws DataIntegrityViolationException {
+  public Employee updateEmployeeAndReturnId(EmployeeDto employeeDto) throws DataIntegrityViolationException {
     Employee employee = employeeRepository.find(employeeDto.getId());
+    String employeeCode = employeeDto.getEmployeeCode();
+    String img = employeeDto.getImage();
 
-    Hibernate.initialize(employee.getApplicant());
-    Applicant applicant = applicantService.findById(employee.getApplicant().getId());
-    Hibernate.initialize(applicant.getOfficial());
+    //Hibernate.initialize(employee.getApplicant());
+    //Applicant applicant = applicantService.findById(employee.getApplicant().getId());
+
+    Applicant applicant = employee.getApplicant();
+
+    //Hibernate.initialize(applicant.getOfficial());
 
     if (applicant.getOfficial() == null) {
       Official official = new Official();
       official.setStartWorkDate(employeeDto.getStartWorkDate());
       official.setEndWorkDate(employeeDto.getEndWorkDate());
-      applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
       official.setProbationDate(employeeDto.getProbationDate());
+      officialService.create(official);
+
+      applicant.setOfficial(official);
+      applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
       applicant.setApplyDate(employeeDto.getOfficialDate());
       applicant.setExpectedSalary(employeeDto.getSalaryExpected());
+    } else if (applicant.getOfficial() != null && applicant.getOfficial().getId() != null) {
+      Official official1 = officialService.findById(applicant.getOfficial().getId());
+      official1.setStartWorkDate(employeeDto.getStartWorkDate());
+      official1.setEndWorkDate(employeeDto.getEndWorkDate());
+      official1.setProbationDate(employeeDto.getProbationDate());
+      officialService.update(official1);
 
-      officialService.create(official);
-      applicant.setOfficial(official);
-    } else if (applicant.getOfficial() != null) {
-      if (applicant.getOfficial().getId() != null) {
-        Official official1 = officialService.findById(applicant.getOfficial().getId());
-        official1.setStartWorkDate(employeeDto.getStartWorkDate());
-        official1.setEndWorkDate(employeeDto.getEndWorkDate());
-        applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
-        official1.setProbationDate(employeeDto.getProbationDate());
-        applicant.setApplyDate(employeeDto.getOfficialDate());
-        applicant.setExpectedSalary(employeeDto.getSalaryExpected());
-        officialService.update(official1);
-
-      }
+      applicant.setEmployedPosition(employeeDto.getPositionAppliedFor());
+      applicant.setApplyDate(employeeDto.getOfficialDate());
+      applicant.setExpectedSalary(employeeDto.getSalaryExpected());
 
     }
 
@@ -395,8 +502,7 @@ public class EmployeeServiceImpl implements EmployeeService {
       }
     }
 
-
-    if (employeeDto.getMasLocation() != null && employeeDto.getMasLocation().isEmpty() == false) {
+    if (employeeDto.getMasLocation() != null && !employeeDto.getMasLocation().isEmpty()) {
       MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
       if (masLocation.getId() != null) {
         employee.setMasLocation(masLocation);
@@ -427,42 +533,24 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     try {
-
       employeeRepository.update(employee);
-
     } catch (DataIntegrityViolationException jdbc) {
       System.out.println("massge exception: " + jdbc.getMessage());
       if (jdbc.getMessage() != null) {
-
         throw jdbc;
-
       }
     }
 
-
     //update Address
-
-
     if (employeeDto.getAddressList() != null) {
-
-
       for (AddressDto addressDto : employeeDto.getAddressList()) {
-
-
         if (addressDto.getId() != null) {
-
-          System.out.println("address : " + addressDto.getStatus());
-
           if (addressDto.getStatus().equals("add") && addressDto.getId() == 0) {
-
-            System.out.println("add");
-
             Address address = new Address();
             address.setHouseNo(addressDto.getHouseNo());
             address.setSubDistrict(addressDto.getSubDistrict());
             address.setDistrict(addressDto.getDistrict());
             address.setRoad(addressDto.getRoad());
-
 
             MasProvince masProvince = masProvinceService.findById(addressDto.getMasprovinceId());
             if (masProvince != null) {
@@ -482,19 +570,12 @@ public class EmployeeServiceImpl implements EmployeeService {
               address.setApplicant(applicant1);
             }
 
-
             List<Address> addressList = new ArrayList<Address>();
             addressList.add(address);
             addressService.create(address);
 
           } else if (addressDto.getStatus().equals("edit")) {
-
-
-            System.out.println("address edit: " + addressDto.getStatus());
-
-
-            Address address = new Address();
-            address = addressService.find(addressDto.getId());
+            Address address = addressService.find(addressDto.getId());
             address.setHouseNo(addressDto.getHouseNo());
             address.setSubDistrict(addressDto.getSubDistrict());
             address.setDistrict(addressDto.getSubDistrict());
@@ -513,211 +594,74 @@ public class EmployeeServiceImpl implements EmployeeService {
             address.setZipcode(addressDto.getZipcode());
 
             Applicant applicant1 = applicantService.findById(addressDto.getApplicantId());
-
             if (applicant1 != null) {
               address.setApplicant(applicant1);
             }
-
 
             List<Address> addressList = new ArrayList<Address>();
             addressList.add(address);
 
             addressService.update(address);
 
-
           } else if (addressDto.getStatus().equals("delete")) {
-
-
-            System.out.println("delete address: " + addressDto.getStatus());
             Address address = new Address();
             address = addressService.find(addressDto.getId());
             addressService.delete(address);
 
           }
-
         }
       }
-
-
     }
+
     return employee;
-  }
-
-  @Override
-  public void deleteEmployeeByHibernate(Employee employee) {
-    // TODO Auto-generated method stub
-
-
-    employeeRepository.delete(employee);
 
   }
 
-
   @Override
-  public Employee findAndinitializeOfficial(Integer id) {
-    // TODO Auto-generated method stub
+  public Employee findAndInitializeOfficial(Integer id) {
     Employee employee = employeeRepository.find(id);
     Applicant applicant = applicantService.findById(employee.getApplicant().getId());
     Hibernate.initialize(applicant.getOfficial());
     Hibernate.initialize(employee.getLeaves());
+
     return employee;
-  }
 
-
-  @Override
-  public List<Employee> findAimRelateWithEmployee(Integer id) {
-    // TODO Auto-generated method stub
-    return employeeRepository.findAimRelateWithEmployee(id);
   }
 
   @Override
   @Transactional
   public String generateEmployeeCode(EmployeeDto employeeDto) {
 
-    List<EmployeeCodeDto> employeeCodeDtoList = new ArrayList<EmployeeCodeDto>();
     EmployeeCodeDto employeeForCode = new EmployeeCodeDto();
     String empCode = null;
-    System.out.println("masloc# " + employeeDto.getMasLocation());
 
-    if (masLocationService.findByLocationCode(employeeDto.getMasLocation()) == null) {
-
-      System.out.println("----null location id-----");
-    } else if (masLocationService.findByLocationCode(employeeDto.getMasLocation()) != null) {
-
+    if (masLocationService.findByLocationCode(employeeDto.getMasLocation()) != null) {
       MasLocation masLocation = masLocationService.findByLocationCode(employeeDto.getMasLocation());
-      System.out.println("id: " + masLocation.getId());
-
-      employeeCodeDtoList = employeeCodeService.findEmployeeCode(masLocation.getId());
-
+      List<EmployeeCodeDto> employeeCodeDtoList = employeeCodeService.findEmployeeCode(masLocation.getId());
 
       if (employeeCodeDtoList.size() == 0) {
-
         employeeForCode = null;
-
       } else if (employeeCodeDtoList.size() > 0) {
-
         employeeForCode = employeeCodeService.findEmployeeCode(masLocation.getId()).get(0);
-
       }
-
 
       if (employeeForCode == null) {
         empCode = employeeDto.getMasLocation() + "10" + "001";
-        System.out.println("empCode: " + empCode);
       } else if (employeeForCode != null) {
         StringBuilder myNumbers = new StringBuilder();
         for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
-
           if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
             myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
-            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
-          } else {
-            System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
           }
         }
-        System.out.println("Your numbers: " + myNumbers.toString());
         int employeeCodePlusOne = Integer.parseInt(myNumbers.toString()) + 1;
         empCode = employeeDto.getMasLocation() + Integer.toString(employeeCodePlusOne);
-        System.out.println("empCode: " + empCode);
 
       }
-
     }
 
     return empCode;
 
-  }
-
-  @Override
-  @Transactional
-  public String generateEmployeeCodeFixData(String location) {
-
-    Applicant applicant = new Applicant();
-    List<EmployeeCodeDto> employeeCodeDtoList = new ArrayList<EmployeeCodeDto>();
-    EmployeeCodeDto employeeForCode = new EmployeeCodeDto();
-    String empCode = null;
-    MasLocation masLocations = masLocationService.findByLocationCode(location);
-    System.out.println("LOCATIONNNN :: " + masLocations);
-    employeeCodeDtoList = employeeCodeService.findEmployeeCode(1);
-
-    if (employeeCodeDtoList.size() == 0) {
-      employeeForCode = null;
-    } else if (employeeCodeDtoList.size() > 0) {
-      employeeForCode = employeeCodeService.findEmployeeCode(1).get(0);
-    }
-
-
-
-    if (employeeForCode == null && ("TH").equals(location)) {
-
-
-      empCode = applicant.getMasLocation() + "10" + "001";
-      System.out.println("empCode: " + empCode);
-
-
-    } else if (employeeForCode != null && ("TH").equals(location)) {
-
-      StringBuilder myNumbers = new StringBuilder();
-      for (int i = 0; i < employeeForCode.getEmployeeCode().length(); i++) {
-
-        if (Character.isDigit(employeeForCode.getEmployeeCode().charAt(i))) {
-          myNumbers.append(employeeForCode.getEmployeeCode().charAt(i));
-          System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " is a digit.");
-        } else {
-          System.out.println(employeeForCode.getEmployeeCode().charAt(i) + " not a digit.");
-        }
-      }
-
-      System.out.println("Your numbers: " + myNumbers.toString());
-      int employeeCodePlusOne = Integer.parseInt(myNumbers.toString()) + 1;
-      System.out.println("LOCATIONTOSTRING :: " + location);
-      empCode = location + Integer.toString(employeeCodePlusOne);
-      System.out.println("empCode: " + empCode);
-    }
-
-    return empCode;
-
-  }
-
-  @Override
-  public List<ReportEmployeeDto> reportEmployee(String nameEng) {
-    return employeeRepository.reportEmployee(nameEng);
-  }
-
-  @Override
-  public List<ReportStatusEmployeeDto> reportStatusEmployee(String statusStaff) {
-    return employeeRepository.reportStatusEmployee(statusStaff);
-  }
-
-  @Override
-  public EmployeeIdDto findCurrentId() {
-    return employeeRepository.findCurrentId();
-  }
-
-  @Override
-  public List<ReportEmployeeDto> findByName(Employee employee) {
-    return employeeRepository.findByName(employee);
-  }
-
-  @Override
-  public List<EmployeeCodeDto> findEmployeeCode(Integer location_id) {
-    return employeeRepository.findEmployeeCode(location_id);
-  }
-
-  @Override
-  public List<DivisionDto> checkTag(String tag) {
-
-    return employeeRepository.checkTag(tag);
-  }
-
-  @Override
-  public List<JoblevelDto> checkTagDivision(String tag) {
-    return employeeRepository.checkTagDivision(tag);
-  }
-
-  @Override
-  public String findByIdDivision(Integer id) {
-    return employeeRepository.findByIdDivision(id);
   }
 
 }

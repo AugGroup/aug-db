@@ -53,13 +53,13 @@ public interface EmployeeService {
 
   String findByIdDivision(Integer id);
 
+  //--- method not in repository---//
+
   EmployeeDto findEmployeeByEmployeeIdWithSetToDto(Integer id);
 
-  Employee updateEmployeeAndReturnId(EmployeeDto allEmployeeDto, String employeeCode, String img) throws DataIntegrityViolationException;
+  Employee updateEmployeeAndReturnId(EmployeeDto employeeDto);
 
-  void deleteEmployeeByHibernate(Employee employee);
-
-  Employee findAndinitializeOfficial(Integer id);
+  Employee findAndInitializeOfficial(Integer id);
 
   String generateEmployeeCode(EmployeeDto employeeDto);
 
