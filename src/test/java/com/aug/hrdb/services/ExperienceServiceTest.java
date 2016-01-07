@@ -1,175 +1,212 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.hibernate.Hibernate;
+import java.util.Calendar;
+import java.util.List;
+
+import com.aug.hrdb.dto.ExperienceDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Experience;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.ExperienceService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasTechnologyService;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
+@Transactional
 public class ExperienceServiceTest {
 
-	@Autowired
-	private ExperienceService experienceService;
-	
-	@Autowired
-	private EmployeeService employeeService;
-	
-	@Autowired
-	private MasJobLevelService masJoblevelService;
-	
-	@Autowired
-	private ApplicantService applicantService;
-	
-	@Autowired
-	private MasDivisionService masDivisionService;
-	
-	@Autowired
-	private MasTechnologyService masTechnologyService;
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-	@Before
-	public void setEducation() throws ParseException {
-        
-        Applicant applicant = new Applicant();
-        applicant.setCardId("115310905001-9");
-        applicant.setFirstNameTH("อรอนงค์");
-        applicant.setFirstNameEN("Ornanong");
-        applicant.setNickNameEN("nong");
-        applicant.setNickNameTH("นงค์");
-        applicant.setLastNameEN("Namlongnamken");
-        applicant.setLastNameTH("น้ำลงน้ำขึ้น");
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		masJoblevelService.create(masJoblevel);
-		MasJobLevel mJoblevel= masJoblevelService.findById(1);
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		
-		MasTechnology mTechnology= masTechnologyService.findById(1);
-		
-		applicant.setJoblevel(mJoblevel);
-		applicant.setTechnology(mTechnology);
-		applicantService.create(applicant);
-		
-	    Applicant applicant1 =  applicantService.findById(1);
-		Experience experience = new Experience();
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		experience.setAddress("ExperienceAddressTest");
-		experience.setTypeOfBusiness("TypeTest");
-		experience.setCompanyName("companyNameTest");
-		experience.setDateFrom(dateFmt.parse("04/01/2015"));
-		experience.setDateTo(dateFmt.parse("04/09/2015"));
-		experience.setPosition("positionTest");
-		experience.setReason("reasonTest");
-		experience.setReference("referenceTest");
-		experience.setResponsibility("responsibilityTest");
-		experience.setSalary(20000);
-		experience.setAuditFlag("C");
-		experience.setCreatedBy(1);
-		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		experienceService.create(experience);
-		
-	}
-	
-	@Test
-	@Ignore
-	@Rollback(false)
-	public void insertExperienceServiceTest() throws ParseException {
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",
-				Locale.ENGLISH);
-		Experience experience = new Experience();
+  @Autowired
+  private ApplicantService applicantService;
 
-		experience.setAddress("ExperienceAddressTest");
-		experience.setTypeOfBusiness("TypeTest");
-		experience.setCompanyName("companyNameTest");
-		experience.setDateFrom(dateFmt.parse("04/01/2015"));
-		experience.setDateTo(dateFmt.parse("04/09/2015"));
-		experience.setPosition("positionTest");
-		experience.setReason("reasonTest");
-		experience.setReference("referenceTest");
-		experience.setResponsibility("responsibilityTest");
-		experience.setSalary(40000);
-		
-		experience.setAuditFlag("C");
-		experience.setCreatedBy(1);
-		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-		experienceService.create(experience);
-		System.out.println("ExperienceServiceTest " + experience.getDateTo());
-	}
-	
-	@Test
-	@Ignore
-	@Rollback(false)
-	public void findByIdExperienceServiceTest() {
-		Experience experience = experienceService.findById(1);
-		System.out.println("Experience Address : "+experience.getAddress());
+  @Autowired
+  private EmployeeService employeeService;
 
-	}
-	
-	@Test
-	@Ignore
-	@Rollback(false)
-	public void updateExperienceServiceTest() {
-		Experience experience = experienceService.findById(4);
-		experience.setCompanyName("companyNameUpdateServiceTest ");
-		experience.setAuditFlag("U");
-		experience.setCreatedBy(1);
-		experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		experienceService.update(experience);
-		System.out.println("Experience Name : " + experience.getId());
+  @Autowired
+  private ExperienceService experienceService;
 
-	}
-	
-	@Test
-	@Ignore
-	@Rollback(false)
-	public void deleteByIdExperienceServiceTest() {
-		//Experience experience =  experienceService.findById(5);
-		experienceService.deleteById(7);
-		System.out.println("Delete Experience : " + experienceService.findById(5));
-	}
+  private  Experience experience;
 
+  private  Employee employee;
 
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    // create experience
+    experience = new Experience();
+    experience.setAuditFlag("C");
+    experience.setCreatedBy(1);
+    experience.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    experience.setCompanyName("PTT");
+    experience.setSalary(20000);
+    experience.setApplicant(applicant);
+    experienceService.create(experience);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(experienceService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(applicantService);
+    assertNotNull(masDivisionService);
+    assertNotNull(employeeService);
+
+  }
+
+  @Test
+  public void testFindWithExperienceServiceShouldReturnExperienceThatSetup() throws Exception {
+    Experience result = experienceService.findById(experience.getId());
+    assertNotNull(result);
+    assertThat(result.getCompanyName(), is("PTT"));
+    assertThat(result.getSalary(), is((long)20000));
+
+  }
+
+  @Test
+  public void testFindAllWithExperienceServiceShouldReturnListOfAllExperience() throws Exception {
+    List<Experience> result = experienceService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithExperienceServiceShouldReturnExperienceThatUpdate() throws Exception {
+    Experience update = experienceService.findById(experience.getId());
+    assertThat(update.getCompanyName(), is("PTT"));
+    update.setCompanyName("DST");
+    experienceService.update(update);
+
+    Experience result = experienceService.findById(update.getId());
+    assertThat(result.getCompanyName(), is("DST"));
+
+  }
+
+  @Test
+  public void testDeleteWithExperienceServiceShouldNotFindThatExperience() throws Exception {
+    Experience delete = experienceService.findById(experience.getId());
+    experienceService.delete(delete);
+
+    Experience result = experienceService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithExperienceServiceShouldNotFindThatExperience() throws Exception {
+    Experience delete = experienceService.findById(experience.getId());
+    experienceService.deleteById(delete.getId());
+
+    Experience result = experienceService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindExperienceByIdWithExperienceServiceShouldReturnListOfExperienceDtoOfThatApplicantId() throws Exception {
+    List<ExperienceDto> result = experienceService.findExperienceById(experience.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getCompanyName(), is("PTT"));
+
+  }
+
+  @Test
+  public void testFindExperienceWithExperienceServiceShouldReturnExperienceDtoOfThatExperienceId() throws Exception {
+    ExperienceDto result = experienceService.findExperience(experience.getId());
+    assertNotNull(result);
+    assertThat(result.getCompanyName(), is("PTT"));
+    assertThat(result.getSalary(), is((long) 20000));
+
+  }
+
+  @Test
+  public void testSearchExperienceWithExperienceServiceShouldReturnListOfExperienceDtoOfThatEmployeeId() throws Exception {
+    List<ExperienceDto> result = experienceService.searchExperience(employee.getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getCompanyName(), is("PTT"));
+
+  }
+  
 }

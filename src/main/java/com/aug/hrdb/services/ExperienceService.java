@@ -6,21 +6,23 @@ import com.aug.hrdb.dto.ExperienceDto;
 import com.aug.hrdb.entities.Experience;
 
 public interface ExperienceService {
-	
-	public void create(Experience experience);
-	
-	public Experience findById(Integer id);
-	
-	public void update(Experience experience);
-	
-	public void deleteById(Integer id);
-	
-	public void delete(Experience experience);
-	
-	public List<Experience> findAll();
-	
-	public List<ExperienceDto> findExperienceById(Integer id);
 
-	public ExperienceDto findExperience(Integer id);
+  void create(Experience experience);
+
+  Experience findById(Integer id);
+
+  void update(Experience experience);
+
+  void deleteById(Integer id);
+
+  void delete(Experience experience);
+
+  List<Experience> findAll();
+
+  List<ExperienceDto> findExperienceById(Integer id);
+
+  ExperienceDto findExperience(Integer id);
+
+  List<ExperienceDto> searchExperience(Integer id);
 
 }

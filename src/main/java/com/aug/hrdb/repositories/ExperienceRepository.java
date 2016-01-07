@@ -7,11 +7,11 @@ import com.aug.hrdb.dto.ExperienceDto;
 import com.aug.hrdb.entities.Experience;
 
 public interface ExperienceRepository extends GenericRepository<Experience, Serializable> {
-	
-	public List<ExperienceDto> findExperienceById(Integer id);
 
-	public ExperienceDto findExperience(Integer id);
+  List<ExperienceDto> findExperienceById(Integer id);
 
-	public List<ExperienceDto> searchExperience(Integer id);
+  ExperienceDto findExperience(Integer id);
+
+  List<ExperienceDto> searchExperience(Integer id);
 
 }
