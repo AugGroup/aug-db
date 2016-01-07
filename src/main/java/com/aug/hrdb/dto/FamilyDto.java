@@ -8,173 +8,162 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.NamedNativeQueries;
 import org.hibernate.annotations.NamedNativeQuery;
 
-
 @NamedNativeQueries({
-	@NamedNativeQuery(
-            name = "listFamily",
-              query = "select family.ID as ID,family.NAME, "
-              		+ "family.GENDER as GENDER,family.AGE as AGE,family.TELEPHONE as TEL,family.ADDRESS as ADDRESS, "
-              		+ "family.OCCUPATION as OCCUPATION,family.POSITION as POSITION,family.APPLICANT_ID as APPLICANT_ID, "
-              		+ "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
-              		+ "from FAMILY as family join MAS_RELATIONTYPE as mas_relation "
-              		+ "on mas_relation.ID = family.MASRELATION_ID "
-              		+ "join APPLICANT as app on app.ID = family.APPLICANT_ID "
-              		+ "where family.APPLICANT_ID=:appId",
-            resultClass = FamilyDto.class),
-	@NamedNativeQuery(name = "SEARCH_FAMILY_ID", query = "select family.ID,family.NAME, "
-              		+ "family.GENDER,family.AGE,family.TELEPHONE as TEL,family.ADDRESS, "
-              		+ "family.OCCUPATION,family.POSITION,family.APPLICANT_ID, "
-              		+ "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
-              		+ " FROM FAMILY as family join MAS_RELATIONTYPE as mas_relation "
-              		+ "on mas_relation.ID = family.MASRELATION_ID WHERE family.ID = :ID", resultClass = FamilyDto.class)
-		})
-
-
+  @NamedNativeQuery(
+    name = "listFamily",
+    query = "select family.ID as ID,family.NAME, "
+      + "family.GENDER as GENDER,family.AGE as AGE,family.TELEPHONE as TEL,family.ADDRESS as ADDRESS, "
+      + "family.OCCUPATION as OCCUPATION,family.POSITION as POSITION,family.APPLICANT_ID as APPLICANT_ID, "
+      + "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
+      + "from FAMILY as family join MAS_RELATIONTYPE as mas_relation "
+      + "on mas_relation.ID = family.MASRELATION_ID "
+      + "join APPLICANT as app on app.ID = family.APPLICANT_ID "
+      + "where family.APPLICANT_ID=:appId",
+    resultClass = FamilyDto.class),
+  @NamedNativeQuery(
+    name = "SEARCH_FAMILY_ID",
+    query = "select family.ID,family.NAME, "
+    + "family.GENDER,family.AGE,family.TELEPHONE as TEL,family.ADDRESS, "
+    + "family.OCCUPATION,family.POSITION,family.APPLICANT_ID, "
+    + "family.MASRELATION_ID as MASRELATIONTYPE_ID,mas_relation.RELATIONTYPE as MASRELATIONTYPENAME "
+    + " FROM FAMILY as family join MAS_RELATIONTYPE as mas_relation "
+    + "on mas_relation.ID = family.MASRELATION_ID WHERE family.ID = :ID",
+    resultClass = FamilyDto.class)
+})
 @Entity
 public class FamilyDto {
-	
-	@Id
-	@Column(name="ID")
-	private Integer id; 
-	
-	@Column(name="NAME")	
-	private String familyName;
-	
-	
-	@Column(name="GENDER")
-	private String gender;
-	
-	@Column(name="AGE")
-	private Integer age;
-	
-	@Column(name="TEL")
-	private String mobile;
-	
-	@Column(name="ADDRESS")
-	private String address;
-	
-	@Column(name="OCCUPATION")
-	private String occupation; 
-	
-	@Column(name="POSITION")
-	private String position; 
-	
-	@Column(name="APPLICANT_ID")
-	private Integer appId;
-	
-	
-	@Column(name="MASRELATIONTYPE_ID")
-	private Integer masRelationTypeId;
-	
-	@Column(name="MASRELATIONTYPENAME")
-	private String masRelationTypeName;
-	
-	
-	@Transient
-	private Integer employeeId;
 
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "NAME")
+  private String familyName;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "GENDER")
+  private String gender;
 
-	
+  @Column(name = "AGE")
+  private Integer age;
 
-	public String getFamilyName() {
-		return familyName;
-	}
+  @Column(name = "TEL")
+  private String mobile;
 
-	public void setFamilyName(String familyName) {
-		this.familyName = familyName;
-	}
+  @Column(name = "ADDRESS")
+  private String address;
 
-	public String getGender() {
-		return gender;
-	}
+  @Column(name = "OCCUPATION")
+  private String occupation;
 
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
+  @Column(name = "POSITION")
+  private String position;
 
-	public Integer getAge() {
-		return age;
-	}
+  @Column(name = "APPLICANT_ID")
+  private Integer appId;
 
-	public void setAge(Integer age) {
-		this.age = age;
-	}
+  @Column(name = "MASRELATIONTYPE_ID")
+  private Integer masRelationTypeId;
 
-	public String getMobile() {
-		return mobile;
-	}
+  @Column(name = "MASRELATIONTYPENAME")
+  private String masRelationTypeName;
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
+  @Transient
+  private Integer employeeId;
 
-	public String getAddress() {
-		return address;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public String getOccupation() {
-		return occupation;
-	}
+  public String getFamilyName() {
+    return familyName;
+  }
 
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
+  public void setFamilyName(String familyName) {
+    this.familyName = familyName;
+  }
 
-	public String getPosition() {
-		return position;
-	}
+  public String getGender() {
+    return gender;
+  }
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+  public void setGender(String gender) {
+    this.gender = gender;
+  }
 
-	
-	public Integer getAppId() {
-		return appId;
-	}
+  public Integer getAge() {
+    return age;
+  }
 
-	public void setAppId(Integer appId) {
-		this.appId = appId;
-	}
+  public void setAge(Integer age) {
+    this.age = age;
+  }
 
-	public Integer getMasRelationTypeId() {
-		return masRelationTypeId;
-	}
+  public String getMobile() {
+    return mobile;
+  }
 
-	public void setMasRelationTypeId(Integer masRelationTypeId) {
-		this.masRelationTypeId = masRelationTypeId;
-	}
+  public void setMobile(String mobile) {
+    this.mobile = mobile;
+  }
 
-	public String getMasRelationTypeName() {
-		return masRelationTypeName;
-	}
+  public String getAddress() {
+    return address;
+  }
 
-	public void setMasRelationTypeName(String masRelationTypeName) {
-		this.masRelationTypeName = masRelationTypeName;
-	}
+  public void setAddress(String address) {
+    this.address = address;
+  }
 
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
+  public String getOccupation() {
+    return occupation;
+  }
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-	
-	
-	
-	
+  public void setOccupation(String occupation) {
+    this.occupation = occupation;
+  }
+
+  public String getPosition() {
+    return position;
+  }
+
+  public void setPosition(String position) {
+    this.position = position;
+  }
+
+  public Integer getAppId() {
+    return appId;
+  }
+
+  public void setAppId(Integer appId) {
+    this.appId = appId;
+  }
+
+  public Integer getMasRelationTypeId() {
+    return masRelationTypeId;
+  }
+
+  public void setMasRelationTypeId(Integer masRelationTypeId) {
+    this.masRelationTypeId = masRelationTypeId;
+  }
+
+  public String getMasRelationTypeName() {
+    return masRelationTypeName;
+  }
+
+  public void setMasRelationTypeName(String masRelationTypeName) {
+    this.masRelationTypeName = masRelationTypeName;
+  }
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
 
 }
