@@ -1,1096 +1,371 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.*;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.AddressDto;
-import com.aug.hrdb.dto.EmployeeCodeDto;
-import com.aug.hrdb.dto.EmployeeDto;
-import com.aug.hrdb.entities.Address;
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasAddressType;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasLocation;
-import com.aug.hrdb.entities.MasProvince;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Official;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.MasCoreSkillRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasEmploymentRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasLocationRepository;
-import com.aug.hrdb.repositories.MasStaffTypeRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.repositories.OfficialRepository;
-import com.aug.hrdb.services.AddressService;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeCodeDtoService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasAddressTypeService;
-import com.aug.hrdb.services.MasCoreSkillService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasEmploymentService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasLocationService;
-import com.aug.hrdb.services.MasProvinceService;
-import com.aug.hrdb.services.MasStaffTypeService;
-import com.aug.hrdb.services.MasTechnologyService;
-import com.aug.hrdb.services.OfficialService;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class EmployeeServiceTest {
-	
-	
-	@Autowired
-	private EmployeeService employeeService;
-	@Autowired
-	private ApplicantService applicantService;
-	@Autowired
-	private MasDivisionService masDivisionService;
-	@Autowired
-	private MasJobLevelService masJoblevelService;
-	@Autowired
-	private MasEmploymentService masEmploymentService;
-	@Autowired
-	private MasTechnologyService masTechnologyService;
-	@Autowired
-	private MasCoreSkillService masCoreSkillService;
-	@Autowired
-	private MasStaffTypeService masStaffTypeService;
-	@Autowired
-	private MasLocationService masLocationService;
-	@Autowired
-	private OfficialService officialService;
-	@Autowired
-	private AddressService addressService;
-	@Autowired
-	private MasAddressTypeService addressTypeService;
-	@Autowired
-	private MasProvinceService provinceService;
-	@Autowired
-	private EmployeeCodeDtoService employeeCodeDtoService;
-	
-	
-	
-	private Employee employee;
-	private Integer id;
-	private Integer idApplicant;
-    private Integer idMasJoblevel;
-	private Integer idMasDivision;
-	private Integer idMasLocation;
-	private Integer idOfficial;
-	private Integer idAddress1;
-	private Integer idMasAddressType;
-	private Integer idMasProvice;
-	private Integer masTechId;
-	
-	
-	MasAddressType addressType;
-	MasProvince province;
-	
-	
-	@Before
-    public void setUp() {
-		
-		
-        employee = new Employee();
-        /*employee.setIdCard("115310905001-9");
-        employee.setNameThai("อภิวาท์");
-        employee.setNameEng("apiva");
-        employee.setNicknameThai("va");
-        employee.setNicknameEng("va");
-        employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");
-        employee.setAge(25);
-        employee.setHeight(165);
-        employee.setWeigth(55);*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("JP10019");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        employee.setStatusEmp("Employee");
-        //employee.setAddress("1/1");
-        
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasLocationService masLocationService;
 
-		masJoblevelService.create(masJoblevel);
-		idMasJoblevel = masJoblevel.getId();
-		MasJobLevel masJobLevel1 = masJoblevelService.findById(idMasJoblevel);
-		
-        
-        MasTechnology masTechnology = new MasTechnology();
-        masTechnology.setCode("MasTech-01");
-        masTechnology.setCreatedBy(1);
-        masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        masTechnology.setAuditFlag("C");
-        masTechnology.setIsActive(true);
-        masTechnology.setName("MASTECH-01");
-        masTechnologyService.create(masTechnology);
-        masTechId = masTechnology.getId();
-        MasTechnology masTechnology2 = masTechnologyService.findById(masTechId);
-        
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setAuditFlag("1");
-		applicant.setJoblevel(masJobLevel1);
-		applicant.setTechnology(masTechnology2);
-		applicantService.create(applicant);
-		idApplicant = applicant.getId();
-        Applicant applicant1 = applicantService.findById(idApplicant);
-        Hibernate.initialize(applicant1);
-    
-       
-        
-        
-		addressType = new MasAddressType();
-		addressType.setName("Permanent");
-		addressType.setIsActive(true);
-		addressType.setCreatedBy(1);
-		addressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		addressType.setAuditFlag("C");
-		addressType.setCode("MAS-ADDTYPE01");
-		addressTypeService.create(addressType);
-		idMasAddressType = addressType.getId();
-		MasAddressType masAddressType = addressTypeService.findById(idMasAddressType);
-		
-		
-		province = new MasProvince();
-		province.setName("Bangkok");
-		province.setCode("B001");
-		province.setIsActive(true);
-		province.setCreatedBy(1);
-		province.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		province.setAuditFlag("C");
-		provinceService.create(province);
-		idMasProvice = province.getId();
-		MasProvince masProvince = provinceService.findById(idMasProvice);
-		
-		
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-		Address address = new Address();
-		address.setHouseNo("18559");
-		address.setRoad("Sukhumvit");
-		address.setDistrict("Mung");
-		address.setSubDistrict("AmphurMung");
-		address.setZipcode(10252);
-		address.setAddressType(masAddressType);
-		address.setProvince(masProvince);
-		address.setAuditFlag("C");
-		address.setCreatedBy(1);
-		address.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		address.setApplicant(applicant1);
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		
-		addressService.create(address);
-		idAddress1 = address.getId();
-		
-		
-		
-		
-		addressType = new MasAddressType();
-		addressType.setName("Present");
-		addressType.setIsActive(true);
-		addressType.setCreatedBy(1);
-		addressType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		addressType.setAuditFlag("C");
-		addressType.setCode("MAS-ADDTYPE03");
-		addressTypeService.create(addressType);
-		int idMasAddressType1 = addressType.getId();
-		MasAddressType masAddressType1 = addressTypeService.findById(idMasAddressType1);
-		
-		
-		province = new MasProvince();
-		province.setName("Pathumtani");
-		province.setCode("B002");
-		province.setIsActive(true);
-		province.setCreatedBy(1);
-		province.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		province.setAuditFlag("C");
-		provinceService.create(province);
-		int idMasProvice1 = province.getId();
-		MasProvince masProvince1 = provinceService.findById(idMasProvice1);
-		
-		
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		Address address1 = new Address();
-		address1.setHouseNo("1855");
-		address1.setRoad("Sukhumvit");
-		address1.setDistrict("Mung");
-		address1.setSubDistrict("AmphurMung");
-		address1.setZipcode(10252);
-		address1.setAddressType(masAddressType1);
-		address1.setProvince(masProvince1);
-		address1.setAuditFlag("C");
-		address1.setCreatedBy(1);
-		address1.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		address1.setApplicant(applicant1);
-		
-		
-		addressService.create(address1);
-		
-		
-		
-		
-		
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		idMasDivision = masDivision.getId();
-		MasDivision masDivision1 = masDivisionService.findById(idMasDivision);
-		employee.setMasDivision(masDivision1);
-		
+  @Autowired
+  private ApplicantService applicantService;
 
-		//employee.setMasJoblevel(masJobLevel1);
-		
-		
-		
+  @Autowired
+  private MasStaffTypeService masStaffTypeService;
 
-	    
-	    MasLocation masLocation = new MasLocation();
-	    masLocation.setIsActive(true);
-	    masLocation.setAuditFlag("C");
-	    masLocation.setCreatedBy(1);
-	    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	    masLocation.setName("MASLOCATION-TESTEMP");
-	    masLocation.setCode("JP");
-	    masLocationService.create(masLocation);
-	    idMasLocation = masLocation.getId();	
-	    MasLocation masLocation2 = masLocationService.findById(idMasLocation);
-	    
-	    employee.setMasLocation(masLocation2);
-	    
-	    Official official = new Official();
-	    official.setCreatedBy(1);
-	    official.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	    official.setAuditFlag("C");
-	    //official.setOfficialDate(date);
-	    officialService.create(official);
-	    idOfficial = official.getId();
-	    Official official2 = officialService.findById(idOfficial);
-	    
-	   // employee.setOfficial(official2);
-	    
-	    
-	    employee.setApplicant(applicant1);
-        
-        
-		
-		employeeService.create(employee);
-		id=employee.getId();
-		System.out.println("id: "+id);
-    }
+  @Autowired
+  private EmployeeService employeeService;
+
+  private Employee employee, aim;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicant.setFirstNameEN("Anat");
+    applicantService.create(applicant);
+
+    Applicant applicant2 = new Applicant();
+    applicant2.setAuditFlag("C");
+    applicant2.setCreatedBy(1);
+    applicant2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant2.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant2.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant2.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicant2.setFirstNameEN("Aim");
+    applicantService.create(applicant2);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivision.setTag("B");
+    masDivisionService.create(masDivision);
+
+    // create staff type
+    MasStaffType masStaffType = new MasStaffType();
+    masStaffType.setAuditFlag("C");
+    masStaffType.setCreatedBy(1);
+    masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masStaffType.setName("Billable");
+    masStaffType.setCode("01A");
+    masStaffType.setIsActive(true);
+    masStaffTypeService.create(masStaffType);
+
+    //create mas location
+    MasLocation masLocation = new MasLocation();
+    masLocation.setAuditFlag("C");
+    masLocation.setCreatedBy(1);
+    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masLocation.setCode("TH");
+    masLocation.setName("Thailand");
+    masLocation.setIsActive(true);
+    masLocationService.create(masLocation);
+
+    // create aim
+    aim = new Employee();
+    aim.setAuditFlag("C");
+    aim.setCreatedBy(1);
+    aim.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    aim.setEmployeeCode("TEST9999");
+    aim.setStatusEmp("Employee");
+    aim.setTelHome("02-9999999");
+    aim.setApplicant(applicant2);
+    aim.setMasDivision(masDivision);
+    aim.setMasStaffType(masStaffType);
+    aim.setIsManager(1);
+    aim.setMasLocation(masLocation);
+    employeeService.create(aim);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employee.setMasStaffType(masStaffType);
+    employee.setAimEmpId(aim);
+    employee.setMasLocation(masLocation);
+    employeeService.create(employee);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithEmployeeServiceShouldReturnEmployeeThatSetup() throws Exception {
+    Employee result = employeeService.findById(employee.getId());
+    assertNotNull(result);
+    assertThat(result.getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getEmployeeCode(), is("TEST0001"));
+
+  }
+
+  @Test
+  public void testFindAllWithEmployeeServiceShouldReturnListOfAllEmployee() throws Exception {
+    List<Employee> result = employeeService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithEmployeeServiceShouldReturnEmployeeThatUpdate() throws Exception {
+    Employee update = employeeService.findById(employee.getId());
+    assertThat(update.getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(update.getEmployeeCode(), is("TEST0001"));
+
+    update.getApplicant().setFirstNameEN("Anattt");
+    employeeService.update(update);
+
+    Employee result = employeeService.findById(update.getId());
+    assertThat(result.getApplicant().getFirstNameEN(), is("Anattt"));
+
+  }
+
+  @Test
+  public void testDeleteWithEmployeeServiceShouldNotFindThatEmployee() throws Exception {
+    Employee delete = employeeService.findById(employee.getId());
+    employeeService.delete(delete);
+
+    Employee result = employeeService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithEmployeeServiceShouldNotFindThatEmployee() throws Exception {
+    Employee delete = employeeService.findById(employee.getId());
+    employeeService.deleteById(delete.getId());
+
+    Employee result = employeeService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByCriteriaWithEmployeeServiceShouldReturnListOfEmployeeOfThatFirstNameEn() throws Exception {
+    List<Employee> result = employeeService.findByCriteria(employee);
+    assertNotNull(result);
+    assertThat(result.get(0).getApplicant().getFirstNameEN(), is("Anat"));
+
+  }
+
+  @Test
+  public void testSearchEmployeeWithEmployeeServiceShouldReturnListOfEmployeeListDto() throws Exception {
+    List<EmployeeListDto> result = employeeService.searchEmployee();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testListEmployeeAimWithEmployeeServiceShouldReturnListOfAimEmployeeDto() throws Exception {
+    List<AimEmployeeDto> result = employeeService.listEmployeeAim();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testSearchEmpIdToAddressWithEmployeeServiceShouldReturnLastCreateEmployee() throws Exception {
+    Employee result = employeeService.searchEmpIdToAddress();
+    assertNotNull(result);
+    assertThat(result.getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getEmployeeCode(), is("TEST0001"));
+
+  }
+
+  @Test
+  public void testReportEmployeeWithEmployeeServiceShouldReturnListOfReportEmployeeDTOOfThatName() throws Exception {
+    List<ReportEmployeeDto> result = employeeService.reportEmployee(employee.getApplicant().getFirstNameEN());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameEng(), is("Anat"));
+
+  }
+
+  @Test
+  public void testReportStatusEmployeeWithEmployeeServiceShouldReturnListOfReportStatusEmployeeDtoOfThatStatusStaff() throws Exception {
+    List<ReportStatusEmployeeDto> result = employeeService.reportStatusEmployee(employee.getMasStaffType().getName());
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(2)));
+    assertThat(result.get(0).getStatusStaff(), is("Billable"));
+
+  }
+
+//  wait leave
+//  @Test
+//  public void testReportLeaveWithEmployeeServiceShouldReturnListOfReportLeaveDTOOfThatNameEng() throws Exception {
+//
+//  }
+
+  @Test
+  public void testFindCurrentIdWithEmployeeServiceShouldReturnLastCreateEmployee() throws Exception {
+    EmployeeIdDto result = employeeService.findCurrentId();
+    assertNotNull(result);
+    assertThat(result.getId(), is(employee.getId()));
+
+  }
+
+//  wait official and site
+//  @Test
+//  public void testFindEmployeeAndOfficialWithEmployeeServiceShouldReturnEmployeeThatId() throws Exception {
+//
+//  }
+
+  @Test
+  public void testFindAimRelateWithEmployeeServiceShouldReturnListOfEmployeeOfThatAim() throws Exception {
+    List<Employee> result = employeeService.findAimRelateWithEmployee(aim.getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
+  }
+
+  @Test
+  public void testFindByNameWithEmployeeServiceShouldReturnListOfReportEmployeeDtoOfThatName() throws Exception {
+    List<ReportEmployeeDto> result = employeeService.findByName(employee);
+    assertNotNull(result);
+    assertThat(result.get(0).getNameEng(), is("Anat"));
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
+
+  }
+
+//  wait official and site
+//  @Test
+//  public void testFindByNameStatusWithEmployeeShouldReturnListOfReportStatusEmployeeDtoOfThatName() throws Exception {
+//
+//  }
+
+//  wait official
+//  @Test
+//  public void testReportEmployeeCodeWithEmployeeServiceShouldReturnListOfReportEmployeeDtoOfThatCode() throws Exception {
+//
+//  }
+
+//  not clear
+//  @Test
+//  public void testListEmployeeAimForUpdateWithEmployeeServiceShouldReturnListOfAimEmployeeDtoOFThatEmployeeId() throws Exception {
+//
+//  }
+
+//  not clear
+//  @Test
+//  public void testSearchEmpForUniqueIdCardWithEmployeeServiceShouldReturnListOfEmployeeListDto() throws Exception {
+//
+//  }
 
 
-	
-	
-	 
-	 
-	@Test
-	@Rollback(true)
-	public void create() {
-		
-		
-		Employee emp =  employeeService.findById(id);
-		Assert.assertEquals("JP10019", emp.getEmployeeCode());
-		
-			
-	}
-	
-	
-	
+  @Test
+  public void testFindEmployeeCodeWithEmployeeServiceShouldReturnListOfEmployeeCodeDtoOfThatLocationId() throws Exception {
+    List<EmployeeCodeDto> result = employeeService.findEmployeeCode(employee.getMasLocation().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
 
-	@Test
-	@Rollback(true)
-	public void update() {
-	    
-		System.out.println("id#: "+id);	 
-		Employee employee1 = new Employee();
-		employee1 = employeeService.findById(id);
-		employee1.setUpdatedBy(1);
-		employee1.setUpdatedTimeStamp(Calendar.getInstance().getTime());
-		employee1.setAuditFlag("U");
-		employee1.setEmployeeCode("JP10011");
-		employeeService.update(employee1);
-		
-		Employee employee2 = new Employee();
-		employee2 = employeeService.findById(id);
-		
-		Assert.assertEquals("JP10011", employee2.getEmployeeCode());
-		
-		
+  }
 
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void delete() {
+  @Test
+  public void testCheckTagWithEmployeeServiceShouldReturnListOfDivisionDtoOfThatTag() throws Exception {
+    List<DivisionDto> result = employeeService.checkTag(employee.getMasDivision().getTag());
+    assertNotNull(result);
+    assertThat(result.get(0).getTag(), is("B"));
 
-		Employee employee = employeeService.findById(id);
-		employeeService.delete(employee);
-		Employee employee2 = employeeService.findById(id);	
-		Assert.assertNull(employee2);
-		
-		
+  }
 
-	}
-	
-	
-	
-	
-	@Test
-	public void findById() {
+  @Test
+  public void testCheckTagDivisionWithEmployeeServiceShouldReturnListOfJobLevelDtoOfThatTagDivision() throws Exception {
+    List<JoblevelDto> result = employeeService.checkTagDivision(employee.getMasDivision().getTag());
+    assertNotNull(result);
+    assertThat(result.get(0).getTagDivision(), is("B"));
 
-		Employee employee = employeeService.findById(id);
-		Assert.assertEquals("JP10019", employee.getEmployeeCode());
-		
-	}
-	
-	
-	
-	
-	@Test
-	public void findAll() {
+  }
 
-		Employee employee = employeeService.findById(id);
-		List<Employee> employeeList = employeeService.findAll();
-		Assert.assertEquals(true, employeeList.contains(employee));		
-		
-	}
-	
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void deleteById() {
+  @Test
+  public void testFindByIdDivisionWithEmployeeServiceShouldReturnTagOfThatId() throws Exception {
+    String result = employeeService.findByIdDivision(employee.getMasDivision().getId());
+    assertThat(result, is("B"));
 
-		Employee employee = employeeService.findById(id);
-		employeeService.deleteById(id);
-		Employee emp = employeeService.findById(id);
-		Assert.assertNull(emp);
-		
-		
-	}
-	
-	
-	
-	
-	@Test 
-	public void findByCriteria(){
-		
-		Employee employee = employeeService.findById(id);
-		List<Employee> empList = employeeService.findByCriteria(employee);
-		Assert.assertEquals(true, empList.contains(employee));		
-
-		
-		
-	}
-	
-	
-	@Test
-	public void searhEmpIdtoAddress() {
-		
-		//search last id of EMPLOYEE
-		Employee employee = employeeService.searhEmpIdtoAddress();
-		Assert.assertEquals(id.intValue(), employee.getId().intValue());
-	
-	}
-	
-	
-	
-	@Test
-	public void findEmployeeByEmployeeIdWithSetToDto(){
-		
-		EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(id);
-		List<AddressDto> addressDto =  addressService.findAddressByApplicantId(idApplicant);
-		
-		
-		System.out.println("id address dto1 "+addressDto.get(0).getId());
-		System.out.println("id address dto2 "+employeeDto.getAddressList().get(0).getId());
-
-		Assert.assertEquals(addressDto.get(0).getId(), employeeDto.getAddressList().get(0).getId());
-		
-	    
-		
-	}
-	
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void createEmployeeAndReturnId(){
-		
-		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
-		 MasProvince masProvince = provinceService.findById(idMasProvice);
-		
-		
-		 Applicant applicant = new Applicant();
-		 applicant.setCreatedBy(1);
-		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 applicant.setAuditFlag("C");
-		 applicant.setCardId("115310905001-9");
-		 applicant.setAuditFlag("1");
-		 applicant.setJoblevel(masJobLevel);
-		 applicant.setTechnology(masTechnology);
-		 applicantService.create(applicant);
-		 int idApplicant2 = applicant.getId();
-		 System.out.println("id applicant: "+idApplicant2);
-	     Applicant applicant1 = applicantService.findById(idApplicant2);
-		
-		
-		EmployeeDto employeeDto = new EmployeeDto();
-		
-		employeeDto.setNameThai("อภิวาท์");
-		employeeDto.setNameEng("apiva");
-		employeeDto.setSurnameEng("viva");
-		employeeDto.setSurnameThai("กิมเกถนอม");
-		employeeDto.setNicknameEng("va");
-		employeeDto.setNicknameThai("วา");
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-2014";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		
-		employeeDto.setStartWorkDate(date);
-		
-		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInStringEnd = "31-12-2016";
-    	Date dateEnd = null;
-		try {
-			dateEnd = sdfEnd.parse(dateInStringEnd);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setEndWorkDate(dateEnd);
-		employeeDto.setPositionAppliedFor("Programmer");
-		employeeDto.setOfficialDate(date);
-		
-		
-		employee.setEmployeeCode("EMP-19");
-		employeeDto.setIdCard("115310905001-9");
-		employeeDto.setAge(25);
-		employeeDto.setEmail("test@gmail.com");
-		employeeDto.setEmergencyContact("mom");
-		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-		
-		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInStringDOB = "12-01-1991";
-    	Date dateDOB = null;
-    	
-		try {
-			dateDOB = sdfDOB.parse(dateInStringDOB);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setDateOfBirth(dateDOB);
-		employeeDto.setStatusemp("Employee");
-		employeeDto.setApplicateId(applicant1.getId());
-		
-		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		
-		AddressDto addressDto = new AddressDto();
-		
-		addressDto.setId(0);
-		addressDto.setAddressTypeId(idMasAddressType);
-		addressDto.setApplicantId(applicant1.getId());
-		addressDto.setMasprovinceId(idMasProvice);
-		addressDto.setMasprovinceName(masProvince.getName());
-		addressDto.setHouseNo("1/11");
-		addressDto.setDistrict("nongsamwong");
-		addressDto.setSubDistrict("nongsua");
-		addressDto.setRoad("sathon");
-		addressDto.setStatus("add");
-		
-		addressDtoList.add(addressDto);
-		
-		
-		employeeDto.setIsManager(1);
-		employeeDto.setAimempid(id);
-		
-		
-		employeeDto.setMasJoblevel(idMasJoblevel);
-		employeeDto.setMasDivision(idMasDivision);
-		
-		employeeDto.setTelHome("0890851022");
-		employeeDto.setTelMobile("0890851022");
-		employeeDto.setAddressList(addressDtoList);
-		
-		/*Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
-		Employee emp2 = employeeService.findById(emp.getId());*/
-	
-			
-		/*Assert.assertEquals("EMP-1119", emp2.getEmployeeCode());*/
-		
-		List<AddressDto> addressDtoList1 = addressService.findAddressByApplicantId(applicant1.getId());
-		System.out.println("address list size: "+addressDtoList1.size());
-		
-	
-		
-		Assert.assertEquals("1/11", addressDtoList1.get(0).getHouseNo());
-
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void deleteEmployeeByHibernate (){
-		
-		Employee employee = employeeService.findById(id);
-		employeeService.deleteEmployeeByHibernate(employee);
-		Employee employee2 = employeeService.findById(id);
-		Assert.assertNull(employee2);
-		
-	}
-	
-	
-	
-	
-	@Test
-	@Rollback(true)
-	@Ignore
-	public void updateEmployeeAndReturnId(){
-		
-		
-		/*********************************************** create employee  **********************************************************/
-		
-		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
-		 MasProvince masProvince = provinceService.findById(idMasProvice);
-		
-		
-		 Applicant applicant = new Applicant();
-		 applicant.setCreatedBy(1);
-		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 applicant.setAuditFlag("C");
-		 applicant.setCardId("115310905001-9");
-		 applicant.setAuditFlag("1");
-		 applicant.setJoblevel(masJobLevel);
-		 applicant.setTechnology(masTechnology);
-		 applicantService.create(applicant);
-		 int idApplicant2 = applicant.getId();
-		 System.out.println("id applicant: "+idApplicant2);
-	     Applicant applicant1 = applicantService.findById(idApplicant2);
-		
-		
-		EmployeeDto employeeDto = new EmployeeDto();
-		
-		employeeDto.setNameThai("อภิวาท์");
-		employeeDto.setNameEng("apiva");
-		employeeDto.setSurnameEng("viva");
-		employeeDto.setSurnameThai("กิมเกถนอม");
-		employeeDto.setNicknameEng("va");
-		employeeDto.setNicknameThai("วา");
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-2014";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		
-		employeeDto.setStartWorkDate(date);
-		
-		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInStringEnd = "31-12-2016";
-    	Date dateEnd = null;
-		try {
-			dateEnd = sdfEnd.parse(dateInStringEnd);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setEndWorkDate(dateEnd);
-		employeeDto.setPositionAppliedFor("Programmer");
-		employeeDto.setOfficialDate(date);
-		
-		
-		employee.setEmployeeCode("EMP-19");
-		employeeDto.setIdCard("115310905001-9");
-		employeeDto.setAge(25);
-		employeeDto.setEmail("test@gmail.com");
-		employeeDto.setEmergencyContact("mom");
-		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-		
-		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInStringDOB = "12-01-1991";
-    	Date dateDOB = null;
-    	
-		try {
-			dateDOB = sdfDOB.parse(dateInStringDOB);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setDateOfBirth(dateDOB);
-		employeeDto.setStatusemp("Employee");
-		employeeDto.setApplicateId(applicant1.getId());
-		
-		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		
-		AddressDto addressDto = new AddressDto();
-		
-		addressDto.setId(0);
-		addressDto.setAddressTypeId(idMasAddressType);
-		addressDto.setApplicantId(applicant1.getId());
-		addressDto.setMasprovinceId(idMasProvice);
-		addressDto.setMasprovinceName(masProvince.getName());
-		addressDto.setHouseNo("1/11");
-		addressDto.setDistrict("nongsamwong");
-		addressDto.setSubDistrict("nongsua");
-		addressDto.setRoad("sathon");
-		addressDto.setStatus("add");
-		
-		addressDtoList.add(addressDto);
-		
-		
-		employeeDto.setIsManager(1);
-		employeeDto.setAimempid(id);
-		
-		
-		employeeDto.setMasJoblevel(idMasJoblevel);
-		employeeDto.setMasDivision(idMasDivision);
-		
-		employeeDto.setTelHome("0890851022");
-		employeeDto.setTelMobile("0890851022");
-		employeeDto.setAddressList(addressDtoList);
-		
-		//Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "EMP-1119");
-		
-		
-	/*******************************************************************************************************************************/	
-		
-		
-		/*EmployeeDto emp2 = employeeService.findEmployeeByEmployeeIdWithSetToDto(emp.getId());	
-		List<AddressDto> addressDtoList1 = addressService.findAddressByApplicantId(emp2.getApplicateId());
-		emp2.setNameEng("test");*/
-		
-		
-		List<AddressDto> addressDto1 = new  ArrayList<AddressDto>();
-		AddressDto addressDto2 = new AddressDto();
-		
-		addressDto2.setId(0);
-		addressDto2.setAddressTypeId(idMasAddressType);
-		addressDto2.setApplicantId(applicant1.getId());
-		addressDto2.setMasprovinceId(idMasProvice);
-		addressDto2.setMasprovinceName(masProvince.getName());
-		addressDto2.setHouseNo("1/19");
-		addressDto2.setDistrict("nongsamwong");
-		addressDto2.setSubDistrict("nongsua");
-		addressDto2.setRoad("sathon");
-		addressDto2.setStatus("add");
-		
-		addressDto1.add(addressDto2);
-		
-		AddressDto addressDto3 = new AddressDto();
-		/*addressDto3.setId(addressDtoList1.get(0).getId());
-		addressDto3.setAddressTypeId(addressDtoList1.get(0).getAddressTypeId());
-		addressDto3.setApplicantId(addressDtoList1.get(0).getApplicantId());
-		addressDto3.setMasprovinceId(addressDtoList1.get(0).getMasprovinceId());
-		addressDto3.setMasprovinceName(addressDtoList1.get(0).getMasprovinceName());*/
-		addressDto3.setHouseNo("1/6");
-		/*addressDto3.setDistrict(addressDtoList1.get(0).getDistrict());
-		addressDto3.setSubDistrict(addressDtoList1.get(0).getSubDistrict());
-		addressDto3.setRoad(addressDtoList1.get(0).getRoad());*/
-		addressDto3.setStatus("edit");
-		
-		
-		addressDto1.add(addressDto3);
-		
-		System.out.println("size: "+addressDto1.size());
-		
-		//emp2.setAddressList(addressDto1);
-		
-		//employeeService.updateEmployeeAndReturnId(emp2, emp2.getEmployeeCode());
-		
-		
-		/*Employee empFindData = employeeService.findById(emp.getId());
-		Address addUpdate = addressService.find(addressDtoList1.get(0).getId());
-		List<AddressDto> addressListDto3 = addressService.findAddressByApplicantId(addressDtoList1.get(0).getApplicantId());
-		
-		Assert.assertEquals("test", empFindData.getNameEng());
-		Assert.assertEquals("1/6", addUpdate.getHouseNo());
-		Assert.assertEquals(2, addressListDto3.size());*/
-		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findEmployeeCode(){
-		
-		/*********************************************** create employee  **********************************************************/
-		
-		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
-		 MasProvince masProvince = provinceService.findById(idMasProvice);
-		 MasLocation masLocation = masLocationService.findById(idMasLocation);
-		
-		
-		 Applicant applicant = new Applicant();
-		 applicant.setCreatedBy(1);
-		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 applicant.setAuditFlag("C");
-		 applicant.setCardId("115310905001-9");
-		 applicant.setAuditFlag("1");
-		 applicant.setJoblevel(masJobLevel);
-		 applicant.setTechnology(masTechnology);
-		 applicantService.create(applicant);
-		 int idApplicant2 = applicant.getId();
-		 System.out.println("id applicant: "+idApplicant2);
-	     Applicant applicant1 = applicantService.findById(idApplicant2);
-		
-		
-		EmployeeDto employeeDto = new EmployeeDto();
-		
-		employeeDto.setNameThai("อภิวาท์");
-		employeeDto.setNameEng("apiva");
-		employeeDto.setSurnameEng("viva");
-		employeeDto.setSurnameThai("กิมเกถนอม");
-		employeeDto.setNicknameEng("va");
-		employeeDto.setNicknameThai("วา");
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-2014";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		
-		employeeDto.setStartWorkDate(date);
-		
-		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
-   	    String dateInStringEnd = "31-12-2016";
-   	    Date dateEnd = null;
-		try {
-			dateEnd = sdfEnd.parse(dateInStringEnd);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setEndWorkDate(dateEnd);
-		employeeDto.setPositionAppliedFor("Programmer");
-		employeeDto.setOfficialDate(date);
-		
-		
-		//employeeDto.setEmployeeCode("JP10020");
-		employeeDto.setIdCard("115310905001-9");
-		employeeDto.setAge(25);
-		employeeDto.setEmail("test@gmail.com");
-		employeeDto.setEmergencyContact("mom");
-		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-		
-		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
-   	    String dateInStringDOB = "12-01-1991";
-     	Date dateDOB = null;
-   	
-		try {
-			dateDOB = sdfDOB.parse(dateInStringDOB);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setDateOfBirth(dateDOB);
-		employeeDto.setStatusemp("Employee");
-		employeeDto.setApplicateId(applicant1.getId());
-		
-		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		
-		AddressDto addressDto = new AddressDto();
-		
-		addressDto.setId(0);
-		addressDto.setAddressTypeId(idMasAddressType);
-		addressDto.setApplicantId(applicant1.getId());
-		addressDto.setMasprovinceId(idMasProvice);
-		addressDto.setMasprovinceName(masProvince.getName());
-		addressDto.setHouseNo("1/11");
-		addressDto.setDistrict("nongsamwong");
-		addressDto.setSubDistrict("nongsua");
-		addressDto.setRoad("sathon");
-		addressDto.setStatus("add");
-		
-		addressDtoList.add(addressDto);
-		
-		
-		employeeDto.setIsManager(1);
-		employeeDto.setAimempid(id);
-		
-		
-		employeeDto.setMasJoblevel(idMasJoblevel);
-		employeeDto.setMasDivision(idMasDivision);
-		
-		employeeDto.setTelHome("0890851022");
-		employeeDto.setTelMobile("0890851022");
-		employeeDto.setAddressList(addressDtoList);
-		
-	//	Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "JP10020");
-		
-		
-	/*******************************************************************************************************************************/	
-		
-		
-		
-		List<EmployeeCodeDto> employee = employeeCodeDtoService.findEmployeeCode(idMasLocation);		
-		//Assert.assertEquals("JP10020", emp.getEmployeeCode());
-		
-		
-	}
-	
-	
-	
-	@Test
-	public void generateEmployeeCode(){
-		
-		
-		EmployeeDto employeeDto = employeeService.findEmployeeByEmployeeIdWithSetToDto(id);		
-		String employeeCode = employeeService.generateEmployeeCode(employeeDto);
-		System.out.println("emp code: "+employeeCode);
-		Assert.assertEquals("JP10020", employeeCode);
-		
-		
-	}
-	
-	
-	
-	
-
-	@Test
-	public void findOfficial(){
-		
-//		Employee employee = employeeService.findOfficial(id);
-	//	Assert.assertEquals(idOfficial, employee.getOfficial().getId());
-		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findAimRelateWithEmployee() {
-		
-		
-		/*********************************************** create employee  **********************************************************/
-		
-		 MasJobLevel masJobLevel = masJoblevelService.findById(idMasJoblevel);
-		 MasTechnology masTechnology = masTechnologyService.findById(masTechId);
-		 MasProvince masProvince = provinceService.findById(idMasProvice);
-		 MasLocation masLocation = masLocationService.findById(idMasLocation);
-		
-		
-		 Applicant applicant = new Applicant();
-		 applicant.setCreatedBy(1);
-		 applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 applicant.setAuditFlag("C");
-		 applicant.setCardId("115310905001-9");
-		 applicant.setAuditFlag("1");
-		 applicant.setJoblevel(masJobLevel);
-		 applicant.setTechnology(masTechnology);
-		 applicantService.create(applicant);
-		 int idApplicant2 = applicant.getId();
-		 System.out.println("id applicant: "+idApplicant2);
-	     Applicant applicant1 = applicantService.findById(idApplicant2);
-		
-		
-		EmployeeDto employeeDto = new EmployeeDto();
-		
-		employeeDto.setNameThai("อภิวาท์");
-		employeeDto.setNameEng("apiva");
-		employeeDto.setSurnameEng("viva");
-		employeeDto.setSurnameThai("กิมเกถนอม");
-		employeeDto.setNicknameEng("va");
-		employeeDto.setNicknameThai("วา");
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-2014";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-		
-		employeeDto.setStartWorkDate(date);
-		
-		SimpleDateFormat sdfEnd = new SimpleDateFormat("dd-MM-yyyy");
-  	    String dateInStringEnd = "31-12-2016";
-  	    Date dateEnd = null;
-		try {
-			dateEnd = sdfEnd.parse(dateInStringEnd);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setEndWorkDate(dateEnd);
-		employeeDto.setPositionAppliedFor("Programmer");
-		employeeDto.setOfficialDate(date);
-		
-		
-		employee.setEmployeeCode("EMP-19");
-		employeeDto.setIdCard("115310905001-9");
-		employeeDto.setAge(25);
-		employeeDto.setEmail("test@gmail.com");
-		employeeDto.setEmergencyContact("mom");
-		employeeDto.setEmergencyContactPhoneNumber("089-085-1022");
-		
-		SimpleDateFormat sdfDOB= new SimpleDateFormat("dd-MM-yyyy");
-  	    String dateInStringDOB = "12-01-1991";
-    	Date dateDOB = null;
-  	
-		try {
-			dateDOB = sdfDOB.parse(dateInStringDOB);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-		
-		employeeDto.setDateOfBirth(dateDOB);
-		employeeDto.setStatusemp("Employee");
-		employeeDto.setApplicateId(applicant1.getId());
-		
-		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		
-		AddressDto addressDto = new AddressDto();
-		
-		addressDto.setId(0);
-		addressDto.setAddressTypeId(idMasAddressType);
-		addressDto.setApplicantId(applicant1.getId());
-		addressDto.setMasprovinceId(idMasProvice);
-		addressDto.setMasprovinceName(masProvince.getName());
-		addressDto.setHouseNo("1/11");
-		addressDto.setDistrict("nongsamwong");
-		addressDto.setSubDistrict("nongsua");
-		addressDto.setRoad("sathon");
-		addressDto.setStatus("add");
-		
-		addressDtoList.add(addressDto);
-		
-		
-		employeeDto.setIsManager(1);
-		employeeDto.setAimempid(id);
-		
-		
-		employeeDto.setMasJoblevel(idMasJoblevel);
-		employeeDto.setMasDivision(idMasDivision);
-		
-		employeeDto.setTelHome("0890851022");
-		employeeDto.setTelMobile("0890851022");
-		employeeDto.setAddressList(addressDtoList);
-		employeeDto.setAimempid(id);
-		employeeDto.setIsManager(1);
-		
-		//Employee emp = employeeService.createEmployeeAndReturnId(employeeDto, "JP10020");
-		
-		
-		
-	 /***********************************************************************************************************************************/
-		
-		
-		
-	//	List<Employee> employeeList = employeeService.findAimRelateWithEmployee(emp.getAimempid().getId());
-		//Assert.assertEquals(1, employeeList.size());
-		
-		
-	}
-	
-	
-	
-
-	@Test
-	public void findAndinitializeOfficial(){
-		
-		Employee employee = employeeService.findAndinitializeOfficial(id);		
-	//	Assert.assertEquals(idOfficial, employee.getOfficial().getId());
-		
-	}
-	
+  }
 
 }
