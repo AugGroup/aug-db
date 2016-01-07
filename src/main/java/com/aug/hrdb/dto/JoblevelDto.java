@@ -8,13 +8,15 @@ import javax.persistence.NamedNativeQuery;
 
 @Entity
 @NamedNativeQueries({
-  @NamedNativeQuery(name = "CHECK_TAG",
+  @NamedNativeQuery(
+    name = "CHECK_TAG",
     query = "SELECT job.ID, job.NAME, job.CODE, job.TAG ,job.TAG_DIVISION "
       + "FROM MAS_JOBLEVEL job "
       + "WHERE job.TAG =:TAG",
     resultClass = JoblevelDto.class),
 
-  @NamedNativeQuery(name = "CHECK_TAG_DIVISION",
+  @NamedNativeQuery(
+    name = "CHECK_TAG_DIVISION",
     query = "SELECT job.ID, job.NAME, job.CODE, job.TAG_DIVISION, job.TAG "
       + "FROM MAS_JOBLEVEL job "
       + "WHERE job.TAG_DIVISION =:TAG_DIVISION",

@@ -11,26 +11,26 @@ import javax.persistence.NamedNativeQuery;
     name = "reportStatusEmployee",
     query = "Select emp.id, "
       + "emp.EMPLOYEE_CODE as employeeCode, "
-      + "DATE_FORMAT(official.START_WORK_DATE,'%d-%m-%Y') as startWorkDate, "
+//      + "DATE_FORMAT(official.START_WORK_DATE,'%d-%m-%Y') as startWorkDate, "
       + "app.LASTNAME_EN  as lastEng, "
       + "app.FIRSTNAME_EN  as nameEng, "
       + "DATE_FORMAT(app.BIRTHDATE,'%d-%m-%Y') as dateOfBirth, "
       + "app.AGE as age, "
       + "staff.STAFFTYPENAME as statusStaff, "
-      + "site.PROJECTOWNER as projectOwner, "
-      + "DATE_FORMAT(site.STARTDATE,'%d-%m-%Y') as startDate, "
-      + "DATE_FORMAT(site.ENDDATE,'%d-%m-%Y') as endDate, "
+//      + "site.PROJECTOWNER as projectOwner, "
+//      + "DATE_FORMAT(site.STARTDATE,'%d-%m-%Y') as startDate, "
+//      + "DATE_FORMAT(site.ENDDATE,'%d-%m-%Y') as endDate, "
       + "TIMESTAMPDIFF(YEAR, app.BIRTHDATE, now() ) as year, "
       + "TIMESTAMPDIFF(MONTH, app.BIRTHDATE, now() ) % 12 as month, "
-      + "FLOOR(TIMESTAMPDIFF( DAY, app.BIRTHDATE, now() ) % 30.4375 ) as day, "
-      + "TIMESTAMPDIFF(YEAR, official.start_work_date, now() ) as yearwork, "
-      + "TIMESTAMPDIFF(MONTH, official.start_work_date, now() ) % 12 as monthwork, "
-      + "FLOOR(TIMESTAMPDIFF( DAY,official.start_work_date, now() ) % 30.4375 ) as daywork  "
+      + "FLOOR(TIMESTAMPDIFF( DAY, app.BIRTHDATE, now() ) % 30.4375 ) as day "
+//      + "TIMESTAMPDIFF(YEAR, official.start_work_date, now() ) as yearwork, "
+//      + "TIMESTAMPDIFF(MONTH, official.start_work_date, now() ) % 12 as monthwork, "
+//      + "FLOOR(TIMESTAMPDIFF( DAY,official.start_work_date, now() ) % 30.4375 ) as daywork  "
       + "from EMPLOYEE as emp  "
       + "join applicant as app on emp.applicant_id = app.id "
-      + "join SITE as site on site.employee_ID = emp.ID "
-      + "join OFFICIAL as official on app.OFFICIAL_ID = OFFICIAL.ID "
-      + "join MAS_STAFFTYPE as staff on staff.ID = emp.ID "
+//      + "join SITE as site on site.employee_ID = emp.ID "
+//      + "join OFFICIAL as official on app.OFFICIAL_ID = OFFICIAL.ID "
+      + "join MAS_STAFFTYPE as staff on staff.ID = emp.STAFFTYPE_ID "
       + "where staff.STAFFTYPENAME like :statusStaff",
     resultClass = ReportStatusEmployeeDto.class)
 })
@@ -57,17 +57,17 @@ public class ReportStatusEmployeeDto {
   @Column(name = "age")
   private Integer age;
 
-  @Column(name = "projectOwner")
-  private String projectOwner;
+//  @Column(name = "projectOwner")
+//  private String projectOwner;
 
-  @Column(name = "startWorkDate")
-  private String startWorkDate;
+//  @Column(name = "startWorkDate")
+//  private String startWorkDate;
 
-  @Column(name = "startDate")
-  private String startDate;
+//  @Column(name = "startDate")
+//  private String startDate;
 
-  @Column(name = "endDate")
-  private String endDate;
+//  @Column(name = "endDate")
+//  private String endDate;
 
   @Column(name = "year")
   private Integer year;
@@ -78,14 +78,14 @@ public class ReportStatusEmployeeDto {
   @Column(name = "day")
   private Integer day;
 
-  @Column(name = "yearwork")
-  private Integer yearwork;
-
-  @Column(name = "monthwork")
-  private Integer monthwork;
-
-  @Column(name = "daywork")
-  private Integer daywork;
+//  @Column(name = "yearwork")
+//  private Integer yearwork;
+//
+//  @Column(name = "monthwork")
+//  private Integer monthwork;
+//
+//  @Column(name = "daywork")
+//  private Integer daywork;
 
   @Column(name = "statusStaff")
   private String statusStaff;
@@ -138,37 +138,37 @@ public class ReportStatusEmployeeDto {
     this.age = age;
   }
 
-  public String getProjectOwner() {
-    return projectOwner;
-  }
+//  public String getProjectOwner() {
+//    return projectOwner;
+//  }
+//
+//  public void setProjectOwner(String projectOwner) {
+//    this.projectOwner = projectOwner;
+//  }
 
-  public void setProjectOwner(String projectOwner) {
-    this.projectOwner = projectOwner;
-  }
+//  public String getStartWorkDate() {
+//    return startWorkDate;
+//  }
+//
+//  public void setStartWorkDate(String startWorkDate) {
+//    this.startWorkDate = startWorkDate;
+//  }
 
-  public String getStartWorkDate() {
-    return startWorkDate;
-  }
-
-  public void setStartWorkDate(String startWorkDate) {
-    this.startWorkDate = startWorkDate;
-  }
-
-  public String getStartDate() {
-    return startDate;
-  }
-
-  public void setStartDate(String startDate) {
-    this.startDate = startDate;
-  }
-
-  public String getEndDate() {
-    return endDate;
-  }
-
-  public void setEndDate(String endDate) {
-    this.endDate = endDate;
-  }
+//  public String getStartDate() {
+//    return startDate;
+//  }
+//
+//  public void setStartDate(String startDate) {
+//    this.startDate = startDate;
+//  }
+//
+//  public String getEndDate() {
+//    return endDate;
+//  }
+//
+//  public void setEndDate(String endDate) {
+//    this.endDate = endDate;
+//  }
 
   public Integer getYear() {
     return year;
@@ -194,29 +194,29 @@ public class ReportStatusEmployeeDto {
     this.day = day;
   }
 
-  public Integer getYearwork() {
-    return yearwork;
-  }
-
-  public void setYearwork(Integer yearwork) {
-    this.yearwork = yearwork;
-  }
-
-  public Integer getMonthwork() {
-    return monthwork;
-  }
-
-  public void setMonthwork(Integer monthwork) {
-    this.monthwork = monthwork;
-  }
-
-  public Integer getDaywork() {
-    return daywork;
-  }
-
-  public void setDaywork(Integer daywork) {
-    this.daywork = daywork;
-  }
+//  public Integer getYearwork() {
+//    return yearwork;
+//  }
+//
+//  public void setYearwork(Integer yearwork) {
+//    this.yearwork = yearwork;
+//  }
+//
+//  public Integer getMonthwork() {
+//    return monthwork;
+//  }
+//
+//  public void setMonthwork(Integer monthwork) {
+//    this.monthwork = monthwork;
+//  }
+//
+//  public Integer getDaywork() {
+//    return daywork;
+//  }
+//
+//  public void setDaywork(Integer daywork) {
+//    this.daywork = daywork;
+//  }
 
   public String getStatusStaff() {
     return statusStaff;

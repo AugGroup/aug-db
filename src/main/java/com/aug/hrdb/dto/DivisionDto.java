@@ -13,12 +13,14 @@ import javax.persistence.NamedNativeQuery;
 @Entity
 @NamedNativeQueries({
 
-  @NamedNativeQuery(name = "CHECK_DIVISION",
+  @NamedNativeQuery(
+    name = "CHECK_DIVISION",
     query = "SELECT divi.ID,divi.NAME,divi.TAG "
       + "FROM MAS_DIVISION divi "
       + "WHERE divi.TAG=:TAG",
     resultClass = DivisionDto.class),
-  @NamedNativeQuery(name = "FIND_BY_ID_DIVISION",
+  @NamedNativeQuery(
+    name = "FIND_BY_ID_DIVISION",
     query = "SELECT divi.ID,divi.NAME,divi.TAG "
       + "FROM MAS_DIVISION divi "
       + "WHERE divi.ID=:ID",

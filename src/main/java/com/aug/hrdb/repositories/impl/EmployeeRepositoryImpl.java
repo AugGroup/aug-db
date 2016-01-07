@@ -42,7 +42,7 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
     c.createAlias("applicant", "applicant");
 
     if (!StringUtils.isNullOrEmpty(employee.getApplicant().getFirstNameEN())) {
-      c.add(Restrictions.like("firstNameEN", "%" + employee.getApplicant().getFirstNameEN() + "%"));
+      c.add(Restrictions.like("applicant.firstNameEN", "%" + employee.getApplicant().getFirstNameEN() + "%"));
     }
 
     return c.list();
@@ -51,20 +51,20 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   @SuppressWarnings("unchecked")
   public List<EmployeeListDto> searchEmployee() {
-    Query namedQuery = getCurrentSession().getNamedQuery("searchEmployee");
-    List<EmployeeListDto> empDto = namedQuery.list();
+    Query query = getCurrentSession().getNamedQuery("searchEmployee");
+    List<EmployeeListDto> employeeListDtoList = query.list();
 
-    return empDto;
+    return employeeListDtoList;
 
   }
 
   @SuppressWarnings("unchecked")
   @Override
   public List<AimEmployeeDto> listEmployeeAim() {
-    Query aimnamedQuery = getCurrentSession().getNamedQuery("listEmployeeAim");
-    List<AimEmployeeDto> aimemp = aimnamedQuery.list();
+    Query query = getCurrentSession().getNamedQuery("listEmployeeAim");
+    List<AimEmployeeDto> aimEmployeeDtoList = query.list();
 
-    return aimemp;
+    return aimEmployeeDtoList;
 
   }
 
@@ -136,16 +136,10 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   @SuppressWarnings("unchecked")
   public List<ReportEmployeeDto> findByName(Employee employee) {
+    Query query = getCurrentSession().getNamedQuery("reportEmployee");
+    query.setString("name", "%" + employee.getApplicant().getFirstNameEN() + "%");
 
-    Criteria c = getCurrentSession().createCriteria(ReportEmployeeDto.class);
-    c.setFetchMode("applicant", FetchMode.JOIN);
-    c.createAlias("applicant", "applicant");
-
-    if (!StringUtils.isNullOrEmpty(employee.getApplicant().getFirstNameEN())) {
-      c.add(Restrictions.like("firstNameEN", "%" + employee.getApplicant().getFirstNameEN() + "%"));
-    }
-
-    return c.list();
+    return query.list();
 
   }
 

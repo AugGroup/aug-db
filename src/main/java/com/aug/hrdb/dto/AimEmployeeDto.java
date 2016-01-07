@@ -37,7 +37,7 @@ public class AimEmployeeDto {
   private String name_eng;
 
   @Column(name = "AIM_EMP_ID")
-  private String aimEmpId;
+  private Integer aimEmpId;
 
   public Integer getId() {
     return id;
@@ -55,11 +55,11 @@ public class AimEmployeeDto {
     this.name_eng = name_eng;
   }
 
-  public String getAimEmpId() {
+  public Integer getAimEmpId() {
     return aimEmpId;
   }
 
-  public void setAimEmpId(String aimEmpId) {
+  public void setAimEmpId(Integer aimEmpId) {
     this.aimEmpId = aimEmpId;
   }
 

@@ -3,6 +3,7 @@ package com.aug.hrdb.repositories;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import com.aug.hrdb.dto.*;
 import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,9 @@ import java.util.List;
 public class EmployeeRepositoryTest {
 
   @Autowired
+  private MasLocationRepository masLocationRepository;
+
+  @Autowired
   private MasCoreSkillRepository masCoreSkillRepository;
 
   @Autowired
@@ -39,9 +43,12 @@ public class EmployeeRepositoryTest {
   private ApplicantRepository applicantRepository;
 
   @Autowired
+  private MasStaffTypeRepository masStaffTypeRepository;
+
+  @Autowired
   private EmployeeRepository employeeRepository;
 
-  private Employee employee;
+  private Employee employee, aim;
 
   @Before
   public void setUp() throws Exception {
@@ -83,6 +90,16 @@ public class EmployeeRepositoryTest {
     applicant.setFirstNameEN("Anat");
     applicantRepository.create(applicant);
 
+    Applicant applicant2 = new Applicant();
+    applicant2.setAuditFlag("C");
+    applicant2.setCreatedBy(1);
+    applicant2.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant2.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+    applicant2.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+    applicant2.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+    applicant2.setFirstNameEN("Aim");
+    applicantRepository.create(applicant2);
+
     // create mas division
     MasDivision masDivision = new MasDivision();
     masDivision.setAuditFlag("C");
@@ -91,7 +108,43 @@ public class EmployeeRepositoryTest {
     masDivision.setIsActive(true);
     masDivision.setCode("ITS");
     masDivision.setName("Integrate Technology Services");
+    masDivision.setTag("B");
     masDivisionRepository.create(masDivision);
+
+    // create staff type
+    MasStaffType masStaffType = new MasStaffType();
+    masStaffType.setAuditFlag("C");
+    masStaffType.setCreatedBy(1);
+    masStaffType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masStaffType.setName("Billable");
+    masStaffType.setCode("01A");
+    masStaffType.setIsActive(true);
+    masStaffTypeRepository.create(masStaffType);
+
+    //create mas location
+    MasLocation masLocation = new MasLocation();
+    masLocation.setAuditFlag("C");
+    masLocation.setCreatedBy(1);
+    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masLocation.setCode("TH");
+    masLocation.setName("Thailand");
+    masLocation.setIsActive(true);
+    masLocationRepository.create(masLocation);
+
+    // create aim
+    aim = new Employee();
+    aim.setAuditFlag("C");
+    aim.setCreatedBy(1);
+    aim.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    aim.setEmployeeCode("TEST9999");
+    aim.setStatusEmp("Employee");
+    aim.setTelHome("02-9999999");
+    aim.setApplicant(applicant2);
+    aim.setMasDivision(masDivision);
+    aim.setMasStaffType(masStaffType);
+    aim.setIsManager(1);
+    aim.setMasLocation(masLocation);
+    employeeRepository.create(aim);
 
     // create employee
     employee = new Employee();
@@ -103,6 +156,9 @@ public class EmployeeRepositoryTest {
     employee.setTelHome("02-9998877");
     employee.setApplicant(applicant);
     employee.setMasDivision(masDivision);
+    employee.setMasStaffType(masStaffType);
+    employee.setAimEmpId(aim);
+    employee.setMasLocation(masLocation);
     employeeRepository.create(employee);
 
   }
@@ -166,6 +222,149 @@ public class EmployeeRepositoryTest {
 
     Employee result = employeeRepository.find(delete.getId());
     assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByCriteriaWithEmployeeRepositoryShouldReturnListOfEmployeeOfThatFirstNameEn() throws Exception {
+    List<Employee> result = employeeRepository.findByCriteria(employee);
+    assertNotNull(result);
+    assertThat(result.get(0).getApplicant().getFirstNameEN(), is("Anat"));
+
+  }
+
+  @Test
+  public void testSearchEmployeeWithEmployeeRepositoryShouldReturnListOfEmployeeListDto() throws Exception {
+    List<EmployeeListDto> result = employeeRepository.searchEmployee();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testListEmployeeAimWithEmployeeRepositoryShouldReturnListOfAimEmployeeDto() throws Exception {
+    List<AimEmployeeDto> result = employeeRepository.listEmployeeAim();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testSearchEmpIdToAddressWithEmployeeRepositoryShouldReturnLastCreateEmployee() throws Exception {
+    Employee result = employeeRepository.searchEmpIdToAddress();
+    assertNotNull(result);
+    assertThat(result.getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getEmployeeCode(), is("TEST0001"));
+
+  }
+
+  @Test
+  public void testReportEmployeeWithEmployeeRepositoryShouldReturnListOfReportEmployeeDTOOfThatName() throws Exception {
+    List<ReportEmployeeDto> result = employeeRepository.reportEmployee(employee.getApplicant().getFirstNameEN());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameEng(), is("Anat"));
+
+  }
+
+  @Test
+  public void testReportStatusEmployeeWithEmployeeRepositoryShouldReturnListOfReportStatusEmployeeDtoOfThatStatusStaff() throws Exception {
+    List<ReportStatusEmployeeDto> result = employeeRepository.reportStatusEmployee(employee.getMasStaffType().getName());
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(2)));
+    assertThat(result.get(0).getStatusStaff(), is("Billable"));
+
+  }
+
+//  wait leave
+//  @Test
+//  public void testReportLeaveWithEmployeeRepositoryShouldReturnListOfReportLeaveDTOOfThatNameEng() throws Exception {
+//
+//  }
+
+  @Test
+  public void testFindCurrentIdWithEmployeeRepositoryShouldReturnLastCreateEmployee() throws Exception {
+    EmployeeIdDto result = employeeRepository.findCurrentId();
+    assertNotNull(result);
+    assertThat(result.getId(), is(employee.getId()));
+
+  }
+
+//  wait official and site
+//  @Test
+//  public void testFindEmployeeAndOfficialWithEmployeeRepositoryShouldReturnEmployeeThatId() throws Exception {
+//
+//  }
+
+  @Test
+  public void testFindAimRelateWithEmployeeRepositoryShouldReturnListOfEmployeeOfThatAim() throws Exception {
+    List<Employee> result = employeeRepository.findAimRelateWithEmployee(aim.getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
+  }
+
+  @Test
+  public void testFindByNameWithEmployeeRepositoryShouldReturnListOfReportEmployeeDtoOfThatName() throws Exception {
+    List<ReportEmployeeDto> result = employeeRepository.findByName(employee);
+    assertNotNull(result);
+    assertThat(result.get(0).getNameEng(), is("Anat"));
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
+
+  }
+
+//  wait official and site
+//  @Test
+//  public void testFindByNameStatusWithEmployeeShouldReturnListOfReportStatusEmployeeDtoOfThatName() throws Exception {
+//
+//  }
+
+//  wait official
+//  @Test
+//  public void testReportEmployeeCodeWithEmployeeRepositoryShouldReturnListOfReportEmployeeDtoOfThatCode() throws Exception {
+//
+//  }
+
+//  not clear
+//  @Test
+//  public void testListEmployeeAimForUpdateWithEmployeeRepositoryShouldReturnListOfAimEmployeeDtoOFThatEmployeeId() throws Exception {
+//
+//  }
+
+//  not clear
+//  @Test
+//  public void testSearchEmpForUniqueIdCardWithEmployeeRepositoryShouldReturnListOfEmployeeListDto() throws Exception {
+//
+//  }
+
+
+  @Test
+  public void testFindEmployeeCodeWithEmployeeRepositoryShouldReturnListOfEmployeeCodeDtoOfThatLocationId() throws Exception {
+    List<EmployeeCodeDto> result = employeeRepository.findEmployeeCode(employee.getMasLocation().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getEmployeeCode(), is("TEST0001"));
+
+  }
+
+  @Test
+  public void testCheckTagWithEmployeeRepositoryShouldReturnListOfDivisionDtoOfThatTag() throws Exception {
+    List<DivisionDto> result = employeeRepository.checkTag(employee.getMasDivision().getTag());
+    assertNotNull(result);
+    assertThat(result.get(0).getTag(), is("B"));
+
+  }
+
+  @Test
+  public void testCheckTagDivisionWithEmployeeRepositoryShouldReturnListOfJobLevelDtoOfThatTagDivision() throws Exception {
+    List<JoblevelDto> result = employeeRepository.checkTagDivision(employee.getMasDivision().getTag());
+    assertNotNull(result);
+    assertThat(result.get(0).getTagDivision(), is("B"));
+
+  }
+
+  @Test
+  public void testFindByIdDivisionWithEmployeeRepositoryShouldReturnTagOfThatId() throws Exception {
+    String result = employeeRepository.findByIdDivision(employee.getMasDivision().getId());
+    assertThat(result, is("B"));
 
   }
 
