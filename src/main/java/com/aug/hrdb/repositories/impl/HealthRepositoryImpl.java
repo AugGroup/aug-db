@@ -1,7 +1,6 @@
 package com.aug.hrdb.repositories.impl;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -14,36 +13,31 @@ import com.aug.hrdb.dto.HealthDto;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.repositories.HealthRepository;
 
+@Repository(value = "healthRepository")
+public class HealthRepositoryImpl extends GenericRepositoryImpl<Health, Integer> implements HealthRepository, Serializable {
 
+  public HealthRepositoryImpl() {
+    super(Health.class);
+  }
 
-@Repository
-public class HealthRepositoryImpl extends GenericRepositoryImpl<Health, Integer> implements HealthRepository,Serializable{
+  @Override
+  public List<HealthDto> listHealth(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("listHealth").setInteger("empId", id);
+    List<HealthDto> healthDtoList = query.list();
 
-	
-	private static final long serialVersionUID = 1L;
+    return healthDtoList;
 
-	public HealthRepositoryImpl() {
-		super(Health.class);
-	}
+  }
 
-	
-	@Override
-	public List<HealthDto> listHealth(Integer id) {
-		// TODO Auto-generated method stub
-		Query query =  getCurrentSession().getNamedQuery("listHealth").setInteger("empId" ,id);
-		List<HealthDto> healthDtoList = query.list();
-		return healthDtoList;
-	}
+  @Override
+  public Health findByEmployeeId(Integer id) {
+    Criteria c = getCurrentSession().createCriteria(Health.class, "health");
+    c.setFetchMode("employee", FetchMode.JOIN);
+    c.createAlias("employee", "employee");
+    c.add(Restrictions.eq("health.employee.id", id));
 
+    return (Health) c.uniqueResult();
 
-	@Override
-	public Health findByEmployeeId(Integer id) {
-		// TODO Auto-generated method stub
-		Criteria c = getCurrentSession().createCriteria(Health.class,"health");
-		c.setFetchMode("employee",FetchMode.JOIN);
-		c.createAlias("employee", "employee");
-		c.add(Restrictions.eq("health.employee.id", id));
-		return (Health) c.uniqueResult();
-	}
+  }
 
 }
