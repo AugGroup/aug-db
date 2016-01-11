@@ -128,7 +128,7 @@ public class HistoryServiceTest {
   }
 
   @Test
-  public void testLoadRepositoriesShouldPass() throws Exception {
+  public void testLoadServicesShouldPass() throws Exception {
     assertNotNull(historyService);
     assertNotNull(masCoreSkillService);
     assertNotNull(masJobLevelService);

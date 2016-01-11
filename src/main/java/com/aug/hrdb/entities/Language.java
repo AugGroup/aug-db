@@ -1,6 +1,5 @@
 package com.aug.hrdb.entities;
 
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,108 +9,88 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
-@Table(name="LANGUAGE")
+@Table(name = "LANGUAGE")
+public class Language extends BaseEntity {
 
-public class Language extends BaseEntity{
-	
-	@Id
-	@GeneratedValue
-	@Column(name="ID")
-	private Integer id;
-	@Column(name="NAMELANGUAGE")
-	private String  nameLanguage;
-	@Column(name="SPEAKING")
-	private String  speaking;
-	@Column(name="READING")
-	private String  reading;
-	@Column(name="UNDERSTANDING")
-	private String  understanding;
-	@Column(name="WRITING")
-	private String  writing;
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "APPLICANT_ID" , nullable=false)
-	private Applicant applicant;
-	
-	
-	
-	
+  @Id
+  @GeneratedValue
+  @Column(name = "ID")
+  private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
-	
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "NAMELANGUAGE")
+  private String nameLanguage;
 
-	public String getNameLanguage() {
-		return nameLanguage;
-	}
+  @Column(name = "SPEAKING")
+  private String speaking;
 
-	public void setNameLanguage(String nameLanguage) {
-		this.nameLanguage = nameLanguage;
-	}
+  @Column(name = "READING")
+  private String reading;
 
-	
-	public String getSpeaking() {
-		return speaking;
-	}
+  @Column(name = "UNDERSTANDING")
+  private String understanding;
 
-	
+  @Column(name = "WRITING")
+  private String writing;
 
-	public void setSpeaking(String speaking) {
-		this.speaking = speaking;
-	}
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "APPLICANT_ID", nullable = false)
+  private Applicant applicant;
 
+  public Integer getId() {
+    return id;
+  }
 
-	public String getReading() {
-		return reading;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setReading(String reading) {
-		this.reading = reading;
-	}
+  public String getNameLanguage() {
+    return nameLanguage;
+  }
 
-	
-	public String getUnderstanding() {
-		return understanding;
-	}
+  public void setNameLanguage(String nameLanguage) {
+    this.nameLanguage = nameLanguage;
+  }
 
-	public void setUnderstanding(String understanding) {
-		this.understanding = understanding;
-	}
+  public String getSpeaking() {
+    return speaking;
+  }
 
-	
-	public String getWriting() {
-		return writing;
-	}
+  public void setSpeaking(String speaking) {
+    this.speaking = speaking;
+  }
 
-	public void setWriting(String writing) {
-		this.writing = writing;
-	}
+  public String getReading() {
+    return reading;
+  }
 
-	
+  public void setReading(String reading) {
+    this.reading = reading;
+  }
 
-	public Applicant getApplicant() {
-		return applicant;
-	}
+  public String getUnderstanding() {
+    return understanding;
+  }
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
-	}
-	
-	
-		
-	
+  public void setUnderstanding(String understanding) {
+    this.understanding = understanding;
+  }
 
+  public String getWriting() {
+    return writing;
+  }
 
+  public void setWriting(String writing) {
+    this.writing = writing;
+  }
 
-	
-	
+  public Applicant getApplicant() {
+    return applicant;
+  }
 
-	
-	
+  public void setApplicant(Applicant applicant) {
+    this.applicant = applicant;
+  }
 
 }

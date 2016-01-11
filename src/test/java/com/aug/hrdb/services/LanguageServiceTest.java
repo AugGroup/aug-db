@@ -1,237 +1,259 @@
 /**
- *
  * @author Pranrajit
  * @date 4 ก.ย. 2558
  */
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.LanguageDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Ability;
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Language;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.LanguageService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasTechnologyService;
-
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class LanguageServiceTest {
 
-	@Autowired private LanguageService languageService;
-	@Autowired private ApplicantService applicantService;
-	@Autowired private MasJobLevelService masJoblevelService;
-	@Autowired private MasDivisionService masDivisionService;
-	@Autowired private EmployeeService employeeService;
-	@Autowired private MasTechnologyService masTechnologyService;
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-	private	 Employee employee;
-	int id;
-	int masdi;
-	int appId;
-	int masjobId;
-	int mastec;
-	
-	@Before
-	public void setAbility() {
-		employee = new Employee();
-        /*employee.setIdCard("115310905001-9");
-        employee.setNameThai("อภิวาท์");
-        employee.setNameEng("apiva");
-        employee.setNicknameThai("va");
-        employee.setNicknameEng("va");
-        employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-22");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        
-		MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		mastec=masTechnology.getId();
- 		
-		MasTechnology mTechnology = masTechnologyService.findById(mastec);
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		masJoblevelService.create(masJoblevel);
-		masjobId=masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.findById(masjobId);
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
-		applicantService.create(applicant);
-		appId=applicant.getId();
-		
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
+  @Autowired
+  private ApplicantService applicantService;
 
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masdi=masDivision.getId();
-		masDivisionService.findById(masdi);
-		employee.setMasDivision(masDivision);
-		
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-		
-	//employee.setMasJoblevel(mJob);
-		employeeService.create(employee);
-	
-		Applicant applicant2=applicantService.findById(appId);
-		Language language=new Language();
-		 language.setNameLanguage("Thai");
-		 language.setSpeaking("good");
-		 language.setReading("good");
-		 language.setWriting("good");
-		 language.setUnderstanding("good");
-		 language.setAuditFlag("C");
-		 language.setCreatedBy(1);
-		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 language.setApplicant(applicant2);
-		 languageService.create(language);
-		
-		 id = language.getId();
-		    //System.out.println("id: "+id);
-	
-	}
-	
-	
-	
-	
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void create() {
-		Applicant applicant=applicantService.findById(1);
-		Language language=new Language();
-		language.setNameLanguage("Thai");
-		 language.setSpeaking("good");
-		 language.setReading("good");
-		 language.setWriting("good");
-		 language.setUnderstanding("good");
-		 language.setAuditFlag("C");
-		 language.setCreatedBy(1);
-		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 language.setApplicant(applicant);
-		 languageService.create(language);
-		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void update() {
-		Language skillLanguage=languageService.find(id);
-		 skillLanguage.setNameLanguage("Thai");
-		 skillLanguage.setSpeaking("well");
-		 skillLanguage.setReading("well");
-		 skillLanguage.setWriting("well");
-		 skillLanguage.setUnderstanding("well");
-		 languageService.update(skillLanguage);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void delete() {
-		Language skillLanguage=languageService.find(id);
-		languageService.delete(skillLanguage);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findAll() {
-		List<Language>skillLanguage=languageService.findAll();
-		
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findById() {
+  @Autowired
+  private EmployeeService employeeService;
 
-		Language skillLanguage =(Language) languageService.find(id);
-		int id = skillLanguage.getId();
-		Assert.assertEquals(id,id);
-	}
-	
+  @Autowired
+  private LanguageService languageService;
+
+  private Language language;
+
+  private Employee employee;
+
+  @Before
+  public void setAbility() {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    // create language
+    language = new Language();
+    language.setAuditFlag("C");
+    language.setCreatedBy(1);
+    language.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    language.setNameLanguage("English");
+    language.setApplicant(applicant);
+    languageService.create(language);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(languageService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithLanguageServiceShouldReturnLanguageThatSetup() throws Exception {
+    Language result = languageService.find(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindAllWithLanguageServiceShouldReturnListOfAllLanguage() throws Exception {
+    List<Language> result = languageService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithLanguageServiceShouldReturnLanguageThatUpdate() throws Exception {
+    Language update = languageService.find(language.getId());
+    assertThat(update.getNameLanguage(), is("English"));
+
+    update.setNameLanguage("Chinese");
+    languageService.update(update);
+
+    Language result = languageService.find(update.getId());
+    assertThat(result.getNameLanguage(), is("Chinese"));
+
+  }
+
+  @Test
+  public void testDeleteWithLanguageServiceShouldNotFindThatLanguage() throws Exception {
+    Language delete = languageService.find(language.getId());
+    languageService.delete(delete);
+
+    Language result = languageService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithLanguageServiceShouldNotFindThatLanguage() throws Exception {
+    Language delete = languageService.find(language.getId());
+    languageService.deleteById(delete.getId());
+
+    Language result = languageService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindLanguagesByIdWithLanguageServiceShouldReturnListOfLanguageDtoOfThatApplicantId() throws Exception {
+    List<LanguageDto> result = languageService.findLanguagesById(language.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindByLanguagesIdWithLanguageServiceShouldReturnLanguageDtoOfThaLanguageId() throws Exception {
+    LanguageDto result = languageService.findByLanguagesId(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testListLanguageByEmployeeWithLanguageServiceShouldReturnListOfLanguageDtoOfThatApplicantId() throws Exception {
+    List<LanguageDto> result = languageService.listLanguageByEmployee(language.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindIdJoinEmployeeWithLanguageServiceShouldReturnLanguageOfThaLanguageId() throws Exception {
+    Language result = languageService.findIdJoinEmployee(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testCheckLanguageNameWithLanguageServiceShouldReturnBoolean() throws Exception {
+    Boolean result = languageService.checkLanguageName(language.getApplicant().getId(), language.getNameLanguage());
+    assertThat(result, is(false));
+
+    Boolean result2 = languageService.checkLanguageName(language.getApplicant().getId(), "Chinese");
+    assertThat(result2, is(true));
+
+  }
+
+  @Test
+  public void testSaveByFindEmployeeWithLanguageServiceShouldPass() throws Exception {
+    LanguageDto languageDto = languageService.findByLanguagesId(language.getId());
+    languageService.saveByFindEmployee(employee.getId(), languageDto);
+
+  }
+
+  @Test
+  public void testFindLanguageEmployeeByIdWithLanguageServiceShouldReturnLanguageDtoOfThatLanguageId() throws Exception {
+    LanguageDto result = languageService.findLanguageEmployeeById(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testUpdateSetLanguageWithLanguageServiceShouldPass() throws Exception {
+    LanguageDto languageDto = languageService.findByLanguagesId(language.getId());
+    assertNotNull(languageDto);
+    assertThat(languageDto.getNameLanguage(), is("English"));
+
+    languageDto.setNameLanguage("Chinese");
+    languageService.updateSetLanguage(languageDto);
+
+    Language result = languageService.find(languageDto.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("Chinese"));
+
+  }
+
 }

@@ -1,249 +1,227 @@
 /**
- *
  * @author Pranrajit
  * @date 4 ก.ย. 2558
  */
 package com.aug.hrdb.repositories;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import javax.swing.text.MaskFormatter;
-
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.LanguageDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Language;
-import com.aug.hrdb.entities.Leave;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.LanguageRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class LanguageRepositoryTest {
-	
-	 @Autowired private LanguageRepository languageRepository;
-	 @Autowired private EmployeeRepository employeeRepository;
-	 @Autowired private MasJobLevelRepository masJoblevelRepository;
-	 @Autowired private ApplicantRepository applicantRepository;
-	 @Autowired private MasDivisionRepository masDivisionRepository;
-	 @Autowired private MasTechnologyRepository masTechnologyRepository;
-			
-	 
-	 
-	 private	 Employee employee;
-		int id;
-		int masdiId;
-		int appId;
-		int masjobId;
-		int mastecId;
-		
-		@Before
-		public void setAbility() {
-			employee = new Employee();
-	        /*employee.setIdCard("115310905001-9");
-	        employee.setNameThai("อภิวาท์");
-	        employee.setNameEng("apiva");
-	        employee.setNicknameThai("va");
-	        employee.setNicknameEng("va");
-	        employee.setSurnameThai("กิมเกถนอม");
-	        employee.setSurnameEng("kimkatanom");*/
-	        
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			/*employee.setDateOfBirth(date);
-	        employee.setEmail("test@gmail.com");
-	        employee.setEmergencyContact("mom");*/
-	        employee.setEmployeeCode("EMP-22");
-	        employee.setStatusEmp("Employee");
-	        employee.setTelHome("089-0851022");
-	        /*employee.setTelMobile("089-0851022");
-	        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-	        employee.setAuditFlag("C");
-	        employee.setCreatedBy(1);
-	        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	        
-	        
-	        
-	        MasTechnology masTechnology = new MasTechnology();
-			masTechnology.setName("java");
-			masTechnology.setCode("001A");
-			masTechnology.setIsActive(true);
-			masTechnology.setAuditFlag("C");
-			masTechnology.setCreatedBy(0);
-			Calendar cal = Calendar.getInstance();
-			masTechnology.setCreatedTimeStamp(cal.getTime());
-			masTechnologyRepository.create(masTechnology);
-			mastecId=masTechnology.getId();
-	 		
-			MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
-	 		
 
-			MasJobLevel masJoblevel = new MasJobLevel();
-			masJoblevel.setName("CEO");
-			masJoblevel.setIsActive(true);
-			masJoblevel.setCode("01");
-			masJoblevel.setAuditFlag("C");
-			masJoblevel.setCreatedBy(1);
-			masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasCoreSkillRepository masCoreSkillRepository;
 
-			masJoblevelRepository.create(masJoblevel);
-			masjobId=masJoblevel.getId();
-			MasJobLevel mJob= masJoblevelRepository.find(masjobId);
-	 		
-	        
-	        Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setTechnology(mTechnology);
-			applicant.setJoblevel(mJob);
-			applicantRepository.create(applicant);
-			appId=applicant.getId();
-			
-	        Applicant applicant1 = applicantRepository.find(appId);
-	        Hibernate.initialize(applicant1);
-	        
-	        
-	       
-	        
-	        employee.setApplicant(applicant1);
-	         
-	    
-		
-			MasDivision masDivision = new MasDivision();
-			masDivision.setName("CEO");
-			masDivision.setIsActive(true);
-			masDivision.setCode("01");
-			masDivision.setAuditFlag("C");
-			masDivision.setCreatedBy(1);
-			masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masDivision.setCode("Division-01");
-			
-			masDivisionRepository.create(masDivision);
-			masdiId=masDivision.getId();
-			masDivisionRepository.find(masdiId);
-			employee.setMasDivision(masDivision);
-			
+  @Autowired
+  private MasJobLevelRepository masJobLevelRepository;
 
-			
-			//employee.setMasJoblevel(mJob);
-			employeeRepository.create(employee);
-			
-			
-			
-			 Applicant applicant2=applicantRepository.find(appId);
-			 
-			 Language language=new Language();
-			 language.setNameLanguage("Thai");
-			 language.setSpeaking("good");
-			 language.setReading("good");
-			 language.setWriting("good");
-			 language.setUnderstanding("good");
-			 language.setAuditFlag("C");
-			 language.setCreatedBy(1);
-			 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			 language.setApplicant(applicant2);
-			 languageRepository.create(language);
-				id = language.getId();
-			    System.out.println("id: "+id);
-		}
-	 
-	 
-	 
-	 @Test
-	 @Rollback(true)
-		public void createSkillLanguage(){
-		 Applicant applicant=applicantRepository.find(appId);
-		 
-		 Language language=new Language();
-		 language.setNameLanguage("Thai");
-		 language.setSpeaking("good");
-		 language.setReading("good");
-		 language.setWriting("good");
-		 language.setUnderstanding("good");
-		 language.setAuditFlag("C");
-		 language.setCreatedBy(1);
-		 language.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		 language.setApplicant(applicant);
-		 languageRepository.create(language);
-		 
-	 }
-	 
-	 @Test
-	 @Rollback(true)
-		public void updateSkillLanguage(){
-		 Language skillLanguage=(Language)languageRepository.getCurrentSession().get(Language.class,id);
-		 skillLanguage.setNameLanguage("Thai");
-		 skillLanguage.setSpeaking("well");
-		 skillLanguage.setReading("well");
-		 skillLanguage.setWriting("well");
-		 skillLanguage.setUnderstanding("well");
-		 languageRepository.update(skillLanguage);
-	 }
-	 
-	 
-	 @Test
-	 @Rollback(true)
-		public void deleteSkillLanguage(){
-		 Language skillLanguage=(Language)languageRepository.getCurrentSession().get(Language.class, id);
-		 languageRepository.delete(skillLanguage);
-		 
-	 }
-	 
-	 
-	@Test
-		public void listSkillLanguage(){
-			
-			Criteria c = languageRepository.getCurrentSession().createCriteria(Language.class);
-			List<Language> SkillLanList = c.list();
-			
-			
-		}
-		
-		
-		@Test
-		public void findAllSkillLsn(){
-			
-			Criteria c = languageRepository.getCurrentSession().createCriteria(Language.class);
-			List<Language> SkillLanList = c.list();
-			
-			
-			
-		}
-	 
-	 
-	 
+  @Autowired
+  private MasTechnologyRepository masTechnologyRepository;
+
+  @Autowired
+  private ApplicantRepository applicantRepository;
+
+  @Autowired
+  private  MasDivisionRepository masDivisionRepository;
+
+  @Autowired
+  private  EmployeeRepository employeeRepository;
+
+  @Autowired
+  private LanguageRepository languageRepository;
+
+  private Language language;
+
+  @Before
+  public void setAbility() {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillRepository.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelRepository.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyRepository.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+    applicantRepository.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionRepository.create(masDivision);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeRepository.create(employee);
+
+    // create language
+    language = new Language();
+    language.setAuditFlag("C");
+    language.setCreatedBy(1);
+    language.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    language.setNameLanguage("English");
+    language.setApplicant(applicant);
+    languageRepository.create(language);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(languageRepository);
+    assertNotNull(masCoreSkillRepository);
+    assertNotNull(masJobLevelRepository);
+    assertNotNull(masTechnologyRepository);
+    assertNotNull(applicantRepository);
+
+  }
+
+  @Test
+  public void testFindWithLanguageRepositoryShouldReturnLanguageThatSetup() throws Exception {
+    Language result = languageRepository.find(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindAllWithLanguageRepositoryShouldReturnListOfAllLanguage() throws Exception {
+    List<Language> result = languageRepository.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithLanguageRepositoryShouldReturnLanguageThatUpdate() throws Exception {
+    Language update = languageRepository.find(language.getId());
+    assertThat(update.getNameLanguage(), is("English"));
+
+    update.setNameLanguage("Chinese");
+    languageRepository.update(update);
+
+    Language result = languageRepository.find(update.getId());
+    assertThat(result.getNameLanguage(), is("Chinese"));
+
+  }
+
+  @Test
+  public void testDeleteWithLanguageRepositoryShouldNotFindThatLanguage() throws Exception {
+    Language delete = languageRepository.find(language.getId());
+    languageRepository.delete(delete);
+
+    Language result = languageRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithLanguageRepositoryShouldNotFindThatLanguage() throws Exception {
+    Language delete = languageRepository.find(language.getId());
+    languageRepository.deleteById(delete.getId());
+
+    Language result = languageRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindLanguagesByIdWithLanguageRepositoryShouldReturnListOfLanguageDtoOfThatApplicantId() throws Exception {
+    List<LanguageDto> result = languageRepository.findLanguagesById(language.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindByLanguagesIdWithLanguageRepositoryShouldReturnLanguageDtoOfThaLanguageId() throws Exception {
+    LanguageDto result = languageRepository.findByLanguagesId(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testListLanguageByEmployeeWithLanguageRepositoryShouldReturnListOfLanguageDtoOfThatApplicantId() throws Exception {
+    List<LanguageDto> result = languageRepository.listLanguageByEmployee(language.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testFindIdJoinEmployeeWithLanguageRepositoryShouldReturnLanguageOfThaLanguageId() throws Exception {
+    Language result = languageRepository.findIdJoinEmployee(language.getId());
+    assertNotNull(result);
+    assertThat(result.getNameLanguage(), is("English"));
+
+  }
+
+  @Test
+  public void testCheckLanguageNameWithLanguageRepositoryShouldReturnBoolean() throws Exception {
+    Boolean result = languageRepository.checkLanguageName(language.getApplicant().getId(), language.getNameLanguage());
+    assertThat(result, is(false));
+
+    Boolean result2 = languageRepository.checkLanguageName(language.getApplicant().getId(), "Chinese");
+    assertThat(result2, is(true));
+
+  }
 
 }
