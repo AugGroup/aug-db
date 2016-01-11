@@ -1,244 +1,212 @@
 /**
- *
  * @author Preeyaporn
  * @date 7 ก.ย. 2558
  */
 package com.aug.hrdb.repositories;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import java.util.Calendar;
+import java.util.List;
+
+import com.aug.hrdb.dto.HistoryDto;
+import com.aug.hrdb.entities.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.History;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.HistoryRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasSpecialtyRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
+import static org.junit.Assert.assertNotNull;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class HistoryRepositoryTest {
-	
-	@Autowired private HistoryRepository historyRepository;
-	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasJobLevelRepository masJoblevelRepository;
-	@Autowired private ApplicantRepository applicantRepository;
-	@Autowired private MasDivisionRepository masDivisionRepository;
-	@Autowired private MasTechnologyRepository masTechnologyRepository;
-	
-	
-	
-	
-	
-	private	 Employee employee;
-	int id;
-	int empId; 
-	int masdiId;
-	int appId;
-	int masjobId;
-	int mastecId;
 
-	@Before
-	public void setHistory() {
-			
-		    employee=new Employee();
-		    /*employee.setIdCard("115310905001-9");
-	        employee.setNameThai("อภิวาท์");
-	        employee.setNameEng("apiva");
-	        employee.setNicknameThai("va");
-	        employee.setNicknameEng("va");
-	        employee.setSurnameThai("กิมเกถนอม");
-	        employee.setSurnameEng("kimkatanom");*/
-	        
-	        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-	    	String dateInString = "31-08-1982";
-	    	Date date = null;
-			try {
-				date = sdf.parse(dateInString);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} 
-	        
-			/*employee.setDateOfBirth(date);
-	        employee.setEmail("test@gmail.com");
-	        employee.setEmergencyContact("mom");*/
-	        employee.setEmployeeCode("EMP-19");
-	        employee.setStatusEmp("Employee");
-	        employee.setTelHome("089-0851022");
-	       /* employee.setTelMobile("089-0851022");
-	        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-	        employee.setAuditFlag("C");
-	        employee.setCreatedBy(1);
-	        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	        
-	        MasTechnology masTechnology = new MasTechnology();
-			masTechnology.setName("java");
-			masTechnology.setCode("001A");
-			masTechnology.setIsActive(true);
-			masTechnology.setAuditFlag("C");
-			masTechnology.setCreatedBy(0);
-			Calendar cal = Calendar.getInstance();
-			masTechnology.setCreatedTimeStamp(cal.getTime());
-			masTechnologyRepository.create(masTechnology);
-			mastecId=masTechnology.getId();
-			MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
-	 		
+  @Autowired
+  private MasCoreSkillRepository masCoreSkillRepository;
 
-			MasJobLevel masJoblevel = new MasJobLevel();
-			masJoblevel.setName("CEO");
-			masJoblevel.setIsActive(true);
-			masJoblevel.setCode("01");
-			masJoblevel.setAuditFlag("C");
-			masJoblevel.setCreatedBy(1);
-			masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasJobLevelRepository masJobLevelRepository;
 
-			masJoblevelRepository.create(masJoblevel);
-			masjobId=masJoblevel.getId();
-			MasJobLevel mJob= masJoblevelRepository.find(masjobId);
-	 		
-	        
-	        Applicant applicant = new Applicant();
-			applicant.setCreatedBy(1);
-			applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			applicant.setAuditFlag("C");
-			applicant.setCardId("115310905001-9");
-			applicant.setTechnology(mTechnology);
-			applicant.setJoblevel(mJob);
-			applicantRepository.create(applicant);
-			Integer appId = applicant.getId();
-	        Applicant applicant1 = applicantRepository.find(appId);
-	        Hibernate.initialize(applicant1);
-	        
-	        
-	       
-	        
-	        employee.setApplicant(applicant1);
-	         
-	    
-		
-			MasDivision masDivision = new MasDivision();
-			masDivision.setName("CEO");
-			masDivision.setIsActive(true);
-			masDivision.setCode("01");
-			masDivision.setAuditFlag("C");
-			masDivision.setCreatedBy(1);
-			masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			masDivision.setCode("Division-01");
-			
-			masDivisionRepository.create(masDivision);
-			Integer masDivisionId = masDivision.getId();
-			masDivisionRepository.find(masDivisionId);
-			employee.setMasDivision(masDivision);
-			
+  @Autowired
+  private MasTechnologyRepository masTechnologyRepository;
 
-			
-			//employee.setMasJoblevel(mJob);
-			employeeRepository.create(employee);
-			
-			 empId = employee.getId();
-			Employee emp = employeeRepository.find(empId);
-			
-			
-			SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
-					Locale.ENGLISH);
-			
-			History history = new History();
-			
-			history.setPosition("Java");
-			history.setSalary(30000d);
-			try {
-				history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			history.setAuditFlag("C");
-			history.setCreatedBy(1);
-			history.setCreatedTimeStamp(Calendar.getInstance().getTime());
-			history.setEmployee(emp);
-			
-			historyRepository.create(history);
-			id = history.getId();
-	}
-	
-	@Test
-	@Rollback(true)
-	public void create() {
-		Employee emp = employeeRepository.find(empId);
-		
-		
-		SimpleDateFormat dateFmt = new SimpleDateFormat("dd-MM-yyyy",
-				Locale.ENGLISH);
-		
-		History history = new History();
-		
-		history.setPosition("Java");
-		history.setSalary(30000d);
-		try {
-			history.setDateOfAdjustment(dateFmt.parse("04-01-2015"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		history.setAuditFlag("C");
-		history.setCreatedBy(1);
-		history.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		history.setEmployee(emp);
-		
-		historyRepository.create(history);
-		
-	
-		
-	}
+  @Autowired
+  private MasDivisionRepository masDivisionRepository;
 
-	@Test
-	@Rollback(true)
-	public void update() {
+  @Autowired
+  private ApplicantRepository applicantRepository;
 
-		History history = historyRepository.find(id);
-		history.setPosition(".Net");
-		historyRepository.update(history);
-		Assert.assertEquals(".Net", history.getPosition());
-	}
+  @Autowired
+  private EmployeeRepository employeeRepository;
 
-	@Test
-	@Rollback(true)
-	public void Delete() {
+  @Autowired
+  private HistoryRepository historyRepository;
 
-		History history = (History) historyRepository.getCurrentSession().get(
-				History.class, id);
+  private History history;
 
-		historyRepository.delete(history);
-	}
+  @Before
+  public void setHistory() {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillRepository.create(masCoreSkill);
 
-	
-	
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelRepository.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyRepository.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+    applicantRepository.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionRepository.create(masDivision);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeRepository.create(employee);
+
+    // create history
+    history = new History();
+    history.setAuditFlag("C");
+    history.setCreatedBy(1);
+    history.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    history.setDateOfAdjustment(Calendar.getInstance().getTime());
+    history.setPosition("Manager");
+    history.setSalary((double) 30000);
+    history.setEmployee(employee);
+    historyRepository.create(history);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(historyRepository);
+    assertNotNull(masCoreSkillRepository);
+    assertNotNull(masJobLevelRepository);
+    assertNotNull(masDivisionRepository);
+    assertNotNull(masTechnologyRepository);
+    assertNotNull(employeeRepository);
+    assertNotNull(applicantRepository);
+
+  }
+  @Test
+  public void testFindWithHistoryRepositoryShouldReturnHistoryThatSetup() throws Exception {
+    History result = historyRepository.find(history.getId());
+    assertNotNull(result);
+    assertThat(result.getPosition(), is("Manager"));
+    assertThat(result.getSalary(), is((double) 30000));
+
+  }
+
+  @Test
+  public void testFindAllWithHistoryRepositoryShouldReturnListOfAllHistory() throws Exception {
+    List<History> result = historyRepository.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithHistoryRepositoryShouldReturnHistoryThatUpdate() throws Exception {
+    History update = historyRepository.find(history.getId());
+    assertThat(update.getPosition(), is("Manager"));
+    assertThat(update.getSalary(), is((double) 30000));
+
+    update.setPosition("High Manager");
+    update.setSalary((double) 50000);
+    historyRepository.update(update);
+
+    History result = historyRepository.find(update.getId());
+    assertThat(result.getPosition(), is("High Manager"));
+    assertThat(result.getSalary(), is((double) 50000));
+
+  }
+
+  @Test
+  public void testDeleteWithHistoryRepositoryShouldNotFindThatHistory() throws Exception {
+    History delete = historyRepository.find(history.getId());
+    historyRepository.delete(delete);
+
+    History result = historyRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithHistoryRepositoryShouldNotFindThatHistory() throws Exception {
+    History delete = historyRepository.find(history.getId());
+    historyRepository.deleteById(delete.getId());
+
+    History result = historyRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByCriteriaWithHistoryRepositoryShouldReturnListOfHistoryOfThatPosition() throws Exception {
+    List<History> result = historyRepository.findByCriteria(history);
+    assertNotNull(result);
+    assertThat(result.get(0).getPosition(), is("Manager"));
+
+  }
+
+  @Test
+  public void testSearchHistoryWithHistoryRepositoryShouldReturnListOfHistoryDtoOfThatEmployeeId() throws Exception {
+    List<HistoryDto> result = historyRepository.searchHistory(history.getEmployee().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getPosition(), is("Manager"));
+    assertThat(result.get(0).getSalary(), is((double) 30000));
+
+  }
+
 }

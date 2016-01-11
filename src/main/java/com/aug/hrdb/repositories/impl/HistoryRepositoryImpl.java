@@ -1,5 +1,4 @@
 /**
- *
  * @author Preeyaporn
  * @date 13 พ.ค. 2558
  */
@@ -17,32 +16,33 @@ import com.aug.hrdb.entities.History;
 import com.aug.hrdb.repositories.HistoryRepository;
 import com.mysql.jdbc.StringUtils;
 
-@Repository
-public class HistoryRepositoryImpl extends GenericRepositoryImpl<History, Integer> implements HistoryRepository{
+@Repository(value = "historyRepository")
+public class HistoryRepositoryImpl extends GenericRepositoryImpl<History, Integer> implements HistoryRepository {
 
-	public HistoryRepositoryImpl() {
-		super(History.class);
-	}
+  public HistoryRepositoryImpl() {
+    super(History.class);
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<History> findByCriteria(History history) {
-		Criteria c = getCurrentSession().createCriteria(History.class);
-		if (!StringUtils.isNullOrEmpty(history.getPosition())) {
-			c.add(Restrictions.like("position", "%" + history.getPosition() + "%"));
-		}
-		return c.list();
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<History> findByCriteria(History history) {
+    Criteria c = getCurrentSession().createCriteria(History.class);
+    if (!StringUtils.isNullOrEmpty(history.getPosition())) {
+      c.add(Restrictions.like("position", "%" + history.getPosition() + "%"));
+    }
 
+    return c.list();
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<HistoryDto> searchHistory(Integer id) {
+  }
 
-		Query namedQuery = getCurrentSession().getNamedQuery("searchHistory").setInteger("empId" ,id);
-		//namedQuery.executeUpdate();
-		List<HistoryDto> hisDto = namedQuery.list();
-	     return hisDto;
-	}
+  @SuppressWarnings("unchecked")
+  @Override
+  public List<HistoryDto> searchHistory(Integer id) {
+    Query namedQuery = getCurrentSession().getNamedQuery("searchHistory").setInteger("empId", id);
+    List<HistoryDto> hisDto = namedQuery.list();
+
+    return hisDto;
+
+  }
 
 }

@@ -1,5 +1,4 @@
 /**
- *
  * @author Preeyaporn
  * @date 13 พ.ค. 2558
  */
@@ -10,9 +9,10 @@ import java.util.List;
 import com.aug.hrdb.dto.HistoryDto;
 import com.aug.hrdb.entities.History;
 
-public interface HistoryRepository extends GenericRepository<History, Integer>{
+public interface HistoryRepository extends GenericRepository<History, Integer> {
 
-	public List<History> findByCriteria(History history);
+  List<History> findByCriteria(History history);
 
-	public List<HistoryDto> searchHistory(Integer id);
+  List<HistoryDto> searchHistory(Integer id);
+
 }

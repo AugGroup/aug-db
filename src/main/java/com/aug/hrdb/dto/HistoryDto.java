@@ -1,5 +1,4 @@
 /**
- *
  * @author Preeyaporn
  * @date 20 พ.ค. 2558
  */
@@ -18,131 +17,129 @@ import javax.persistence.TemporalType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
-	@NamedNativeQuery(
-            name = "searchHistory",
-            query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id, his.CREATEDBY, his.CREATEDTIMESTAMP  from history as his, employee as emp where his.employee_id=:empId and emp.id = his.employee_id", 
-            resultClass = HistoryDto.class)
-  })
+  @NamedNativeQuery(
+    name = "searchHistory",
+    query = "select his.id, his.position, his.salary, his.old_salary, his.date_of_adjustment, his.reason_of_adjustment, his.adjustment_time, his.employee_id, his.CREATEDBY, his.CREATEDTIMESTAMP  from history as his, employee as emp where his.employee_id=:empId and emp.id = his.employee_id",
+    resultClass = HistoryDto.class)
+})
 
 @Entity
 public class HistoryDto {
 
-	@Id
-	@Column(name = "ID")
-	private Integer id;
-	
-	@Column(name = "POSITION")
-	private String position;
-	
-	@Column(name = "SALARY")
-	private Double salary;
-	
-	@Column(name = "OLD_SALARY")
-	private Double oldSalary;
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	@Column(name = "DATE_OF_ADJUSTMENT")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date dateOfAdjustment;
-	
-	@Column(name = "REASON_OF_ADJUSTMENT")
-	private String reasonOfAdjustment;
-	
-	@Column(name = "ADJUSTMENT_TIME")
-	private Integer adjustmentTime;
-	
-	@Column(name = "EMPLOYEE_ID")
-	private Integer employeeId;
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	@Column(name = "CREATEDTIMESTAMP", nullable = false)
-	private Date createdTimeStamp;
-	
-	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
-	@Column(name = "CREATEDBY", nullable = false, length = 10)
-	private Integer createdBy;
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+  @Column(name = "POSITION")
+  private String position;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Column(name = "SALARY")
+  private Double salary;
 
-	public String getPosition() {
-		return position;
-	}
+  @Column(name = "OLD_SALARY")
+  private Double oldSalary;
 
-	public void setPosition(String position) {
-		this.position = position;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  @Column(name = "DATE_OF_ADJUSTMENT")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date dateOfAdjustment;
 
-	public Double getSalary() {
-		return salary;
-	}
+  @Column(name = "REASON_OF_ADJUSTMENT")
+  private String reasonOfAdjustment;
 
-	public void setSalary(Double salary) {
-		this.salary = salary;
-	}
+  @Column(name = "ADJUSTMENT_TIME")
+  private Integer adjustmentTime;
 
-	public Double getOldSalary() {
-		return oldSalary;
-	}
+  @Column(name = "EMPLOYEE_ID")
+  private Integer employeeId;
 
-	public void setOldSalary(Double oldSalary) {
-		this.oldSalary = oldSalary;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  @Column(name = "CREATEDTIMESTAMP", nullable = false)
+  private Date createdTimeStamp;
 
-	public Date getDateOfAdjustment() {
-		return dateOfAdjustment;
-	}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  @Column(name = "CREATEDBY", nullable = false, length = 10)
+  private Integer createdBy;
 
-	public void setDateOfAdjustment(Date dateOfAdjustment) {
-		this.dateOfAdjustment = dateOfAdjustment;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public String getReasonOfAdjustment() {
-		return reasonOfAdjustment;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setReasonOfAdjustment(String reasonOfAdjustment) {
-		this.reasonOfAdjustment = reasonOfAdjustment;
-	}
+  public String getPosition() {
+    return position;
+  }
 
-	public Integer getAdjustmentTime() {
-		return adjustmentTime;
-	}
+  public void setPosition(String position) {
+    this.position = position;
+  }
 
-	public void setAdjustmentTime(Integer adjustmentTime) {
-		this.adjustmentTime = adjustmentTime;
-	}
+  public Double getSalary() {
+    return salary;
+  }
 
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
+  public void setSalary(Double salary) {
+    this.salary = salary;
+  }
 
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
+  public Double getOldSalary() {
+    return oldSalary;
+  }
 
-	public Date getCreatedTimeStamp() {
-		return createdTimeStamp;
-	}
+  public void setOldSalary(Double oldSalary) {
+    this.oldSalary = oldSalary;
+  }
 
-	public void setCreatedTimeStamp(Date createdTimeStamp) {
-		this.createdTimeStamp = createdTimeStamp;
-	}
+  public Date getDateOfAdjustment() {
+    return dateOfAdjustment;
+  }
 
-	public Integer getCreatedBy() {
-		return createdBy;
-	}
+  public void setDateOfAdjustment(Date dateOfAdjustment) {
+    this.dateOfAdjustment = dateOfAdjustment;
+  }
 
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
-	}
+  public String getReasonOfAdjustment() {
+    return reasonOfAdjustment;
+  }
 
-	
-	
-	
+  public void setReasonOfAdjustment(String reasonOfAdjustment) {
+    this.reasonOfAdjustment = reasonOfAdjustment;
+  }
+
+  public Integer getAdjustmentTime() {
+    return adjustmentTime;
+  }
+
+  public void setAdjustmentTime(Integer adjustmentTime) {
+    this.adjustmentTime = adjustmentTime;
+  }
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
+
+  public Date getCreatedTimeStamp() {
+    return createdTimeStamp;
+  }
+
+  public void setCreatedTimeStamp(Date createdTimeStamp) {
+    this.createdTimeStamp = createdTimeStamp;
+  }
+
+  public Integer getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(Integer createdBy) {
+    this.createdBy = createdBy;
+  }
+
+
 }
