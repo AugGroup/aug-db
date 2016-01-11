@@ -1,266 +1,224 @@
 /**
- *
  * @author Pranrajit
  * @date 4 ก.ย. 2558
  */
 package com.aug.hrdb.repositories;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Leave;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasLeaveType;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.ApplicantRepository;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.LeaveRepository;
-import com.aug.hrdb.repositories.MasDivisionRepository;
-import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasLeaveTypeRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.services.MasTechnologyService;
-
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class LeaveRepositoryTest {
-	
-	@Autowired private LeaveRepository leaveRepository;
-	@Autowired private EmployeeRepository employeeRepository;
-	@Autowired private MasLeaveTypeRepository masLeaveTypeRepository;
-	@Autowired private MasJobLevelRepository masJoblevelRepository;
-	@Autowired private ApplicantRepository applicantRepository;
-	@Autowired private MasDivisionRepository masDivisionRepository;
-	@Autowired private MasTechnologyRepository masTechnologyRepository;
-	
-	private	 Employee employee;
-	int id;
-	int masdiId;
-	int appId;
-	int masjobId;
-	int mastecId;
-	int empId;
-	
-	@Before
-	public void setleave() {
-		employee = new Employee();
-        /*employee.setIdCard("115310905001-9");
-        employee.setNameThai("อภิวาท์");
-        employee.setNameEng("apiva");
-        employee.setNicknameThai("va");
-        employee.setNicknameEng("va");
-        employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-09");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyRepository.create(masTechnology);
-		mastecId=masTechnology.getId();
-		MasTechnology mTechnology= masTechnologyRepository.find(mastecId);
- 		
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasCoreSkillRepository masCoreSkillRepository;
 
-		masJoblevelRepository.create(masJoblevel);
-		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelRepository.find(masjobId);
- 		
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
-		applicantRepository.create(applicant);
-		appId=applicant.getId();
-		
-        Applicant applicant1 = applicantRepository.find(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-       
-        
-        employee.setApplicant(applicant1);
-         
-    
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionRepository.create(masDivision);
-		masdiId=masDivision.getId();
-		masDivisionRepository.find(masdiId);
-		employee.setMasDivision(masDivision);
-		
+  @Autowired
+  private MasJobLevelRepository masJobLevelRepository;
 
-		
-		//employee.setMasJoblevel(mJob);
-		employeeRepository.create(employee);
-		
-		
-		Employee employee= employeeRepository.find(1);
-		
-		
-		
-		MasLeaveType masLeaveType1=new MasLeaveType();
-		masLeaveType1.setId(1);
-		masLeaveType1.setName("holiday");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCode("LO-01");
-		masLeaveType1.setIsactive(true);
-		masLeaveType1.setAuditFlag("C");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		masLeaveTypeRepository.create(masLeaveType1);
-		
-		int idMasLeaveType = masLeaveType1.getId();
-		MasLeaveType masLeaveType =masLeaveTypeRepository.find(idMasLeaveType);
-		
-		Leave leave=new Leave();
-		leave.setReason("tire");
-		leave.setAim("boy");
-		leave.setStartTimeString("20-12-2014 09:00");
-		leave.setEndTimeString("22-12-2014 16:00");
-		leave.setAuditFlag("C");
-		leave.setCreatedBy(1);
-		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		leave.setEmployee(employee);
-		leave.setMasleavetype(masLeaveType);
-		leaveRepository.create(leave);
-		
-		
-		id = leave.getId();
-	    System.out.println("id: "+id);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void createLeave(){
-		
-		Employee employee= employeeRepository.find(1);
-		MasLeaveType masLeaveType1=new MasLeaveType();
-		masLeaveType1.setId(1);
-		masLeaveType1.setName("holiday");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCode("LO-01");
-		masLeaveType1.setIsactive(true);
-		masLeaveType1.setAuditFlag("C");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		masLeaveTypeRepository.create(masLeaveType1);
-		int idMasLeaveType = masLeaveType1.getId();
-		
-		Leave leave=new Leave();
-		leave.setReason("tire");
-		leave.setAim("boy");
-		leave.setStartTimeString("20-12-2014 09:00");
-		leave.setEndTimeString("22-12-2014 16:00");
-		leave.setAuditFlag("C");
-		leave.setCreatedBy(1);
-		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		leave.setEmployee(employee);
-		leave.setMasleavetype(masLeaveType1);
-		leaveRepository.create(leave);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void updateLeave(){
-		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,id);
-		leave.setReason("sick2");
-		leave.setAim("girl2");
-		leave.setStartTimeString("04-09-2014 09:00");
-		leave.setEndTimeString("05-09-2014 16:00");
-		leaveRepository.update(leave);
-	}
+  @Autowired
+  private MasTechnologyRepository masTechnologyRepository;
 
-	
-	
-	@Test
-	@Rollback(true)
-	public void deleteLeave(){
-		Leave leave=(Leave)leaveRepository.getCurrentSession().get(Leave.class,id);
-		leaveRepository.getCurrentSession().delete(leave);
-	}
-	
+  @Autowired
+  private MasDivisionRepository masDivisionRepository;
 
-	@Test
-	public void findAllLeave(){
-		
-		Criteria c = leaveRepository.getCurrentSession().createCriteria(Leave.class);
-		List<Leave> LeaveList = c.list();
-		
-		
-		
-	}
-	
-	
-	
+  @Autowired
+  private ApplicantRepository applicantRepository;
+
+  @Autowired
+  private EmployeeRepository employeeRepository;
+
+  @Autowired
+  private MasLeaveTypeRepository masLeaveTypeRepository;
+
+  @Autowired
+  private LeaveRepository leaveRepository;
+
+  private Leave leave;
+
+  private Employee employee;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillRepository.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelRepository.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyRepository.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillRepository.find(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelRepository.find(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyRepository.find(masTechnology.getId()));
+    applicantRepository.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionRepository.create(masDivision);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeRepository.create(employee);
+
+    MasLeaveType masLeaveType = new MasLeaveType();
+    masLeaveType.setName("test");
+    masLeaveType.setCode("MD-01");
+    masLeaveType.setIsactive(true);
+    masLeaveType.setAuditFlag("C");
+    masLeaveType.setCreatedBy(1);
+    masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masLeaveTypeRepository.create(masLeaveType);
+
+    leave = new Leave();
+    leave.setAuditFlag("C");
+    leave.setCreatedBy(1);
+    leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    leave.setEmployee(employee);
+    leave.setMasleavetype(masLeaveType);
+    leave.setAim("Adisorn");
+    leaveRepository.create(leave);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(masLeaveTypeRepository);
+    assertNotNull(leaveRepository);
+    assertNotNull(masCoreSkillRepository);
+    assertNotNull(masJobLevelRepository);
+    assertNotNull(masDivisionRepository);
+    assertNotNull(masTechnologyRepository);
+    assertNotNull(employeeRepository);
+    assertNotNull(applicantRepository);
+
+  }
+
+  @Test
+  public void testFindWithLeaveRepositoryShouldReturnLeaveThatSetup() throws Exception {
+    Leave result = leaveRepository.find(leave.getId());
+    assertNotNull(result);
+    assertThat(result.getAim(), is("Adisorn"));
+    assertThat(result.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getMasleavetype().getName(), is("test"));
+
+  }
+
+  @Test
+  public void testFindAllWithLeaveRepositoryShouldReturnListOfAllLeave() throws Exception {
+    List<Leave> result = leaveRepository.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithLeaveRepositoryShouldReturnLeaveThatUpdate() throws Exception {
+    Leave update = leaveRepository.find(leave.getId());
+    assertThat(update.getAim(), is("Adisorn"));
+    assertThat(update.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(update.getMasleavetype().getName(), is("test"));
+
+    update.setAim("Ekkachai");
+    leaveRepository.update(update);
+
+    Leave result = leaveRepository.find(update.getId());
+    assertThat(result.getAim(), is("Ekkachai"));
+
+  }
+
+  @Test
+  public void testDeleteWithLeaveRepositoryShouldNotFindThatLeave() throws Exception {
+    Leave delete = leaveRepository.find(leave.getId());
+    leaveRepository.delete(delete);
+
+    Leave result = leaveRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithLeaveRepositoryShouldNotFindThatLeave() throws Exception {
+    Leave delete = leaveRepository.find(leave.getId());
+    leaveRepository.deleteById(delete.getId());
+
+    Leave result = leaveRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+//  phase 2
+//  @Test
+//  public void testSearchLeaveWithLeaveRepositoryShouldReturnListOfLeaveDtoOfThatEmployeeId() throws Exception {
+//
+//  }
+
+//  phase 2
+//  @Test
+//  public void testReportLeaveWithLeaveRepositoryShouldReturnListOfReportLeaveDtoOfThatName() throws Exception {
+//
+//  }
+
+//  phase 2
+//  @Test
+//  public void testFindLeaveTypeWithLeaveRepositoryShouldReturnListOfLeaveOfThatMasLeaveTypeIdAndEmployeeId() throws Exception {
+//
+//  }
+
 }

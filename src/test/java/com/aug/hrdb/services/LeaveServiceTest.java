@@ -1,279 +1,225 @@
 /**
- *
  * @author Pranrajit
  * @date 4 ก.ย. 2558
  */
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.entities.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Leave;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasLeaveType;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.LeaveService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasLeaveTypeService;
-import com.aug.hrdb.services.MasTechnologyService;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class LeaveServiceTest {
-	
-	@Autowired private LeaveService leaveService;
-	@Autowired private EmployeeService employeeService;
-	@Autowired private MasLeaveTypeService masLeaveTypeService;
-	@Autowired private MasJobLevelService masJoblevelService;
-	@Autowired private ApplicantService applicantService;
-	@Autowired private MasDivisionService masDivisionService;
-	@Autowired private MasTechnologyService masTechnologyService;
 
-	
-	
-	private	 Employee employee;
-	int id;
-	int masdiId;
-	int appId;
-	int masjobId;
-	int mastecId;
-	int empId;
-	
-	@Before
-	public void setAbility() {
-		employee = new Employee();
-        /*employee.setIdCard("115310905001-9");
-        employee.setNameThai("อภิวาท์");
-        employee.setNameEng("apiva");
-        employee.setNicknameThai("va");
-        employee.setNicknameEng("va");
-        employee.setSurnameThai("กิมเกถนอม");
-        employee.setSurnameEng("kimkatanom");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-18");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		mastecId=masTechnology.getId();
- 		
-		MasTechnology mTechnology= masTechnologyService.findById(mastecId);
- 		
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		masJoblevelService.create(masJoblevel);
-		masjobId=masJoblevel.getId();
-		MasJobLevel mJob= masJoblevelService.findById(masjobId);
- 			
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		applicantService.create(applicant);
-		appId=applicant.getId();
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masdiId=masDivision.getId();
-		masDivisionService.findById(masdiId);
-		employee.setMasDivision(masDivision);
-		
-	
-		//employee.setMasJoblevel(mJob);
-		employeeService.create(employee);
-		empId=employee.getId();
-		
-		
-		Employee employee=employeeService.findById(empId);
-		
-		MasLeaveType masLeaveType1=new MasLeaveType();
-		masLeaveType1.setId(1);
-		masLeaveType1.setName("holiday");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCode("LO-01");
-		masLeaveType1.setIsactive(true);
-		masLeaveType1.setAuditFlag("C");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		masLeaveTypeService.create(masLeaveType1);
-		
-		int idMasLeaveType = masLeaveType1.getId();
-		MasLeaveType masLeaveType =masLeaveTypeService.findById(idMasLeaveType);
-		
-	
-		Leave leave=new Leave();
-		leave.setReason("tire");
-		leave.setAim("boy");
-		leave.setStartTimeString("20-12-2014 09:00");
-		leave.setEndTimeString("22-12-2014 16:00");
-		leave.setAuditFlag("C");
-		leave.setCreatedBy(1);
-		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		leave.setEmployee(employee);
-		leave.setMasleavetype(masLeaveType);
-		leaveService.create(leave);
-		
-		id = leave.getId();
-	    System.out.println("id: "+id);
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void create(){
-		
-		Employee employee=employeeService.findById(1);
-		
-		MasLeaveType masLeaveType1=new MasLeaveType();
-		masLeaveType1.setId(1);
-		masLeaveType1.setName("holiday");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCode("LO-01");
-		masLeaveType1.setIsactive(true);
-		masLeaveType1.setAuditFlag("C");
-		masLeaveType1.setCreatedBy(1);
-		masLeaveType1.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		masLeaveTypeService.create(masLeaveType1);
-		
-		int idMasLeaveType = masLeaveType1.getId();
-		MasLeaveType masLeaveType =masLeaveTypeService.findById(idMasLeaveType);
-		
-		/*MasLeaveType masLeaveType=masLeaveTypeService.find(1);*/
-		
-		Leave leave=new Leave();
-		leave.setReason("tire");
-		leave.setAim("boy");
-		leave.setStartTimeString("20-12-2014 09:00");
-		leave.setEndTimeString("22-12-2014 16:00");
-		leave.setAuditFlag("C");
-		leave.setCreatedBy(1);
-		leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		leave.setEmployee(employee);
-		leave.setMasleavetype(masLeaveType);
-		leaveService.create(leave);
-		
-		
-	}
+  @Autowired
+  private ApplicantService applicantService;
 
-	
-	@Test
-	@Rollback(true)
-	public void update(){
-		Leave leave=(Leave)leaveService.findById(id);
-		leave.setReason("sick2");
-		leave.setAim("girl2");
-		leave.setStartTimeString("04-09-2014 09:00");
-		leave.setEndTimeString("05-09-2014 16:00");
-		leaveService.update(leave);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void delete(){
-		Leave leave = leaveService.findById(id);
-		leaveService.delete(leave);
-		
-	}
-	
-	@Test
-	public void findAllLeave(){
+  @Autowired
+  private EmployeeService employeeService;
 
-		List<Leave> leave = leaveService.findAll();
-		
-	}
-	
-	
-	
+  @Autowired
+  private MasLeaveTypeService masLeaveTypeService;
 
-	@Test
-	public void findDatabyIdLeave(){
+  @Autowired
+  private LeaveService leaveService;
 
-		Leave leave =(Leave)leaveService.findById(id);
-		int id = leave.getId();
-		Assert.assertEquals(id,id);
-		
-		
-		
-	}
-	
+  private Leave leave;
+
+  private Employee employee;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    MasLeaveType masLeaveType = new MasLeaveType();
+    masLeaveType.setName("test");
+    masLeaveType.setCode("MD-01");
+    masLeaveType.setIsactive(true);
+    masLeaveType.setAuditFlag("C");
+    masLeaveType.setCreatedBy(1);
+    masLeaveType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masLeaveTypeService.create(masLeaveType);
+
+    leave = new Leave();
+    leave.setAuditFlag("C");
+    leave.setCreatedBy(1);
+    leave.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    leave.setEmployee(employee);
+    leave.setMasleavetype(masLeaveType);
+    leave.setAim("Adisorn");
+    leaveService.create(leave);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(masLeaveTypeService);
+    assertNotNull(leaveService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithLeaveServiceShouldReturnLeaveThatSetup() throws Exception {
+    Leave result = leaveService.findById(leave.getId());
+    assertNotNull(result);
+    assertThat(result.getAim(), is("Adisorn"));
+    assertThat(result.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getMasleavetype().getName(), is("test"));
+
+  }
+
+  @Test
+  public void testFindAllWithLeaveServiceShouldReturnListOfAllLeave() throws Exception {
+    List<Leave> result = leaveService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithLeaveServiceShouldReturnLeaveThatUpdate() throws Exception {
+    Leave update = leaveService.findById(leave.getId());
+    assertThat(update.getAim(), is("Adisorn"));
+    assertThat(update.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(update.getMasleavetype().getName(), is("test"));
+
+    update.setAim("Ekkachai");
+    leaveService.update(update);
+
+    Leave result = leaveService.findById(update.getId());
+    assertThat(result.getAim(), is("Ekkachai"));
+
+  }
+
+  @Test
+  public void testDeleteWithLeaveServiceShouldNotFindThatLeave() throws Exception {
+    Leave delete = leaveService.findById(leave.getId());
+    leaveService.delete(delete);
+
+    Leave result = leaveService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithLeaveServiceShouldNotFindThatLeave() throws Exception {
+    Leave delete = leaveService.findById(leave.getId());
+    leaveService.deleteById(delete.getId());
+
+    Leave result = leaveService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+//  phase 2
+//  @Test
+//  public void testSearchLeaveWithLeaveServiceShouldReturnListOfLeaveDtoOfThatEmployeeId() throws Exception {
+//
+//  }
+
+//  phase 2
+//  @Test
+//  public void testReportLeaveWithLeaveServiceShouldReturnListOfReportLeaveDtoOfThatName() throws Exception {
+//
+//  }
+
+//  phase 2
+//  @Test
+//  public void testFindLeaveTypeWithLeaveServiceShouldReturnListOfLeaveOfThatMasLeaveTypeIdAndEmployeeId() throws Exception {
+//
+//  }
+  
 }
