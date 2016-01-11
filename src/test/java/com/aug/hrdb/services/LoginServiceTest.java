@@ -1,233 +1,231 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.LoginForgotDto;
+import com.aug.hrdb.entities.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Login;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.LoginService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasTechnologyService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class LoginServiceTest {
-	
-	@Autowired
-	private LoginService loginService;
-	@Autowired 
-	private EmployeeService employeeService;
-	@Autowired 
-	private MasJobLevelService masJoblevelService;
-	@Autowired 
-	private ApplicantService applicantService;
-	@Autowired 
-	private MasDivisionService masDivisionService;
-	@Autowired 
-	private MasTechnologyService masTechnologyService;
-	
-	private	 Employee employee;
-	int id;
-	int empId;
-	int masjobId;
-	int appId; 
-	int mastecId;
-	
-	
-	
-	@Before
-	public void setLogin() {
-		employee = new Employee();
-		/*employee.setIdCard("115310905001-9");
-        employee.setNameThai("ธัญลักษณ์์");
-        employee.setNameEng("thanyalak");
-        employee.setNicknameThai("กิ๊ก");
-        employee.setNicknameEng("kik");
-        employee.setSurnameThai("พิมสวรรค์");
-        employee.setSurnameEng("Pimsawan");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-24");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-        /*employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		mastecId = masTechnology.getId();
-		MasTechnology mTechnology = masTechnologyService.findById(mastecId);
-
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
-
-		masJoblevelService.create(masJoblevel);
-		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.findById(masjobId);
-         			
-        
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
-		applicantService.create(applicant);
-		appId=applicant.getId();
-		
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
-
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		
-		employee.setMasDivision(masDivision);	
-		//employee.setMasJoblevel(mJob);
-		employeeService.create(employee);
-		empId=employee.getId();
-		
-		
-	
-		Employee employee =employeeService.findById(1);	   
-		Login login=new Login();
-		employee.setId(1);		
-		login.setEmployee(employee);	
-		login.setUsername("Kik");
-		login.setPassword("admin");
-		login.setAuditFlag("C");
-		login.setCreatedBy(1);
-		login.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		loginService.create(login);
-		
-		
-	    id = login.getId();
-	    System.out.println("id: "+id);
-	
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void createDataLogin(){
-		
-		Employee employee1 = employeeService.findById(1);	  		
-		Login login =new Login();
-		employee1.setId(1);		
-		login.setEmployee(employee1);	
-		login.setUsername("Kik");
-		login.setPassword("admin");	
-		login.setAuditFlag("C");
-		login.setCreatedBy(1);
-		login.setCreatedTimeStamp(Calendar.getInstance().getTime());	
-		loginService.create(login);
-		id = login.getId();
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void updateLogin(){		
-		Login login = (Login)loginService.find(id);
-		login.setUsername("Kik");
-		login.setPassword("admin");
-		loginService.update(login);
-	}
 
 
-	@Test
-	@Rollback(true)
-	public void deleteDataLogin(){
-		Login login=loginService.find(id);
-		loginService.delete(login);
-	}
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-	
-	
-	@Test
-	public void findAllDataLogin(){
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		List<Login> login = loginService.findAll();
-//		Assert.assertEquals(3, login.size());
-	}
-	
-	
-	
-	
-	@Test
-	public void findDatabyIdLogin(){
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		Login login =(Login) loginService.find(id);
-		int id = login.getId();
-		Assert.assertEquals(id,id);
-		
-	}
+  @Autowired
+  private MasDivisionService masDivisionService;
+
+  @Autowired
+  private ApplicantService applicantService;
+
+  @Autowired
+  private EmployeeService employeeService;
+
+  @Autowired
+  private MasLocationService masLocationService;
+
+  @Autowired
+  private LoginService loginService;
+
+  private Login login;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setEmail("anat@testmail.com");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    //create mas location
+    MasLocation masLocation = new MasLocation();
+    masLocation.setAuditFlag("C");
+    masLocation.setCreatedBy(1);
+    masLocation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masLocation.setCode("TH");
+    masLocation.setName("Thailand");
+    masLocation.setIsActive(true);
+    masLocationService.create(masLocation);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employee.setMasLocation(masLocation);
+    employeeService.create(employee);
+
+    login = new Login();
+    login.setAuditFlag("C");
+    login.setCreatedBy(1);
+    login.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    login.setUsername("test");
+    login.setPassword("P@ssWord");
+    login.setEmployee(employee);
+    login.setMasLocation(employee.getMasLocation());
+    loginService.create(login);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+    assertNotNull(loginService);
+
+  }
+
+  @Test
+  public void testFindWithLoginServiceShouldReturnLoginThatSetup() throws Exception {
+    Login result = loginService.find(login.getId());
+    assertNotNull(result);
+    assertThat(result.getUsername(), is("test"));
+    assertThat(result.getPassword(), is("P@ssWord"));
+
+  }
+
+  @Test
+  public void testFindAllWithLoginServiceShouldReturnListOfAllLogin() throws Exception {
+    List<Login> result = loginService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithLoginServiceShouldReturnLoginThatUpdate() throws Exception {
+    Login update = loginService.find(login.getId());
+    assertThat(update.getUsername(), is("test"));
+    assertThat(update.getPassword(), is("P@ssWord"));
+
+    update.setPassword("passVVord");
+    loginService.update(update);
+
+    Login result = loginService.find(update.getId());
+    assertThat(result.getPassword(), is("passVVord"));
+
+  }
+
+  @Test
+  public void testDeleteWithLoginServiceShouldNotFindThatLogin() throws Exception {
+    Login delete = loginService.find(login.getId());
+    loginService.delete(delete);
+
+    Login result = loginService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithLoginServiceShouldNotFindThatLogin() throws Exception {
+    Login delete = loginService.find(login.getId());
+    loginService.deleteById(delete.getId());
+
+    Login result = loginService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByUserNameWithLoginServiceShouldReturnLoginOfThatUsername() throws Exception {
+    Login result = loginService.findByUserName(login.getUsername());
+    assertNotNull(result);
+    assertThat(result.getPassword(), is("P@ssWord"));
+
+  }
+
+  @Test
+  public void testSearchEmpIdToLoginWithLoginServiceShouldReturnLoginOfThatLastLogin() throws Exception {
+    Login result = loginService.searchEmpIdToLogin();
+    assertNotNull(result);
+    assertThat(result.getUsername(), is("test"));
+    assertThat(result.getPassword(), is("P@ssWord"));
+
+  }
+
+  @Test
+  public void testFindPasswordByEmailWithLoginServiceShouldReturnLoginForgotDtoOfThatEmail() throws Exception {
+    LoginForgotDto result = loginService.findPasswordByEmail("anat@testmail.com");
+    assertNotNull(result);
+    assertThat(result.getUsername(), is("test"));
+    assertThat(result.getPassword(), is("P@ssWord"));
+
+  }
 
 }

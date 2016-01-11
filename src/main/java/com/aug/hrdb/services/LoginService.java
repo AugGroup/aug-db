@@ -7,22 +7,22 @@ import com.aug.hrdb.entities.Login;
 
 public interface LoginService {
 
-	public void create(Login login);
+  void create(Login login);
 
-	public void update(Login login);
+  void update(Login login);
 
-	public void delete(Login login);
+  void delete(Login login);
 
-	public Login find(Integer id);
+  Login find(Integer id);
 
-	public List<Login> findAll();
+  List<Login> findAll();
 
-	public Login findByUserName(String name);
+  void deleteById(Integer id);
 
-//	public void deleteById(Integer id);
+  Login findByUserName(String name);
 
-	public Login searhEmpIdtoLogin();
-	
-	public LoginForgotDto findPasswordByEmail(String email);
+  Login searchEmpIdToLogin();
+
+  LoginForgotDto findPasswordByEmail(String email);
 
 }

@@ -11,63 +11,56 @@ import com.aug.hrdb.entities.Login;
 import com.aug.hrdb.repositories.LoginRepository;
 import com.aug.hrdb.services.LoginService;
 
-
-
-//import com.aug.hr.entity.Official;
-
-
-@Service("loginService")
 @Transactional
-public class LoginServiceImpl implements LoginService{
-	
-	@Autowired 
-	private LoginRepository loginRepository;
-	
-	@Override
-	public void create(Login login) {
-		loginRepository.create(login);
-		
-	}
+@Service(value = "loginService")
+public class LoginServiceImpl implements LoginService {
 
-	@Override
-	public void update(Login login) {
-		loginRepository.update(login);
-	}
+  @Autowired
+  private LoginRepository loginRepository;
 
-	@Override
-	public void delete(Login login) {
-		loginRepository.delete(login);
-	}
+  @Override
+  public void create(Login login) {
+    loginRepository.create(login);
+  }
 
-	@Override
-	public Login find(Integer id) {
-		return loginRepository.find(id);
-	}
+  @Override
+  public void update(Login login) {
+    loginRepository.update(login);
+  }
 
-	@Override
-	public List<Login> findAll() {
-		return loginRepository.findAll();
-	}
+  @Override
+  public void delete(Login login) {
+    loginRepository.delete(login);
+  }
 
-	@Override
-	public Login findByUserName(String name) {
-		return loginRepository.findByUserName(name);
-	}
+  @Override
+  public Login find(Integer id) {
+    return loginRepository.find(id);
+  }
 
-/*	@Override
-	public Login deleteById(Integer id) {
-		return loginRepository.deleteById(id);
-	}*/
+  @Override
+  public List<Login> findAll() {
+    return loginRepository.findAll();
+  }
 
-	@Override
-	public Login searhEmpIdtoLogin() {		
-		return loginRepository.searhEmpIdtoLogin();
-	}
+  @Override
+  public Login findByUserName(String name) {
+    return loginRepository.findByUserName(name);
+  }
 
-	@Override
-	public LoginForgotDto findPasswordByEmail(String email) {
-		return loginRepository.findPasswordByEmail(email);
-	}
+  @Override
+  public LoginForgotDto findPasswordByEmail(String email) {
+    return loginRepository.findPasswordByEmail(email);
+  }
 
+  @Override
+  public void deleteById(Integer id) {
+    loginRepository.deleteById(id);
+  }
+
+  @Override
+  public Login searchEmpIdToLogin() {
+    return loginRepository.searchEmpIdToLogin();
+  }
 
 }
