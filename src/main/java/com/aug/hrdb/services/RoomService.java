@@ -5,10 +5,17 @@ import java.util.List;
 import com.aug.hrdb.entities.Room;
 
 public interface RoomService {
-	public List<Room> findAll();
-	public Room findById(Integer Id);
-	public void deleteById(Integer id);
-	public void update(Room room);
-	public void delete(Room room);
-	public void create(Room room);
+
+  List<Room> findAll();
+
+  Room findById(Integer Id);
+
+  void deleteById(Integer id);
+
+  void update(Room room);
+
+  void delete(Room room);
+
+  void create(Room room);
+
 }

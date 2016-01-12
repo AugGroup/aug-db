@@ -1,90 +1,87 @@
 /**
- *
  * @author Pranrajit
  * @date 27 ต.ค. 2558
  */
 package com.aug.hrdb.entities;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-
 @Entity
-@Table(name="ROOM")
-public class Room extends BaseEntity{
-	@Id
-	@Column(name = "ID")
-	@GeneratedValue
-	private Integer id;
-	
-	@Column(name="NAME",nullable = false)
-	private String name;
-	
-	@Column(name="CAPACITY",nullable = false)
-	private Integer capacity;
-	
-	@Column(name="DESCRIPTION",nullable = false)
-	private String description;
-	
-	@Column(name="COLOR",nullable = false)
-	private String color;
-	
-	@OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade=CascadeType.REMOVE)
-    @JsonIgnore
-    private Set<Reservation> reservation = new HashSet<Reservation>();
-	
-	public Integer getId() {
-		return id;
-	}
+@Table(name = "ROOM")
+public class Room extends BaseEntity {
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  @Id
+  @Column(name = "ID")
+  @GeneratedValue
+  private Integer id;
 
-	public String getName() {
-		return name;
-	}
+  @Column(name = "NAME", nullable = false)
+  private String name;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  @Column(name = "CAPACITY", nullable = false)
+  private Integer capacity;
 
-	public Integer getCapacity() {
-		return capacity;
-	}
+  @Column(name = "DESCRIPTION", nullable = false)
+  private String description;
 
-	public void setCapacity(Integer capacity) {
-		this.capacity = capacity;
-	}
+  @Column(name = "COLOR", nullable = false)
+  private String color;
 
-	public String getDescription() {
-		return description;
-	}
+  @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+  @JsonIgnore
+  private Set<Reservation> reservation = new HashSet<Reservation>();
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public Set<Reservation> getReservation() {
-		return reservation;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setReservation(Set<Reservation> reservation) {
-		this.reservation = reservation;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public String getColor() {
-		return color;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public void setColor(String color) {
-		this.color = color;
-	}
-	
-	
+  public Integer getCapacity() {
+    return capacity;
+  }
+
+  public void setCapacity(Integer capacity) {
+    this.capacity = capacity;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Set<Reservation> getReservation() {
+    return reservation;
+  }
+
+  public void setReservation(Set<Reservation> reservation) {
+    this.reservation = reservation;
+  }
+
+  public String getColor() {
+    return color;
+  }
+
+  public void setColor(String color) {
+    this.color = color;
+  }
+
 }

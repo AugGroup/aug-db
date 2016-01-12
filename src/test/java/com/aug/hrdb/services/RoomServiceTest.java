@@ -1,16 +1,15 @@
 package com.aug.hrdb.services;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
 import java.util.Calendar;
 import java.util.List;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -18,80 +17,89 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.entities.Room;
-import com.aug.hrdb.services.ReservationService;
-import com.aug.hrdb.services.RoomService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
 public class RoomServiceTest {
-	@Autowired 
-	private ReservationService reservationService ;
-	
-	@Autowired 
-	private RoomService roomService ;
-	
-	private Room room;
-	
-	int id;
-	
-	@Before
-	public void setUp(){
-		room = new Room();
-		room.setDescription("meeting");
-		room.setCapacity(4);
-		room.setName("room1");
-		room.setAuditFlag("C");
-		room.setCreatedBy(1);
-		room.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		roomService.create(room);
-		id = room.getId();
-	}
-	
-	@Test
-	public void testInsertRoomService() throws Exception { 
-		Room result = roomService.findById(id);
-		assertThat(result.getName(), is("room1"));
-				
-		
-	}
-	
-	@Test
-	public void testUpdateRoomService() throws Exception {
-		Room updateRoom = roomService.findById(id);
-		updateRoom.setName("room2");
-		roomService.update(updateRoom);
-		
-		Room result = roomService.findById(id);
-		assertThat(result.getName(), is("room2"));
-				
-	}
-	
-	@Test
-	public void testDeleteByIdRoomService() throws Exception {
-		roomService.deleteById(id);
-		Room result = roomService.findById(id);
-		assertNull(result);
-	}
-	
-	@Test
-	
-	public void testDeleteRoomService() throws Exception {
-		roomService.delete(room);
-		Room result = roomService.findById(id);
-		assertNull(result);
-	}
-	@Test
-	public void testFindByIdRoomService() throws Exception {
-		Room result = roomService.findById(id);
-		assertThat(result.getName(),is("room1"));
 
-		
-	}
-	@Test
-	public void testfindAllReservationService(){	
-		List<Room> rooms = roomService.findAll();
-		Assert.assertEquals(4, rooms.size());
-	}
+  @Autowired
+  private RoomService roomService;
+
+  private Room room;
+
+  @Before
+  public void setUp() throws Exception {
+    //create room
+    room = new Room();
+    room.setAuditFlag("C");
+    room.setCreatedBy(1);
+    room.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    room.setCapacity(10);
+    room.setName("NAME");
+    room.setColor("#CCCCCC");
+    room.setDescription("DESC");
+    roomService.create(room);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(roomService);
+  }
+
+  @Test
+  public void testFindWithRoomServiceShouldReturnRoomThatSetup() throws Exception {
+    Room result = roomService.findById(room.getId());
+    assertNotNull(result);
+    assertThat(result.getName(), is("NAME"));
+    assertThat(result.getColor(), is("#CCCCCC"));
+    assertThat(result.getDescription(), is("DESC"));
+
+  }
+
+  @Test
+  public void testFindAllWithRoomServiceShouldReturnListOfAllRoom() throws Exception {
+    List<Room> result = roomService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithRoomServiceShouldReturnRoomThatUpdate() throws Exception {
+    Room update = roomService.findById(room.getId());
+    assertThat(update.getName(), is("NAME"));
+    assertThat(update.getColor(), is("#CCCCCC"));
+    assertThat(update.getDescription(), is("DESC"));
+
+    update.setColor("#CC9999");
+    roomService.update(update);
+
+    Room result = roomService.findById(update.getId());
+    assertThat(result.getColor(), is("#CC9999"));
+
+  }
+
+  @Test
+  public void testDeleteWithRoomServiceShouldNotFindThatRoom() throws Exception {
+    Room delete = roomService.findById(room.getId());
+    roomService.delete(delete);
+
+    Room result = roomService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithRoomServiceShouldNotFindThatRoom() throws Exception {
+    Room delete = roomService.findById(room.getId());
+    roomService.deleteById(delete.getId());
+
+    Room result = roomService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
 }

@@ -1,100 +1,104 @@
 package com.aug.hrdb.repositories;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
+import com.aug.hrdb.entities.Room;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.Reservation;
-import com.aug.hrdb.entities.Room;
-import com.aug.hrdb.repositories.EmployeeRepository;
-import com.aug.hrdb.repositories.ReservationRepository;
-import com.aug.hrdb.repositories.RoomRepository;
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
 public class RoomRepositoryTest {
-	@Autowired 
-	private ReservationRepository reservationRepository ;
-	
-	@Autowired 
-	private RoomRepository roomRepository ;
-	
-	private Room room;
-	
-	int id;
-	
-	@Before
-	public void setUp(){
-		room = new Room();
-		room.setDescription("meeting");
-		room.setCapacity(4);
-		room.setName("room1");
-		room.setAuditFlag("C");
-		room.setCreatedBy(1);
-		room.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		roomRepository.create(room);
-		id = room.getId();
-	}
-	
-	@Test
-	public void testInsertRoomRepository() throws Exception { 
-		Room result = roomRepository.find(id);
-		assertThat(result.getName(), is("room1"));
-				
-	}
-	
-	@Test
-	public void testUpdateRoomRepository() throws Exception {
-		Room updateRoom = roomRepository.find(id);
-		updateRoom.setName("room2");
-		roomRepository.update(updateRoom);
-		
-		Room result = roomRepository.find(id);
-		assertThat(result.getName(), is("room2"));
-				
-	}
-	
-	@Test
-	public void testDeleteByIdRoomRepository() throws Exception {
-		roomRepository.deleteById(id);
-		Room result = roomRepository.find(id);
-		assertNull(result);
-	}
-	
-	@Test
-	
-	public void testDeleteRoomRepository() throws Exception {
-		roomRepository.delete(room);
-		Room result = roomRepository.find(id);
-		assertNull(result);
-	}
-	@Test
-	public void testFindByIdRoomRepository() throws Exception {
-		Room result = roomRepository.find(id);
-		assertThat(result.getName(),is("room1"));
 
-		
-	}
-	@Test
-	public void testfindAllReservationRepository(){	
-		List<Room> rooms = roomRepository.findAll();
-		Assert.assertEquals(4, rooms.size());
-	}
+  @Autowired
+  private RoomRepository roomRepository;
+
+  private Room room;
+
+  @Before
+  public void setUp() throws Exception {
+    //create room
+    room = new Room();
+    room.setAuditFlag("C");
+    room.setCreatedBy(1);
+    room.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    room.setCapacity(10);
+    room.setName("NAME");
+    room.setColor("#CCCCCC");
+    room.setDescription("DESC");
+    roomRepository.create(room);
+    
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(roomRepository);
+  }
+
+  @Test
+  public void testFindWithRoomRepositoryShouldReturnRoomThatSetup() throws Exception {
+    Room result = roomRepository.find(room.getId());
+    assertNotNull(result);
+    assertThat(result.getName(), is("NAME"));
+    assertThat(result.getColor(), is("#CCCCCC"));
+    assertThat(result.getDescription(), is("DESC"));
+
+  }
+
+  @Test
+  public void testFindAllWithRoomRepositoryShouldReturnListOfAllRoom() throws Exception {
+    List<Room> result = roomRepository.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithRoomRepositoryShouldReturnRoomThatUpdate() throws Exception {
+    Room update = roomRepository.find(room.getId());
+    assertThat(update.getName(), is("NAME"));
+    assertThat(update.getColor(), is("#CCCCCC"));
+    assertThat(update.getDescription(), is("DESC"));
+
+    update.setColor("#CC9999");
+    roomRepository.update(update);
+
+    Room result = roomRepository.find(update.getId());
+    assertThat(result.getColor(), is("#CC9999"));
+
+  }
+
+  @Test
+  public void testDeleteWithRoomRepositoryShouldNotFindThatRoom() throws Exception {
+    Room delete = roomRepository.find(room.getId());
+    roomRepository.delete(delete);
+
+    Room result = roomRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithRoomRepositoryShouldNotFindThatRoom() throws Exception {
+    Room delete = roomRepository.find(room.getId());
+    roomRepository.deleteById(delete.getId());
+
+    Room result = roomRepository.find(delete.getId());
+    assertNull(result);
+
+  }
+  
 }

@@ -11,47 +11,41 @@ import com.aug.hrdb.repositories.RoomRepository;
 import com.aug.hrdb.services.RoomService;
 
 
-@Service(value="roomService")
 @Transactional
+@Service(value = "roomService")
 public class RoomServiceImpl implements RoomService {
-	@Autowired
-	RoomRepository roomRepository;
-	
-	@Override
-	public List<Room> findAll() {
-		// TODO Auto-generated method stub
-		return roomRepository.findAll();
-	}
-	
-	@Override
-	public Room findById(Integer Id) {
-		
-		return  roomRepository.find(Id);
-	}
 
-	
-	@Override
-	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
-		roomRepository.deleteById(id);
+  @Autowired
+  RoomRepository roomRepository;
 
-	}
+  @Override
+  public List<Room> findAll() {
+    return roomRepository.findAll();
+  }
 
-	@Override
-	public void update(Room room) {
-		// TODO Auto-generated method stub
-		roomRepository.update(room);
-	}
+  @Override
+  public Room findById(Integer Id) {
+    return roomRepository.find(Id);
+  }
 
-	@Override
-	public void delete(Room room) {
-		// TODO Auto-generated method stub
-		roomRepository.delete(room);
-	}
+  @Override
+  public void deleteById(Integer id) {
+    roomRepository.deleteById(id);
+  }
 
-	@Override
-	public void create(Room room) {
-		// TODO Auto-generated method stub
-		roomRepository.create(room);
-	}
+  @Override
+  public void update(Room room) {
+    roomRepository.update(room);
+  }
+
+  @Override
+  public void delete(Room room) {
+    roomRepository.delete(room);
+  }
+
+  @Override
+  public void create(Room room) {
+    roomRepository.create(room);
+  }
+
 }
