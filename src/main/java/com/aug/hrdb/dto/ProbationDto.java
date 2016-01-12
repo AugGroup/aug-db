@@ -11,94 +11,93 @@ import javax.persistence.NamedNativeQuery;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedNativeQueries({
-    @NamedNativeQuery(
-            name = "searchProbation",
-            query = "select pro.id, "
-            		+ "pro.date_from, "
-            		+ "pro.date_to, "
-            		+ "pro.status,"
-            		+ "pro.reason,"
-            		+ "pro.employee_id, "
-            		+ "emp.employee_code "
-            		+ "from probation as pro, employee as emp "
-            		+ "where pro.employee_id=:empId and emp.id = pro.employee_id",
-            resultClass = ProbationDto.class),
-//    @NamedNativeQuery(name = "createProbation", 
-//    		query = "insert into emp_probation as pro (pro.date_from, pro.date_to, pro.status,pro.employee_id) values (?dateFrom, ?dateTo, ?status, ?employeeId)",
-//    		resultClass = Probation.class)
+  @NamedNativeQuery(
+    name = "searchProbation",
+    query = "select pro.id, pro.date_from, pro.date_to, pro.status, pro.reason, pro.employee_id, emp.employee_code "
+      + "from probation as pro, employee as emp where pro.employee_id=:empId and emp.id = pro.employee_id",
+    resultClass = ProbationDto.class)
 })
 @Entity
 public class ProbationDto {
-	
-	   	@Id
-	    private Integer id;
-	   	@Column(name = "DATE_FROM")
-	    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	    private Date dateFrom;
-		@Column(name = "DATE_TO")
-		 @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
-	    private Date dateTo;
-	    private String status;
-	    private String reason;
-		@Column(name = "EMPLOYEE_ID")
-	    private Integer employeeId;
-		@Column(name = "EMPLOYEE_CODE")
-	    private String employeeCode;
 
-	    public Integer getId() {
-	        return id;
-	    }
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-	    public void setId(Integer id) {
-	        this.id = id;
-	    }
+  @Column(name = "DATE_FROM")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  private Date dateFrom;
 
-	    public Date getDateFrom() {
-	        return dateFrom;
-	    }
+  @Column(name = "DATE_TO")
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  private Date dateTo;
 
-	    public void setDateFrom(Date dateFrom) {
-	        this.dateFrom = dateFrom;
-	    }
+  @Column(name = "STATUS")
+  private String status;
 
-	    public Date getDateTo() {
-	        return dateTo;
-	    }
+  @Column(name = "REASON")
+  private String reason;
 
-	    public void setDateTo(Date dateTo) {
-	        this.dateTo = dateTo;
-	    }
+  @Column(name = "EMPLOYEE_ID")
+  private Integer employeeId;
 
-	    public String getStatus() {
-	        return status;
-	    }
+  @Column(name = "EMPLOYEE_CODE")
+  private String employeeCode;
 
-	    public void setStatus(String status) {
-	        this.status = status;
-	    }
+  public Integer getId() {
+    return id;
+  }
 
-	    public String getEmployeeCode() {
-	        return employeeCode;
-	    }
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	    public void setEmployeeCode(String employeeCode) {
-	        this.employeeCode = employeeCode;
-	    }
+  public Date getDateFrom() {
+    return dateFrom;
+  }
 
-	    public Integer getEmployeeId() {
-	        return employeeId;
-	    }
+  public void setDateFrom(Date dateFrom) {
+    this.dateFrom = dateFrom;
+  }
 
-	    public void setEmployeeId(Integer employeeId) {
-	        this.employeeId = employeeId;
-	    }
+  public Date getDateTo() {
+    return dateTo;
+  }
 
-		public String getReason() {
-			return reason;
-		}
+  public void setDateTo(Date dateTo) {
+    this.dateTo = dateTo;
+  }
 
-		public void setReason(String reason) {
-			this.reason = reason;
-		}
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  public String getEmployeeCode() {
+    return employeeCode;
+  }
+
+  public void setEmployeeCode(String employeeCode) {
+    this.employeeCode = employeeCode;
+  }
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
+
+  public String getReason() {
+    return reason;
+  }
+
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
 
 }

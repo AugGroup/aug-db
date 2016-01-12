@@ -1,188 +1,197 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.ProbationDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Probation;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasSpecialtyService;
-import com.aug.hrdb.services.ProbationService;
-
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
+@TransactionConfiguration
 @Transactional
 public class ProbationServiceTest {
 
-	@Autowired private ProbationService probationService;
-	@Autowired private EmployeeService employeeService;
-	@Autowired private MasSpecialtyService masSpecialtyService;	
-	@Autowired private MasJobLevelService masJoblevelService;
-	@Autowired private ApplicantService applicantService;
-	@Autowired private MasDivisionService masDivisionService;
-	@Autowired private MasTechnologyRepository masTechnologyRepository;
-	
-	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-	int id;
-	
-	@Before
-	public void setProbation() throws ParseException{
-		
-		Employee employee = new Employee();
-		/*employee.setIdCard("1103600695991");
-        employee.setNameThai("จุฑามาศ");
-        employee.setNameEng("Jutamas");
-        employee.setNicknameThai("ป่าน");
-        employee.setNicknameEng("Parn");
-        employee.setSurnameThai("มณีอินทร์");
-        employee.setSurnameEng("Maneeinr");
-        employee.setDateOfBirth(dateFmt.parse("24/01/1992"));
-        employee.setEmail("parn@gmail.com");
-        employee.setEmergencyContact("Mom");*/
-        employee.setEmployeeCode("EMP-19");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("029314352");
-        /*employee.setTelMobile("0817334542");
-        employee.setEmergencyContactPhoneNumber("0817750936");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		
-		Applicant app = applicantService.findById(1);
-	    Hibernate.initialize(app);
-	    
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.findById(1);
-		
-		//employee.setMasJoblevel(masJoblevel);
-	    
-	    MasTechnology masTech = new MasTechnology();
-		masTech.setName("Java");
-		masTech.setCode("001A");
-		masTech.setIsActive(true);
-		masTech.setAuditFlag("C");
-		masTech.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTech.setCreatedTimeStamp(cal.getTime());
-		masTechnologyRepository.create(masTech);
-		applicant.setTechnology(masTech);
-	    
-	    employee.setApplicant(app);
-		
-        MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");		
-		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		employee.setMasDivision(masDivision);
-        
-		employeeService.create(employee);
-		
-		Employee employee1 =  employeeService.findById(1);
-        
-		Probation probation = new Probation();
-		probation.setAuditFlag("C");
-		probation.setCreatedBy(1);
-		probation.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		probation.setDateFrom(dateFmt.parse("04/01/2015"));
-		probation.setDateTo(dateFmt.parse("04/01/2015"));
-		probation.setName("Jutamas");
-		probation.setReason("Good");
-		probation.setStatus("Pass");
-		probation.setEmployee(employee1);
-		probationService.create(probation);
-		
-		id=probation.getId();
-	}
-	
-	@Test
-	@Rollback(true)
-	public void create() throws ParseException{
-		//SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-		Probation probation = new Probation();
-		probation.setAuditFlag("C");
-		probation.setCreatedBy(1);
-		probation.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		probation.setDateFrom(dateFmt.parse("04/01/2015"));
-		probation.setDateTo(dateFmt.parse("04/01/2015"));
-		probation.setReason("Good");
-		probation.setStatus("Pass");
-		probation.setEmployee(employeeService.findById(1));
-		probationService.create(probation);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void update(){
-		Probation probation = probationService.find(id);
-		probation.setStatus("Not Pass");
-		probationService.update(probation);
-	}
-	
-	
-	@Test
-	@Rollback(true)
-	public void findById(){
-		Probation probation = probationService.find(id);
-		int idPro = probation.getId();
-		Assert.assertEquals(id,idPro);
-	}
-	
-	@Test
-	@Rollback(true)
-	public void delete(){
-		Probation probation = probationService.find(id);
-		probationService.delete(probation);
-	}
-	
-	@Test
-	public void findAll(){	
-		List<Probation> probations = probationService.findAll();
-		Assert.assertEquals(3, probations.size());
-	}
-	
-	
-	
+  @Autowired
+  private MasJobLevelService masJobLevelService;
+
+  @Autowired
+  private MasTechnologyService masTechnologyService;
+
+  @Autowired
+  private MasDivisionService masDivisionService;
+
+  @Autowired
+  private ApplicantService applicantService;
+
+  @Autowired
+  private EmployeeService employeeService;
+
+  @Autowired
+  private ProbationService probationService;
+
+  private Probation probation;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    //create probation
+    probation = new Probation();
+    probation.setAuditFlag("C");
+    probation.setCreatedBy(1);
+    probation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    probation.setDateFrom(Calendar.getInstance().getTime());
+    probation.setDateTo(Calendar.getInstance().getTime());
+    probation.setStatus("status");
+    probation.setEmployee(employee);
+    probationService.create(probation);
+
+  }
+
+  @Test
+  public void testLoadRepositoriesShouldPass() throws Exception {
+    assertNotNull(probationService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithProbationServiceShouldReturnProbationThatSetup() throws Exception {
+    Probation result = probationService.find(probation.getId());
+    assertNotNull(result);
+    assertThat(result.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getStatus(), is("status"));
+
+  }
+
+  @Test
+  public void testFindAllWithProbationServiceShouldReturnListOfAllProbation() throws Exception {
+    List<Probation> result = probationService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithProbationServiceShouldReturnProbationThatUpdate() throws Exception {
+    Probation update = probationService.find(probation.getId());
+    assertThat(update.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(update.getStatus(), is("status"));
+
+    update.setStatus("status update");
+    probationService.update(update);
+
+    Probation result = probationService.find(update.getId());
+    assertThat(result.getStatus(), is("status update"));
+
+  }
+
+  @Test
+  public void testDeleteWithProbationServiceShouldNotFindThatProbation() throws Exception {
+    Probation delete = probationService.find(probation.getId());
+    probationService.delete(delete);
+
+    Probation result = probationService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithProbationServiceShouldNotFindThatProbation() throws Exception {
+    Probation delete = probationService.find(probation.getId());
+    probationService.deleteById(delete.getId());
+
+    Probation result = probationService.find(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testSearchProbationWithProbationServiceShouldReturnListOfProbationDtoOfThatEmployeeId() throws Exception {
+    List<ProbationDto> result = probationService.searchProbation(probation.getEmployee().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getStatus(), is("status"));
+    assertThat(result.get(0).getEmployeeCode(), is(probation.getEmployee().getEmployeeCode()));
+
+  }
+
 }
