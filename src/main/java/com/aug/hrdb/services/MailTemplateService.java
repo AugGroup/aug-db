@@ -6,18 +6,18 @@ import com.aug.hrdb.entities.MailTemplate;
 
 public interface MailTemplateService {
 	
-	public MailTemplate findById(Integer id);
+	MailTemplate findById(Integer id);
 	
-	public MailTemplate findByName(String name);
+	MailTemplate findByName(String name);
 	
-	public List<MailTemplate> findAll();
+	List<MailTemplate> findAll();
 
-	public void create(MailTemplate model);
+	void create(MailTemplate model);
 
-	public void update(MailTemplate model);
+	void update(MailTemplate model);
 
-	public void delete(MailTemplate model); 
+	void delete(MailTemplate model);
 	
-	public void deleteById (Integer id);
+	void deleteById (Integer id);
 	
 }
