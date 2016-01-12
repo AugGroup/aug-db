@@ -12,49 +12,50 @@ import com.aug.hrdb.entities.Reference;
 import com.aug.hrdb.repositories.ReferenceRepository;
 import com.mysql.jdbc.StringUtils;
 
-@Repository("referenceRepository")
-public class ReferenceRepositoryImpl extends GenericRepositoryImpl<Reference, Integer> implements ReferenceRepository{
+@SuppressWarnings("unchecked")
+@Repository(value = "referenceRepository")
+public class ReferenceRepositoryImpl extends GenericRepositoryImpl<Reference, Integer> implements ReferenceRepository {
 
-	public ReferenceRepositoryImpl(){
-		super(Reference.class);
-	}
+  public ReferenceRepositoryImpl() {
+    super(Reference.class);
+  }
 
-	@Override
-	public List<Reference> findByCriteria(Reference reference) {
-		
-		Criteria c = getCurrentSession().createCriteria(Reference.class);
-		if (!StringUtils.isNullOrEmpty(reference.getName())) {
-			c.add(Restrictions.like("name", "%" + reference.getName() + "%"));
-		}
-		return c.list();
-	}
-	
-	
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<ReferenceDto> searchReference(Integer id) {
-		 Query   namedQuery = getCurrentSession().getNamedQuery("searchReference").setInteger("empId" ,id);
-			List<ReferenceDto> refDto = namedQuery.list();
-			return refDto;
-	}
-	
-	@Override
-	public List<ReferenceDto> findReferenceById(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_REFERENCE");
-		query.setParameter("ID", id);
-		List<ReferenceDto> result = query.list();
-		System.out.println("QUERYADDRESS :: " + result);
-		return result;
-	}
+  @Override
+  public List<Reference> findByCriteria(Reference reference) {
 
-	@Override
-	public ReferenceDto findReference(Integer id) {
-		Query query = getCurrentSession().getNamedQuery("SEARCH_REFERENCE_ID");
-		query.setParameter("ID", id);
-		List<ReferenceDto> result = query.list();
-		ReferenceDto app = result.get(0);
-		return app;
-	}
-		
-	
+    Criteria c = getCurrentSession().createCriteria(Reference.class);
+    if (!StringUtils.isNullOrEmpty(reference.getName())) {
+      c.add(Restrictions.like("name", "%" + reference.getName() + "%"));
+    }
+
+    return c.list();
+
+  }
+
+  @Override
+  public List<ReferenceDto> searchReference(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("searchReference").setInteger("empId", id);
+
+    return (List<ReferenceDto>) query.list();
+
+  }
+
+  @Override
+  public List<ReferenceDto> findReferenceById(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("SEARCH_REFERENCE");
+    query.setParameter("ID", id);
+
+    return (List<ReferenceDto>) query.list();
+
+  }
+
+  @Override
+  public ReferenceDto findReference(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("SEARCH_REFERENCE_ID");
+    query.setParameter("ID", id);
+
+    return (ReferenceDto) query.list().get(0);
+
+  }
+
 }

@@ -1,147 +1,226 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 
-import org.junit.Assert;
+import com.aug.hrdb.dto.ReferenceDto;
+import com.aug.hrdb.entities.*;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Reference;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasTechnologyService;
-import com.aug.hrdb.services.ReferenceService;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
 public class ReferenceServiceTest {
-	@Autowired private ReferenceService referenceService;
-	@Autowired private ApplicantService applicantService;
-	@Autowired private EmployeeService employeeService;
-	@Autowired private MasJobLevelService masJoblevelService;
-	@Autowired private MasTechnologyService masTechnologyService;
-	
-	SimpleDateFormat dateFmt = new SimpleDateFormat("dd/MM/yyyy",Locale.ENGLISH);
-	int id;
-	
-	@Before
-	public void setReference() throws ParseException{
 
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-		masJoblevelService.create(masJoblevel);
-		masJoblevelService.findById(1);
-		applicant.setJoblevel(masJoblevel);
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-		MasTechnology masTech = new MasTechnology();
-		masTech.setName("Java");
-		masTech.setCode("001A");
-		masTech.setIsActive(true);
-		masTech.setAuditFlag("C");
-		masTech.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTech.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTech);
-		applicant.setTechnology(masTech);
-		
-		applicantService.create(applicant);
-        		
-		Applicant applicant1 =  applicantService.findById(1);
-        
-		Reference reference = new Reference();
-		reference.setAddress("Bangkok");
-		reference.setAuditFlag("C");
-		reference.setCreatedBy(1);
-		reference.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		reference.setName("Jutamas");
-		reference.setOccupation("Programmer");
-		reference.setTel("0817334542");
-		reference.setApplicant(applicant1);
-		referenceService.create(reference);
-		
-		id=reference.getId();
-	}
-	
-	@Test
-	@Rollback(true)
-	public void createReference(){
-		Reference reference = new Reference();
-		reference.setAddress("Bangkok");
-		reference.setAuditFlag("C");
-		reference.setCreatedBy(1);
-		reference.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		reference.setName("Jutamas");
-		reference.setOccupation("Programmer");
-		reference.setTel("0817334542");
-		reference.setApplicant(applicantService.findById(1));
-		referenceService.create(reference);
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-	}
-	
-	@Test
-	public void updateReference(){	
-		Reference reference = (Reference)referenceService.findById(id);
-		reference.setName("Phicha");
-		referenceService.update(reference);
-	}
+  @Autowired
+  private ApplicantService applicantService;
 
-	
-	
-	@Test
-	public void deleteReference(){		
-		Reference reference = (Reference)referenceService.findById(id);
-		referenceService.deleteById(reference.getId());
-	}
-	
-	
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-	@Test
-	public void findAllReference(){		
-		List<Reference> references = referenceService.findAll();
-		Assert.assertEquals(5, references.size());
-		
-		
-	}
-	
-	
+  @Autowired
+  private EmployeeService employeeService;
 
-	@Test
-	public void findByIdReference(){	
-		Reference reference = (Reference) referenceService.findById(id);	
-		int idRef = reference.getId();
-		Assert.assertEquals(id,idRef);
-		
-		
-	}
+  @Autowired
+  private ReferenceService referenceService;
+
+  private Reference reference;
+
+  private Employee employee;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    // create reference
+    reference = new Reference();
+    reference.setAuditFlag("C");
+    reference.setCreatedBy(1);
+    reference.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    reference.setName("NAME");
+    reference.setOccupation("OCCUPATION");
+    reference.setTel("000-0000000");
+    reference.setApplicant(applicant);
+    referenceService.create(reference);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(referenceService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithReferenceServiceShouldReturnReferenceThatSetup() throws Exception {
+    Reference result = referenceService.findById(reference.getId());
+    assertNotNull(result);
+    assertThat(result.getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getName(), is("NAME"));
+    assertThat(result.getOccupation(), is("OCCUPATION"));
+
+  }
+
+  @Test
+  public void testFindAllWithReferenceServiceShouldReturnListOfAllReference() throws Exception {
+    List<Reference> result = referenceService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithReferenceServiceShouldReturnReferenceThatUpdate() throws Exception {
+    Reference update = referenceService.findById(reference.getId());
+    assertThat(update.getName(), is("NAME"));
+    assertThat(update.getOccupation(), is("OCCUPATION"));
+
+    update.setOccupation("OCCUPATION UPDATE");
+    referenceService.update(update);
+
+    Reference result = referenceService.findById(update.getId());
+    assertThat(result.getOccupation(), is("OCCUPATION UPDATE"));
+
+  }
+
+  @Test
+  public void testDeleteWithReferenceServiceShouldNotFindThatReference() throws Exception {
+    Reference delete = referenceService.findById(reference.getId());
+    referenceService.delete(delete);
+
+    Reference result = referenceService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithReferenceServiceShouldNotFindThatReference() throws Exception {
+    Reference delete = referenceService.findById(reference.getId());
+    referenceService.deleteById(delete.getId());
+
+    Reference result = referenceService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByCriteriaWithReferenceServiceShouldReturnListOfReferenceOfThatName() throws Exception {
+    List<Reference> result = referenceService.findByCriteria(reference);
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("NAME"));
+
+  }
+
+  @Test
+  public void testSearchReferenceWithReferenceServiceShouldReturnListOfReferenceDtoOfThatEmployeeId() throws Exception {
+    List<ReferenceDto> result = referenceService.searchReference(employee.getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("NAME"));
+    assertThat(result.get(0).getApplicantId(), is(reference.getApplicant().getId()));
+
+  }
+
+  @Test
+  public void testFindReferenceByIdWithReferenceServiceShouldReturnListOfReferenceDtoOfThatApplicantId() throws Exception {
+    List<ReferenceDto> result = referenceService.findReferenceById(reference.getApplicant().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("NAME"));
+    assertThat(result.get(0).getOccupation(), is("OCCUPATION"));
+
+  }
+
+  @Test
+  public void testFindReferenceWithReferenceServiceShouldReturnReferenceDtoOfThatReferenceId() throws Exception {
+    ReferenceDto result = referenceService.findReference(reference.getId());
+    assertNotNull(result);
+    assertThat(result.getName(), is("NAME"));
+    assertThat(result.getOccupation(), is("OCCUPATION"));
+
+  }
+  
 }
