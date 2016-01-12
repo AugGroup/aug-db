@@ -1,134 +1,219 @@
 package com.aug.hrdb.services;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertNull;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-
-import org.junit.Assert;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasReservationType;
-import com.aug.hrdb.entities.Reservation;
-import com.aug.hrdb.entities.Room;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasReservationTypeService;
-import com.aug.hrdb.services.ReservationService;
-import com.aug.hrdb.services.RoomService;
+import java.util.Calendar;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
 @TransactionConfiguration
 @Transactional
 public class ReservationServiceTest {
-	@Autowired 
-	private ReservationService reservationService ;
-	
-	@Autowired 
-	private RoomService roomService ;
-	
-	@Autowired 
-	private MasReservationTypeService masReservationTypeService ;
-	
-	@Autowired 
-	private EmployeeService employeeService ;
-	
-	private Reservation reservation;
-	
-	int id;
-	
-	@Before
-	public void setUp(){
-	Employee employee = employeeService.findById(1);
-	reservation = new Reservation();
-	reservation.setDescription("meeting");
-	reservation.setEmployee(employee);
-	reservation.setDateReservation(new Date());
-	reservation.setStart(new Date());
-	reservation.setEnd(new Date());
-	reservation.setAuditFlag("C");
-	reservation.setCreatedBy(1);
-	reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	
-	MasReservationType masReservationType = new MasReservationType();
-	 masReservationType.setName("meeting");
-	 masReservationType.setIsactive(true);
-	 masReservationType.setCode("01");
-	 masReservationType.setAuditFlag("C");
-	 masReservationType.setCreatedBy(1);
-	 masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	 masReservationTypeService.create(masReservationType);
-	 MasReservationType masReservType = masReservationTypeService.findById(1);
-	
-	Room room = new Room();
-	room.setName("room1");
-	room.setCapacity(3);
-	room.setDescription("meeting");
-	room.setAuditFlag("C");
-	room.setCreatedBy(1);
-	room.setCreatedTimeStamp(Calendar.getInstance().getTime());
-	roomService.create(room);
-	reservation.setRoom(room);
-	reservation.setMasreservationtype(masReservType);
-	reservationService.create(reservation);
-	id = reservation.getId();
-	}
-	
-	@Test
-	public void testInsertReservationService() throws Exception { 
-		
-		Reservation result = reservationService.findById(id);
-		assertThat(result.getRoom().getName(), is("room1"));
-		
-	}
-	
-	@Test
-	public void testUpdateReservationService() throws Exception {
-		Reservation updateReservation = reservationService.findById(id);
-		updateReservation.getRoom().setName("room2");
-		reservationService.update(updateReservation);
-		
-		Reservation result = reservationService.findById(id);
-		assertThat(result.getRoom().getName(), is("room2"));
-				
-	}
-	
-	@Test
-	public void testDeleteByIdReservationService() throws Exception {
-		reservationService.deleteById(id);
-		Reservation result = reservationService.findById(id);
-		assertNull(result);
-	}
-	
-	@Test
-	
-	public void testDeleteReservationService() throws Exception {
-		reservationService.delete(reservation);
-		Reservation result = reservationService.findById(id);
-		assertNull(result);
-	}
-	
-	@Test
-	public void testFindByIdReservationService() throws Exception {
-		Reservation result = reservationService.findById(id);
-		assertThat(result.getRoom().getName(),is("room1"));
-	}
-	
-	@Test
-	public void testfindAllReservationService(){	
-		List<Reservation> reservations = reservationService.findAll();
-		Assert.assertEquals(5, reservations.size());
-	}
-}
 
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
+
+  @Autowired
+  private MasJobLevelService masJobLevelService;
+
+  @Autowired
+  private MasTechnologyService masTechnologyService;
+
+  @Autowired
+  private MasDivisionService masDivisionService;
+
+  @Autowired
+  private ApplicantService applicantService;
+
+  @Autowired
+  private EmployeeService employeeService;
+
+  @Autowired
+  private RoomService roomService;
+
+  @Autowired
+  private MasReservationTypeService masReservationTypeService;
+
+  @Autowired
+  private ReservationService reservationService;
+
+  private Reservation reservation;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    //create room
+    Room room = new Room();
+    room.setAuditFlag("C");
+    room.setCreatedBy(1);
+    room.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    room.setCapacity(10);
+    room.setName("ROOM NAME");
+    room.setColor("#CCCCCC");
+    room.setDescription("DESC");
+    roomService.create(room);
+
+    // create mas reservation type
+    MasReservationType masReservationType = new MasReservationType();
+    masReservationType.setName("TYPE NAME");
+    masReservationType.setCode("01");
+    masReservationType.setIsactive(true);
+    masReservationType.setAuditFlag("C");
+    masReservationType.setCreatedBy(1);
+    masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masReservationTypeService.create(masReservationType);
+
+    //create reservation
+    reservation = new Reservation();
+    reservation.setAuditFlag("C");
+    reservation.setCreatedBy(1);
+    reservation.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    reservation.setEmployee(employee);
+    reservation.setMasDivision(masDivision);
+    reservation.setMasreservationtype(masReservationType);
+    reservation.setRoom(room);
+    reservation.setDescription("DESC");
+    reservationService.create(reservation);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(roomService);
+    assertNotNull(reservationService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+    assertNotNull(masReservationTypeService);
+
+  }
+
+  @Test
+  public void testFindWithReservationServiceShouldReturnReservationThatSetup() throws Exception {
+    Reservation result = reservationService.findById(reservation.getId());
+    assertNotNull(result);
+    assertThat(result.getDescription(), is("DESC"));
+    assertThat(result.getRoom().getName(), is("ROOM NAME"));
+    assertThat(result.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getMasreservationtype().getName(), is("TYPE NAME"));
+    assertThat(result.getMasDivision().getCode(), is("ITS"));
+
+  }
+
+  @Test
+  public void testFindAllWithReservationServiceShouldReturnListOfAllReservation() throws Exception {
+    List<Reservation> result = reservationService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithReservationServiceShouldReturnReservationThatUpdate() throws Exception {
+    Reservation update = reservationService.findById(reservation.getId());
+    assertThat(update.getDescription(), is("DESC"));
+
+    update.setDescription("UPDATE DESC");
+    reservationService.update(update);
+
+    Reservation result = reservationService.findById(update.getId());
+    assertThat(result.getDescription(), is("UPDATE DESC"));
+
+  }
+
+  @Test
+  public void testDeleteWithReservationServiceShouldNotFindThatReservation() throws Exception {
+    Reservation delete = reservationService.findById(reservation.getId());
+    reservationService.delete(delete);
+
+    Reservation result = reservationService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithReservationServiceShouldNotFindThatReservation() throws Exception {
+    Reservation delete = reservationService.findById(reservation.getId());
+    reservationService.deleteById(delete.getId());
+
+    Reservation result = reservationService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+}
