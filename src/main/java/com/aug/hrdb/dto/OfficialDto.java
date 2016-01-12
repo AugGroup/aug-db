@@ -1,122 +1,108 @@
 /**
- *
  * @author natechanok
  * @date May 28, 2015
  */
-
 package com.aug.hrdb.dto;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
-import org.springframework.stereotype.Component;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-
-
-@Component
-//@Entity
+@Entity
 public class OfficialDto {
-	
-	 //@Column(name = "ID")
-	    private Integer id;
-		
-	    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
-	    @Temporal(TemporalType.TIMESTAMP)
-	    private Date officialDate;
-	    
-	    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
-	    @Temporal(TemporalType.TIMESTAMP)
-	    private Date startWorkDate;
-	    
-	    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
-	    @Temporal(TemporalType.TIMESTAMP)
-	    private Date endWorkDate;
 
-	 //@Column(name = "POSITION_APPLIED_FOR", nullable = true)
-		private String positionAppliedFor;
-		
-	//@Column(name = "SALARY_EXPECTED", nullable = true)
-		private String salaryExpected;
-		
-		@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-mm-yyyy")
-		@Temporal(TemporalType.TIMESTAMP)
-		private Date probationDate;
-	    
-		private Integer employeeId;
+  @Id
+  @Column(name = "ID")
+  private Integer id;
 
-		public Integer getId() {
-			return id;
-		}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date officialDate;
 
-		public void setId(Integer id) {
-			this.id = id;
-		}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date startWorkDate;
 
-		public Date getOfficialDate() {
-			return officialDate;
-		}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date endWorkDate;
 
-		public void setOfficialDate(Date officialDate) {
-			this.officialDate = officialDate;
-		}
+  //@Column(name = "POSITION_APPLIED_FOR", nullable = true)
+  private String positionAppliedFor;
 
-		public Date getStartWorkDate() {
-			return startWorkDate;
-		}
+  //@Column(name = "SALARY_EXPECTED", nullable = true)
+  private String salaryExpected;
 
-		public void setStartWorkDate(Date startWorkDate) {
-			this.startWorkDate = startWorkDate;
-		}
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-mm-yyyy")
+  @Temporal(TemporalType.TIMESTAMP)
+  private Date probationDate;
 
-		public Date getEndWorkDate() {
-			return endWorkDate;
-		}
+  private Integer employeeId;
 
-		public void setEndWorkDate(Date endWorkDate) {
-			this.endWorkDate = endWorkDate;
-		}
+  public Integer getId() {
+    return id;
+  }
 
-		public String getPositionAppliedFor() {
-			return positionAppliedFor;
-		}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-		public void setPositionAppliedFor(String positionAppliedFor) {
-			this.positionAppliedFor = positionAppliedFor;
-		}
+  public Date getOfficialDate() {
+    return officialDate;
+  }
 
-		public String getSalaryExpected() {
-			return salaryExpected;
-		}
+  public void setOfficialDate(Date officialDate) {
+    this.officialDate = officialDate;
+  }
 
-		public void setSalaryExpected(String salaryExpected) {
-			this.salaryExpected = salaryExpected;
-		}
+  public Date getStartWorkDate() {
+    return startWorkDate;
+  }
 
-		public Integer getEmployeeId() {
-			return employeeId;
-		}
+  public void setStartWorkDate(Date startWorkDate) {
+    this.startWorkDate = startWorkDate;
+  }
 
-		public void setEmployeeId(Integer employeeId) {
-			this.employeeId = employeeId;
-		}
+  public Date getEndWorkDate() {
+    return endWorkDate;
+  }
 
-		public Date getProbationDate() {
-			return probationDate;
-		}
+  public void setEndWorkDate(Date endWorkDate) {
+    this.endWorkDate = endWorkDate;
+  }
 
-		public void setProbationDate(Date probationDate) {
-			this.probationDate = probationDate;
-		}
-		
+  public String getPositionAppliedFor() {
+    return positionAppliedFor;
+  }
 
+  public void setPositionAppliedFor(String positionAppliedFor) {
+    this.positionAppliedFor = positionAppliedFor;
+  }
+
+  public String getSalaryExpected() {
+    return salaryExpected;
+  }
+
+  public void setSalaryExpected(String salaryExpected) {
+    this.salaryExpected = salaryExpected;
+  }
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
+
+  public Date getProbationDate() {
+    return probationDate;
+  }
+
+  public void setProbationDate(Date probationDate) {
+    this.probationDate = probationDate;
+  }
 
 }

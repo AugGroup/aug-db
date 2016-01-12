@@ -1,9 +1,7 @@
 /**
- *
  * @author natechanok
  * @date Apr 30, 2015
  */
-
 package com.aug.hrdb.services.impl;
 
 import java.util.List;
@@ -18,73 +16,61 @@ import com.aug.hrdb.entities.Official;
 import com.aug.hrdb.repositories.OfficialRepository;
 import com.aug.hrdb.services.OfficialService;
 
-@Service("officialService")
 @Transactional
-public class OfficialServiceImpl implements OfficialService{
+@Service(value = "officialService")
+public class OfficialServiceImpl implements OfficialService {
 
-	@Autowired
-	private OfficialRepository officialResp;
-	
-	
-	@Override
-	public void create(Official official) {
-		officialResp.create(official);
-		
-		
-	}
+  @Autowired
+  private OfficialRepository officialRepository;
 
-	@Override
-	public void update(Official official) {
-		officialResp.update(official);
-	}
+  @Override
+  public void create(Official official) {
+    officialRepository.create(official);
+  }
 
-	@Override
-	public void delete(Official official) {
-		officialResp.delete(official);
-	}
+  @Override
+  public void update(Official official) {
+    officialRepository.update(official);
+  }
 
-	
+  @Override
+  public void delete(Official official) {
+    officialRepository.delete(official);
+  }
 
-	@Override
-	public List<Official> findAll() {
-		return officialResp.findAll();
-	}
+  @Override
+  public List<Official> findAll() {
+    return officialRepository.findAll();
+  }
 
-	@Override
-	public List<Official> findByCriteria(Applicant applicant) {
-		return officialResp.findByCriteria(applicant);
-	}
+  @Override
+  public void deleteById(Integer id) {
+    officialRepository.deleteById(id);
+  }
 
-	@Override
-	public void deleteById(Integer id) {
-		 officialResp.deleteById(id);
-	}
+  @Override
+  public Official findById(Integer id) {
+    return officialRepository.find(id);
+  }
 
-	@Override
-	public Official findById(Integer id) {
-		return officialResp.find(id);
-	}
+  @Override
+  public List<Official> findByCriteria(Applicant applicant) {
+    return officialRepository.findByCriteria(applicant);
+  }
 
-	@Override
-	public void saveOfficialByNameQuery(OfficialDto officialDto) {
-		
-		officialResp.saveOfficialByNameQuery(officialDto);
-		
-	}
+  @Override
+  public void saveOfficialByNameQuery(OfficialDto officialDto) {
+    officialRepository.saveOfficialByNameQuery(officialDto);
+  }
 
-	@Override
-	public Official searhEmpIdtoOfficial() {
-		
-		return officialResp.searhEmpIdtoOfficial();
-	}
+  @Override
+  public Official searchEmpIdToOfficial() {
+    return officialRepository.searchEmpIdToOfficial();
+  }
 
-	@Override
-	public void deleteOfficialByNameQuery(Official official) {
-		// TODO Auto-generated method stub
-		officialResp.deleteOfficialByNameQuery(official);
-		
-	}
-
-	
+  @Override
+  public void updateOfficialByNameQuery(OfficialDto officialDto) {
+    officialRepository.updateOfficialByNameQuery(officialDto);
+  }
 
 }

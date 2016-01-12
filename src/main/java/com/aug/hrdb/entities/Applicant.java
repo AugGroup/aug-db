@@ -255,10 +255,6 @@ public class Applicant extends BaseEntity{
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE, fetch=FetchType.EAGER)
 	private List<Education> educations;
 
-//	@JsonIgnore
-//	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
-//	private List<MasCoreSkill> masCoreSkills;
-
 	@JsonIgnore
 	@OneToMany(mappedBy = "applicant",cascade=CascadeType.REMOVE)
 	private List<Experience> experiences;
