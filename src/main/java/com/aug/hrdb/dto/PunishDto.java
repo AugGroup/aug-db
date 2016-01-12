@@ -1,0 +1,80 @@
+package com.aug.hrdb.dto;
+
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@NamedNativeQueries({
+  @NamedNativeQuery(
+    name = "searchPunish",
+    query = "select punish.id, punish.datepunish, punish.description, punish.penalty, punish.employee_id "
+      + "from punish as punish,employee as emp where punish.employee_id =:empId and punish.employee_id=emp.id",
+    resultClass = PunishDto.class)
+})
+@Entity
+public class PunishDto {
+
+  @Id
+  @Column(name = "ID")
+  private Integer id;
+
+  @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+  @Column(name = "DATEPUNISH")
+  private Date datePunish;
+
+  @Column(name = "DESCRIPTION")
+  private String description;
+
+  @Column(name = "PENALTY")
+  private String penalty;
+
+  @Column(name = "EMPLOYEE_ID")
+  private Integer employeeId;
+
+  public Integer getId() {
+    return id;
+  }
+
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+  public Date getDatePunish() {
+    return datePunish;
+  }
+
+  public void setDatePunish(Date datePunish) {
+    this.datePunish = datePunish;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public String getPenalty() {
+    return penalty;
+  }
+
+  public void setPenalty(String penalty) {
+    this.penalty = penalty;
+  }
+
+  public Integer getEmployeeId() {
+    return employeeId;
+  }
+
+  public void setEmployeeId(Integer employeeId) {
+    this.employeeId = employeeId;
+  }
+
+}

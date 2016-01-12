@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.PunsihDto;
+import com.aug.hrdb.dto.PunishDto;
 import com.aug.hrdb.repositories.PunishRepository;
 
 
@@ -16,7 +16,7 @@ public class PunishDtoService {
 		
 	@Autowired private PunishRepository punishRepository;
 	
-	public List<PunsihDto> searchPunish(Integer id){
+	public List<PunishDto> searchPunish(Integer id){
 		return punishRepository.searchPunish(id);
 	}
 }

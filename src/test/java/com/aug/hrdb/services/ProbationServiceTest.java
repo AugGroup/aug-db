@@ -123,7 +123,7 @@ public class ProbationServiceTest {
   }
 
   @Test
-  public void testLoadRepositoriesShouldPass() throws Exception {
+  public void testLoadServicesShouldPass() throws Exception {
     assertNotNull(probationService);
     assertNotNull(masCoreSkillService);
     assertNotNull(masJobLevelService);
