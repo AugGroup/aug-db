@@ -3,6 +3,7 @@ package com.aug.hrdb.repositories;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
+import com.aug.hrdb.dto.ReservationDto;
 import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +15,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -51,6 +55,8 @@ public class ReservationRepositoryTest {
   private ReservationRepository reservationRepository;
   
   private Reservation reservation;
+
+  private String startDate, endDate;
 
   @Before
   public void setUp() throws Exception {
@@ -135,6 +141,21 @@ public class ReservationRepositoryTest {
     masReservationType.setCreatedTimeStamp(Calendar.getInstance().getTime());
     masReservationTypeRepository.create(masReservationType);
 
+    // create date
+    //first date
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+
+    Calendar first = Calendar.getInstance();
+    first.set(Calendar.DAY_OF_MONTH, 1);
+    Date today = first.getTime();
+    startDate = df.format(today);
+
+    //last date
+    Calendar last = Calendar.getInstance();
+    last.set(Calendar.DAY_OF_MONTH, last.getActualMaximum(Calendar.DAY_OF_MONTH));
+    Date lastDay = last.getTime();
+    endDate = df.format(lastDay);
+
     //create reservation
     reservation = new Reservation();
     reservation.setAuditFlag("C");
@@ -145,6 +166,8 @@ public class ReservationRepositoryTest {
     reservation.setMasreservationtype(masReservationType);
     reservation.setRoom(room);
     reservation.setDescription("DESC");
+    reservation.setStart(today);
+    reservation.setEnd(lastDay);
     reservationRepository.create(reservation);
 
   }
@@ -215,5 +238,56 @@ public class ReservationRepositoryTest {
     assertNull(result);
 
   }
+
+  @Test
+  public void testFindByDateRangeWithReservationRepositoryShouldReturnListOfReservationDtoOfBetweenDate() throws Exception {
+    List<ReservationDto> result = reservationRepository.findByDateRange(startDate, endDate);
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testFindReservationByIdWithReservationRepositoryShouldReturnReservationDtoOfThatReservationId() throws Exception {
+    ReservationDto result = reservationRepository.findReservationById(reservation.getId());
+    assertThat(result.getDescription(), is("DESC"));
+    assertThat(result.getRoomName(), is("ROOM NAME"));
+    assertThat(result.getFirstName_En(), is("Anat"));
+    assertThat(result.getReservationType(), is("TYPE NAME"));
+    assertThat(result.getDivisionName(), is("Integrate Technology Services"));
+
+  }
+
+  @Test
+  public void testSearchReservationWithReservationRepositoryShouldReturnListOfReservationDtoOfThatSearch() throws Exception {
+    List<ReservationDto> result = reservationRepository.searchReservation("", null, reservation.getMasreservationtype().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getReservationType(), is("TYPE NAME"));
+
+  }
+
+//  wait clear
+//  @Test
+//  public void testFindByTimestampWithReservationRepositoryShouldReturnListOfReservationDtoOfThatTimeAndRoom() throws Exception {
+//
+//  }
+
+//  wait clear
+//  @Test
+//  public void testFindByBetweenWithReservationRepositoryShouldReturnListOfReservationDtoOfThatBetweenDateTime() throws Exception {
+//    
+//  }
+
+//  wait clear
+//  @Test
+//  public void testFindReservationWithReservationRepositoryShouldReturnListOfReportReservationDtoOfThatInput() throws Exception {
+//
+//  }
+
+//  wait clear
+//  @Test
+//  public void testFilterReservationWithReservationRepositoryShouldReturnListOfReservationDtoOfThatFilter() throws Exception {
+//
+//  }
 
 }
