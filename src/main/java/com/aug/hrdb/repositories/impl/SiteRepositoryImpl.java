@@ -1,6 +1,5 @@
 package com.aug.hrdb.repositories.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -10,24 +9,20 @@ import com.aug.hrdb.dto.SiteDto;
 import com.aug.hrdb.entities.Site;
 import com.aug.hrdb.repositories.SiteRepository;
 
+@SuppressWarnings("unchecked")
+@Repository(value = "siteRepository")
+public class SiteRepositoryImpl extends GenericRepositoryImpl<Site, Integer> implements SiteRepository {
 
-@Repository
-public class SiteRepositoryImpl extends GenericRepositoryImpl<Site, Integer> implements SiteRepository,Serializable{
+  public SiteRepositoryImpl() {
+    super(Site.class);
+  }
 
-	
-	private static final long serialVersionUID = 1L;
+  @Override
+  public List<SiteDto> listByNameNativeQuery(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("listSite").setInteger("empId", id);
 
-	public SiteRepositoryImpl() {
-		super(Site.class);
-		// TODO Auto-generated constructor stub
-	}
+    return query.list();
 
-	@Override
-	public List<SiteDto> listByNameNativeQuery(Integer id) {
-		// TODO Auto-generated method stub
-		
-		Query query = getCurrentSession().getNamedQuery("listSite").setInteger("empId", id);	
-		return query.list();
-	}
+  }
 
 }
