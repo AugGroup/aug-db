@@ -2,18 +2,25 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
+import com.aug.hrdb.dto.RewardDto;
 import com.aug.hrdb.entities.Reward;
 
+public interface RewardService {
 
-public interface RewardService { 
-		
-	public List<Reward> findAll();
-	public void create(Reward reward);
-	public void update(Reward  reward);
-	public void delete(Reward  reward);
-	public Reward  findById(Integer id);
-	public List<Reward> findByCriteria(Reward  reward);
-	public void deleteById(Integer id);
+  List<Reward> findAll();
 
+  void create(Reward reward);
+
+  void update(Reward reward);
+
+  void delete(Reward reward);
+
+  Reward findById(Integer id);
+
+  void deleteById(Integer id);
+
+  List<Reward> findByCriteria(Reward reward);
+
+  List<RewardDto> searchReward(Integer id);
 
 }

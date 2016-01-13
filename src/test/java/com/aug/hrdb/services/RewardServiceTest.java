@@ -1,242 +1,205 @@
 package com.aug.hrdb.services;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.*;
+
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Hibernate;
-import org.junit.Assert;
+import com.aug.hrdb.dto.RewardDto;
+import com.aug.hrdb.entities.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasDivision;
-import com.aug.hrdb.entities.MasJobLevel;
-import com.aug.hrdb.entities.MasTechnology;
-import com.aug.hrdb.entities.Reward;
-import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
-import com.aug.hrdb.services.MasDivisionService;
-import com.aug.hrdb.services.MasJobLevelService;
-import com.aug.hrdb.services.MasSpecialtyService;
-import com.aug.hrdb.services.MasTechnologyService;
-import com.aug.hrdb.services.RewardService;
-
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = { "classpath:spring-bean-db-test.xml" })
+@ContextConfiguration(locations = {"classpath:spring-bean-db-test.xml"})
 @Transactional
 public class RewardServiceTest {
-	
-	@Autowired
-	private RewardService rewardService;
-	@Autowired 
-	private EmployeeService employeeService;
-	@Autowired 
-	private MasJobLevelService masJoblevelService;
-	@Autowired 
-	private ApplicantService applicantService;
-	@Autowired 
-	private MasDivisionService masDivisionService;
-	@Autowired 
-	private MasTechnologyService masTechnologyService;
-	
-	private	 Employee employee;
-	int id;
-	int empId;
-	int masjobId;
-	int appId; 
-	int mastecId;
-	
-	
-	
-	@Before
-	public void setReward() {
-		employee = new Employee();
-		/*employee.setIdCard("115310905001-9");
-        employee.setNameThai("ธัญลักษณ์์");
-        employee.setNameEng("thanyalak");
-        employee.setNicknameThai("กิ๊ก");
-        employee.setNicknameEng("kik");
-        employee.setSurnameThai("พิมสวรรค์");
-        employee.setSurnameEng("Pimsawan");*/
-        
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-    	String dateInString = "31-08-1982";
-    	Date date = null;
-		try {
-			date = sdf.parse(dateInString);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
-        
-		/*employee.setDateOfBirth(date);
-        employee.setEmail("test@gmail.com");
-        employee.setEmergencyContact("mom");*/
-        employee.setEmployeeCode("EMP-32");
-        employee.setStatusEmp("Employee");
-        employee.setTelHome("089-0851022");
-       /* employee.setTelMobile("089-0851022");
-        employee.setEmergencyContactPhoneNumber("089-085-1022");*/
-        employee.setAuditFlag("C");
-        employee.setCreatedBy(1);
-        employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
-        
-        MasTechnology masTechnology = new MasTechnology();
-		masTechnology.setName("java");
-		masTechnology.setCode("001A");
-		masTechnology.setIsActive(true);
-		masTechnology.setAuditFlag("C");
-		masTechnology.setCreatedBy(0);
-		Calendar cal = Calendar.getInstance();
-		masTechnology.setCreatedTimeStamp(cal.getTime());
-		masTechnologyService.create(masTechnology);
-		mastecId = masTechnology.getId();
-		MasTechnology mTechnology = masTechnologyService.findById(mastecId);
 
-		MasJobLevel masJoblevel = new MasJobLevel();
-		masJoblevel.setName("CEO");
-		masJoblevel.setIsActive(true);
-		masJoblevel.setCode("01");
-		masJoblevel.setAuditFlag("C");
-		masJoblevel.setCreatedBy(1);
-		masJoblevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masJoblevel.setCode("Division-01");
+  @Autowired
+  private MasCoreSkillService masCoreSkillService;
 
-		masJoblevelService.create(masJoblevel);
-		masjobId = masJoblevel.getId();
-		MasJobLevel mJob = masJoblevelService.findById(masjobId);
-         			
-        
-        
-        Applicant applicant = new Applicant();
-		applicant.setCreatedBy(1);
-		applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		applicant.setAuditFlag("C");
-		applicant.setCardId("115310905001-9");
-		applicant.setTechnology(mTechnology);
-		applicant.setJoblevel(mJob);
-		applicantService.create(applicant);
-		appId=applicant.getId();
-		
-        Applicant applicant1 = applicantService.findById(appId);
-        Hibernate.initialize(applicant1);
-        
-        
-        employee.setApplicant(applicant1);
-         
+  @Autowired
+  private MasJobLevelService masJobLevelService;
 
-	
-		MasDivision masDivision = new MasDivision();
-		masDivision.setName("CEO");
-		masDivision.setIsActive(true);
-		masDivision.setCode("01");
-		masDivision.setAuditFlag("C");
-		masDivision.setCreatedBy(1);
-		masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
-		masDivision.setCode("Division-01");
-		
-		masDivisionService.create(masDivision);
-		masDivisionService.findById(1);
-		
-		employee.setMasDivision(masDivision);	
-		//employee.setMasJoblevel(mJob);
-		employeeService.create(employee);
-		empId=employee.getId();
-		
-		
-	
-		Employee employee =employeeService.findById(1);
-		Reward reward=new Reward();   
-		reward.setEmployee(employee);  
-		reward.setTypereward("aa");
-		reward.setYear("1991");
-		reward.setReason("reason");
-//		Calendar cal = Calendar.getInstance();
-		reward.setAuditFlag("C");
-		reward.setCreatedBy(0);
-		reward.setCreatedTimeStamp(cal.getTime());
-		rewardService.create(reward);
-		
-	    id = reward.getId();
-	    System.out.println("id: "+id);
-	
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void createDataReward(){
-		
-		Employee employee1 =employeeService.findById(1);
-		Reward reward=new Reward();   
-		employee1.setId(2);
-		reward.setEmployee(employee1);  
-		reward.setTypereward("aa");
-		reward.setYear("1991");
-		reward.setReason("reason");
-		Calendar cal = Calendar.getInstance();
-		reward.setAuditFlag("C");
-		reward.setCreatedBy(0);
-		reward.setCreatedTimeStamp(cal.getTime());
-		rewardService.create(reward);	
+  @Autowired
+  private MasTechnologyService masTechnologyService;
 
-		
-	}
-	
-	
-	
-	@Test
-	@Rollback(true)
-	public void updateDataReward(){
-		
-		Reward reward=(Reward)rewardService.findById(id);
-		reward.setTypereward("b");
-		reward.setYear("2015");
-		reward.setReason("rrrrr");
-		rewardService.update(reward);
-		
-	}
-	
+  @Autowired
+  private MasDivisionService masDivisionService;
 
-	
-	
-	@Test
-	@Rollback(true)
-	public void deleteDataReward(){
-		Reward reward=rewardService.findById(id);
-		rewardService.delete(reward);
-	}
-	
-	
-	
-	@Test
-	public void findAllDataReward(){
+  @Autowired
+  private ApplicantService applicantService;
 
-		
-		List<Reward> reward = rewardService.findAll();
-		//	Assert.assertEquals(id, reward.size());
-	}
-	
+  @Autowired
+  private EmployeeService employeeService;
 
-	
-	@Test
-	public void findDatabyIdReward(){
+  @Autowired
+  private RewardService rewardService;
 
-		Reward reward =(Reward) rewardService.findById(id);
-		int id = reward.getId();
-		Assert.assertEquals(id,id);
-	}
-	
+  private Reward reward;
+
+  @Before
+  public void setUp() throws Exception {
+    // create applicant
+    MasCoreSkill masCoreSkill = new MasCoreSkill();
+    masCoreSkill.setAuditFlag("C");
+    masCoreSkill.setCreatedBy(1);
+    masCoreSkill.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masCoreSkill.setIsActive(true);
+    masCoreSkill.setCode("ITS");
+    masCoreSkill.setName("ITS");
+    masCoreSkillService.create(masCoreSkill);
+
+    MasJobLevel masJobLevel = new MasJobLevel();
+    masJobLevel.setAuditFlag("C");
+    masJobLevel.setCreatedBy(1);
+    masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masJobLevel.setIsActive(true);
+    masJobLevel.setCode("C");
+    masJobLevel.setName("Consultant");
+    masJobLevelService.create(masJobLevel);
+
+    MasTechnology masTechnology = new MasTechnology();
+    masTechnology.setAuditFlag("C");
+    masTechnology.setCreatedBy(1);
+    masTechnology.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masTechnology.setIsActive(true);
+    masTechnology.setCode("1");
+    masTechnology.setName("Java");
+    masTechnologyService.create(masTechnology);
+
+    Applicant applicant = new Applicant();
+    applicant.setAuditFlag("C");
+    applicant.setCreatedBy(1);
+    applicant.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    applicant.setFirstNameEN("Anat");
+    applicant.setCoreSkill(masCoreSkillService.findById(masCoreSkill.getId()));
+    applicant.setJoblevel(masJobLevelService.findById(masJobLevel.getId()));
+    applicant.setTechnology(masTechnologyService.findById(masTechnology.getId()));
+    applicantService.create(applicant);
+
+    // create mas division
+    MasDivision masDivision = new MasDivision();
+    masDivision.setAuditFlag("C");
+    masDivision.setCreatedBy(1);
+    masDivision.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    masDivision.setIsActive(true);
+    masDivision.setCode("ITS");
+    masDivision.setName("Integrate Technology Services");
+    masDivisionService.create(masDivision);
+
+    // create employee
+    Employee employee = new Employee();
+    employee.setAuditFlag("C");
+    employee.setCreatedBy(1);
+    employee.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    employee.setEmployeeCode("TEST0001");
+    employee.setStatusEmp("Employee");
+    employee.setTelHome("02-9998877");
+    employee.setApplicant(applicant);
+    employee.setMasDivision(masDivision);
+    employeeService.create(employee);
+
+    // create reward
+    reward = new Reward();
+    reward.setAuditFlag("C");
+    reward.setCreatedBy(1);
+    reward.setCreatedTimeStamp(Calendar.getInstance().getTime());
+    reward.setTypeReward("TYPE");
+    reward.setName("NAME");
+    reward.setYear("1992");
+    reward.setEmployee(employee);
+    rewardService.create(reward);
+
+  }
+
+  @Test
+  public void testLoadServicesShouldPass() throws Exception {
+    assertNotNull(rewardService);
+    assertNotNull(masCoreSkillService);
+    assertNotNull(masJobLevelService);
+    assertNotNull(masDivisionService);
+    assertNotNull(masTechnologyService);
+    assertNotNull(employeeService);
+    assertNotNull(applicantService);
+
+  }
+
+  @Test
+  public void testFindWithRewardServiceShouldReturnRewardThatSetup() throws Exception {
+    Reward result = rewardService.findById(reward.getId());
+    assertNotNull(result);
+    assertThat(result.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(result.getTypeReward(), is("TYPE"));
+    assertThat(result.getName(), is("NAME"));
+    assertThat(result.getYear(), is("1992"));
+
+  }
+
+  @Test
+  public void testFindAllWithRewardServiceShouldReturnListOfAllReward() throws Exception {
+    List<Reward> result = rewardService.findAll();
+    assertNotNull(result);
+    assertThat(result.size(), is(new GreaterOrEqual<>(1)));
+
+  }
+
+  @Test
+  public void testUpdateWithRewardServiceShouldReturnRewardThatUpdate() throws Exception {
+    Reward update = rewardService.findById(reward.getId());
+    assertThat(update.getEmployee().getApplicant().getFirstNameEN(), is("Anat"));
+    assertThat(update.getTypeReward(), is("TYPE"));
+
+    update.setTypeReward("UPDATE TYPE");
+    rewardService.update(update);
+
+    Reward result = rewardService.findById(update.getId());
+    assertThat(result.getTypeReward(), is("UPDATE TYPE"));
+
+  }
+
+  @Test
+  public void testDeleteWithRewardServiceShouldNotFindThatReward() throws Exception {
+    Reward delete = rewardService.findById(reward.getId());
+    rewardService.delete(delete);
+
+    Reward result = rewardService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testDeleteByIdWithRewardServiceShouldNotFindThatReward() throws Exception {
+    Reward delete = rewardService.findById(reward.getId());
+    rewardService.deleteById(delete.getId());
+
+    Reward result = rewardService.findById(delete.getId());
+    assertNull(result);
+
+  }
+
+  @Test
+  public void testFindByCriteriaWithRewardServiceShouldReturnListOfRewardOfThatName() throws Exception {
+    List<Reward> result = rewardService.findByCriteria(reward);
+    assertNotNull(result);
+    assertThat(result.get(0).getName(), is("NAME"));
+
+  }
+
+  @Test
+  public void testSearchRewardWithRewardServiceShouldReturnListOfRewardDtoOfThatEmployeeId() throws Exception {
+    List<RewardDto> result = rewardService.searchReward(reward.getEmployee().getId());
+    assertNotNull(result);
+    assertThat(result.get(0).getYear(), is("1992"));
+    assertThat(result.get(0).getTypeReward(), is("TYPE"));
+
+  }
 
 }

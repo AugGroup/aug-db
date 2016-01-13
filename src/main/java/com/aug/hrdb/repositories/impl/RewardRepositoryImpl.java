@@ -12,33 +12,31 @@ import com.aug.hrdb.entities.Reward;
 import com.aug.hrdb.repositories.RewardRepository;
 import com.mysql.jdbc.StringUtils;
 
-
-@Repository("RewardDao")
+@SuppressWarnings("unchecked")
+@Repository(value = "rewardRepository")
 public class RewardRepositoryImpl extends GenericRepositoryImpl<Reward, Integer> implements RewardRepository {
 
-	
-	public RewardRepositoryImpl(){
-		super(Reward.class);
-	}
+  public RewardRepositoryImpl() {
+    super(Reward.class);
+  }
 
+  @Override
+  public List<Reward> findByCriteria(Reward reward) {
+    Criteria c = getCurrentSession().createCriteria(Reward.class);
+    if (!StringUtils.isNullOrEmpty(reward.getName())) {
+      c.add(Restrictions.like("name", "%" + reward.getName() + "%"));
+    }
 
-	@Override
-	public List<Reward> findByCriteria(Reward reward) {
-		Criteria c = getCurrentSession().createCriteria(Reward.class);
-		if (!StringUtils.isNullOrEmpty(reward.getName())) {
-			c.add(Restrictions.like("name", "%" + reward.getName() + "%"));
-		}
-		return c.list();
-	}
+    return c.list();
 
+  }
 
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<RewardDto> searchReward(Integer id) {
-		Query nameQuery = getCurrentSession().getNamedQuery("searchReward").setInteger("empId" ,id);
-			List<RewardDto> rewardDto = nameQuery.list();
-			return rewardDto;
-	}
-	
-	
+  @Override
+  public List<RewardDto> searchReward(Integer id) {
+    Query query = getCurrentSession().getNamedQuery("searchReward").setInteger("empId", id);
+
+    return query.list();
+
+  }
+
 }
