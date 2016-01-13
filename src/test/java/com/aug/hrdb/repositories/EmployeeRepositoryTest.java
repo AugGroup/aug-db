@@ -68,6 +68,7 @@ public class EmployeeRepositoryTest {
     masJobLevel.setCreatedTimeStamp(Calendar.getInstance().getTime());
     masJobLevel.setIsActive(true);
     masJobLevel.setCode("C");
+    masJobLevel.setTagDivision("B");
     masJobLevel.setName("Consultant");
     masJobLevelRepository.create(masJobLevel);
 
@@ -355,7 +356,7 @@ public class EmployeeRepositoryTest {
 
   @Test
   public void testCheckTagDivisionWithEmployeeRepositoryShouldReturnListOfJobLevelDtoOfThatTagDivision() throws Exception {
-    List<JoblevelDto> result = employeeRepository.checkTagDivision(employee.getMasDivision().getTag());
+    List<JoblevelDto> result = employeeRepository.checkTagDivision(employee.getApplicant().getJobLevel().getTagDivision());
     assertNotNull(result);
     assertThat(result.get(0).getTagDivision(), is("B"));
 
