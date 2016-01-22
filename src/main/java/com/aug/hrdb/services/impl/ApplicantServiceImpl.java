@@ -10,11 +10,8 @@ import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.Employee;
-import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.repositories.ApplicantRepository;
 import com.aug.hrdb.repositories.MasJobLevelRepository;
-import com.aug.hrdb.repositories.MasTechnologyRepository;
 import com.aug.hrdb.services.ApplicantService;
 
 
@@ -25,9 +22,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 	@Autowired
 	private ApplicantRepository applicantRepository;
 
-	@Autowired
-	private MasTechnologyRepository masTechnologyRepository;
-	
 	@Autowired
 	private MasJobLevelRepository masJoblevelRepository;
 	

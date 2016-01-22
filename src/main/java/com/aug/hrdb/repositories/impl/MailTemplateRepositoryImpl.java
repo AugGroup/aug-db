@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.aug.hrdb.entities.MailTemplate;
 import com.aug.hrdb.repositories.MailTemplateRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "mailTemplateRepository")
 public class MailTemplateRepositoryImpl extends GenericRepositoryImpl<MailTemplate, Integer> implements MailTemplateRepository {
 

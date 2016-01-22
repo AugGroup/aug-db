@@ -12,6 +12,7 @@ import com.aug.hrdb.dto.LanguageDto;
 import com.aug.hrdb.entities.Language;
 import com.aug.hrdb.repositories.LanguageRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "LanguageRepository")
 public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language, Integer> implements LanguageRepository {
 
@@ -19,7 +20,6 @@ public class LanguageRepositoryImpl extends GenericRepositoryImpl<Language, Inte
     super(Language.class);
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public List<LanguageDto> listLanguageByEmployee(Integer id) {
     Query nameQuery = getCurrentSession().getNamedQuery("listLanguage").setInteger("appId", id);

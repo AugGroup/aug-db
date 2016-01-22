@@ -26,7 +26,7 @@ import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.EmployeeRepository;
 import com.mysql.jdbc.StringUtils;
 
-
+@SuppressWarnings("unchecked")
 @Repository(value = "employeeRepository")
 public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Integer> implements EmployeeRepository {
 
@@ -34,7 +34,6 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
     super(Employee.class);
   }
 
-  @SuppressWarnings("unchecked")
   public List<Employee> findByCriteria(Employee employee) {
 
     Criteria c = getCurrentSession().createCriteria(Employee.class);
@@ -49,7 +48,6 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   }
 
-  @SuppressWarnings("unchecked")
   public List<EmployeeListDto> searchEmployee() {
     Query query = getCurrentSession().getNamedQuery("searchEmployee");
     List<EmployeeListDto> employeeListDtoList = query.list();
@@ -58,7 +56,6 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public List<AimEmployeeDto> listEmployeeAim() {
     Query query = getCurrentSession().getNamedQuery("listEmployeeAim");
@@ -134,7 +131,6 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   }
 
-  @SuppressWarnings("unchecked")
   public List<ReportEmployeeDto> findByName(Employee employee) {
     Query query = getCurrentSession().getNamedQuery("reportEmployee");
     query.setString("name", "%" + employee.getApplicant().getFirstNameEN() + "%");
@@ -143,7 +139,6 @@ public class EmployeeRepositoryImpl extends GenericRepositoryImpl<Employee, Inte
 
   }
 
-  @SuppressWarnings("unchecked")
   public List<ReportStatusEmployeeDto> findByNameStatus(Employee employee) {
 
     Criteria c = getCurrentSession().createCriteria(ReportStatusEmployeeDto.class);

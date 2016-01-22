@@ -4,20 +4,17 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.util.List;
 
-import javax.mail.Session;
-
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.Applicant;
-import com.aug.hrdb.entities.MasJobLevel;
 import com.aug.hrdb.repositories.ApplicantRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "applicantRepository")
 public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Serializable> implements ApplicantRepository {
   public ApplicantRepositoryImpl() {
@@ -28,7 +25,8 @@ public class ApplicantRepositoryImpl extends GenericRepositoryImpl<Applicant, Se
   public List<ApplicantDto> findByJoblevel(String joblevel) {
     Query query = getCurrentSession().getNamedQuery("SEARCH_APPLICANT");
     query.setParameter("JOBLEVEL", "%" + joblevel + "%");
-    List<ApplicantDto> results = query.list();
+    
+	List<ApplicantDto> results = query.list();
 
     return results;
 

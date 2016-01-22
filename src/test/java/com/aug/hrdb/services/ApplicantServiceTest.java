@@ -4,7 +4,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,21 +13,17 @@ import com.aug.hrdb.dto.ApplicantDto;
 import com.aug.hrdb.dto.JoblevelDto;
 import com.aug.hrdb.dto.ReportApplicantDto;
 import com.aug.hrdb.entities.*;
-import com.aug.hrdb.repositories.*;
-import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aug.hrdb.services.ApplicantService;
-import com.aug.hrdb.services.EmployeeService;
 import com.aug.hrdb.services.MasJobLevelService;
 import com.aug.hrdb.services.MasTechnologyService;
 

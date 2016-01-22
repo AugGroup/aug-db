@@ -15,8 +15,6 @@ import com.aug.hrdb.dto.LeaveDto;
 import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.repositories.LeaveRepository;
 
-
-
 @Service("leaveDtoService")
 @Transactional
 public class LeaveDtoService {
@@ -28,17 +26,7 @@ public class LeaveDtoService {
 	}
 
 	public List<ReportLeaveDto> reportLeave(String searchText) {
-		// TODO Auto-generated method stub
 		return leaveRepository.reportLeave(searchText);
 	}
-
-
-
-
-
-	/*public List<ReportLeaveDto> reportLeave(String nameEng){
-		return leaveRepository.reportLeave(nameEng);
-	}*/
-	
 	
 }

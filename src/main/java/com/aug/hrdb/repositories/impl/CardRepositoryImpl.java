@@ -12,6 +12,7 @@ import com.aug.hrdb.entities.Card;
 import com.aug.hrdb.repositories.CardRepository;
 import com.mysql.jdbc.StringUtils;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "cardRepository")
 public class CardRepositoryImpl extends GenericRepositoryImpl<Card, Integer> implements CardRepository{
 
@@ -30,7 +31,6 @@ public class CardRepositoryImpl extends GenericRepositoryImpl<Card, Integer> imp
 
 	}
 	
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<CardDto> searchCard(Integer id){
 		Query nameQuery = getCurrentSession().getNamedQuery("searchCard").setInteger("empId" ,id);

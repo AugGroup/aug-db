@@ -11,13 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-
-
-
 import com.aug.hrdb.dto.EducationDto;
-import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.repositories.EducationRepository;
-
 
 @Service("educationDtoService")
 @Transactional
@@ -30,7 +25,6 @@ public class EducationDtoService {
 	}
 
 	public List<EducationDto> findEducationById(Integer id) {
-		// TODO Auto-generated method stub
 		return educationRepository.findEducationById(id);
 	}
 	

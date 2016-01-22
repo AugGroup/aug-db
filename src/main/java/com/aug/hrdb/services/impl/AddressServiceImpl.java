@@ -18,33 +18,27 @@ import com.aug.hrdb.entities.Address;
 import com.aug.hrdb.repositories.AddressRepository;
 import com.aug.hrdb.services.AddressService;
 
-
-
 @Service("addressService")
 @Transactional
-public class AddressServiceImpl implements AddressService{
+public class AddressServiceImpl implements AddressService {
 
 	@Autowired
 	private AddressRepository addressResp;
-	
+
 	@Override
 	public void create(Address address) {
 		addressResp.create(address);
-		
 	}
 
 	@Override
 	public void update(Address address) {
 		addressResp.update(address);
-		
 	}
 
 	@Override
 	public void delete(Address address) {
 		addressResp.delete(address);
-		
 	}
-
 
 	@Override
 	public List<Address> findAll() {
@@ -63,7 +57,7 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public void deleteById(Integer id) {
-		 addressResp.deleteById(id);
+		addressResp.deleteById(id);
 	}
 
 	@Override
@@ -73,35 +67,33 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public void saveAddressByNameQuery(AddressDto addressDto) {
-		
 		addressResp.saveAddressByNameQuery(addressDto);
 	}
 
 	@Override
 	public List<AddressDto> findAddressByApplicantId(Integer id) {
-		
-		
 		List<Address> addressList = addressResp.findAddressByApplicantId(id);
 		List<AddressDto> addressDtoList = new ArrayList<AddressDto>();
-		for(Address address:addressList){
-			
-		   AddressDto addressDto = new AddressDto();
-		   addressDto.setId(address.getId());
-		   addressDto.setHouseNo(address.getHouseNo());
-		   addressDto.setRoad(address.getRoad());
-		   addressDto.setDistrict(address.getDistrict());
-		   addressDto.setSubDistrict(address.getSubDistrict());		   
-		   addressDto.setAddressTypeId(address.getAddressType().getId());
-		   addressDto.setApplicantId(id);
-		   addressDto.setMasaddresstypeName(address.getAddressType().getName());
-		   addressDto.setMasprovinceId(address.getProvince().getId());
-		   addressDto.setMasprovinceName(address.getProvince().getName());
-		   addressDto.setZipcode(address.getZipcode());
-		   
-		   addressDtoList.add(addressDto);
-			
+		for (Address address : addressList) {
+			AddressDto addressDto = new AddressDto();
+			addressDto.setId(address.getId());
+			addressDto.setHouseNo(address.getHouseNo());
+			addressDto.setRoad(address.getRoad());
+			addressDto.setDistrict(address.getDistrict());
+			addressDto.setSubDistrict(address.getSubDistrict());
+			addressDto.setAddressTypeId(address.getAddressType().getId());
+			addressDto.setApplicantId(id);
+			addressDto.setMasaddresstypeName(address.getAddressType().getName());
+			addressDto.setMasprovinceId(address.getProvince().getId());
+			addressDto.setMasprovinceName(address.getProvince().getName());
+			addressDto.setZipcode(address.getZipcode());
+
+			addressDtoList.add(addressDto);
+
 		}
+		
 		return addressDtoList;
+		
 	}
 
 	@Override
@@ -111,24 +103,23 @@ public class AddressServiceImpl implements AddressService{
 
 	@Override
 	public void deleteAddressByNameQuery(Integer id) {
-		// TODO Auto-generated method stub
 		addressResp.deleteAddressByNameQuery(id);
-		
 	}
 
 	@Override
 	public List<AddressDto> findAddressById(Integer id) {
 		List<AddressDto> addresses = addressResp.findAddressById(id);
+		
 		return addresses;
+		
 	}
 
 	@Override
 	public AddressDto findAddress(Integer id) {
 		AddressDto address = addressResp.findByAddressId(id);
+		
 		return address;
+		
 	}
-
-
-	
 
 }

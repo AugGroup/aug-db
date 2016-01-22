@@ -13,6 +13,7 @@ import com.aug.hrdb.dto.AbilityDto;
 import com.aug.hrdb.entities.Ability;
 import com.aug.hrdb.repositories.AbilityRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "abilityRepository")
 public class AbilityRepositoryImpl extends GenericRepositoryImpl<Ability, Integer> implements AbilityRepository {
 

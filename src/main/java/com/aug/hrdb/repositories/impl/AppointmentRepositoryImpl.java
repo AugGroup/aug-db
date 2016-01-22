@@ -11,6 +11,7 @@ import com.aug.hrdb.entities.Applicant;
 import com.aug.hrdb.entities.Appointment;
 import com.aug.hrdb.repositories.AppointmentRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "appointmentRepository")
 public class AppointmentRepositoryImpl extends GenericRepositoryImpl<Appointment, Integer> implements AppointmentRepository {
 

@@ -10,6 +10,7 @@ import com.aug.hrdb.dto.EducationDto;
 import com.aug.hrdb.entities.Education;
 import com.aug.hrdb.repositories.EducationRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "educationRepository")
 public class EducationRepositoryImpl extends GenericRepositoryImpl<Education, Serializable> implements EducationRepository {
 

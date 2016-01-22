@@ -10,6 +10,7 @@ import com.aug.hrdb.dto.ExperienceDto;
 import com.aug.hrdb.entities.Experience;
 import com.aug.hrdb.repositories.ExperienceRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "experienceRepository")
 public class ExperienceRepositoryImpl extends GenericRepositoryImpl<Experience, Serializable> implements ExperienceRepository {
 

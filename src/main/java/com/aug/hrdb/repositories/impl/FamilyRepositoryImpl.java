@@ -1,6 +1,5 @@
 package com.aug.hrdb.repositories.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -13,8 +12,9 @@ import com.aug.hrdb.dto.FamilyDto;
 import com.aug.hrdb.entities.Family;
 import com.aug.hrdb.repositories.FamilyRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "familyRepository")
-public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer> implements FamilyRepository, Serializable {
+public class FamilyRepositoryImpl extends GenericRepositoryImpl<Family, Integer> implements FamilyRepository {
 
   public FamilyRepositoryImpl() {
     super(Family.class);

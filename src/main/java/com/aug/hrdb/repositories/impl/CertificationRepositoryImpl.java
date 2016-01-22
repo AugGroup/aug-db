@@ -10,6 +10,7 @@ import com.aug.hrdb.dto.CertificationDto;
 import com.aug.hrdb.entities.Certification;
 import com.aug.hrdb.repositories.CertificationRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "certificationRepository")
 public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certification, Serializable> implements CertificationRepository {
 
@@ -38,7 +39,6 @@ public class CertificationRepositoryImpl extends GenericRepositoryImpl<Certifica
 
   }
 
-  @SuppressWarnings("unchecked")
   public List<CertificationDto> searchCertification(Integer id) {
     Query namedQuery = getCurrentSession().getNamedQuery("searchCertification").setInteger("ID", id);
     List<CertificationDto> cerDto = namedQuery.list();

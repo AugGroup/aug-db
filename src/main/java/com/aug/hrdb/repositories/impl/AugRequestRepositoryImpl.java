@@ -15,6 +15,7 @@ import com.aug.hrdb.repositories.impl.GenericRepositoryImpl;
 *
 * @author Supannika Pattanodom
 */
+@SuppressWarnings("unchecked")
 @Repository(value = "augRequestRepository")
 public class AugRequestRepositoryImpl extends GenericRepositoryImpl<AugRequest, Serializable> implements
 		AugRequestRepository {

@@ -1,6 +1,5 @@
 package com.aug.hrdb.repositories.impl;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.Criteria;
@@ -13,8 +12,9 @@ import com.aug.hrdb.dto.HealthDto;
 import com.aug.hrdb.entities.Health;
 import com.aug.hrdb.repositories.HealthRepository;
 
+@SuppressWarnings("unchecked")
 @Repository(value = "healthRepository")
-public class HealthRepositoryImpl extends GenericRepositoryImpl<Health, Integer> implements HealthRepository, Serializable {
+public class HealthRepositoryImpl extends GenericRepositoryImpl<Health, Integer> implements HealthRepository {
 
   public HealthRepositoryImpl() {
     super(Health.class);
@@ -23,7 +23,8 @@ public class HealthRepositoryImpl extends GenericRepositoryImpl<Health, Integer>
   @Override
   public List<HealthDto> listHealth(Integer id) {
     Query query = getCurrentSession().getNamedQuery("listHealth").setInteger("empId", id);
-    List<HealthDto> healthDtoList = query.list();
+    
+	List<HealthDto> healthDtoList = query.list();
 
     return healthDtoList;
 

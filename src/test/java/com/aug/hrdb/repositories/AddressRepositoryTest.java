@@ -8,31 +8,27 @@ package com.aug.hrdb.repositories;
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
-import com.aug.hrdb.dto.AddressDto;
-import com.aug.hrdb.entities.*;
-import junit.framework.Assert;
-
-import org.hibernate.Hibernate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.internal.matchers.GreaterOrEqual;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.repositories.AddressRepository;
-import com.aug.hrdb.repositories.MasAddressTypeRepository;
-import com.aug.hrdb.repositories.MasProvinceRepository;
+import com.aug.hrdb.dto.AddressDto;
+import com.aug.hrdb.entities.Address;
+import com.aug.hrdb.entities.Applicant;
+import com.aug.hrdb.entities.MasAddressType;
+import com.aug.hrdb.entities.MasCoreSkill;
+import com.aug.hrdb.entities.MasJobLevel;
+import com.aug.hrdb.entities.MasProvince;
+import com.aug.hrdb.entities.MasTechnology;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)

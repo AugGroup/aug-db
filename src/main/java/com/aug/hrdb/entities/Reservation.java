@@ -9,9 +9,6 @@ import java.util.Date;
 
 import javax.persistence.*;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity

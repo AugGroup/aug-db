@@ -2,23 +2,16 @@ package com.aug.hrdb.services;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aug.hrdb.dto.EmployeeDto;
 import com.aug.hrdb.dto.EmployeeListDto;
 import com.aug.hrdb.dto.ReportEmployeeDto;
 import com.aug.hrdb.dto.ReportLeaveDto;
 import com.aug.hrdb.dto.ReportStatusEmployeeDto;
 import com.aug.hrdb.entities.Employee;
 import com.aug.hrdb.repositories.EmployeeRepository;
-
-
-
 
 @Service("employeeDtoService")
 @Transactional
